@@ -4,5 +4,8 @@ Changelog
 0.6
 ---
 
+- Added missing metadata.xml to profile.
+  [hannosch]
+
 - Initial implementation.
   [elvix]
