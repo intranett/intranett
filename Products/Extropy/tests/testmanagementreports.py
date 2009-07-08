@@ -1,15 +1,11 @@
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
 from Testing import ZopeTestCase
-#from zope.publisher.browser import TestRequest
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 
 from DateTime import DateTime
 from Products.Extropy.browser.managementreports import WeeklyReport
+
 
 class Dummyhours:
     """fake worked hours"""
@@ -36,14 +32,8 @@ class TestReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.assertEqual(len(view.getHours()),3)
 
 
-
-
-
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestReportViews))
     return suite
-
-if __name__ == '__main__':
-    framework()

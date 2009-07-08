@@ -2,18 +2,11 @@
 # EXTask test
 #
 
-import os, sys
 import transaction
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
 
 from Testing import ZopeTestCase
 from Interface.Verify import verifyObject
 from Products.Extropy.tests import ExtropyTrackingTestCase
-
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import _createObjectByType
-from Products.Extropy.config import TASK_FOR_RELATIONSHIP
 
 
 class TestFeatures(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
@@ -32,9 +25,6 @@ class TestFeatures(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         from Products.Extropy.interfaces import IExtropyTracking
         self.failUnless(IExtropyTracking.isImplementedBy(self.feature))
         self.failUnless(verifyObject(IExtropyTracking, self.feature))
-
-# add tests for schema
-# add tests for properties and methods
 
     def testAvailablePeople(self):
         self.folder.project.setParticipants(['joe','noob'])
@@ -87,6 +77,3 @@ def test_suite():
     suite = TestSuite()
     suite.addTest(makeSuite(TestFeatures))
     return suite
-
-if __name__ == '__main__':
-    framework()

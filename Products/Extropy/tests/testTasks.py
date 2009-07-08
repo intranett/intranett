@@ -2,18 +2,11 @@
 # ExtropyTask test
 #
 
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
-
 from DateTime import DateTime
 
 from Testing import ZopeTestCase
 from Interface.Verify import verifyObject
 from Products.Extropy.tests import ExtropyTrackingTestCase
-
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import _createObjectByType
 
 default_user = ZopeTestCase.user_name
 
@@ -34,10 +27,6 @@ class TestTasks(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         from Products.Extropy.interfaces import IExtropyTask
         self.failUnless(IExtropyTask.isImplementedBy(self.task1))
         self.failUnless(verifyObject(IExtropyTask, self.task1))
-
-# test basic operations
-# test task schema
-# test task methods
 
     def testTaskPriority(self):
         self.assertEqual(self.task1.getPriority(),5)
@@ -183,6 +172,3 @@ def test_suite():
     suite = TestSuite()
     suite.addTest(makeSuite(TestTasks))
     return suite
-
-if __name__ == '__main__':
-    framework()

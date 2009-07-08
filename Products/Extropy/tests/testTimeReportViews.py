@@ -2,14 +2,10 @@
 # ExtropyTrackingTestCase Skeleton
 #
 
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
 from Testing import ZopeTestCase
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
 from DateTime import DateTime
-import re
 from Products.CMFPlone.utils import _createObjectByType, getToolByName
 
 from zope.component import getMultiAdapter
@@ -91,6 +87,3 @@ def test_suite():
     suite = TestSuite()
     suite.addTest(makeSuite(TestTimeReportViews))
     return suite
-
-if __name__ == '__main__':
-    framework()

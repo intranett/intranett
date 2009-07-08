@@ -2,17 +2,11 @@
 # ExtropyTrackingTestCase Skeleton
 #
 
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
 from Testing import ZopeTestCase
-#from zope.publisher.browser import TestRequest
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 
-from DateTime import DateTime
 from Products.Extropy.browser.reports import ReportView, iteratorFactory, ReportIterator, ReportKey, TableView
 
 
@@ -27,7 +21,6 @@ class TestReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
     def afterSetUp(self):
         self.tool = self.portal.extropy_timetracker_tool
         self.request = self.app.REQUEST
-#        self.request = TestRequest()
 
     def testInstantiateView(self):
         view = ReportView(self.portal, self.request)
@@ -127,6 +120,3 @@ def test_suite():
     suite.addTest(makeSuite(TestTableViews))
     suite.addTest(makeSuite(TestReportViews))
     return suite
-
-if __name__ == '__main__':
-    framework()
