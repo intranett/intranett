@@ -67,7 +67,6 @@ def importDependencies(context):
     qi = getToolByName(site, 'portal_quickinstaller')
     products = [
         'Memo',
-        'Invoice',
     ]
     for product in products:
         if not qi.isProductInstalled(product):

@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Use GS profile dependency mechanism to install the Invoice package.
+  [hannosch]
+
 - Removed specialized login_next script, which didn't serve any purpose
   anymore and was causing errors on @@logindestination.
   [hannosch]
