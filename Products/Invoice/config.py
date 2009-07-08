@@ -4,8 +4,6 @@ PROJECTNAME = 'Invoice'
 
 GLOBALS = globals()
 
-SKINS_DIR = 'skins'
-
 PAYMENT_DUE_OPTIONS = DisplayList((
     (0,  'Immediately'),
     (7,  '1 week'),
