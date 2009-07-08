@@ -21,6 +21,28 @@
   <permission-map name="View" acquired="True">
   </permission-map>
  </state>
+ <state state_id="completed" title="All tasks complete">
+  <exit-transition transition_id="close"/>
+  <exit-transition transition_id="discard"/>
+  <exit-transition transition_id="start_testing"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
  <state state_id="discarded" title="Discarded">
   <exit-transition transition_id="empty_close"/>
   <exit-transition transition_id="start"/>
@@ -145,6 +167,15 @@
              new_state="closed" trigger="USER"
              before_script="" after_script="">
   <action url="" category="workflow">Close</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="complete"
+             title="All tasks complete"
+             new_state="completed" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/content_publish_form"
+          category="workflow">All tasks complete</action>
   <guard>
   </guard>
  </transition>

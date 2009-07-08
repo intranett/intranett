@@ -33,5 +33,7 @@
    <element value="ExtropyProject"/>
    <element value="ExtropyFeature"/>
   </property>
+  <property name="enable_link_integrity_checks" type="boolean">False</property>
+  <property name="enable_inline_editing" type="boolean">False</property>
  </object>
 </object>
