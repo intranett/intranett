@@ -4,6 +4,9 @@ Changelog
 0.6
 ---
 
+- Added missing getInvoiceNumber catalog and metadata.
+  [hannosch]
+
 - Removed workflows subpackage, which has been replaced by a GS profile.
   [hannosch]
 
