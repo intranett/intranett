@@ -1,11 +1,3 @@
-#
-# InvoiceTestCase Skeleton
-#
-
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
-
 from Testing import ZopeTestCase
 from Products.Invoice.tests import InvoiceTestCase
 
@@ -95,6 +87,3 @@ def test_suite():
     suite = TestSuite()
     suite.addTest(makeSuite(TestInvoice))
     return suite
-
-if __name__ == '__main__':
-    framework()

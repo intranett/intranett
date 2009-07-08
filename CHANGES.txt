@@ -4,6 +4,9 @@ Changelog
 0.6
 ---
 
+- Removed old test runner.
+  [hannosch]
+
 - Added missing getInvoiceNumber catalog and metadata.
   [hannosch]
 
