@@ -3,6 +3,6 @@
  <object name="Invoice" meta_type="Filesystem Directory View"
     directory="Products.Invoice:skins/Invoice"/>
  <skin-path name="*">
-  <layer name="Invoice"/>
+  <layer insert-after="custom" name="Invoice"/>
  </skin-path>
 </object>
