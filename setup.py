@@ -21,12 +21,12 @@ setup(name='Products.Extropy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.Invoice',
           'Products.Maps',
           'Products.MaildropHost',
           'Products.Memo',
           'Products.SecureMaildropHost',
           'Products.signalstack',
           'experimental.catalogqueryplan',
-          'python-gettext',
       ],
       )
