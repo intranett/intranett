@@ -2,14 +2,8 @@
 # Extropy workflow tests
 #
 
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
-
 from Testing import ZopeTestCase
 from Products.Extropy.tests import ExtropyTrackingTestCase
-from Products.Extropy.Extensions import Workflow # To catch import errors
-from Products.CMFPlone.utils import _createObjectByType
 
 default_user = ZopeTestCase.user_name
 
@@ -169,6 +163,3 @@ def test_suite():
     suite.addTest(makeSuite(TestTaskWorkflow))
     suite.addTest(makeSuite(TestFeatureWorkflow))
     return suite
-
-if __name__ == '__main__':
-    framework()

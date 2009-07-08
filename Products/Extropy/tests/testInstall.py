@@ -2,18 +2,10 @@
 # EXTask test
 #
 
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
-
 from Testing import ZopeTestCase
-from DateTime import DateTime
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
-
-#from Products.Extropy.Extensions import Install # To catch import errors
 
 
 class TestSetup(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
@@ -83,6 +75,3 @@ def test_suite():
     suite = TestSuite()
     suite.addTest(makeSuite(TestSetup))
     return suite
-
-if __name__ == '__main__':
-    framework()
