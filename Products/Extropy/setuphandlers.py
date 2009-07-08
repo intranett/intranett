@@ -26,6 +26,12 @@ def setupCatalogMultiplex(portal, out):
     attool.setCatalogsByType('ExtropyHours', [config.TIMETOOLNAME])
     attool.setCatalogsByType('ExtropyHourGlass', [])
 
+    timetool = getToolByName(portal, config.TIMETOOLNAME)
+    idx_id = 'start'
+    if idx_id in timetool.indexes():
+        timetool.delIndex(idx_id)
+    timetool.addIndex('start', 'DateIndex')
+
 
 def setupPASRoles(portal, out):
     rmanager = portal.acl_users.portal_role_manager
