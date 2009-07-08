@@ -4,6 +4,10 @@ Changelog
 0.7
 ---
 
+- Removed specialized login_next script, which didn't serve any purpose
+  anymore and was causing errors on @@logindestination.
+  [hannosch]
+
 - Initial implementation.
   [jarn]
 
