@@ -4,6 +4,9 @@ Changelog
 0.6
 ---
 
+- Removed workflows subpackage, which has been replaced by a GS profile.
+  [hannosch]
+
 - Added missing metadata.xml to profile.
   [hannosch]
 
