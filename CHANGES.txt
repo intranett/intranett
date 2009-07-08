@@ -1,5 +1,5 @@
 Changelog
----------
+=========
 
 - Add a summary field to ExtropHours which can be used to describe the work
   in more detail. Add a new worklog report which shows an overview of all work

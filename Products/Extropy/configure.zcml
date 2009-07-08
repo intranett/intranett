@@ -1,6 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
   <subscriber
@@ -11,6 +11,12 @@
 
   <include package=".browser" />
   <include package=".portlets" />
+
+  <cmf:registerDirectory
+      name="skins"
+      directory="skins"
+      recursive="True"
+      />
 
   <genericsetup:registerProfile
     name="extropy"

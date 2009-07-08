@@ -1,13 +1,10 @@
 from Products.CMFCore.utils import ContentInit
-from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CMFCore.utils import ToolInit
 
 from Products.Archetypes.public import process_types, listTypes
 
-from Products.Extropy.config import *
+from Products.Extropy.config import PROJECTNAME, ADD_CONTENT_PERMISSION
 from Products.Extropy import tools
-
-registerDirectory(SKINS_DIR, GLOBALS)
 
 def initialize(context):
     from Products.Extropy import content

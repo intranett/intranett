@@ -1,5 +1,5 @@
 Introduction
-------------
+============
 
 This is the Jarn AS approach to project management through Plone.
 
