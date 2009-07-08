@@ -13,6 +13,7 @@
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
   <element value="ExtropyActivity"/>
+  <element value="ExtropyFeature"/>
   <element value="Invoice"/>
   <element value="Document"/>
   <element value="Event"/>
