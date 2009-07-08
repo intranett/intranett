@@ -1,0 +1,243 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+
+<head></head>
+
+<body>
+
+<div metal:fill-slot="main">
+
+    <form name="edit_form"
+          action="."
+          method="post"
+          enctype="multipart/form-data"
+          tal:attributes="action string:${here/absolute_url}/${template/getId}">
+
+        <input type="hidden" name="form.submitted" value="1" />
+
+        <h1>
+            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
+            <span ondblclick="showhiddenfield(this)" tal:define="title here/Title">
+                <span class="formvaluenode" tal:content="title">
+                    Title
+                </span>
+                <input name="title"
+                       class="invisibleformnode editableHeadline"
+                       tal:attributes="value title"
+                       />
+            </span>
+        </h1>
+
+        <metal:summary define-macro="trackingsummary">
+
+            <div style="float:right; width: 17em; margin-left: 1em;">
+
+            <table class="vertical listing" style="float: right; width: 20em">
+
+                <tr>
+                    <th colspan="2"><img tal:replace="structure here/hour_icon.gif" /> Summary</th>
+                </tr>
+
+                <tal:period define="start here/start;
+                                    end here/end;">
+                    <tr tal:condition="start">
+                        <th>Start date</th>
+                        <td tal:content="python:start is not None and start.Date() or None"></td>
+                    </tr>
+                    <tr tal:condition="end">
+                        <th>Delivery date</th>
+                        <td tal:content="python:end is not None and end.Date() or None"></td>
+                    </tr>
+                </tal:period>
+
+                <tr tal:define="hours here/getEstimates"
+                    tal:condition="hours">
+                    <th>Estimated</th>
+                    <td style="text-align:right">
+                        <span tal:replace="hours" /> h
+                    </td>
+                </tr>
+
+                <tr tal:define="hours here/getWorkedTime"
+                    tal:condition="hours">
+                    <th>Used</th>
+                    <td style="text-align:right">
+                        <span tal:replace="hours" /> h
+                    </td>
+                </tr>
+
+                <tr tal:define="hours here/getRemainingTime| nothing"
+                    tal:condition="hours">
+                    <th>Remaining</th>
+                    <td style="text-align:right">
+                        <span tal:replace="hours" /> h
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Invoices
+                        <img tal:condition="exists:here/invoice_icon.gif" tal:replace="structure here/invoice_icon.gif" />
+                    </th>
+                    <td>
+                        <span tal:repeat="invoice python:context.contentValues({'portal_type': 'Invoice'})">
+                            <a tal:attributes="href invoice/absolute_url" tal:content="string:#${invoice/getInvoiceNumber}">#147</a>,
+                        </span>
+                    </td>
+                </tr>
+
+            </table>
+
+            <table class="vertical listing" style="float: right; margin-left: 1em; clear:right; width: 9.5em">
+                <tal:tasks define="tasks here/getTasksByState;
+                                   tasks_by_state tasks/getTasksByState;"
+                           condition="tasks">
+                    <tr>
+                        <th colspan="2"><img tal:replace="structure here/task_icon.gif" /> Tasks</th>
+                    </tr>
+                    <tr tal:repeat="state tasks_by_state" tal:attributes="class string:state-${state}">
+                        <th tal:content="state" />
+                        <td tal:content="python:len(tasks_by_state[state])" />
+                    </tr>
+                </tal:tasks>
+            </table>
+
+            <table class="vertical listing" style="float: right; width: 9.5em">
+                <tal:tasks define="tasks here/getRequirementsByState;
+                                   tasks_by_state tasks/getTasksByState"
+                           condition="tasks">
+                   <tr>
+                        <th colspan="2"><img tal:replace="structure here/feature_icon.gif" /> Deliverables</th>
+                    </tr>
+                    <tr tal:repeat="state tasks_by_state" tal:attributes="class string:state-${state}">
+                        <th tal:content="state" />
+                        <td tal:content="python:len(tasks_by_state[state])" />
+                    </tr>
+                </tal:tasks>
+            </table>
+
+            </div>
+
+        </metal:summary>
+
+        <p class="documentDescription"
+           tal:content="here/Description">
+            Main descriptive text
+        </p>
+
+        <div metal:define-macro="text_inline_edit"
+             ondblclick="toggleEditArea(this)" tal:define="text context/getText">
+          <div tal:define="default string:(no body, double click to edit);
+                           content python:text and text or default"
+               tal:content="structure content"></div>
+          <div style="display:none">
+            <textarea name="text"
+                      class="proportional"
+                      style="margin-top: 1em; width: 100%; height: 28em;"
+                      tal:content="context/getRawText">
+            </textarea>
+            <input type="hidden" name="text_text_format" value="text/x-rst" />
+            <input class="context" name="form.button.update" type="submit" value="Update" />
+          </div>
+        </div>
+
+        <h2>Project Status</h2>
+        <div ondblclick="toggleEditArea(this)" tal:define="status context/getProjectStatus">
+            <p class="documentDescription"
+               tal:define="default string:(no status, double click to edit);
+                           content python:status and status or default"
+               tal:content="content">
+                Project Status
+            </p>
+            <div style="display:none">
+                <input type="text" name="projectStatus" value="" style="width: 60%"
+                       tal:attributes="value context/getProjectStatus" />
+                <input class="context" name="form.button.update" type="submit" value="Update" />
+            </div>
+        </div>
+
+        <tal:memos define="memos python:context.contentValues({'portal_type': 'Memo'})"
+                   metal:define-macro="memolisting"
+                   condition="memos">
+            <h2><img tal:replace="structure here/memo.png" /> Memos</h2>
+            <ul>
+                <li tal:repeat="memo python:memos[:5]">
+                    <a tal:define="date python:toLocalizedTime(memo.start())"
+                       tal:attributes="href memo/absolute_url;
+                                       title string:${memo/Subject}, $date"
+                       tal:content="memo/title_or_id">Memo</a><tal:sep condition="memo/Description">:</tal:sep>
+                    <tal:desc content="memo/Description" />
+                </li>
+            </ul>
+            <div style="text-align: right" tal:condition="python:len(memos) &gt; 5">
+                <a tal:attributes="href string:${here/absolute_url}/folder_listing?contentFilter.portal_type:record=Memo">Show all memos&hellip;</a>
+            </div>
+        </tal:memos>
+
+        <h2>Open Packages</h2>
+
+        <dl>
+            <tal:phases tal:repeat="phase here/getActivePhases">
+                <dt style="clear:left; margin-top:2em">
+
+                    <a tal:attributes="href phase/absolute_url"><span tal:content="phase/Title" /></a>
+
+                    <span tal:content="structure phase/@@workflowactions">
+                            [workflowstate]</span>
+                        - <span tal:define="d phase/start"
+                                tal:condition="d"
+                                tal:content="d/Date"> [from] </span>
+                        - <span tal:define="d phase/end"
+                                tal:condition="d"
+                                tal:content="d/Date">[to] </span>
+
+                    <p class="discreet">
+                        <a tal:attributes="href string:${phase/absolute_url}/list_deliverables"><b tal:content="python:len(phase.getDeliverables(review_state=phase.getOpenWorkflowStates()))">XX</b> open deliverables</a>
+                        &middot;
+                        <a tal:attributes="href string:${phase/absolute_url}/list_tasks"><b tal:content="python:len(phase.getTasks(review_state=phase.getOpenWorkflowStates()))">XX</b> open tasks</a>
+                        &middot;
+                        <a tal:attributes="href string:${phase/absolute_url}/list_activities"><b tal:content="python:len(phase.getActivities(review_state=phase.getOpenWorkflowStates()))">XX</b> open activities</a>
+                        &middot;
+                        <span tal:content="phase/getRemainingTime" /> hours estimated remaining
+                    </p>
+
+                    <tal:progressbar define="
+                         worked phase/getWorkedTime;
+                         URL phase/absolute_url;
+                         remaining phase/getRemainingTime;
+                         bar nocall:context/@@smallprogressbar">
+                        <a tal:replace="structure python:bar(URL=URL, remaining=remaining, worked=worked)"></a>
+                        <span class="discreet"><span tal:content="worked">X</span> hours worked</span>
+                    </tal:progressbar>
+
+                </dt>
+                <dd style="clear:left">
+                    <span tal:replace="structure phase/Description | phase/getText"></span>
+
+                </dd>
+            </tal:phases>
+        </dl>
+
+        <div style="text-align: right">
+            <a tal:attributes="href string:${here/absolute_url}/extropyproject_all_packages">Show all packages&hellip;</a>
+        </div>
+
+        <div class="visualClear"><!----></div>
+
+    </form>
+
+    <tal:content define="extropy_types python:('Memo', 'ExtropyPhase', 'ExtropyFeature', 'ExtropyTask', 'ExtropyActivity');
+                         types python:[t.getId() for t in context.allowedContentTypes()];
+                         dummy python:[types.remove(t) for t in extropy_types if t in types];
+                         contentFilter python:dict(portal_type=types)"
+                  metal:define-macro="contentlisting">
+        <h2>Content listing</h2>
+        <metal:listing use-macro="context/folder_listing/macros/listing" />
+    </tal:content>
+
+</div>
+
+</body>
+</html>

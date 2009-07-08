@@ -1,0 +1,33 @@
+<dl class="portlet portletMyResponsibilies"
+    i18n:domain="plone">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        My Responsibilies
+        <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem">
+        
+        <table style="width:90%">
+            <tr>
+                <td>
+                    <select style="width: 12em" onchange="if (this.options[this.selectedIndex].value) window.location.href=this.options[this.selectedIndex].value">
+                       <option value="">My Responsibilies</option>
+                       <tal:options repeat="item view/fetchData">
+                       <option value="" disabled="disabled"
+                               tal:condition="python:item['depth'] == 0">---------------------</option>
+                       <option value=""
+                               tal:attributes="value item/getURL|default;
+                                               disabled python:not item.get('getURL')">
+                          <span tal:replace="structure python:item['depth'] * '&hellip;'">&hellip;</span><span
+                                tal:replace="item/Title"></span>
+                       </option>
+                       </tal:options>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        
+    </dd>
+
+</dl>

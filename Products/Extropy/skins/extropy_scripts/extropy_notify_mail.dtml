@@ -1,0 +1,42 @@
+<dtml-if "getNosyPeopleData()">
+<dtml-let projecttitle="getExtropyParent(metatype='ExtropyProject').Title()">
+<dtml-try>
+<dtml-sendmail mailhost=MailHost>
+From: <dtml-var expr="_.SecurityGetUser().getUserName()">(extropy) <extropy@plonesolutions.com>
+To: <dtml-in getNosyPeopleEmails><dtml-var sequence-item>,</dtml-in>
+
+Subject: [<dtml-var projecttitle>] <dtml-var Title>
+
+<dtml-var expr="_.SecurityGetUser().getUserName()"> changed this <dtml-var portal_type>:
+'<dtml-var Title>'
+<dtml-var absolute_url>
+<dtml-var Description>
+===========================================
+<dtml-var changenote missing>
+-------------------------------------------
+The following data was changed/updated:
+
+<dtml-in changes mapping>
+- <dtml-var title>:
+   from: <dtml-var from>
+   to  : <dtml-var to>
+
+</dtml-in>
+--
+Extropy automailer
+
+</dtml-sendmail>
+<dtml-except MailHostError>
+
+Mail Host Error
+
+</dtml-try>
+</dtml-let>
+
+Email is supposedly successfully sent
+
+<dtml-else>
+
+No recipients
+
+</dtml-if>

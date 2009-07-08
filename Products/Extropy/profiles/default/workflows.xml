@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <property
+    name="title">Contains workflow definitions for your portal</property>
+ <object name="extropy_feature_workflow" meta_type="Workflow"/>
+ <object name="extropy_hours_workflow" meta_type="Workflow"/>
+ <object name="extropy_project_workflow" meta_type="Workflow"/>
+ <object name="extropy_task_workflow" meta_type="Workflow"/>
+ <bindings>
+  <type type_id="ExtropyActivity">
+   <bound-workflow workflow_id="extropy_project_workflow"/>
+  </type>
+  <type type_id="ExtropyFeature">
+   <bound-workflow workflow_id="extropy_feature_workflow"/>
+  </type>
+  <type type_id="ExtropyHours">
+   <bound-workflow workflow_id="extropy_hours_workflow"/>
+  </type>
+  <type type_id="ExtropyPhase">
+   <bound-workflow workflow_id="extropy_project_workflow"/>
+  </type>
+  <type type_id="ExtropyProject">
+   <bound-workflow workflow_id="extropy_project_workflow"/>
+  </type>
+  <type type_id="ExtropyTask">
+   <bound-workflow workflow_id="extropy_task_workflow"/>
+  </type>
+ </bindings>
+</object>

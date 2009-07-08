@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+</head>             
+             
+<body>
+<div metal:fill-slot="main">
+
+    <h1>Worked hours in <span tal:replace="here/Title"></span></h1>
+
+    <p class="discreet">Use the form to filter the listing or change the date-span it reports. The dates in the list link to the timesheet for that date.</p>
+    <p metal:use-macro="context/@@timereport_macros/timereport_menu" />
+
+    <form method="post" tal:attributes="action string:${here/absolute_url}/${view/__name__}">
+        <fieldset>
+            <legend>Filter query</legend>
+        
+            <select metal:use-macro="context/@@timereport_macros/creator_filter" />
+            <select metal:use-macro="context/@@timereport_macros/category_filter" />
+            <select metal:use-macro="context/@@timereport_macros/invoice_state_filter" />
+            
+            <span metal:use-macro="context/@@timereport_macros/dates_filter" />
+            
+            <input type="submit" value="filter">
+        </fieldset>
+    
+    <table metal:use-macro="context/@@timereport_macros/hours_table"/>
+    
+    <div tal:condition="view/finance_access">
+        <input class="context"
+               type="submit"
+               name="mark_invoiced"
+               value="Mark as invoiced"
+               />
+        
+        <input class="context"
+               type="submit"
+               name="create_invoice"
+               value="Create invoice"
+               tal:condition="view/can_construct_invoices"
+               />
+    </div>
+
+    </form>
+</div>
+
+</body>
+</html>

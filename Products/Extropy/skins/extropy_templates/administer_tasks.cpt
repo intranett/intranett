@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+
+<div metal:fill-slot="main" tal:define="etool nocall:here/extropy_tracking_tool;
+                                        tasks python:etool.searchResults(meta_type='ExtropyTask');
+                                        dict python:etool.dictifyResults(tasks,'getResponsiblePerson')">
+
+<dl tal:repeat="userdata python:dict.items()">
+    <dt tal:content="python:userdata[0] or 'None'"></dt>    
+    
+    <tal:states define="tasksbystates python:etool.dictifyResults(userdata[1],'review_state')">
+    <dd tal:repeat="state tasksbystates/items">
+        <span tal:content="python:state[0]"></span>
+        <span tal:content="python:len(state[1])"></span>
+    </dd>
+    </tal:states>
+</dl>
+
+</div>
+
+</body>
+</html>

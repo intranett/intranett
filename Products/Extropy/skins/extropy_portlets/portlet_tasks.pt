@@ -1,0 +1,72 @@
+<dd class="portletItem odd">
+    <label>Current active task</label>
+    <div>
+        <img tal:replace="structure here/task_icon.gif" />
+        Task title 
+        <span class="discreet" 
+              xtal:replace="hours used so far">(2.5h)</span>
+    </div>
+
+    <input type="submit"
+           class="standalone"
+           value="End this task" 
+           />
+</dd>
+
+<dd class="portletItem even">
+    <label>Next action</label>
+
+    <select>
+        <option>By project</option>
+        <optgroup label="Deliverable title (3)"
+                  xtal:attributes="label ProjectTitle">
+            <option xtal:content="task title">Task title</option>
+            <option xtal:content="task title">Task title</option>
+            <option xtal:content="task title">Task title</option>
+        </optgroup>
+        <optgroup label="Another deliverable (2)"
+                  xtal:attributes="label ProjectTitle">
+            <option xtal:content="task title">Task title</option>
+            <option xtal:content="task title">Task title</option>
+        </optgroup>
+    </select>
+
+    <select>
+        <option>By context</option>
+        <optgroup label="Call"
+                  xtal:attributes="label ContextTitle">
+            <option xtal:content="">Task title</option>
+        </optgroup>
+        <optgroup label="Mail">
+            <option xtal:content="">Task title</option>
+        </optgroup>
+    </select>
+
+    <input type="submit"
+           class="context"
+           value="Start this task"
+           />
+</dd>
+
+<dd class="portletItem odd">
+    <input type="submit"
+           class="standalone"
+           value="Add new task" 
+           xtal:attributes="value goes to add task form, should accept tasks without context/project/deliverable, ask limi about UI"
+           />
+</dd>
+
+<dd class="portletItem even">
+    <input type="submit"
+           class="standalone"
+           value="Start workday" 
+           xtal:attributes="value start/end workday"
+           />
+</dd>
+
+<dd class="portletFooter">
+    <a href=""
+       xtal:attributes="href template_with_all_tasks_assigned_to_you_or_unassigned">
+       Show available tasks&hellip;
+    </a>
+</dd>

@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+<div metal:fill-slot="main">
+    
+    <form name="batchadd_form"
+          action="."
+          method="post"
+          enctype="multipart/form-data"
+          tal:attributes="action string:${here/getId}/${template/getId}"
+          tal:define="default_responsible member/getId;
+                      available_participants here/getAvailableParticipants;
+                      available_estimates here/getTaskEstimates;
+                      default_estimate python:available_estimates[3][0];">
+
+        <input type="hidden" name="form.submitted" value="1" />
+
+        <h2>Add Tasks for this Deliverable</h2>
+      
+        <div tal:repeat="item python:range(0,2)" class="batchAddRow"
+             style="margin-top : 1em" tal:define="icon here/task_icon.gif">
+            <img tal:replace="structure icon" />
+            <input type="text" size="50" style="width : 30em" 
+                   name="taskadd.title:records"/>
+            <select name="taskadd.estimate:records">
+              <option tal:repeat="estimate available_estimates"
+                      tal:attributes="value python:estimate[0];
+                                      selected python:estimate[0] == default_estimate"
+                      tal:content="python:estimate[1]"
+                      value="0.25">a few minutes</option>
+            </select>
+            <select name="taskadd.responsible:records">
+              <option value="">Unassigned</option>
+              <tal:options repeat="participant available_participants">
+              <option tal:attributes="value participant;
+                      selected python:participant == default_responsible"
+                      tal:define="author python:mtool.getMemberInfo(participant)"
+                      tal:content="author/fullname|participant">limi</option>
+              </tal:options>
+            </select>
+             
+             <!--
+              <select  name="estimatedDuration">
+                                    <option tal:repeat="options here/getTaskEstimates" 
+                                            value="0.25" 
+                                            tal:attributes="value python:options[0];
+                                                            selected python:str(options[0])=='3'"
+                                            tal:content="python:str(options[1])">
+                                                A few minutes
+                                    </option>
+                                </select>
+        -->
+        </div>
+
+        <div style="margin : 2em 1em;">
+            <input class="context" 
+                   name="form.button.Update" 
+                   type="submit" 
+                   value="Add all" />
+        </div>
+    </form>
+</div>
+</body>
+</html>

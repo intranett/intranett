@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      i18n:domain="plone"
+      metal:use-macro="here/main_template/macros/master"
+      >
+<body>
+
+<metal:macro fill-slot="main">
+
+    <div metal:use-macro="here/base/macros/header">
+        This one is from Archetypes' base macros.
+    </div>
+
+    <fieldset class="collapsible" metal:use-macro="here/extropyproject_view/macros/trackingsummary">
+    </fieldset>
+
+    <h2>All packages</h2>
+
+    <dl>
+        <tal:phases tal:repeat="phase here/getPhases">
+            <dt style="clear:left; margin-top:2em">
+                    <a tal:attributes="href phase/absolute_url"><span tal:content="phase/Title" /></a>
+                    <span tal:content="structure phase/@@workflowactions">
+                        [workflowstate]</span>
+                    - <span tal:define="d phase/start"
+                            tal:condition="d"
+                            tal:content="d/Date"> [from] </span>
+                    - <span tal:define="d phase/end"
+                            tal:condition="d"
+                            tal:content="d/Date">[to] </span>
+                <p class="discreet">
+                    <a tal:attributes="href string:${phase/absolute_url}/list_deliverables"><b
+                       tal:content="python:len(phase.getDeliverables(review_state=phase.getOpenWorkflowStates()))">XX</b>
+                       open deliverables</a>
+                    &middot;
+                    <a tal:attributes="href string:${phase/absolute_url}/list_tasks"><b
+                       tal:content="python:len(phase.getTasks(review_state=phase.getOpenWorkflowStates()))">XX</b>
+                       open tasks</a>
+                    &middot;
+                    <a tal:attributes="href string:${phase/absolute_url}/list_activities"><b
+                       tal:content="python:len(phase.getActivities(review_state=phase.getOpenWorkflowStates()))">XX</b>
+                       open activities</a>
+                    &middot;
+                    <span tal:content="phase/getRemainingTime" /> hours estimated remaining
+                </p>
+                <tal:progressbar define="worked phase/getWorkedTime;
+                                         URL phase/absolute_url;
+                                         remaining phase/getRemainingTime;
+                                         bar nocall:context/@@smallprogressbar">
+                    <a tal:replace="structure python:bar(URL=URL,remaining=remaining, worked=worked)"></a>
+                    <span class="discreet"><span tal:content="worked">X</span> hours worked</span>
+                </tal:progressbar>
+            </dt>
+            <dd style="clear: left">
+                <span tal:replace="structure phase/Description | phase/getText"></span>
+            </dd>
+        </tal:phases>
+    </dl>
+
+</metal:macro>
+
+<metal:removelisting define-macro="folderlisting" />
+
+</body>
+</html>

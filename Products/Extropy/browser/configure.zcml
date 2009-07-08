@@ -1,0 +1,197 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five">
+
+<browser:page
+    for="*"
+    class=".reports.ReportView"
+    name="hourreport_view"
+    allowed_interface=".reports.IReportView"
+    permission="zope2.Public"
+    />
+
+<browser:page
+    for="*"
+    class=".reports.TableView"
+    name="hourreporttable_view"
+    allowed_interface=".reports.IReportView"
+    permission="zope2.Public"
+    />
+
+<browser:page
+    for="*"
+    class=".editforms.TaskEdit"
+    name="task_edit"
+    allowed_interface=".editforms.ITaskEdit"
+    permission="zope2.Public"
+    />
+
+<browser:page
+    for="*"
+    class=".editforms.DeliverableEdit"
+    name="deliverable_edit"
+    allowed_interface=".editforms.IDeliverableEdit"
+    permission="zope2.Public"
+    />
+
+<browser:page
+    for="*"
+    class=".managementreports.InvoiceReport"
+    name="invoice-report"
+    template="invoicereport.pt"
+    allowed_interface=".managementreports.IInvoiceReport"
+    permission="zope2.View"
+    />
+
+
+<!-- Time reports -->
+
+<browser:menu id="timereport" />
+
+<browser:page
+    for="*"
+    class=".worklog.WorkLogView"
+    name="worklog"
+    template="worklog.pt"
+    permission="zope2.View"
+    allowed_interface=".worklog.IWorkLogView"
+    />
+
+<browser:page
+    for="*"
+    name="timereport_macros"
+    template="timereport_macros.pt"
+    permission="zope2.View"
+    />
+
+<browser:pages
+    for="*"
+    class=".timereports.TimeReports"
+    permission="zope2.View"
+    >
+
+  <browser:page
+      name="timereport"
+      title="Numbers-version of this page"
+      template="timereport.pt"
+      menu="timereport"
+      />
+
+  <browser:page
+      name="timereport2"
+      title="Visual by-day of this page"
+      template="timereport2.pt"
+      menu="timereport"
+      />
+
+  <browser:page
+      name="email_hours_report"
+      title="plaintext-report of this selection"
+      attribute="email_hours_report"
+      menu="timereport"
+      />
+
+</browser:pages>
+
+<!-- Registered for *, but only meant for IInvoice
+     we do not want to introduce a hard dependency though -->
+<browser:page
+    for="*"
+    class=".timereports.InvoiceHours"
+    permission="zope2.View"
+    name="invoice_hours"
+    template="invoice_hours.pt"
+    />
+
+<!-- Weekly planning -->
+
+<browser:menu id="weeklyplan" />
+
+<browser:page
+    for="*"
+    name="weeklyplan_macros"
+    template="weeklyplan_macros.pt"
+    permission="zope2.View"
+    />
+
+<browser:pages
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".weeklyplanning.WeeklyPlanning"
+    permission="zope2.View"
+    >
+
+  <browser:page
+      name="weeklyplan_personal"
+      title="Personal plan overview"
+      template="weeklyplan_personal.pt"
+      menu="weeklyplan"
+      />
+
+  <browser:page
+      name="weeklyplan_planning"
+      title="Weekly planning"
+      template="weeklyplan_planning.pt"
+      menu="weeklyplan"
+      />
+
+  <browser:page
+      name="weeklyplan_tasks_available"
+      template="weeklyplan_tasks_available.pt"
+      />
+
+</browser:pages>
+
+<browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".weeklyplanning.WeeklyPlanning"
+    permission="cmf.ModifyPortalContent"
+    name="weeklyplan_assign_task"
+    attribute="assignTask"
+    />
+
+<browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".weeklyplanning.WeekReport"
+    permission="zope2.View"
+    name="weeklyplan_report"
+    title="Weekly report"
+    template="weeklyplan_report.pt"
+    menu="weeklyplan"
+    />
+
+<!-- Progress bars -->
+
+<browser:view
+    for="*"
+    class=".progressbar.ProgressBar"
+    permission="zope2.View"
+    name="progressbar"
+    />
+
+<browser:view
+    for="*"
+    class=".progressbar.SmallProgressBar"
+    permission="zope2.View"
+    name="smallprogressbar"
+    />
+
+<!-- Workflow actions -->
+
+<browser:page
+    for="Products.CMFCore.interfaces.IDynamicType"
+    class=".workflowactions.WorkflowActions"
+    permission="zope2.View"
+    name="workflowactions"
+    template="workflowactions.pt"
+    />
+
+<browser:page
+    for="Products.ZCatalog.CatalogBrains.AbstractCatalogBrain"
+    class=".workflowactions.RecordWorkflowActions"
+    permission="zope2.View"
+    name="workflowactions"
+    template="workflowactions.pt"
+    />
+
+</configure>

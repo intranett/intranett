@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+<div metal:fill-slot="main">
+
+   <form name="edit_form"
+          action="."
+          method="post"
+          enctype="multipart/form-data"
+          tal:attributes="action string:${here/absolute_url}/${template/getId}" >
+
+    <input type="hidden" name="form.submitted" value="1" />
+        
+        <h1>
+        <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
+          <span ondblclick="showhiddenfield(this)">
+            <span class="formvaluenode " 
+                    tal:content="here/Title"
+                    tal:attributes="style python:test(here.getRawTitle(),'display:inline', 'display:none')">
+                </span>
+            <input 
+                tal:attributes="style python:test(here.getRawTitle(),'display:none', 'display:inline');
+                                    value here/getRawTitle" 
+                    class="invisibleformnode editableHeadline" 
+                    name="title" 
+                     />
+        </span>
+        </h1>
+    
+        <a href=""
+           class="link-parent"
+           tal:define="parent_url python:here.navigationParent(here, template_id)"
+           tal:condition="parent_url"
+           tal:attributes="href parent_url"
+           i18n:translate="go_to_parent_url">
+        Up one level
+        </a>    
+
+
+   
+        <div tal:define="remaining here/getRemainingTime;
+                         worked here/getWorkedHours;
+                         URL here/absolute_url;
+                         bar nocall:context/@@progressbar;
+                         ">
+            <p tal:replace="structure python:bar(worked, remaining, URL)"/>
+        </div>
+            
+        <p style="text-align : right">
+            <a tal:attributes="href string:${here/absolute_url}/add_work_hours"><img tal:replace="structure here/hour_icon.gif" /> Register work hours</a>
+        </p>
+        
+        
+     
+    
+        
+
+    <fieldset>
+            <legend>Status/Edit</legend>
+           
+        <div>
+            
+       
+        <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
+            
+            <tbody>
+                <tr>
+                    <th>Estimated work</th>
+                    <td ondblclick="showhiddenfield(this)">
+                         <input type="text" class="invisibleformnode" name="estimatedDuration" 
+                                tal:attributes="value here/getRawEstimatedDuration" />
+                        <span class="formvaluenode"><span tal:content="here/getEstimatedDuration" /> hours  </span>
+                    </td>
+                </tr>
+                 <tr>
+                    <th>
+                        Participants
+                    </th>
+                    <td ondblclick="showhiddenfield(this)">
+                        <select class="invisibleformnode" name="participants" multiple="multiple">
+                            <tal:options 
+                              define="availableParticipants here/getParticipants" 
+                              repeat="participant here/getAvailableParticipants">
+                            <option tal:attributes="value participant;
+                                    selected python:participant in availableParticipants"
+                                    tal:define="author python:mtool.getMemberInfo(participant)"
+                                    tal:content="author/fullname|participant">limi</option>
+                            </tal:options>  
+                        </select>
+                         <span class="formvaluenode" tal:content="python: ','.join(here.getParticipants())"></span>
+                    </td>
+                </tr>
+  
+            </tbody>
+        </table>
+        <div class="discreet">Double-click on values to edit them.</div>
+        
+        <div id="DescriptionArea" tal:content="structure here/getText">
+            
+            THE MAIN TEXT COMES HERE
+            
+        </div>
+      
+    </div>
+        
+    <div class="visualClear"></div>
+
+    <h4>Add comment or changenote</h4>
+    <textarea style="width : 100%" rows="5" name="changenote" id="changenote"></textarea>
+
+
+        <div style="text-align: right;">
+            <input class="context" 
+                       name="form.button.Update" 
+                       type="submit" 
+                       value="Update" />
+        </div>
+    </fieldset>
+
+    
+    
+    
+     
+        <div class="visualClear"></div>
+
+    </form>
+
+
+  <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
+  
+  
+  
+
+</div>
+
+</body>
+</html>

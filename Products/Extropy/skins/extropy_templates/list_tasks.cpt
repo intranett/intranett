@@ -1,0 +1,132 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+
+<div metal:fill-slot="main" tal:define="etool nocall:here/extropy_tracking_tool;
+                                        review_state request/review_state|string:;
+                                        states python:review_state == 'AllOpenStates' and etool.getOpenStates() or review_state;
+                                        tasks python:etool.trackingQuery(context, meta_type='ExtropyTask', review_state=states, REQUEST=request);">
+
+    <h1>Tasks in <span tal:content="here/Title"></span></h1>
+    
+    <div tal:condition="not: tasks">
+        <p><strong i18n:translate="description_no_results_found">No results were found.</strong></p>
+    </div>
+    
+    <dl class="collapsible collapsedOnLoad">
+        <dt class="collapsibleHeader">
+            Filter Results
+        </dt>
+        <dd class="collapsibleContent">
+
+            <form name="filter_form"
+                  action="."
+                  method="get"
+                  tal:attributes="action string:${here/absolute_url}/${template/getId}" >
+
+                <input type="hidden" name="form.submitted" value="1" />
+
+                <span>     
+                    <label>Responsible</label>
+                        <select name="getResponsiblePerson">
+                            <tal:options repeat="person python:etool.uniqueValuesFor('getResponsiblePerson')">
+                            <option tal:attributes="value person;
+                                    selected python:test(request.get('getResponsiblePerson',None) == person,'selected','')"
+                                    tal:define="author python:person and mtool.getMemberInfo(person);
+                                                name author/fullname|person"
+                                    tal:content="python:name or 'All'" />
+                            </tal:options>
+                        </select>
+                </span>
+                <span>     
+                    <label>State</label>
+                        <select name="review_state">
+                            <option value="" tal:attributes="selected python:review_state == ''">All</option>
+                            <option value="AllOpenStates" tal:attributes="selected python:review_state == 'AllOpenStates'">All 'open'</option>
+                            <option tal:repeat="state python:etool.uniqueValuesFor('review_state')" 
+                                tal:attributes="value state;
+                                                selected python:review_state == state "
+                                tal:content="python:state" /> 
+                        </select> 
+                </span>
+                    <input type="submit" value="Filter tasks">
+                <p class="discreet">(Refactor: this one needs to ask the workflowtool about states, not the catalog)</p>
+            </form>
+        </dd>
+    </dl>
+ 
+    
+    
+    
+    <table metal:define-macro="extropy_task_listing" class="listing" id="sortable" style="width :100%; clear: both" tal:condition="tasks">
+
+        <script type="text/javascript">
+            WorkflowActions.subscribe(function(action) { action.element.up().previous(2).className = 'state-' + action.state; })
+        </script>
+
+        <thead>  
+            <tr>
+                <th>Where</th>
+                <th>Task</th>
+                <th>Responsible</th>
+                <th>Last activity</th>
+                <th>State</th>
+                <th>Priority</th>
+                <th>Progress</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tal:task tal:repeat="task tasks">
+            <tr tal:define="oddrow repeat/task/odd"
+                tal:attributes="class python:test(oddrow, 'even', 'odd')">
+        
+                <td tal:content="string:${task/getProjectTitle} ${task/getPhaseTitle}"></td>
+                <td tal:attributes="class string:state-${task/review_state}">
+                    <a href="" 
+                       tal:content="python: test(task.Title, '#' + task.getId + ' ' + task.Title , '#' + task.getId)" 
+                       tal:attributes="href task/getURL">Task title</a>
+                </td>
+                <td tal:define="responsible task/getResponsiblePerson;
+                                author python:responsible and mtool.getMemberInfo(responsible)"
+                    tal:content="author/fullname|responsible"
+                    >limi</td>
+                <td style="text-align:right"
+                    tal:define="modified task/modified"
+                    tal:content="python: etool.howLongAgo(modified)">Last Activity</td>
+                <td tal:define="task_obj task/getObject"
+                    tal:content="structure task_obj/@@workflowactions">Completed?</td>
+                <td>
+                    <span style="display:none" tal:content="task/getPriority"></span>
+                    <span tal:attributes="class string:priority-${task/getPriority}"
+                    tal:content="python:etool.getPriorityDescription(task.getPriority)">                        
+                    xxx 
+                    </span>  
+                </td>
+                <td>
+
+                <tal:progressbar define="
+                         worked task/getWorkedHours;
+                         estimated task/getEstimatedDuration; 
+                         URL task/getURL;
+                         remaining task/getRemainingTime;
+                         bar nocall:context/@@smallprogressbar">  
+                <a tal:replace="structure python:bar(URL=URL,remaining=remaining,  worked=worked)">
+                </a>  
+        </tal:progressbar>
+
+
+                </td>        
+            </tr>
+            </tal:task>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

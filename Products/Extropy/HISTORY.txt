@@ -1,0 +1,22 @@
+Changelog
+---------
+
+- Add a summary field to ExtropHours which can be used to describe the work
+  in more detail. Add a new worklog report which shows an overview of all work
+  using this information.
+  [wichert]
+
+0.4
+---
+
+- Restructure tests a bit and add more
+  [elvix]
+
+- Add project manager field to project schema
+  [elvix]
+
+0.3
+---
+
+- Start History recording
+  [elvix]

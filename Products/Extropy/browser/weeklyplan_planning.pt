@@ -1,0 +1,170 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+      <metal:javascript fill-slot="javascript_head_slot">
+      <script type="text/javascript" tal:content="structure string:
+      var base_url=&quot;${here/absolute_url}&quot;;
+      ">
+      var base_url="/";
+      </script>
+      </metal:javascript>
+      <metal:block fill-slot="top_slot"
+                   tal:define="dummy python:request.set('disable_border',1)" /> 
+  </head>
+<body>
+<div metal:fill-slot="main">
+
+<h1>Weekly planning for 
+  <span metal:use-macro="context/@@weeklyplan_macros/week_label"/>
+</h1>
+<p><span metal:use-macro="context/@@weeklyplan_macros/week_links"/></p>
+
+<p>Drag tasks from the listing of unassigned tasks to populate each workday of the team</p>
+
+<p metal:use-macro="context/@@weeklyplan_macros/weeklyplan_menu" />
+
+<table id="planning" class="listing planning nosort">
+    <thead>
+    <tr>
+        <th><img id="planned_spinner" style="display: none" 
+                 tal:define="indicator nocall:context/indicator.gif"
+                 tal:replace="structure python:indicator.tag(id='planned_spinner',
+                                                             style='display: none')"
+                 /></th>
+        <th tal:repeat="day view/weekdays"
+            tal:content="day">Monday 05 Feb</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="even" id="plan-tesdal"
+        tal:repeat="plan view/planned" 
+        tal:attributes="class repeat/plan/parity;
+                        id string:plan-${plan/user}"
+        >
+        <th>
+            <span class="focustoggle" id="toggle-tesdal" title="Toggle user focus"
+                  tal:attributes="id string:toggle-${plan/user}"></span>
+            <a href="sketch_personal_weekplan" class="plan-user"
+               tal:attributes="href string:$here_url/weeklyplan_personal?startdate=${request/startdate|string:}&user=${plan/user}"
+               tal:define="user plan/user;
+                           author python:mtool.getMemberInfo(user)"
+               tal:content="author/fullname|user"
+               >Tesdal</a></th>
+        <td class="plan-day"
+            tal:repeat="tasks plan/tasks_for_day"
+            tal:attributes="date python:(view.start + repeat['tasks'].index).Date()">
+            <tal:task repeat="task tasks">
+            <a href="#" title="Foo bar" class="planning-task"
+               tal:replace="structure task/progressbar">
+                <span class="planning-task-hour" href="#" title="Foo bar"></span>
+            </a>
+            <script type="text/javascript"
+                    tal:content="string:
+                PlanningUI.setTask(new Planned({
+                    uid: '${task/info/UID}',
+                    project: '${task/escaped/project}',
+                    deliverable: '${task/escaped/deliverable}',
+                    title: '${task/escaped/title}',
+                    remaining: ${task/info/getRemainingTime},
+                    state: '${task/info/review_state}',
+                    responsible: '${task/info/getResponsiblePerson}',
+                    date: '${task/info/end/Date}'
+                }));"></script>
+            </tal:task>
+         </td>
+        <td class="plan-total"><span id="plan-total-tesdal"
+            tal:attributes="id string:plan-total-${plan/user}"
+            >0</span>h</td>
+    </tr>
+    </tbody>
+    </table>
+    
+    
+    
+    <fieldset>
+        <legend>Available tasks</legend>
+
+ <dl class="collapsible collapsedOnLoad">
+        <dt class="collapsibleHeader">
+            Filter Results <img id="available_spinner" style="display: none"
+                                tal:define="progress nocall:context/progress.gif"
+                                tal:replace="structure python:progress.tag(id='available_spinner',
+                                                                           style='display: none')"/>
+        </dt>
+        <dd class="collapsibleContent">
+
+            <form name="filter_form" id="filter_form"
+                  action="https://intranet.plonesolutions.com/list_tasks"
+                  method="get">
+                <span>     
+                    <label>Responsible</label>
+                        <select name="getResponsiblePerson" id="getResponsiblePerson"
+                            tal:define="getResponsiblePerson request/getResponsiblePerson|nothing"
+                            >
+                            <option value="">All</option>
+                            <tal:options repeat="responsible view/responsibles">
+                            <option value="geir"
+                                tal:attributes="value responsible;
+                                                selected python:getResponsiblePerson == responsible"
+                                tal:define="author python:mtool.getMemberInfo(responsible)"
+                                tal:content="author/fullname|responsible"
+                                >geir</option>
+                            </tal:options>
+                        </select>
+                </span>
+                <span>     
+                    <label>Project</label>
+                        <select name="path"
+                            tal:define="path request/path|nothing">
+                            <option value="">All</option>
+                            <option value="abm"
+                                tal:repeat="project view/projects"
+                                tal:attributes="value project/getPath;
+                                                selected python:path == project.getPath()"
+                                tal:content="project/pretty_title_or_id"
+                                >ABM</option>
+                        </select>
+                </span>
+                <input id="filter_submit" type="submit" value="Filter tasks">
+            </form>
+        </dd>
+    </dl>
+    
+    <div id="plannables" style="display:none">
+    <ul id="plannableCategories">
+      <li id="plannable-cat-overdue" class="selected">
+        <a href="#">Overdue (<span id="overdue-count">0</span>)</a></li>
+      <li id="plannable-cat-unassigned">
+        <a href="#">Unassigned (<span id="unassigned-count">0</span>)</a></li>
+      <li id="plannable-cat-future">
+        <a href="#">Future (<span id="future-count">0</span>)</a></li>
+    </ul>
+ 
+    <table class="plannables listing nosort">
+        <thead>  
+            <tr>
+                <th>Where</th>
+                <th>Task</th>
+                <th>Responsible</th>
+                <th>State</th>
+                <th>Due</th>
+                <th>Priority</th>
+                <th>Progress</th>
+            </tr>
+        </thead>
+        <tbody id="available_tasks">
+        </tbody>
+    </table>
+    <div/>
+    </div> 
+    <div id="no-plannables" style="display: none">
+      <p class="discreet">No tasks found</p>
+    </div>
+    </fieldset>  
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<tbody id="available_tasks" tal:omit-tag=""
+       tal:define="mtool context/portal_membership">
+    <metal:block tal:define="
+        charset site_properties/default_charset|string:utf-8;
+        dummy python:request.RESPONSE.setHeader('Content-Type', 'text/html;;charset=%s' % charset)"
+        />
+    
+    <tal:type define="type string:overdue">
+    <metal:row define-macro="taskrow">
+    <tr class="plannable overdue"
+        tal:repeat="task view/?type" 
+        tal:attributes="class string:plannable $type ${repeat/task/parity};
+                        id string:plannable-${task/info/UID}">
+        <td tal:content="string:${task/info/getProjectTitle}, ${task/info/getPhaseTitle}">
+            ABM, Implementation/configuration</td>
+        <td class="state-assigned"
+            tal:attributes="class string:state-${task/info/review_state}">
+            <a href="#"
+               tal:attributes="href task/info/getURL"
+               tal:content="task/info/pretty_title_or_id"
+               >#61 translate the new custom roles to norwegian</a>
+        </td>
+        <td tal:define="responsible task/info/getResponsiblePerson;
+                        author python:responsible and mtool.getMemberInfo(responsible)"
+            tal:content="author/fullname|responsible">geir</td>
+        <td tal:content="structure task/info/@@workflowactions">assigned</td>
+        <td class="overdue"
+            tal:attributes="class python:task['overdue'] and 'overdue'"
+            tal:content="task/duedate"
+            >Wednesday</td>
+        <td class="priority-5"
+            tal:attributes="class string:priority-${task/info/getPriority}"
+            tal:content="task/priority"
+            >Normal</td>
+        <td tal:content="structure task/progressbar"><a class="progressbar-small" href="#" title="0h worked, 1h remain"><span class="progressbar-done"></span><span class="progressbar-remaining"></span></a>
+        </td>        
+        <script type="text/javascript"
+                tal:content="string:
+            PlanningUI.setTask(new Plannable({
+                uid: '${task/info/UID}',
+                project: '${task/escaped/project}',
+                deliverable: '${task/escaped/deliverable}',
+                title: '${task/escaped/title} and such',
+                remaining: ${task/info/getRemainingTime},
+                state: '${task/info/review_state}',
+                tab: '$type'
+            }));"></script>
+    </tr>
+    </metal:row>
+    </tal:type>
+
+    <tal:type define="type string:unassigned">
+    <metal:row use-macro="template/macros/taskrow"/>
+    </tal:type>
+    
+    <tal:type define="type string:future">
+    <metal:row use-macro="template/macros/taskrow"/>
+    </tal:type>
+    
+    <script type="text/javascript">PlanningUI.updatePlannables()</script>
+</tbody>

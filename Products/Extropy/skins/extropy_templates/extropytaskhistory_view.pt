@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title tal:content="template/title">The title</title>
+  </head>
+  <body>
+    
+      <div metal:define-macro="body">
+
+        <div class="documentDescription" 
+             tal:content="here/getChangenote">
+        </div>
+
+        
+       <dl>
+            <dt>Changes</dt>            
+            <dd tal:repeat="change here/getChanges | nothing">
+                <strong tal:content="change/title" />
+                from [ <span tal:replace="change/from"/> ]
+                to [ <span tal:replace="change/to"/> ]
+            </dd>
+       </dl>
+      
+      
+      
+      </div>    
+
+
+  </body>
+</html>

@@ -1,0 +1,11 @@
+<div class="portletItem">
+<table style="width:90%">
+    <tr tal:repeat="data python:here.getPortletData()">
+        <td>
+            <a tal:attributes="href string:${here/portal_url}/timesheet?date=${data/date/Date}" 
+               tal:content="data/date/aDay"></a>
+        </td>
+        <td style="text-align:right;"><span tal:content="data/sum"/><span class="discreet">h</span></td>
+    </tr>
+</table>
+</div>

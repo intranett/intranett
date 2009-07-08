@@ -1,0 +1,11 @@
+[default]
+title = Add deliverables
+
+[validators]
+validators..form_add =
+validators..cancel =
+
+[actions]
+action.success = traverse_to:string:batch_create_tasks
+action.success..cancel = traverse_to:string:go_back
+action.failure = traverse_to_action:string:view

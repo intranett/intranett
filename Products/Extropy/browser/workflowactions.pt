@@ -1,0 +1,31 @@
+<div tal:condition="view/review_state"
+     tal:omit-tag="" 
+     i18n:domain="plone">
+
+    <span tal:condition="not:view/actions"
+          tal:content="view/review_state_title"
+          tal:attributes="class string:state-${view/review_state}"
+          i18n:translate="">
+    Workflow state
+    </span>
+
+    <span class="workflowactions" id="workflowActions-XYZ"
+          tal:attributes="id string:workflowActions-${context/UID};
+                          target context/getURL|context/absolute_url"
+          tal:condition="view/actions">
+        <select name="workflowActions">
+          <option value="assigned" selected="selected"
+                  i18n:translate=""
+                  tal:attributes="value view/review_state"
+                  tal:content="view/review_state_title">Assigned</option>
+          <option value="assigned"
+                  i18n:translate=""
+                  tal:repeat="action view/actions"
+                  tal:attributes="value action/id"
+                  tal:content="action/title">Assigned</option>
+        </select>
+        <script type="text/javascript" tal:content="string:
+            WorkflowActions.registerMenu('${context/UID}')">
+        </script>
+    </span>
+</div>

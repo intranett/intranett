@@ -1,0 +1,136 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+
+<div metal:fill-slot="main" tal:define="etool nocall:here/extropy_tracking_tool;
+                        states python:test((not request.has_key('review_state')) or request.get('review_state', None) == 'AllOpenStates',
+                                        etool.getOpenStates(),
+                                        request.get('review_state'));
+                                        deliverables python:etool.trackingQuery(context, meta_type='ExtropyFeature', review_state=states, REQUEST=request);">
+
+    <h1><span tal:content="python:len(deliverables)">12</span> Deliverables in <span tal:content="here/Title"></span></h1>
+    
+    <div tal:condition="not: deliverables">
+        <p><strong i18n:translate="description_no_results_found">No results were found.</strong></p>
+    </div>
+    
+    <dl class="collapsible collapsedOnLoad">
+        <dt class="collapsibleHeader">
+            Filter Results
+        </dt>
+        <dd class="collapsibleContent">
+
+            <form name="filter_form"
+                  action="."
+                  method="get"
+                  tal:attributes="action string:${here/absolute_url}/${template/getId}" >
+
+                <input type="hidden" name="form.submitted" value="1" />
+
+                <span>     
+                    <label>Responsible</label>
+                        <select name="getResponsiblePerson">
+                            <tal:options repeat="person python:etool.uniqueValuesFor('getResponsiblePerson')">
+                            <option tal:attributes="value person;
+                                               selected python:test(request.get('getResponsiblePerson',None) == person,'selected','')"
+                               tal:define="author python:person and mtool.getMemberInfo(person);
+                                           name author/fullname|person"
+                               tal:content="python:name or 'All'" />
+                           </tal:options>
+                        </select>
+                </span>
+                <span>     
+                    <label>State</label>
+                        <select name="review_state">
+                            <option value="" tal:attributes="selected python:request.get('review_state',None)==''">All</option>
+                            <option value="AllOpenStates" tal:attributes="selected python:not request.has_key('review_state') or request.get('review_state')=='AllOpenStates'">All 'open'</option>
+                            <option tal:repeat="state python:etool.uniqueValuesFor('review_state')" 
+                                tal:attributes="value state;
+                                                selected python:request.get('review_state','') == state "
+                                tal:content="python:state" /> 
+                        </select> 
+                </span>
+                    <input type="submit" value="Filter">
+                <p class="discreet">(Refactor: this one needs to ask the workflowtool about states, not the catalog)</p>
+            </form>
+        </dd>
+    </dl>
+ 
+    
+    <table metal:define-macro="extropy_deliverables_listing" class="listing" id="sortable" style="width :100%; clear: both" tal:condition="deliverables">
+
+        <script type="text/javascript">
+            WorkflowActions.subscribe(function(action) { action.element.up().previous(2).className = 'state-' + action.state; })
+        </script>
+
+        <thead>  
+            <tr>
+                <th colspan="8" tal:content="tableheader | default">Deliverables</th>
+            </tr>
+            <tr>
+                <th>Project</th>
+                <th>Deliverable</th>
+                <th>Responsible</th>
+                <th>Activity</th>
+                <th>State</th>
+                <th>Progress</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tal:deliverable tal:repeat="deliverable deliverables">
+            <tr tal:define="oddrow repeat/deliverable/odd"
+                tal:attributes="class python:test(oddrow, 'even', 'odd')">
+        
+                <td tal:content="deliverable/getProjectTitle" />
+                <td tal:attributes="class string:state-${deliverable/review_state}">
+                    <a href="" 
+                       tal:content="python:deliverable.Title or deliverable.getId" 
+                       tal:attributes="href deliverable/getURL">deliverable title</a>
+                </td>
+                <td tal:define="responsible deliverable/getResponsiblePerson;
+                                author python:responsible and mtool.getMemberInfo(responsible)"
+                    tal:content="author/fullname|responsible"
+                    >limi</td>
+                <td tal:define="modified deliverable/modified"
+                    tal:content="python: etool.howLongAgo(modified)">Last Activity</td>
+                <td tal:define="deliverable_obj deliverable/getObject"
+                    tal:content="structure deliverable_obj/@@workflowactions">Completed?</td>
+                <td>
+                    
+                <tal:progressbar define="
+                         worked deliverable/getWorkedHours;
+                         estimated deliverable/getEstimatedDuration; 
+                         URL deliverable/getURL;
+                         remaining deliverable/getRemainingTime;
+                         bar nocall:context/@@smallprogressbar">  
+                <a tal:replace="structure python:bar(URL=URL,remaining=remaining,  worked=worked)">
+                </a>  
+        </tal:progressbar>
+
+                
+                    
+                </td>        
+                
+            </tr>
+            </tal:deliverable>
+        </tbody>
+        <tfooter>
+            <tr>
+                <th colspan="5" style="text-align:right">Sum estimated hours</th>
+                <td tal:content="python:etool.countEstimates(deliverables)">66</td>       
+            </tr>
+        </tfooter>
+        
+        
+    </table>
+
+
+</div>
+
+</body>
+</html>

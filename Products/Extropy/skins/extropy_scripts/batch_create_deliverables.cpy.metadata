@@ -1,0 +1,12 @@
+[default]
+title = Edit
+
+[validators]
+#validators = validate_base
+validators..form_add =
+validators..cancel =
+
+[actions]
+action.success = traverse_to:string:deliverables_batchadd
+action.success..cancel = traverse_to:string:deliverables_batchadd
+action.failure = traverse_to_action:string:deliverables_batchadd

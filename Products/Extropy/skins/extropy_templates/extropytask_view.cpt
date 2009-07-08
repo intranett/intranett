@@ -1,0 +1,312 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+
+<head></head>
+
+<body>
+
+<div metal:fill-slot="main"
+     tal:define="edit_view context/@@task_edit">
+
+    <form name="edit_form"
+          action="."
+          method="post"
+          enctype="multipart/form-data"
+          tal:attributes="action string:${here/absolute_url}/${template/getId}" >
+
+        <input type="hidden" name="form.submitted" value="1" />
+
+        <p class="discreet" tal:condition="not:here/Title">
+            Remember that the task title should be short and understandable even
+            without its context, as it will show up in various listings. Try to be
+            as concise and descriptive as possible. 'Invoice' is a bad task title,
+            'Invoice XYZ for training' is better.
+            Use action verbs for task titles, such as 'Call', 'Organize', 'Review',
+            'Buy', 'Fill out', 'Find', 'Purge', 'Look into', 'Gather', 'Print',
+            'Take', 'Load', 'Draft' and 'Email'.
+        </p>
+
+        <h1>
+            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
+            <span ondblclick="showhiddenfield(this)" tal:define="title context/Title">
+                <span class="formvaluenode editableHeadline"
+                      tal:attributes="style python:title and 'display:inline' or 'display:none'"
+                      tal:content="title">
+                </span>
+                <input name="title" class="invisibleformnode editableHeadline"
+                       tal:attributes="value here/Title;
+                                       style python:title and 'display:none' or 'display:inline'"
+                       />
+            </span>
+        </h1>
+
+        <div class="visualClear"><!----></div>
+
+        <!-- This is slightly evil, but since we have to work around the fake in-place editing,
+            this is the only way for now - until Plone 3.0! :) -->
+        <div style="float: right">
+            <button type="button"
+                    tal:attributes="onclick string:window.location.href='${here/absolute_url}/split_task'">
+                <img tal:replace="structure here/task_icon.gif" />
+                Split this task
+                </button>
+            <button type="button"
+                    tal:attributes="onclick string:window.location.href='${here/absolute_url}/add_work_hours'">
+                <img tal:replace="structure here/hour_icon.gif" />
+                Register work hours
+            </button>
+        </div>
+
+        <a href=""
+           class="link-parent"
+           tal:define="parent_url python:here.navigationParent(here, template_id)"
+           tal:condition="parent_url"
+           tal:attributes="href parent_url"
+           i18n:translate="go_to_parent_url">
+            Up one level
+        </a>
+
+        <div tal:define="worked here/getWorkedHours;
+                         estimates here/getEstimatedDuration;
+                         URL here/absolute_url;
+                         remaining here/getRemainingTime;
+                         bar nocall:context/@@progressbar">
+            <a tal:replace="structure python:bar(URL=URL,remaining=remaining,  worked=worked)"></a>
+        </div>
+
+        <dl id="parentdata" class="collapsible collapsedOnLoad"
+            tal:define="deliverable here/getOriginatingFeature">
+            <dt class="collapsibleHeader">Parent deliverable &quot;<span tal:replace="deliverable/Title"></span>&quot;</dt>
+            <dd class="collapsibleContent"><p tal:replace="structure deliverable/getText"></p></dd>
+            <dd class="collapsibleContent">
+                <table class="vertical listing">
+                    <tr>
+                        <th>Sibling tasks</th>
+                        <td tal:define="deliverable here/getOriginatingFeature;
+                                        etool nocall:here/extropy_tracking_tool;
+                                        tasks python:etool.trackingQuery(deliverable, meta_type='ExtropyTask', REQUEST=request);">
+                            <div tal:repeat="task tasks">
+                                <a tal:attributes="href task/getURL;
+                                                   class string:state-${task/review_state};"
+                                   tal:content="task/Title">
+                                    Task
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </dd>
+        </dl>
+
+        <p tal:define="originatingtask here/getOriginatingTask | nothing"
+           tal:condition="originatingtask">
+            This task was split from:
+            <a tal:attributes="href originatingtask/absolute_url"
+               tal:content="originatingtask/Title">origin</a>
+        </p>
+
+        <p tal:define="splittasks here/getSplitTasks | nothing"
+           tal:condition="splittasks">
+            Tasks that have been spawned from this task:
+            <a tal:repeat="task splittasks"
+               tal:attributes="href task/absolute_url"
+               tal:content="task/Title">child</a>
+        </p>
+
+        <h2>Status/Edit</h2>
+
+        <div class="discreet">Double-click on values to edit them.</div>
+
+        <table class="vertical listing" style="float: right; margin: 1em">
+            <tbody>
+                <tr>
+                    <th>Priority</th>
+                    <td ondblclick="showhiddenfield(this)">
+                        <select class="invisibleformnode"
+                                name="priority">
+                            <option tal:repeat="options here/getPriorities"
+                                    tal:attributes="value python:options[0];
+                                                    selected python:str(options[0])==str(here.getPriority())"
+                                    tal:content="python:options[1]">
+                                A few minutes
+                            </option>
+                        </select>
+                        <span class="formvaluenode" tal:content="here/getPriorityDescription">Urgent</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Active after</th>
+                    <td ondblclick="showhiddenfield(this)">
+                        <span class="invisibleformnode">
+                            <select name="startDate">
+                                <option value="">Not set</option>
+                                <option tal:repeat="date here/getAvailableDates"
+                                        tal:content="python:date.strftime('%d %b')"
+                                        tal:attributes="value date;
+                                                        selected python:here.start() == date"
+                                        >02 Nov</option>
+                            </select>
+                            <img tal:define="date_go here/date_go.png"
+                                 tal:replace="structure
+                                              python:date_go.tag(style='display: none',
+                                                                 css_class='today_button',
+                                                                 alt='*', title='Today')"
+                                 />
+                        </span>
+                        <span class="formvaluenode"
+                              tal:condition="here/start"
+                              tal:content="python:here.start().strftime('%d %b')"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Due Date</th>
+                    <td ondblclick="showhiddenfield(this)">
+                        <span class="invisibleformnode">
+                            <select name="endDate">
+                                <option value="">Not set</option>
+                                <option tal:repeat="date here/getAvailableDates"
+                                        tal:content="python:date.strftime('%d %b')"
+                                        tal:attributes="value date;
+                                                        selected python:here.end() == date"
+                                        >02 Nov</option>
+                            </select>
+                            <img tal:define="date_go here/date_go.png"
+                                 tal:replace="structure
+                                              python:date_go.tag(style='display: none',
+                                                                 css_class='today_button',
+                                                                 alt='*', title='Today')"
+                                 />
+                        </span>
+                        <span class="formvaluenode"
+                              tal:condition="here/end"
+                              tal:content="python:here.end().strftime('%d %b')"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Estimated duration</th>
+                    <td ondblclick="showhiddenfield(this)">
+                        <select class="invisibleformnode" name="estimatedDuration">
+                            <option tal:repeat="options here/getTaskEstimates"
+                                    value="0.25"
+                                    tal:attributes="value python:options[0];
+                                                    selected python:str(options[0])==str(here.getEstimatedDuration())"
+                                    tal:content="python:str(options[1])">
+                              A few minutes
+                            </option>
+                        </select>
+                        <span class="formvaluenode" tal:content="here/getTaskEstimateDescription"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Responsible</th>
+                    <td ondblclick="showhiddenfield(this)">
+                        <span class="invisibleformnode">
+                            <select name="responsiblePerson"
+                                    tal:define="responsiblePerson request/responsiblePerson | here/getResponsiblePerson | python:''">
+                                <option value="">Unassigned</option>
+                                <tal:options repeat="participant here/getAvailableParticipants">
+                                    <option tal:attributes="value participant;
+                                                            selected python:responsiblePerson==participant"
+                                            tal:define="author python:mtool.getMemberInfo(participant)"
+                                            tal:content="author/fullname|participant">limi</option>
+                                </tal:options>
+                            </select>
+                            <input type="image"
+                                   style="border: none;"
+                                   title="Claim this task"
+                                   name="form.button.claimthistask"
+                                   tal:attributes="src string:${portal_url}/favorite_icon.gif"
+                                   />
+                        </span>
+                        <span class="formvaluenode"
+                              tal:define="responsible here/getResponsiblePerson;
+                                          author python:responsible and mtool.getMemberInfo(responsible)"
+                              tal:content="author/fullname|responsible"
+                              >limi</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Nosy list</th>
+                    <td ondblclick="showhiddenfield(this)">
+                        <select class="invisibleformnode" name="participants" multiple="multiple">
+                            <tal:options define="availableParticipants here/getParticipants"
+                                         repeat="participant here/getAvailableParticipants">
+                                <option tal:attributes="value participant;
+                                                        selected python:participant in availableParticipants"
+                                        tal:define="author python:mtool.getMemberInfo(participant)"
+                                        tal:content="author/fullname|participant">limi</option>
+                            </tal:options>
+                        </select>
+                        <span class="formvaluenode">
+                            <tal:participants repeat="participant here/getParticipants">
+                                <span tal:define="author python:mtool.getMemberInfo(participant);
+                                                  name author/fullname|participant"
+                                      tal:replace="name">limi</span><span
+                                      tal:condition="not:repeat/participant/end"
+                                      tal:omit-tag="">,</span>
+                            </tal:participants>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <metal:text use-macro="here/extropyproject_view/macros/text_inline_edit" />
+
+        <div class="visualClear"><!----></div>
+
+        <h4>Add comment or changenote</h4>
+
+        <textarea class="proportional" rows="5" name="changenote" id="changenote" style="width: 100%"></textarea>
+        <input class="context" name="form.button.Update" type="submit" value="Update" />
+
+    </form>
+
+    <table metal:define-macro="historylist"
+           tal:define="history here/getHistory"
+           tal:condition="history"
+           class="vertical listing" style="width: 100%">
+
+        <tr>
+            <th>Comment</th>
+            <th>Changes</th>
+        </tr>
+
+        <tal:changes tal:repeat="changes python:history">
+            <tr tal:define="oddrow repeat/changes/odd"
+                tal:attributes="class python:test(oddrow, 'even', 'odd')">
+                <td style="width: 70%">
+                    <p style="text-align:center; color: #666">
+                        <span tal:define="creator changes/Creator | nothing;
+                                          creatordata python:mtool.getMemberInfo(creator)">
+                            <b tal:condition="creatordata" tal:content="python:creatordata['fullname'] or creator">Author</b>
+                            <b tal:condition="not:creatordata" tal:content="creator">Author</b>
+                        </span>
+                        on
+                        <span tal:replace="python:toLocalizedTime(changes.created())">Date</span>
+                    </p>
+                    <div tal:content="structure changes/getChangenote">
+                        Change note
+                    </div>
+                </td>
+                <td style="width: 30%">
+                    <tal:change repeat="change changes/getChanges | nothing">
+                        <div>
+                            <b tal:content="change/title">Priority</b>
+                            <del tal:content="change/from">Old value</del>
+                            <ins tal:content="change/to">New value</ins>
+                        </div>
+                    </tal:change>
+                </td>
+            </tr>
+        </tal:changes>
+    </table>
+
+    <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
+
+</div>
+</body>
+</html>

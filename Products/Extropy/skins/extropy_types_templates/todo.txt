@@ -1,0 +1,39 @@
+
+
+
+PROJECT
+
+    - phases [default view]
+        shows phases - non-active phases collapsed
+        - each phase shows a summary
+    
+    
+    
+
+PHASE
+    - features with estimates / spent
+    - features with tasks
+    - batch add features
+    - tasks by person
+    - hours history
+
+REQUIREMENT
+
+    - list all tasks
+    - batch-add tasks
+    - schema and data 
+    - hours history
+
+TASK
+    - task info w history
+    - hours history 
+
+BUGJAR
+    - list all bugs
+    
+
+BUG
+
+
+HOURGLASS
+    

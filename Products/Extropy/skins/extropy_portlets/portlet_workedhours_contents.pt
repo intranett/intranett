@@ -1,0 +1,16 @@
+<div class="portletItem">
+<table style="width:90%"
+       tal:define="mtool context/portal_membership">
+    <tr tal:repeat="obj python:here.getPortletData().items()">
+        <td tal:define="person python:obj[0];
+                        author python:mtool.getMemberInfo(person);
+                        start python:context.ZopeTime().earliestTime()-6;
+            portal_url nocall:here/portal_url">
+            <a tal:attributes="href string:${portal_url}/weeklyplan_report?user=${person}"
+               tal:define="name author/fullname|person;
+                           name python:len(name) > 12 and name[:11] + '&amp;hellip;;' or name"
+               tal:content="structure name"></a></td>
+        <td style="text-align:right;"><span tal:content="python:obj[1]"/><span class="discreet">h</span></td>
+    </tr>
+</table>
+</div>

@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+
+<div metal:fill-slot="main"
+     tal:define="participants here/getParticipants;
+                 tasks here/getTasksByState;
+                 requirements python:list(here.extropy_tracking_tool.getDeliverablesWithTasks(here))">
+
+    <form name="edit_form"
+          action="."
+          method="post"
+          enctype="multipart/form-data"
+          tal:attributes="action string:${here/absolute_url}/${template/getId}">
+
+        <input type="hidden" name="form.submitted" value="1" />
+
+        <h1>
+            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
+            <span ondblclick="showhiddenfield(this)" tal:define="title here/Title">
+                <span class="formvaluenode" tal:content="title">
+                    Title
+                </span>
+                <input name="title"
+                       class="invisibleformnode editableHeadline"
+                       tal:attributes="value title"
+                       />
+            </span>
+        </h1>
+
+        <a href=""
+           class="link-parent"
+           tal:define="parent_url python:here.navigationParent(here, template_id)"
+           tal:condition="parent_url"
+           tal:attributes="href parent_url"
+           i18n:translate="go_to_parent_url">
+            Up one level
+        </a>
+
+        <metal:summary use-macro="here/extropyproject_view/macros/trackingsummary" />
+
+        <p class="documentDescription" tal:content="here/Description">
+            Description
+        </p>
+
+        <metal:text use-macro="here/extropyproject_view/macros/text_inline_edit" />
+
+    </form>
+
+    <table class="listing nosort" id="deliverables-toc"
+           tal:condition="python:len(requirements) &gt; 2">
+    <thead><tr><th>Table of contents</th></tr></thead>
+    <tbody>
+        <tr tal:repeat="deliverable requirements"
+            tal:attributes="class repeat/deliverable/parity">
+          <td><a href=""
+                 tal:attributes="href string:#${deliverable/UID};
+                                 title deliverable/Description;
+                                 class string:state-${deliverable/review_state}"
+                 tal:content="deliverable/Title"
+                 >Deliverable</a></td>
+        </tr>
+    </tbody>
+    </table>
+
+    <div class="visualClear"></div>
+
+    <tal:activities tal:define="etool nocall:here/extropy_tracking_tool;
+                                activities python:etool.trackingQuery(context, meta_type='ExtropyActivity', REQUEST=request)">
+        <table class="listing" id="sortable"
+               metal:use-macro="here/list_activities/macros/extropy_activities_listing"
+               tal:condition="requirements">
+        </table>
+    </tal:activities>
+
+    <p style="text-align: right">
+        <a tal:attributes="href string:${here/absolute_url}/deliverables_batchadd">
+        <img tal:replace="structure here/add_icon.gif" />
+        Batch-add deliverables</a>
+    </p>
+
+    <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
+
+    <div metal:use-macro="here/progress/macros/progressreport"></div>
+
+    <div class="visualClear"><!----></div>
+
+    <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
+
+</div>
+
+</body>
+</html>

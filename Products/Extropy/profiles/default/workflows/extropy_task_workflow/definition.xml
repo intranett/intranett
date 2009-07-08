@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="extropy_task_workflow"
+             title="Task Workflow [Extropy]"
+             state_variable="review_state"
+             initial_state="unassigned">
+ <permission>Access contents information</permission>
+ <permission>Change portal events</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <state state_id="active" title="">
+  <exit-transition transition_id="deactivate"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="assigned" title="Assigned">
+  <exit-transition transition_id="activate"/>
+  <exit-transition transition_id="assign"/>
+  <exit-transition transition_id="claim"/>
+  <exit-transition transition_id="complete"/>
+  <exit-transition transition_id="deactivate"/>
+  <exit-transition transition_id="discard"/>
+  <exit-transition transition_id="unassign"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="completed" title="Completed">
+  <exit-transition transition_id="assign"/>
+  <exit-transition transition_id="reopen-assigned"/>
+  <exit-transition transition_id="reopen-unassigned"/>
+  <exit-transition transition_id="unassign"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="discarded" title="Discarded">
+  <exit-transition transition_id="assign"/>
+  <exit-transition transition_id="claim"/>
+  <exit-transition transition_id="complete"/>
+  <exit-transition transition_id="unassign"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="unassigned" title="Unassigned">
+  <exit-transition transition_id="assign"/>
+  <exit-transition transition_id="claim"/>
+  <exit-transition transition_id="complete"/>
+  <exit-transition transition_id="discard"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="activate" title=""
+             new_state="active" trigger="USER"
+             before_script="logChanges" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="assign" title=""
+             new_state="assigned" trigger="USER"
+             before_script="" after_script="logChanges">
+  <description>The task is assigned to someone</description>
+  
+  <guard>
+   <guard-expression>here/getResponsiblePerson</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="claim" title=""
+             new_state="assigned" trigger="USER"
+             before_script="" after_script="claimTask">
+  <description>Participant claims a task</description>
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="complete" title=""
+             new_state="completed" trigger="USER"
+             before_script=""
+             after_script="deliverableAllTasksComplete">
+  <description>The task is complete</description>
+  <action url="%(content_url)s/content_publish_form"
+          category="workflow">Complete</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="deactivate" title=""
+             new_state="assigned" trigger="USER"
+             before_script="" after_script="logChanges">
+  <description>Deactivate</description>
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="discard" title=""
+             new_state="discarded" trigger="USER"
+             before_script=""
+             after_script="deliverableAllTasksComplete">
+  <description>Discard task</description>
+  <action url="%(content_url)s/content_reject_form"
+          category="workflow">Discard</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="reopen-assigned"
+             title="Reopen completed assigned task"
+             new_state="assigned" trigger="USER"
+             before_script="" after_script="logChanges">
+  <action url="" category="workflow">Re-open</action>
+  <guard>
+   <guard-expression>here/getResponsiblePerson</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="reopen-unassigned"
+             title="Reopen completed unassigned task"
+             new_state="unassigned" trigger="USER"
+             before_script="" after_script="logChanges">
+  <action url="" category="workflow">Re-open</action>
+  <guard>
+   <guard-expression>not:here/getResponsiblePerson</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="unassign" title=""
+             new_state="unassigned" trigger="USER"
+             before_script="" after_script="logChanges">
+  <description>Unassign</description>
+  <action url="%(content_url)s/content_submit_form"
+          category="workflow">Unassign</action>
+  <guard>
+  </guard>
+ </transition>
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending"
+          category="global">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>

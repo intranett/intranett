@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <subscriber
+      for=".interfaces.z3IExtropyTask
+           zope.app.container.interfaces.IObjectAddedEvent"
+      handler=".events.taskAddedSubscriber"
+      />
+
+  <include package=".browser" />
+  <include package=".portlets" />
+
+  <genericsetup:registerProfile
+    name="extropy"
+    title="Extropy"
+    directory="profiles/default"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+</configure>

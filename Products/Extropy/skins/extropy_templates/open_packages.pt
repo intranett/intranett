@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+  <body>
+    <div metal:fill-slot="main"
+          tal:define="catalog nocall:here/portal_catalog;
+                    etool nocall:here/extropy_timetracker_tool;
+                    global total python:0">
+    
+        <h2>Open packages</h2>
+
+        <table class="listing">
+            <thead>
+                <th>Package</th>
+                <th>Billable hours</th>
+            </thead>
+            <tbody>
+                <tal:loop tal:repeat="item python:catalog(portal_type='ExtropyPhase',review_state=['active','prospective'])">
+                    <tr tal:define="obj item/getObject"
+                        tal:condition="python:obj.getBudgetCategory()=='Billable'">
+                        <td>
+                            <a tal:content="item/Title"
+                               tal:attributes="href item/getURL" />
+                        </td>
+                        <td>
+                            <span tal:define="subtotal python:etool.countIntervalHours(obj, getBudgetCategory='Billable');
+                                              global total python:total+subtotal;"
+                                  tal:content="subtotal" />
+                        </td>
+                    </tr>
+                </tal:loop>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong tal:content="total" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+  </body>
+</html>

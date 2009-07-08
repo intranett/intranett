@@ -1,0 +1,177 @@
+<html>
+<body>
+<div>
+<h1>Navigation</h1>
+<p metal:define-macro="timereport_menu">
+   <tal:menu repeat="mitem view/menu">
+   <a href="timereport"
+      tal:attributes="href string:${here_url}/${mitem/action}${view/query_string}"
+      tal:content="mitem/title">Numbers-version of this page</a><span
+      tal:condition="not:repeat/mitem/end" tal:omit-tag="">,</span>
+   </tal:menu>
+</p>
+</div>
+
+<div>
+<h1>Filters</h1>
+<select name="Creator"
+    metal:define-macro="creator_filter">
+    <option value="">All people</option>
+    <tal:options repeat="person view/people">
+    <option tal:define="author python:mtool.getMemberInfo(person)"
+            tal:attributes="value person;
+            selected python:person == request.get('Creator','')"        
+            tal:content="author/fullname|person" />
+    </tal:options>
+</select>
+<select name="getBudgetCategory"
+    metal:define-macro="category_filter">
+    <option value="">All categories</option>
+    <option tal:repeat="cat view/categories"
+            tal:attributes="value cat;
+                            selected python:cat == request.get('getBudgetCategory','')"
+            tal:content="cat" />
+</select>
+<select name="review_state"
+    metal:define-macro="invoice_state_filter"
+    tal:condition="view/finance_access">
+    <option value="">All invoice states</option>
+    <option tal:repeat="state view/invoice_states"
+            tal:attributes="value state;
+                            selected python:state == request.get('review_state','')"
+            tal:content="state/capitalize" />
+</select>
+        
+<span metal:define-macro="dates_filter">
+start:<input type="text" size="10" name="startdate" tal:attributes="value view/start/Date">
+end:<input type="text" size="10" name="enddate" tal:attributes="value view/end/Date">
+</span>
+</div>
+
+<div>
+<h1>Hour views</h1>
+<metal:hours_table define-macro="hours_table">
+    <table class="listing" id="sortable"
+           tal:define="finance_access view/finance_access|python:False">
+    <tr>
+        <th class="nosort"
+            tal:condition="finance_access">
+          <input class="noborder"
+                 type="checkbox"
+                 src="select_all_icon.gif"
+                 name="selectButton"
+                 title="Select all items"
+                 onClick="toggleSelect(this,'hours:list', true);"
+                 tal:attributes="src string:$portal_url/select_all_icon.gif"
+                 alt="Select all items"
+                 checked="checked"
+                 i18n:attributes="title label_select_all_items; alt label_select_all_items;"
+                 />
+        </th>
+        <th>what </th>
+        <th>who </th>
+        <th>from </th>
+        <th>to   </th>
+        <th>category</th>
+        <th>hours</th>
+    </tr> 
+    <tal:hours tal:repeat="hour view/hours" 
+               tal:define="timefmt string:%h.%d %H:%M;">
+    <tr tal:define="isodd repeat/hour/odd;
+                    state hour/review_state;
+                    budget hour/getBudgetCategory/lower;
+                    rowclass python:isodd and 'odd' or 'even'"
+        tal:attributes="class string:$rowclass state-$state budget-category-$budget">
+        <td tal:condition="finance_access">
+          <input type="checkbox" class="noborder" name="hours:list" id="#" value="#" checked="checked"
+                 tal:condition="python:view.can_invoice(hour)"
+                 tal:attributes="id string:cb_${repeat/hour/index};
+                                 value hour/getPath"/>
+        </td>
+        <td><a tal:attributes="href hour/getURL" tal:content="python:path('hour/Title') or '(no title)'">HOUR</a></td>
+        <td tal:define="creator hour/Creator;
+                        author python:creator and mtool.getMemberInfo(creator)"
+            tal:content="author/fullname|creator"></td>
+        <td><span tal:content="python:hour.start.strftime(timefmt)"></span></td>
+        <td><span tal:content="python:hour.end.strftime(timefmt)"></span></td>
+        <td><span tal:content="hour/getBudgetCategory"></span></td>
+        <td style="text-align:right"><span tal:content="hour/workedHours"></span></td>
+    </tr>
+    </tal:hours>
+    
+    <tr>
+        <th colspan="6" style="text-align: right"
+            tal:attributes="colspan python:finance_access and 6 or 5">SUM</th>
+        <td style="text-align:right"><span  tal:content="view/sum">66</span></td>
+    </tr>
+    
+    </table>
+</metal:hours_table>
+
+<metal:hours_by_date define-macro="hours_by_date">
+    <div tal:repeat="days view/hours_by_date" 
+         class="hour-report-line">
+        <div class="hour-report-date">
+            <a 
+                tal:define="indexdate days/date"
+                tal:attributes="href string:${portal_url}/timesheet?date=${indexdate/Date}"
+                tal:content="python:indexdate.strftime('%a %b %d')"></a>
+        </div>
+        <tal:hour tal:repeat="hour days/hours">
+            <a class="hour-report-hours discreet" 
+                tal:define="width python:int((hour.workedHours * 20) -2)"
+                tal:attributes="href hour/getURL;
+                                title string:${hour/getProjectTitle} ${hour/Title} : ${hour/workedHours} hours from ${hour/start/Time} to ${hour/end/Time} - ${hour/Creator};
+                                style string:width:${width}px;
+                                class string:budget-category-block-${hour/getBudgetCategory/lower} hour-report-hours">
+            </a>
+        </tal:hour>
+        <span class="hours-listing-sum discreet"
+              tal:condition="days/sum">
+              (<span tal:replace="days/sum"></span>)
+        </span>        
+    </div>
+    <p class="visualClear"></p>
+
+    <p><span class="hour-report-date">Total hours</span> <b tal:content="view/sum">123</b></p>
+</metal:hours_by_date>
+
+<metal:hours_by_category define-macro="hours_by_category">
+    <div tal:repeat="category view/hours_by_category" 
+         class="hour-report-line">
+        <div class="hour-report-date" tal:content="category/category">
+          Billable
+        </div>
+        <span class="hour-report-hours budget-category-block-billable" 
+            tal:define="width python:int((category['sum'] * 20) -2)"
+            tal:attributes="style string:width:${width}px;
+                            class string:budget-category-block-${category/category/lower} hour-report-hours">
+        </span>
+        <span class="hours-listing-sum discreet">
+              (<span tal:replace="category/sum"></span>)
+        </span>        
+    </div>
+    <p class="visualClear"></p>
+</metal:hours_by_category>
+
+<metal:hours_by_project define-macro="hours_by_project">
+    <div tal:repeat="project view/hours_by_project" 
+         class="hour-report-line">
+        <div class="hour-report-date" tal:content="project/project">
+          Billable
+        </div>
+        <span class="hour-report-hours budget-category-block-billable" 
+            tal:define="width python:int((project['sum'] * 20) -2)"
+            tal:attributes="style string:width:${width}px;
+                            class string:budget-category-block-${project/category/lower} hour-report-hours">
+        </span>
+        <span class="hours-listing-sum discreet">
+              (<span tal:replace="project/sum"></span>)
+        </span>        
+    </div>
+    <p class="visualClear"></p>
+</metal:hours_by_project>
+
+</div>
+</body>
+</html>

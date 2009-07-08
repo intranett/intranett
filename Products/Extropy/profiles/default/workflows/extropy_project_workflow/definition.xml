@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="extropy_project_workflow"
+             title="Project Workflow [Extropy]"
+             state_variable="review_state"
+             initial_state="prospective">
+ <permission>Access contents information</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <permission>Change portal events</permission>
+ <state state_id="active" title="">
+  <exit-transition transition_id="close"/>
+  <exit-transition transition_id="set_to_prospective"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="closed" title="">
+  <exit-transition transition_id="activate"/>
+  <exit-transition transition_id="set_to_prospective"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="prospective" title="">
+  <exit-transition transition_id="activate"/>
+  <exit-transition transition_id="close"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+ </state>
+ <transition transition_id="activate" title=""
+             new_state="active" trigger="USER"
+             before_script="" after_script="">
+  <description>Activate</description>
+  <action url="" category="workflow">Activate</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="close" title=""
+             new_state="closed" trigger="USER"
+             before_script="" after_script="">
+  <description>Close</description>
+  <action url="" category="workflow">Close</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="set_to_prospective" title=""
+             new_state="prospective" trigger="USER"
+             before_script="" after_script="">
+  <description>set to prospective</description>
+  <action url="" category="workflow">set to prospective</action>
+  <guard>
+  </guard>
+ </transition>
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending"
+          category="global">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>

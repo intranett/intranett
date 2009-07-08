@@ -1,0 +1,48 @@
+<html>
+<body>
+
+<span metal:define-macro="week_label">
+  week <span tal:replace="view/start/week">5</span>, 
+  <span tal:replace="python:view.shortDate(view.start)">Feb 05</span>
+  &mdash; <span tal:replace="python:view.shortDate(view.end)">Feb 09</span>
+</span>
+  
+<span metal:define-macro="week_links"
+      tal:define="here_url string:$here_url/${view/__name__}">
+  <a href="#"
+     tal:attributes="href string:$here_url?startdate=${view/prev}&amp;user=${view/user}"
+     >&larr; previous week</a> | 
+  <a href="#"
+     tal:attributes="href string:$here_url?startdate=${view/next}&amp;user=${view/user}"
+     >next week &rarr;</a>
+</span>
+
+<form metal:define-macro="week_links_filter"
+      name="filter_form" action="/" method="get"
+      tal:attributes="action string:${here_url}/${view/__name__}">
+<p>
+      <span metal:use-macro="context/@@weeklyplan_macros/week_links"/>
+      <input type="hidden" name="startdate" value=""
+             tal:attributes="value view/start" />
+      <select name="user" onChange="this.form.submit();">
+        <tal:options repeat="responsible view/responsibles">
+        <option tal:attributes="value responsible;
+                                selected python:view.user == responsible"
+                tal:define="author python:mtool.getMemberInfo(responsible)"
+                tal:content="author/fullname|responsible">geir</option>
+        </tal:options>
+      </select>
+</p>
+</form>
+
+<p metal:define-macro="weeklyplan_menu">
+   <tal:menu repeat="mitem view/menu">
+   <a href="weeklyplan_report"
+      tal:attributes="href string:$portal_url/${mitem/action}?startdate=${view/start/Date}&amp;user=${view/user}"
+      tal:content="mitem/title">Weekly report</a>
+   <span tal:condition="not:repeat/mitem/end" tal:omit-tag="">|</span> 
+   </tal:menu>
+</p>
+
+</body>
+</html>

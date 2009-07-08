@@ -1,0 +1,380 @@
+/* <dtml-with base_properties> (do not remove this :) */
+
+.editableHeadline {
+    /*font-size: 160%;*/
+    font-family     : <dtml-var headingFontFamily>;
+    font-weight     : normal;
+}
+
+h1 .editableHeadline {
+    font-size       : 100%;
+    width           : 90%
+}
+
+option[disabled] {
+    color: grey;
+}
+
+.invisibleformnode{ 
+    display         :none;
+    margin          : 0;
+    }
+
+.extropychangenote{
+    border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    margin          : 1em 0;
+    font-size       : 90%
+}
+
+.extropychangenotecontent{
+    margin          : 1em;
+}
+
+
+.notImplemented {
+    opacity: 0.2;
+    -moz-opacity: 0.2;
+    -khtml-opacity: 0.2;
+    border: 1px dotted red;
+}
+
+/* NEW CHANGENOTES */
+.extropy-history-list{
+    
+}
+
+.extropy-history-entry-header{
+    
+}
+
+.extropy-history-entry-changenote{
+    
+}
+
+.extropy-history-entry-changes{
+    
+}
+
+.extropy-history-entry-bottom{
+    
+}
+
+
+
+
+
+/* progressbars */
+
+.progressbar{
+    text-decoration : none;
+    text-align      : center;
+    line-height     : 1.3em;
+}
+
+.progressbar-done{
+    width           : 1.5em; 
+    float           : left; 
+    margin-right    : 0.1em; 
+    clear           : none; 
+    border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    display         : block; 
+    height          : 1.5em; 
+    background-color: &dtml-globalBackgroundColor;;
+}
+
+.progressbar-remaining{
+    width           : 1.5em; 
+    float           : left; 
+    margin-right    : 0.1em; 
+    clear           : none; 
+    border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    display         : block; 
+    height          : 1.5em; 
+    background-color: #fff;
+}
+
+.progressbar .short{
+    width           : 0.75em;
+}
+
+.progressbar-small{
+    text-decoration : none;
+    text-align      : center;
+    line-height     : 0.5em !important;
+}
+
+.progressbar-small .progressbar-done{
+    width           : 0.75em !important;
+    margin-right    : 1px !important;
+    height          : 0.75em !important;
+}
+
+.progressbar-small .progressbar-remaining{
+    width           : 0.75em !important;
+    margin-right    : 1px !important;
+    height          : 0.75em !important;
+}
+
+.progressbar-small .short{
+    width : 0.4em !important;
+}
+
+
+/* HOUR REPORTING */
+
+.hour-report-line{
+    margin-top      : 0.2em;
+    margin-bottom   : 1px;
+    clear           : both;
+    
+}
+
+.hour-report-date{
+    text-decoration :none;
+    float           :left;
+    width           : 8em; 
+    text-align      :right;
+    font-size       : 90%;
+}
+.hour-report-line a{
+    text-decoration :none;
+}
+
+.hour-report-hours{
+    float           : left;
+    height          : 0.8em;
+    margin-left     : 1px;
+    margin-top      : 0.2em;
+    border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    background-color: &dtml-globalBackgroundColor;;    
+}
+
+.hours-listing-sum{
+    float:left; 
+    margin-left: 0.5em;
+    margin-right: 1em;
+}
+
+/* BUDGET CATEGORIES */
+
+.budget-category-billable{
+}
+.budget-category-skillandbrand{
+color : orange;
+}
+.budget-category-sales{
+color:green
+}
+.budget-category-administration{
+color:blue
+}
+
+
+.budget-category-block-billable{
+}
+.budget-category-block-skillandbrand{
+    background-color : orange;
+    border-color: brown;
+}
+.budget-category-block-sales{
+    background-color : green;
+    border-color: black;
+
+}
+.budget-category-block-administration{
+    background-color : blue;
+
+}
+
+
+
+
+
+
+/* states */
+
+.state-completed,
+.state-closed {
+    color: green !important;
+    text-decoration: line-through !important;
+}
+
+.state-unassigned {
+    color: red !important;
+}
+
+
+.state-discarded {
+    color: grey !important;
+    text-decoration: line-through !important;
+
+}
+
+.state-in-progress,
+.state-assigned,
+.state-open {
+    color : &dtml-linkColor; !important;
+}
+
+.state-prospective {
+    color: orange !important;
+}
+
+.state-invoiced a {
+    text-decoration: line-through !important;
+}
+
+/* priorities */
+
+.priority-5 {
+        color: black;  /*normal*/
+}
+.priority-1 {
+        color: green;   /*nice-to-have*/
+}
+.priority-10 {
+        color: red;    /*critical*/
+}
+
+.overdue{
+        color: red !important;    
+}
+
+
+/* Planning-UI */
+table .planning { 
+    width: 100%;
+}
+
+table .planning td {
+    padding: 1em;
+    border-top-width : 1px;
+}
+
+.plan-day, .plan-total {
+    width : 18%;
+    height : 2em;
+    padding : 0.5em 1em;
+}
+
+#plannables {
+    height: 22em;
+    padding: 1px;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+table.plannables {
+    margin-top: 0;
+    width: 100%;
+}
+
+table.plannables th {
+    border-top-width : 0px;
+}
+
+.block-display-task {
+    float           : left;
+    height          : 0.8em;
+    margin-left     : 1px;
+    margin-top      : 0.2em;
+    border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    background-color: &dtml-globalBackgroundColor;;    
+}
+
+#plannableCategories {
+    background-color  : transparent;
+    padding-left      : 1em;
+    line-height       : normal;
+    margin            : 1ex 0 0 0;
+    list-style        : none !important;
+    font-size         : 85%;
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+}
+#plannableCategories li {
+    display: inline;
+    padding-top: 0.5em;
+}
+#plannableCategories li a {
+    background-color: transparent;
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    border-style: &dtml-borderStyle;;
+    color: &dtml-globalFontColor;;
+    height: auto;
+    margin-right: 0.5em;
+    padding: 0em 1em;
+    line-height: normal;
+    text-decoration: none;
+    text-transform: &dtml-textTransform;;
+    z-index: 1;
+}
+#plannableCategories .selected a {
+    background-color: &dtml-globalBackgroundColor;;
+    border-bottom: &dtml-globalBackgroundColor; &dtml-borderWidth; &dtml-borderStyle;;
+    color: &dtml-globalFontColor;;
+}
+#plannableCategories li a:hover {
+    background-color: &dtml-globalBackgroundColor;;
+    color: &dtml-globalFontColor;;
+}
+#plannableCategories li a:visited, .plannableCategories li a:active {
+    color: &dtml-globalFontColor;;
+}
+#no-plannables {
+    margin: 2ex;
+}
+
+.planned-task{
+    margin-right : 0.6em;
+    margin-bottom: 0.6em;
+    float        : left;
+}
+
+.planned-task:hover span{
+    border-color    : orange !important;
+}
+
+.plan-day a.state-completed span{
+    border-color    : green !important;
+}
+
+.plan-day-hover {
+    background: &dtml-globalBackgroundColor;;
+}
+
+.plan-user {
+    margin-right: 20px;
+}
+
+.focustoggle {
+    background-image: url(&dtml-portal_url;/fullscreenexpand_icon.gif);
+    background-repeat: no-repeat;
+    display: block;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    float: right;
+    margin: -5px -10px 0px 10px;
+}
+
+.focustoggle.focused {
+    background-image: url(&dtml-portal_url;/fullscreencollapse_icon.gif);
+}
+
+/* Workflow actions view */
+.workflowactions {
+    text-transform: lowercase;
+}
+
+.workflowactions.loading {
+    background-image: url(&dtml-portal_url;/progress.gif);
+    background-repeat: no-repeat;
+    background-position: 100%;
+    padding-right: 14px;
+    padding-bottom: 0.5ex;
+}
+/* </dtml-with> */

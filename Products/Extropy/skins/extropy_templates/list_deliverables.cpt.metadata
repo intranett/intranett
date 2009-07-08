@@ -1,0 +1,12 @@
+[default]
+title = Tasks
+
+[validators]
+#validators = validate_base
+validators..form_add =
+validators..cancel =
+
+[actions]
+action.success = traverse_to:string:list_deliverables
+action.success..cancel = traverse_to:string:list_deliverables
+action.failure = traverse_to:string:list_deliverables

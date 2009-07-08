@@ -1,0 +1,183 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+<head></head>
+<body>
+<div metal:fill-slot="main">
+
+    <form name="edit_form"
+          action="."
+          method="post"
+          enctype="multipart/form-data"
+          tal:attributes="action string:${here/absolute_url}/${template/getId}"
+          tal:define="etool nocall:here/extropy_tracking_tool;
+                      tasks python:etool.trackingQuery(context, meta_type='ExtropyTask', REQUEST=request)">
+
+        <input type="hidden" name="form.submitted" value="1" />
+
+        <p class="discreet" tal:condition="not:here/Title">
+            Use action verbs for deliverable titles, such as 'Finalize', 'Resolve',
+            'Handle', 'Look into', 'Submit', 'Maximize', 'Organize', 'Design',
+            'Complete', 'Ensure', 'Roll out', 'Update', 'Install', 'Implement' and
+            'Set up'.
+        </p>
+
+        <h1>
+            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
+            <span ondblclick="showhiddenfield(this)">
+                <span class="formvaluenode"
+                      tal:content="here/Title">
+                </span>
+                <input name="title"
+                       class="invisibleformnode editableHeadline"
+                       tal:attributes="value here/Title"
+                       />
+            </span>
+        </h1>
+
+        <table class="vertical listing" style="float:right">
+            <tr tal:condition="not:tasks">
+                <td>
+                    <a tal:attributes="href string:${here/absolute_url}/tasks_add1on1">Add 1-on-1 task <img tal:replace="structure here/add_alternative_icon.gif" /><img tal:replace="structure here/task_icon.gif" /></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a tal:attributes="href string:${here/absolute_url}/tasks_batchadd">Batch-add tasks <img tal:replace="structure here/add_alternative_icon.gif" /><img tal:replace="structure here/add_alternative_icon.gif" /></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a tal:attributes="href string:${here/absolute_url}/add_work_hours">Register work hours <img tal:replace="structure here/hour_icon.gif" /></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a tal:attributes="href string:${here/absolute_url}/timereport2">Timesheet reports <img tal:replace="structure here/hour_icon.gif" /></a>
+                </td>
+            </tr>
+        </table>
+
+        <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
+          <tbody>
+            <tr>
+              <th>Target Phase</th>
+              <td ondblclick="showhiddenfield(this)" tal:define="currentPhase python:here.getExtropyParent('ExtropyPhase')">
+                <select class="invisibleformnode" name="moveToPhase"
+                        >
+                  <option tal:repeat="phase python:here.getExtropyParent('ExtropyProject').objectValues('ExtropyPhase')"
+                          tal:content="phase/Title"
+                          tal:attributes="value phase/UID;
+                          selected python:phase.UID() ==currentPhase.UID()">Phase 1</option>
+                </select>
+                <span class="formvaluenode" tal:content="currentPhase/Title"></span>
+              </td>
+            </tr>
+            <tr>
+              <th>Responsible</th>
+              <td ondblclick="showhiddenfield(this)">
+                <span  class="invisibleformnode">
+                  <select name="responsiblePerson"
+                          tal:define="responsiblePerson request/responsiblePerson | here/getResponsiblePerson | python:''">
+                    <option value="">Unassigned</option>
+                    <tal:options repeat="participant here/getAvailableParticipants">
+                    <option tal:attributes="value participant;
+                            selected python:responsiblePerson==participant"
+                            tal:define="author python:mtool.getMemberInfo(participant)"
+                            tal:content="author/fullname|participant">limi</option>
+                    </tal:options>
+                  </select>
+                  <input type="image"
+                         style="border: none;"
+                         title="Claim this task"
+                         tal:attributes="src string:${portal_url}/favorite_icon.gif">
+                  </span>
+                  <span class="formvaluenode"
+                        tal:define="responsible here/getResponsiblePerson;
+                                    author python:responsible and mtool.getMemberInfo(responsible)"
+                        tal:content="author/fullname|responsible"
+                        >limi</span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Nosy list
+              </th>
+              <td ondblclick="showhiddenfield(this)">
+                <select class="invisibleformnode" name="participants" multiple="multiple">
+                  <tal:options
+                    define="availableParticipants here/getParticipants"
+                    repeat="participant here/getAvailableParticipants">
+                  <option tal:attributes="value participant;
+                          selected python:participant in availableParticipants"
+                          tal:define="author python:mtool.getMemberInfo(participant)"
+                          tal:content="author/fullname|participant">limi</option>
+                  </tal:options>
+                </select>
+                <span class="formvaluenode">
+                  <tal:participants repeat="participant here/getParticipants">
+                    <span tal:define="author python:mtool.getMemberInfo(participant);
+                                      name author/fullname | participant"
+                          tal:replace="name">limi</span><span
+                          tal:condition="not:repeat/participant/end"
+                          tal:omit-tag="">,</span>
+                  </tal:participants>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a href=""
+           class="link-parent"
+           tal:define="parent_url python:here.navigationParent(here, template_id)"
+           tal:condition="parent_url"
+           tal:attributes="href parent_url"
+           i18n:translate="go_to_parent_url">
+            Up one level
+        </a>
+
+        <div tal:define="worked here/getWorkedHours;
+                         estimates here/getEstimatedDuration;
+                         URL here/absolute_url;
+                         remaining here/getRemainingTime;
+                         bar nocall:context/@@progressbar">
+            <a tal:replace="structure python:bar(URL=URL,remaining=remaining, worked=worked)"> </a>
+        </div>
+
+        <p class="documentDescription" tal:content="here/Description">
+            Description
+        </p>
+
+        <tal:tasks tal:define="removelocationcolumn python:1">
+              <table metal:use-macro="here/list_tasks/macros/extropy_task_listing">
+              </table>
+        </tal:tasks>
+
+        <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
+
+        <fieldset>
+            <legend>Status/Edit</legend>
+            <metal:text use-macro="here/extropyproject_view/macros/text_inline_edit" />
+
+            <div class="visualClear"><!----></div>
+
+            <h4>Add comment or changenote</h4>
+            <textarea style="width: 100%" rows="5" name="changenote" id="changenote"></textarea>
+            <input class="context" name="form.button.Update" type="submit" value="Update" />
+        </fieldset>
+
+        <div class="visualClear"><!----></div>
+
+    </form>
+
+    <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
+
+    <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
+
+</div>
+
+</body>
+</html>

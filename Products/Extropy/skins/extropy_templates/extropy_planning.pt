@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+
+<div metal:fill-slot="main" >
+
+    <div tal:define="now here/ZopeTime;
+                     tool python:here.extropy_tracking_tool;
+                     openstates tool/getOpenStates;
+                     tasks python:tool.localQuery(  here,REQUEST=None, 
+                                                    portal_type='ExtropyTask', 
+                                                    review_state=openstates 
+                                                    );                     
+                     futuretasks python:tool.localQuery(here,REQUEST=None, 
+                                                        portal_type='ExtropyTask', 
+                                                        review_state=openstates, 
+                                                        end={   'query' : here.ZopeTime(), 
+                                                                'range': 'min'});                     
+                     tasksbyuser python:tool.dictifyResults(tasks, 'getResponsiblePerson');">
+
+
+
+<table class="vertical listing">
+    <tr tal:repeat="person tasksbyuser/items">
+        <th tal:content="python:person[0]"></th>
+        <td>
+            <span tal:content="python:person[1]"></span>
+        </td>
+        <td><span tal:content=""></span></td>
+    </tr>
+</table>
+
+
+</div>
+
+
+<!-- 
+<table class="vertical listing" 
+        tal:define="dates python:(tool.dictifyTasksByDate(tasks, startdate=here.ZopeTime(), enddate=here.ZopeTime()+7)).keys();
+        dummy python:dates.sort(); 
+        "
+        >
+        <tr>
+
+            <th>Date</th>
+            <th tal:repeat="date dates" tal:content="date/Date"></th>
+</tr>
+    
+        <tr tal:repeat="username python:tasksbyuser.keys()">
+            <th> 
+                    
+                <span tal:content="python:tool.getFullnameOf(username) or 'Unassigned'"></span>
+                (<span tal:content="python:len(tasksbyuser[username])"></span>)
+            </th>
+            
+            <tal:tasks tal:define="tasksbydate python:tool.dictifyTasksByDate(tasksbyuser[username], startdate=here.ZopeTime(), enddate=here.ZopeTime()+7)">
+                <td tal:repeat="day dates">
+                    <div tal:repeat="task python:tasksbydate[day]">
+                    <a tal:define="duration task/getEstimatedDuration;
+                                     width python:int(duration) * 20;
+                                     "
+                        tal:attributes="href task/absolute_url;
+                                        style string:width:${width}px;
+                                        title string:${task/Title} in project:${task/getProjectTitle}"
+                        class="block-display-task"
+                    >
+                    </a>
+                </div> 
+                </td>
+            </tal:tasks>
+            </tr>
+            </table>
+    </div>
+-->
+    
+    
+</div>
+</body>
+</html>
