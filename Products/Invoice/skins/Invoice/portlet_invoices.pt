@@ -1,0 +1,61 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="plone">
+<body>
+<div metal:define-macro="portlet"
+     tal:define="results python:here.portal_catalog.searchResults(
+													 portal_type='Invoice',
+                                                     sort_on='end',
+                                                     sort_order='asc',
+                                                     review_state='Sent');">
+
+    <dl class="portlet" id="portlet-invoices">
+
+        <dt class="portletHeader">
+            <span class="portletTopLeft"></span>
+            <span class="tile">
+                Unpaid invoices
+            </span>
+            <span class="portletTopRight"></span>
+        </dt>
+
+        <tal:invoices tal:repeat="obj results">
+        <dd tal:define="oddrow repeat/obj/odd"
+             tal:attributes="class python:test(oddrow, 'portletItem even', 'portletItem odd')">
+
+            <a href=""
+               class="tile"
+               tal:attributes="href obj/getURL;">
+                <tal:block replace="structure here/invoice_icon.gif"/>
+                <span tal:replace="obj/pretty_title_or_id">
+                Plone 2.1 announced!
+                </span> 
+                <span class="portletItemDetails">Due 
+                    <span tal:omit-tag="python:obj.end > here.ZopeTime()" style="color:red">
+                        <span
+                            tal:content="python:here.toLocalizedTime(obj.end)">May 5
+                        </span>   
+                    </span>
+                </span>
+            </a>
+        </dd>
+        </tal:invoices>
+
+        <dd class="portletFooter">
+
+            <a href=""
+               class="tile"
+               tal:condition="python:None"
+               tal:attributes="href string:${utool}/news"
+               i18n:translate="box_more_news_link"
+               >
+              More invoices&hellip;
+            </a>
+            <span class="portletBottomLeft"></span>
+            <span class="portletBottomRight"></span>
+        </dd>
+    </dl>
+
+</div>
+</body>
+</html>
