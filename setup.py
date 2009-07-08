@@ -21,5 +21,12 @@ setup(name='Products.Extropy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.DataGridField',
+          'Products.Maps',
+          'Products.MaildropHost',
+          'Products.SecureMaildropHost',
+          'Products.signalstack',
+          'experimental.catalogqueryplan',
+          'python-gettext',
       ],
       )

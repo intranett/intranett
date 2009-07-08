@@ -3,14 +3,16 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
+  <include package="experimental.catalogqueryplan" />
+
+  <include package=".browser" />
+  <include package=".portlets" />
+
   <subscriber
       for=".interfaces.z3IExtropyTask
            zope.app.container.interfaces.IObjectAddedEvent"
       handler=".events.taskAddedSubscriber"
       />
-
-  <include package=".browser" />
-  <include package=".portlets" />
 
   <cmf:registerDirectory
       name="skins"
