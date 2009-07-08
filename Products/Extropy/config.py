@@ -1,6 +1,4 @@
 from Products.Extropy.permissions import *
-from Products.Archetypes.public import DisplayList
-
 
 PROJECTNAME = "Extropy"
 
@@ -11,8 +9,6 @@ TIMETOOLNAME = 'extropy_timetracker_tool'
 TIMETOOLTYPE = 'Extropy TimeTracker Tool'
 
 GLOBALS = globals()
-
-SKINS_DIR = 'skins'
 
 TASK_PRIORITIES = (('1','NiceToHave'),('5','Normal'),('10','Urgent'))
 

@@ -3,21 +3,20 @@ from Products.CMFCore.utils import ToolInit
 
 from Products.Archetypes.public import process_types, listTypes
 
-from Products.Extropy.config import PROJECTNAME, ADD_CONTENT_PERMISSION
+from Products.Extropy import config
 from Products.Extropy import tools
 
 def initialize(context):
     from Products.Extropy import content
 
     content_types, constructors, ftis = process_types(
-        listTypes(PROJECTNAME), PROJECTNAME)
+        listTypes(config.PROJECTNAME), config.PROJECTNAME)
 
     ContentInit(
-        PROJECTNAME + ' Content',
+        config.PROJECTNAME + ' Content',
         content_types = content_types,
-        permission = ADD_CONTENT_PERMISSION,
+        permission = config.ADD_CONTENT_PERMISSION,
         extra_constructors = constructors,
-        fti = ftis,
         ).initialize(context)
 
     TOOLS = (
@@ -25,7 +24,7 @@ def initialize(context):
         tools.ExtropyTrackingTool.ExtropyTrackingTool,
         )
     ToolInit(
-        PROJECTNAME + ' Tool',
+        config.PROJECTNAME + ' Tool',
         tools = TOOLS,
         icon = 'tool.gif',
         ).initialize(context)

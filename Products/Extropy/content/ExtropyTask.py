@@ -82,11 +82,6 @@ class ExtropyTask(ExtropyHistoryTrackable, ExtropyBase, BaseFolder):
         newtask.reindexObject() # for featureUID
         return newtask
 
-    #security.declareProtected(VIEW_PERMISSION, 'getRemainingTime')
-    #def getRemainingTime(self):
-    ##    # XXX estimated duration minus hours spent
-    # #   return max(self.getEstimatedDuration(),0)
-
     security.declareProtected(VIEW_PERMISSION, 'getSplitTasks')
     def getSplitTasks(self):
         """Get the tasks split from this
