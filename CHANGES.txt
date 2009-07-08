@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Added caching packages and config.
+  [hannosch]
+
 - Make sure to add the `start` index to our time tracker tool / catalog.
   [hannosch]
 

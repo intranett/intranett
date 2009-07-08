@@ -21,6 +21,8 @@ setup(name='Products.Extropy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'five.caching',
+          'Products.CacheSetup',
           'Products.Invoice',
           'Products.Maps',
           'Products.MaildropHost',
