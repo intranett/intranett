@@ -57,26 +57,11 @@ def importVarious(context):
     logger.info(out.getvalue())
 
 def importDependencies(context):
-    """We manually hook up the dependencies installers."""
+    """Nothing to be done here anymore."""
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('extropy_dependencies.txt') is None:
         return
 
-    out = StringIO()
-    site = context.getSite()
-    qi = getToolByName(site, 'portal_quickinstaller')
-    products = [
-        'Memo',
-    ]
-    for product in products:
-        if not qi.isProductInstalled(product):
-            qi.installProducts([product])
-
-    if not qi.isProductInstalled('Extropy'):
-        qi.notifyInstalled('Extropy')
-
-    logger = context.getLogger('Extropy')
-    logger.info(out.getvalue())
 
 ## XXX: Temporary workaround. This is referenced in the persistent config of
 # the import registry. Needs to be removed from there before we can delete this

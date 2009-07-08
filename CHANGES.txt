@@ -4,7 +4,8 @@ Changelog
 0.7
 ---
 
-- Use GS profile dependency mechanism to install the Invoice package.
+- Use GS profile dependency mechanism to install the Invoice and Memo packages.
+  Remove the custom setup handler.
   [hannosch]
 
 - Removed specialized login_next script, which didn't serve any purpose

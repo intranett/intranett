@@ -3,5 +3,6 @@
   <version>0.7</version>
   <dependencies>
     <dependency>profile-Products.Invoice:default</dependency>
+    <dependency>profile-Products.Memo:default</dependency>
   </dependencies>
 </metadata>
