@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Really disable all of linkintegrity by overriding the event handlers.
+  [hannosch]
+
 - Added caching packages and config.
   [hannosch]
 
