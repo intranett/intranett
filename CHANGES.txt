@@ -4,6 +4,10 @@ Changelog
 0.7
 ---
 
+- Figure out how to do the real catalog index and metadata setup for our own
+  tools without using custom GS handlers.
+  [hannosch]
+
 - Completely removed estimate handling.
   [hannosch]
 

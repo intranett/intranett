@@ -26,27 +26,22 @@ def setupCatalogMultiplex(portal, out):
     attool.setCatalogsByType('ExtropyHours', [config.TIMETOOLNAME])
     attool.setCatalogsByType('ExtropyHourGlass', [])
 
-    timetool = getToolByName(portal, config.TIMETOOLNAME)
-    # indexes
-    indexes = {
-        'getBudgetCategory' : 'FieldIndex',
-        'start' : 'DateIndex',
-    }
-    for idx_id, idx_type in indexes.items():
-        if idx_id in timetool.indexes():
-            timetool.delIndex(idx_id)
-        timetool.addIndex(idx_id, idx_type)
+    def setup_indexes(tool):
+        for idx_id, idx_type, _ in tool.enumerateIndexes():
+            if idx_id in tool.indexes():
+                tool.delIndex(idx_id)
+            tool.addIndex(idx_id, idx_type)
 
-    # metadata
-    columns = [
-        'getBudgetCategory',
-        'workedHours',
-    ]
-    for col_id in columns:
-        if col_id in timetool.schema()[:]:
-            timetool.delColumn(col_id)
-        timetool.addColumn(col_id)
-    timetool.refreshCatalog()
+        for col_id in tool.enumerateColumns():
+            if col_id in tool.schema()[:]:
+                tool.delColumn(col_id)
+            tool.addColumn(col_id)
+        tool.refreshCatalog()
+
+    tool = getToolByName(portal, config.TOOLNAME)
+    setup_indexes(tool)
+    timetool = getToolByName(portal, config.TIMETOOLNAME)
+    setup_indexes(timetool)
 
 
 def setupPASRoles(portal, out):
