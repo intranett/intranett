@@ -130,14 +130,14 @@
  </state>
  <transition transition_id="activate" title=""
              new_state="active" trigger="USER"
-             before_script="logChanges" after_script="">
+             before_script="" after_script="">
   
   <guard>
   </guard>
  </transition>
  <transition transition_id="assign" title=""
              new_state="assigned" trigger="USER"
-             before_script="" after_script="logChanges">
+             before_script="" after_script="">
   <description>The task is assigned to someone</description>
   
   <guard>
@@ -156,7 +156,7 @@
  </transition>
  <transition transition_id="deactivate" title=""
              new_state="assigned" trigger="USER"
-             before_script="" after_script="logChanges">
+             before_script="" after_script="">
   <description>Deactivate</description>
   
   <guard>
@@ -175,7 +175,7 @@
  <transition transition_id="reopen-assigned"
              title="Reopen completed assigned task"
              new_state="assigned" trigger="USER"
-             before_script="" after_script="logChanges">
+             before_script="" after_script="">
   <action url="" category="workflow">Re-open</action>
   <guard>
    <guard-expression>here/getResponsiblePerson</guard-expression>
@@ -184,7 +184,7 @@
  <transition transition_id="reopen-unassigned"
              title="Reopen completed unassigned task"
              new_state="unassigned" trigger="USER"
-             before_script="" after_script="logChanges">
+             before_script="" after_script="">
   <action url="" category="workflow">Re-open</action>
   <guard>
    <guard-expression>not:here/getResponsiblePerson</guard-expression>
@@ -192,7 +192,7 @@
  </transition>
  <transition transition_id="unassign" title=""
              new_state="unassigned" trigger="USER"
-             before_script="" after_script="logChanges">
+             before_script="" after_script="">
   <description>Unassign</description>
   <action url="%(content_url)s/content_submit_form"
           category="workflow">Unassign</action>
