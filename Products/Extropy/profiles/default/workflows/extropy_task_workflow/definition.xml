@@ -24,7 +24,6 @@
  <state state_id="assigned" title="Assigned">
   <exit-transition transition_id="activate"/>
   <exit-transition transition_id="assign"/>
-  <exit-transition transition_id="claim"/>
   <exit-transition transition_id="complete"/>
   <exit-transition transition_id="deactivate"/>
   <exit-transition transition_id="discard"/>
@@ -78,7 +77,6 @@
  </state>
  <state state_id="discarded" title="Discarded">
   <exit-transition transition_id="assign"/>
-  <exit-transition transition_id="claim"/>
   <exit-transition transition_id="complete"/>
   <exit-transition transition_id="unassign"/>
   <permission-map name="Access contents information"
@@ -105,7 +103,6 @@
  </state>
  <state state_id="unassigned" title="Unassigned">
   <exit-transition transition_id="assign"/>
-  <exit-transition transition_id="claim"/>
   <exit-transition transition_id="complete"/>
   <exit-transition transition_id="discard"/>
   <permission-map name="Access contents information"
@@ -145,14 +142,6 @@
   
   <guard>
    <guard-expression>here/getResponsiblePerson</guard-expression>
-  </guard>
- </transition>
- <transition transition_id="claim" title=""
-             new_state="assigned" trigger="USER"
-             before_script="" after_script="claimTask">
-  <description>Participant claims a task</description>
-  
-  <guard>
   </guard>
  </transition>
  <transition transition_id="complete" title=""

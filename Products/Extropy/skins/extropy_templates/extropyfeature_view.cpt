@@ -89,10 +89,6 @@
                             tal:content="author/fullname|participant">limi</option>
                     </tal:options>
                   </select>
-                  <input type="image"
-                         style="border: none;"
-                         title="Claim this task"
-                         tal:attributes="src string:${portal_url}/favorite_icon.gif">
                   </span>
                   <span class="formvaluenode"
                         tal:define="responsible here/getResponsiblePerson;

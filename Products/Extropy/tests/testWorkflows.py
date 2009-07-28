@@ -20,11 +20,6 @@ class TestTaskWorkflow(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
     def testWorkflowInstalled(self):
         self.failUnless('extropy_task_workflow' in self.portal.portal_workflow.objectIds())
 
-    def testWorkflowScriptsInstalled(self):
-        wfscripts = self.portal.portal_workflow.extropy_task_workflow.scripts
-        scriptids = wfscripts.objectIds()
-        self.failUnless('claimTask' in scriptids)
-
     def testWorkflowAssignedToTask(self):
         wf_tool = self.portal.portal_workflow
         self.failUnlessEqual(wf_tool.getChainForPortalType('ExtropyTask'), ('extropy_task_workflow',))
@@ -34,22 +29,6 @@ class TestTaskWorkflow(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.deliverable.invokeFactory('ExtropyTask','task')
         task = self.deliverable.task
         self.failUnlessEqual(wf_tool.getInfoFor(task, 'review_state'), 'unassigned')
-
-    def testClaimTask(self):
-        wf_tool = self.portal.portal_workflow
-        self.deliverable.invokeFactory('ExtropyTask','task')
-        task = self.deliverable.task
-        wf_tool.doActionFor(task, 'claim')
-        self.failUnlessEqual(wf_tool.getInfoFor(task, 'review_state'), 'assigned')
-        self.failUnlessEqual(str(task.getResponsiblePerson()), default_user)
-
-    def testClaimTaskWithoutWorkflow(self):
-        wf_tool = self.portal.portal_workflow
-        self.deliverable.invokeFactory('ExtropyTask','task')
-        task = self.deliverable.task
-        task.claimTask()
-        self.failUnlessEqual(wf_tool.getInfoFor(task, 'review_state'), 'assigned')
-        self.failUnlessEqual(str(task.getResponsiblePerson()), default_user)
 
     def testSetResponsible(self):
         wf_tool = self.portal.portal_workflow

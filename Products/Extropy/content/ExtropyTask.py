@@ -48,15 +48,6 @@ class ExtropyTask(ExtropyHistoryTrackable, ExtropyBase, BaseFolder):
 
     security = ClassSecurityInfo()
 
-    security.declareProtected(permissions.ModifyPortalContent, 'claimTask')
-    def claimTask(self):
-        """a user claims the task to assign it to himself and 'activate' it"""
-        member = getToolByName(self, 'portal_membership').getAuthenticatedMember()
-        wftool = getToolByName(self, 'portal_workflow')
-        if wftool.getInfoFor(self, 'review_state') == 'unassigned' and self.getResponsiblePerson() in ('', None):
-            wftool.doActionFor(self, 'claim')
-        self.setResponsiblePerson(member.getId())
-
     security.declareProtected(permissions.ModifyPortalContent, 'splitTask')
     def splitTask(self, targetPhase=None):
         """ make a new task with a reference pointing to this one"""

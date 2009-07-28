@@ -62,19 +62,6 @@ class TestTasks(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.folder.project.phase.requirement.task1.reindexObject()
         self.failUnless(self.folder.project.getTasksForCurrentUser())
 
-    def testTaskCreatesHistory(self):
-        self.failUnlessEqual(len(self.task1.objectIds()),0)
-        self.portal.portal_workflow.doActionFor(self.task1, 'claim')
-        self.failUnlessEqual(len(self.task1.objectIds()),1)
-        self.task1.processForm(values={'title':'confuse-a-cat'})
-        self.failUnlessEqual(len(self.task1.objectIds()),2)
-        self.failUnlessEqual( self.task1.Title(), 'confuse-a-cat' )
-
-        hist = self.task1.objectValues()[-1]
-        changes = hist.getChanges()
-        self.failUnless(changes[0]['field'] == 'title')
-        self.failUnlessEqual(changes[0]['to'], 'confuse-a-cat')
-
     def testHistoryIsPartOfSearchableText(self):
         self.task1.processForm(values={'changenote':'ham and spam'})
         self.task1.processForm(values={'changenote':'eggs'})
@@ -90,20 +77,6 @@ class TestTasks(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.failUnless(len(self.task1.objectIds())>0)
         self.failIf(self.task1.getChangenote())
         self.assertEqual(self.task1.objectValues()[0].getChangenote(),"<p>CHANGED!</p>")
-
-    def testTaskCommentfromREQUEST(self):
-        self.app.REQUEST.form={}
-        self.app.REQUEST.form['changenote']='CHANGED!'
-        self.app.REQUEST.form['title']='confuse-a-cat'
-        self.app.REQUEST.form['participants']='extropy'
-        self.portal.portal_workflow.doActionFor(self.task1, 'claim')
-        self.task1.processForm(REQUEST=self.app.REQUEST)
-        self.failUnless(len(self.task1.objectIds())>0)
-        self.failIf(self.task1.getChangenote())
-        self.assertEqual(self.task1.objectValues()[-1].getChangenote(),"<p>CHANGED!</p>")
-        self.assertEqual(self.task1.objectValues()[-1].Title(),"CHANGED!")
-        self.failUnlessEqual( self.task1.Title(), 'confuse-a-cat' )
-        self.failUnless( 'extropy' in self.task1.getParticipants() )
 
     def testSplitTask(self):
         self.task1.splitTask()

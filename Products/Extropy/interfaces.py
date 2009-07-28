@@ -51,9 +51,6 @@ class IExtropyTask(Interface):
     Interface for tasks
     """
 
-    def claimTask():
-        """Current user claims task"""
-
     def splitTask(targetPhase=None):
         """Split the current task in two, retaining most properties, not title/description"""
 
