@@ -13,12 +13,6 @@
   <include package=".browser" />
   <include package=".portlets" />
 
-  <subscriber
-      for=".interfaces.z3IExtropyTask
-           zope.app.container.interfaces.IObjectAddedEvent"
-      handler=".events.taskAddedSubscriber"
-      />
-
   <cmf:registerDirectory
       name="skins"
       directory="skins"

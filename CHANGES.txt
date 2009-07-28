@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- We don't need the taskAddedSubscriber anymore.
+  [hannosch]
+
 - Removed split task functionality.
   [hannosch]
 
