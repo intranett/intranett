@@ -8,13 +8,13 @@ from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_base, aq_parent
 from Products.Extropy.content.ExtropyBase import ExtropyBase
 from Products.Extropy.content.ExtropyHistoryTrackable import ExtropyHistoryTrackable
-from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema, ChangeNoteSchema,  EstimatesSchema
+from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema, ChangeNoteSchema
 from Products.Extropy.content.ExtropyTracking import ExtropyTracking
 from Products.Extropy.config import *
 from Products.Extropy.interfaces import *
 from Products.CMFCore import permissions
 
-ActivitySchema = ExtropyBaseSchema.copy()+ ParticipantsSchema.copy() + EstimatesSchema.copy() + Schema((
+ActivitySchema = ExtropyBaseSchema.copy()+ ParticipantsSchema.copy() + Schema((
     ))
 
 del ActivitySchema['responsiblePerson']

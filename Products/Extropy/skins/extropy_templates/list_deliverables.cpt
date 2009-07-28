@@ -101,10 +101,9 @@
                 <td tal:define="deliverable_obj deliverable/getObject"
                     tal:content="structure deliverable_obj/@@workflowactions">Completed?</td>
                 <td>
-                    
+
                 <tal:progressbar define="
                          worked deliverable/getWorkedHours;
-                         estimated deliverable/getEstimatedDuration; 
                          URL deliverable/getURL;
                          remaining deliverable/getRemainingTime;
                          bar nocall:context/@@smallprogressbar">  
@@ -112,23 +111,11 @@
                 </a>  
         </tal:progressbar>
 
-                
-                    
-                </td>        
-                
+                </td>
             </tr>
             </tal:deliverable>
         </tbody>
-        <tfooter>
-            <tr>
-                <th colspan="5" style="text-align:right">Sum estimated hours</th>
-                <td tal:content="python:etool.countEstimates(deliverables)">66</td>       
-            </tr>
-        </tfooter>
-        
-        
     </table>
-
 
 </div>
 

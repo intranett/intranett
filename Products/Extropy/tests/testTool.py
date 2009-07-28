@@ -65,18 +65,6 @@ class TestTool(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.assertEqual(len(self.tool.trackingQuery(self.folder.project.phase.feature, portal_type='ExtropyTask')), 2)
         self.assertEqual(len(self.tool.trackingQuery(self.folder.project.phase2.feature, portal_type='ExtropyTask')), 1)
 
-    def testSummingEstimates(self):
-        # We'll add some tasks and test that they can be properly summed up
-        self.folder.invokeFactory('ExtropyProject','project')
-        self.folder.project.invokeFactory('ExtropyPhase','phase')
-        self.folder.project.phase.invokeFactory('ExtropyFeature','feature')
-        today = DateTime().earliestTime()
-        self.folder.project.phase.feature.invokeFactory('ExtropyTask','task0',estimatedDuration=1)
-        self.folder.project.phase.feature.invokeFactory('ExtropyTask','task1',estimatedDuration=3)
-        tasks = self.tool.searchResults(portal_type='ExtropyTask')
-        sum = self.tool.sumEstimates(tasks)
-        self.assertEqual(sum, 4)
-
 
 def test_suite():
     from unittest import TestSuite, makeSuite

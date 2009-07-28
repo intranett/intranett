@@ -73,13 +73,6 @@ class ExtropyFeature(ExtropyHistoryTrackable, ExtropyTracking, ExtropyBase, Base
             transaction.get().savepoint()
             return self
 
-    def getEstimatedDuration(self, **kw):
-        """Estimated duration of subobjects."""
-        tasks = self.getTasks( **kw)
-        if not len(tasks):
-            return 0
-        return reduce(lambda x, y: x + y , [t.getEstimatedDuration for t in tasks if t.getEstimatedDuration is not None])
-
     def getWorkedHours(self):
         """Gets the total amount of time worked for this object."""
         tool = getToolByName(self, config.TIMETOOLNAME)

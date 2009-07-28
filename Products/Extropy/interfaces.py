@@ -112,9 +112,6 @@ class IExtropyBug(Interface):
     def getRemainingTasks():
         """get the spawned tasks that are still open"""
 
-    def getRemainingEstimatedTime():
-        """Sum the estimated time of all related tasks"""
-
 
 class IExtropyFeature(Interface):
     """
@@ -134,9 +131,6 @@ class IExtropyFeature(Interface):
 
     def getRemainingTasks():
         """get the spawned tasks that are still open"""
-
-    def getRemainingEstimatedTime():
-        """Sum the estimated time of all related tasks"""
 
 
 class IExtropyTrackingTool(Interface):

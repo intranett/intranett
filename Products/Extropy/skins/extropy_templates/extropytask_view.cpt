@@ -70,7 +70,6 @@
         </a>
 
         <div tal:define="worked here/getWorkedHours;
-                         estimates here/getEstimatedDuration;
                          URL here/absolute_url;
                          remaining here/getRemainingTime;
                          bar nocall:context/@@progressbar">
@@ -183,21 +182,6 @@
                         <span class="formvaluenode"
                               tal:condition="here/end"
                               tal:content="python:here.end().strftime('%d %b')"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Estimated duration</th>
-                    <td ondblclick="showhiddenfield(this)">
-                        <select class="invisibleformnode" name="estimatedDuration">
-                            <option tal:repeat="options here/getTaskEstimates"
-                                    value="0.25"
-                                    tal:attributes="value python:options[0];
-                                                    selected python:str(options[0])==str(here.getEstimatedDuration())"
-                                    tal:content="python:str(options[1])">
-                              A few minutes
-                            </option>
-                        </select>
-                        <span class="formvaluenode" tal:content="here/getTaskEstimateDescription"></span>
                     </td>
                 </tr>
                 <tr>

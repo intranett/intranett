@@ -11,7 +11,6 @@ from Products.CMFCore.permissions import ModifyPortalContent
 
 from Products.Extropy.config import TOOLNAME
 from Products.Extropy.config import OPEN_STATES
-from Products.Extropy.config import TASK_ESTIMATES
 from Products.Extropy.config import VIEW_PERMISSION
 from Products.Extropy.config import DEFAULT_BUGDET_CATEGORIES
 from Products.Extropy.interfaces import IExtropyBase
@@ -110,23 +109,6 @@ ChangeNoteSchema = Schema((
             description=('Comment on every change made to the task,'
                          ' or enter additional information.'),
             description_msgid='help_changenote',
-            i18n_domain='extropy',
-        ),
-    ),
-
-))
-
-EstimatesSchema = Schema((
-
-    FloatField(
-        name='estimatedDuration',
-        vocabulary=TASK_ESTIMATES,
-        default=1.0,
-        widget=SelectionWidget(
-            label='Estimated Duration',
-            label_msgid='label_estimated_duration',
-            description='How many hours do we expect to spend.',
-            description_msgid='help_estimated_duration',
             i18n_domain='extropy',
         ),
     ),
@@ -342,19 +324,6 @@ class ExtropyBase:
             priority = self.getPriority()
         tool = getToolByName(self, TOOLNAME)
         return tool.getPriorityDescription(priority)
-
-    security.declareProtected(VIEW_PERMISSION, 'getTaskEstimates')
-    def getTaskEstimates(self):
-        """Show the task estimates."""
-        tool = getToolByName(self, TOOLNAME)
-        return tool.getTaskEstimatesVocabulary()
-
-    security.declareProtected(VIEW_PERMISSION, 'getTaskEstimateDescription')
-    def getTaskEstimateDescription(self):
-        """Gets the textstring describing the estimate."""
-        tool = getToolByName(self, TOOLNAME)
-        value = self.getEstimatedDuration()
-        return tool.getTaskEstimateDescription(value)
 
     security.declareProtected(VIEW_PERMISSION, 'getFullnameOf')
     def getFullnameOf(self, username):

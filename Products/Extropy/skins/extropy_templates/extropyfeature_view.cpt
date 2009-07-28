@@ -136,7 +136,6 @@
         </a>
 
         <div tal:define="worked here/getWorkedHours;
-                         estimates here/getEstimatedDuration;
                          URL here/absolute_url;
                          remaining here/getRemainingTime;
                          bar nocall:context/@@progressbar">

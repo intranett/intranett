@@ -81,13 +81,6 @@ class ExtropyTrackingTool(CatalogTool):
                 d[newkey]=[h]
         return d
 
-    security.declareProtected(VIEW_PERMISSION, 'countEstimates')
-    def countEstimates(self, objects):
-        """ count the estimates of many records """
-        if objects is None or len(objects)==0 or not objects:
-            return 0
-        return reduce(lambda x, y: x + y , [h.getEstimatedDuration for h in objects])
-
     # *******************************************************************
     # VOCABULARY METHODS
     #
@@ -110,27 +103,6 @@ class ExtropyTrackingTool(CatalogTool):
             if str(i[0]) == str(priority):
                 return i[1]
         return 'None'
-
-    security.declareProtected(permissions.VIEW_PERMISSION, 'getTaskEstimatesVocabulary')
-    def getTaskEstimatesVocabulary(self):
-        """Show the task estimates."""
-        return TASK_ESTIMATES
-
-    security.declareProtected(permissions.VIEW_PERMISSION, 'getTaskEstimateDescription')
-    def getTaskEstimateDescription(self, value):
-        """Gets the textsting describing the estimate."""
-        for i in TASK_ESTIMATES:
-            if str(i[0]) == str(value):
-                return i[1]
-        return 'Not set'
-
-
-    def sumEstimates(self, tasks):
-        """ sums the total amount of estimated hours in a sequence of tasks """
-        if tasks is None or len(tasks)==0 or not tasks:
-            return 0
-        return reduce(lambda x, y: x + y , [t.getEstimatedDuration for t in tasks])
-
 
     security.declareProtected(permissions.VIEW_PERMISSION, 'getFullnameOf')
     def getFullnameOf(self, username):
@@ -190,7 +162,6 @@ class ExtropyTrackingTool(CatalogTool):
                 , ('startendrange'  , 'DateRangeIndex', {'since_field':'start', 'until_field':'end'})
                 , ('featureUID'     , 'FieldIndex',     None)
                 , ('getPriority'     , 'FieldIndex',    None)
-                , ('getEstimatedDuration','FieldIndex', None)
                 , ('getRemainingTime','FieldIndex',     None)
                 , ('getWorkedHours','FieldIndex',     None)
                 , ('getDueDate','FieldIndex',     None)
@@ -223,7 +194,6 @@ class ExtropyTrackingTool(CatalogTool):
                , 'start'
                , 'end'
                , 'getPriority'
-               , 'getEstimatedDuration'
                , 'getDueDate'
                , 'getWorkedHours'
                , 'getProjectTitle'

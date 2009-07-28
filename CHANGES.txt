@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Completely removed estimate handling.
+  [hannosch]
+
 - Removed the `claimTask` functionality.
   [hannosch]
 

@@ -9,7 +9,7 @@ from Products.Archetypes.config import REFERENCE_CATALOG
 from Products.CMFCore.utils import getToolByName
 
 from Products.Extropy.config import *
-from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema, TimeSchema, EstimatesSchema
+from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema, TimeSchema
 from Products.Extropy.content.ExtropyHistoryTrackable import ExtropyHistoryTrackable
 
 from Products.CMFCore import permissions

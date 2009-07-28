@@ -34,20 +34,10 @@ class TestTasks(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.assertEqual(self.task1.getPriority(),10)
 
     def testTaskInvokeFactoryPassesKeywords(self):
-        self.folder.project.phase.requirement.invokeFactory('ExtropyTask','taskx', RESPONSE=None, title='test',estimatedDuration=5.0)
-        #self.folder.project.phase.taskx.setEstimatedDuration(5.0)
+        self.folder.project.phase.requirement.invokeFactory('ExtropyTask','taskx', RESPONSE=None, title='test')
         self.failUnless(self.folder.project.phase.requirement.taskx)
         self.assertEqual(self.folder.project.phase.requirement.taskx.getId(),'taskx')
         self.assertEqual(self.folder.project.phase.requirement.taskx.Title(),'test')
-        self.assertEqual(self.folder.project.phase.requirement.taskx.getEstimatedDuration(), 5.0)
-
-    def testTaskEstimatedDuration(self):
-        self.folder.project.phase.requirement.invokeFactory('ExtropyTask','taskx', RESPONSE=None, title='test',estimatedDuration=5.0)
-        #self.folder.project.phase.taskx.setEstimatedDuration(5.0)
-        self.failUnless(self.folder.project.phase.requirement.taskx)
-        self.assertEqual(self.folder.project.phase.requirement.taskx.getId(),'taskx')
-        self.assertEqual(self.folder.project.phase.requirement.taskx.Title(),'test')
-        self.assertEqual(self.folder.project.phase.requirement.taskx.getEstimatedDuration(), 5.0)
 
     def testGetTasks(self):
         self.failUnless(self.folder.project.getTasks())
@@ -115,20 +105,6 @@ class TestTasks(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
             self.task1.splitTask()
         except BadRequest:
             self.fail()
-
-    def testRemainingTimeinCatalog(self):
-        self.task1.setEstimatedDuration(10)
-        self.task1.reindexObject()
-        self.assertEqual(self.task1.getEstimatedDuration(), 10)
-        res = self.portal.extropy_tracking_tool.localQuery(self.portal,REQUEST=None, getId='task1')
-        self.assertEqual(len(res),1)
-        self.assertEqual(res[0].getEstimatedDuration,10)
-
-    def testRemainingTime(self):
-        self.task1.setEstimatedDuration(10)
-        self.task1.reindexObject()
-        self.assertEqual(self.task1.getEstimatedDuration(), 10)
-        self.assertEqual(self.task1.getRemainingTime(), 10)
 
     def testAvailableDates(self):
         today = DateTime().earliestTime()

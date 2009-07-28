@@ -53,14 +53,6 @@
                     </tr>
                 </tal:period>
 
-                <tr tal:define="hours here/getEstimates"
-                    tal:condition="hours">
-                    <th>Estimated</th>
-                    <td style="text-align:right">
-                        <span tal:replace="hours" /> h
-                    </td>
-                </tr>
-
                 <tr tal:define="hours here/getWorkedTime"
                     tal:condition="hours">
                     <th>Used</th>
@@ -199,8 +191,6 @@
                         <a tal:attributes="href string:${phase/absolute_url}/list_tasks"><b tal:content="python:len(phase.getTasks(review_state=phase.getOpenWorkflowStates()))">XX</b> open tasks</a>
                         &middot;
                         <a tal:attributes="href string:${phase/absolute_url}/list_activities"><b tal:content="python:len(phase.getActivities(review_state=phase.getOpenWorkflowStates()))">XX</b> open activities</a>
-                        &middot;
-                        <span tal:content="phase/getRemainingTime" /> hours estimated remaining
                     </p>
 
                     <tal:progressbar define="

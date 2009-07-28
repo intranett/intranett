@@ -11,7 +11,7 @@ from Products.Archetypes.config import REFERENCE_CATALOG
 from Products.CMFCore.utils import getToolByName
 
 from Products.Extropy.config import *
-from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema, ChangeNoteSchema, TimeSchema, EstimatesSchema
+from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema, ChangeNoteSchema, TimeSchema
 from Products.Extropy.content.ExtropyHistoryTrackable import ExtropyHistoryTrackable
 
 from Products.CMFCore import permissions
@@ -24,7 +24,7 @@ from Products.Extropy.interfaces import IExtropyBase
 from DateTime import DateTime
 
 
-ExtropyTaskSchema = ExtropyBaseSchema.copy() + ParticipantsSchema.copy() + TimeSchema.copy() +  ChangeNoteSchema.copy() + EstimatesSchema.copy() + Schema((
+ExtropyTaskSchema = ExtropyBaseSchema.copy() + ParticipantsSchema.copy() + TimeSchema.copy() +  ChangeNoteSchema.copy() + Schema((
     StringField('priority',
         vocabulary = TASK_PRIORITIES,
         default=5,
@@ -95,8 +95,6 @@ class ExtropyTask(ExtropyHistoryTrackable, ExtropyBase, BaseFolder):
         """the amount of time left before the task is due to be delivered"""
         return self.getDueDate() - DateTime()
 
-    # the accessor for estimated time is "getEstimatedDuration"
-
     def getWorkedHours(self):
         timetool = getToolByName(self,TIMETOOLNAME)
         hours = timetool.countIntervalHours(node=self)
@@ -105,17 +103,7 @@ class ExtropyTask(ExtropyHistoryTrackable, ExtropyBase, BaseFolder):
     security.declareProtected(VIEW_PERMISSION, 'getRemainingTime')
     def getRemainingTime(self):
         """ the remaining time till this task is complete, according to estimats"""
-        #if the state is not one of the open ones > return 0
-        tool = getToolByName(self,TOOLNAME)
-        wftool = getToolByName(self,'portal_workflow')
-
-        if not wftool.getInfoFor(self, 'review_state') in  tool.getOpenStates():
-            return 0
-        estimates = self.getEstimatedDuration()
-        worked = self.getWorkedHours()
-        if worked > estimates:
-            return 0
-        return estimates - worked
+        return 0
 
     ############################################
     # reindex parent on any change

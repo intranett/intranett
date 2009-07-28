@@ -18,8 +18,7 @@ for entry in context.REQUEST.taskadd:
     if entry.title:
         new_id = context.generateUniqueId(type_name='ExtropyTask')
         context.invokeFactory('ExtropyTask', new_id, title=entry.title,
-                              responsiblePerson=entry.responsible,
-                              estimatedDuration=entry.estimate)
+                              responsiblePerson=entry.responsible)
         new_task = getattr(context, new_id)
         if new_task.getResponsiblePerson():
             wf_tool.doActionFor(new_task, 'assign')

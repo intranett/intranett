@@ -58,22 +58,12 @@ class TestProject(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.assertEqual(self.project.phase.requirement1.t1, self.project.getTasks()[0])
         self.assertEqual(self.project.phase.requirement1.t1.Title(), self.project.Title)
 
-    def testGettingEstimates(self):
-        self.project.invokeFactory('ExtropyPhase','phase')
-        self.project.phase.invokeFactory('ExtropyFeature','requirement1')
-        self.project.phase.requirement1.invokeFactory('ExtropyTask','t1', estimatedDuration=5)
-
-        self.assertEqual(self.project.getEstimates(),5)
-        self.assertEqual(self.project.phase.getEstimates(),5)
-
 
 # things to test for;
 # getting tasks by keywords
 # getTasksByState
 # getTasksForCurrentUser
 #
-
-
 
     def testCountingTasks(self):
         self.project.invokeFactory('ExtropyPhase','phase')

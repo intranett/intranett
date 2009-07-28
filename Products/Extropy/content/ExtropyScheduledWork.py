@@ -40,9 +40,8 @@ class ExtropyScheduledWork(ExtropyBase, BaseContent):
         if not self.end() and self.start(): return 0
 
         if self.end() == self.end().latestTime() and self.start() == self.start().earliestTime():
-            # a full workday is estimated to a set amount of hours.
-        # we should have a global setting for what hours to expect from a WORKDAY
-        # for now, we hardcode it to 6
+            # we should have a global setting for what hours to expect from a WORKDAY
+            # for now, we hardcode it to 6
             return 6
 
         interval = self.end() - self.start()

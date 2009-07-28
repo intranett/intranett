@@ -21,16 +21,7 @@ DEFAULT_WORKTYPES = ('Development',
                      'Design',
                      'Travel')
 
-#HOUR = 1.0/24.0   # datetime stuff
 WORKDAY = 6.0
-TASK_ESTIMATES = (
-                  (str(0.0)     ,'Not set'   ),
-                  (str(0.25)     ,'a few minutes'   ),
-                  (str(1.0)         ,'1 hour'          ),
-                  (str(WORKDAY/2.0)  ,'half a day'      ),
-                  (str(WORKDAY)        ,'1 day'           ),
-                  )
-
 
 TASK_FOR_RELATIONSHIP = 'taskFor'
 ORIGINATING_TASK_RELATIONSHIP = 'originatingTask'

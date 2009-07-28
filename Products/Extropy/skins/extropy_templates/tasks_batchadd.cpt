@@ -14,9 +14,7 @@
           enctype="multipart/form-data"
           tal:attributes="action string:${here/getId}/${template/getId}"
           tal:define="default_responsible member/getId;
-                      available_participants here/getAvailableParticipants;
-                      available_estimates here/getTaskEstimates;
-                      default_estimate python:available_estimates[3][0];">
+                      available_participants here/getAvailableParticipants;">
 
         <input type="hidden" name="form.submitted" value="1" />
 
@@ -27,13 +25,6 @@
             <img tal:replace="structure icon" />
             <input type="text" size="50" style="width : 30em" 
                    name="taskadd.title:records"/>
-            <select name="taskadd.estimate:records">
-              <option tal:repeat="estimate available_estimates"
-                      tal:attributes="value python:estimate[0];
-                                      selected python:estimate[0] == default_estimate"
-                      tal:content="python:estimate[1]"
-                      value="0.25">a few minutes</option>
-            </select>
             <select name="taskadd.responsible:records">
               <option value="">Unassigned</option>
               <tal:options repeat="participant available_participants">
@@ -43,18 +34,6 @@
                       tal:content="author/fullname|participant">limi</option>
               </tal:options>
             </select>
-             
-             <!--
-              <select  name="estimatedDuration">
-                                    <option tal:repeat="options here/getTaskEstimates" 
-                                            value="0.25" 
-                                            tal:attributes="value python:options[0];
-                                                            selected python:str(options[0])=='3'"
-                                            tal:content="python:str(options[1])">
-                                                A few minutes
-                                    </option>
-                                </select>
-        -->
         </div>
 
         <div style="margin : 2em 1em;">

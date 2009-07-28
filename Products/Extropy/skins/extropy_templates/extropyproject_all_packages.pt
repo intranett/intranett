@@ -40,8 +40,6 @@
                     <a tal:attributes="href string:${phase/absolute_url}/list_activities"><b
                        tal:content="python:len(phase.getActivities(review_state=phase.getOpenWorkflowStates()))">XX</b>
                        open activities</a>
-                    &middot;
-                    <span tal:content="phase/getRemainingTime" /> hours estimated remaining
                 </p>
                 <tal:progressbar define="worked phase/getWorkedTime;
                                          URL phase/absolute_url;

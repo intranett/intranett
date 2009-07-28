@@ -108,20 +108,7 @@ class WeeklyPlanning(BrowserView):
 
     @property
     def personal_plan(self):
-        for i in range(7):
-            date = self.start + i
-            tasks = self.tool.searchResults(
-                getResponsiblePerson=self.user,
-                portal_type='ExtropyTask',
-                end=dict(query=(date, date.latestTime()), range='min:max'))
-            if tasks:
-                tasksum = sum(task.getEstimatedDuration for task in tasks)
-                yield dict(
-                    date=date,
-                    weekday=self.weekdayname(date),
-                    sum=tasksum,
-                    tasks=self.taskDetails(tasks),
-                )
+        pass
 
     @property
     def overdue(self):

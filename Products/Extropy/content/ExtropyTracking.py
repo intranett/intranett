@@ -85,13 +85,6 @@ class ExtropyTracking:
         ETTool = getToolByName(self,'extropy_tracking_tool')
         return len(self.getTasks(review_state=ETTool.getOpenStates()))
 
-    def getEstimates(self, **kw):
-        """estimated duration of subobjects """
-        tasks = self.getTasks( **kw)
-        if not len(tasks):
-            return 0
-        return reduce(lambda x, y: x + y , [t.getEstimatedDuration for t in tasks if t.getEstimatedDuration is not None])
-
     def getWorkedTime(self):
         """get the total amount of time worked for this object"""
         tool = getToolByName(self,TIMETOOLNAME)
