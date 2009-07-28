@@ -36,6 +36,8 @@ class TestTimeReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
                                name).__of__(self.folder)
 
     def testTimeReportView(self):
+        from Products.Five.security import newInteraction
+        newInteraction()
         html = self.getView('timereport')()
         self.assertTrue('Hour entry 1' in html)
         self.assertTrue('Hour entry 2' in html)

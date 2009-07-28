@@ -146,7 +146,7 @@ class ExtropyBase:
         """Gets the containg parent chain."""
         chain = []
         for o in self.aq_chain:
-            if o is not self and not include_self:
+            if not include_self and o is self:
                 continue
             if IExtropyBase.isImplementedBy(o):
                 chain.append(o)
