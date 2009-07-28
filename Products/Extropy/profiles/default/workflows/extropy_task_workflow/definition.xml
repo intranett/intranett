@@ -158,7 +158,7 @@
  <transition transition_id="complete" title=""
              new_state="completed" trigger="USER"
              before_script=""
-             after_script="deliverableAllTasksComplete">
+             after_script="">
   <description>The task is complete</description>
   <action url="%(content_url)s/content_publish_form"
           category="workflow">Complete</action>
@@ -176,7 +176,7 @@
  <transition transition_id="discard" title=""
              new_state="discarded" trigger="USER"
              before_script=""
-             after_script="deliverableAllTasksComplete">
+             after_script="">
   <description>Discard task</description>
   <action url="%(content_url)s/content_reject_form"
           category="workflow">Discard</action>
