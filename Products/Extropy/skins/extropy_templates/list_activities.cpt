@@ -59,13 +59,7 @@
                         </select> (Refactor: this one needs to ask the workflowtool about states, not the catalog)
                     </div>
                 </div>
-                
-                <p class="discreet">
-                    Fields we need here : <br/>
-                    last activity (today, last 3 days, last week, last month ?)<br/>
-                    Remaining work (an hour or less, half-a-day, a day, 3 days, a week or more)<br/>
-                </p>
-                
+
                 <div>
                     <input type="submit" value="Filter activities">
                 </div>
@@ -105,10 +99,9 @@
     
                 <td>
                     <div tal:define="worked activity/getWorkedHours;
-                                     remaining activity/getRemainingTime;
                                      URL activity/absolute_url;
                                      bar nocall:context/@@smallprogressbar">
-                        <p tal:replace="structure python:bar(worked, remaining, URL)"/>
+                        <p tal:replace="structure python:bar(worked, URL)"/>
                     </div>
                 </td>
                 <td>

@@ -31,7 +31,7 @@
                      />
         </span>
         </h1>
-    
+
         <a href=""
            class="link-parent"
            tal:define="parent_url python:here.navigationParent(here, template_id)"
@@ -39,16 +39,13 @@
            tal:attributes="href parent_url"
            i18n:translate="go_to_parent_url">
         Up one level
-        </a>    
+        </a>
 
-
-   
-        <div tal:define="remaining here/getRemainingTime;
-                         worked here/getWorkedHours;
+        <div tal:define="worked here/getWorkedHours;
                          URL here/absolute_url;
                          bar nocall:context/@@progressbar;
                          ">
-            <p tal:replace="structure python:bar(worked, remaining, URL)"/>
+            <p tal:replace="structure python:bar(worked, URL)"/>
         </div>
             
         <p style="text-align : right">

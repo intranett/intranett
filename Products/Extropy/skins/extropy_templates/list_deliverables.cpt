@@ -105,9 +105,8 @@
                 <tal:progressbar define="
                          worked deliverable/getWorkedHours;
                          URL deliverable/getURL;
-                         remaining deliverable/getRemainingTime;
-                         bar nocall:context/@@smallprogressbar">  
-                <a tal:replace="structure python:bar(URL=URL,remaining=remaining,  worked=worked)">
+                         bar nocall:context/@@smallprogressbar">
+                <a tal:replace="structure python:bar(URL=URL, worked=worked)">
                 </a>  
         </tal:progressbar>
 

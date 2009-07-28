@@ -89,10 +89,3 @@ class ExtropyTracking:
         """get the total amount of time worked for this object"""
         tool = getToolByName(self,TIMETOOLNAME)
         return tool.countIntervalHours(node=self)
-
-    def getRemainingTime(self):
-        tool = getToolByName(self,'extropy_tracking_tool')
-        tasks = tool.localQuery(self, REQUEST=None, portal_type=['ExtropyTask', 'ExtropyActivity'])
-        if tasks is None or len(tasks)==0 or not tasks:
-            return 0
-        return reduce(lambda x, y: x + y , [t.getRemainingTime for t in tasks])

@@ -71,9 +71,8 @@
 
         <div tal:define="worked here/getWorkedHours;
                          URL here/absolute_url;
-                         remaining here/getRemainingTime;
                          bar nocall:context/@@progressbar">
-            <a tal:replace="structure python:bar(URL=URL,remaining=remaining,  worked=worked)"></a>
+            <a tal:replace="structure python:bar(URL=URL, worked=worked)"></a>
         </div>
 
         <dl id="parentdata" class="collapsible collapsedOnLoad"

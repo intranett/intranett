@@ -11,7 +11,6 @@ from Products.Extropy.content.ExtropyBase import TimeSchema
 from Products.Extropy.content.ExtropyBase import ExtropyBase
 from Products.Extropy.content.ExtropyBase import ExtropyBaseSchema
 from Products.Extropy.content.ExtropyBase import ParticipantsSchema
-from Products.Extropy.content.ExtropyBase import ChangeNoteSchema
 from Products.Extropy.content.ExtropyTracking import ExtropyTracking
 from Products.Extropy.content.ExtropyHistoryTrackable import ExtropyHistoryTrackable
 from Products.Extropy.interfaces import IExtropyBase
@@ -77,15 +76,6 @@ class ExtropyFeature(ExtropyHistoryTrackable, ExtropyTracking, ExtropyBase, Base
         """Gets the total amount of time worked for this object."""
         tool = getToolByName(self, config.TIMETOOLNAME)
         return tool.countIntervalHours(node=self)
-
-    # NEEDS TESTS
-    def getRemainingTimeForAllTasks(self):
-        """Sums the remaining estimated time for all tasks in this deliverable."""
-        tool = getToolByName(self, config.TOOLNAME)
-        tasks = tool.trackingQuery(self, portal_type='ExtropyTask')
-        if tasks is None or len(tasks)==0 or not tasks:
-            return 0
-        return reduce(lambda x, y: x + y , [task.getRemainingTime for task in tasks])
 
 
 registerType(ExtropyFeature, config.PROJECTNAME)

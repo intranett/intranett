@@ -54,9 +54,6 @@ class IExtropyTask(Interface):
     def splitTask(targetPhase=None):
         """Split the current task in two, retaining most properties, not title/description"""
 
-    def getRemainingTime():
-        """estimated - spent time"""
-
     def getSplitTasks():
         """get tasks spawned from this one"""
 
@@ -109,9 +106,6 @@ class IExtropyBug(Interface):
     def getSpawnedTasks():
         """return all linked tasks"""
 
-    def getRemainingTasks():
-        """get the spawned tasks that are still open"""
-
 
 class IExtropyFeature(Interface):
     """
@@ -128,9 +122,6 @@ class IExtropyFeature(Interface):
 
     def getSpawnedTasks():
         """return all linked tasks"""
-
-    def getRemainingTasks():
-        """get the spawned tasks that are still open"""
 
 
 class IExtropyTrackingTool(Interface):

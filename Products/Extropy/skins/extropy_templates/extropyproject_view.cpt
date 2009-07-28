@@ -61,14 +61,6 @@
                     </td>
                 </tr>
 
-                <tr tal:define="hours here/getRemainingTime| nothing"
-                    tal:condition="hours">
-                    <th>Remaining</th>
-                    <td style="text-align:right">
-                        <span tal:replace="hours" /> h
-                    </td>
-                </tr>
-
                 <tr>
                     <th>Invoices
                         <img tal:condition="exists:here/invoice_icon.gif" tal:replace="structure here/invoice_icon.gif" />
@@ -168,9 +160,8 @@
                     <tal:progressbar define="
                          worked phase/getWorkedTime;
                          URL phase/absolute_url;
-                         remaining phase/getRemainingTime;
                          bar nocall:context/@@smallprogressbar">
-                        <a tal:replace="structure python:bar(URL=URL, remaining=remaining, worked=worked)"></a>
+                        <a tal:replace="structure python:bar(URL=URL, worked=worked)"></a>
                         <span class="discreet"><span tal:content="worked">X</span> hours worked</span>
                     </tal:progressbar>
 

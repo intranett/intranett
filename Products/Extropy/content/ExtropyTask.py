@@ -100,11 +100,6 @@ class ExtropyTask(ExtropyHistoryTrackable, ExtropyBase, BaseFolder):
         hours = timetool.countIntervalHours(node=self)
         return hours
 
-    security.declareProtected(VIEW_PERMISSION, 'getRemainingTime')
-    def getRemainingTime(self):
-        """ the remaining time till this task is complete, according to estimats"""
-        return 0
-
     ############################################
     # reindex parent on any change
 
