@@ -164,35 +164,6 @@ class ExtropyTrackingTool(CatalogTool):
                 d[newkey]=[b]
         return d
 
-    security.declareProtected(permissions.VIEW_PERMISSION, 'getDeliverablesWithTasks')
-    def getDeliverablesWithTasks(self,context):
-        """get deliverables with nested tasks"""
-        # expand the brains schema to allow for setting 'children'
-        rschema = self._catalog._v_result_class.__record_schema__
-        rschema['children'] = len(self.schema()) + 3
-
-        objects = list(self.trackingQuery(
-            context, meta_type=('ExtropyTask', 'ExtropyFeature')))
-        objects.sort(key=lambda b: b.getPath())
-
-        deliverables = []
-        for dtitle, ditems in groupby(objects,
-                                      attrgetter('getDeliverableTitle')):
-            deliverable = ditems.next()
-            deliverable.children = tuple(ditems)
-            deliverables.append(deliverable)
-
-        deliverables.sort(key=attrgetter('review_state'))
-        bystate = dict((k, tuple(v))
-                       for (k, v) in groupby(deliverables,
-                                             attrgetter('review_state')))
-        order = ('open', 'taskscomplete', 'testing', 'planned', 'prospective',
-                 'closed', 'discarded')
-        for state in order:
-            deliverables = bystate.pop(state, ())
-            for deliverable in deliverables:
-                yield deliverable
-
     # *******************************************************************
     # INSTALLATION OF INDEXES STUFF
 

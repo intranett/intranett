@@ -65,18 +65,6 @@ class TestTool(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.assertEqual(len(self.tool.trackingQuery(self.folder.project.phase.feature, portal_type='ExtropyTask')), 2)
         self.assertEqual(len(self.tool.trackingQuery(self.folder.project.phase2.feature, portal_type='ExtropyTask')), 1)
 
-    def testgetDeliverablesWithTasks(self):
-        self.folder.invokeFactory('ExtropyProject','project')
-        self.folder.project.invokeFactory('ExtropyPhase','phase')
-        self.folder.project.phase.invokeFactory('ExtropyFeature','feature1', title='f1')
-        self.folder.project.phase.feature1.invokeFactory('ExtropyTask','task1', title='t1')
-        self.folder.project.phase.feature1.invokeFactory('ExtropyTask','task2', title='t2')
-        self.folder.project.phase.invokeFactory('ExtropyFeature','feature2', title='f2')
-        self.folder.project.phase.feature2.invokeFactory('ExtropyTask','task2', title='t3')
-        tree = self.tool.getDeliverablesWithTasks(self.portal)
-
-        self.assertEqual(len(tuple(tree)),2) # Two ExtrpyFeatures
-
     def testSummingEstimates(self):
         # We'll add some tasks and test that they can be properly summed up
         self.folder.invokeFactory('ExtropyProject','project')
