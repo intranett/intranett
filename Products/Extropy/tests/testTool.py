@@ -77,26 +77,6 @@ class TestTool(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 
         self.assertEqual(len(tuple(tree)),2) # Two ExtrpyFeatures
 
-    def testDictifyingObjectsByDate(self):
-        # Pass in objects, get them by date
-        self.folder.invokeFactory('ExtropyProject','project')
-        self.folder.project.invokeFactory('ExtropyPhase','phase')
-        self.folder.project.phase.invokeFactory('ExtropyFeature','feature')
-        today = DateTime().earliestTime()
-        self.folder.project.phase.feature.invokeFactory('ExtropyTask','task0',startDate=today,endDate=today+3)
-        self.folder.project.phase.feature.invokeFactory('ExtropyTask','task1',startDate=today+3,endDate=today+4)
-
-        tasks = self.tool.searchResults(portal_type='ExtropyTask')
-        d = self.tool.dictifyTasksByDate( tasks, fill=True, startdate=None, enddate=None)
-        self.assertEqual(len(d.keys()),4)
-
-        # then we try passing it an explicit startdate
-        d = self.tool.dictifyTasksByDate( tasks, fill=True, startdate=today-1, enddate=None)
-        self.assertEqual(len(d.keys()),5)
-
-        self.assertEqual(d[today][0].getObject(),self.folder.project.phase.feature.task0)
-        self.assertEqual(d[today-1],[])
-
     def testSummingEstimates(self):
         # We'll add some tasks and test that they can be properly summed up
         self.folder.invokeFactory('ExtropyProject','project')

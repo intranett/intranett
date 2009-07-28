@@ -38,47 +38,6 @@
 
 </div>
 
-
-<!-- 
-<table class="vertical listing" 
-        tal:define="dates python:(tool.dictifyTasksByDate(tasks, startdate=here.ZopeTime(), enddate=here.ZopeTime()+7)).keys();
-        dummy python:dates.sort(); 
-        "
-        >
-        <tr>
-
-            <th>Date</th>
-            <th tal:repeat="date dates" tal:content="date/Date"></th>
-</tr>
-    
-        <tr tal:repeat="username python:tasksbyuser.keys()">
-            <th> 
-                    
-                <span tal:content="python:tool.getFullnameOf(username) or 'Unassigned'"></span>
-                (<span tal:content="python:len(tasksbyuser[username])"></span>)
-            </th>
-            
-            <tal:tasks tal:define="tasksbydate python:tool.dictifyTasksByDate(tasksbyuser[username], startdate=here.ZopeTime(), enddate=here.ZopeTime()+7)">
-                <td tal:repeat="day dates">
-                    <div tal:repeat="task python:tasksbydate[day]">
-                    <a tal:define="duration task/getEstimatedDuration;
-                                     width python:int(duration) * 20;
-                                     "
-                        tal:attributes="href task/absolute_url;
-                                        style string:width:${width}px;
-                                        title string:${task/Title} in project:${task/getProjectTitle}"
-                        class="block-display-task"
-                    >
-                    </a>
-                </div> 
-                </td>
-            </tal:tasks>
-            </tr>
-            </table>
-    </div>
--->
-    
-    
 </div>
 </body>
 </html>

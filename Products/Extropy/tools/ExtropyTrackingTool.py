@@ -164,26 +164,6 @@ class ExtropyTrackingTool(CatalogTool):
                 d[newkey]=[b]
         return d
 
-    def dictifyTasksByDate(self, tasks, fill=True, startdate=None, enddate=None):
-        """create a dict from the tasks so we can separate them by Dates"""
-        d={}
-        for h in tasks:
-            newkey = h.start.earliestTime()
-            if d.has_key(newkey):
-                d[newkey].append(h)
-            else:
-                d[newkey]=[h]
-        alldates = d.keys()
-        if fill and alldates:
-            end = (enddate or max(alldates)).earliestTime()
-            start = (startdate or min(alldates)).earliestTime()
-            diff = int(end-start)
-            for i in range(0,diff):
-                if not d.has_key(start+i):
-                    d[start+i]=[]
-        return d
-
-
     security.declareProtected(permissions.VIEW_PERMISSION, 'getDeliverablesWithTasks')
     def getDeliverablesWithTasks(self,context):
         """get deliverables with nested tasks"""
