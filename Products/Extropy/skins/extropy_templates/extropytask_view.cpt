@@ -45,14 +45,7 @@
 
         <div class="visualClear"><!----></div>
 
-        <!-- This is slightly evil, but since we have to work around the fake in-place editing,
-            this is the only way for now - until Plone 3.0! :) -->
         <div style="float: right">
-            <button type="button"
-                    tal:attributes="onclick string:window.location.href='${here/absolute_url}/split_task'">
-                <img tal:replace="structure here/task_icon.gif" />
-                Split this task
-                </button>
             <button type="button"
                     tal:attributes="onclick string:window.location.href='${here/absolute_url}/add_work_hours'">
                 <img tal:replace="structure here/hour_icon.gif" />
@@ -98,21 +91,6 @@
                 </table>
             </dd>
         </dl>
-
-        <p tal:define="originatingtask here/getOriginatingTask | nothing"
-           tal:condition="originatingtask">
-            This task was split from:
-            <a tal:attributes="href originatingtask/absolute_url"
-               tal:content="originatingtask/Title">origin</a>
-        </p>
-
-        <p tal:define="splittasks here/getSplitTasks | nothing"
-           tal:condition="splittasks">
-            Tasks that have been spawned from this task:
-            <a tal:repeat="task splittasks"
-               tal:attributes="href task/absolute_url"
-               tal:content="task/Title">child</a>
-        </p>
 
         <h2>Status/Edit</h2>
 

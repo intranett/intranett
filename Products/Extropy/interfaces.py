@@ -51,15 +51,6 @@ class IExtropyTask(Interface):
     Interface for tasks
     """
 
-    def splitTask(targetPhase=None):
-        """Split the current task in two, retaining most properties, not title/description"""
-
-    def getSplitTasks():
-        """get tasks spawned from this one"""
-
-    def getOriginatingTask():
-        """the task from which we were split, if existing"""
-
     def moveTo(uid):
         """
         move task to a different phase

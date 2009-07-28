@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Removed split task functionality.
+  [hannosch]
+
 - Removed the handling of "remaining" time.
   [hannosch]
 

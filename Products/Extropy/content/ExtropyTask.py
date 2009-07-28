@@ -48,44 +48,6 @@ class ExtropyTask(ExtropyHistoryTrackable, ExtropyBase, BaseFolder):
 
     security = ClassSecurityInfo()
 
-    security.declareProtected(permissions.ModifyPortalContent, 'splitTask')
-    def splitTask(self, targetPhase=None):
-        """ make a new task with a reference pointing to this one"""
-        rt = getToolByName(self, REFERENCE_CATALOG)
-        if isinstance(targetPhase, StringTypes):
-            targetPhase = rt.lookupObject(targetPhase)
-        if targetPhase is None:
-            targetPhase = aq_parent(aq_inner(self))
-
-        newid = self.generateUniqueId(type_name='ExtropyTask')
-
-        mungedid = targetPhase.invokeFactory(self.portal_type, newid)
-        id = mungedid is not None and mungedid or newid
-        newtask = getattr(targetPhase, id)
-        # copy values
-        #newtask.setKeywords(self.getRawKeywords())
-        newtask.setResponsiblePerson(self.getRawResponsiblePerson())
-        newtask.setParticipants(self.getRawParticipants())
-        newtask.addReference(self, ORIGINATING_TASK_RELATIONSHIP)
-        # we must also make sure to copy the pointer back to the feature
-        if self.getOriginatingFeature():
-            newtask.addReference(self.getOriginatingFeature(), TASK_FOR_RELATIONSHIP)
-        newtask.reindexObject() # for featureUID
-        return newtask
-
-    security.declareProtected(VIEW_PERMISSION, 'getSplitTasks')
-    def getSplitTasks(self):
-        """Get the tasks split from this
-        """
-        return self.getBRefs(ORIGINATING_TASK_RELATIONSHIP)
-
-    security.declareProtected(VIEW_PERMISSION, 'getOriginatingTask')
-    def getOriginatingTask(self):
-        """Get the originating task from which we were split
-        """
-        originating_task = self.getRefs(ORIGINATING_TASK_RELATIONSHIP)
-        return originating_task and originating_task[0] or None
-
     def getOriginatingFeature(self):
         """Get the originating feature
         """

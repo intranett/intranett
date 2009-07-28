@@ -68,44 +68,6 @@ class TestTasks(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.failIf(self.task1.getChangenote())
         self.assertEqual(self.task1.objectValues()[0].getChangenote(),"<p>CHANGED!</p>")
 
-    def testSplitTask(self):
-        self.task1.splitTask()
-        splittasks = self.task1.getSplitTasks()
-        self.failUnless(splittasks)
-        self.failUnlessEqual(len(splittasks), 1)
-        self.failUnlessEqual(splittasks[0].getOriginatingTask(), self.task1 )
-        self.failIfEqual(splittasks[0].getId(), self.task1.getId())
-        self.failIfEqual(splittasks[0], self.task1)
-
-    def testSplittingTaskKeepsFeatureReference(self):
-        self.phase.invokeFactory('ExtropyFeature','f1')
-        f1 = self.phase.f1
-        f1.invokeFactory('ExtropyTask','task1')
-        t1 = f1.task1
-        t2 = t1.splitTask()
-        self.assertEqual( t1.getOriginatingFeature() , t2.getOriginatingFeature() )
-        self.assertEqual( t1.getOriginatingFeature() , f1 )
-
-    def testSplittingTaskKeepsValues(self):
-        self.phase.invokeFactory('ExtropyFeature','f1')
-        f1 = self.phase.f1
-        f1.invokeFactory('ExtropyTask','task1')
-        t1 = f1.task1
-        t1.setResponsiblePerson('sam')
-        t1.setParticipants(('sam','joe','ted'))
-        self.assertEqual(t1.getResponsiblePerson(),'sam')
-        t2 = t1.splitTask()
-        self.assertEqual( t1.getParticipants() , t2.getParticipants() )
-        self.assertEqual( t1.getResponsiblePerson() , t2.getResponsiblePerson() )
-
-    def testSplittingTaskTwice(self):
-        self.task1.splitTask()
-        from zExceptions import BadRequest
-        try:
-            self.task1.splitTask()
-        except BadRequest:
-            self.fail()
-
     def testAvailableDates(self):
         today = DateTime().earliestTime()
         expected = [(today + i) for i in range(22)]
