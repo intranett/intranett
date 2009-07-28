@@ -88,7 +88,6 @@ class ExtropyTracking:
     def getEstimates(self, **kw):
         """estimated duration of subobjects """
         tasks = self.getTasks( **kw)
-        #import pdb; pdb.set_trace()
         if not len(tasks):
             return 0
         return reduce(lambda x, y: x + y , [t.getEstimatedDuration for t in tasks if t.getEstimatedDuration is not None])

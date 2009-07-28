@@ -92,6 +92,9 @@ class ExtropyHours(BaseContent):
     security.declarePublic('setDefaultStartDate')
     def setDefaultStartDate(self):
         """use smarts to find a proper default start-time"""
+        start = getattr(self, 'startDate', None)
+        if start is not None:
+            return start
         ct = getToolByName(self, TIMETOOLNAME)
         lastreg =  ct.getLastRegisteredTime()
         if lastreg is not None:
@@ -102,7 +105,7 @@ class ExtropyHours(BaseContent):
     security.declarePublic('setDefaultEndDate')
     def setDefaultEndDate(self):
         """one hour more"""
-        return (self.setDefaultStartDate() + (1.0/24.0))
+        return self.setDefaultStartDate() + (1.0/24.0)
 
     def getDate(self):
         if self.start() is None:

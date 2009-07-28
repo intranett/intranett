@@ -62,7 +62,6 @@ class ExtropyTrackingTool(CatalogTool):
         """Gets the containg parent of context, if it is an ExtropyBase object, or the first on that is.
         """
         for o in list(context.aq_chain):
-            #import pdb; pdb.set_trace()
             if IExtropyTracking.isImplementedBy(o):
                 if metatype is None:
                     return o
