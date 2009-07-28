@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Removed batch creation views for no longer used types.
+  [hannosch]
+
 - Removed the weekly planning views. We don't use Extropy to do detailed task
   planning anymore.
   [hannosch]

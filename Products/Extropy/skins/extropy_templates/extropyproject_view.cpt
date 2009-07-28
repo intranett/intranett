@@ -82,34 +82,6 @@
 
             </table>
 
-            <table class="vertical listing" style="float: right; margin-left: 1em; clear:right; width: 9.5em">
-                <tal:tasks define="tasks here/getTasksByState;
-                                   tasks_by_state tasks/getTasksByState;"
-                           condition="tasks">
-                    <tr>
-                        <th colspan="2"><img tal:replace="structure here/task_icon.gif" /> Tasks</th>
-                    </tr>
-                    <tr tal:repeat="state tasks_by_state" tal:attributes="class string:state-${state}">
-                        <th tal:content="state" />
-                        <td tal:content="python:len(tasks_by_state[state])" />
-                    </tr>
-                </tal:tasks>
-            </table>
-
-            <table class="vertical listing" style="float: right; width: 9.5em">
-                <tal:tasks define="tasks here/getRequirementsByState;
-                                   tasks_by_state tasks/getTasksByState"
-                           condition="tasks">
-                   <tr>
-                        <th colspan="2"><img tal:replace="structure here/feature_icon.gif" /> Deliverables</th>
-                    </tr>
-                    <tr tal:repeat="state tasks_by_state" tal:attributes="class string:state-${state}">
-                        <th tal:content="state" />
-                        <td tal:content="python:len(tasks_by_state[state])" />
-                    </tr>
-                </tal:tasks>
-            </table>
-
             </div>
 
         </metal:summary>

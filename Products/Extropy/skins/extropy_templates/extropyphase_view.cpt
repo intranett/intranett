@@ -53,12 +53,6 @@
 
     <div class="visualClear"></div>
 
-    <p style="text-align: right">
-        <a tal:attributes="href string:${here/absolute_url}/deliverables_batchadd">
-        <img tal:replace="structure here/add_icon.gif" />
-        Batch-add deliverables</a>
-    </p>
-
     <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
 
     <div class="visualClear"><!----></div>
