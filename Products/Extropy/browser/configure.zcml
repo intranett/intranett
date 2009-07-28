@@ -115,41 +115,6 @@
     permission="zope2.View"
     />
 
-<browser:pages
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".weeklyplanning.WeeklyPlanning"
-    permission="zope2.View"
-    >
-
-  <browser:page
-      name="weeklyplan_personal"
-      title="Personal plan overview"
-      template="weeklyplan_personal.pt"
-      menu="weeklyplan"
-      />
-
-  <browser:page
-      name="weeklyplan_planning"
-      title="Weekly planning"
-      template="weeklyplan_planning.pt"
-      menu="weeklyplan"
-      />
-
-  <browser:page
-      name="weeklyplan_tasks_available"
-      template="weeklyplan_tasks_available.pt"
-      />
-
-</browser:pages>
-
-<browser:page
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".weeklyplanning.WeeklyPlanning"
-    permission="cmf.ModifyPortalContent"
-    name="weeklyplan_assign_task"
-    attribute="assignTask"
-    />
-
 <browser:page
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".weeklyplanning.WeekReport"

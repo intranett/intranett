@@ -187,10 +187,6 @@ color:blue
 }
 
 
-
-
-
-
 /* states */
 
 .state-completed,
@@ -235,134 +231,8 @@ color:blue
 .priority-10 {
         color: red;    /*critical*/
 }
-
 .overdue{
-        color: red !important;    
-}
-
-
-/* Planning-UI */
-table .planning { 
-    width: 100%;
-}
-
-table .planning td {
-    padding: 1em;
-    border-top-width : 1px;
-}
-
-.plan-day, .plan-total {
-    width : 18%;
-    height : 2em;
-    padding : 0.5em 1em;
-}
-
-#plannables {
-    height: 22em;
-    padding: 1px;
-    overflow: auto;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-table.plannables {
-    margin-top: 0;
-    width: 100%;
-}
-
-table.plannables th {
-    border-top-width : 0px;
-}
-
-.block-display-task {
-    float           : left;
-    height          : 0.8em;
-    margin-left     : 1px;
-    margin-top      : 0.2em;
-    border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
-    background-color: &dtml-globalBackgroundColor;;    
-}
-
-#plannableCategories {
-    background-color  : transparent;
-    padding-left      : 1em;
-    line-height       : normal;
-    margin            : 1ex 0 0 0;
-    list-style        : none !important;
-    font-size         : 85%;
-    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-}
-#plannableCategories li {
-    display: inline;
-    padding-top: 0.5em;
-}
-#plannableCategories li a {
-    background-color: transparent;
-    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
-    border-style: &dtml-borderStyle;;
-    color: &dtml-globalFontColor;;
-    height: auto;
-    margin-right: 0.5em;
-    padding: 0em 1em;
-    line-height: normal;
-    text-decoration: none;
-    text-transform: &dtml-textTransform;;
-    z-index: 1;
-}
-#plannableCategories .selected a {
-    background-color: &dtml-globalBackgroundColor;;
-    border-bottom: &dtml-globalBackgroundColor; &dtml-borderWidth; &dtml-borderStyle;;
-    color: &dtml-globalFontColor;;
-}
-#plannableCategories li a:hover {
-    background-color: &dtml-globalBackgroundColor;;
-    color: &dtml-globalFontColor;;
-}
-#plannableCategories li a:visited, .plannableCategories li a:active {
-    color: &dtml-globalFontColor;;
-}
-#no-plannables {
-    margin: 2ex;
-}
-
-.planned-task{
-    margin-right : 0.6em;
-    margin-bottom: 0.6em;
-    float        : left;
-}
-
-.planned-task:hover span{
-    border-color    : orange !important;
-}
-
-.plan-day a.state-completed span{
-    border-color    : green !important;
-}
-
-.plan-day-hover {
-    background: &dtml-globalBackgroundColor;;
-}
-
-.plan-user {
-    margin-right: 20px;
-}
-
-.focustoggle {
-    background-image: url(&dtml-portal_url;/fullscreenexpand_icon.gif);
-    background-repeat: no-repeat;
-    display: block;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    float: right;
-    margin: -5px -10px 0px 10px;
-}
-
-.focustoggle.focused {
-    background-image: url(&dtml-portal_url;/fullscreencollapse_icon.gif);
+        color: red !important;
 }
 
 /* Workflow actions view */
