@@ -94,16 +94,6 @@
 
 </browser:pages>
 
-<!-- Registered for *, but only meant for IInvoice
-     we do not want to introduce a hard dependency though -->
-<browser:page
-    for="*"
-    class=".timereports.InvoiceHours"
-    permission="zope2.View"
-    name="invoice_hours"
-    template="invoice_hours.pt"
-    />
-
 <!-- Weekly planning -->
 
 <browser:menu id="weeklyplan" />

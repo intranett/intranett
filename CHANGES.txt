@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Moved out the invoice_hours template to the Invoice package.
+  [hannosch]
+
 - We don't need the taskAddedSubscriber anymore.
   [hannosch]
 
