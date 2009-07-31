@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="extropy">
+
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main">
+
+    <h1>Hours attached to <span tal:replace="here/Title"></span></h1>
+
+    <textarea style="width: 100%" rows="15" cols="80"
+              tal:content="view/email_hours_report"></textarea>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:page
+      for="Products.Invoice.interfaces.IInvoice"
+      class=".invoice.InvoiceHours"
+      permission="zope2.View"
+      name="invoice_hours"
+      template="invoice_hours.pt"
+      />
+
+</configure>

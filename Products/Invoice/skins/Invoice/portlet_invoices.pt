@@ -4,10 +4,10 @@
 <body>
 <div metal:define-macro="portlet"
      tal:define="results python:here.portal_catalog.searchResults(
-													 portal_type='Invoice',
-                                                     sort_on='end',
-                                                     sort_order='asc',
-                                                     review_state='Sent');">
+                              portal_type='Invoice',
+                              sort_on='end',
+                              sort_order='asc',
+                              review_state='Sent');">
 
     <dl class="portlet" id="portlet-invoices">
 

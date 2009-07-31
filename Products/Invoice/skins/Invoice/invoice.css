@@ -31,7 +31,6 @@
     margin-bottom: 1em;
 }
 
-
 #invoice-invoicelines {
     width: 98%;
     margin: 1em 0;
@@ -45,13 +44,24 @@
     width: 8em;
 }
 
+#invoice-hoursreport {
+    margin-top: 2em;
+}
 
-
+#invoice-reminder {
+    margin-top: 2em;
+}
 
 
 @media print{
 
-.hoursReport {page-break-before:always;}
+    #invoice-hoursreport {
+        page-break-before:always;
+    }
+
+    #invoice-reminder {
+        display:none;
+    }
 
     body, h1, h2, h4, h4, h5, h6, p, div, table{
          font-family : 'Futura Std Book', Baskerville;

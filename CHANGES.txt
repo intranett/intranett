@@ -4,6 +4,10 @@ Changelog
 0.6
 ---
 
+- Moved in the invoice_hours template from Extropy. This references
+  https://dev.jarn.com/ticket/46.
+  [hannosch]
+
 - Removed old test runner.
   [hannosch]
 

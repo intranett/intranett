@@ -4,7 +4,7 @@
 
   <body>
 
-    <div metal:fill-slot="main" tal:define="hours_view context/@@invoice_hours">
+    <div metal:fill-slot="main" tal:define="hours_view nocall:context/@@invoice_hours">
 
         <div>
             <h4><span tal:content="here/getFromName"></span></h4>
@@ -69,8 +69,7 @@
                 </tr>
             </tfoot>
         </table>
-        
-        
+
         <div tal:condition="python:here.getTotal() > 0 ">
             <div tal:condition="python:here.getPaymentDays() == 0 or request.has_key('printreminder')" id="invoice-paymentdue">
                 <strong>Payment due immediately</strong>
@@ -83,15 +82,13 @@
         <div id="invoice-paymentdetails" tal:content="structure here/getPaymentDetails"></div>
 
         <div id="invoice-notes" class="discreet" tal:content="structure here/getNotes"></div>
-        
-        
-        <div style="margin-top:2em;" tal:condition="python:here.getPaymentdue() < here.ZopeTime() and not request.has_key('printreminder')">Overdue, <a tal:attributes="href string:${request/URL0}?printreminder=1">click to print reminder</a></div>
 
-        <!-- <div class="hoursReport" tal:content="hours_view/email_hours_report">
-            Hours Report
-        </div> -->
-        
-</div>
-</body>
+        <div id="invoice-reminder" tal:condition="python:here.getPaymentdue() < here.ZopeTime() and not request.has_key('printreminder')">Overdue, <a tal:attributes="href string:${request/URL0}?printreminder=1">click to print reminder</a></div>
+
+        <pre id="invoice-hoursreport" tal:content="hours_view/email_hours_report">
+            Hours report
+        </pre>
+
+    </div>
+  </body>
 </html>
-
