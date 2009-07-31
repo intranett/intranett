@@ -23,7 +23,10 @@ class InvoiceHours(BrowserView, TimeReportQuery):
         self._hours = self.ettool.getHours(UID=uids)
         self._sum = self.ettool.countHours(self._hours)
 
-    def email_hours_report(self):
+    def email_hours_report(self, html=False):
+        newline = '\n'
+        if html:
+            newline = '<br />'
         timefmt = '%h.%d %H:%M';
         result = []
         for data in self.hours_by_date:
@@ -34,8 +37,11 @@ class InvoiceHours(BrowserView, TimeReportQuery):
                     result.append('%s to %s (%s hours)   : %s' % (
                         hour.start.TimeMinutes(), hour.end.TimeMinutes(),
                         hour.workedHours, hour.Title.ljust(25)))
-                result.append("total: %s hours\n" % data['sum'])
+                result.append("total: %s hours%s" % (data['sum'], newline))
         result.append('-' * 60)
         result.append('Total hours: %s' % self.sum)
         result.append('=' * 60)
-        return '\n'.join(result)
+        return newline.join(result)
+
+    def page_hours_report(self):
+        return self.email_hours_report(html=True)
