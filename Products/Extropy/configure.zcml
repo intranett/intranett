@@ -8,6 +8,7 @@
   <include package="Products.CacheSetup" />
   <include package="experimental.catalogqueryplan" />
   <include package="five.caching" />
+  <include package="plone.app.blob" />
   <include package="z3c.caching" file="meta.zcml" />
 
   <include package=".browser" />
