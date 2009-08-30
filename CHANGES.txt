@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Welcome to the Jungle - add more monkeys.
+  [hannosch]
+
 - Moved out the invoice_hours template to the Invoice package.
   [hannosch]
 
