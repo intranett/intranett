@@ -8,12 +8,6 @@
   </action>
  </action-provider>
  <action-provider name="portal_actions">
-  <action title="Weekly summary" action_id="timereport2" category="portal_tabs"
-     condition_expr="member"
-     url_expr="string:${portal_url}/weekly_summary"
-     visible="True">
-   <permission>View</permission>
-  </action>
   <action title="Worklog" action_id="worklog" category="object"
      condition_expr="member" url_expr="string:${globals_view/getCurrentFolderUrl}/worklog"
      visible="True">

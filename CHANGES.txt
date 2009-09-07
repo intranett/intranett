@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Removed the weekly summary from the tabs, we don't use it anymore.
+  [hannosch]
+
 - Added an isAnonymous check to the fast timesheet. If you are not logged in
   and go to the timesheet_fast, you are prompted for login now.
   [hannosch]
