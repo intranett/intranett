@@ -4,6 +4,10 @@ Changelog
 0.7
 ---
 
+- Added an isAnonymous check to the fast timesheet. If you are not logged in
+  and go to the timesheet_fast, you are prompted for login now.
+  [hannosch]
+
 - Welcome to the Jungle - add more monkeys.
   [hannosch]
 

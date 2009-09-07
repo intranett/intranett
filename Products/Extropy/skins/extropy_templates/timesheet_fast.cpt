@@ -60,7 +60,9 @@
 </div>
 
 <div style="margin:2em;"
-     tal:define="DateTime modules/DateTime;
+     tal:define="isAnon context/@@plone_portal_state/anonymous;
+                 raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
+                 DateTime modules/DateTime;
                  datestring request/date | python:DateTime.DateTime().Date();
                  date python:DateTime.DateTime(datestring);
                  start python:DateTime.DateTime( '%s %s' %(datestring , '00:00'));
