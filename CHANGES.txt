@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Increased the font-size in the fast timesheet table.
+  [hannosch, witsch]
+
 - Removed the weekly summary from the tabs, we don't use it anymore.
   [hannosch]
 
