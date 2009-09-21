@@ -1,12 +1,11 @@
-from itertools import groupby
-from operator import attrgetter
-
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 
 from Products.Extropy import config
 from Products.Extropy import permissions
-from Products.Extropy.config import *
+from Products.Extropy.config import OPEN_STATES
+from Products.Extropy.config import TASK_PRIORITIES
+from Products.Extropy.odict import OrderedDict
 
 from Products.CMFPlone.CatalogTool import CatalogTool
 from Products.Extropy.interfaces import IExtropyTracking, IExtropyTrackingTool
@@ -127,13 +126,13 @@ class ExtropyTrackingTool(CatalogTool):
     security.declareProtected(permissions.VIEW_PERMISSION, 'dictifyBrains')
     def dictifyBrains(self, brains, key):
         """create a dict from the brains so we can separate them by key"""
-        d={}
+        d = OrderedDict()
         for b in brains:
             newkey = b[key]
-            if d.has_key(newkey):
+            if newkey in d:
                 d[newkey].append(b)
             else:
-                d[newkey]=[b]
+                d[newkey] = [b]
         return d
 
     # *******************************************************************

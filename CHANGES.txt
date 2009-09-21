@@ -4,6 +4,10 @@ Changelog
 0.7
 ---
 
+- Sort the entries in the fast timesheet by project title instead of relying
+  on an undefined dict ordering.
+  [hannosch]
+
 - Increased the font-size in the fast timesheet table.
   [hannosch, witsch]
 

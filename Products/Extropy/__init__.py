@@ -1,7 +1,9 @@
-from Products.CMFCore.utils import ContentInit
-from Products.CMFCore.utils import ToolInit
+from AccessControl import allow_class
+from AccessControl import allow_module
 
 from Products.Archetypes.public import process_types, listTypes
+from Products.CMFCore.utils import ContentInit
+from Products.CMFCore.utils import ToolInit
 
 from Products.Extropy import config
 from Products.Extropy import tools
@@ -30,3 +32,7 @@ def initialize(context):
         ).initialize(context)
 
     import patches
+
+    allow_module('Products.Extropy.odict')
+    from Products.Extropy.odict import OrderedDict
+    allow_class(OrderedDict)

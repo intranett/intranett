@@ -242,6 +242,7 @@ class ExtropyTimeTrackerTool(CatalogTool):
                 , ('getId'          , 'FieldIndex', None)
                 , ('path'           , 'PathIndex' , None)
                 , ('portal_type'    , 'FieldIndex', None)
+                , ('getProjectTitle', 'FieldIndex', 'getProjectTitle')
                 , ('getResponsiblePerson', 'FieldIndex', 'getResponsiblePerson')
                 , ('start'      , 'DateIndex',      None)
                 , ('end'        , 'DateIndex',      None)
