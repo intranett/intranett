@@ -37,7 +37,7 @@
 
 <style type="text/css">
 <!--
-  .listing, .stx table {
+  table.listing, .stx table {
     font-size: 100% !important;
   }
   .gap {
