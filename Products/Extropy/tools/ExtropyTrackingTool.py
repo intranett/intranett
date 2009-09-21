@@ -154,6 +154,7 @@ class ExtropyTrackingTool(CatalogTool):
                 , ('path'           , 'PathIndex' ,     None)
                 , ('portal_type'    , 'FieldIndex',     None)
                 , ('getParticipants', 'KeywordIndex',   None)
+                , ('getProjectTitle', 'FieldIndex', 'getProjectTitle')
                 , ('getResponsiblePerson', 'KeywordIndex',None)
                 , ('start'          , 'DateIndex',      None)
                 , ('end'            , 'DateIndex',      None)
