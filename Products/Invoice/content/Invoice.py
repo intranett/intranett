@@ -236,7 +236,7 @@ class Invoice(BaseContent):
         return plone_tool.normalizeString(title)
 
 
-    security.declareProtected(permissions.EDIT_CONTENT_PERMISSION, 'createRecurrence')
+    #security.declareProtected(permissions.EDIT_CONTENT_PERMISSION, 'createRecurrence')
     def createRecurrence(self):
         """take the current invoice, and make a new recurrence of it"""
         parent = self.aq_parent
