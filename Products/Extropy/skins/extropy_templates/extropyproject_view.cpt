@@ -181,7 +181,7 @@
 
     </form>
 
-    <tal:content define="extropy_types python:('Memo', 'ExtropyPhase', 'ExtropyFeature', 'ExtropyTask', 'ExtropyActivity');
+    <tal:content define="extropy_types python:('Memo', 'ExtropyPhase', 'ExtropyFeature', 'ExtropyTask');
                          types python:[t.getId() for t in context.allowedContentTypes()];
                          dummy python:[types.remove(t) for t in extropy_types if t in types];
                          contentFilter python:dict(portal_type=types)"
