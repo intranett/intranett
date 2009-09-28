@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Added TinyMCE as a dependency and install it by default.
+  [hannosch]
+
 - Sort the entries in the fast timesheet by project title instead of relying
   on an undefined dict ordering.
   [hannosch]
