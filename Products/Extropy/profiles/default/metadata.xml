@@ -4,5 +4,6 @@
   <dependencies>
     <dependency>profile-Products.Invoice:default</dependency>
     <dependency>profile-Products.Memo:default</dependency>
+    <dependency>profile-Products.TinyMCE:TinyMCE</dependency>
   </dependencies>
 </metadata>
