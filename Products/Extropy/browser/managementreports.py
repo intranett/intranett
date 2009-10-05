@@ -1,14 +1,10 @@
 from itertools import groupby
 from operator import attrgetter
-import urllib
 from zope import interface
 from Products import Five
 from DateTime import DateTime
-from Products.CMFCore import utils as cmf_utils
-from Products.Extropy import permissions
 from Products.Extropy import config
-from Products.CMFCore.utils import _checkPermission, getToolByName
-
+from Products.CMFCore.utils import getToolByName
 
 
 class IWeeklyReport(interface.Interface):
@@ -38,29 +34,12 @@ class IWeeklyReport(interface.Interface):
         """a dict of people with hours by budget category"""
 
 
-#                 startdatestring request/startdate | python:(DateTime.DateTime()-7).Date();
-#                 enddatestring request/enddate | python:(DateTime.DateTime()).Date();
-#                 start python:DateTime.DateTime(startdatestring).earliestTime();
-#                 end python:DateTime.DateTime(enddatestring).latestTime();
-#                 tool nocall:here/extropy_timetracker_tool;
-#                 hours python:tool.getHours(here, start=start, end=end, REQUEST=context.REQUEST);
-#                 dicthours python:tool.dictifyHoursByDate(hours, fill=True);
-#                 groupedhours python:tool.splitHoursByBudgetGroups(hours);
-#                 sortedlisting dicthours/items;
-#                 sumhours python:tool.countHours(hours);
-#                 timefmt python:'%h.%d %H:%M';
-#                 dummy python:sortedlisting.sort()
-#
-
-
 class WeeklyReport(Five.BrowserView):
     """Helper view for task editing
     """
 
     def __init__(self, context, request):
         Five.BrowserView.__init__(self, context, request)
-        self.context = context
-        self.request = request
         self.hours=None
 
     def getParticipants(self):
@@ -88,6 +67,7 @@ class WeeklyReport(Five.BrowserView):
 
 
 class IInvoiceReport(interface.Interface):
+
     def getInvoices():
         """Get the Invoices
         """
@@ -95,11 +75,6 @@ class IInvoiceReport(interface.Interface):
 
 class InvoiceReport(Five.BrowserView):
     """invoices report"""
-
-    def __init__(self, context, request):
-        Five.BrowserView.__init__(self, context, request)
-        self.context = context
-        self.request = request
 
     def getInvoices(self):
         etool = getToolByName(self.context, config.TOOLNAME)
@@ -111,7 +86,13 @@ class InvoiceReport(Five.BrowserView):
     def sumInvoices(self, invoices):
         if invoices is None or len(invoices)==0 or not invoices:
             return 0
-        return reduce(lambda x, y: x + y , [i.getTotal() for i in invoices])
+        total = 0
+        for i in invoices:
+            t = i.getTotal()
+            if isinstance(t, int):
+                # We sometimes get 0.0 or *error* here
+                total += t
+        return total
 
     def splitInvoicesByState(self,invoices):
         d={}

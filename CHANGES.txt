@@ -4,6 +4,10 @@ Changelog
 0.7
 ---
 
+- Fixed InvoiceReport.sumInvoices to gracefully deal with floating point
+  numbers, like 0.0.
+  [hannosch]
+
 - Added TinyMCE as a dependency and install it by default.
   [hannosch]
 
