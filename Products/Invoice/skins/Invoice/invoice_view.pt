@@ -83,12 +83,15 @@
 
         <div id="invoice-notes" class="discreet" tal:content="structure here/getNotes"></div>
 
-        <div id="invoice-reminder" tal:condition="python:here.getPaymentdue() &lt; here.ZopeTime() and not request.has_key('printreminder')">
+        <div class="visualNoPrint" id="invoice-reminder" tal:condition="python:here.getPaymentdue() &lt; here.ZopeTime() and not request.has_key('printreminder')">
             Overdue, <a tal:attributes="href string:${request/URL0}?printreminder=1">click to print reminder</a>
         </div>
 
-        <p id="invoice-hoursreport" tal:content="structure hours_view/page_hours_report">
+        <p id="invoice-hoursreport" tal:condition="hours_view/page_hours_report" tal:content="structure hours_view/page_hours_report">
             Hours report
+        </p>
+        <p style="text-align:right" tal:condition="not:hours_view/page_hours_report" class="visualNoPrint">
+            <a tal:attributes="href string:${context/absolute_url}/recurInvoice"><button>Create recurrence</button></a>
         </p>
 
     </div>

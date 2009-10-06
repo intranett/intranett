@@ -31,13 +31,15 @@ class InvoiceHours(BrowserView, TimeReportQuery):
         result = []
         for data in self.hours_by_date:
             if data['hours']:
-                result.append('-' * 20)
                 result.append(data['date'].strftime('%A %d %b'))
                 for hour in data['hours']:
                     result.append('%s to %s (%s hours)   : %s' % (
                         hour.start.TimeMinutes(), hour.end.TimeMinutes(),
                         hour.workedHours, hour.Title.ljust(25)))
                 result.append("total: %s hours%s" % (data['sum'], newline))
+                
+        if not result:
+            return None
         result.append('-' * 60)
         result.append('Total hours: %s' % self.sum)
         result.append('=' * 60)

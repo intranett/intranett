@@ -234,8 +234,7 @@ class Invoice(BaseContent):
 
         title = 'invoice-' + str(self.getInvoiceNumber()).zfill(5)
         return plone_tool.normalizeString(title)
-
-
+        
     #security.declareProtected(permissions.EDIT_CONTENT_PERMISSION, 'createRecurrence')
     def createRecurrence(self):
         """take the current invoice, and make a new recurrence of it"""
