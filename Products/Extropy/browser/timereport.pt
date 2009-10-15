@@ -11,10 +11,10 @@
 
     <h1>Worked hours in <span tal:replace="here/Title"></span></h1>
 
-    <p class="discreet">Use the form to filter the listing or change the date-span it reports. The dates in the list link to the timesheet for that date.</p>
+    <p class="discreet visualNoPrint">Use the form to filter the listing or change the date-span it reports. The dates in the list link to the timesheet for that date.</p>
     <p metal:use-macro="context/@@timereport_macros/timereport_menu" />
 
-    <form method="post" tal:attributes="action string:${here/absolute_url}/${view/__name__}">
+    <form method="post" tal:attributes="action string:${here/absolute_url}/${view/__name__}" >
         <fieldset>
             <legend>Filter query</legend>
         
@@ -25,6 +25,10 @@
             <span metal:use-macro="context/@@timereport_macros/dates_filter" />
             
             <input type="submit" value="filter">
+            
+            <span metal:use-macro="context/@@timereport_macros/show_invoices" />            
+
+
         </fieldset>
     
     <table metal:use-macro="context/@@timereport_macros/hours_table"/>

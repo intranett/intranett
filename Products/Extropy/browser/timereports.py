@@ -93,7 +93,7 @@ class TimeReports(BrowserView, TimeReportQuery):
         self.ettool = getToolByName(self.context, 'extropy_timetracker_tool')
 
         start = self.request.get('startdate', None)
-        start = start and DateTime(start) or (DateTime() - 7)
+        start = start and DateTime(start) or (DateTime('2000-01-01'))
         self.start = start.earliestTime()
 
         end = self.request.get('enddate', None)

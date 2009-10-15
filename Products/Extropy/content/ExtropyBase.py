@@ -372,3 +372,4 @@ class ExtropyBase:
         if hasattr(self.aq_parent, 'getBudgetCategory'):
             return self.aq_parent.getBudgetCategory() or 'Billable'
         return 'Billable'
+
