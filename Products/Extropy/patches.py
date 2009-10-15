@@ -28,13 +28,6 @@ CMFCatalogAware.originalOpaqueItems = CMFCatalogAware.opaqueItems
 CMFCatalogAware.opaqueItems = opaqueItems
 
 
-# The transform chain path doesn't really change, so it's likely to be
-# the same for the combination of source and target mime types
-from plone.memoize.forever import memoize
-from Products.PortalTransforms.TransformEngine import TransformTool
-TransformTool._findPath = memoize(TransformTool._findPath)
-
-
 from plone.memoize import volatile
 
 from Acquisition import ImplicitAcquisitionWrapper
