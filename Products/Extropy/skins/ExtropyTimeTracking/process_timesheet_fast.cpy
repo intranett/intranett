@@ -48,4 +48,5 @@ else:
         message = "No hours added"
         state.setStatus('failure')
 
-return state.set(context=context, portal_status_message=message)
+context.plone_utils.addPortalMessage(message)
+return state.set(context=context)

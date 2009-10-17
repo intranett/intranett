@@ -27,4 +27,5 @@ message = 'Added 1-on-1 task'
 
 state.setStatus('success')
 
-return state.set(context=context, portal_status_message=message)
+context.plone_utils.addPortalMessage(message)
+return state.set(context=context)

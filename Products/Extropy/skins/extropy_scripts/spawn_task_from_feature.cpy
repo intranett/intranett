@@ -18,4 +18,5 @@ message = 'Spawned task from %s.' % context.Title()
 
 state.setStatus('success_no_edit')
 
-return state.set(context=o, portal_status_message=message)
+context.plone_utils.addPortalMessage(message)
+return state.set(context=o)

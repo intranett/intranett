@@ -19,4 +19,5 @@ message = 'Adding worked time record to "%s."' % context.Title()
 
 state.setStatus('success')
 
-return state.set(context=addhour, portal_status_message=message)
+context.plone_utils.addPortalMessage(message)
+return state.set(context=addhour)

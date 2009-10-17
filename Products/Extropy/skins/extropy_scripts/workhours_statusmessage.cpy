@@ -9,6 +9,7 @@
 ##title=
 ##
 
-msg = "Changed worked hours."
+message = "Changed worked hours."
 
-return state.set( portal_status_message=msg)
+context.plone_utils.addPortalMessage(message)
+return state
