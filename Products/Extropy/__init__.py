@@ -39,7 +39,7 @@ def initialize(context):
     allow_class(OrderedDict)
 
     # What follows shoulnd't be required, but zope.i18n.locales is stupid
-    from zope.i18n.locales import locales    
+    from zope.i18n.locales import locales
     gregorian = locales.getLocale('en').dates.calendars[u'gregorian']
 
     date_format = gregorian.dateFormats['medium'].formats[None]
