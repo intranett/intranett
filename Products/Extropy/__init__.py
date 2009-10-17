@@ -8,6 +8,7 @@ from Products.CMFCore.utils import ToolInit
 from Products.Extropy import config
 from Products.Extropy import tools
 
+
 def initialize(context):
     from Products.Extropy import content
 
@@ -36,3 +37,13 @@ def initialize(context):
     allow_module('Products.Extropy.odict')
     from Products.Extropy.odict import OrderedDict
     allow_class(OrderedDict)
+
+    # What follows shoulnd't be required, but zope.i18n.locales is stupid
+    from zope.i18n.locales import locales    
+    gregorian = locales.getLocale('en').dates.calendars[u'gregorian']
+
+    date_format = gregorian.dateFormats['medium'].formats[None]
+    time_format = gregorian.timeFormats['medium'].formats[None]
+
+    date_format.pattern = u'yyyy-MM-dd '
+    time_format.pattern = u'HH:mm:ss '
