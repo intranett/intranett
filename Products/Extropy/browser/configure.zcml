@@ -149,4 +149,14 @@
     template="workflowactions.pt"
     />
 
+<!-- Projects Listing -->
+
+<browser:page
+    for="Products.Archetypes.public.BaseFolder"
+    class=".projects_listing.ProjectsListing"
+    permission="zope2.View"
+    name="projects_listing"
+    template="projects_listing.pt"
+    />
+
 </configure>

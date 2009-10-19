@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+
+<div metal:fill-slot="main"
+     tal:define="etool nocall:here/extropy_tracking_tool;">
+
+<div tal:define="projectsbystate view/projects">
+
+    <div tal:repeat="state projectsbystate">
+
+        <h3 tal:content="state/title">Title</h3>
+
+        <dl tal:repeat="phase state/projects">
+            <dt>
+                    <a tal:attributes="href phase/url"><span tal:content="phase/title" /></a> [<span tal:replace="phase/project_manager" />]
+            </dt>
+            <dd>
+                    <span tal:content="phase/status">[status]</span>
+            </dd>
+
+        </dl>
+
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>
