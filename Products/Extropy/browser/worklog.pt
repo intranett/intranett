@@ -80,42 +80,45 @@
 
     <div tal:repeat="group activity">
         <h2 tal:content="group/title">Group title</h2>
-        <p>
-            Total number of booked hours: <span tal:replace="group/summary/hours">10.0</span>
-        </p>
+        <dl class="collapsible inline collapsedOnLoad">
+            <dt class="collapsibleHeader">
+                Total number of booked hours: <span tal:replace="group/summary/hours">10.0</span>
+            </dt>
+            <dd class="collapsibleContent">
+                <dl>
+                    <tal:repeat repeat="booking group/bookings">
+                        <dt>
+                            <a tal:attributes="href booking/url;
+                                               title booking/title"
+                               tal:content="booking/title">Title of the booking</a>
+                        </dt>
 
-        <dl>
-            <tal:repeat repeat="booking group/bookings">
-                <dt>
-                    <a tal:attributes="href booking/url;
-                                       title booking/title"
-                       tal:content="booking/title">Title of the booking</a>
-                </dt>
+                        <dd>
+                            <p class="discreet">
+                                On <span tal:replace="python:booking['start'].strftime('%Y-%m-%d')">2007-08-01</span>
+                                from <span tal:replace="python:booking['start'].strftime('%H:%M')">10:00</span>
+                                to <span tal:replace="python:booking['end'].strftime('%H:%M')">11:30</span>
+                                (<span tal:replace="booking/hours">1.5</span> hours)<br/>
+                                By <span tal:replace="booking/fullname">someone</span> in
+                                <tal:path repeat="info booking/chain">
+                                    <a tal:attributes="href string:${info/url}/worklog?${qsa};
+                                                       title info/title"
+                                       tal:content="info/title">
+                                        parent
+                                    </a>
+                                    <tal:arrow condition="not:repeat/info/end">
+                                        &rarr;
+                                    </tal:arrow>
+                                </tal:path>
+                            </p>
 
-                <dd>
-                    <p class="discreet">
-                        On <span tal:replace="python:booking['start'].strftime('%Y-%m-%d')">2007-08-01</span>
-                        from <span tal:replace="python:booking['start'].strftime('%H:%M')">10:00</span>
-                        to <span tal:replace="python:booking['end'].strftime('%H:%M')">11:30</span>
-                        (<span tal:replace="booking/hours">1.5</span> hours)<br/>
-                        By <span tal:replace="booking/fullname">someone</span> in
-                        <tal:path repeat="info booking/chain">
-                            <a tal:attributes="href string:${info/url}/worklog?${qsa};
-                                               title info/title"
-                               tal:content="info/title">
-                                parent
-                            </a>
-                            <tal:arrow condition="not:repeat/info/end">
-                                &rarr;
-                            </tal:arrow>
-                        </tal:path>
-                    </p>
-
-                    <span tal:replace="structure booking/summary">
-                        Description
-                    </span>
-                </dd>
-            </tal:repeat>
+                            <span tal:replace="structure booking/summary">
+                                Description
+                            </span>
+                        </dd>
+                    </tal:repeat>
+                </dl>
+            </dd>
         </dl>
     </div>
 </div>
