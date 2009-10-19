@@ -1,5 +1,6 @@
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
+from Products.Extropy.browser.worklog import DateToPeriod, WorkLogView
 
 
 class ProjectsListing(BrowserView):
@@ -14,12 +15,25 @@ class ProjectsListing(BrowserView):
         for state, projects in etool.dictifyBrains(brains, 'review_state').iteritems():
             for project in projects:
                 project = project.getObject()
+                worklog = WorkLogView(project, self.request)
+                worklog.group_by = self.request.get("group_by", "person")
+                (worklog.start, worklog.end) = DateToPeriod(period=worklog.period, date=worklog.start-1)
+                activity = worklog.activity()
+                hours = sum([x['summary']['hours'] for x in activity])
+                persons = [x['title'] for x in activity]
                 data = dict(
                     url=project.absolute_url(),
                     title=project.Title(),
                     project_manager=project.getProjectManager(),
                     status=project.getProjectStatus(),
+                    hours=hours,
+                    start=worklog.start,
+                    end=worklog.end,
                 )
+                if len(persons) > 1:
+                    data['persons'] = "%s and %s" % (", ".join(persons[:-1]), persons[-1])
+                else:
+                    data['persons'] = "".join(persons)
                 if state == 'active':
                     if 'Ongoing Project' in project.Subject():
                         ongoing['projects'].append(data)
