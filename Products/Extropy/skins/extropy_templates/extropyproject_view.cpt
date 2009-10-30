@@ -67,7 +67,7 @@
                     </th>
                     <td>
                         <span tal:repeat="invoice python:context.portal_catalog.searchResults(path={'query' : '/'.join(context.getPhysicalPath()), },sort_on = 'getObjPositionInParent',portal_type = 'Invoice')">
-                            <a tal:attributes="href invoice/absolute_url" tal:content="string:#${invoice/getInvoiceNumber}">#147</a>,
+                            <a tal:attributes="href invoice/getURL" tal:content="string:#${invoice/getInvoiceNumber}">#147</a>,
                         </span>
                     </td>
                 </tr>
