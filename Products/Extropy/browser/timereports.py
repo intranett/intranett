@@ -93,7 +93,17 @@ class TimeReports(BrowserView, TimeReportQuery):
         self.ettool = getToolByName(self.context, 'extropy_timetracker_tool')
 
         start = self.request.get('startdate', None)
-        start = start and DateTime(start) or (DateTime('2000-01-01'))
+        if not start:
+            now = DateTime()
+            # Default to showing the current year. During January we still
+            # include the last year, as we usually still write bills for that
+            # period.
+            if now.month() > 1:
+                start = '%s-01-01' % now.year()
+            else:
+                start = '%s-01-01' % (now.year() - 1)
+
+        start = DateTime(start)
         self.start = start.earliestTime()
 
         end = self.request.get('enddate', None)
