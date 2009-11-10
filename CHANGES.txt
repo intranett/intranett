@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Added a new default query plan.
+  [hannosch]
+
 - Fixed InvoiceReport.sumInvoices to gracefully deal with floating point
   numbers, like 0.0.
   [hannosch]
