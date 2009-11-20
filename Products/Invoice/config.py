@@ -1,10 +1,12 @@
-from Products.Archetypes.public import DisplayList
+# -*- coding: utf-8 -*-
+
+from Products.Archetypes.public import IntDisplayList
 
 PROJECTNAME = 'Invoice'
 
 GLOBALS = globals()
 
-PAYMENT_DUE_OPTIONS = DisplayList((
+PAYMENT_DUE_OPTIONS = IntDisplayList((
     (0,  'Immediately'),
     (7,  '1 week'),
     (14, '2 weeks'),
