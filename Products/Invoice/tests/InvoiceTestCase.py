@@ -11,7 +11,6 @@ ZopeTestCase.installProduct('CMFQuickInstallerTool', quiet=1)
 ZopeTestCase.installProduct('CMFFormController', quiet=1)
 ZopeTestCase.installProduct('GroupUserFolder', quiet=1)
 ZopeTestCase.installProduct('ZCTextIndex', quiet=1)
-ZopeTestCase.installProduct('TextIndexNG2', quiet=1)
 ZopeTestCase.installProduct('SecureMailHost', quiet=1)
 ZopeTestCase.installProduct('CMFPlone')
 
