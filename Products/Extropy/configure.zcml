@@ -1,6 +1,5 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:cache="http://namespaces.zope.org/cache"
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
@@ -9,9 +8,7 @@
   <i18n:registerTranslations directory="locales"/>
 
   <include package="experimental.catalogqueryplan" />
-  <include package="five.caching" />
   <include package="plone.app.blob" />
-  <include package="z3c.caching" file="meta.zcml" />
 
   <include package=".browser" />
   <include package=".portlets" />
@@ -27,16 +24,6 @@
     title="Extropy"
     directory="profiles/default"
     provides="Products.GenericSetup.interfaces.EXTENSION"
-    />
-
-  <cache:ruleset
-    for="Products.CMFCore.FSImage.FSImage"
-    ruleset="httpcache"
-    />
-
-  <cache:ruleset
-    for="Products.CMFCore.FSFile.FSFile"
-    ruleset="httpcache"
     />
 
 </configure>
