@@ -1,3 +1,5 @@
+from zope.interface import implements
+
 from AccessControl import ClassSecurityInfo
 from Products.Extropy.interfaces import IExtropyBase
 
@@ -10,7 +12,7 @@ schema = BaseSchema + Schema((
 class ExtropyBase(BaseContent):
     """A simple type with budget category """
     schema = schema
-    __implements__ = BaseContent.__implements__+(IExtropyBase,)
+    implements(IExtropyBase)
 
     security = ClassSecurityInfo()
 
@@ -19,7 +21,7 @@ registerType(ExtropyBase)
 class ExtropyFolder(BaseFolder):
     """A simple folderish archetype"""
     schema = schema
-    __implements__ = BaseContent.__implements__+(IExtropyBase,)
+    implements(IExtropyBase)
 
     security = ClassSecurityInfo()
 

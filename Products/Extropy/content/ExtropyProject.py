@@ -1,4 +1,5 @@
-from DateTime import DateTime
+from zope.interface import implements
+
 from AccessControl import ClassSecurityInfo
 
 from Products.Archetypes.public import *
@@ -94,7 +95,7 @@ ExtropyProjectSchema = ExtropyBaseSchema.copy() + Schema((
 
 class ExtropyProject(ExtropyTracking, ExtropyBase, OrderedBaseFolder):
     """An Extropy Project contains all the information needed to manage a project."""
-    __implements__ = OrderedBaseFolder.__implements__ + (IExtropyTracking, IExtropyBase)
+    implements(IExtropyTracking, IExtropyBase)
 
     schema = ExtropyProjectSchema
 

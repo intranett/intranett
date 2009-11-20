@@ -5,7 +5,6 @@
 import transaction
 
 from Testing import ZopeTestCase
-from Interface.Verify import verifyObject
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
 
@@ -20,11 +19,9 @@ class TestFeatures(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 
     def testFeatureInterface(self):
         from Products.Extropy.interfaces import IExtropyBase
-        self.failUnless(IExtropyBase.isImplementedBy(self.feature))
-        self.failUnless(verifyObject(IExtropyBase, self.feature))
+        self.failUnless(IExtropyBase.providedBy(self.feature))
         from Products.Extropy.interfaces import IExtropyTracking
-        self.failUnless(IExtropyTracking.isImplementedBy(self.feature))
-        self.failUnless(verifyObject(IExtropyTracking, self.feature))
+        self.failUnless(IExtropyTracking.providedBy(self.feature))
 
     def testAvailablePeople(self):
         self.folder.project.setParticipants(['joe','noob'])

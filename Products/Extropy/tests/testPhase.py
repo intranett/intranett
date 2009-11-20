@@ -3,7 +3,6 @@
 #
 
 from Testing import ZopeTestCase
-from Interface.Verify import verifyObject
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
 
@@ -17,11 +16,9 @@ class TestPhase(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 
     def testPhaseInterface(self):
         from Products.Extropy.interfaces import IExtropyBase
-        self.failUnless(IExtropyBase.isImplementedBy(self.phase))
-        self.failUnless(verifyObject(IExtropyBase, self.phase))
+        self.failUnless(IExtropyBase.providedBy(self.phase))
         from Products.Extropy.interfaces import IExtropyTracking
-        self.failUnless(IExtropyTracking.isImplementedBy(self.phase))
-        self.failUnless(verifyObject(IExtropyTracking, self.phase))
+        self.failUnless(IExtropyTracking.providedBy(self.phase))
 
     def testGettingRequirements(self):
         self.phase.invokeFactory('ExtropyFeature','r1')

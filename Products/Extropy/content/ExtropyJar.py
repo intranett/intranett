@@ -1,17 +1,20 @@
+from zope.interface import implements
+
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import *
 from Products.Extropy.config import *
 from Products.Extropy.content.ExtropyTracking import ExtropyTracking
-from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, TimeSchema, ParticipantsSchema
+from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema
 
-from Products.Extropy.interfaces import IExtropyTracking, IExtropyBase
+from Products.Extropy.interfaces import IExtropyBase
 
 JarSchema = ExtropyBaseSchema + ParticipantsSchema
 
 class ExtropyJar(ExtropyTracking, ExtropyBase, BaseFolder):
     """A Bug Jar contains Bugs, which are reported defects in a project."""
     schema = JarSchema
-    __implements__ = (IExtropyBase)
+    implements(IExtropyBase)
+
     security = ClassSecurityInfo()
 
     def getBugs(self, **kw):

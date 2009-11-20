@@ -1,13 +1,13 @@
+from zope.interface import implements
+
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import *
 from Products.Extropy.config import *
-from Products.CMFCore.utils import getToolByName
-from Acquisition import aq_base, aq_parent
 from Products.Extropy.content.ExtropyBase import ExtropyBase
 from Products.Extropy.content.ExtropyHistoryTrackable import ExtropyHistoryTrackable
-from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema, ChangeNoteSchema
+from Products.Extropy.content.ExtropyBase import ExtropyBaseSchema, ChangeNoteSchema
 from Products.Extropy.interfaces import IExtropyBug
-from Products.CMFPlone.interfaces.NonStructuralFolder import INonStructuralFolder
+from Products.CMFPlone.interfaces import INonStructuralFolder
 
 
 BugSchema = ExtropyBaseSchema.copy() + ChangeNoteSchema.copy()
@@ -27,7 +27,7 @@ class ExtropyBug(ExtropyHistoryTrackable, ExtropyBase, BaseFolder):
     allow_discussion = 0
 
     security = ClassSecurityInfo()
-    __implements__ = (IExtropyBug, INonStructuralFolder)
+    implements(IExtropyBug, INonStructuralFolder)
 
 
     def spawnTask(self, container=None):

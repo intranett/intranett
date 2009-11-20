@@ -29,7 +29,9 @@
         <span i18n:translate="batch_x_items_matching_your_criteria"><span i18n:name="number" tal:content="python:len(results)">234</span> items matching your criteria.</span>
         </strong>
 
-        <a href="" tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}">
+        <a href=""
+            tal:define="here_url context/@@plone_context_state/object_url;"
+            tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}">
         <img i18n:attributes="title alt"
              tal:attributes="src string:$portal_url/rss.gif"
              src="rss.gif"

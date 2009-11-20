@@ -1,20 +1,18 @@
 from types import StringTypes
-from Acquisition import aq_base
 
-from Globals import InitializeClass
-from AccessControl import ClassSecurityInfo
-
-from Products.Extropy import config
-from Products.Extropy.permissions import *
-
-from Products.CMFPlone.CatalogTool import CatalogTool
+from zope.interface import implements
 
 from AccessControl import getSecurityManager
-
+from AccessControl import ClassSecurityInfo
+from Acquisition import aq_base
+from App.class_init import InitializeClass
 from DateTime import DateTime
+from Products.CMFPlone.CatalogTool import CatalogTool
 from Products.CMFPlone.utils import _createObjectByType
 
+from Products.Extropy import config
 from Products.Extropy.interfaces import IExtropyTimeTrackingTool
+from Products.Extropy.permissions import *
 
 
 class ExtropyTimeTrackerTool(CatalogTool):
@@ -26,7 +24,7 @@ class ExtropyTimeTrackerTool(CatalogTool):
 
     security = ClassSecurityInfo()
 
-    __implements__ = (CatalogTool.__implements__, IExtropyTimeTrackingTool)
+    implements(IExtropyTimeTrackingTool)
 
     manage_options = (CatalogTool.manage_options)
 
@@ -80,8 +78,6 @@ class ExtropyTimeTrackerTool(CatalogTool):
     def findTimeTrackableParent(self, context):
         """ find the next parent of context that can have timetracking"""
         for o in list(context.aq_chain):
-        #if IExtropyTimeTrackable.isImplementedBy(o):
-        # we have no interface for this yet
             if hasattr(o,'meta_type') and o.meta_type in config.BILLABLE_TYPES:
                 return o
         return None
@@ -233,7 +229,7 @@ class ExtropyTimeTrackerTool(CatalogTool):
     def enumerateIndexes( self ):
     #   Return a list of ( index_name, type ) pairs for the initial index set.
         return  ( ('Creator'        , 'FieldIndex', None)
-                , ('SearchableText' , 'TextIndex', None)
+                , ('SearchableText' , 'ZCTextIndex', None)
                 , ('created'        , 'DateIndex', None)
                 , ('modified'       , 'DateIndex', None)
                 , ('allowedRolesAndUsers', 'KeywordIndex', None)
@@ -308,6 +304,7 @@ class ExtropyTimeTrackerTool(CatalogTool):
                     p = Record(**extra)
                 else:
                     p = Record()
+
                 addIndex( index_name, index_type, extra=p )
 
         # Cached metadata

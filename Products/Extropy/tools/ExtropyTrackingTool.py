@@ -1,23 +1,22 @@
-from Globals import InitializeClass
+from math import floor
+from types import StringTypes, DictType
+
+from zope.interface import implements
+
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_base
+from App.class_init import InitializeClass
+from DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.CatalogTool import CatalogTool
 
 from Products.Extropy import config
 from Products.Extropy import permissions
 from Products.Extropy.config import OPEN_STATES
 from Products.Extropy.config import TASK_PRIORITIES
+from Products.Extropy.interfaces import IExtropyTracking, IExtropyTrackingTool
 from Products.Extropy.odict import OrderedDict
 
-from Products.CMFPlone.CatalogTool import CatalogTool
-from Products.Extropy.interfaces import IExtropyTracking, IExtropyTrackingTool
-
-from types import StringTypes, DictType
-
-from Acquisition import aq_base
-from Products.CMFCore.utils import getToolByName
-from Products.Five.traversable import Traversable
-
-from DateTime import DateTime
-from math import floor
 
 class ExtropyTrackingTool(CatalogTool):
     """A tool for tracking tasks and similar things
@@ -28,15 +27,11 @@ class ExtropyTrackingTool(CatalogTool):
 
     security = ClassSecurityInfo()
 
-    __implements__ = (CatalogTool.__implements__, IExtropyTrackingTool)
+    implements(IExtropyTrackingTool)
 
     manage_options = (
         CatalogTool.manage_options
     )
-
-    def __setstate__(self, state):
-        CatalogTool.__setstate__(self, state)
-        self._catalog.useBrains(Traversable)
 
     # a method to get placeful task results
     security.declarePublic( 'localQuery' )
@@ -61,7 +56,7 @@ class ExtropyTrackingTool(CatalogTool):
         """Gets the containg parent of context, if it is an ExtropyBase object, or the first on that is.
         """
         for o in list(context.aq_chain):
-            if IExtropyTracking.isImplementedBy(o):
+            if IExtropyTracking.providedBy(o):
                 if metatype is None:
                     return o
                 elif hasattr(o,'meta_type') and metatype == o.meta_type:
@@ -143,7 +138,7 @@ class ExtropyTrackingTool(CatalogTool):
     #   Return a list of ( index_name, type ) pairs for the initial index set.
         return  ( ('UID'            , 'FieldIndex',     None)
                 , ('Creator'        , 'FieldIndex',     None)
-                , ('SearchableText' , 'TextIndex',      None)
+                , ('SearchableText' , 'ZCTextIndex',    None)
                 , ('Subject'        , 'KeywordIndex',   None)
                 , ('created'        , 'DateIndex',      None)
                 , ('modified'       , 'DateIndex',      None)

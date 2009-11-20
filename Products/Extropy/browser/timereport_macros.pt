@@ -5,6 +5,7 @@
 <p metal:define-macro="timereport_menu">
    <tal:menu repeat="mitem view/menu">
    <a href="timereport"
+      tal:define="here_url context/@@plone_context_state/object_url;"
       tal:attributes="href string:${here_url}/${mitem/action}${view/query_string}"
       tal:content="mitem/title">Numbers-version of this page</a><span
       tal:condition="not:repeat/mitem/end" tal:omit-tag="">,</span>
@@ -18,9 +19,10 @@
     metal:define-macro="creator_filter">
     <option value="">All people</option>
     <tal:options repeat="person view/people">
-    <option tal:define="author python:mtool.getMemberInfo(person)"
+    <option tal:define="mtool nocall:context/portal_membership;
+                        author python:mtool.getMemberInfo(person)"
             tal:attributes="value person;
-            selected python:person == request.get('Creator','')"        
+            selected python:person == request.get('Creator','')"
             tal:content="author/fullname|person" />
     </tal:options>
 </select>
@@ -99,6 +101,7 @@ end:<input type="text" size="10" name="enddate" tal:attributes="value view/end/D
         </td>
         <td><a tal:attributes="href hour/getURL" tal:content="python:path('hour/Title') or '(no title)'">HOUR</a></td>
         <td tal:define="creator hour/Creator;
+                        mtool nocall:context/portal_membership;
                         author python:creator and mtool.getMemberInfo(creator)"
             tal:content="author/fullname|creator"></td>
         <td><span tal:content="python:hour.start.strftime(timefmt)"></span></td>

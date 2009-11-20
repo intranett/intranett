@@ -1,25 +1,20 @@
-from types import StringTypes
+from zope.interface import implements
 
-from Acquisition import aq_base, aq_parent, aq_inner
 from AccessControl import ClassSecurityInfo
 
 from Products.Archetypes.public import *
-from Products.Archetypes.config import REFERENCE_CATALOG
 
 from Products.CMFCore.utils import getToolByName
 
 from Products.Extropy.config import *
 from Products.Extropy.content.ExtropyBase import ExtropyBase, ExtropyBaseSchema, ParticipantsSchema, TimeSchema
-from Products.Extropy.content.ExtropyHistoryTrackable import ExtropyHistoryTrackable
 
 from Products.CMFCore import permissions
 from Products.Extropy.permissions import MANAGE_PLAN_ITEMS
 
-from Products.CMFPlone.interfaces.NonStructuralFolder import INonStructuralFolder
+from Products.CMFPlone.interfaces import INonStructuralFolder
 
 from Products.Extropy.interfaces import IExtropyPlan
-
-from DateTime import DateTime
 
 
 ExtropyPlanSchema = ExtropyBaseSchema.copy() + ParticipantsSchema.copy() + TimeSchema.copy() + Schema((
@@ -56,7 +51,7 @@ class ExtropyPlan(ExtropyBase, BaseFolder):
 
     schema = ExtropyPlanSchema
 
-    __implements__ = (IExtropyPlan, INonStructuralFolder)
+    implements(IExtropyPlan, INonStructuralFolder)
 
     security = ClassSecurityInfo()
 

@@ -10,7 +10,7 @@
 
   
   <table style="width:90%"
-         tal:define="mtool context/portal_membership">
+         tal:define="mtool nocall:context/portal_membership">
       <tr tal:repeat="obj python:view.totals().items()">
           <td tal:define="person python:obj[0];
                           author python:mtool.getMemberInfo(person);

@@ -32,7 +32,7 @@
 
                 <input type="hidden" name="form.submitted" value="1" />
 
-                <span>     
+                <span tal:define="mtool nocall:context/portal_membership;">
                     <label>Responsible</label>
                         <select name="getResponsiblePerson">
                             <tal:options repeat="person python:etool.uniqueValuesFor('getResponsiblePerson')">
@@ -81,11 +81,11 @@
                 <th>Progress</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody tal:define="mtool nocall:context/portal_membership;">
             <tal:deliverable tal:repeat="deliverable deliverables">
             <tr tal:define="oddrow repeat/deliverable/odd"
                 tal:attributes="class python:test(oddrow, 'even', 'odd')">
-        
+
                 <td tal:content="deliverable/getProjectTitle" />
                 <td tal:attributes="class string:state-${deliverable/review_state}">
                     <a href="" 

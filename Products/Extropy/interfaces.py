@@ -1,6 +1,5 @@
-from Interface import Interface
+from zope.interface import Interface
 
-from Products.Five.bridge import fromZ2Interface
 
 class IExtropyBase(Interface):
     """ Interface for all real Extropy Objects """
@@ -18,10 +17,6 @@ class IExtropyTracking(Interface):
 
     def getTasksForCurrentUser(**kw):
         """getTasks, only limited to tasks owned by the current user"""
-
-
-#    def getDaysLeft():
-#        """the number of days (workdays?) to the phase/project etc. expires"""
 
 
 class IExtropyProject(Interface):
@@ -62,8 +57,6 @@ class IExtropyTask(Interface):
         The originating feature
         """
 
-z3IExtropyTask = fromZ2Interface(IExtropyTask)
-z3IExtropyTask.__dict__['__name__'] = 'z3IExtropyTask'
 
 class IExtropyBugJar(Interface):
     """

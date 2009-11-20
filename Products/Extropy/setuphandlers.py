@@ -1,6 +1,14 @@
 from StringIO import StringIO
+
 from Products.CMFCore.utils import getToolByName
+from Products.ZCTextIndex.PipelineFactory import element_factory
+from Products.ZCTextIndex.ZCTextIndex import PLexicon
+
 from Products.Extropy import config
+
+
+class Extra(object):
+    pass
 
 
 def tweakTimeTrackerActions(portal, out):
@@ -30,7 +38,14 @@ def setupCatalogMultiplex(portal, out):
         for idx_id, idx_type, _ in tool.enumerateIndexes():
             if idx_id in tool.indexes():
                 tool.delIndex(idx_id)
-            tool.addIndex(idx_id, idx_type)
+
+            if idx_id == 'SearchableText':
+                extra = Extra()
+                setattr(extra, 'index_type', 'Okapi BM25 Rank')
+                setattr(extra, 'lexicon_id', 'plone_lexicon')
+                tool.addIndex(idx_id, idx_type, extra=extra)
+            else:
+                tool.addIndex(idx_id, idx_type)
 
         for col_id in tool.enumerateColumns():
             if col_id in tool.schema()[:]:
@@ -38,9 +53,25 @@ def setupCatalogMultiplex(portal, out):
             tool.addColumn(col_id)
         tool.refreshCatalog()
 
+    def add_lexicon(catalog):
+        # Lexicon
+        catalog._setObject('plone_lexicon', PLexicon('plone_lexicon'))
+        lexicon = catalog.plone_lexicon
+
+        pipeline = [
+            element_factory.instantiate(
+                "Word Splitter", "Unicode Whitespace splitter"),
+            element_factory.instantiate(
+                "Case Normalizer", "Unicode Case Normalizer"),
+        ]
+        lexicon._pipeline = tuple(pipeline)
+
     tool = getToolByName(portal, config.TOOLNAME)
+    add_lexicon(tool)
     setup_indexes(tool)
+
     timetool = getToolByName(portal, config.TIMETOOLNAME)
+    add_lexicon(timetool)
     setup_indexes(timetool)
 
 

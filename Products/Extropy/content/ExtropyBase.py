@@ -1,3 +1,5 @@
+from zope.interface import implements
+
 from DateTime import DateTime
 from Acquisition import aq_chain, aq_inner
 from AccessControl import ClassSecurityInfo
@@ -137,7 +139,7 @@ ExtropyFullSchema = ExtropyBaseSchema + TimeSchema + ParticipantsSchema
 
 class ExtropyBase:
     """Base class for shared Extropy stuff."""
-    __implements__ = (IExtropyBase,)
+    implements(IExtropyBase,)
 
     security = ClassSecurityInfo()
 
@@ -148,7 +150,7 @@ class ExtropyBase:
         for o in self.aq_chain:
             if not include_self and o is self:
                 continue
-            if IExtropyBase.isImplementedBy(o):
+            if IExtropyBase.providedBy(o):
                 chain.append(o)
         return chain
 
@@ -190,7 +192,7 @@ class ExtropyBase:
         """Gets the containg parent, if it is an ExtropyBase object."""
         for o in self.aq_chain:
             if o is not self:
-                if IExtropyBase.isImplementedBy(o):
+                if IExtropyBase.providedBy(o):
                     if metatype is None:
                         return o
                     elif hasattr(o,'meta_type') and metatype == o.meta_type:

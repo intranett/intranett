@@ -11,7 +11,8 @@
 <div metal:fill-slot="main">
 
 <h1>Weekly report for 
-  <span tal:define="author python:mtool.getMemberInfo(view.user)"
+  <span tal:define="mtool nocall:context/portal_membership;
+                    author python:mtool.getMemberInfo(view.user)"
         tal:replace="author/fullname|view/user">Tesdal</span>
   <span metal:use-macro="context/@@weeklyplan_macros/week_label"/>
 </h1>

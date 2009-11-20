@@ -61,7 +61,7 @@
         </table>
 
         <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
-          <tbody>
+          <tbody tal:define="mtool nocall:context/portal_membership;">
             <tr>
               <th>Target Phase</th>
               <td ondblclick="showhiddenfield(this)" tal:define="currentPhase python:here.getExtropyParent('ExtropyPhase')">

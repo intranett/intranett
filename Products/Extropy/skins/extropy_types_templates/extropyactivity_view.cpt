@@ -62,7 +62,8 @@
                     <th>
                         Participants
                     </th>
-                    <td ondblclick="showhiddenfield(this)">
+                    <td ondblclick="showhiddenfield(this)"
+                        tal:define="mtool nocall:context/portal_membership;">
                         <select class="invisibleformnode" name="participants" multiple="multiple">
                             <tal:options 
                               define="availableParticipants here/getParticipants" 

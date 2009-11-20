@@ -1,3 +1,5 @@
+from zope.interface import implements
+
 import transaction
 from Acquisition import aq_parent, aq_inner
 from AccessControl import ClassSecurityInfo
@@ -40,7 +42,7 @@ FeatureSchema = ExtropyBaseSchema.copy() + TimeSchema.copy() + ParticipantsSchem
 
 class ExtropyFeature(ExtropyHistoryTrackable, ExtropyTracking, ExtropyBase, BaseFolder):
     """A Deliverable is a clearly defined unit that should be produced as part of a project. Deliverables contain tasks."""
-    __implements__ = BaseFolder.__implements__ + (IExtropyBase, IExtropyTracking, IExtropyFeature)
+    implements(IExtropyBase, IExtropyTracking, IExtropyFeature)
 
     schema = FeatureSchema
     security = ClassSecurityInfo()

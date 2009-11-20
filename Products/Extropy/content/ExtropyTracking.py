@@ -1,5 +1,5 @@
-from AccessControl import ClassSecurityInfo
-from Globals import InitializeClass
+from zope.interface import implements
+
 from Products.Extropy.interfaces import IExtropyTracking
 from Products.CMFCore.utils import getToolByName
 from AccessControl import getSecurityManager
@@ -19,7 +19,7 @@ class ResultList(list):
 class ExtropyTracking:
     """Base class for types tracking tasks, requirements and bugs"""
 
-    __implements__ = (IExtropyTracking)
+    implements(IExtropyTracking)
 
     def getTasks(self, **kw):
         """gets all contained tasks, query by keywords"""

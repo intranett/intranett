@@ -1,3 +1,5 @@
+from zope.interface import implements
+
 from AccessControl import ClassSecurityInfo
 
 from Products.Archetypes.public import *
@@ -13,13 +15,12 @@ from Products.Extropy.content.ExtropyBase import TimeSchema,ExtropyBaseSchema,  
 from Products.Extropy.content.ExtropyTracking import ExtropyTracking
 
 
-
 ExtropyPhaseSchema = ExtropyBaseSchema.copy() + TimeSchema.copy() + BudgetSchema.copy()
 
 
 class ExtropyPhase(ExtropyTracking, ExtropyBase, BaseFolder):
     """A Package is a unit of work that contains a number of tasks. Aka. milestone in other systems."""
-    __implements__ = (IExtropyTracking, IExtropyBase)
+    implements(IExtropyTracking, IExtropyBase)
 
     schema = ExtropyPhaseSchema
     _at_rename_after_creation = True

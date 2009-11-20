@@ -3,7 +3,6 @@
 #
 
 from Testing import ZopeTestCase
-from Interface.Verify import verifyObject
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
 from Products.CMFCore.utils import getToolByName
@@ -19,11 +18,9 @@ class TestProject(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 
     def testProjectInterface(self):
         from Products.Extropy.interfaces import IExtropyBase
-        self.failUnless(IExtropyBase.isImplementedBy(self.project))
-        self.failUnless(verifyObject(IExtropyBase, self.project))
+        self.failUnless(IExtropyBase.providedBy(self.project))
         from Products.Extropy.interfaces import IExtropyTracking
-        self.failUnless(IExtropyTracking.isImplementedBy(self.project))
-        self.failUnless(verifyObject(IExtropyTracking, self.project))
+        self.failUnless(IExtropyTracking.providedBy(self.project))
 
     def testActivePhase(self):
         self.failUnlessEqual(self.folder.project.getActivePhases(), [])

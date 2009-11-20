@@ -68,7 +68,7 @@ class ExtropyHours(BaseContent):
         """
         for o in self.aq_chain:
             if o is not self:
-                if IExtropyBase.isImplementedBy(o):
+                if IExtropyBase.providedBy(o):
                     if metatype is None:
                         return o
                     elif hasattr(o,'meta_type') and metatype == o.meta_type:

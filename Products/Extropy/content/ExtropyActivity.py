@@ -1,3 +1,5 @@
+from zope.interface import implements
+
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import *
 from Products.Archetypes.config import REFERENCE_CATALOG
@@ -20,7 +22,7 @@ del ActivitySchema['responsiblePerson']
 
 class ExtropyActivity(ExtropyTracking, ExtropyBase, BaseFolder ):
     """Activity is ongoing work that needs hour-registration, but doesn't really have tasks as such. Generally speaking, they are deliverables that are never marked as being completed. Typically on-site work, training, administration, meetings."""
-    __implements__ = BaseFolder.__implements__ + ( IExtropyBase, IExtropyTracking)
+    implements(IExtropyBase, IExtropyTracking)
 
     schema = ActivitySchema
 

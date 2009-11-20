@@ -5,7 +5,6 @@
 from DateTime import DateTime
 
 from Testing import ZopeTestCase
-from Interface.Verify import verifyObject
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
 default_user = ZopeTestCase.user_name
@@ -25,8 +24,7 @@ class TestTasks(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 
     def testTaskInterface(self):
         from Products.Extropy.interfaces import IExtropyTask
-        self.failUnless(IExtropyTask.isImplementedBy(self.task1))
-        self.failUnless(verifyObject(IExtropyTask, self.task1))
+        self.failUnless(IExtropyTask.providedBy(self.task1))
 
     def testTaskPriority(self):
         self.assertEqual(self.task1.getPriority(),5)
