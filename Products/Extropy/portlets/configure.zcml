@@ -5,7 +5,8 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="plone">
 
-       
+    <include package="plone.app.portlets" file="permissions.zcml" />
+
     <plone:portlet
         name="Extropy.portlets.Hourslastweek"
         interface=".hourslastweekportlet.IHourslastweekPortlet"
