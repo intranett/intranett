@@ -10,6 +10,7 @@
      tal:define="activity view/activity;
                  period view/period|string:week;
                  person view/person|string:all;
+                 ztu modules/ZTUtils;
                  qsa python:ztu.make_query(period=period, person=person, start=view.start, group_by=view.group_by)">
 
     <form method="POST" id="periodform" tal:attributes="action string:${context/absolute_url}/worklog">

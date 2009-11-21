@@ -10,7 +10,8 @@
 <div metal:fill-slot="main"
      tal:define="etool nocall:here/extropy_tracking_tool;">
 
-<div tal:define="projectsbystate view/projects">
+<div tal:define="projectsbystate view/projects;
+                 ztu modules/ZTUtils;">
 
     <div tal:repeat="state projectsbystate">
 

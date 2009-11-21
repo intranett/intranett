@@ -2,8 +2,19 @@
 <metal:block define-slot="top_slot" />
 
 <metal:block use-macro="here/global_defines/macros/defines" />
-<html xmlns="http://www.w3.org/1999/xhtml" i18n:domain="plone"
-    tal:define="lang string:'en'">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    tal:define="portal_state context/@@plone_portal_state;
+        context_state context/@@plone_context_state;
+        plone_view context/@@plone;
+        lang string:'en';
+        view nocall:view | nocall: plone_view;
+        dummy python: plone_view.mark_view(view);
+        portal_url portal_state/portal_url;
+        portal portal_state/portal;
+        checkPermission nocall: context/portal_membership/checkPermission;
+        site_properties context/portal_properties/site_properties;"
+    tal:attributes="lang lang;">
+
 
   <tal:cache tal:define="charset site_properties/default_charset|string:utf-8">
     <metal:cache use-macro="here/global_cache_settings/macros/cacheheaders">
@@ -78,7 +89,7 @@
 
     <form method="get" 
           class="enableUnloadProtection"
-          tal:attributes="action string:${here/absolute_url}/${template_id}">
+          tal:attributes="action string:${here/absolute_url}/${template/getId}">
 
     <fieldset>
       <legend>Filter</legend>
