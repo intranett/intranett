@@ -4,6 +4,10 @@ Changelog
 0.7
 ---
 
+- Fixed fast time entry for activities with non-ascii titles.
+  This closes RT #11206.
+  [hannosch]
+
 - Added a new default query plan.
   [hannosch]
 

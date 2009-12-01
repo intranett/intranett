@@ -9,10 +9,12 @@
 ##title=Add worked time
 ##
 
+from DateTime import DateTime
+from Products.CMFPlone.utils import safe_unicode
+
 records = context.REQUEST.get('hours',[])
 timetool = context.extropy_timetracker_tool
 extropytool = context.extropy_tracking_tool
-from DateTime import DateTime
 request = context.REQUEST
 
 #From the form 
@@ -35,17 +37,17 @@ for r in records:
             if addhour is None:
                 raise Exception, "Failure adding hours"
             addhour.setSummary(r.summary, mimetype="text/x-rst")
-            added.append(title)
+            added.append(safe_unicode(title))
             request.set('last_task', r.task)
 if added:
-    message = "Added workhours to " + ", ".join(added)
+    message = u"Added workhours to " + u", ".join(added)
     state.setStatus('success')
 else:
     if not added:
-        message = "Changed timespan"
+        message = u"Changed timespan"
         state.setStatus('settimes')
     else:
-        message = "No hours added"
+        message = u"No hours added"
         state.setStatus('failure')
 
 context.plone_utils.addPortalMessage(message)
