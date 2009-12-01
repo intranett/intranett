@@ -4,6 +4,9 @@ Changelog
 0.7
 ---
 
+- Added a test for RT #11055: ``Moving an hourglass item doesn't work.``
+  [hannosch]
+
 - Fixed fast time entry for activities with non-ascii titles.
   This closes RT #11206.
   [hannosch]

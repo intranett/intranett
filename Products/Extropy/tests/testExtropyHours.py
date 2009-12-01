@@ -5,9 +5,11 @@
 from Testing import ZopeTestCase
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
-from Products.Extropy.config import TIMETOOLNAME
+import transaction
 from DateTime import DateTime
 from Products.CMFPlone.utils import _createObjectByType
+
+from Products.Extropy.config import TIMETOOLNAME
 
 
 class TestExtropyHourSetup(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
@@ -66,6 +68,16 @@ class TestExtropyHours(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.hourglass.invokeFactory('ExtropyHours','a',startDate=self.now-(self.h*2), endDate=self.now-self.h)
         self.assertEqual(self.timetracktool.searchResults()[0].workedHours, 1)
 
+    def testMovingHours(self):
+        _createObjectByType('ExtropyHourGlass',self.folder, 'hourglass2')
+        hourglass2 = getattr(self.folder, 'hourglass2')
+        self.hourglass.invokeFactory('ExtropyHours', 'a', startDate=self.now-(self.h*2), endDate=self.now-self.h)
+        transaction.savepoint(optimistic=True)
+        hourglass2.manage_pasteObjects(self.hourglass.manage_cutObjects('a'))
+        self.failUnless('a' in hourglass2)
+        self.failIf('a' in self.hourglass)
+        self.assertEquals(len(self.hourglass), 0)
+
     def testToolIntervalQuery(self):
         self.hourglass.invokeFactory('ExtropyHours','a',startDate=self.now-(self.h*2), endDate=self.now-self.h)
         self.hourglass.invokeFactory('ExtropyHours','b',startDate=self.now-2, endDate=self.now - (2 + self.h))
@@ -73,7 +85,6 @@ class TestExtropyHours(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.assertEqual(len(self.timetracktool.getHours( start=self.now -1, end=self.now )),1)
         self.assertEqual(len(self.timetracktool.getHours( start=self.now -3, end=self.now ) ),2)
         self.assertEqual(len(self.timetracktool.getHours( start=self.now +1, end=self.now + 2 ) ),0)
-
 
     def testToolIntervalCounting(self):
         # add a one-hour tracking
