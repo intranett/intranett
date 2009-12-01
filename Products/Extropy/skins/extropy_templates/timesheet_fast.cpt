@@ -8,7 +8,7 @@
         plone_view context/@@plone;
         lang string:'en';
         view nocall:view | nocall: plone_view;
-        dummy python: plone_view.mark_view(view);
+        dummy python: getattr(plone_view, 'mark_view', None) is not None and plone_view.mark_view(view);
         portal_url portal_state/portal_url;
         portal portal_state/portal;
         checkPermission nocall: context/portal_membership/checkPermission;
