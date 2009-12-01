@@ -4,6 +4,9 @@ Changelog
 0.6
 ---
 
+- Fixed RT #11245: Too many line breaks in address on invoices.
+  [hannosch]
+
 - Moved in the invoice_hours template from Extropy. This references
   https://dev.jarn.com/ticket/46.
   [hannosch]

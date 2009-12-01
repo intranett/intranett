@@ -234,7 +234,7 @@ class Invoice(BaseContent):
 
         title = 'invoice-' + str(self.getInvoiceNumber()).zfill(5)
         return plone_tool.normalizeString(title)
-        
+
     #security.declareProtected(permissions.EDIT_CONTENT_PERMISSION, 'createRecurrence')
     def createRecurrence(self):
         """take the current invoice, and make a new recurrence of it"""
@@ -246,5 +246,15 @@ class Invoice(BaseContent):
         newid=newob.generateNewId()
         parent.manage_renameObjects(('copy_of_'+self.getId(),), (newid,))
         return parent.absolute_url()+'/'+newid
+
+    def getFromAddress(self):
+        value = self.Schema().getField('fromAddress').get(self)
+        value = value.replace('\n', '<br />')
+        return value
+
+    def getToAddress(self):
+        value = self.Schema().getField('toAddress').get(self)
+        value = value.replace('\n', '<br />')
+        return value
 
 registerType(Invoice, PROJECTNAME)
