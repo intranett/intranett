@@ -9,13 +9,17 @@
 ##title=Add worked time
 ##
 
+from Products.CMFPlone.utils import safe_unicode
+
 timetool = context.extropy_timetracker_tool
-addhour = timetool.addTimeTrackingHours(context, context.Title(), hours=None, start=None, end=None)
+
+title = safe_unicode(context.Title())
+addhour = timetool.addTimeTrackingHours(context, title, hours=None, start=None, end=None)
 
 if addhour is None:
     raise Exception, "Failure adding hour"
 
-message = 'Adding worked time record to "%s."' % context.Title()
+message = u'Adding worked time record to "%s."' % title
 
 state.setStatus('success')
 
