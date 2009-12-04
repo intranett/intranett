@@ -6,13 +6,11 @@
 
     <div metal:fill-slot="main" tal:define="hours_view nocall:context/@@invoice_hours">
 
-        <div>
-            <h4><span tal:content="here/getFromName"></span></h4>
+        <div tal:content="structure context/getFrom">
+          The complete from address
         </div>
 
-        <div tal:content="structure here/getFromAddress|nothing"></div>
-
-        <div tal:content="structure here/getVatNumber|nothing"></div>
+        <p tal:content="structure here/getVatNumber|nothing"></p>
 
         <h1 class="documentFirstHeading" style="margin-top: 2em;">
           <span tal:condition="python:here.getTotal() &lt; 0 ">CREDIT NOTE</span>

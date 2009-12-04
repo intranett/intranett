@@ -40,9 +40,8 @@ class InvoiceHours(BrowserView, TimeReportQuery):
                 
         if not result:
             return None
-        result.append('-' * 60)
+        result.append('-' * 20)
         result.append('Total hours: %s' % self.sum)
-        result.append('=' * 60)
         return newline.join(result)
 
     def page_hours_report(self):

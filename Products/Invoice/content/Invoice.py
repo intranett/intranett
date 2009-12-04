@@ -257,4 +257,20 @@ class Invoice(BaseContent):
         value = value.replace('\n', '<br />')
         return value
 
+    def getPaymentDetails(self):
+        value = self.Schema().getField('paymentDetails').get(self)
+        value = value.replace('\n', '<br />')
+        return value
+
+    def getFrom(self):
+        address = self.Schema().getField('fromAddress').getRaw(self)
+        value = self.getRawFromName() + '\n' + address
+
+        transformer = getToolByName(self, 'portal_transforms')
+        data = transformer.convertTo('text/x-html-safe', value, object=self,
+                                     context=self, mimetype='text/x-rst')
+        value = data.getData().strip()
+        value = value.replace('\n', '<br />')
+        return value
+
 registerType(Invoice, PROJECTNAME)
