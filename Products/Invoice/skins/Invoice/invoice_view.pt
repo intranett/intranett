@@ -25,13 +25,9 @@
             Invoice # <span tal:replace="here/getInvoiceNumber"></span>
         </div>
 
-
-        <h4><span tal:content="here/getToName|nothing"></span></h4>
-
-        <div id="invoice-toaddress"
-             tal:content="structure here/getToAddress|nothing">
+        <div id="invoice-toaddress" tal:content="structure context/getTo">
+          The complete from address
         </div>
-
 
         <h2 id="invoice-title" tal:content="here/getHeader"></h2>
 

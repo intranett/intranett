@@ -267,10 +267,22 @@ class Invoice(BaseContent):
         value = self.getRawFromName() + '\n' + address
 
         transformer = getToolByName(self, 'portal_transforms')
-        data = transformer.convertTo('text/x-html-safe', value, object=self,
+        data = transformer.convertTo('text/x-html-safe', value,
                                      context=self, mimetype='text/x-rst')
         value = data.getData().strip()
         value = value.replace('\n', '<br />')
         return value
+
+    def getTo(self):
+        address = self.Schema().getField('toAddress').getRaw(self)
+        value = self.getRawToName() + '\n' + address
+
+        transformer = getToolByName(self, 'portal_transforms')
+        data = transformer.convertTo('text/x-html-safe', value,
+                                     context=self, mimetype='text/x-rst')
+        value = data.getData().strip()
+        value = value.replace('\n', '<br />')
+        return value
+
 
 registerType(Invoice, PROJECTNAME)
