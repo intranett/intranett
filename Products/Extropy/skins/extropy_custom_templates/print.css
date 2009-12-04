@@ -35,6 +35,7 @@ div.documentActions,
 #portal-footer,
 #portal-colophon,
 input,
+#kss-spinner,
 .skipnav,
 .visualNoPrint {
     /* Hides all the elements irrelevant for presentations */
@@ -114,12 +115,3 @@ a:link, a:visited {
     color: #520;
     background: transparent;
 }
-
-/* Uncomment this to get link addresses inserted along with the link text
-   when you print.
-
-#content a:link:after, 
-#content a:visited:after {
-   content: " [" attr(href) "] ";
-}
-*/
