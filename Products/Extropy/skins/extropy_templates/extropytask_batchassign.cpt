@@ -6,7 +6,7 @@
   <head>
     <metal:css fill-slot="css_slot">
         <style type="text/css" media="all"
-               tal:content="structure string:<!-- @import url($portal_url/extropy.css); -->"></style>
+               tal:content="structure string:&lt;!-- @import url($portal_url/extropy.css); --&gt;"></style>
     </metal:css>
   </head>
 <body tal:define="errors options/state/getErrors | nothing;
@@ -38,7 +38,7 @@
     <h1>Batch assignment of tasks</h1>
 
     <fieldset>
-        <legend>Unclaimed tasks (<span xtal:replace="">23</span>)</legend>
+        <legend>Unclaimed tasks (<span tal:replace="">23</span>)</legend>
         
             <ul class="configlets">
                 <li tal:repeat="task here/getTasks">

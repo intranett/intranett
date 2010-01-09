@@ -7,21 +7,21 @@
   </head>
 <body>
 <div metal:fill-slot="main">
-    
+
     <form name="batchadd_form"
           action="."
           method="post"
           enctype="multipart/form-data"
           tal:attributes="action string:${here/getId}/${template/getId}" >
 
-          <input type="hidden" name="form.submitted" value="1" />
+        <input type="hidden" name="form.submitted" value="1" />
 
 
-          <div>Add new features, one on each line</div>
+        <div>Add new features, one on each line</div>
 
-          <fieldset>
+        <fieldset>
             <legend>Properties</legend>
-            
+
             <div>
                 <label>Target Phase</label>
                 <select>
@@ -29,26 +29,25 @@
                     <option>saj dohasdj fsad</option>
                     <option>saj dohasdj fsad</option>
                 </select>
-            
+            </div>
+
         </fieldset>
         <fieldset>
             <legend>Stories - add titles one in each box</legend>
-                    
+
             <div style="margin-top : 1em"><input type="text" size="50" style="width : 90%" name="featureadd:list" /></div>
 
             <div style="margin-top : 1em"><input type="text" size="50" style="width : 90%" name="featureadd:list" /></div>
-        <div style="text-align: right;">
+
+            <div style="text-align: right;">
             <input class="context" 
                    name="form.button.Update" 
                    type="submit" 
                    value="Update" />
-        </div>
-  
+            </div>
+
         </fieldset>
     </form>
-  
-  
-  
 
 </div>
 

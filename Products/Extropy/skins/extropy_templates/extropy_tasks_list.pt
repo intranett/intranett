@@ -6,6 +6,7 @@
 <metal:block fill-slot="top_slot"
              tal:define="dummy python:request.set('disable_border',1)" />
 
+<body>
 <div metal:fill-slot="main"
        tal:define="results python:here.getTasks();
                  Batch python:modules['Products.CMFPlone'].Batch;
@@ -21,7 +22,6 @@
         <p><strong>No tasks were found.</strong></p>
     </div>
 
-   
     <div tal:condition="results"
           tal:define="batch python:Batch(results, b_size, int(b_start), orphan=1);">
 
@@ -50,30 +50,30 @@
                 <img tal:replace="structure python:path('here/linkOpaque.gif')"
                      tal:condition="python:not path('here/%s' % result.getIcon)" 
                      /></a><img tal:replace="structure python:path('here/%s' % result.getIcon)"
-                     tal:condition="python:path('here/%s' % result.getIcon)"  
-                     /></a>&nbsp;<a
+                     tal:condition="python:path('here/%s' % result.getIcon)"
+                     />&nbsp;<a
                 href="#" tal:attributes="href url"
                 tal:content="python:result.Title or result.getId" />
-               
+
                 <span class="discreet">
-                by <span tal:replace="result/Creator">responsible</span>,
-                <span tal:replace="python:here.toPortalTime(result.ModificationDate)">Modification Date</span>
+                  by <span tal:replace="result/Creator">responsible</span>,
+                  <span tal:replace="python:here.toPortalTime(result.ModificationDate)">Modification Date</span>
                 </span>
 
             </dt>
-            
-            <dd class="discreet" tal:content="python:here.cropText(result.Description, desc_length, desc_ellipsis)"> Description </dd>
+
+            <dd class="discreet" tal:content="python:here.cropText(result.Description, desc_length, desc_ellipsis)">
+              Description
+            </dd>
 
         </tal:entry>
         </tal:results>
         </dl>
-         
+
         <!-- Navigation -->
         <div metal:use-macro="here/batch_macros/macros/navigation" />
 
     </div>
 </div>
-
-
+</body>
 </html>
-

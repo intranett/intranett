@@ -1,6 +1,3 @@
-<metal:page define-macro="master"><metal:doctype define-slot="doctype"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"></metal:doctype>
-<metal:block define-slot="top_slot" />
-
 <metal:block use-macro="here/global_defines/macros/defines" />
 <html xmlns="http://www.w3.org/1999/xhtml" 
     tal:define="portal_state context/@@plone_portal_state;
@@ -93,15 +90,16 @@
 
     <fieldset>
       <legend>Filter</legend>
-        Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()">&nbsp;
-      <a tal:define="yesterday python:start-1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${yesterday/Date}">&larr; previous day</a> | 
+        Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()" />&nbsp;
+      <a tal:define="yesterday python:start-1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${yesterday/Date}">&larr; previous day</a> |
       <a tal:define="tomorrow python:start+1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${tomorrow/Date}">next day &rarr;</a>
 
-    </fieldset>            
-            
+    </fieldset>
+
     <fieldset>
       <legend>Worked hours on <span tal:replace="start/Day" /> <span tal:replace="start/Date"></span><br/>
-</legend>
+      </legend>
+
       <table class="listing nosort">
          <thead>
             <tr>
@@ -133,13 +131,13 @@
              </tal:vars>
         </tal:gaps>
         </tbody>
-        <tfooter>
+        <tfoot>
             <tr>
                 <th colspan="3" style="text-align:right">Sum</th>
                 <td tal:content="sumhours"></td>
                 <td>&nbsp;</td>
             </tr>
-        </tfooter>
+        </tfoot>
 
       </table>
 
@@ -192,14 +190,13 @@
         </tbody>
       </table>
 
-      <input type="submit" name="form.submitted" value="Submit">
+      <input type="submit" name="form.submitted" value="Submit" />
 
-    </fieldset>    
-    
+    </fieldset>
+
     </form>
 
 </div>
 
 </body>
 </html>
-</metal:page>

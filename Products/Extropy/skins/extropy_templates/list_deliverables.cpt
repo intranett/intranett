@@ -55,13 +55,12 @@
                                 tal:content="python:state" /> 
                         </select> 
                 </span>
-                    <input type="submit" value="Filter">
+                <input type="submit" value="Filter" />
                 <p class="discreet">(Refactor: this one needs to ask the workflowtool about states, not the catalog)</p>
             </form>
         </dd>
     </dl>
- 
-    
+
     <table metal:define-macro="extropy_deliverables_listing" class="listing" id="sortable" style="width :100%; clear: both" tal:condition="deliverables">
 
         <script type="text/javascript">

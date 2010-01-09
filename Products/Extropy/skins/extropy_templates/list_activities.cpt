@@ -61,13 +61,13 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="Filter activities">
+                    <input type="submit" value="Filter activities" />
                 </div>
-                
+
             </form>
         </dd>
-    </dl>    
-    
+    </dl>
+
     <table metal:define-macro="extropy_activities_listing" class="listing" id="sortable" style="width :100%; clear: both" tal:condition="activities">
 
         <script type="text/javascript">

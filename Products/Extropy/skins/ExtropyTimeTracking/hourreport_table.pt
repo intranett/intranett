@@ -23,7 +23,7 @@
         <h2>Links</h2>
         <a tal:attributes="href string:${request/URL0}?group_by=start/month:Creator&amp;getBudgetCategory=Billable">Month:Creator - Billable</a>
         <tal:years repeat="year python:range(2005, DateTime().year() + 1)">
-          (<a tal:attributes="href string:${request/URL0}?group_by=start/month:Creator&amp;getBudgetCategory=Billable&start=$year/01/01&end=$year/12/31"
+          (<a tal:attributes="href string:${request/URL0}?group_by=start/month:Creator&amp;getBudgetCategory=Billable&amp;start=$year/01/01&amp;end=$year/12/31"
               tal:content="year">Year</a>)
         </tal:years>
         <br/>

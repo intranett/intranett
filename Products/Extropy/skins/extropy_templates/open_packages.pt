@@ -42,14 +42,14 @@
                     </tr>
                 </tal:loop>
             </tbody>
-                <tfooter>
+                <tfoot>
                 <tr>
                     <th colspan="2"><strong>Total</strong></th>
 
                     <th><strong tal:content="total" /></th>
                     <th></th>
                 </tr>
-            </tfooter>
+            </tfoot>
 
         </table>
 

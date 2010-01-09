@@ -4,8 +4,8 @@
       i18n:domain="plone">
 
 <head>
-</head>             
-             
+</head>
+
 <body>
 <div metal:fill-slot="main"
      tal:define="DateTime modules/DateTime;
@@ -29,30 +29,26 @@
 
 <h1>Worked hours on <span tal:replace="start/Day" /> <span tal:replace="start/Date"></span></h1>
 
-
-
 <p class="discreet">The timesheet selectors will list open tasks and deliverables you are responsible for.
 </p>
+
 <p class="discreet">Right now it only lists open tasks and activities. In the future it will list closed objects that you closed this week as well
 </p>
 
-
-            
     <fieldset>
       <legend>start end filter</legend>
-        Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()">
-        From:<input type="text" size="5" name="start:string" tal:attributes="value python:start.strftime('%H:%M')">
-        To:<input type="text" size="5" name="end:string" tal:attributes="value python:end.strftime('%H:%M')">
-<br/>
+        Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()" />
+        From:<input type="text" size="5" name="start:string" tal:attributes="value python:start.strftime('%H:%M')" />
+        To:<input type="text" size="5" name="end:string" tal:attributes="value python:end.strftime('%H:%M')" />
+        <br/>
       <a tal:define="yesterday python:start-1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${yesterday/Date}">&larr; previous day</a> | 
       <a tal:define="tomorrow python:start+1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${tomorrow/Date}">next day &rarr;</a>
 
+    </fieldset>
 
-    </fieldset>            
-            
     <fieldset>
-      <legend>Worked hours on <span tal:replace="start/Day" /> <span tal:replace="start/Date"></span><br/>
-</legend>
+      <legend>Worked hours on <span tal:replace="start/Day" /> <span tal:replace="start/Date"></span><br />
+      </legend>
       <table class="listing nosort">
          <thead>
             <tr>
@@ -63,6 +59,12 @@
                 <th>Category</th>
             </tr>
          </thead>
+         <tfoot>
+            <tr>
+                <th colspan="3" style="text-align:right">Sum</th>
+                <td tal:content="sumhours"></td>
+            </tr>
+         </tfoot>
          <tbody>
          <tal:gaps tal:repeat="gap gaps">
              <tr tal:condition="python:same_type(gap,{})">
@@ -76,10 +78,10 @@
                      </select>
                  </td>
                  <td>
-                    <input  name="hours.start:records:string" type="text" value="10:00" size="5" tal:attributes="value gap/start">
+                    <input  name="hours.start:records:string" type="text" value="10:00" size="5" tal:attributes="value gap/start" />
                  </td>
                  <td>
-                    <input  name="hours.end:records:string" type="text" value="10:00" size="5" tal:attributes="value gap/end">
+                    <input  name="hours.end:records:string" type="text" value="10:00" size="5" tal:attributes="value gap/end" />
                  </td>
                  <td></td>
                  <td></td>
@@ -93,23 +95,12 @@
              </tr>
         </tal:gaps>
         </tbody>
-            <tfooter>
-            <tr>
-                <th colspan="3" style="text-align:right">Sum</th>
-                <td tal:content="sumhours"></td>
-            </tr>
-        </tfooter>
       </table>
 
-
-      <input type="submit" name="form.submitted" value="Submit">
-
+      <input type="submit" name="form.submitted" value="Submit" />
 
     </fieldset>
-    
-    
     </form>
-
 
 </div>
 
