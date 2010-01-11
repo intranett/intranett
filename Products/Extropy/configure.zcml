@@ -9,6 +9,7 @@
 
   <include package="experimental.catalogqueryplan" />
   <include package="plone.app.blob" />
+  <include package="jarn.intranet.tracportlet" />
 
   <include package=".browser" />
   <include package=".portlets" />

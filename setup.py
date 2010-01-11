@@ -28,5 +28,6 @@ setup(name='Products.Extropy',
           'Products.Maps',
           'Products.Memo',
           'Products.signalstack',
+          'jarn.intranet.tracportlet',
       ],
       )
