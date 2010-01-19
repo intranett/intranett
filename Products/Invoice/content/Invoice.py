@@ -162,20 +162,6 @@ class Invoice(BaseContent):
 
     _at_rename_after_creation = True
 
-
-    actions = ({
-        'id'          : 'view',
-        'name'        : 'View',
-        'action'      : 'string:${object_url}/invoice_view',
-        'permissions' : ('View',),
-         }, {
-        'id'          : 'edit',
-        'name'        : 'Edit',
-        'action'      : 'string:${object_url}/base_edit',
-        'permissions' : (permissions.EDIT_CONTENT_PERMISSION,),
-         },)
-
-
     security.declareProtected('View', 'today')
     def today(self):
         """Assign today
