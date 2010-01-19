@@ -2,6 +2,6 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="extropy">
 
-    <include package="archetypes.schemaextender" file="caching.zcml" />
+    <!-- <include package="archetypes.schemaextender" file="caching.zcml" /> -->
 
 </configure>
