@@ -9,13 +9,24 @@ from Products.Archetypes.public import LinesField, MultiSelectionWidget
 from Products.Archetypes.public import registerType
 from Products.Archetypes.public import DisplayList
 
-from Products.Archetypes.public import ImageField, ImageWidget, TextField, TextAreaWidget
+from Products.Archetypes.public import StringField, ImageField, ImageWidget, TextField, TextAreaWidget
 
 
 from jarn.extranet.config import PROJECTNAME
 from jarn.extranet.interfaces import ICustomer, IPerson
 
 CustomerSchema = BaseSchema + Schema((
+
+    TextField('description',
+              accessor='Description',
+              widget=TextAreaWidget(label='Description',
+                                    description='',
+                                    label_msgid='',
+                                    description_msgid='',
+                                    i18n_domain='',
+                                    rows=5),
+              ),
+
     
     ImageField('logo',
         widget=ImageWidget(label='Customer logo')
