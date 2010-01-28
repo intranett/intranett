@@ -1,14 +1,21 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="jarn.extranet">
 
+    <include package=".browser" />
     <include package="borg.localrole" />
 
-    <five:registerPackage package="." initialize=".initialize" />
+  <cmf:registerDirectory
+      name="skins"
+      directory="skins"
+      recursive="True"
+      />
 
+    <five:registerPackage package="." initialize=".initialize" />
 
     <class class="jarn.extranet.person.Person" />
 
@@ -16,12 +23,10 @@
              factory=".user.UserIdProvider"
              />
 
-   <adapter factory=".group.LocalRoles"
+    <adapter factory=".group.LocalRoles"
             provides="borg.localrole.interfaces.ILocalRoleProvider"
             for="jarn.extranet.interfaces.ICustomer"
             />
-
-
 
     <browser:page
         for="*"

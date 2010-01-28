@@ -10,8 +10,9 @@ from Products.Archetypes.public import registerType
 from Products.Archetypes.public import DisplayList
 from Products.Archetypes.public import StringField, StringWidget, DateTimeField, IntegerField, CalendarWidget, BooleanWidget, BooleanField, SelectionWidget,FileField,FileWidget, ImageField, ImageWidget, TextField, TextAreaWidget
 
-
 from jarn.extranet.config import PROJECTNAME
+from jarn.extranet.interfaces import IContract
+
 
 ContractSchema = BaseSchema + Schema((
 
@@ -171,6 +172,9 @@ class Contract(BaseFolder):
     """A contract for work"""
     schema = ContractSchema
     _at_rename_after_creation = True
+
+    implements(IContract)
+
 
     security = ClassSecurityInfo()
 

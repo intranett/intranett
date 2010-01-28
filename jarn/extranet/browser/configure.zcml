@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:page
+      name="customer_view"
+      for="jarn.extranet.interfaces.ICustomer"
+      class=".customer_view.CustomerView"
+      template="customer_view.pt"
+      permission="zope2.View"
+      />
+
+
+</configure>
