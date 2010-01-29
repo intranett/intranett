@@ -14,6 +14,7 @@ def initialize(context):
     import jarn.extranet.customer
     import jarn.extranet.person
     import jarn.extranet.contract
+    import jarn.extranet.sitedocumentation
 
 
     content_types, constructors, ftis = atapi.process_types(

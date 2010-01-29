@@ -9,6 +9,8 @@ ADD_PERMISSIONS = {
     'Customer': 'jarn.extranet: Add Customer',
     'Person': 'jarn.extranet: Add Person',
     'Contract': 'jarn.extranet: Add Contract',
+    'SiteDocumentation': 'jarn.extranet: Add SiteDocumentation',
+
 
 }
 

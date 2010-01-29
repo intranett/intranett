@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
-<object name="Contract" meta_type="Factory-based Type Information"
+<object name="SiteDocumentation" meta_type="Factory-based Type Information"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Contract</property>
- <property name="description">A Jarn Contract</property>
+ <property name="title">Site documentation</property>
+ <property name="description">Documentation about a Plone site installation</property>
  <property name="content_icon">document.gif</property>
- <property name="content_meta_type">Contract</property>
+ <property name="content_meta_type">SiteDocumentation</property>
  <property name="product">jarn.extranet</property>
- <property name="factory">addContract</property>
+ <property name="factory">addSiteDocumentation</property>
  <property name="immediate_view">base_edit</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
-  <element value="Contract"/>
+  <element value="SiteDocumentation"/>
  </property>
  <property name="allow_discussion">False</property>
  <alias from="(Default)" to="base_view"/>

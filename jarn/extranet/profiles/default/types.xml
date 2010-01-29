@@ -6,4 +6,6 @@
           meta_type="Factory-based Type Information" />
   <object name="Contract"
           meta_type="Factory-based Type Information"/>
+  <object name="SiteDocumentation"
+          meta_type="Factory-based Type Information"/>
 </object>
