@@ -23,14 +23,16 @@
 
 
         <p class="documentDescription">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            List of all customers
         </p>
         
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-        <p>list customers here</p>
-
-
+        
+        <ul tal:define="customers python:context.restrictedTraverse('@@searchResults')(Type='Customer')">
+            <li tal:repeat="customer customers"><a href="" tal:attributes="href customer/getURL"><img tal:define="logo customer/getRawLogo" tal:attributes="src string:${customer/getURL}/logo; title customer/Title;alt customer/Title" /></a> 
+                </li>
+        </ul>
     
         <div tal:replace="structure provider:plone.belowcontentbody" />
 
