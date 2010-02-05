@@ -1,0 +1,28 @@
+# This file is generated from templates/logrotate.conf.                                                                                                                                         
+# Please do not edit the copy in etc/                                                                                                                                                           
+
+rotate 4
+weekly
+create
+compress
+delaycompress
+
+${buildout:directory}/var/log/zeo.log {
+    postrotate
+        ${buildout:bin-directory}/zeo logreopen
+    endscript
+}
+
+${buildout:directory}/var/nginx*log{
+    missingok
+    postrotate
+       test ! -f ${buildout:directory}/var/nginx.pid || kill -USR1 `cat ${buildout:directory}/var/nginx.pid`
+    endscript
+}
+
+${buildout:directory}/parts/nginx/logs/access.log{
+    missingok
+    postrotate
+       test ! -f ${buildout:directory}/var/nginx.pid || kill -USR1 `cat ${buildout:directory}/var/nginx.pid`
+    endscript
+}
