@@ -1,0 +1,41 @@
+[unix_http_server]
+file=${buildout:directory}/var/supervisor.sock
+chmod=0600
+#chown=root:root
+
+[supervisorctl]
+serverurl=unix://${buildout:directory}/var/supervisor.sock
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory=supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisord]
+logfile=${buildout:directory}/var/log/supervisord.log
+logfile_maxbytes=5MB
+logfile_backups=10
+loglevel=info
+pidfile=${buildout:directory}/var/supervisord.pid ;
+childlogdir=${buildout:directory}/var/log
+nodaemon=false              ; (start in foreground if true;default false)
+minfds=1024                 ; (min. avail startup file descriptors;default 1024)
+minprocs=200                ; (min. avail process descriptors;default 200)
+directory=%(here)s
+
+[program:varnish]
+command = ${varnish-build:location}/sbin/varnishd -F -f ${buildout:directory}/etc/varnish.vcl -s file,${buildout:directory}/var/cache.dat,512M -T ${varnish:management-host}:${varnish:management-port} -a ${varnish:bind}
+autostart= true
+autorestart = true
+redirect_stderr = true
+
+[program:zeo]
+command = ${buildout:directory}/bin/zeo fg
+redirect_stderr = true
+autostart = true
+autorestart = true
+
+
+[program:nginx]
+command = ${nginx:location}/sbin/nginx
+autostart= true
+autorestart = true
+redirect_stderr = true
