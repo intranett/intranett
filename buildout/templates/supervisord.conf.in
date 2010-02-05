@@ -22,10 +22,10 @@ minprocs=200                ; (min. avail process descriptors;default 200)
 directory=%(here)s
 
 [program:varnish]
-command = ${varnish-build:location}/sbin/varnishd -F -f ${buildout:directory}/etc/varnish.vcl -s file,${buildout:directory}/var/cache.dat,512M -T ${varnish:management-host}:${varnish:management-port} -a ${varnish:bind}
-autostart= true
-autorestart = true
+command = ${buildout:directory}/bin/varnish
 redirect_stderr = true
+autostart = true
+autorestart = true
 
 
 [program:instance]
