@@ -13,16 +13,3 @@ ${buildout:directory}/var/log/zeo.log {
     endscript
 }
 
-${buildout:directory}/var/nginx*log{
-    missingok
-    postrotate
-       test ! -f ${buildout:directory}/var/nginx.pid || kill -USR1 `cat ${buildout:directory}/var/nginx.pid`
-    endscript
-}
-
-${buildout:directory}/parts/nginx/logs/access.log{
-    missingok
-    postrotate
-       test ! -f ${buildout:directory}/var/nginx.pid || kill -USR1 `cat ${buildout:directory}/var/nginx.pid`
-    endscript
-}

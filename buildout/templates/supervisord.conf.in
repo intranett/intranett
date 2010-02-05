@@ -40,9 +40,3 @@ redirect_stderr = true
 autostart = true
 autorestart = true
 
-
-[program:nginx]
-command = ${nginx:location}/sbin/nginx
-autostart= true
-autorestart = true
-redirect_stderr = true
