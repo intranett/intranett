@@ -27,6 +27,13 @@ autostart= true
 autorestart = true
 redirect_stderr = true
 
+
+[program:instance]
+command = ${buildout:directory}/bin/instance console
+redirect_stderr = true
+autostart = true
+autorestart = true
+
 [program:zeo]
 command = ${buildout:directory}/bin/zeo fg
 redirect_stderr = true
