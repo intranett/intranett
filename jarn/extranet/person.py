@@ -3,8 +3,9 @@ from AccessControl import ClassSecurityInfo
 from zope.interface import implements
 
 from Products.Archetypes.public import BaseSchema, Schema, BaseContent, \
-     StringField, StringWidget, registerType, LinesField, \
-     MultiSelectionWidget, ImageField, ImageWidget
+     StringField, StringWidget, registerType, ImageField, ImageWidget
+
+from Products.membrane.interfaces import IUserAuthProvider, IUserAuthentication,  IPropertiesProvider, IUserChanger
 
 from jarn.extranet.config import PROJECTNAME
 from jarn.extranet.interfaces import IPerson
@@ -38,7 +39,7 @@ PersonSchema = BaseSchema + Schema((
 
 class Person(BaseContent):
     """A person related to Jarn, can be a user"""
-    implements(IPerson)
+    implements(IPerson, IUserAuthProvider,IUserAuthentication,  IPropertiesProvider, IUserChanger, )
     
     schema = PersonSchema
     _at_rename_after_creation = True
