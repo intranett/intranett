@@ -37,6 +37,16 @@ ExtropyBaseSchema = BaseSchema.copy() + Schema((
         ),
     ),
 
+    StringField(
+        name='clientNotifyEmail',
+        widget=SelectionWidget(
+            label='Email for automatic reporting to the client',
+            label_msgid='label_responsible_person',
+            description='',
+            description_msgid='help_responsible_person',
+            i18n_domain='extropy',
+        ),
+    ),
 ))
 
 ExtropyBaseSchema['description'].schemata = 'default'
