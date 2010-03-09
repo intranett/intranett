@@ -39,7 +39,7 @@ ExtropyBaseSchema = BaseSchema.copy() + Schema((
 
     StringField(
         name='clientNotifyEmail',
-        widget=SelectionWidget(
+        widget=StringWidget(
             label='Email for automatic reporting to the client',
             label_msgid='label_responsible_person',
             description='',
