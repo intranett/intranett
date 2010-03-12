@@ -63,9 +63,6 @@ class ExtropyHistoryTrackable:
             return False
         newid = self.generateHistoryId()
 
-        # Send mail
-        self.extropy_notify_mail(client=self, REQUEST=REQUEST, changes=changes, changenote=changenote)
-
         # Create a history subobject with the changes
         _createObjectByType('ExtropyTaskHistory', self, newid)
 
