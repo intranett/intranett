@@ -38,18 +38,6 @@ def initialize(context):
     from Products.Extropy.odict import OrderedDict
     allow_class(OrderedDict)
 
-    # We can use these new helper methods once we depend on Plone 3.3.2+
-    # from Products.CMFPlone import i18nl10n
-    # i18nl10n.setDefaultDateFormat(('en',), u'yyyy-MM-dd')
-    # i18nl10n.setDefaultTimeFormat(('en',), u'HH:mm:ss')
-
-    # What follows shoulnd't be required, but zope.i18n.locales is stupid
-
-    from zope.i18n.locales import locales
-    gregorian = locales.getLocale('en').dates.calendars[u'gregorian']
-
-    date_format = gregorian.dateFormats['medium'].formats[None]
-    time_format = gregorian.timeFormats['medium'].formats[None]
-
-    date_format.pattern = u'yyyy-MM-dd'
-    time_format.pattern = u'HH:mm:ss'
+    from Products.CMFPlone import i18nl10n
+    i18nl10n.setDefaultDateFormat(('en',), u'yyyy-MM-dd')
+    i18nl10n.setDefaultTimeFormat(('en',), u'HH:mm:ss')
