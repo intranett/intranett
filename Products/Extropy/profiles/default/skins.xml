@@ -10,14 +10,8 @@
     directory="Extropy/skins/extropy_scripts"/>
  <object name="extropy_templates" meta_type="Filesystem Directory View"
     directory="Extropy/skins/extropy_templates"/>
- <object name="extropy_types_templates" meta_type="Filesystem Directory View"
-    directory="Extropy/skins/extropy_types_templates"/>
- <object name="ExtropyTimeTracking" meta_type="Filesystem Directory View"
-    directory="Extropy/skins/ExtropyTimeTracking"/>
  <skin-path name="*">
-  <layer insert-after="custom" name="ExtropyTimeTracking"/>
   <layer insert-after="custom" name="extropy_custom_templates"/>
-  <layer insert-after="custom" name="extropy_types_templates"/>
   <layer insert-after="custom" name="extropy_templates"/>
   <layer insert-after="custom" name="extropy_scripts"/>
   <layer insert-after="custom" name="extropy_portlets"/>
