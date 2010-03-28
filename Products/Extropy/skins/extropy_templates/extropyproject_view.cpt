@@ -150,10 +150,6 @@
                                 tal:content="d/Date">[to] </span>
 
                     <p class="discreet">
-                        <a tal:attributes="href string:${phase/absolute_url}/list_deliverables"><b tal:content="python:len(phase.getDeliverables(review_state=phase.getOpenWorkflowStates()))">XX</b> open deliverables</a>
-                        &middot;
-                        <a tal:attributes="href string:${phase/absolute_url}/list_tasks"><b tal:content="python:len(phase.getTasks(review_state=phase.getOpenWorkflowStates()))">XX</b> open tasks</a>
-                        &middot;
                         <a tal:attributes="href string:${phase/absolute_url}/list_activities"><b tal:content="python:len(phase.getActivities(review_state=phase.getOpenWorkflowStates()))">XX</b> open activities</a>
                     </p>
 

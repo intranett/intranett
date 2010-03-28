@@ -37,29 +37,6 @@
             </span>
         </h1>
 
-        <table class="vertical listing" style="float:right">
-            <tr tal:condition="not:tasks">
-                <td>
-                    <a tal:attributes="href string:${here/absolute_url}/tasks_add1on1">Add 1-on-1 task <img tal:replace="structure here/add_alternative_icon.gif" /><img tal:replace="structure here/task_icon.gif" /></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a tal:attributes="href string:${here/absolute_url}/tasks_batchadd">Batch-add tasks <img tal:replace="structure here/add_alternative_icon.gif" /><img tal:replace="structure here/add_alternative_icon.gif" /></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a tal:attributes="href string:${here/absolute_url}/add_work_hours">Register work hours <img tal:replace="structure here/hour_icon.gif" /></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a tal:attributes="href string:${here/absolute_url}/timereport2">Timesheet reports <img tal:replace="structure here/hour_icon.gif" /></a>
-                </td>
-            </tr>
-        </table>
-
         <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
           <tbody tal:define="mtool nocall:context/portal_membership;">
             <tr>
@@ -135,11 +112,6 @@
         <p class="documentDescription" tal:content="here/Description">
             Description
         </p>
-
-        <tal:tasks tal:define="removelocationcolumn python:1">
-              <table metal:use-macro="here/list_tasks/macros/extropy_task_listing">
-              </table>
-        </tal:tasks>
 
         <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
 
