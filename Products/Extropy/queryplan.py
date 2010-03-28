@@ -1,4 +1,4 @@
-# query plan dumped at 'Mon Feb 22 15:22:39 2010'
+# query plan dumped at 'Sun Mar 28 14:27:10 2010'
 
 queryplan = {
   '/intranet.psol/portal_catalog': {
@@ -39,6 +39,8 @@ queryplan = {
     ('allowedRolesAndUsers', 'path', 'show_inactive', 'sort_on'):
       ['path', 'allowedRolesAndUsers'],
     ('allowedRolesAndUsers', 'path', 'show_inactive', 'sort_on', ('portal_type', "['Image', 'Document', 'Event', 'File', 'Invoice', 'ExtropyActivity']")):
+      ['path', 'portal_type', 'allowedRolesAndUsers'],
+    ('allowedRolesAndUsers', 'path', 'show_inactive', 'sort_on', ('portal_type', "['Image', 'Document', 'Event', 'File']")):
       ['path', 'portal_type', 'allowedRolesAndUsers'],
     ('allowedRolesAndUsers', 'path', 'show_inactive', 'sort_on', ('portal_type', "['Image', 'Document', 'Event', 'Folder', 'File', 'Invoice']")):
       ['path', 'portal_type', 'allowedRolesAndUsers'],
@@ -87,6 +89,23 @@ queryplan = {
     ('path',):
       ['path'],
   },
+  '/intranet.psol/portal_catalog:valueindexes': frozenset([
+    'Subject',
+    'Type',
+    'getAudiences',
+    'getEventType',
+    'getRawListedItems',
+    'getSections',
+    'getStartHere',
+    'getVersions',
+    'in_reply_to',
+    'isOutdated',
+    'is_default_page',
+    'is_folderish',
+    'meta_type',
+    'portal_type',
+    'review_state',
+  ]),
   '/intranet.psol/uid_catalog': {
     ('UID',):
       ['UID'],
@@ -122,6 +141,8 @@ queryplan = {
       ['getResponsiblePerson', 'review_state', 'portal_type', 'allowedRolesAndUsers'],
     ('allowedRolesAndUsers', 'path', ('meta_type', "'ExtropyActivity'")):
       ['path', 'meta_type', 'allowedRolesAndUsers'],
+    ('allowedRolesAndUsers', 'path', ('meta_type', "'ExtropyTask'")):
+      ['path', 'meta_type', 'allowedRolesAndUsers'],
     ('allowedRolesAndUsers', 'path', ('portal_type', "'ExtropyActivity'"), ('review_state', "['open', 'in-progress', 'active', 'unassigned', 'deferred', 'assigned', 'testing', 'taskscomplete']")):
       ['path', 'review_state', 'portal_type', 'allowedRolesAndUsers'],
     ('allowedRolesAndUsers', 'path', ('portal_type', "'ExtropyFeature'"), ('review_state', "['open', 'in-progress', 'active', 'unassigned', 'deferred', 'assigned', 'testing', 'taskscomplete']")):
@@ -139,6 +160,19 @@ queryplan = {
     ('path',):
       ['path'],
   },
+  '/intranet.psol/extropy_tracking_tool:valueindexes': frozenset([
+    'Creator',
+    'Subject',
+    'featureUID',
+    'getDueDate',
+    'getEstimatedDuration',
+    'getKeywords',
+    'getPriority',
+    'getRemainingTime',
+    'meta_type',
+    'portal_type',
+    'review_state',
+  ]),
   '/intranet.psol/extropy_timetracker_tool': {
     ('Creator', 'path', 'sort_on', 'sort_order', 'start', ('allowedRolesAndUsers', "['Member', 'Manager', 'Authenticated', 'Finance-manager', 'user:AuthenticatedUsers', 'user:finance', 'Anonymous', 'user:maria']"), ('portal_type', "'ExtropyHours'")):
       ['path', 'Creator', 'start', 'allowedRolesAndUsers', 'portal_type'],
@@ -319,4 +353,12 @@ queryplan = {
     ('path', 'sort_on', ('allowedRolesAndUsers', "['Member', 'Manager', 'Authenticated', 'user:AuthenticatedUsers', 'user:contractors', 'Anonymous', 'user:fschulze']"), ('portal_type', "'ExtropyHours'")):
       ['path', 'allowedRolesAndUsers', 'portal_type'],
   },
+  '/intranet.psol/extropy_timetracker_tool:valueindexes': frozenset([
+    'allowedRolesAndUsers',
+    'getBudgetCategory',
+    'meta_type',
+    'nosy',
+    'portal_type',
+    'review_state',
+  ]),
 }
