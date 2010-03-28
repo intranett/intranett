@@ -123,30 +123,3 @@ class IExtropyTimeTrackingTool(Interface):
 
     def localQuery(node=None,REQUEST=None, **kw):
         """ get items in subtree"""
-
-class IExtropyPlan(Interface):
-    """ Interface for the (weekly) plan
-    A plan is for a certain user and has references to deliverables and tasks
-    that are supposed to be completed in the duration of the plan"""
-
-    def addItem(item, **kw):
-        """ Add item to the plan
-        This is only allowed before the plan is approved"""
-
-    def deleteItem(item):
-        """ Remove an item from the plan - can only be done
-        before approval """
-
-    def getItems():
-        """ Get all the planned items """
-
-    def addAdditionalItem(item, **kw):
-        """ Add additional item to the plan
-        This is used for extra  items done after approval"""
-
-    def deleteAdditionalItem(item):
-        """ Remove an item from the plan - can only be done
-        before approval """
-
-    def getAdditionalItems():
-        """ Get all the items added after approval """

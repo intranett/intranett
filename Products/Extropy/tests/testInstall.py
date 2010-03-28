@@ -31,7 +31,6 @@ class TestSetup(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.failUnless('ExtropyFeature' in types)
         self.failUnless('ExtropyTaskHistory' in types)
         self.failUnless('ExtropyActivity' in types)
-        #self.failUnless('ExtropyPlan' in types)
 
     def testToolsInstalled(self):
         # Test something

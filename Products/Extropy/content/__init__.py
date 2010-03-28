@@ -8,4 +8,3 @@ import ExtropyJar
 import ExtropyHours
 import ExtropyHourGlass
 import ExtropyActivity
-import ExtropyPlan
