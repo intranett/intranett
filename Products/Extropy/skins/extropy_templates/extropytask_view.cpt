@@ -212,9 +212,9 @@
     </form>
 
     <table metal:define-macro="historylist"
-           tal:define="history here/getHistory;
-                       mtool nocall:context/portal_membership;"
+           tal:define="history here/getHistory"
            tal:condition="history"
+           tal:on-error="nothing"
            class="vertical listing" style="width: 100%">
 
         <tr>
