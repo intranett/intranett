@@ -1,4 +1,4 @@
-# query plan dumped at 'Sun Mar 28 14:27:10 2010'
+# query plan dumped at 'Sun Mar 28 14:41:09 2010'
 
 queryplan = {
   '/intranet.psol/portal_catalog': {
@@ -115,6 +115,9 @@ queryplan = {
     ('sourceUID', ('relationship', "'relatesTo'")):
       ['sourceUID', 'relationship'],
   },
+  '/intranet.psol/reference_catalog:valueindexes': frozenset([
+    'relationship',
+  ]),
   '/intranet.psol/extropy_tracking_tool': {
     ('UID', 'allowedRolesAndUsers'):
       ['UID', 'allowedRolesAndUsers'],
@@ -157,6 +160,14 @@ queryplan = {
     'review_state',
   ]),
   '/intranet.psol/extropy_timetracker_tool': {
+    ('Creator', 'allowedRolesAndUsers', 'path', 'portal_type', 'sort_on', 'start'):
+      ['path', 'start', 'Creator', 'allowedRolesAndUsers', 'portal_type'],
+    ('allowedRolesAndUsers', 'path', 'portal_type', 'sort_on'):
+      ['path', 'allowedRolesAndUsers', 'portal_type'],
+    ('allowedRolesAndUsers', 'path', 'portal_type', 'sort_on', 'start'):
+      ['path', 'start', 'allowedRolesAndUsers', 'portal_type'],
+    ('allowedRolesAndUsers', 'path', 'portal_type', 'sort_on', ('getBudgetCategory', "'Billable'"), ('review_state', "'entered'")):
+      ['path', 'review_state', 'getBudgetCategory', 'allowedRolesAndUsers', 'portal_type'],
     ('path',):
       ['path'],
   },
