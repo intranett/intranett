@@ -1,12 +1,11 @@
 from zope.component import getMultiAdapter
+from zope.i18n import translate
 from zope.app.publisher.browser.menu import getMenu
 
 from AccessControl import getSecurityManager, Unauthorized
 from DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.i18nl10n import monthname_msgid_abbr
-from Products.CMFPlone.i18nl10n import utranslate
 from Products.CMFPlone.i18nl10n import weekdayname_msgid
 
 from Products.Five import BrowserView
@@ -71,15 +70,13 @@ class WeekReport(BrowserView, TimeReportQuery):
 
     def shortDate(self, date):
         """Format date in "Feb 06" style"""
-        month = monthname_msgid_abbr(date.month())
-        month = utranslate('plonelocales', month, context=self.request, default=month)
-        return u'%s %02i' % (month, date.day())
+        return u'%s %02i' % (date.pMonth(), date.day())
 
     def weekdayname(self, date):
         """Return (localized) weekday name for a date"""
         weekday = weekdayname_msgid(date.dow())
-        return utranslate('plonelocales', weekday, context=self.request,
-                          default=weekday)
+        return translate(weekday, domain='plonelocales',
+                         context=self.request, default=weekday)
 
     def _query(self):
         # narrow down TimeReportQuery to one user
