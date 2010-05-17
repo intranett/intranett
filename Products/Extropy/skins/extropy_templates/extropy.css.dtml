@@ -11,7 +11,7 @@ div.width-1\3a 4 { width:    14.45%; } /* .width-1:4 */
 /* div.width-3\3a 4 { width:    72.75%; }  .width-3:4 */
 div.width-3\3a 4 { width:    81.05%; } /* .width-3:4 */
 
-div.width-full   { width:    97.75%  } 
+div.width-full   { width:    97.75%  }
 
 /* div.position-1\3a 4 {margin-left:    -73.875%;}  .position-1:4 */
 div.position-1\3a 4 {margin-left:    -82.175%;} /* .position-1:4 */
@@ -38,7 +38,7 @@ option[disabled] {
     color: grey;
 }
 
-.invisibleformnode{ 
+.invisibleformnode{
     display         :none;
     margin          : 0;
     }
@@ -61,30 +61,6 @@ option[disabled] {
     border: 1px dotted red;
 }
 
-/* NEW CHANGENOTES */
-.extropy-history-list{
-    
-}
-
-.extropy-history-entry-header{
-    
-}
-
-.extropy-history-entry-changenote{
-    
-}
-
-.extropy-history-entry-changes{
-    
-}
-
-.extropy-history-entry-bottom{
-    
-}
-
-
-
-
 
 /* progressbars */
 
@@ -95,24 +71,24 @@ option[disabled] {
 }
 
 .progressbar-done{
-    width           : 1.5em; 
-    float           : left; 
-    margin-right    : 0.1em; 
-    clear           : none; 
+    width           : 1.5em;
+    float           : left;
+    margin-right    : 0.1em;
+    clear           : none;
     border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
-    display         : block; 
-    height          : 1.5em; 
+    display         : block;
+    height          : 1.5em;
     background-color: &dtml-globalBackgroundColor;;
 }
 
 .progressbar-remaining{
-    width           : 1.5em; 
-    float           : left; 
-    margin-right    : 0.1em; 
-    clear           : none; 
+    width           : 1.5em;
+    float           : left;
+    margin-right    : 0.1em;
+    clear           : none;
     border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
-    display         : block; 
-    height          : 1.5em; 
+    display         : block;
+    height          : 1.5em;
     background-color: #fff;
 }
 
@@ -149,13 +125,13 @@ option[disabled] {
     margin-top      : 0.2em;
     margin-bottom   : 1px;
     clear           : both;
-    
+
 }
 
 .hour-report-date{
     text-decoration :none;
     float           :left;
-    width           : 8em; 
+    width           : 8em;
     text-align      :right;
     font-size       : 90%;
 }
@@ -169,11 +145,11 @@ option[disabled] {
     margin-left     : 1px;
     margin-top      : 0.2em;
     border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
-    background-color: &dtml-globalBackgroundColor;;    
+    background-color: &dtml-globalBackgroundColor;;
 }
 
 .hours-listing-sum{
-    float:left; 
+    float:left;
     margin-left: 0.5em;
     margin-right: 1em;
 }
@@ -243,31 +219,4 @@ color:blue
     text-decoration: line-through !important;
 }
 
-/* priorities */
-
-.priority-5 {
-        color: black;  /*normal*/
-}
-.priority-1 {
-        color: green;   /*nice-to-have*/
-}
-.priority-10 {
-        color: red;    /*critical*/
-}
-.overdue{
-        color: red !important;
-}
-
-/* Workflow actions view */
-.workflowactions {
-    text-transform: lowercase;
-}
-
-.workflowactions.loading {
-    background-image: url(&dtml-portal_url;/progress.gif);
-    background-repeat: no-repeat;
-    background-position: 100%;
-    padding-right: 14px;
-    padding-bottom: 0.5ex;
-}
 /* </dtml-with> */
