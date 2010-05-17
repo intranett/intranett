@@ -21,6 +21,14 @@ table.listing {
     margin: 1em 0em 1em 0em;
 }
 
+table.listing .top {
+    border-left: 1px solid #8cacbb;
+    border-top: 1px solid #8cacbb;
+    border-right: 1px solid #8cacbb;
+    text-align: right ! important;
+    padding: 0em 0em 1em 0em;
+}
+
 table.listing th {
     border-top: 1px solid #8cacbb;
     border-bottom: 1px solid #8cacbb;
@@ -36,8 +44,14 @@ table.listing td {
 table.vertical th {
     padding: 0.5em;
 }
+
 table.vertical td {
     border-top: 1px solid #8cacbb;
+    padding: 0.5em;
+}
+
+table.grid td {
+    border: 1px solid #8cacbb;
     padding: 0.5em;
 }
 
