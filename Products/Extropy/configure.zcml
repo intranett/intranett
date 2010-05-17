@@ -8,7 +8,6 @@
   <i18n:registerTranslations directory="locales"/>
 
   <include package="experimental.catalogqueryplan" />
-  <include package="plone.app.blob" />
   <include package="jarn.intranet.tracportlet" />
 
   <include package=".browser" />

@@ -22,8 +22,6 @@ setup(name='Products.Extropy',
       install_requires=[
           'setuptools',
           'experimental.catalogqueryplan',
-          'plone.app.blob',
-          'Products.TinyMCE',
           'Products.Invoice',
           'Products.Maps',
           'Products.Memo',
