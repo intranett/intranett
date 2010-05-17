@@ -27,5 +27,6 @@ setup(name='Products.Extropy',
           'Products.Memo',
           'Products.signalstack',
           'jarn.intranet.tracportlet',
+          'plone.app.caching',
       ],
       )
