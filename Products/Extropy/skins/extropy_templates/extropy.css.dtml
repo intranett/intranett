@@ -1,27 +1,48 @@
 /* <dtml-with base_properties> (do not remove this :) */
 
+/* Start sunburst overrides */
+
 /* Force the grid system into a 1/6, 2/3, 1/6 system */
 
-/* div.width-1\3a 2 { width:    47.75%; }  .width-1:2 */
-div.width-1\3a 2 { width:    64.35%; } /* .width-1:2 */
-
-/* div.width-1\3a 4 { width:    22.75%; }  .width-1:4 */
-div.width-1\3a 4 { width:    14.45%; } /* .width-1:4 */
-
-/* div.width-3\3a 4 { width:    72.75%; }  .width-3:4 */
-div.width-3\3a 4 { width:    81.05%; } /* .width-3:4 */
-
+div.width-1\3a 2 { width:    64.35%; } /* 47.75% .width-1:2 */
+div.width-1\3a 4 { width:    14.45%; } /* 22.75% .width-1:4 */
+div.width-3\3a 4 { width:    81.05%; } /* 72.75% .width-3:4 */
 div.width-full   { width:    97.75%  }
 
-/* div.position-1\3a 4 {margin-left:    -73.875%;}  .position-1:4 */
-div.position-1\3a 4 {margin-left:    -82.175%;} /* .position-1:4 */
+div.position-1\3a 4 {margin-left:    -82.175%;} /* -73.875% .position-1:4 */
+div.position-1\3a 2 {margin-left:    -64.35%;} /* -48.875% .position-1:2 */
+div.position-3\3a 4 {margin-left:    -15.575%;} /* -23.875% .position-3:4 */
 
-/* div.position-1\3a 2 {margin-left:    -48.875%;}  .position-1:2 */
-div.position-1\3a 2 {margin-left:    -64.35%;} /* .position-1:2 */
+table.listing {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-left: 1px solid #8cacbb;
+    border-bottom: 1px solid #8cacbb;
+    margin: 1em 0em 1em 0em;
+}
 
-/* div.position-3\3a 4 {margin-left:    -23.875%;}  .position-3:4 */
-div.position-3\3a 4 {margin-left:    -15.575%;} /* .position-3:4 */
+table.listing th {
+    border-top: 1px solid #8cacbb;
+    border-bottom: 1px solid #8cacbb;
+    border-right: 1px solid #8cacbb;
+    padding: 0.25em 0.5em;
+}
 
+table.listing td {
+    border-right: 1px solid #8cacbb;
+    padding: 0.25em 0.5em;
+}
+
+table.vertical th {
+    padding: 0.5em;
+}
+table.vertical td {
+    border-top: 1px solid #8cacbb;
+    padding: 0.5em;
+}
+
+
+/* End sunburst overrides */
 
 .editableHeadline {
     /*font-size: 160%;*/
