@@ -21,29 +21,12 @@
 
 <browser:page
     for="*"
-    class=".editforms.TaskEdit"
-    name="task_edit"
-    allowed_interface=".editforms.ITaskEdit"
-    permission="zope2.Public"
-    />
-
-<browser:page
-    for="*"
-    class=".editforms.DeliverableEdit"
-    name="deliverable_edit"
-    allowed_interface=".editforms.IDeliverableEdit"
-    permission="zope2.Public"
-    />
-
-<browser:page
-    for="*"
     class=".managementreports.InvoiceReport"
     name="invoice-report"
     template="invoicereport.pt"
     allowed_interface=".managementreports.IInvoiceReport"
     permission="zope2.View"
     />
-
 
 <!-- Time reports -->
 
