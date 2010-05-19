@@ -8,11 +8,14 @@ handlers.referenceRemoved = _null_handler
 handlers.referencedObjectRemoved = _null_handler
 
 
-from Products.CMFPlone.patches.unicodehacks import FasterStringIO
-from chameleon.core import generation
+try:
+    from chameleon.core import generation
+    from Products.CMFPlone.patches.unicodehacks import FasterStringIO
+except ImportError:
+    pass
+else:
+    def initialize_stream():
+        out = FasterStringIO()
+        return (out, out.write)
 
-def initialize_stream():
-    out = FasterStringIO()
-    return (out, out.write)
-
-generation.initialize_stream = initialize_stream
+    generation.initialize_stream = initialize_stream
