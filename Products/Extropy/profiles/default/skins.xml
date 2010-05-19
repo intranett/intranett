@@ -1,20 +1,14 @@
 <?xml version="1.0"?>
 <object name="portal_skins" meta_type="Plone Skins Tool">
- <object name="extropy_custom_templates" meta_type="Filesystem Directory View"
-    directory="Extropy/skins/extropy_custom_templates"/>
  <object name="extropy_images" meta_type="Filesystem Directory View"
     directory="Extropy/skins/extropy_images"/>
- <object name="extropy_portlets" meta_type="Filesystem Directory View"
-    directory="Extropy/skins/extropy_portlets"/>
  <object name="extropy_scripts" meta_type="Filesystem Directory View"
     directory="Extropy/skins/extropy_scripts"/>
  <object name="extropy_templates" meta_type="Filesystem Directory View"
     directory="Extropy/skins/extropy_templates"/>
  <skin-path name="*">
-  <layer insert-after="custom" name="extropy_custom_templates"/>
   <layer insert-after="custom" name="extropy_templates"/>
   <layer insert-after="custom" name="extropy_scripts"/>
-  <layer insert-after="custom" name="extropy_portlets"/>
   <layer insert-after="custom" name="extropy_images"/>
  </skin-path>
 </object>
