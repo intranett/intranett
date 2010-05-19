@@ -8,31 +8,19 @@
 <body>
 
 <div metal:fill-slot="main"
-     tal:define="participants here/getParticipants;
-                 tasks here/getTasksByState;">
+     tal:define="participants here/getParticipants;">
 
-    <form name="edit_form"
-          action="."
-          method="post"
-          enctype="multipart/form-data"
-          tal:attributes="action string:${here/absolute_url}/${template/getId}">
+    <h1 tal:content="here/Title" />
 
-        <input type="hidden" name="form.submitted" value="1" />
+    <metal:summary use-macro="here/extropyproject_view/macros/trackingsummary" />
 
-        <h1 tal:content="here/Title" />
+    <p class="documentDescription" tal:content="here/Description">
+        Description
+    </p>
 
-        <metal:summary use-macro="here/extropyproject_view/macros/trackingsummary" />
-
-        <p class="documentDescription" tal:content="here/Description">
-            Description
-        </p>
-
-        <div tal:define="default string:(no body, double click to edit);
-                         text context/getText;
-                         content python:text and text or default"
-             tal:content="structure content"></div>
-
-    </form>
+    <div tal:define="text context/getText;
+                     content python:text and text or default"
+         tal:content="structure content"></div>
 
     <div class="visualClear"></div>
 

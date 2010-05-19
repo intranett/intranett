@@ -7,86 +7,57 @@
 <body>
 <div metal:fill-slot="main">
 
-    <form name="edit_form"
-          action="."
-          method="post"
-          enctype="multipart/form-data"
-          tal:attributes="action string:${here/absolute_url}/${template/getId}"
-          tal:define="etool nocall:here/extropy_tracking_tool;
-                      tasks python:etool.trackingQuery(context, meta_type='ExtropyTask', REQUEST=request)">
+    <h1 tal:content="here/Title" />
 
-        <input type="hidden" name="form.submitted" value="1" />
+    <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
+      <tbody tal:define="mtool nocall:context/portal_membership;">
+        <tr>
+          <th>Target Phase</th>
+          <td tal:define="currentPhase python:here.getExtropyParent('ExtropyPhase')">
+            <span tal:content="currentPhase/Title"></span>
+          </td>
+        </tr>
+        <tr>
+          <th>Responsible</th>
+          <td tal:define="responsible here/getResponsiblePerson;
+                          author python:responsible and mtool.getMemberInfo(responsible)"
+              tal:content="author/fullname|responsible">limi
+          </td>
+        </tr>
+        <tr>
+          <th>
+            Nosy list
+          </th>
+          <td>
+              <tal:participants repeat="participant here/getParticipants">
+                <span tal:define="author python:mtool.getMemberInfo(participant);
+                                  name author/fullname | participant"
+                      tal:replace="name">limi</span><span
+                      tal:condition="not:repeat/participant/end"
+                      tal:omit-tag="">,</span>
+              </tal:participants>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-        <p class="discreet" tal:condition="not:here/Title">
-            Use action verbs for deliverable titles, such as 'Finalize', 'Resolve',
-            'Handle', 'Look into', 'Submit', 'Maximize', 'Organize', 'Design',
-            'Complete', 'Ensure', 'Roll out', 'Update', 'Install', 'Implement' and
-            'Set up'.
-        </p>
+    <div tal:define="worked here/getWorkedHours;
+                     URL here/absolute_url;
+                     bar nocall:context/@@progressbar">
+        <a tal:replace="structure python:bar(URL=URL, worked=worked)"> </a>
+    </div>
 
-        <h1 tal:content="here/Title" />
+    <p class="documentDescription" tal:content="here/Description">
+        Description
+    </p>
 
-        <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
-          <tbody tal:define="mtool nocall:context/portal_membership;">
-            <tr>
-              <th>Target Phase</th>
-              <td tal:define="currentPhase python:here.getExtropyParent('ExtropyPhase')">
-                <span tal:content="currentPhase/Title"></span>
-              </td>
-            </tr>
-            <tr>
-              <th>Responsible</th>
-              <td tal:define="responsible here/getResponsiblePerson;
-                              author python:responsible and mtool.getMemberInfo(responsible)"
-                  tal:content="author/fullname|responsible">limi
-              </td>
-            </tr>
-            <tr>
-              <th>
-                Nosy list
-              </th>
-              <td>
-                  <tal:participants repeat="participant here/getParticipants">
-                    <span tal:define="author python:mtool.getMemberInfo(participant);
-                                      name author/fullname | participant"
-                          tal:replace="name">limi</span><span
-                          tal:condition="not:repeat/participant/end"
-                          tal:omit-tag="">,</span>
-                  </tal:participants>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
 
-        <div tal:define="worked here/getWorkedHours;
-                         URL here/absolute_url;
-                         bar nocall:context/@@progressbar">
-            <a tal:replace="structure python:bar(URL=URL, worked=worked)"> </a>
-        </div>
+    <div tal:define="text context/getText;
+                     content python:text and text or default"
+         tal:content="structure content"></div>
 
-        <p class="documentDescription" tal:content="here/Description">
-            Description
-        </p>
-
-        <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
-
-        <fieldset>
-            <legend>Status/Edit</legend>
-            <div tal:define="default string:(no body, double click to edit);
-                             text context/getText;
-                             content python:text and text or default"
-                 tal:content="structure content"></div>
-
-            <div class="visualClear"><!----></div>
-
-            <h4>Add comment or changenote</h4>
-            <textarea style="width: 100%" rows="5" name="changenote" id="changenote"></textarea>
-            <input class="context" name="form.button.Update" type="submit" value="Update" />
-        </fieldset>
-
-        <div class="visualClear"><!----></div>
-
-    </form>
+    <div class="visualClear"><!----></div>
 
     <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
 

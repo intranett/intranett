@@ -8,71 +8,41 @@
 <body>
 <div metal:fill-slot="main">
 
-   <form name="edit_form"
-          action="."
-          method="post"
-          enctype="multipart/form-data"
-          tal:attributes="action string:${here/absolute_url}/${template/getId}" >
+    <h1 tal:content="here/Title"
+        tal:attributes="style python:test(here.getRawTitle(),'display:inline', 'display:none')">
+    </h1>
 
-        <input type="hidden" name="form.submitted" value="1" />
+    <div tal:define="worked here/getWorkedHours;
+                     URL here/absolute_url;
+                     bar nocall:context/@@progressbar;
+                     ">
+        <p tal:replace="structure python:bar(worked, URL)"/>
+    </div>
 
-        <h1 tal:content="here/Title"
-            tal:attributes="style python:test(here.getRawTitle(),'display:inline', 'display:none')">
-        </h1>
+    <p style="text-align : right">
+        <a tal:attributes="href string:${here/absolute_url}/add_work_hours"><img tal:replace="structure here/hour_icon.gif" /> Register work hours</a>
+    </p>
 
-        <div tal:define="worked here/getWorkedHours;
-                         URL here/absolute_url;
-                         bar nocall:context/@@progressbar;
-                         ">
-            <p tal:replace="structure python:bar(worked, URL)"/>
-        </div>
-            
-        <p style="text-align : right">
-            <a tal:attributes="href string:${here/absolute_url}/add_work_hours"><img tal:replace="structure here/hour_icon.gif" /> Register work hours</a>
-        </p>
+    <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
+        <tbody>
+             <tr>
+                <th>
+                    Participants
+                </th>
+                <td tal:define="mtool nocall:context/portal_membership;">
+                     <span tal:content="python: ','.join(here.getParticipants())"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-    <fieldset>
-        <legend>Status</legend>
-        <div>
-
-        <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
-            <tbody>
-                 <tr>
-                    <th>
-                        Participants
-                    </th>
-                    <td tal:define="mtool nocall:context/portal_membership;">
-                         <span tal:content="python: ','.join(here.getParticipants())"></span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div id="DescriptionArea" tal:content="structure here/getText">
-            Text
-        </div>
-
+    <div id="DescriptionArea" tal:content="structure here/getText">
+        Text
     </div>
 
     <div class="visualClear"></div>
 
-    <h4>Add comment or changenote</h4>
-    <textarea style="width : 100%" rows="5" name="changenote" id="changenote"></textarea>
-
-
-        <div style="text-align: right;">
-            <input class="context" 
-                       name="form.button.Update" 
-                       type="submit" 
-                       value="Update" />
-        </div>
-    </fieldset>
-
-    <div class="visualClear"></div>
-
-    </form>
-
-  <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
+    <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
 
 </div>
 

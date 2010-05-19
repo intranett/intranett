@@ -8,137 +8,103 @@
 
 <body>
 
-<div metal:fill-slot="main"
-     tal:define="edit_view context/@@task_edit">
+<div metal:fill-slot="main">
 
-    <form name="edit_form"
-          action="."
-          method="post"
-          enctype="multipart/form-data"
-          tal:attributes="action string:${here/absolute_url}/${template/getId}" >
+    <h1 tal:content="context/Title" />
 
-        <input type="hidden" name="form.submitted" value="1" />
+    <div class="visualClear"><!----></div>
 
-        <p class="discreet" tal:condition="not:here/Title">
-            Remember that the task title should be short and understandable even
-            without its context, as it will show up in various listings. Try to be
-            as concise and descriptive as possible. 'Invoice' is a bad task title,
-            'Invoice XYZ for training' is better.
-            Use action verbs for task titles, such as 'Call', 'Organize', 'Review',
-            'Buy', 'Fill out', 'Find', 'Purge', 'Look into', 'Gather', 'Print',
-            'Take', 'Load', 'Draft' and 'Email'.
-        </p>
+    <div style="float: right">
+        <button type="button"
+                tal:attributes="onclick string:window.location.href='${here/absolute_url}/add_work_hours'">
+            <img tal:replace="structure here/hour_icon.gif" />
+            Register work hours
+        </button>
+    </div>
 
-        <h1>
-            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
-            <span tal:define="title context/Title">
-                <span tal:attributes="style python:title and 'display:inline' or 'display:none'"
-                      tal:content="title">
-                </span>
-            </span>
-        </h1>
+    <div tal:define="worked here/getWorkedHours;
+                     URL here/absolute_url;
+                     bar nocall:context/@@progressbar">
+        <a tal:replace="structure python:bar(URL=URL, worked=worked)"></a>
+    </div>
 
-        <div class="visualClear"><!----></div>
-
-        <div style="float: right">
-            <button type="button"
-                    tal:attributes="onclick string:window.location.href='${here/absolute_url}/add_work_hours'">
-                <img tal:replace="structure here/hour_icon.gif" />
-                Register work hours
-            </button>
-        </div>
-
-        <div tal:define="worked here/getWorkedHours;
-                         URL here/absolute_url;
-                         bar nocall:context/@@progressbar">
-            <a tal:replace="structure python:bar(URL=URL, worked=worked)"></a>
-        </div>
-
-        <dl id="parentdata" class="collapsible collapsedOnLoad"
-            tal:define="deliverable here/getOriginatingFeature">
-            <dt class="collapsibleHeader">Parent deliverable &quot;<span tal:replace="deliverable/Title"></span>&quot;</dt>
-            <dd class="collapsibleContent"><p tal:replace="structure deliverable/getText"></p></dd>
-            <dd class="collapsibleContent">
-                <table class="vertical listing">
-                    <tr>
-                        <th>Sibling tasks</th>
-                        <td tal:define="deliverable here/getOriginatingFeature;
-                                        etool nocall:here/extropy_tracking_tool;
-                                        tasks python:etool.trackingQuery(deliverable, meta_type='ExtropyTask', REQUEST=request);">
-                            <div tal:repeat="task tasks">
-                                <a tal:attributes="href task/getURL;
-                                                   class string:state-${task/review_state};"
-                                   tal:content="task/Title">
-                                    Task
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </dd>
-        </dl>
-
-        <h2>Status</h2>
-
-        <table class="vertical listing" style="float: right; margin: 1em">
-            <tbody>
+    <dl id="parentdata" class="collapsible collapsedOnLoad"
+        tal:define="deliverable here/getOriginatingFeature">
+        <dt class="collapsibleHeader">Parent deliverable &quot;<span tal:replace="deliverable/Title"></span>&quot;</dt>
+        <dd class="collapsibleContent"><p tal:replace="structure deliverable/getText"></p></dd>
+        <dd class="collapsibleContent">
+            <table class="vertical listing">
                 <tr>
-                    <th>Priority</th>
-                    <td>
-                        <span tal:content="here/getPriorityDescription">Urgent</span>
+                    <th>Sibling tasks</th>
+                    <td tal:define="deliverable here/getOriginatingFeature;
+                                    etool nocall:here/extropy_tracking_tool;
+                                    tasks python:etool.trackingQuery(deliverable, meta_type='ExtropyTask', REQUEST=request);">
+                        <div tal:repeat="task tasks">
+                            <a tal:attributes="href task/getURL;
+                                               class string:state-${task/review_state};"
+                               tal:content="task/Title">
+                                Task
+                            </a>
+                        </div>
                     </td>
                 </tr>
-                <tr>
-                    <th>Active after</th>
-                    <td>
-                        <span tal:condition="here/start"
-                              tal:content="python:here.start().strftime('%d %b')"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Due Date</th>
-                    <td>
-                        <span tal:condition="here/end"
-                              tal:content="python:here.end().strftime('%d %b')"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Responsible</th>
-                    <td>
-                        <span tal:define="responsible here/getResponsiblePerson;
-                                          author python:responsible and mtool.getMemberInfo(responsible)"
-                              tal:content="author/fullname|responsible"
-                              >limi</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Nosy list</th>
-                    <td>
-                        <tal:participants repeat="participant here/getParticipants">
-                            <span tal:define="author python:mtool.getMemberInfo(participant);
-                                              name author/fullname|participant"
-                                  tal:replace="name">limi</span><span
-                                  tal:condition="not:repeat/participant/end"
-                                  tal:omit-tag="">,</span>
-                        </tal:participants>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            </table>
+        </dd>
+    </dl>
 
-        <div tal:define="default string:(no body, double click to edit);
-                         text context/getText;
-                         content python:text and text or default"
-             tal:content="structure content"></div>
+    <h2>Status</h2>
 
-        <div class="visualClear"><!----></div>
+    <table class="vertical listing" style="float: right; margin: 1em">
+        <tbody>
+            <tr>
+                <th>Priority</th>
+                <td>
+                    <span tal:content="here/getPriorityDescription">Urgent</span>
+                </td>
+            </tr>
+            <tr>
+                <th>Active after</th>
+                <td>
+                    <span tal:condition="here/start"
+                          tal:content="python:here.start().strftime('%d %b')"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Due Date</th>
+                <td>
+                    <span tal:condition="here/end"
+                          tal:content="python:here.end().strftime('%d %b')"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Responsible</th>
+                <td>
+                    <span tal:define="responsible here/getResponsiblePerson;
+                                      author python:responsible and mtool.getMemberInfo(responsible)"
+                          tal:content="author/fullname|responsible"
+                          >limi</span>
+                </td>
+            </tr>
+            <tr>
+                <th>Nosy list</th>
+                <td>
+                    <tal:participants repeat="participant here/getParticipants">
+                        <span tal:define="author python:mtool.getMemberInfo(participant);
+                                          name author/fullname|participant"
+                              tal:replace="name">limi</span><span
+                              tal:condition="not:repeat/participant/end"
+                              tal:omit-tag="">,</span>
+                    </tal:participants>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-        <h4>Add comment or changenote</h4>
+    <div tal:define="text context/getText;
+                     content python:text and text or default"
+         tal:content="structure content"></div>
 
-        <textarea class="proportional" rows="5" name="changenote" id="changenote" style="width: 100%"></textarea>
-        <input class="context" name="form.button.Update" type="submit" value="Update" />
-
-    </form>
+    <div class="visualClear"><!----></div>
 
     <table metal:define-macro="historylist"
            tal:define="history here/getHistory"
