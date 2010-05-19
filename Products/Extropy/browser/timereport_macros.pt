@@ -130,9 +130,11 @@ end:<input type="text" size="10" name="enddate" tal:attributes="value view/end/D
         </div>
         <tal:hour tal:repeat="hour days/hours">
             <a class="hour-report-hours discreet" 
-                tal:define="width python:int((hour.workedHours * 20) -2)"
+                tal:define="width python:int((hour.workedHours * 20) -2);
+                            ptitle python:unicode(hour.getProjectTitle, 'utf-8', 'replace');
+                            htitle python:unicode(hour.Title, 'utf-8', 'replace');"
                 tal:attributes="href hour/getURL;
-                                title string:${hour/getProjectTitle} ${hour/Title} : ${hour/workedHours} hours from ${hour/start/Time} to ${hour/end/Time} - ${hour/Creator};
+                                title string:${ptitle} ${htitle} : ${hour/workedHours} hours from ${hour/start/Time} to ${hour/end/Time} - ${hour/Creator};
                                 style string:width:${width}px;
                                 class string:budget-category-block-${hour/getBudgetCategory/lower} hour-report-hours">
             </a>

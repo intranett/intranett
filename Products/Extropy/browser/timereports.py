@@ -13,6 +13,8 @@ from ZTUtils import make_query
 
 from Products.Extropy.config import INVOICE_RELATIONSHIP
 from Products.Extropy.permissions import MANAGE_FINANCES
+from Products.Extropy.utils import safe_unicode
+
 
 class TimeReportQuery(object):
     """Mixin class for timereport queries"""
@@ -53,7 +55,7 @@ class TimeReportQuery(object):
         category = attrgetter('getBudgetCategory')
         hours.sort(key=category)
         for category, hours in groupby(hours, category):
-            yield dict(category=category,
+            yield dict(category=safe_unicode(category),
                        sum=self.ettool.countHours(hours))
 
     @property
@@ -79,12 +81,13 @@ class TimeReportQuery(object):
         for project, hours in groupby(hours, project):
             hours = tuple(hours)
             sum = self.ettool.countHours(hours)
-            yield dict(project=project, category=hours[0].getBudgetCategory,
-                       sum=sum)
+            yield dict(project=safe_unicode(project),
+                       category=hours[0].getBudgetCategory, sum=sum)
 
 
 class InvoicingError(ValueError):
     """Error invoicing hour objects"""
+
 
 class TimeReports(BrowserView, TimeReportQuery):
     def __init__(self, context, request):
