@@ -14,19 +14,16 @@
 
     <div class="visualClear"><!----></div>
 
-    <div style="float: right">
-        <button type="button"
-                tal:attributes="onclick string:window.location.href='${here/absolute_url}/add_work_hours'">
-            <img tal:replace="structure here/hour_icon.gif" />
-            Register work hours
-        </button>
-    </div>
-
     <div tal:define="worked here/getWorkedHours;
                      URL here/absolute_url;
                      bar nocall:context/@@progressbar">
         <a tal:replace="structure python:bar(URL=URL, worked=worked)"></a>
     </div>
+
+    <p style="text-align: right">
+        <a tal:attributes="href string:${here/absolute_url}/add_work_hours">
+        <img tal:replace="structure here/hour_icon.gif" />Register work hours</a>
+    </p>
 
     <dl id="parentdata" class="collapsible collapsedOnLoad"
         tal:define="deliverable here/getOriginatingFeature">
@@ -55,7 +52,7 @@
     <h2>Status</h2>
 
     <table class="vertical listing" style="float: right; margin: 1em">
-        <tbody>
+        <tbody tal:define="mtool nocall:context/portal_membership;">
             <tr>
                 <th>Priority</th>
                 <td>

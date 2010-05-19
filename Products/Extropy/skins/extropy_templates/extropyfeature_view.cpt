@@ -1,69 +1,67 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xml:lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      i18n:domain="extropy"
-      metal:use-macro="here/main_template/macros/master">
-<head></head>
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="extropy">
 <body>
-<div metal:fill-slot="main">
 
-    <h1 tal:content="here/Title" />
+<metal:content-core fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
 
-    <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
-      <tbody tal:define="mtool nocall:context/portal_membership;">
-        <tr>
-          <th>Target Phase</th>
-          <td tal:define="currentPhase python:here.getExtropyParent('ExtropyPhase')">
-            <span tal:content="currentPhase/Title"></span>
-          </td>
-        </tr>
-        <tr>
-          <th>Responsible</th>
-          <td tal:define="responsible here/getResponsiblePerson;
-                          author python:responsible and mtool.getMemberInfo(responsible)"
-              tal:content="author/fullname|responsible">limi
-          </td>
-        </tr>
-        <tr>
-          <th>
-            Nosy list
-          </th>
-          <td>
-              <tal:participants repeat="participant here/getParticipants">
-                <span tal:define="author python:mtool.getMemberInfo(participant);
-                                  name author/fullname | participant"
-                      tal:replace="name">limi</span><span
-                      tal:condition="not:repeat/participant/end"
-                      tal:omit-tag="">,</span>
-              </tal:participants>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
+          <tbody tal:define="mtool nocall:context/portal_membership;">
+            <tr>
+              <th>Target Phase</th>
+              <td tal:define="currentPhase python:here.getExtropyParent('ExtropyPhase')">
+                <span tal:content="currentPhase/Title"></span>
+              </td>
+            </tr>
+            <tr>
+              <th>Responsible</th>
+              <td tal:define="responsible here/getResponsiblePerson;
+                              author python:responsible and mtool.getMemberInfo(responsible)"
+                  tal:content="author/fullname|responsible">limi
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Nosy list
+              </th>
+              <td>
+                  <tal:participants repeat="participant here/getParticipants">
+                    <span tal:define="author python:mtool.getMemberInfo(participant);
+                                      name author/fullname | participant"
+                          tal:replace="name">limi</span><span
+                          tal:condition="not:repeat/participant/end"
+                          tal:omit-tag="">,</span>
+                  </tal:participants>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-    <div tal:define="worked here/getWorkedHours;
-                     URL here/absolute_url;
-                     bar nocall:context/@@progressbar">
-        <a tal:replace="structure python:bar(URL=URL, worked=worked)"> </a>
-    </div>
+        <div tal:define="worked here/getWorkedHours;
+                         URL here/absolute_url;
+                         bar nocall:context/@@progressbar">
+            <a tal:replace="structure python:bar(URL=URL, worked=worked)"> </a>
+        </div>
 
-    <p class="documentDescription" tal:content="here/Description">
-        Description
-    </p>
+        <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
 
-    <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
+        <metal:field use-macro="python:context.widget('text', mode='view')">
+            Body text
+        </metal:field>
 
-    <div tal:define="text context/getText;
-                     content python:text and text or default"
-         tal:content="structure content"></div>
+        <div class="visualClear"><!----></div>
 
-    <div class="visualClear"><!----></div>
+        <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
 
-    <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
+        <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
 
-    <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
-
-</div>
+    </metal:content-core>
+</metal:content-core>
 
 </body>
 </html>
