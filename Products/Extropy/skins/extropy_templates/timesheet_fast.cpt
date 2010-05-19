@@ -49,26 +49,6 @@
 
 <body>
 
-<style type="text/css">
-<!--
-  table.listing, .stx table {
-    font-size: 100% !important;
-  }
-  .gap {
-    font-size: 80%;
-  }
-  .gap tr, .gap td {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  textarea {
-    font-family: "Lucida Grande",Verdana,Lucida,Helvetica,Arial,sans-serif;
-  }
--->
-</style>
-
 <div metal:use-macro="here/global_statusmessage/macros/portal_message">
     Portal status message
 </div>
@@ -165,7 +145,7 @@
                             <optgroup tal:repeat="phase python:etool.dictifyBrains(proj[1], 'getPhaseTitle').items()"
                                                  tal:attributes="label python:'%s - %s' % (proj[0], phase[0])">
                                   <option tal:repeat="task python:phase[1]" tal:attributes="value task/UID; label python:task.Title; selected python: last_task == path('task/UID')"
-                                            tal:content="python:task.Title">add batching to blogpostings-template</option>
+                                            tal:content="python:task.Title">task title</option>
                             </optgroup>
                         </tal:projects>
                      </select>
