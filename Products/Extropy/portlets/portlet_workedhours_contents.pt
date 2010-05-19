@@ -1,28 +1,37 @@
 <dl class="portlet portletHourslastweek"
-    i18n:domain="plone">
+    i18n:domain="plone"
+    tal:define="portal_url context/portal_url;">
 
   <dt class="portletHeader">
       <span class="portletTopLeft"></span>
        Hours this week
       <span class="portletTopRight"></span>
   </dt>
-    <dd class="portletItem">
+  <dd class="portletItem">
 
-  
-  <table style="width:90%"
-         tal:define="mtool nocall:context/portal_membership">
-      <tr tal:repeat="obj python:view.totals().items()">
-          <td tal:define="person python:obj[0];
-                          author python:mtool.getMemberInfo(person);
-                          start python:context.ZopeTime().earliestTime()-6;
-              portal_url nocall:here/portal_url">
-              <a tal:attributes="href string:${portal_url}/weeklyplan_report?user=${person}"
-                 tal:define="name author/fullname|person;
-                             name python:len(name) > 20 and name[:19] + '&amp;hellip;;' or name"
-                 tal:content="structure name"></a></td>
-          <td style="text-align:right;"><span tal:content="python:obj[1]"/><span class="discreet">h</span></td>
-      </tr>
-  </table>
-  </dd>    
+    <table style="width:90%"
+           tal:define="mtool nocall:context/portal_membership">
+        <tr tal:repeat="obj python:view.totals().items()">
+            <td tal:define="person python:obj[0];
+                            author python:mtool.getMemberInfo(person);
+                            start python:context.ZopeTime().earliestTime()-6;">
+                <a tal:attributes="href string:${portal_url}/weeklyplan_report?user=${person}"
+                   tal:define="name author/fullname|person;
+                               name python:len(name) > 20 and name[:19] + '&amp;hellip;;' or name"
+                   tal:content="structure name"></a></td>
+            <td style="text-align:right;"><span tal:content="python:obj[1]"/><span class="discreet">h</span></td>
+        </tr>
+    </table>
+  </dd>
+
+  <dd class="portletFooter">
+      <a href="#"
+         class="tile"
+         tal:attributes="href string:${portal_url}/timesheet_fast">
+          Register hours&hellip;
+      </a>
+      <span class="portletBottomLeft"></span>
+      <span class="portletBottomRight"></span>
+  </dd>
+
 </dl>
-

@@ -1,28 +1,17 @@
 from itertools import groupby, chain
 from operator import itemgetter
 
-from zope.interface import implements
-from zope.component import getUtility
-from zope.component import getMultiAdapter
 from persistent import Persistent
-
-
-from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.component import getMultiAdapter
+from zope.interface import implements
 
-from Products.Extropy.config import *
-from Products.CMFCore.utils import getToolByName
 from AccessControl import getSecurityManager
-from DateTime import DateTime
-from itertools import groupby
-
-from plone.i18n.normalizer.interfaces import IIDNormalizer
-
-from zope import schema
-from zope.formlib import form
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from plone.portlet.static import PloneMessageFactory as _
+from Products.Extropy.config import TOOLNAME, OPEN_STATES
 
 
 class IMyResponsibilitiesPortlet(IPortletDataProvider):
@@ -38,19 +27,12 @@ class Assignment(base.Assignment):
     """
 
     implements(IMyResponsibilitiesPortlet)
+    title = "My Responsibilities"
 
-    def __init__(self):
-        pass
-    @property
-    def title(self):
-        """This property is used to give the title of the portlet in the
-        "manage portlets" screen. Here, we use the title that the user gave.
-        """
-        return "MyResponsibilities"
 
 def _reconstructURL(parent, child):
-    # Reconstruct the URL of an item one step deeper from  the parent's URL but
-    # one or more steps shallower than the child's URL.
+    # Reconstruct the URL of an item one step deeper from the parent's URL
+    # but one or more steps shallower than the child's URL.
     parentURL = parent.get('getURL')
     childURL = child.get('getURL')
     if not parentURL or not childURL:
@@ -58,6 +40,7 @@ def _reconstructURL(parent, child):
     next_step = childURL[len(parentURL) + 1:].split('/', 1)[0]
     url = '%s/%s' % (parentURL, next_step)
     return url
+
 
 class ItemsTree(Persistent):
     """Builds a tree from catalog items
@@ -121,27 +104,21 @@ class ItemsTree(Persistent):
                         item['depth'] = 3
                         yield item
 
+
 class Renderer(base.Renderer):
     """Portlet renderer.
-
-    This is registered in configure.zcml. The referenced page template is
-    rendered, and the implicit variable 'view' will refer to an instance
-    of this class. Other methods can be added and referenced in the template.
     """
 
+    available = True
     render = ViewPageTemplateFile('myresponsibilitiesportlet.pt')
-
-    @property
-    def available(self):
-        return True
-
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
-        portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
+        portal_state = getMultiAdapter(
+            (self.context, self.request), name=u'plone_portal_state')
         self.portal_url = portal_state.portal_url()
         self.portal = portal_state.portal()
-    
+
     def fetchData(self):
         """Gets the item data."""
         etool = getToolByName(self, TOOLNAME)
@@ -157,14 +134,12 @@ class Renderer(base.Renderer):
             review_state=OPEN_STATES)
         return ItemsTree(list(projects) + list(items))
 
-
     def reportlink(self):
         "link to the more detailed view"
-        return "%s/weeklyplan_report" %(self.portal_url,)
-        
-        
+        return "%s/weeklyplan_report" % (self.portal_url, )
+
+
 class AddForm(base.NullAddForm):
 
     def create(self):
         return Assignment()
-

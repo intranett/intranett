@@ -3,12 +3,12 @@
 
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
-        My Responsibilies
+            My Responsibilies
         <span class="portletTopRight"></span>
     </dt>
     <dd class="portletItem">
-        
-        <table style="width:90%">
+
+        <table>
             <tr>
                 <td>
                     <select style="width: 12em" onchange="if (this.options[this.selectedIndex].value) window.location.href=this.options[this.selectedIndex].value">
@@ -27,7 +27,7 @@
                 </td>
             </tr>
         </table>
-        
+
     </dd>
 
 </dl>

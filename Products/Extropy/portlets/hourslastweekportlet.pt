@@ -8,28 +8,26 @@
       <span class="portletTopRight"></span>
   </dt>
 
-    <dd class="portletItem">
-        
-        <table style="width:90%">
-            <tr tal:repeat="data view/myhours">
-                <td>
-                    <a tal:attributes="href string:${here/portal_url}/timesheet?date=${data/date/Date}" 
-                       tal:content="data/date/aDay"></a>
-                </td>
-                <td style="text-align:right;"><span tal:content="data/sum"/><span class="discreet">h</span></td>
-            </tr>
-        </table>
-        
-              <div class="visualClear"><!-- --></div>
-    </dd>
-    
-    <dd class="portletFooter">
-        <a href="#"
-         class="tile"
-         tal:attributes="href view/reportlink">
-        Details&hellip;
-        </a>
-        <span class="portletBottomLeft"></span>
-        <span class="portletBottomRight"></span>
-    </dd>
+  <dd class="portletItem">
+      <table style="width:90%">
+          <tr tal:repeat="data view/myhours">
+              <td>
+                  <a tal:attributes="href string:${here/portal_url}/timesheet?date=${data/date/Date}" 
+                     tal:content="data/date/aDay"></a>
+              </td>
+              <td style="text-align:right;"><span tal:content="data/sum"/><span class="discreet">h</span></td>
+          </tr>
+      </table>
+      <div class="visualClear"><!-- --></div>
+  </dd>
+
+  <dd class="portletFooter">
+      <a href="#"
+       class="tile"
+       tal:attributes="href view/reportlink">
+      Details&hellip;
+      </a>
+      <span class="portletBottomLeft"></span>
+      <span class="portletBottomRight"></span>
+  </dd>
 </dl>

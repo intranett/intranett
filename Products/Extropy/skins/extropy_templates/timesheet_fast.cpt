@@ -55,7 +55,6 @@
   </div>
 
   <div id="content"
-       style="margin:2em;"
        tal:define="isAnon context/@@plone_portal_state/anonymous;
                    raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
                    DateTime modules/DateTime;
