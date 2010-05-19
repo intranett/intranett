@@ -20,7 +20,6 @@ setup(name='Products.Extropy',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'cmf.pt',
           'experimental.catalogqueryplan',
           'mailinglogger',
           'Products.Invoice',
