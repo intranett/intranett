@@ -12,6 +12,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from Products.Extropy.config import TOOLNAME, OPEN_STATES
+from Products.Extropy.utils import safe_unicode
 
 
 class IMyResponsibilitiesPortlet(IPortletDataProvider):
@@ -69,7 +70,7 @@ class ItemsTree(Persistent):
             next = [] # Used to put iterated item back into flow
             if project['portal_type'] != 'ExtropyProject':
                 next = [project]
-                project = dict(Title=prtitle)
+                project = dict(Title=safe_unicode(prtitle))
             project['depth'] = 0
             yield project
 
@@ -77,7 +78,7 @@ class ItemsTree(Persistent):
                 chain(next, pritems), itemgetter('getPhaseTitle')):
                 # Reconstruct enough info for a phase
                 next = [phitems.next()]
-                phase = dict(depth=1, Title=phtitle,
+                phase = dict(depth=1, Title=safe_unicode(phtitle),
                              getURL=_reconstructURL(project, next[0]))
                 yield phase
 
@@ -95,7 +96,7 @@ class ItemsTree(Persistent):
                                                getURL=phase['getURL'])
                         else:
                             deliverable = dict(
-                                Title=dtitle,
+                                Title=safe_unicode(dtitle),
                                 getURL=_reconstructURL(phase, deliverable))
                     deliverable['depth'] = 2
                     yield deliverable

@@ -23,7 +23,7 @@
             
             <span metal:use-macro="context/@@timereport_macros/dates_filter" />
             
-            <input type="submit" value="filter">
+            <input type="submit" value="filter" />
 
             <span metal:use-macro="context/@@timereport_macros/show_invoices" />            
             

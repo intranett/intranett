@@ -1,5 +1,11 @@
 from Record import Record
 
+def safe_unicode(v):
+    if isinstance(v, unicode):
+        return v
+    return unicode(v, 'utf-8', 'replace')
+
+
 def dictifyBrain(item):
     """Make a dict with all the metadata
     and getURL and getPath"""

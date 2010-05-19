@@ -56,8 +56,6 @@
 
         <div class="visualClear"><!----></div>
 
-        <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
-
         <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
 
     </metal:content-core>

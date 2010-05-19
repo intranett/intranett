@@ -13,3 +13,10 @@ class WorkflowActions(BrowserView):
         putils = getToolByName(context, 'plone_utils')
         title = putils.getReviewStateTitleFor(context)
         return dict(state=state, title=title)
+
+
+class RecordWorkflowActions(BrowserView):
+
+    def data(self):
+        state = self.context.review_state
+        return dict(state=state, title=state)

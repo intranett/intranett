@@ -41,7 +41,6 @@
 
   </head>
 
-<body>
 <body tal:define="body_class python:plone_view.bodyClass(template, view);
                   sunburst_view python:context.restrictedTraverse('@@sunburstview')"
     tal:attributes="class body_class;">

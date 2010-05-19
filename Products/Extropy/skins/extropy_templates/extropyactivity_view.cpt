@@ -35,10 +35,6 @@
             </tbody>
         </table>
 
-        <div class="visualClear"></div>
-
-        <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
-
     </metal:content-core>
 </metal:content-core>
 

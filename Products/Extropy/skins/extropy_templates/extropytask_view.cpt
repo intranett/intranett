@@ -97,52 +97,11 @@
         </tbody>
     </table>
 
-    <div tal:define="text context/getText;
-                     content python:text and text or default"
-         tal:content="structure content"></div>
+    <metal:field use-macro="python:context.widget('text', mode='view')">
+        Body text
+    </metal:field>
 
     <div class="visualClear"><!----></div>
-
-    <table metal:define-macro="historylist"
-           tal:define="history here/getHistory"
-           tal:condition="history"
-           tal:on-error="nothing"
-           class="vertical listing" style="width: 100%">
-
-        <tr>
-            <th>Comment</th>
-            <th>Changes</th>
-        </tr>
-
-        <tal:changes tal:repeat="changes python:history">
-            <tr tal:define="oddrow repeat/changes/odd"
-                tal:attributes="class python:test(oddrow, 'even', 'odd')">
-                <td style="width: 70%">
-                    <p style="text-align:center; color: #666">
-                        <span tal:define="creator changes/Creator | nothing;
-                                          creatordata python:mtool.getMemberInfo(creator)">
-                            <b tal:condition="creatordata" tal:content="python:creatordata['fullname'] or creator">Author</b>
-                            <b tal:condition="not:creatordata" tal:content="creator">Author</b>
-                        </span>
-                        on
-                        <span tal:replace="python:toLocalizedTime(changes.created())">Date</span>
-                    </p>
-                    <div tal:content="structure changes/getChangenote">
-                        Change note
-                    </div>
-                </td>
-                <td style="width: 30%">
-                    <tal:change repeat="change changes/getChanges | nothing">
-                        <div>
-                            <b tal:content="change/title">Priority</b>
-                            <del tal:content="change/from">Old value</del>
-                            <ins tal:content="change/to">New value</ins>
-                        </div>
-                    </tal:change>
-                </td>
-            </tr>
-        </tal:changes>
-    </table>
 
     <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
 

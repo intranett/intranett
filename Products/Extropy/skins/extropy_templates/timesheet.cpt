@@ -15,11 +15,11 @@
                  end python:DateTime.DateTime('%s %s' % (datestring , request.get('end', '23:59')));
                  tool nocall:here/extropy_timetracker_tool;
                  etool nocall:here/extropy_tracking_tool;
-                 hours python:tool.getHours(portal, start=start, end=end, Creator=user.getUserName());
+                 hours python:tool.getHours(context, start=start, end=end, Creator=user.getUserName());
                  gaps python:tool.fillGaps(hours, start=start, end=end);
                  sumhours python:tool.countHours(hours);
                  timefmt python:'%h.%d %H:%M';
-                 tasks python:etool.trackingQuery( portal, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates());
+                 tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates());
                  groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').items()">
     
     <form method="get" 

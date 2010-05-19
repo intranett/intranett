@@ -49,15 +49,15 @@
 
         <dl>
             <tal:phases tal:repeat="phase here/getActivePhases">
-                    <h3><a tal:attributes="href python:'%s/email_hours_report?startdate=%s&endate=%s'%(phase.absolute_url(),str(qstart),str(qend))"><span tal:content="phase/Title" /></a></h3>
+                <h3><a tal:attributes="href python:'%s/email_hours_report?startdate=%s&amp;endate=%s' % (phase.absolute_url(), str(qstart), str(qend))"><span tal:content="phase/Title" /></a></h3>
 
-                    <tal:progressbar define="
-                         worked python:timetool.countIntervalHours(node=phase,start=qstart, end=qend);
-                         URL phase/absolute_url;
-                         bar nocall:context/@@smallprogressbar">
-                        <a tal:replace="structure python:bar(URL=URL, worked=worked)"></a>
-                        <span class="discreet"><span tal:content="worked">X</span> hours worked</span>
-                    </tal:progressbar>
+                <tal:progressbar define="
+                     worked python:timetool.countIntervalHours(node=phase,start=qstart, end=qend);
+                     URL phase/absolute_url;
+                     bar nocall:context/@@smallprogressbar">
+                    <a tal:replace="structure python:bar(URL=URL, worked=worked)"></a>
+                    <span class="discreet"><span tal:content="worked">X</span> hours worked</span>
+                </tal:progressbar>
 
             </tal:phases>
         </dl>
