@@ -58,25 +58,9 @@ table.grid td {
 
 /* End sunburst overrides */
 
-.editableHeadline {
-    /*font-size: 160%;*/
-    font-family     : <dtml-var headingFontFamily>;
-    font-weight     : normal;
-}
-
-h1 .editableHeadline {
-    font-size       : 100%;
-    width           : 90%
-}
-
 option[disabled] {
     color: grey;
 }
-
-.invisibleformnode{
-    display         :none;
-    margin          : 0;
-    }
 
 .extropychangenote{
     border          : &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
@@ -191,8 +175,6 @@ option[disabled] {
 
 /* BUDGET CATEGORIES */
 
-.budget-category-billable{
-}
 .budget-category-skillandbrand{
 color : orange;
 }
@@ -204,8 +186,6 @@ color:blue
 }
 
 
-.budget-category-block-billable{
-}
 .budget-category-block-skillandbrand{
     background-color : orange;
     border-color: brown;

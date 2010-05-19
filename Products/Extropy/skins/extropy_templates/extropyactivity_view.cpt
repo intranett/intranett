@@ -14,22 +14,10 @@
           enctype="multipart/form-data"
           tal:attributes="action string:${here/absolute_url}/${template/getId}" >
 
-    <input type="hidden" name="form.submitted" value="1" />
-        
-        <h1>
-        <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
-          <span ondblclick="showhiddenfield(this)">
-            <span class="formvaluenode " 
-                    tal:content="here/Title"
-                    tal:attributes="style python:test(here.getRawTitle(),'display:inline', 'display:none')">
-                </span>
-            <input 
-                tal:attributes="style python:test(here.getRawTitle(),'display:none', 'display:inline');
-                                    value here/getRawTitle" 
-                    class="invisibleformnode editableHeadline" 
-                    name="title" 
-                     />
-        </span>
+        <input type="hidden" name="form.submitted" value="1" />
+
+        <h1 tal:content="here/Title"
+            tal:attributes="style python:test(here.getRawTitle(),'display:inline', 'display:none')">
         </h1>
 
         <div tal:define="worked here/getWorkedHours;
@@ -53,19 +41,8 @@
                     <th>
                         Participants
                     </th>
-                    <td ondblclick="showhiddenfield(this)"
-                        tal:define="mtool nocall:context/portal_membership;">
-                        <select class="invisibleformnode" name="participants" multiple="multiple">
-                            <tal:options 
-                              define="availableParticipants here/getParticipants" 
-                              repeat="participant here/getAvailableParticipants">
-                            <option tal:attributes="value participant;
-                                    selected python:participant in availableParticipants"
-                                    tal:define="author python:mtool.getMemberInfo(participant)"
-                                    tal:content="author/fullname|participant">limi</option>
-                            </tal:options>  
-                        </select>
-                         <span class="formvaluenode" tal:content="python: ','.join(here.getParticipants())"></span>
+                    <td tal:define="mtool nocall:context/portal_membership;">
+                         <span tal:content="python: ','.join(here.getParticipants())"></span>
                     </td>
                 </tr>
   

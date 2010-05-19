@@ -18,18 +18,7 @@
 
         <input type="hidden" name="form.submitted" value="1" />
 
-        <h1>
-            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
-            <span ondblclick="showhiddenfield(this)" tal:define="title here/Title">
-                <span class="formvaluenode" tal:content="title">
-                    Title
-                </span>
-                <input name="title"
-                       class="invisibleformnode editableHeadline"
-                       tal:attributes="value title"
-                       />
-            </span>
-        </h1>
+        <h1 tal:content="here/Title" />
 
         <metal:summary define-macro="trackingsummary">
 
@@ -83,35 +72,19 @@
             Main descriptive text
         </p>
 
-        <div metal:define-macro="text_inline_edit"
-             ondblclick="toggleEditArea(this)" tal:define="text context/getText">
-          <div tal:define="default string:(no body, double click to edit);
-                           content python:text and text or default"
-               tal:content="structure content"></div>
-          <div style="display:none">
-            <textarea name="text"
-                      class="proportional"
-                      style="margin-top: 1em; width: 100%; height: 28em;"
-                      tal:content="context/getRawText">
-            </textarea>
-            <input type="hidden" name="text_text_format" value="text/x-rst" />
-            <input class="context" name="form.button.update" type="submit" value="Update" />
-          </div>
-        </div>
+        <div tal:define="default string:(no body, double click to edit);
+                         text context/getText;
+                         content python:text and text or default"
+             tal:content="structure content"></div>
 
         <h2>Project Status</h2>
-        <div ondblclick="toggleEditArea(this)" tal:define="status context/getProjectStatus">
+        <div tal:define="status context/getProjectStatus">
             <p class="documentDescription"
                tal:define="default string:(no status, double click to edit);
                            content python:status and status or default"
                tal:content="content">
                 Project Status
             </p>
-            <div style="display:none">
-                <input type="text" name="projectStatus" value="" style="width: 60%"
-                       tal:attributes="value context/getProjectStatus" />
-                <input class="context" name="form.button.update" type="submit" value="Update" />
-            </div>
         </div>
 
         <tal:memos define="memos python:context.contentValues({'portal_type': 'Memo'})"

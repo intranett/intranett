@@ -31,15 +31,10 @@
 
         <h1>
             <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
-            <span ondblclick="showhiddenfield(this)" tal:define="title context/Title">
-                <span class="formvaluenode editableHeadline"
-                      tal:attributes="style python:title and 'display:inline' or 'display:none'"
+            <span tal:define="title context/Title">
+                <span tal:attributes="style python:title and 'display:inline' or 'display:none'"
                       tal:content="title">
                 </span>
-                <input name="title" class="invisibleformnode editableHeadline"
-                       tal:attributes="value here/Title;
-                                       style python:title and 'display:none' or 'display:inline'"
-                       />
             </span>
         </h1>
 
@@ -91,84 +86,28 @@
             <tbody>
                 <tr>
                     <th>Priority</th>
-                    <td ondblclick="showhiddenfield(this)">
-                        <select class="invisibleformnode"
-                                name="priority">
-                            <option tal:repeat="options here/getPriorities"
-                                    tal:attributes="value python:options[0];
-                                                    selected python:str(options[0])==str(here.getPriority())"
-                                    tal:content="python:options[1]">
-                                A few minutes
-                            </option>
-                        </select>
-                        <span class="formvaluenode" tal:content="here/getPriorityDescription">Urgent</span>
+                    <td>
+                        <span tal:content="here/getPriorityDescription">Urgent</span>
                     </td>
                 </tr>
                 <tr>
                     <th>Active after</th>
-                    <td ondblclick="showhiddenfield(this)">
-                        <span class="invisibleformnode">
-                            <select name="startDate">
-                                <option value="">Not set</option>
-                                <option tal:repeat="date here/getAvailableDates"
-                                        tal:content="python:date.strftime('%d %b')"
-                                        tal:attributes="value date;
-                                                        selected python:here.start() == date"
-                                        >02 Nov</option>
-                            </select>
-                            <img tal:define="date_go here/date_go.png"
-                                 tal:replace="structure
-                                              python:date_go.tag(style='display: none',
-                                                                 css_class='today_button',
-                                                                 alt='*', title='Today')"
-                                 />
-                        </span>
-                        <span class="formvaluenode"
-                              tal:condition="here/start"
+                    <td>
+                        <span tal:condition="here/start"
                               tal:content="python:here.start().strftime('%d %b')"></span>
                     </td>
                 </tr>
                 <tr>
                     <th>Due Date</th>
-                    <td ondblclick="showhiddenfield(this)">
-                        <span class="invisibleformnode">
-                            <select name="endDate">
-                                <option value="">Not set</option>
-                                <option tal:repeat="date here/getAvailableDates"
-                                        tal:content="python:date.strftime('%d %b')"
-                                        tal:attributes="value date;
-                                                        selected python:here.end() == date"
-                                        >02 Nov</option>
-                            </select>
-                            <img tal:define="date_go here/date_go.png"
-                                 tal:replace="structure
-                                              python:date_go.tag(style='display: none',
-                                                                 css_class='today_button',
-                                                                 alt='*', title='Today')"
-                                 />
-                        </span>
-                        <span class="formvaluenode"
-                              tal:condition="here/end"
+                    <td>
+                        <span tal:condition="here/end"
                               tal:content="python:here.end().strftime('%d %b')"></span>
                     </td>
                 </tr>
                 <tr>
                     <th>Responsible</th>
-                    <td ondblclick="showhiddenfield(this)">
-                        <span class="invisibleformnode">
-                            <select name="responsiblePerson"
-                                    tal:define="responsiblePerson request/responsiblePerson | here/getResponsiblePerson | python:''">
-                                <option value="">Unassigned</option>
-                                <tal:options repeat="participant here/getAvailableParticipants">
-                                    <option tal:attributes="value participant;
-                                                            selected python:responsiblePerson==participant"
-                                            tal:define="author python:mtool.getMemberInfo(participant)"
-                                            tal:content="author/fullname|participant">limi</option>
-                                </tal:options>
-                            </select>
-                        </span>
-                        <span class="formvaluenode"
-                              tal:define="responsible here/getResponsiblePerson;
+                    <td>
+                        <span tal:define="responsible here/getResponsiblePerson;
                                           author python:responsible and mtool.getMemberInfo(responsible)"
                               tal:content="author/fullname|responsible"
                               >limi</span>
@@ -176,31 +115,23 @@
                 </tr>
                 <tr>
                     <th>Nosy list</th>
-                    <td ondblclick="showhiddenfield(this)">
-                        <select class="invisibleformnode" name="participants" multiple="multiple">
-                            <tal:options define="availableParticipants here/getParticipants"
-                                         repeat="participant here/getAvailableParticipants">
-                                <option tal:attributes="value participant;
-                                                        selected python:participant in availableParticipants"
-                                        tal:define="author python:mtool.getMemberInfo(participant)"
-                                        tal:content="author/fullname|participant">limi</option>
-                            </tal:options>
-                        </select>
-                        <span class="formvaluenode">
-                            <tal:participants repeat="participant here/getParticipants">
-                                <span tal:define="author python:mtool.getMemberInfo(participant);
-                                                  name author/fullname|participant"
-                                      tal:replace="name">limi</span><span
-                                      tal:condition="not:repeat/participant/end"
-                                      tal:omit-tag="">,</span>
-                            </tal:participants>
-                        </span>
+                    <td>
+                        <tal:participants repeat="participant here/getParticipants">
+                            <span tal:define="author python:mtool.getMemberInfo(participant);
+                                              name author/fullname|participant"
+                                  tal:replace="name">limi</span><span
+                                  tal:condition="not:repeat/participant/end"
+                                  tal:omit-tag="">,</span>
+                        </tal:participants>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <metal:text use-macro="here/extropyproject_view/macros/text_inline_edit" />
+        <div tal:define="default string:(no body, double click to edit);
+                         text context/getText;
+                         content python:text and text or default"
+             tal:content="structure content"></div>
 
         <div class="visualClear"><!----></div>
 

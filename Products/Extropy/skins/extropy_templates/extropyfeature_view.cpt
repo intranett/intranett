@@ -24,72 +24,28 @@
             'Set up'.
         </p>
 
-        <h1>
-            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
-            <span ondblclick="showhiddenfield(this)">
-                <span class="formvaluenode"
-                      tal:content="here/Title">
-                </span>
-                <input name="title"
-                       class="invisibleformnode editableHeadline"
-                       tal:attributes="value here/Title"
-                       />
-            </span>
-        </h1>
+        <h1 tal:content="here/Title" />
 
         <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
           <tbody tal:define="mtool nocall:context/portal_membership;">
             <tr>
               <th>Target Phase</th>
-              <td ondblclick="showhiddenfield(this)" tal:define="currentPhase python:here.getExtropyParent('ExtropyPhase')">
-                <select class="invisibleformnode" name="moveToPhase"
-                        >
-                  <option tal:repeat="phase python:here.getExtropyParent('ExtropyProject').objectValues('ExtropyPhase')"
-                          tal:content="phase/Title"
-                          tal:attributes="value phase/UID;
-                          selected python:phase.UID() ==currentPhase.UID()">Phase 1</option>
-                </select>
-                <span class="formvaluenode" tal:content="currentPhase/Title"></span>
+              <td tal:define="currentPhase python:here.getExtropyParent('ExtropyPhase')">
+                <span tal:content="currentPhase/Title"></span>
               </td>
             </tr>
             <tr>
               <th>Responsible</th>
-              <td ondblclick="showhiddenfield(this)">
-                <span  class="invisibleformnode">
-                  <select name="responsiblePerson"
-                          tal:define="responsiblePerson request/responsiblePerson | here/getResponsiblePerson | python:''">
-                    <option value="">Unassigned</option>
-                    <tal:options repeat="participant here/getAvailableParticipants">
-                    <option tal:attributes="value participant;
-                            selected python:responsiblePerson==participant"
-                            tal:define="author python:mtool.getMemberInfo(participant)"
-                            tal:content="author/fullname|participant">limi</option>
-                    </tal:options>
-                  </select>
-                  </span>
-                  <span class="formvaluenode"
-                        tal:define="responsible here/getResponsiblePerson;
-                                    author python:responsible and mtool.getMemberInfo(responsible)"
-                        tal:content="author/fullname|responsible"
-                        >limi</span>
+              <td tal:define="responsible here/getResponsiblePerson;
+                              author python:responsible and mtool.getMemberInfo(responsible)"
+                  tal:content="author/fullname|responsible">limi
               </td>
             </tr>
             <tr>
               <th>
                 Nosy list
               </th>
-              <td ondblclick="showhiddenfield(this)">
-                <select class="invisibleformnode" name="participants" multiple="multiple">
-                  <tal:options
-                    define="availableParticipants here/getParticipants"
-                    repeat="participant here/getAvailableParticipants">
-                  <option tal:attributes="value participant;
-                          selected python:participant in availableParticipants"
-                          tal:define="author python:mtool.getMemberInfo(participant)"
-                          tal:content="author/fullname|participant">limi</option>
-                  </tal:options>
-                </select>
-                <span class="formvaluenode">
+              <td>
                   <tal:participants repeat="participant here/getParticipants">
                     <span tal:define="author python:mtool.getMemberInfo(participant);
                                       name author/fullname | participant"
@@ -97,7 +53,6 @@
                           tal:condition="not:repeat/participant/end"
                           tal:omit-tag="">,</span>
                   </tal:participants>
-                </span>
               </td>
             </tr>
           </tbody>
@@ -117,7 +72,10 @@
 
         <fieldset>
             <legend>Status/Edit</legend>
-            <metal:text use-macro="here/extropyproject_view/macros/text_inline_edit" />
+            <div tal:define="default string:(no body, double click to edit);
+                             text context/getText;
+                             content python:text and text or default"
+                 tal:content="structure content"></div>
 
             <div class="visualClear"><!----></div>
 

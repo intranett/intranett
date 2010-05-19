@@ -141,14 +141,6 @@
     template="workflowactions.pt"
     />
 
-<browser:page
-    for="Products.ZCatalog.CatalogBrains.AbstractCatalogBrain"
-    class=".workflowactions.RecordWorkflowActions"
-    permission="zope2.View"
-    name="workflowactions"
-    template="workflowactions.pt"
-    />
-
 <!-- Projects Listing -->
 
 <browser:page

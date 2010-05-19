@@ -28,18 +28,7 @@
 
         <input type="hidden" name="form.submitted" value="1" />
 
-        <h1>
-            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
-            <span ondblclick="showhiddenfield(this)" tal:define="title here/Title">
-                <span class="formvaluenode" tal:content="title">
-                    Title
-                </span>
-                <input name="title"
-                       class="invisibleformnode editableHeadline"
-                       tal:attributes="value title"
-                       />
-            </span>
-        </h1>
+        <h1 tal:content="here/Title" />
 
         <p class="documentDescription"
            tal:content="python: 'Support usage for quarter %s %s'%(quarter,year)">

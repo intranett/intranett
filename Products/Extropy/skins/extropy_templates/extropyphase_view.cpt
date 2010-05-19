@@ -19,18 +19,7 @@
 
         <input type="hidden" name="form.submitted" value="1" />
 
-        <h1>
-            <img tal:attributes="src string:${portal_url}/${here/getIcon}" />
-            <span ondblclick="showhiddenfield(this)" tal:define="title here/Title">
-                <span class="formvaluenode" tal:content="title">
-                    Title
-                </span>
-                <input name="title"
-                       class="invisibleformnode editableHeadline"
-                       tal:attributes="value title"
-                       />
-            </span>
-        </h1>
+        <h1 tal:content="here/Title" />
 
         <metal:summary use-macro="here/extropyproject_view/macros/trackingsummary" />
 
@@ -38,7 +27,10 @@
             Description
         </p>
 
-        <metal:text use-macro="here/extropyproject_view/macros/text_inline_edit" />
+        <div tal:define="default string:(no body, double click to edit);
+                         text context/getText;
+                         content python:text and text or default"
+             tal:content="structure content"></div>
 
     </form>
 
