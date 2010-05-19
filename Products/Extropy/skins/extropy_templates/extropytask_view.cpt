@@ -78,9 +78,7 @@
             </dd>
         </dl>
 
-        <h2>Status/Edit</h2>
-
-        <div class="discreet">Double-click on values to edit them.</div>
+        <h2>Status</h2>
 
         <table class="vertical listing" style="float: right; margin: 1em">
             <tbody>

@@ -32,7 +32,7 @@
         </p>
 
     <fieldset>
-        <legend>Status/Edit</legend>
+        <legend>Status</legend>
         <div>
 
         <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
@@ -45,19 +45,15 @@
                          <span tal:content="python: ','.join(here.getParticipants())"></span>
                     </td>
                 </tr>
-  
             </tbody>
         </table>
-        <div class="discreet">Double-click on values to edit them.</div>
-        
+
         <div id="DescriptionArea" tal:content="structure here/getText">
-            
-            THE MAIN TEXT COMES HERE
-            
+            Text
         </div>
-      
+
     </div>
-        
+
     <div class="visualClear"></div>
 
     <h4>Add comment or changenote</h4>
@@ -72,19 +68,11 @@
         </div>
     </fieldset>
 
-    
-    
-    
-     
-        <div class="visualClear"></div>
+    <div class="visualClear"></div>
 
     </form>
 
-
   <div metal:use-macro="here/extropytask_view/macros/historylist"></div>
-  
-  
-  
 
 </div>
 
