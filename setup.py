@@ -1,12 +1,11 @@
 from setuptools import setup, find_packages
 
-version = '0.7'
+version = '1.0'
 
 setup(name='Products.Extropy',
       version=version,
       description="",
-      long_description=open("README.txt").read() + "\n" +
-                       open("CHANGES.txt").read(),
+      long_description=open("README.txt").read(),
       classifiers=[
         "Framework :: Plone",
         ],
