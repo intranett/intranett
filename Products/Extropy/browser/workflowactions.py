@@ -1,12 +1,12 @@
-from Acquisition import aq_inner
+from zope.publisher.browser import BrowserView
+
 from Products.CMFCore.utils import getToolByName
-from Products.Five import BrowserView
 
 
 class WorkflowActions(BrowserView):
 
     def data(self):
-        context = aq_inner(self.context)
+        context = self.context
         wft = getToolByName(context, 'portal_workflow')
         state = wft.getInfoFor(context, 'review_state', None)
 
