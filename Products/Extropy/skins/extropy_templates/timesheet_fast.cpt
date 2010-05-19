@@ -1,187 +1,193 @@
-<metal:page define-macro="master"
-><metal:block define-slot="top_slot"
-/><tal:doctype tal:replace="structure string:&lt;!DOCTYPE html PUBLIC
+<metal:page define-macro="master">
+<tal:doctype tal:replace="structure string:&lt;!DOCTYPE html PUBLIC
   &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
   &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" />
 
-<metal:block use-macro="here/global_defines/macros/defines" />
 <html xmlns="http://www.w3.org/1999/xhtml" 
     tal:define="portal_state context/@@plone_portal_state;
         context_state context/@@plone_context_state;
         plone_view context/@@plone;
-        lang string:'en';
+        lang portal_state/language;
         view nocall:view | nocall: plone_view;
-        dummy python: getattr(plone_view, 'mark_view', None) is not None and plone_view.mark_view(view);
+        dummy python: plone_view.mark_view(view);
         portal_url portal_state/portal_url;
-        portal portal_state/portal;
         checkPermission nocall: context/portal_membership/checkPermission;
-        site_properties context/portal_properties/site_properties;"
+        site_properties context/portal_properties/site_properties;
+        ajax_load request/ajax_load | nothing"
     tal:attributes="lang lang;">
 
-
-  <tal:cache tal:define="charset site_properties/default_charset|string:utf-8">
-    <metal:cache use-macro="here/global_cache_settings/macros/cacheheaders">
-      Get the global cache headers located in global_cache_settings.
+    <metal:cache use-macro="context/global_cache_settings/macros/cacheheaders">
+    Get the global cache headers located in global_cache_settings.
     </metal:cache>
-  </tal:cache>
 
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <metal:baseslot define-slot="base">
-      <base tal:attributes="href here/renderBase" /><!--[if lt IE 7]></base><![endif]-->
+        <base tal:attributes="href plone_view/renderBase" /><!--[if lt IE 7]></base><![endif]-->
     </metal:baseslot>
 
     <div tal:replace="structure provider:plone.htmlhead" />
+    <link tal:replace="structure provider:plone.htmlhead.links" />
 
+    <metal:block tal:define="dummy python:request.set('disable_border',1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+
+    <metal:topslot define-slot="top_slot" />
     <metal:headslot define-slot="head_slot" />
-    <tal:comment replace="nothing"> A slot where you can insert elements in the header from a template </tal:comment>
-
-    <tal:comment replace="nothing"> A slot where you can insert CSS in the header from a template </tal:comment>
     <metal:styleslot define-slot="style_slot" />
-
-    <tal:comment replace="nothing"> This is deprecated, please use style_slot instead. </tal:comment>
-    <metal:cssslot define-slot="css_slot" />
-
-    <tal:comment replace="nothing"> A slot where you can insert javascript in the header from a template </tal:comment>
     <metal:javascriptslot define-slot="javascript_head_slot" />
 
   </head>
 
 <body>
+<body tal:define="body_class python:plone_view.bodyClass(template, view);
+                  sunburst_view python:context.restrictedTraverse('@@sunburstview')"
+    tal:attributes="class body_class;">
 
-<div metal:use-macro="here/global_statusmessage/macros/portal_message">
-    Portal status message
+<div id="visual-portal-wrapper">
+<div id="portal-columns" class="row">
+<div id="portal-column-content" class="cell" tal:attributes="class python:sunburst_view.getColumnsClass(view)">
+
+  <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+   Status message
+  </div>
+
+  <div id="content"
+       style="margin:2em;"
+       tal:define="isAnon context/@@plone_portal_state/anonymous;
+                   raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
+                   DateTime modules/DateTime;
+                   datestring request/date | python:DateTime.DateTime().Date();
+                   date python:DateTime.DateTime(datestring);
+                   start python:DateTime.DateTime( '%s %s' %(datestring , '00:00'));
+                   end python:DateTime.DateTime('%s %s' % (datestring , '23:59'));
+                   tool nocall:here/extropy_timetracker_tool;
+                   etool nocall:here/extropy_tracking_tool;
+                   hours python:tool.getHours(context, start=start, end=end, Creator=user.getUserName());
+                   gaps python:tool.fillGaps(hours);
+                   sumhours python:tool.countHours(hours);
+                   timefmt python:'%h.%d %H:%M';
+                   tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates(), sort_on='getProjectTitle');
+                   groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').iteritems()">
+
+      <form method="get" 
+            class="enableUnloadProtection"
+            tal:attributes="action string:${here/absolute_url}/${template/getId}">
+
+      <fieldset>
+        <legend>Filter</legend>
+          Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()" />&nbsp;
+        <a tal:define="yesterday python:start-1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${yesterday/Date}">&larr; previous day</a> |
+        <a tal:define="tomorrow python:start+1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${tomorrow/Date}">next day &rarr;</a>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Worked hours on <span tal:replace="start/Day" /> <span tal:replace="start/Date"></span><br/>
+        </legend>
+
+        <table class="listing nosort">
+           <thead>
+              <tr>
+                  <th>Task</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Hours</th>
+                  <th>Category</th>
+              </tr>
+           </thead>
+           <tbody>
+           <tal:gaps tal:repeat="gap gaps">
+               <tal:vars define="is_gap python:same_type(gap,{}); was_gap last_gap | nothing; global last_gap is_gap;">
+               <tr tal:condition="python: is_gap and not was_gap" class="gap">
+                   <td>-- Gap! --</td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+               </tr>
+               <tr tal:condition="not: is_gap">
+                   <td><a tal:attributes="href gap/getURL" tal:content="python:gap.Title or '...unknown...'"></a>
+                     <span class="discreet" tal:content="gap/getProjectTitle | nothing"></span></td>
+                   <td tal:content="python:gap.start.strftime('%H:%M')">10:00</td>  
+                   <td tal:content="python:gap.end.strftime('%H:%M')">11:00</td>
+                   <td tal:content="gap/workedHours"></td>
+                   <td><span tal:attributes="class string:budget-category-${gap/getBudgetCategory/lower}" tal:content="gap/getBudgetCategory"></span></td>
+               </tr>
+               </tal:vars>
+          </tal:gaps>
+          </tbody>
+          <tfoot>
+              <tr>
+                  <th colspan="3" style="text-align:right">Sum</th>
+                  <td tal:content="sumhours"></td>
+                  <td>&nbsp;</td>
+              </tr>
+          </tfoot>
+
+        </table>
+
+        <table class="listing nosort">
+           <thead>
+              <tr>
+                  <th>Task</th>
+                  <th>Title</th>
+                  <th>Start</th>
+                  <th>End</th>
+              </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td>
+                       <select name="hours.task:records:string" tal:define="last_task request/last_task | nothing" style="width: 20em">
+                          <option value="">-</option>
+                          <tal:projects tal:repeat="proj groupedtasks">
+                              <optgroup tal:repeat="phase python:etool.dictifyBrains(proj[1], 'getPhaseTitle').items()"
+                                                   tal:attributes="label python:'%s - %s' % (proj[0], phase[0])">
+                                    <option tal:repeat="task python:phase[1]" tal:attributes="value task/UID; label python:task.Title; selected python: last_task == path('task/UID')"
+                                              tal:content="python:task.Title">task title</option>
+                              </optgroup>
+                          </tal:projects>
+                       </select>
+                   </td>
+                   <td>
+                      <input  name="hours.title:records:string" type="text" value="" size="20"
+                              tal:attributes="value request/title | nothing" />
+                   </td>
+                   <td tal:define="tasks python:len(gaps)!=0;
+                                   last python:tasks and gaps[-1] or False;
+                                   lastended python: last and last.end.strftime('%H:%M') or '09:00'">
+                      <input name="hours.start:records:string" type="text" value="" size="5"
+                             tal:attributes="value request/start | lastended" />
+                   </td>
+                   <td>
+                      <input name="hours.end:records:string" type="text" value="" size="5"
+                             tal:attributes="value request/end | nothing" />
+                   </td>
+               </tr>
+               <tr>
+                   <td colspan="4">
+                      Summary (in restructured text)<br />
+                      <textarea name="hours.summary:records:text" rows="5" style="width:100%;"
+                           tal:content="request/summary | nothing"
+                           tal:attributes="rows request/rows | default"></textarea>
+                   </td>
+               </tr>
+          </tbody>
+        </table>
+
+        <input type="submit" name="form.submitted" value="Submit" />
+
+      </fieldset>
+
+      </form>
+
+  </div>
+
 </div>
-
-<div style="margin:2em;"
-     tal:define="isAnon context/@@plone_portal_state/anonymous;
-                 raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
-                 DateTime modules/DateTime;
-                 datestring request/date | python:DateTime.DateTime().Date();
-                 date python:DateTime.DateTime(datestring);
-                 start python:DateTime.DateTime( '%s %s' %(datestring , '00:00'));
-                 end python:DateTime.DateTime('%s %s' % (datestring , '23:59'));
-                 tool nocall:here/extropy_timetracker_tool;
-                 etool nocall:here/extropy_tracking_tool;
-                 hours python:tool.getHours(portal, start=start, end=end, Creator=user.getUserName());
-                 gaps python:tool.fillGaps(hours);
-                 sumhours python:tool.countHours(hours);
-                 timefmt python:'%h.%d %H:%M';
-                 tasks python:etool.trackingQuery( portal, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates(), sort_on='getProjectTitle');
-                 groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').iteritems()">
-
-    <form method="get" 
-          class="enableUnloadProtection"
-          tal:attributes="action string:${here/absolute_url}/${template/getId}">
-
-    <fieldset>
-      <legend>Filter</legend>
-        Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()" />&nbsp;
-      <a tal:define="yesterday python:start-1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${yesterday/Date}">&larr; previous day</a> |
-      <a tal:define="tomorrow python:start+1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${tomorrow/Date}">next day &rarr;</a>
-
-    </fieldset>
-
-    <fieldset>
-      <legend>Worked hours on <span tal:replace="start/Day" /> <span tal:replace="start/Date"></span><br/>
-      </legend>
-
-      <table class="listing nosort">
-         <thead>
-            <tr>
-                <th>Task</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Hours</th>
-                <th>Category</th>
-            </tr>
-         </thead>
-         <tbody>
-         <tal:gaps tal:repeat="gap gaps">
-             <tal:vars define="is_gap python:same_type(gap,{}); was_gap last_gap | nothing; global last_gap is_gap;">
-             <tr tal:condition="python: is_gap and not was_gap" class="gap">
-                 <td>-- Gap! --</td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-             </tr>
-             <tr tal:condition="not: is_gap">
-                 <td><a tal:attributes="href gap/getURL" tal:content="python:gap.Title or '...unknown...'"></a>
-                   <span class="discreet" tal:content="gap/getProjectTitle | nothing"></span></td>
-                 <td tal:content="python:gap.start.strftime('%H:%M')">10:00</td>  
-                 <td tal:content="python:gap.end.strftime('%H:%M')">11:00</td>
-                 <td tal:content="gap/workedHours"></td>
-                 <td><span tal:attributes="class string:budget-category-${gap/getBudgetCategory/lower}" tal:content="gap/getBudgetCategory"></span></td>
-             </tr>
-             </tal:vars>
-        </tal:gaps>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="3" style="text-align:right">Sum</th>
-                <td tal:content="sumhours"></td>
-                <td>&nbsp;</td>
-            </tr>
-        </tfoot>
-
-      </table>
-
-      <table class="listing nosort">
-         <thead>
-            <tr>
-                <th>Task</th>
-                <th>Title</th>
-                <th>Start</th>
-                <th>End</th>
-            </tr>
-         </thead>
-         <tbody>
-             <tr>
-                 <td>
-                     <select name="hours.task:records:string" tal:define="last_task request/last_task | nothing" style="width: 20em">
-                        <option value="">-</option>
-                        <tal:projects tal:repeat="proj groupedtasks">
-                            <optgroup tal:repeat="phase python:etool.dictifyBrains(proj[1], 'getPhaseTitle').items()"
-                                                 tal:attributes="label python:'%s - %s' % (proj[0], phase[0])">
-                                  <option tal:repeat="task python:phase[1]" tal:attributes="value task/UID; label python:task.Title; selected python: last_task == path('task/UID')"
-                                            tal:content="python:task.Title">task title</option>
-                            </optgroup>
-                        </tal:projects>
-                     </select>
-                 </td>
-                 <td>
-                    <input  name="hours.title:records:string" type="text" value="" size="20"
-                            tal:attributes="value request/title | nothing" />
-                 </td>
-                 <td tal:define="tasks python:len(gaps)!=0;
-                                 last python:tasks and gaps[-1] or False;
-                                 lastended python: last and last.end.strftime('%H:%M') or '09:00'">
-                    <input name="hours.start:records:string" type="text" value="" size="5"
-                           tal:attributes="value request/start | lastended" />
-                 </td>
-                 <td>
-                    <input name="hours.end:records:string" type="text" value="" size="5"
-                           tal:attributes="value request/end | nothing" />
-                 </td>
-             </tr>
-             <tr>
-                 <td colspan="4">
-                    Summary (in restructured text)<br />
-                    <textarea name="hours.summary:records:text" rows="5" style="width:100%;"
-                         tal:content="request/summary | nothing"
-                         tal:attributes="rows request/rows | default"></textarea>
-                 </td>
-             </tr>
-        </tbody>
-      </table>
-
-      <input type="submit" name="form.submitted" value="Submit" />
-
-    </fieldset>
-
-    </form>
-
+</div>
 </div>
 
 </body>
