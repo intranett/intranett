@@ -13,6 +13,8 @@
   <include package=".browser" />
   <include package=".portlets" />
 
+  <utility component=".solr.solr_config" />
+
   <cmf:registerDirectory
       name="skins"
       directory="skins"
