@@ -20,6 +20,7 @@ setup(name='Products.Extropy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'collective.solr',
           'experimental.catalogqueryplan',
           'mailinglogger',
           'Products.Invoice',
