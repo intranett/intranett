@@ -7,8 +7,10 @@ from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base
 from App.class_init import InitializeClass
 from DateTime import DateTime
+from Products.CMFCore.utils import _getAuthenticatedUser
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.CatalogTool import CatalogTool
+from Products.ZCatalog.ZCatalog import ZCatalog
 
 from Products.Extropy import config
 from Products.Extropy import permissions
@@ -33,12 +35,26 @@ class ExtropyTrackingTool(CatalogTool):
         CatalogTool.manage_options
     )
 
+    def _listAllowedRolesAndUsers(self, user):
+        """Makes sure the list includes the user's groups.
+        """
+        result = list(user.getRoles())
+        if hasattr(aq_base(user), 'getGroups'):
+            result = result + ['user:%s' % x for x in user.getGroups()]
+        result.append('Anonymous')
+        # result.append('user:%s' % user.getId())
+        return result
+
     # a method to get placeful task results
     security.declarePublic( 'localQuery' )
     def localQuery(self,node,REQUEST=None, **kw):
         """ a placeful query for tasks"""
-        kw[ 'path' ] = '/'.join(node.getPhysicalPath())
-        return apply(CatalogTool.searchResults, (self, REQUEST), kw)
+        kw['path'] = '/'.join(node.getPhysicalPath())
+
+        user = _getAuthenticatedUser(self)
+        kw['allowedRolesAndUsers'] = self._listAllowedRolesAndUsers(user)
+
+        return ZCatalog.searchResults(self, REQUEST, **kw)
 
     security.declareProtected(permissions.VIEW_PERMISSION, 'trackingQuery')
     def trackingQuery(self, node, REQUEST=None, **kw):
@@ -209,7 +225,6 @@ class ExtropyTrackingTool(CatalogTool):
             def __init__(self, **kw):
                 self.__dict__.update(kw)
 
-        base = aq_base(self)
         addIndex = self.addIndex
         addColumn = self.addColumn
 

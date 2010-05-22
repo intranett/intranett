@@ -7,12 +7,14 @@ from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base
 from App.class_init import InitializeClass
 from DateTime import DateTime
+from Products.CMFCore.utils import _getAuthenticatedUser
 from Products.CMFPlone.CatalogTool import CatalogTool
 from Products.CMFPlone.utils import _createObjectByType
+from Products.ZCatalog.ZCatalog import ZCatalog
 
 from Products.Extropy import config
 from Products.Extropy.interfaces import IExtropyTimeTrackingTool
-from Products.Extropy.permissions import *
+from Products.Extropy.permissions import VIEW_PERMISSION
 
 
 class ExtropyTimeTrackerTool(CatalogTool):
@@ -82,12 +84,26 @@ class ExtropyTimeTrackerTool(CatalogTool):
                 return o
         return None
 
+    def _listAllowedRolesAndUsers(self, user):
+        """Makes sure the list includes the user's groups.
+        """
+        result = list(user.getRoles())
+        if hasattr(aq_base(user), 'getGroups'):
+            result = result + ['user:%s' % x for x in user.getGroups()]
+        result.append('Anonymous')
+        # result.append('user:%s' % user.getId())
+        return result
+
     security.declareProtected(VIEW_PERMISSION, 'localQuery')
     def localQuery(self, node=None, REQUEST=None, **kw):
         """ a placeful query for tasks"""
         if node is not None:
             kw[ 'path' ] = '/'.join(node.getPhysicalPath())
-        return apply(CatalogTool.searchResults, (self, REQUEST), kw)
+
+        user = _getAuthenticatedUser(self)
+        kw['allowedRolesAndUsers'] = self._listAllowedRolesAndUsers(user)
+
+        return ZCatalog.searchResults(self, REQUEST, **kw)
 
     security.declareProtected(VIEW_PERMISSION, 'getHours')
     def getHours(self, node=None, start=None, end=None, REQUEST=None, **kw):
@@ -107,7 +123,6 @@ class ExtropyTimeTrackerTool(CatalogTool):
         kw[ 'portal_type'] = 'ExtropyHours'
         kw[ 'sort_on' ]   = 'start'
         return self.localQuery(node=node, REQUEST=REQUEST, **kw)
-        #return apply(CatalogTool.searchResults, (self, REQUEST), kw)
 
     security.declareProtected(VIEW_PERMISSION, 'countIntervalHours')
     def countIntervalHours(self, node=None, start=None, end=None, REQUEST=None, **kw):
@@ -288,7 +303,6 @@ class ExtropyTimeTrackerTool(CatalogTool):
             def __init__(self, **kw):
                 self.__dict__.update(kw)
 
-        base = aq_base(self)
         addIndex = self.addIndex
         addColumn = self.addColumn
 
@@ -300,7 +314,7 @@ class ExtropyTimeTrackerTool(CatalogTool):
             else:
                 if isinstance(extra, StringTypes):
                     p = Record(indexed_attrs=extra)
-                elif isinstance(extra, DictType):
+                elif isinstance(extra, dict):
                     p = Record(**extra)
                 else:
                     p = Record()
