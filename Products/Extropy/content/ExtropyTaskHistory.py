@@ -39,24 +39,24 @@ class ExtropyTaskHistory(BaseContent):
             return self.changes
         return None
 
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'indexObject')
-    def indexObject(self):
-        """"""
-        #parent will reindex itself when we are added
-        pass
-        #self.aq_parent.reindexObject()
-
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'unindexObject')
-    def unindexObject(self):
-        """"""
-        # reindex parent if we are removed
-        self.aq_parent.reindexObject()
-
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'reindexObject')
-    def reindexObject(self, idxs=[]):
-        """"""
-        # reindex parent if we are changed
-        self.aq_parent.reindexObject(idxs)
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'indexObject')
+    # def indexObject(self):
+    #     """"""
+    #     #parent will reindex itself when we are added
+    #     pass
+    #     #self.aq_parent.reindexObject()
+    # 
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'unindexObject')
+    # def unindexObject(self):
+    #     """"""
+    #     # reindex parent if we are removed
+    #     self.aq_parent.reindexObject()
+    # 
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'reindexObject')
+    # def reindexObject(self, idxs=[]):
+    #     """"""
+    #     # reindex parent if we are changed
+    #     self.aq_parent.reindexObject(idxs)
 
 
 registerType(ExtropyTaskHistory, PROJECTNAME)

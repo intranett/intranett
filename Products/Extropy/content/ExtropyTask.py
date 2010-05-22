@@ -58,33 +58,33 @@ class ExtropyTask(ExtropyHistoryTrackable, ExtropyBase, BaseFolder):
 
     ############################################
     # reindex parent on any change
-
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'indexObject')
-    def indexObject(self):
-        """"""
-        #parent will reindex itself when we are added
-        BaseFolder.indexObject(self)
-        parent = aq_parent(aq_inner(self))
-        if parent is not None:
-            parent.reindexObject()
-
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'unindexObject')
-    def unindexObject(self):
-        """"""
-        # reindex parent if we are removed
-        BaseFolder.unindexObject(self)
-        parent = aq_parent(aq_inner(self))
-        if parent is not None:
-            parent.reindexObject()
-
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'reindexObject')
-    def reindexObject(self, idxs=[]):
-        """"""
-        # reindex parent if we are changed
-        BaseFolder.reindexObject(self, idxs)
-        parent = aq_parent(aq_inner(self))
-        if parent is not None:
-            parent.reindexObject()
+    # 
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'indexObject')
+    # def indexObject(self):
+    #     """"""
+    #     #parent will reindex itself when we are added
+    #     BaseFolder.indexObject(self)
+    #     parent = aq_parent(aq_inner(self))
+    #     if parent is not None:
+    #         parent.reindexObject()
+    # 
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'unindexObject')
+    # def unindexObject(self):
+    #     """"""
+    #     # reindex parent if we are removed
+    #     BaseFolder.unindexObject(self)
+    #     parent = aq_parent(aq_inner(self))
+    #     if parent is not None:
+    #         parent.reindexObject()
+    # 
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'reindexObject')
+    # def reindexObject(self, idxs=[]):
+    #     """"""
+    #     # reindex parent if we are changed
+    #     BaseFolder.reindexObject(self, idxs)
+    #     parent = aq_parent(aq_inner(self))
+    #     if parent is not None:
+    #         parent.reindexObject()
 
 
 

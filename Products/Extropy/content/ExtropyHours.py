@@ -123,33 +123,33 @@ class ExtropyHours(BaseContent):
 
     ############################################
     # reindex parent on any change
-
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'indexObject')
-    def indexObject(self):
-        """"""
-        #parent will reindex itself when we are added
-        BaseContent.indexObject(self)
-        parent = self.getExtropyParent()
-        if parent is not None:
-            parent.reindexObject()
-
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'unindexObject')
-    def unindexObject(self):
-        """"""
-        # reindex parent if we are removed
-        BaseContent.unindexObject(self)
-        parent = self.getExtropyParent()
-        if parent is not None:
-            parent.reindexObject()
-
-    security.declareProtected(MODIFY_CONTENT_PERMISSION , 'reindexObject')
-    def reindexObject(self, idxs=[]):
-        """"""
-        # reindex parent if we are changed
-        BaseContent.reindexObject(self, idxs)
-        parent = self.getExtropyParent()
-        if parent is not None:
-            parent.reindexObject()
+    # 
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'indexObject')
+    # def indexObject(self):
+    #     """"""
+    #     #parent will reindex itself when we are added
+    #     BaseContent.indexObject(self)
+    #     parent = self.getExtropyParent()
+    #     if parent is not None:
+    #         parent.reindexObject()
+    # 
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'unindexObject')
+    # def unindexObject(self):
+    #     """"""
+    #     # reindex parent if we are removed
+    #     BaseContent.unindexObject(self)
+    #     parent = self.getExtropyParent()
+    #     if parent is not None:
+    #         parent.reindexObject()
+    # 
+    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'reindexObject')
+    # def reindexObject(self, idxs=[]):
+    #     """"""
+    #     # reindex parent if we are changed
+    #     BaseContent.reindexObject(self, idxs)
+    #     parent = self.getExtropyParent()
+    #     if parent is not None:
+    #         parent.reindexObject()
 
 
 registerType(ExtropyHours, PROJECTNAME)
