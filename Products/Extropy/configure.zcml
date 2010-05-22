@@ -14,6 +14,8 @@
   <include package=".portlets" />
 
   <utility component=".solr.solr_config" />
+  <utility factory="collective.solr.manager.SolrConnectionManager" />
+  <utility factory="collective.solr.indexer.SolrIndexProcessor" name="solr" />
 
   <cmf:registerDirectory
       name="skins"
