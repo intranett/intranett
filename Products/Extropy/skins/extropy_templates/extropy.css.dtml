@@ -17,25 +17,6 @@ option[disabled] {
     color: grey;
 }
 
-.extropychangenote{
-    border: 1px solid #8cacbb;
-    margin          : 1em 0;
-    font-size       : 90%
-}
-
-.extropychangenotecontent{
-    margin          : 1em;
-}
-
-
-.notImplemented {
-    opacity: 0.2;
-    -moz-opacity: 0.2;
-    -khtml-opacity: 0.2;
-    border: 1px dotted red;
-}
-
-
 /* progressbars */
 
 .progressbar{
