@@ -1,7 +1,13 @@
-# query plan dumped at 'Sat May 22 23:16:22 2010'
+# query plan dumped at 'Mon May 24 01:33:28 2010'
 
 queryplan = {
   '/intranet.psol/portal_catalog': {
+    ('allowedRolesAndUsers', 'effectiveRange', 'path', 'show_inactive', 'sort_on'):
+      ['allowedRolesAndUsers', 'path', 'effectiveRange'],
+    ('allowedRolesAndUsers', 'effectiveRange', 'path', 'sort_on', 'sort_order', ('is_default_page', 'False'), ('is_folderish', 'True'), ('portal_type', "['ExtropyActivity', 'ExtropyPhase', 'ExtropyProject', 'Folder', 'Topic']"), ('review_state', "('Sent', 'active', 'prospective', 'open', 'assigned', 'entered', 'external', 'internal', 'internally_published', 'pending', 'planned', 'private', 'prospective', 'Draft', 'published', 'testing', 'unassigned')")):
+      ['allowedRolesAndUsers', 'path', 'portal_type', 'is_folderish', 'review_state', 'is_default_page', 'effectiveRange'],
+    ('allowedRolesAndUsers', 'effectiveRange', 'path', 'sort_on', 'sort_order', ('is_default_page', 'False'), ('portal_type', "['ATFile', 'ATImage', 'ExtropyActivity', 'ExtropyPhase', 'ExtropyProject', 'Folder', 'Large Plone Folder', 'Topic']"), ('review_state', "('Sent', 'active', 'prospective', 'open', 'assigned', 'entered', 'external', 'internal', 'internally_published', 'pending', 'planned', 'private', 'prospective', 'Draft', 'published', 'testing', 'unassigned')")):
+      ['allowedRolesAndUsers', 'path', 'portal_type', 'review_state', 'is_default_page', 'effectiveRange'],
     ('allowedRolesAndUsers', 'path', 'show_inactive', 'sort_on'):
       ['path', 'allowedRolesAndUsers'],
     ('allowedRolesAndUsers', 'path', 'show_inactive', 'sort_on', ('portal_type', "['Image', 'Document', 'Event', 'File', 'Invoice', 'ExtropyActivity']")):
@@ -53,6 +59,12 @@ queryplan = {
     'relationship',
   ]),
   '/intranet.psol/extropy_tracking_tool': {
+    ('UID', 'allowedRolesAndUsers'):
+      ['UID', 'allowedRolesAndUsers'],
+    ('allowedRolesAndUsers', 'effectiveRange', 'getParticipants', ('portal_type', "'ExtropyProject'"), ('review_state', "'active'")):
+      ['allowedRolesAndUsers', 'getParticipants', 'portal_type', 'review_state'],
+    ('allowedRolesAndUsers', 'effectiveRange', 'getResponsiblePerson', ('portal_type', "('ExtropyActivity', 'ExtropyFeature', 'ExtropyTask')"), ('review_state', "['open', 'in-progress', 'active', 'unassigned', 'deferred', 'assigned', 'testing', 'taskscomplete']")):
+      ['allowedRolesAndUsers', 'getResponsiblePerson', 'review_state', 'portal_type'],
     ('allowedRolesAndUsers', 'getParticipants', ('portal_type', "'ExtropyProject'"), ('review_state', "'active'")):
       ['portal_type', 'getParticipants', 'review_state', 'allowedRolesAndUsers'],
     ('allowedRolesAndUsers', 'getResponsiblePerson', 'path', 'sort_on', ('portal_type', "['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature']"), ('review_state', "['open', 'in-progress', 'active', 'unassigned', 'deferred', 'assigned', 'testing', 'taskscomplete']")):
@@ -78,6 +90,8 @@ queryplan = {
       ['path', 'start', 'Creator', 'allowedRolesAndUsers', 'portal_type'],
     ('Creator', 'allowedRolesAndUsers', 'path', 'portal_type', 'sort_on', 'start'):
       ['path', 'start', 'Creator', 'allowedRolesAndUsers', 'portal_type'],
+    ('Creator', 'allowedRolesAndUsers', 'portal_type', 'sort_on', 'start'):
+      ['start', 'Creator', 'allowedRolesAndUsers', 'portal_type'],
     ('allowedRolesAndUsers', 'path', 'portal_type', 'sort_on'):
       ['path', 'allowedRolesAndUsers', 'portal_type'],
     ('allowedRolesAndUsers', 'path', 'portal_type', 'sort_on', 'sort_order', 'start'):
@@ -86,6 +100,8 @@ queryplan = {
       ['path', 'start', 'allowedRolesAndUsers', 'portal_type'],
     ('allowedRolesAndUsers', 'path', 'portal_type', 'sort_on', ('getBudgetCategory', "'Billable'"), ('review_state', "'entered'")):
       ['path', 'review_state', 'getBudgetCategory', 'allowedRolesAndUsers', 'portal_type'],
+    ('path',):
+      ['path'],
   },
   '/intranet.psol/extropy_timetracker_tool:valueindexes': frozenset([
     'getBudgetCategory',
