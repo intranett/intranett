@@ -3,6 +3,7 @@ from Products.Archetypes.public import *
 from Products.Extropy.config import *
 from Products.Extropy.permissions import *
 from Products.Extropy.content.ExtropyBase import BudgetSchema
+from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
 from Products.ATContentTypes.configuration import zconf
@@ -120,33 +121,18 @@ class ExtropyHours(BaseContent):
             return package.getBudgetCategory() or 'Billable'
         return "Billable"
 
-
-    ############################################
-    # reindex parent on any change
-    # 
-    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'indexObject')
-    # def indexObject(self):
-    #     """"""
-    #     #parent will reindex itself when we are added
-    #     BaseContent.indexObject(self)
+    # security.declareProtected(ModifyPortalContent, 'setStartDate')
+    # def setStartDate(self, value, **kwargs):
+    #     field = self.getField('startDate')
+    #     field.set(self, value, **kwargs)
     #     parent = self.getExtropyParent()
     #     if parent is not None:
     #         parent.reindexObject()
     # 
-    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'unindexObject')
-    # def unindexObject(self):
-    #     """"""
-    #     # reindex parent if we are removed
-    #     BaseContent.unindexObject(self)
-    #     parent = self.getExtropyParent()
-    #     if parent is not None:
-    #         parent.reindexObject()
-    # 
-    # security.declareProtected(MODIFY_CONTENT_PERMISSION , 'reindexObject')
-    # def reindexObject(self, idxs=[]):
-    #     """"""
-    #     # reindex parent if we are changed
-    #     BaseContent.reindexObject(self, idxs)
+    # security.declareProtected(ModifyPortalContent, 'setEndDate')
+    # def setEndDate(self, value, **kwargs):
+    #     field = self.getField('endDate')
+    #     field.set(self, value, **kwargs)
     #     parent = self.getExtropyParent()
     #     if parent is not None:
     #         parent.reindexObject()
