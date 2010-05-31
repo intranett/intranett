@@ -4,6 +4,7 @@ from zope.interface import implements
 
 from AccessControl import getSecurityManager
 from AccessControl import ClassSecurityInfo
+from AccessControl.Permissions import search_zcatalog
 from Acquisition import aq_base
 from App.class_init import InitializeClass
 from DateTime import DateTime
@@ -91,8 +92,13 @@ class ExtropyTimeTrackerTool(CatalogTool):
         if hasattr(aq_base(user), 'getGroups'):
             result = result + ['user:%s' % x for x in user.getGroups()]
         result.append('Anonymous')
-        # result.append('user:%s' % user.getId())
         return result
+
+    security.declareProtected(search_zcatalog, 'searchResults')
+    def searchResults(self, REQUEST=None, **kw):
+        return ZCatalog.searchResults(self, REQUEST, **kw)
+
+    __call__ = searchResults
 
     security.declareProtected(VIEW_PERMISSION, 'localQuery')
     def localQuery(self, node=None, REQUEST=None, **kw):

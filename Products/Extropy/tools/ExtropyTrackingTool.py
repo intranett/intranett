@@ -4,6 +4,7 @@ from types import StringTypes, DictType
 from zope.interface import implements
 
 from AccessControl import ClassSecurityInfo
+from AccessControl.Permissions import search_zcatalog
 from Acquisition import aq_base
 from App.class_init import InitializeClass
 from DateTime import DateTime
@@ -42,10 +43,14 @@ class ExtropyTrackingTool(CatalogTool):
         if hasattr(aq_base(user), 'getGroups'):
             result = result + ['user:%s' % x for x in user.getGroups()]
         result.append('Anonymous')
-        # result.append('user:%s' % user.getId())
         return result
 
-    # a method to get placeful task results
+    security.declareProtected(search_zcatalog, 'searchResults')
+    def searchResults(self, REQUEST=None, **kw):
+        return ZCatalog.searchResults(self, REQUEST, **kw)
+
+    __call__ = searchResults
+
     security.declarePublic( 'localQuery' )
     def localQuery(self,node,REQUEST=None, **kw):
         """ a placeful query for tasks"""

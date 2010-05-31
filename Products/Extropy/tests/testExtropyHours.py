@@ -32,7 +32,7 @@ class TestExtropyHourSetup(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         # test that hours get cataloged properly in the tool
         _createObjectByType('ExtropyHourGlass',self.folder, 'hourglass')
         self.folder.hourglass.invokeFactory('ExtropyHours','test')
-        self.failUnless(len(self.timetracktool())==1)
+        self.assertEquals(len(self.timetracktool()), 1)
 
     def testCatalogingHoursOnlyInTheTimeTrackTool(self):
         # test that hours get cataloged ONLY in the tool
@@ -40,8 +40,8 @@ class TestExtropyHourSetup(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         _createObjectByType('ExtropyHourGlass',self.folder, 'hourglass')
         # HourGlasses dont get cataloged anywhere
         self.folder.hourglass.invokeFactory('ExtropyHours','test')
-        #the number of objects in the catalog should not increasae
-        self.failIf( len( self.portal.portal_catalog() ) != l )
+        # the number of objects in the catalog should not increasae
+        self.assertEquals(len(self.portal.portal_catalog()), l)
 
 
 class TestExtropyHours(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
