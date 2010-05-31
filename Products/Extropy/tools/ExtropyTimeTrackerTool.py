@@ -105,10 +105,6 @@ class ExtropyTimeTrackerTool(CatalogTool):
         """ a placeful query for tasks"""
         if node is not None:
             kw[ 'path' ] = '/'.join(node.getPhysicalPath())
-
-        user = _getAuthenticatedUser(self)
-        kw['allowedRolesAndUsers'] = self._listAllowedRolesAndUsers(user)
-
         return ZCatalog.searchResults(self, REQUEST, **kw)
 
     security.declareProtected(VIEW_PERMISSION, 'getHours')

@@ -55,10 +55,6 @@ class ExtropyTrackingTool(CatalogTool):
     def localQuery(self,node,REQUEST=None, **kw):
         """ a placeful query for tasks"""
         kw['path'] = '/'.join(node.getPhysicalPath())
-
-        user = _getAuthenticatedUser(self)
-        kw['allowedRolesAndUsers'] = self._listAllowedRolesAndUsers(user)
-
         return ZCatalog.searchResults(self, REQUEST, **kw)
 
     security.declareProtected(permissions.VIEW_PERMISSION, 'trackingQuery')
