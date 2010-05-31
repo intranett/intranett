@@ -2,7 +2,6 @@
 # Project test
 #
 
-from Testing import ZopeTestCase
 from Products.Extropy.tests import ExtropyTrackingTestCase
 
 from Products.CMFCore.utils import getToolByName
@@ -12,7 +11,6 @@ from DateTime import DateTime
 class TestProject(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 
     def afterSetUp(self):
-        # set up a Feature/Tasks hierarchy
         self.folder.invokeFactory('ExtropyProject','project')
         self.project = self.folder.project
 
@@ -33,7 +31,6 @@ class TestProject(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         wftool.doActionFor(self.folder.project.phase1, 'close')
         self.failUnlessEqual(self.folder.project.getActivePhases(), [])
 
-
     def testAvailableParticipants(self):
         participants = self.project.getAvailableParticipants()
         self.failUnlessEqual(participants, ['test_user_1_'])
@@ -47,49 +44,6 @@ class TestProject(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.project.phase.invokeFactory('ExtropyFeature','requirement1')
         rs =  self.project.phase.getRequirementsByState()
         self.assertEqual(len(rs),1)
-
-    def getTasks(self):
-        self.project.invokeFactory('ExtropyPhase','phase')
-        self.project.phase.invokeFactory('ExtropyFeature','requirement1')
-        self.project.phase.requirement1.invokeFactory('ExtropyTask','t1', title='fish')
-        self.assertEqual(self.project.phase.requirement1.t1, self.project.getTasks()[0])
-        self.assertEqual(self.project.phase.requirement1.t1.Title(), self.project.Title)
-
-
-# things to test for;
-# getting tasks by keywords
-# getTasksByState
-# getTasksForCurrentUser
-#
-
-    def testCountingTasks(self):
-        self.project.invokeFactory('ExtropyPhase','phase')
-        self.project.phase.invokeFactory('ExtropyFeature','requirement1')
-        self.project.phase.requirement1.invokeFactory('ExtropyTask','t1', title='fish')
-        self.assertEqual( self.project.countTasks(), 1)
-        self.project.phase.requirement1.invokeFactory('ExtropyTask','t2', title='fish')
-        self.assertEqual( self.project.countTasks(), 2)
-        self.assertEqual( self.project.phase.countTasks(), 2)
-        self.assertEqual( self.project.phase.requirement1.countTasks(), 2)
-
-    def testCountingOpenTasks(self):
-        self.project.invokeFactory('ExtropyPhase','phase')
-        self.project.phase.invokeFactory('ExtropyFeature','requirement1')
-        self.project.phase.requirement1.invokeFactory('ExtropyTask','t1', title='fish')
-        self.project.phase.requirement1.invokeFactory('ExtropyTask','t2', title='fish')
-        self.assertEqual( self.project.countOpenTasks(), 2)
-        self.portal.portal_workflow.doActionFor(self.project.phase.requirement1.t2, 'discard')
-        self.assertEqual( self.project.countOpenTasks(), 1)
-
-    def testCountingOpenTasksIsIndexed(self):
-        self.project.invokeFactory('ExtropyPhase','phase')
-        self.project.phase.invokeFactory('ExtropyFeature','requirement1')
-        self.project.phase.requirement1.invokeFactory('ExtropyTask','t1', title='fish')
-        self.project.phase.requirement1.invokeFactory('ExtropyTask','t2', title='fish')
-        self.portal.portal_workflow.doActionFor(self.project.phase.requirement1.t2, 'discard')
-        d = self.project.getDeliverables()[0]
-        self.assertEqual(d.countOpenTasks,1)
-        self.assertEqual(d.countTasks,2)
 
 
 def test_suite():
