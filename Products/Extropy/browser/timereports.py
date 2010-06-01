@@ -206,13 +206,16 @@ class TimeReports(BrowserView, TimeReportQuery):
 
     def create_invoice(self):
         """Create an invoice from the selected hours"""
-        id = self.context.aq_inner.generateUniqueId('Invoice')
-        new_id = self.context.aq_inner.invokeFactory(id=id, type_name='Invoice')
-        invoice = getattr(self.context.aq_inner, new_id or id)
+        nr = self.request.form.get('invoiceNumber', None)
+        if not nr:
+            nr = self.context.aq_inner.generateUniqueId('Invoice')
+        new_id = self.context.aq_inner.invokeFactory(id=nr, type_name='Invoice')
+        invoice = getattr(self.context.aq_inner, new_id or nr)
 
         for hour in self.selected_hours:
             hour.deleteReferences(INVOICE_RELATIONSHIP)
             hour.addReference(invoice, INVOICE_RELATIONSHIP)
+            hour.setInvoiceNumber(nr)
 
         self.setMessage('Created invoice from marked hours.')
         self.mark_invoiced()

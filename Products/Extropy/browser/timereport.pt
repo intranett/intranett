@@ -33,6 +33,12 @@
     <table metal:use-macro="context/@@timereport_macros/hours_table"/>
 
     <div tal:condition="view/finance_access">
+        Invoice number:
+        <input type="text"
+               size="5"
+               name="invoiceNumber:string"
+               />
+
         <input class="context"
                type="submit"
                name="mark_invoiced"

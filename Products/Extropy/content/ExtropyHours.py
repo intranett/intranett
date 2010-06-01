@@ -3,7 +3,6 @@ from Products.Archetypes.public import *
 from Products.Extropy.config import *
 from Products.Extropy.permissions import *
 from Products.Extropy.content.ExtropyBase import BudgetSchema
-from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
 from Products.ATContentTypes.configuration import zconf
@@ -55,7 +54,18 @@ ExtropyHoursSchema = BaseSchema.copy() + Schema((
                   vocabulary=WORKTYPES,
                   widget=SelectionWidget(label='Work Type',),
                   ),
+
+    StringField(
+        name='invoiceNumber',
+        widget=StringWidget(
+            label='Invoice number',
+            description='The invoice number this hour is billed on.',
+            i18n_domain='extropy',
+        ),
+    ),
+
     )) + BudgetSchema.copy()
+
 
 class ExtropyHours(BaseContent):
     """Hours track worked time. Each hour object represents a chunk of worked time."""
