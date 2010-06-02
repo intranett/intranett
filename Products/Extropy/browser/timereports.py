@@ -121,8 +121,9 @@ class TimeReports(BrowserView, TimeReportQuery):
 
     def __call__(self, *args, **kw):
         if 'create_invoice' in self.request:
-            invoice = self.create_invoice()
-            return self.request.response.redirect(invoice.absolute_url())
+            result = self.create_invoice()
+            if result:
+                self.request.response.redirect(result)
         return super(TimeReports, self).__call__(*args, **kw)
 
     @property
@@ -154,6 +155,22 @@ class TimeReports(BrowserView, TimeReportQuery):
     @property
     def invoice_states(self):
         return self.ettool.uniqueValuesFor('review_state')
+
+    def invoice_numbers(self):
+        strings = self.ettool.uniqueValuesFor('getInvoiceNumber')
+        numbers = [0, ]
+        for s in strings:
+            try:
+                n = int(s)
+            except (ValueError, TypeError):
+                pass
+            else:
+                numbers.append(n)
+        return numbers
+
+    def last_invoice_number(self):
+        numbers = self.invoice_numbers()
+        return str(max(numbers))
 
     @property
     def selected_hours(self):
@@ -200,22 +217,25 @@ class TimeReports(BrowserView, TimeReportQuery):
         for hour in self.selected_hours:
             wf_tool.doActionFor(hour, 'invoice')
         self._clearQuery()
-        self.setMessage('Marked hours as invoiced.')
 
     def create_invoice(self):
         """Create an invoice from the selected hours"""
         nr = self.request.form.get('invoiceNumber', None)
         if not nr:
-            nr = self.context.aq_inner.generateUniqueId('Invoice')
-        new_id = self.context.aq_inner.invokeFactory(id=nr, type_name='Invoice')
-        invoice = getattr(self.context.aq_inner, new_id or nr)
+            self.setMessage('You need to specify a number.')
+            return
+        numbers = self.ettool.uniqueValuesFor('getInvoiceNumber')
+        if nr in numbers:
+            self.setMessage('This invoice number has already been used.')
+            return
 
         for hour in self.selected_hours:
-            hour.deleteReferences(INVOICE_RELATIONSHIP)
-            hour.addReference(invoice, INVOICE_RELATIONSHIP)
             hour.setInvoiceNumber(nr)
 
         self.setMessage('Created invoice from marked hours.')
         self.mark_invoiced()
+        url = None
+        url_tool = getToolByName(self.context, 'portal_url')
+        # url = url_tool() + '/@@invoice-hours?id=%s' % nr
+        return url
 
-        return invoice

@@ -30,7 +30,9 @@
     <table metal:use-macro="context/@@timereport_macros/hours_table"/>
 
     <div tal:condition="view/finance_access">
-        Invoice number:
+        Invoice number (last was:
+        <span tal:replace="view/last_invoice_number" />
+        )
         <input type="text"
                size="5"
                name="invoiceNumber:string"
