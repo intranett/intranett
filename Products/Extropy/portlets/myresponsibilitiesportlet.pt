@@ -1,4 +1,4 @@
-<dl class="portlet portletMyResponsibilies"
+<dl class="portlet portletMyResponsibilities"
     i18n:domain="plone">
 
     <dt class="portletHeader">
@@ -12,7 +12,7 @@
             <tr>
                 <td>
                     <select style="width: 12em" onchange="if (this.options[this.selectedIndex].value) window.location.href=this.options[this.selectedIndex].value">
-                       <option value="">My Responsibilies</option>
+                       <option value="">My responsibilities</option>
                        <tal:options repeat="item view/fetchData">
                        <option value="" disabled="disabled"
                                tal:condition="python:item['depth'] == 0">---------------------</option>
