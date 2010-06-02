@@ -233,6 +233,5 @@ class TimeReports(BrowserView, TimeReportQuery):
 
         self.mark_invoiced(nr)
         self.setMessage('Created invoice from marked hours.')
-        url_tool = getToolByName(self.context, 'portal_url')
-        url = url_tool() + '/@@invoice-hours?number=%s' % nr
+        url = self.context.absolute_url() + '/@@invoice-hours?number=%s' % nr
         return url
