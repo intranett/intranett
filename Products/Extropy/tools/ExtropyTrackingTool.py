@@ -172,10 +172,11 @@ class ExtropyTrackingTool(CatalogTool):
                 , ('end'            , 'DateIndex',      None)
                 , ('getNosy'        , 'KeywordIndex',   None)
                 , ('startendrange'  , 'DateRangeIndex', {'since_field':'start', 'until_field':'end'})
-                , ('featureUID'     , 'FieldIndex',     None)
-                , ('getPriority'     , 'FieldIndex',    None)
-                , ('getWorkedHours','FieldIndex',     None)
-                , ('getDueDate','FieldIndex',     None)
+                , ('featureUID', 'FieldIndex', None)
+                , ('getInvoiceNumber', 'FieldIndex', None)
+                , ('getPriority', 'FieldIndex', None)
+                , ('getWorkedHours', 'FieldIndex', None)
+                , ('getDueDate','FieldIndex', None)
                 )
 
     security.declarePublic( 'enumerateColumns' )
@@ -198,8 +199,9 @@ class ExtropyTrackingTool(CatalogTool):
                , 'ExpiresDate'
                , 'ModificationDate'
                , 'portal_type'
-               , 'getResponsiblePerson'
                , 'getId'
+               , 'getInvoiceNumber',
+               , 'getResponsiblePerson'
                , 'featureUID'
                , 'start'
                , 'end'

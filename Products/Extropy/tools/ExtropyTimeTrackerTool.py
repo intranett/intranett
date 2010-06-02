@@ -262,6 +262,7 @@ class ExtropyTimeTrackerTool(CatalogTool):
                 , ('nosy'       , 'KeywordIndex',   None)
                 , ('workedHours', 'FieldIndex',     None)
                 , ('getBudgetCategory','FieldIndex',None)
+                , ('getInvoiceNumber','FieldIndex',None)
                 , ('UID','FieldIndex',None)
                 )
 
