@@ -200,7 +200,7 @@ class ExtropyTrackingTool(CatalogTool):
                , 'ModificationDate'
                , 'portal_type'
                , 'getId'
-               , 'getInvoiceNumber',
+               , 'getInvoiceNumber'
                , 'getResponsiblePerson'
                , 'featureUID'
                , 'start'
