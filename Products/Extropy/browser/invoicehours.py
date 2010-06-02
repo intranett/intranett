@@ -30,7 +30,7 @@ class InvoiceHours(BrowserView):
     """invoice hour report"""
 
     def getNumber(self):
-        return self.request.form.get('number', None)
+        return str(self.request.form.get('number', ''))
 
     def _queryHours(self, number):
         ettool = getToolByName(self.context, 'extropy_timetracker_tool')
