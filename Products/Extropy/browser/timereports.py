@@ -211,11 +211,13 @@ class TimeReports(BrowserView, TimeReportQuery):
         result.append('=' * 60)
         return '\n'.join(result)
 
-    def mark_invoiced(self):
+    def mark_invoiced(self, number):
         """Mark the selected hours as invoiced"""
         wf_tool = getToolByName(self.context, 'portal_workflow')
         for hour in self.selected_hours:
+            hour.setInvoiceNumber(number)
             wf_tool.doActionFor(hour, 'invoice')
+            hour.reindexObject()
         self._clearQuery()
 
     def create_invoice(self):
@@ -229,12 +231,8 @@ class TimeReports(BrowserView, TimeReportQuery):
             self.setMessage('This invoice number has already been used.')
             return
 
-        for hour in self.selected_hours:
-            hour.setInvoiceNumber(nr)
-
+        self.mark_invoiced(nr)
         self.setMessage('Created invoice from marked hours.')
-        self.mark_invoiced()
         url_tool = getToolByName(self.context, 'portal_url')
         url = url_tool() + '/@@invoice-hours?number=%s' % nr
         return url
-
