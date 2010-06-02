@@ -41,12 +41,6 @@
 
         <input class="context"
                type="submit"
-               name="mark_invoiced"
-               value="Mark as invoiced"
-               />
-
-        <input class="context"
-               type="submit"
                name="create_invoice"
                value="Create invoice"
                tal:condition="view/can_construct_invoices"

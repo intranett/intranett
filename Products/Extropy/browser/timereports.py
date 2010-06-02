@@ -120,8 +120,6 @@ class TimeReports(BrowserView, TimeReportQuery):
         self.query_string = self.query_string and '?' + self.query_string
 
     def __call__(self, *args, **kw):
-        if 'mark_invoiced' in self.request:
-            self.mark_invoiced()
         if 'create_invoice' in self.request:
             invoice = self.create_invoice()
             return self.request.response.redirect(invoice.absolute_url())
