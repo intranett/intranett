@@ -28,6 +28,15 @@
     permission="zope2.View"
     />
 
+<browser:page
+    for="*"
+    class=".invoicehours.InvoiceHours"
+    name="invoice-hours"
+    template="invoicehours.pt"
+    allowed_interface=".invoicehours.IInvoiceHours"
+    permission="zope2.View"
+    />
+
 <!-- Time reports -->
 
 <browser:menu id="timereport" />

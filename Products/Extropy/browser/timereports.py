@@ -236,6 +236,6 @@ class TimeReports(BrowserView, TimeReportQuery):
         self.mark_invoiced()
         url = None
         url_tool = getToolByName(self.context, 'portal_url')
-        # url = url_tool() + '/@@invoice-hours?id=%s' % nr
+        # url = url_tool() + '/@@invoice-hours?number=%s' % nr
         return url
 

@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="extropy">
+<body>
+
+<metal:content-core fill-slot="main">
+    <metal:content-core define-macro="main">
+    <tal:wrapper tal:define="number view/getNumber;
+                             hours view/getHours;">
+
+        <h1 class="documentFirstHeading">Invoice hours report</h1>
+
+        <div tal:condition="not:number"
+             class="documentDescription">
+            No invoice number has been specified.
+        </div>
+
+        <tal:number tal:condition="number">
+            <div class="documentDescription">
+                Hours for invoice number <span tal:replace="number" />.
+            </div>
+
+            <div tal:condition="not: hours">
+                No hours have been found for this invoice number.
+            </div>
+
+            <p tal:condition="hours"
+               tal:content="structure hours">
+                Text
+            </p>
+
+        </tal:number>
+
+    </tal:wrapper>
+    </metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
