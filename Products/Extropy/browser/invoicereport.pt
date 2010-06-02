@@ -41,20 +41,8 @@
                 <span tal:content="invoice/getTotal"></span>
             </td>
         </tr>
-        
-        <tr>
-            <th colspan="3" style="text-align:right">sum</th>
-            <th style="text-align:right">
-                <span tal:content="python:view.getInvoicesByState()[state]['total']"></span>
-            </th>
-        </tr>
-          
+
       </table>
-
-      
-      
-
-    
     
     </div>
   </body>
