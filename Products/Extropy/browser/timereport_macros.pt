@@ -45,7 +45,7 @@
 </select>
 
 <span metal:define-macro="show_invoices">
-    <label for="showInvoices">Show invoices(slow)</label><input type="checkbox" value="1" name="showInvoices" tal:attributes="selected python:request.get('showInvoices',None)" />
+    <label for="showInvoices">Show invoices</label><input type="checkbox" value="1" name="showInvoices" tal:attributes="selected python:request.get('showInvoices',None)" />
 </span>
 
 <span metal:define-macro="dates_filter">
