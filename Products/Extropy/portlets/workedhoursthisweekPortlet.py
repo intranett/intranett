@@ -30,14 +30,17 @@ class Renderer(base.Renderer):
     """A class for showing all the worked hours this week."""
 
     render = ViewPageTemplateFile('portlet_workedhours_contents.pt')
-    available = True
 
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
-        portal_state = getMultiAdapter(
+        self.portal_state = getMultiAdapter(
             (self.context, self.request), name=u'plone_portal_state')
-        self.portal_url = portal_state.portal_url()
-        self.portal = portal_state.portal()
+        self.portal_url = self.portal_state.portal_url()
+        self.portal = self.portal_state.portal()
+
+    @property
+    def available(self):
+        return not self.portal_state.anonymous()
 
     def totals(self):
         """Gets the content."""

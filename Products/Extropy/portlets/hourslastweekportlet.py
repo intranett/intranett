@@ -54,15 +54,15 @@ class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('hourslastweekportlet.pt')
 
-    @property
-    def available(self):
-        return not self.portal_state.anonymous()
-
     def __init__(self, *args):
         base.Renderer.__init__(self, *args)
         self.portal_state = getMultiAdapter((self.context, self.request), name=u'plone_portal_state')
         self.portal_url = self.portal_state.portal_url()
         self.portal = self.portal_state.portal()
+
+    @property
+    def available(self):
+        return not self.portal_state.anonymous()
 
     def myhours(self):
         """Gets the content."""
