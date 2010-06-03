@@ -32,9 +32,17 @@
                     </tr>
                 </tal:period>
 
-                <tr tal:define="hours here/getWorkedTime"
+                <tr tal:define="hours context/getWorkedTime"
                     tal:condition="hours">
                     <th>Used</th>
+                    <td style="text-align:right">
+                        <span tal:replace="hours" /> h
+                    </td>
+                </tr>
+
+                <tr tal:define="hours context/getUnbilledTime"
+                    tal:condition="hours">
+                    <th>Not invoiced</th>
                     <td style="text-align:right">
                         <span tal:replace="hours" /> h
                     </td>
