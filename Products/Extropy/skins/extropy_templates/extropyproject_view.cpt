@@ -40,17 +40,6 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <th>Invoices
-                        <img tal:condition="exists:here/invoice_icon.gif" tal:replace="structure here/invoice_icon.gif" />
-                    </th>
-                    <td>
-                        <span tal:repeat="invoice python:context.portal_catalog.searchResults(path={'query' : '/'.join(context.getPhysicalPath()), },sort_on = 'getId',portal_type = 'Invoice')">
-                            <a tal:attributes="href invoice/getURL" tal:content="string:#${invoice/getInvoiceNumber}">#147</a>,
-                        </span>
-                    </td>
-                </tr>
-
             </table>
 
             </div>

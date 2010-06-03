@@ -173,7 +173,6 @@ class ExtropyTrackingTool(CatalogTool):
                 , ('getNosy'        , 'KeywordIndex',   None)
                 , ('startendrange'  , 'DateRangeIndex', {'since_field':'start', 'until_field':'end'})
                 , ('featureUID', 'FieldIndex', None)
-                , ('getInvoiceNumber', 'FieldIndex', None)
                 , ('getPriority', 'FieldIndex', None)
                 , ('getWorkedHours', 'FieldIndex', None)
                 , ('getDueDate','FieldIndex', None)
@@ -200,7 +199,6 @@ class ExtropyTrackingTool(CatalogTool):
                , 'ModificationDate'
                , 'portal_type'
                , 'getId'
-               , 'getInvoiceNumber'
                , 'getResponsiblePerson'
                , 'featureUID'
                , 'start'
