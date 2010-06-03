@@ -10,12 +10,13 @@
 <metal:content-core fill-slot="main">
     <metal:content-core define-macro="main">
     <tal:wrapper tal:define="number view/getNumber;
-                             hours view/getHours;">
+                             hours view/getHours;
+                             url context/absolute_url;
+                             action string:${url}/${view/__name__}">
 
         <h1 class="documentFirstHeading">Invoice hours report</h1>
 
-        <div tal:condition="not:number"
-             class="documentDescription">
+        <div tal:condition="not:number" class="documentDescription">
             No invoice number has been specified.
         </div>
 
@@ -34,6 +35,15 @@
             </p>
 
         </tal:number>
+
+        <form method="get" tal:attributes="action action">
+            <fieldset>
+                <legend>View invoice</legend>
+                View invoice number:
+                <input type="text" size="5" name="number"/>
+                <input type="submit" value="View" />
+            </fieldset>
+        </form>
 
     </tal:wrapper>
     </metal:content-core>
