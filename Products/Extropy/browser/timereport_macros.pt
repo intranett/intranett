@@ -100,7 +100,10 @@ end:<input type="text" size="10" name="enddate" tal:attributes="value view/end/D
         <td><span tal:content="python:hour.start.strftime(timefmt)"></span></td>
         <td><span tal:content="python:hour.end.strftime(timefmt)"></span></td>
         <td><span tal:content="hour/getBudgetCategory"></span></td>
-        <td><span tal:content="hour/getInvoiceNumber"></span></td>
+        <td tal:define="number hour/getInvoiceNumber">
+          <a tal:attributes="href string:${context/absolute_url}/@@invoice-hours?number=${number}"
+             tal:content="number">425</a>
+        </td>
         <td style="text-align:right"><span tal:content="hour/workedHours"></span></td>
     </tr>
     </tal:hours>
