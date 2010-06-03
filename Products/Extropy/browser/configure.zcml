@@ -8,7 +8,7 @@
     class=".reports.ReportView"
     name="hourreport_view"
     allowed_interface=".reports.IReportView"
-    permission="zope2.Public"
+    permission="cmf.ModifyPortalContent"
     />
 
 <browser:page
@@ -16,7 +16,7 @@
     class=".reports.TableView"
     name="hourreporttable_view"
     allowed_interface=".reports.IReportView"
-    permission="zope2.Public"
+    permission="cmf.ModifyPortalContent"
     />
 
 <browser:page
@@ -25,7 +25,7 @@
     name="invoice-report"
     template="invoicereport.pt"
     allowed_interface=".managementreports.IInvoiceReport"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     />
 
 <browser:page
@@ -34,7 +34,7 @@
     name="invoice-hours"
     template="invoicehours.pt"
     allowed_interface=".invoicehours.IInvoiceHours"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     />
 
 <!-- Time reports -->
@@ -46,7 +46,7 @@
     class=".worklog.WorkLogView"
     name="worklog"
     template="worklog.pt"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     allowed_interface=".worklog.IWorkLogView"
     />
 
@@ -54,13 +54,13 @@
     for="*"
     name="timereport_macros"
     template="timereport_macros.pt"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     />
 
 <browser:pages
     for="*"
     class=".timereports.TimeReports"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     >
 
   <browser:page
@@ -94,13 +94,13 @@
     for="*"
     name="weeklyplan_macros"
     template="weeklyplan_macros.pt"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     />
 
 <browser:page
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".weeklyplanning.WeekReport"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     name="weeklyplan_report"
     title="Weekly report"
     template="weeklyplan_report.pt"
@@ -128,7 +128,7 @@
 <browser:page
     for="Products.CMFCore.interfaces.IDynamicType"
     class=".workflowactions.WorkflowActions"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     name="workflowactions"
     template="workflowactions.pt"
     />
@@ -136,7 +136,7 @@
 <browser:page
     for="Products.ZCatalog.CatalogBrains.AbstractCatalogBrain"
     class=".workflowactions.RecordWorkflowActions"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     name="workflowactions"
     template="workflowactions.pt"
     />
@@ -146,7 +146,7 @@
 <browser:page
     for="Products.Archetypes.public.BaseFolder"
     class=".projects_listing.ProjectsListing"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     name="projects_listing"
     template="projects_listing.pt"
     />

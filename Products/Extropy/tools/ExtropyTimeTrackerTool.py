@@ -8,7 +8,6 @@ from AccessControl.Permissions import search_zcatalog
 from Acquisition import aq_base
 from App.class_init import InitializeClass
 from DateTime import DateTime
-from Products.CMFCore.utils import _getAuthenticatedUser
 from Products.CMFPlone.CatalogTool import CatalogTool
 from Products.CMFPlone.utils import _createObjectByType
 from Products.ZCatalog.ZCatalog import ZCatalog
@@ -261,8 +260,8 @@ class ExtropyTimeTrackerTool(CatalogTool):
                 , ('end'        , 'DateIndex',      None)
                 , ('nosy'       , 'KeywordIndex',   None)
                 , ('workedHours', 'FieldIndex',     None)
-                , ('getBudgetCategory','FieldIndex',None)
-                , ('getInvoiceNumber','FieldIndex',None)
+                , ('getBudgetCategory', 'FieldIndex', None)
+                , ('getInvoiceNumber', 'FieldIndex', None)
                 , ('UID','FieldIndex',None)
                 )
 
@@ -289,6 +288,7 @@ class ExtropyTimeTrackerTool(CatalogTool):
                , 'end'
                , 'workedHours'
                , 'getBudgetCategory'
+               , 'getInvoiceNumber'
                , 'getProjectTitle'
                , 'getPackageTitle'
                , 'UID')
