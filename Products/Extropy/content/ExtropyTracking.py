@@ -93,4 +93,4 @@ class ExtropyTracking:
     def getUnbilledTime(self):
         """get the total amount of time worked for this object"""
         tool = getToolByName(self,TIMETOOLNAME)
-        return tool.countIntervalHours(node=self, review_state='entered')
+        return tool.countIntervalHours(node=self, review_state='entered',  getBudgetCategory='Billable')
