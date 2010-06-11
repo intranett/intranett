@@ -84,8 +84,10 @@
                    gaps python:tool.fillGaps(hours);
                    sumhours python:tool.countHours(hours);
                    timefmt python:'%h.%d %H:%M';
-                   tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates(), sort_on='getProjectTitle');
+                   tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature', 'Contract'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates(), sort_on='getProjectTitle');
                    groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').iteritems()">
+
+      <p style="float:right; background-color: white; padding: 1em; border: 1px solid black;"><a href="/" tal:attributes="href portal_url">Back to Jarn intranet</a></p>
 
       <form method="get" 
             class="enableUnloadProtection"
@@ -116,7 +118,7 @@
                        <select name="hours.task:records:string" tal:define="last_task request/last_task | nothing" style="width: 20em">
                           <option value="">-</option>
                           <tal:projects tal:repeat="proj groupedtasks">
-                              <optgroup tal:repeat="phase python:etool.dictifyBrains(proj[1], 'getPhaseTitle').items()"
+                              <optgroup tal:repeat="phase python:etool.dictifyBrains(proj[1], 'getProjectTitle').items()"
                                                    tal:attributes="label python:'%s - %s' % (proj[0], phase[0])">
                                     <option tal:repeat="task python:phase[1]" tal:attributes="value task/UID; label python:task.Title; selected python: last_task == path('task/UID')"
                                               tal:content="python:task.Title">task title</option>
