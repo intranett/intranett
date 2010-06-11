@@ -66,6 +66,18 @@ div.position-3\3a 4 {margin-left:    -15.575%;} /* -23.875% .position-3:4 */
 }
 
 
+#content table, #content td, #content th{
+    border: 1px solid #aaa;
+}
+
+#content th{
+    background-color: #006699;
+    color: white;
+}
+
+
+
+
 
 /* End sunburst overrides */
 
