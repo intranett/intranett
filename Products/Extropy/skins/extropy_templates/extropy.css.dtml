@@ -13,6 +13,9 @@ div.position-3\3a 4 {margin-left:    -15.575%;} /* -23.875% .position-3:4 */
 
 
 /* flatten the top bar to be easier in reach */
+#portal-personaltools #anon-personalbar a {
+    float:none;
+}
 
 #portal-personaltools  {
     background-color:   #6BAC27;
@@ -66,7 +69,7 @@ div.position-3\3a 4 {margin-left:    -15.575%;} /* -23.875% .position-3:4 */
 }
 
 
-#content table, #content td, #content th{
+#content table , #content td, #content th{
     border: 1px solid #aaa;
 }
 
