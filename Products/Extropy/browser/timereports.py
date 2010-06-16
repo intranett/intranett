@@ -11,7 +11,6 @@ from Products.CMFPlone.utils import transaction_note
 from Products.Five import BrowserView
 from ZTUtils import make_query
 
-from Products.Extropy.config import INVOICE_RELATIONSHIP
 from Products.Extropy.permissions import MANAGE_FINANCES
 from Products.Extropy.utils import safe_unicode
 
@@ -141,16 +140,6 @@ class TimeReports(BrowserView, TimeReportQuery):
         # user yet at traversal time, which is when the view gets instantiated
         user = getSecurityManager().getUser()
         return user.has_permission(MANAGE_FINANCES, self.context)
-
-    @property
-    def can_construct_invoices(self):
-        """Can invoices be constructed for the current context"""
-        types_tool = getToolByName(self.context, 'portal_types')
-        context_info = types_tool.getTypeInfo(self.context)
-        invoice_info = types_tool.getTypeInfo('Invoice')
-        if context_info and not context_info.allowType('Invoice'):
-            return False
-        return invoice_info.isConstructionAllowed(self.context)
 
     @property
     def invoice_states(self):

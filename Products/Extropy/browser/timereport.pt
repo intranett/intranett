@@ -42,7 +42,6 @@
                type="submit"
                name="create_invoice"
                value="Create invoice"
-               tal:condition="view/can_construct_invoices"
                />
     </div>
 
