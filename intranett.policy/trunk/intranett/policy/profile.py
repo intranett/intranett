@@ -12,6 +12,8 @@ class HiddenProfiles(object):
             u'borg.localrole:default',
             u'plone.app.iterate:plone.app.iterate',
             u'plone.app.openid:default',
+            u'plonetheme.classic:default',
+            u'plonetheme.sunburst:default',
             u'Products.PloneFormGen:default',
             u'Products.PloneFormGen:typeoverrides25x',
             ]
@@ -21,7 +23,12 @@ class HiddenProducts(object):
 
     def getNonInstallableProducts(self):
         return [
+            'kupu',
             'plone.app.iterate',
             'plone.app.openid',
+            'plonetheme.classic',
+            'Products.CMFPlacefulWorkflow',
+            'Products.kupu',
             'Products.Marshall',
+            'Products.PloneFormGen',
         ]

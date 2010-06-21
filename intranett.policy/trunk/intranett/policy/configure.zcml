@@ -6,6 +6,7 @@
   <five:registerPackage package="." initialize=".initialize" />
 
   <include package="Products.CMFPlone" />
+  <include package="plonetheme.sunburst" />
 
   <include file="profile.zcml" />
 
