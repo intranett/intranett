@@ -22,5 +22,6 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'Plone',
+          'Products.PloneFormGen',
       ],
       )
