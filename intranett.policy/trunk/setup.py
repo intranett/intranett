@@ -21,7 +21,9 @@ setup(name='intranett.policy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'collective.testcaselayer',
           'Plone',
           'Products.PloneFormGen',
+          'Zope2',
       ],
       )

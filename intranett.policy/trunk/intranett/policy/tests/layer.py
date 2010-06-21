@@ -1,13 +1,13 @@
-from Products.PloneTestCase import layer
+from collective.testcaselayer.ptc import BasePTCLayer, ptc_layer
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 from Testing import ZopeTestCase as ztc
 
 
-class IntranettLayer(layer.PloneSite):
+class IntranettLayer(BasePTCLayer):
+    """ layer for integration tests """
 
-    @classmethod
-    def setUp(cls):
+    def afterSetUp(self):
         import intranett.policy
 
         fiveconfigure.debug_mode = True
@@ -15,8 +15,11 @@ class IntranettLayer(layer.PloneSite):
         zcml.load_config("configure.zcml", intranett.policy)
         zcml.load_config("overrides.zcml", intranett.policy)
         fiveconfigure.debug_mode = False
-        ztc.installPackage("intranett.policy", quiet=1)
+        ztc.installPackage("intranett.policy", quiet=True)
+        self.addProfile('plone.app.imaging:default')
 
-    @classmethod
-    def tearDown(cls):
+    def beforeTearDown(self):
         pass
+
+
+intranett = IntranettLayer(bases=[ptc_layer])
