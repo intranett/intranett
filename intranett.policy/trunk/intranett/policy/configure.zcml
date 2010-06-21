@@ -6,7 +6,9 @@
   <five:registerPackage package="." initialize=".initialize" />
 
   <include package="Products.CMFPlone" />
+  <include package="experimental.catalogqueryplan" />
   <include package="plonetheme.sunburst" />
+  <include package="Products.PloneFormGen" />
 
   <include file="profile.zcml" />
 

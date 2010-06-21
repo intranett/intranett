@@ -22,6 +22,7 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'collective.testcaselayer',
+          'experimental.catalogqueryplan',
           'Plone',
           'plonetheme.sunburst',
           'Products.CMFQuickInstallerTool',
