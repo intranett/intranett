@@ -3,4 +3,6 @@
 
   <include package="Products.CMFPlone" file="overrides.zcml" />
 
+  <include package=".browser" file="overrides.zcml" />
+
 </configure>

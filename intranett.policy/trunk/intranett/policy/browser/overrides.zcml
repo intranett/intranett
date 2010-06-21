@@ -1,0 +1,14 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="intranett">
+
+  <browser:page
+      for="OFS.interfaces.IApplication"
+      name="plone-overview"
+      class=".admin.IntranettOverview"
+      permission="zope.Public"
+      template="templates/overview.pt"
+      />
+
+</configure>
