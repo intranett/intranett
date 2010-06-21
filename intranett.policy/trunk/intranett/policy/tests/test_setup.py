@@ -30,7 +30,11 @@ class TestSiteSetup(IntranettTestCase):
         self.assertEquals(skins.getDefaultSkin(), 'Sunburst Theme')
 
     def test_content(self):
-        self.assertEquals(self.portal.contentIds(), ['Members'])
+        # This content is only created in the tests, it's too hard to avoid
+        # its creation
+        test_content = set(['front-page', 'news', 'events', 'Members'])
+        content = set(self.portal.contentIds())
+        self.assertEquals(content - test_content, set())
 
     def test_content_language(self):
         self.assertEquals(self.portal.Language(), 'no')
