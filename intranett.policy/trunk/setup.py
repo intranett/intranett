@@ -30,6 +30,7 @@ setup(name='intranett.policy',
           'Products.PloneFormGen',
           'Products.PloneTestCase',
           'Zope2',
+          'zope.component',
           'zope.interface',
       ],
       )

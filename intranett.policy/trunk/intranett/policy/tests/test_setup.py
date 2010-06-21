@@ -1,6 +1,8 @@
 from unittest import TestSuite
 from unittest import makeSuite
 
+from zope.component import queryMultiAdapter
+from zope.interface import Interface
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
@@ -68,6 +70,20 @@ class TestAdmin(IntranettTestCase):
         self.assertEquals(len(extensions), 1)
         profile = extensions[0]
         self.assertEquals(profile['id'], u'intranett.policy:default')
+
+    def test_addsite_call(self):
+        self.loginAsPortalOwner()
+        addsite = self.app.unrestrictedTraverse('@@intranett-addsite')
+        result = addsite()
+        self.assert_('Create intranet' in result, result)
+
+    def test_addsite_create(self):
+        request = self.app.REQUEST
+        request.form['form.submitted'] = True
+        addsite = queryMultiAdapter(
+            (self.app, request), Interface, 'intranett-addsite')
+        addsite()
+        self.assert_('Plone' in self.app.keys())
 
 
 def test_suite():
