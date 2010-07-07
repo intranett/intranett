@@ -21,6 +21,18 @@ div.position-3\3a 4 {margin-left:    -15.575%;} /* -23.875% .position-3:4 */
     background-color:   #6BAC27;
     -moz-border-radius-bottomleft:0;
     -moz-border-radius-bottomright:0;
+}
+
+#portal-personaltools dt.actionMenuHeader a {
+  color: white;
+}
+
+/* These are Geir's adjustments - invalidated by the latest bug fixes to
+   avoid the "flickering" of menus */
+/*#portal-personaltools  {
+    background-color:   #6BAC27;
+    -moz-border-radius-bottomleft:0;
+    -moz-border-radius-bottomright:0;
     float:              none;
     position:           static;
     right:              0;
@@ -37,7 +49,7 @@ div.position-3\3a 4 {margin-left:    -15.575%;} /* -23.875% .position-3:4 */
 }
 
 #portal-personaltools dt.actionMenuHeader a:after {
-	content: none;
+  content: none;
 }
 
 #portal-personaltools dd {
@@ -48,25 +60,24 @@ div.position-3\3a 4 {margin-left:    -15.575%;} /* -23.875% .position-3:4 */
     display:inline;
 }
 
-#portal-personaltools li, 
+#portal-personaltools li,
 #portal-personaltools ul{
     display:inline;
 }
 
-#portal-personaltools a, 
+#portal-personaltools a,
 #portal-personaltools div {
     display:inline
 }
 
-#portal-personaltools a:link, 
+#portal-personaltools a:link,
 #portal-personaltools a:visited{
     color:white;
-} 
-
+}
 
 #portal-personaltools dt{
     display:inline
-}
+}*/
 
 
 #content table , #content td, #content th{
@@ -77,10 +88,6 @@ div.position-3\3a 4 {margin-left:    -15.575%;} /* -23.875% .position-3:4 */
     background-color: #006699;
     color: white;
 }
-
-
-
-
 
 /* End sunburst overrides */
 
