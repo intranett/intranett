@@ -12,8 +12,8 @@ html {
 }
 body {
     font-family: Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif;
-    width: 949px; /* 670 (content) + 256 (column) + 23 (margin between the columns) */
-    margin: 0 auto;
+    /*width: 949px;*/ /* 670 (content) + 256 (column) + 23 (margin between the columns) */
+    /*margin: 0 auto;*/
     color: #5e5e5e;
     background: transparent;	    
     height: 100%;    
@@ -149,34 +149,40 @@ body > header nav li:last-child a {
 
 /* @group Content */
 
-body > section {
-	clear: both;
+#content-one-wrapper {
 	float: left;
-	width: 670px;
+	margin-right: 256px;
+}
+#content-one-wrapper > section {
+	clear: both;
+	float: right;
+	margin-left: 256px;
+	/*width: 670px;*/
 	padding-right: 23px;
+	padding-left: 23px;
 	border-top: 1px solid #111F2B;
 }
-body > section > article {
+#content-one-wrapper > section > article {
 	margin-bottom: 1.625em;
 }
-body > section > header hgroup {
+#content-one-wrapper > section > header hgroup {
 	margin-top: 1.625em;
 	margin-bottom: 1.625em;
 }
-body > section > header hgroup h1 {
+#content-one-wrapper > section > header hgroup h1 {
 	margin: 0;
 	padding: 0;
     font-size: 2.625em;
     line-height: 1em;
 	text-transform: uppercase;
 }
-body > section > header hgroup h3 {
+#content-one-wrapper > section > header hgroup h3 {
 	margin: 0.615em 0 0;
 	padding: 0;
     line-height: 1em;	
     font-size: 1.625em;
 }
-body > section > footer small {
+#content-one-wrapper > section > footer small {
 	display: block;
 }
 #document-actions {
@@ -238,14 +244,21 @@ figcaption {
 
 /* @group Column */
 
-body > aside {
+body > aside,
+#content-one-wrapper > aside {
 	width: 256px;
-	float: left;
 	padding: 1.625em 0 0;
-	margin: 0;
 	border-radius: none;
 	background: transparent;
 	border-top: 1px solid #111F2B;
+}
+body > aside {
+	float: left;
+	margin: 0 0 0 -256px;	
+}
+#content-one-wrapper > aside {
+	float: left;
+	margin: 0 -256px 0 0;
 }
 
 /* @group Portlets */
