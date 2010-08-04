@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<object name="portal_skins" allow_any="False" cookie_persistence="False"
+   default_skin="Intranett.no base theme">
+
+ <object name="intranett_theme_custom_images"
+    meta_type="Filesystem Directory View"
+    directory="intranett.theme:skins/intranett_theme_custom_images"/>
+ <object name="intranett_theme_custom_templates"
+    meta_type="Filesystem Directory View"
+    directory="intranett.theme:skins/intranett_theme_custom_templates"/>
+ <object name="intranett_theme_styles"
+    meta_type="Filesystem Directory View"
+    directory="intranett.theme:skins/intranett_theme_styles"/>
+
+ <skin-path name="Intranett.no base theme" based-on="Plone Default">
+  <layer name="intranett_theme_custom_images"
+     insert-after="custom"/>
+  <layer name="intranett_theme_custom_templates"
+     insert-after="intranett_theme_custom_images"/>
+  <layer name="intranett_theme_styles"
+     insert-after="intranett_theme_custom_templates"/>
+ </skin-path>
+
+</object>

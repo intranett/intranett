@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="intranett.theme">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Intranett.no base theme"
+      directory="profiles/default"
+      description='Extension profile for the "Intranett.no base theme" Plone theme.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="intranett.theme.various"
+      title="Intranett.no base theme: miscellaneous import steps"
+      description="Various import steps that are not handled by GS import/export handlers."
+      handler="intranett.theme.setuphandlers.setupVarious">
+    <depends name="skins"/>
+  </genericsetup:importStep>
+
+</configure>
