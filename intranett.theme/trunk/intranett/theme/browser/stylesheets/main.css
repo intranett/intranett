@@ -1,2 +1,334 @@
-/* Stylesheet for the 'Intranett.no base theme' Plone theme */
+/* @group Basic */
+
+html {
+    /*background: #fff -moz-linear-gradient(0% 20% 90deg, #fff, #e6e6e6);
+    background: #fff -webkit-gradient(linear, 0% 0%, 0% 20%, from(#e6e6e6), to(#fff));*/	 
+    
+    background-image: -moz-linear-gradient(0% 90% 90deg, #e6e6e6, #fff); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 80%,color-stop(0, #e6e6e6),color-stop(1, #fff)); /* Saf4+, Chrome */
+   filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6'); /* IE6,IE7 */
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')"; /* IE8 */   
+    height: 100%;
+}
+body {
+    font-family: Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif;
+    /*width: 949px;*/ /* 670 (content) + 256 (column) + 23 (margin between the columns) */
+    /*margin: 0 auto;*/
+    color: #5e5e5e;
+    background: transparent;	    
+    height: 100%;    
+}
+
+h1, h2, h3, h4 {
+    font-family: Baskerville, serif;
+    color: #000;
+}
+h1, h2, h3 {
+    font-weight: normal;
+}
+h1, h2 {
+	letter-spacing: -1px;
+}
+h2 {
+	font-size: 1.625em;
+	margin: 1em 0 0.615em;
+}
+h3 {
+	font-size: 1em;
+	margin: 0.615em 0;
+}
+section aside,
+section figure {
+	float: right;
+	width: 15.5625em;
+	background: #d5d5d5;
+	padding: 0.625em;
+	margin: 0 0 1em 1em;
+	color: #676767;
+	
+	border-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-right-radius: 5px;	
+}
+p {
+	margin: 1em 0;
+}
+a {
+	color: #2dadda;
+	text-decoration: none;
+}
+a:visited {
+
+}
+a:hover {
+	color: #1b7797;
+}
+small {
+	font-size: 0.625em;
+}
+
+/* @end */
+
+/* @group Header */
+
+/*body > header {
+	float:left;
+}*/
+
+/* @group Logo */
+
+body > header h1 {
+	width: 300px;
+	float: left;
+	font-size:2.625em;
+	font-weight: bold;
+	line-height: 1em;
+	letter-spacing:0;
+	margin:0.625em 0;
+	position:relative;
+	color: #3c3c3c;
+}
+
+/* @end */
+
+/* @group Search box */
+
+#search-box {
+	float: right;
+}
+
+/* @end */
+
+/* @group Global navigation */
+
+body > header nav {
+	clear: left;
+	width: 100%;
+	/*float: left;
+	list-style: none;*/
+	/*text-align: right;*/
+}
+body > header nav ul {
+	margin: 0;
+	padding: 0;
+	display: table;
+	list-style: none;
+}
+body > header nav li {
+	display: table-cell;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+body > header nav li a {
+	display: block;
+    margin: 0;
+	padding: 1.45em 0 1.45em 0.9em;    
+    color: #333 !important;
+    text-decoration: none;
+    border-bottom: none;	
+	text-transform: uppercase;
+	font-size: 1em;
+	line-height: 1em;
+}
+body > header nav li a:focus {
+	outline: none;
+}
+body > header nav li a:hover {
+
+}
+body > header nav li:first-child a {
+	margin-left: 0;
+}
+body > header nav li:last-child a {
+	margin-right: 0;
+}
+
+/* @end */
+
+
+
+/* @end */
+
+/* @group Content */
+
+/*#content-one-wrapper {
+	float: left;
+	margin-right: 17em;
+}*/
+#content-one-wrapper > section {
+	/*clear: both;*/
+	/*float: right;*/
+	/*margin-left: 17em;*/
+	/*width: 670px;*/
+	/*padding-right: 23px;
+	padding-left: 23px;*/
+	/*border-top: 1px solid #111F2B;*/
+}
+#content-one-wrapper > section > article {
+	margin-bottom: 1.625em;
+}
+#content-one-wrapper > section > header hgroup {
+	margin-top: 1.625em;
+	margin-bottom: 1.625em;
+}
+#content-one-wrapper > section > header hgroup h1 {
+	margin: 0;
+	padding: 0;
+    font-size: 2.625em;
+    line-height: 1em;
+	text-transform: uppercase;
+}
+#content-one-wrapper > section > header hgroup h3 {
+	margin: 0.615em 0 0;
+	padding: 0;
+    line-height: 1em;	
+    font-size: 1.625em;
+}
+#content-one-wrapper > section > footer small {
+	display: block;
+}
+#document-actions {
+	margin-top: 1em;	
+	margin: 1em 0;
+	padding: 0;	
+	float: left;
+}
+#document-actions li {
+	display: inline;
+	list-style: none;
+	font-size: 0.625em;	
+}
+#document-actions li a {	
+	background: rgba(21, 49, 65, .5);
+	border:medium none;
+	float:left;
+	margin:0 1em 0 0;
+	padding:0.625em;
+	text-transform: uppercase;
+	
+	border-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-right-radius: 5px;	
+}
+
+/* @group Figure */
+
+figure {
+	line-height: 1em;
+}
+figure a {
+	border: none;
+}
+figure a img {
+	border: none;
+}
+figure a:hover img {
+	opacity: .7;
+}
+figcaption {
+	font-size: 0.625em;
+	/*color: #666666;*/
+	line-height: 1.2em;
+	margin-top: 0.6em;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group Column */
+
+body > aside,
+#content-one-wrapper > aside {
+	/*width: 17em;*/
+	border-radius: none;
+	background: transparent;
+	/*border-top: 1px solid #111F2B;*/
+}
+body > aside {
+	/*float: left;
+	margin: 0 0 0 -17em;	
+	padding: 1.625em 1em 0 0;*/
+}
+#content-one-wrapper > aside {
+	/*float: left;
+	margin: 0 -16em 0 0;
+	padding: 1.625em 0 0 1em;*/
+}
+
+/* @group Portlets */
+
+section.portlet {
+	margin-bottom: 1em;
+}
+section.portlet header {
+    text-transform: uppercase;	
+    line-height: 1em;
+}
+section.portlet a {
+	border: none;
+}
+section.portlet ul {
+	margin: 0;
+	padding: 0;
+}
+section.portlet ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0;	
+}
+section.portlet div.portletBody {
+	padding-top: 0.625em;
+}
+section.portlet div.portletBody p {
+	text-indent: 0;
+	margin: 0.375em 0;
+}
+section.portlet div.portletBody > p:nth-child(1) {
+	margin-top: 0;
+}
+section.portlet div.portletBody a {
+	display: block;
+}
+section.portlet footer {
+	font-size: 0.625em;
+	padding: 1em 0;
+	text-transform: uppercase;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group Footer */
+
+body > footer {
+	text-align: right;
+	clear: both;
+	margin-bottom: 1.625em;
+	text-transform: uppercase;
+}
+body > footer small {
+	margin-left: 1em;
+}
+body > footer strong {
+	font-weight: normal;
+}
+
+/* @end */
 

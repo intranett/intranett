@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts">
-
+ <javascript id="++resource++intranett.theme.javascripts/html5.js"
+             conditionalcomment="lt IE 9" />
+ <javascript id="++resource++intranett.theme.javascripts/modernizr.js" />             
 </object>

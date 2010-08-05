@@ -26,5 +26,12 @@
       directory="stylesheets"
       layer=".interfaces.IThemeSpecific"
       />
+      
+  <!-- Resource directory for javascript -->
+  <browser:resourceDirectory
+      name="intranett.theme.javascripts"
+      directory="javascripts"
+      layer=".interfaces.IThemeSpecific"
+      />      
 
 </configure>
