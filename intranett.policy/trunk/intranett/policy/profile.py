@@ -16,6 +16,7 @@ class HiddenProfiles(object):
             u'plonetheme.sunburst:default',
             u'Products.PloneFormGen:default',
             u'Products.PloneFormGen:typeoverrides25x',
+            u'intranett.theme:default',
             ]
 
 class HiddenProducts(object):
@@ -31,4 +32,5 @@ class HiddenProducts(object):
             'Products.kupu',
             'Products.Marshall',
             'Products.PloneFormGen',
+            'intranett.theme',
         ]

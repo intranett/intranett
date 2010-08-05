@@ -29,7 +29,7 @@ class TestSiteSetup(IntranettTestCase):
 
     def test_theme(self):
         skins = getToolByName(self.portal, 'portal_skins')
-        self.assertEquals(skins.getDefaultSkin(), 'Sunburst Theme')
+        self.assertEquals(skins.getDefaultSkin(), 'Intranett.no base theme')
 
     def test_content(self):
         # This content is only created in the tests, it's too hard to avoid

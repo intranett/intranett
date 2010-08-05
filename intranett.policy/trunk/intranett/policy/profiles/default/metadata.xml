@@ -4,5 +4,6 @@
   <dependencies>
     <dependency>profile-plonetheme.sunburst:default</dependency>
     <dependency>profile-Products.PloneFormGen:default</dependency>
+    <dependency>profile-intranett.theme:default</dependency>    
   </dependencies>
 </metadata>
