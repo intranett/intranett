@@ -27,10 +27,6 @@ class TestSiteSetup(IntranettTestCase):
         tt = getToolByName(self.portal, 'portal_types')
         self.assert_('FormFolder' in tt.keys())
 
-    def test_theme(self):
-        skins = getToolByName(self.portal, 'portal_skins')
-        self.assertEquals(skins.getDefaultSkin(), 'Intranett.no base theme')
-
     def test_content(self):
         # This content is only created in the tests, it's too hard to avoid
         # its creation

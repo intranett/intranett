@@ -9,6 +9,7 @@
   <include package="experimental.catalogqueryplan" />
   <include package="plonetheme.sunburst" />
   <include package="Products.PloneFormGen" />
+  <include package="intranett.theme" />
 
   <include package=".browser" />
   <include file="profile.zcml" />

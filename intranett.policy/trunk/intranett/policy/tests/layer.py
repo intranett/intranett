@@ -16,6 +16,7 @@ class IntranettLayer(BasePTCLayer):
         zcml.load_config("overrides.zcml", intranett.policy)
         fiveconfigure.debug_mode = False
         ztc.installPackage("intranett.policy", quiet=True)
+        ztc.installPackage("intranett.theme", quiet=True)
         self.addProfile('intranett.policy:default')
 
     def beforeTearDown(self):
