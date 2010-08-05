@@ -1,17 +1,13 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="intranett.theme">
+    i18n_domain="intranett">
 
-  <!-- 'Intranett.no base theme' Zope 3 browser layer -->
   <interface
       interface=".interfaces.IThemeSpecific"
       type="zope.publisher.interfaces.browser.IBrowserSkinType"
       name="Intranett.no base theme"
       />
-  
-  <!-- Viewlets registration -->
-  <!-- Zope 3 browser resources -->
 
   <!-- Resource directory for images -->
   <browser:resourceDirectory
@@ -26,12 +22,12 @@
       directory="stylesheets"
       layer=".interfaces.IThemeSpecific"
       />
-      
+
   <!-- Resource directory for javascript -->
   <browser:resourceDirectory
       name="intranett.theme.javascripts"
       directory="javascripts"
       layer=".interfaces.IThemeSpecific"
-      />      
+      />
 
 </configure>
