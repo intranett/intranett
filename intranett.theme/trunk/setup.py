@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import os
 
 version = '0.1'
 
@@ -10,15 +9,15 @@ setup(name='intranett.theme',
                    projects' specific visual themes are going to \
                    be built on top of this base theme.",
       long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+                       open("CHANGES.txt").read(),
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
         ],
       keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      author='Jarn AS',
+      author_email='info@jarn.com',
+      url='http://www.jarn.com',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['intranett'],
