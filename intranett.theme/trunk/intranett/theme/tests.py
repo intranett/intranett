@@ -1,6 +1,6 @@
 import unittest
 
-#from zope.testing import doctestunit
+#import doctest
 #from zope.component import testing
 from Testing import ZopeTestCase as ztc
 
@@ -31,11 +31,11 @@ def test_suite():
     return unittest.TestSuite([
 
         # Unit tests
-        #doctestunit.DocFileSuite(
+        #doctest.DocFileSuite(
         #    'README.txt', package='intranett.theme',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
-        #doctestunit.DocTestSuite(
+        #doctest.DocTestSuite(
         #    module='intranett.theme.mymodule',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
@@ -50,6 +50,3 @@ def test_suite():
         #    test_class=TestCase),
 
         ])
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')
