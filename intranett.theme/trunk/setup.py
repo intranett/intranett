@@ -6,7 +6,7 @@ version = '0.1'
 setup(name='intranett.theme',
       version=version,
       description="Basic theme providing base fonts, typography, \
-                   rhythm for intranett.no projects. Particulars \
+                   rhythm for intranett.no projects. Particular \
                    projects' specific visual themes are going to \
                    be built on top of this base theme.",
       long_description=open("README.txt").read() + "\n" +
