@@ -35,6 +35,10 @@
             </metal:field>
         </div>
 
+        <div class="visualClear"><!----></div>
+
+        <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
+
     </metal:content-core>
 </metal:content-core>
 

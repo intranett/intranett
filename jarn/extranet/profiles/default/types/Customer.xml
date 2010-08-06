@@ -5,7 +5,7 @@
  <property name="title">Customer</property>
  <property
     name="description">A Jarn Customer</property>
- <property name="content_icon">group.gif</property>
+ <property name="icon_expr">string:${portal_url}/group.png</property>
  <property name="content_meta_type">Customer</property>
  <property name="product">jarn.extranet</property>
  <property name="factory">addCustomer</property>
@@ -19,7 +19,7 @@
  <alias from="(Default)" to="base_view"/>
  <alias from="edit" to="base_edit"/>
  <action title="View" action_id="view" category="object" condition_expr=""
-    url_expr="string:${object_url}/customer_view" visible="True">
+    url_expr="string:${object_url}/base_view" visible="True">
   <permission value="View"/>
  </action>
  <action title="Edit" action_id="edit" category="object" condition_expr=""
