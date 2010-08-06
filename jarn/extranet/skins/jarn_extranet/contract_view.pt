@@ -22,42 +22,73 @@
             <img tal:replace="structure here/hour_icon.gif" />Register work hours</a>
         </p>
 
-        <metal:field use-macro="python:context.widget('contract_number', mode='view')">
-            Contract number
-        </metal:field>
+        <div class="field">
+            <label class="formQuestion"><span>Contract number</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('contract_number', mode='view')">
+                Contract number
+            </metal:field>
+        </div>
 
-        <metal:field use-macro="python:context.widget('contract_type', mode='view')">
-            Contract Type
-        </metal:field>
+        <div class="field">
+            <label class="formQuestion"><span>Contract Type</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('contract_type', mode='view')">
+                Contract Type
+            </metal:field>
+        </div>
 
-        <metal:field use-macro="python:context.widget('contract_terms', mode='view')">
-            Contract terms
-        </metal:field>
+        <div class="field">
+            <label class="formQuestion"><span>Contract terms</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('contract_terms', mode='view')">
+                Contract terms
+            </metal:field>
+        </div>
 
-        <metal:field use-macro="python:context.widget('original_contract', mode='view')">
-            Original contract
-        </metal:field>
+        <div class="field">
+            <label class="formQuestion"><span>Original contract</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('original_contract', mode='view')">
+                Original contract
+            </metal:field>
+        </div>
 
-        <metal:field use-macro="python:context.widget('original_contract_text', mode='view')">
-            Original contract text
-        </metal:field>
+        <div class="field">
+            <label class="formQuestion"><span>Original contract text</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('original_contract_text', mode='view')">
+                Original contract text
+            </metal:field>
+        </div>
 
-        <metal:field use-macro="python:context.widget('startDate', mode='view')">
-            Start date
-        </metal:field>
+        <div class="field">
+            <label class="formQuestion"><span>Start date</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('startDate', mode='view')">
+                Start date
+            </metal:field>
+        </div>
 
-        <metal:field use-macro="python:context.widget('endDate', mode='view')">
-            End date
-        </metal:field>
+        <div class="field">
+            <label class="formQuestion"><span>End date</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('endDate', mode='view')">
+                End date
+            </metal:field>
+        </div>
 
-        <metal:field use-macro="python:context.widget('invoicing_rules', mode='view')">
-            Invoicing rules
-        </metal:field>
+        <div class="field">
+            <label class="formQuestion"><span>Invoicing rules</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('invoicing_rules', mode='view')">
+                Invoicing rules
+            </metal:field>
+        </div>
 
         <div class="visualClear"><!----></div>
 
         <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
-
 
     </metal:content-core>
 </metal:content-core>

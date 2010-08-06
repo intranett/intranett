@@ -16,6 +16,7 @@ from Products.Archetypes.public import StringWidget
 from Products.Archetypes.public import TextAreaWidget
 from Products.Archetypes.public import TextField
 from Products.CMFCore.utils import getToolByName
+from Products.Extropy.config import VIEW_PERMISSION
 from Products.Extropy.config import TIMETOOLNAME
 
 from jarn.extranet.config import PROJECTNAME
@@ -92,10 +93,41 @@ class Contract(BaseFolder):
     schema = ContractSchema
     security = ClassSecurityInfo()
 
+    security.declareProtected(VIEW_PERMISSION, 'getActivePhases')
+    def getActivePhases(self):
+        """"""
+        return ()
+
+    security.declareProtected(VIEW_PERMISSION, 'getActivities')
+    def getActivities(self, **kw):
+        """"""
+        return ()
+
+    security.declareProtected(VIEW_PERMISSION, 'getExtropyProject')
+    def getExtropyProject(self):
+        """Returns the current project."""
+        return self
+
+    security.declareProtected(VIEW_PERMISSION, 'getProjectTitle')
+    def getProjectTitle(self):
+        """Returns the title of the current project."""
+        return self.Title()
+
+    security.declareProtected(VIEW_PERMISSION, 'getWorkedHours')
     def getWorkedHours(self):
         """get the total amount of time worked for this object"""
         tool = getToolByName(self,TIMETOOLNAME)
         return tool.countIntervalHours(node=self)
+
+    security.declareProtected(VIEW_PERMISSION, 'getBudgetCategory')
+    def getBudgetCategory(self):
+        """The budget category."""
+        return 'Billable'
+
+    security.declareProtected(VIEW_PERMISSION, 'getDefaultBudgetCategory')
+    def getDefaultBudgetCategory(self):
+        """The default budget category."""
+        return 'Billable'
 
 
 registerType(Contract, PROJECTNAME)

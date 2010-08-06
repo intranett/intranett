@@ -24,4 +24,9 @@
     url_expr="string:${object_url}/base_edit" visible="True">
   <permission value="Modify portal content"/>
  </action>
+ <action title="Timereport" action_id="timereport" category="object"
+    condition_expr="" url_expr="string:${object_url}/timereport"
+    visible="True">
+  <permission value="View"/>
+ </action>
 </object>
