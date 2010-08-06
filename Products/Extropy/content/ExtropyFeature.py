@@ -65,7 +65,7 @@ class ExtropyFeature(ExtropyHistoryTrackable, ExtropyTracking, ExtropyBase, Base
             rt = getToolByName(self, REFERENCE_CATALOG)
             dest = rt.lookupObject(uid)
             if dest is None:
-                raise AttributeError, "we are trying to move to a None-object from uid %s" %(uid)
+                raise AttributeError("we are trying to move to a None-object from uid %s" %(uid))
             dest.manage_pasteObjects(parent.manage_cutObjects(self.getId()))
             if hasattr(self, 'aq_parent'):
                 self.aq_parent = dest

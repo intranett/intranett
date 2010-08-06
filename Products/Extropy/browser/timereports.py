@@ -5,13 +5,12 @@ from zope.app.publisher.browser.menu import getMenu
 from Products.Archetypes.config import REFERENCE_CATALOG
 
 from AccessControl import getSecurityManager
+from Acquisition import aq_parent
 from DateTime import DateTime
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import transaction_note
 from Products.Five import BrowserView
 from ZTUtils import make_query
-from Acquisition import aq_base, aq_parent, aq_inner
 
 from Products.Extropy.permissions import MANAGE_FINANCES
 from Products.Extropy.utils import safe_unicode
@@ -188,7 +187,6 @@ class TimeReports(BrowserView, TimeReportQuery):
         transaction_note(message)
 
     def email_hours_report(self):
-        timefmt = '%h.%d %H:%M';
         result = []
         for data in self.hours_by_date:
             if data['hours']:
@@ -227,20 +225,17 @@ class TimeReports(BrowserView, TimeReportQuery):
 
         self.mark_invoiced(nr)
         self.setMessage('Created invoice from marked hours.')
-        url = self.context.absolute_url() + '/@@invoice-hours?number=%s' % nr
-        return url
+        return self.context.absolute_url() + '/@@invoice-hours?number=%s' % nr
 
     def moveHours(self):
         """Move the selected hours to a different package"""
         targetuid = self.request.get('targetuid',None)
         if not targetuid:
-                raise AttributeError, "Cannot move hours without a destination"        
+                raise AttributeError("Cannot move hours without a destination")
         referencetool = getToolByName(self.context, REFERENCE_CATALOG)
         destination = referencetool.lookupObject(targetuid)
         if destination is None:
-            raise AttributeError, "we are trying to move to a None-object from uid %s" %(targetuid)
+            raise AttributeError("we are trying to move to a None-object from uid %s" % (targetuid))
         for obj in self.selected_hours:
-            destination.hourglass.manage_pasteObjects(obj.aq_parent.manage_cutObjects(obj.getId()))
-        url = destination.absolute_url() + '/timereport'
-        return url
-            
+            destination.hourglass.manage_pasteObjects(aq_parent(obj).manage_cutObjects(obj.getId()))
+        return destination.absolute_url() + '/timereport'
