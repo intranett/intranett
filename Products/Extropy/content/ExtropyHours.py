@@ -77,7 +77,7 @@ class ExtropyHours(BaseContent):
     def getExtropyParent(self, metatype=None):
         """Gets the containg parent, if it is an ExtropyBase object.
         """
-        project_types=['ExtropyProject','Contract']
+        project_types=['ExtropyProject', 'Contract']
         for o in self.aq_chain:
             if o is not self:
                 if hasattr(o,'meta_type') and o.meta_type in project_types:
@@ -124,7 +124,7 @@ class ExtropyHours(BaseContent):
     security.declarePublic('getDefaultBudgetCategory')
     def getDefaultBudgetCategory(self):
         """the default budget cat"""
-        package =  self.getExtropyParent( metatype='ExtropyPhase')
+        package =  self.getExtropyParent(metatype='ExtropyPhase')
         if package is not None:
             return package.getBudgetCategory() or 'Billable'
         return "Billable"

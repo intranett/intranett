@@ -4,9 +4,10 @@ from Products.Extropy.browser.worklog import DateToPeriod, WorkLogView
 
 
 class ProjectsListing(BrowserView):
+
     def projects(self):
         etool = getToolByName(self.context, 'extropy_tracking_tool')
-        brains = etool.searchResults(meta_type='ExtropyProject', review_state=['active', 'closable'], sort_on='getId')
+        brains = etool.searchResults(meta_type=['ExtropyProject'], review_state=['active', 'closable'], sort_on='getId')
         active = dict(title='Active projects', projects=[])
         ongoing = dict(title='Ongoing projects', projects=[])
         internal = dict(title='Internal projects', projects=[])
@@ -45,5 +46,12 @@ class ProjectsListing(BrowserView):
                     closable['projects'].append(data)
                 else:
                     other['projects'].append(data)
+
         result = [active, ongoing, internal, closable]
         return result
+
+    def contracts(self):
+        catalog = getToolByName(self.context, 'portal_catalog')
+        path = self.context.getPhysicalPath()
+        query = {'portal_type': 'Contract', path: {'path': path}, }
+        return catalog(query)
