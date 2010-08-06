@@ -19,7 +19,7 @@ from jarn.extranet.interfaces import ICustomer
 CustomerSchema = BaseSchema + Schema((
 
     StringField('code',
-                required=False,
+                required=True,
                 widget=StringWidget(label='Unique customer code',
                                     description='Technical identifer used as the unique id in all tools.'),
                 ),
