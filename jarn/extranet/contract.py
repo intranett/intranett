@@ -12,6 +12,7 @@ from Products.Archetypes.public import FileWidget
 from Products.Archetypes.public import Schema
 from Products.Archetypes.public import SelectionWidget
 from Products.Archetypes.public import StringField
+from Products.Archetypes.public import StringWidget
 from Products.Archetypes.public import TextAreaWidget
 from Products.Archetypes.public import TextField
 
@@ -21,10 +22,13 @@ from jarn.extranet.interfaces import IContract
 
 ContractSchema = BaseSchema + Schema((
 
-    StringField(name='contract_number'),
+    StringField(name='contract_number',
+                widget=StringWidget(label='Contract number'),
+                ),
 
     StringField(name='contract_type',
                 widget=SelectionWidget(label='Contract type'),
+                default='development',
                 vocabulary=DisplayList((('support', 'Support'),
                                         ('development', 'Development or consulting'),
                                         ('hosting', 'Hosting'),
@@ -67,7 +71,6 @@ ContractSchema = BaseSchema + Schema((
                   ),
 
     TextField('invoicing rules',
-              schemata='billing',
               default_content_type='text/plain',
               allowable_content_types=('text/plain', ),
               widget=TextAreaWidget(label='Invoicing rules',
