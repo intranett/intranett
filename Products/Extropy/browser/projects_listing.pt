@@ -14,23 +14,6 @@
                  contracts view/contracts;
                  ztu modules/ZTUtils;">
 
-    <div>
-        <h3>Contracts</h3>
-
-        <dl tal:repeat="contract contracts">
-            <dt tal:define="obj contract/getObject;
-                            parent nocall:obj/aq_parent">
-                <a tal:attributes="href contract/getURL">
-                    <span tal:content="contract/Title" />
-                </a>
-                (<span tal:content="parent/Title | nothing" />)
-            </dt>
-            <dd>
-                <tal:block>Hour tracking not implemented yet.</tal:block>
-            </dd>
-        </dl>
-    </div>
-
     <div tal:repeat="state projectsbystate">
 
         <h3 tal:content="state/title">Title</h3>
@@ -48,6 +31,24 @@
         </dl>
 
     </div>
+
+    <div>
+        <h3>Contracts</h3>
+
+        <dl tal:repeat="contract contracts">
+            <dt tal:define="obj contract/getObject;
+                            parent nocall:obj/aq_parent">
+                <a tal:attributes="href contract/getURL">
+                    <span tal:content="contract/Title" />
+                </a>
+                (<span tal:content="parent/Title | nothing" />)
+            </dt>
+            <dd>
+                <tal:block>Hour tracking not implemented yet.</tal:block>
+            </dd>
+        </dl>
+    </div>
+
 </div>
 
 </div>
