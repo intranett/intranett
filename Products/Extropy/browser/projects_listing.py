@@ -9,8 +9,6 @@ class ProjectsListing(BrowserView):
         etool = getToolByName(self.context, 'extropy_tracking_tool')
         brains = etool.searchResults(meta_type=['ExtropyProject'], review_state=['active', 'closable'], sort_on='getId')
         active = dict(title='Active projects', projects=[])
-        ongoing = dict(title='Ongoing projects', projects=[])
-        internal = dict(title='Internal projects', projects=[])
         closable = dict(title='Finished projects waiting for invoicing', projects=[])
         other = dict(title='Other', projects=[])
         for state, projects in etool.dictifyBrains(brains, 'review_state').iteritems():
@@ -36,10 +34,8 @@ class ProjectsListing(BrowserView):
                 else:
                     data['persons'] = "".join(persons)
                 if state == 'active':
-                    if 'Ongoing Project' in project.Subject():
-                        ongoing['projects'].append(data)
-                    elif 'Management Project' in project.Subject():
-                        internal['projects'].append(data)
+                    if 'Management Project' in project.Subject():
+                        continue
                     else:
                         active['projects'].append(data)
                 elif state == 'closable':
@@ -47,7 +43,7 @@ class ProjectsListing(BrowserView):
                 else:
                     other['projects'].append(data)
 
-        result = [active, ongoing, internal, closable]
+        result = [active, closable]
         return result
 
     def contracts(self):
