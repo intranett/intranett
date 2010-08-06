@@ -4,18 +4,14 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import registerType
 from Products.Archetypes.public import BaseFolder
 from Products.Archetypes.public import BaseSchema
-from Products.Archetypes.public import BooleanField
-from Products.Archetypes.public import BooleanWidget
 from Products.Archetypes.public import CalendarWidget
 from Products.Archetypes.public import DateTimeField
 from Products.Archetypes.public import DisplayList
 from Products.Archetypes.public import FileField
 from Products.Archetypes.public import FileWidget
-from Products.Archetypes.public import IntegerField
 from Products.Archetypes.public import Schema
 from Products.Archetypes.public import SelectionWidget
 from Products.Archetypes.public import StringField
-from Products.Archetypes.public import StringWidget
 from Products.Archetypes.public import TextAreaWidget
 from Products.Archetypes.public import TextField
 
@@ -62,10 +58,6 @@ ContractSchema = BaseSchema + Schema((
                                     rows=5),
               ),
 
-
-
-
-
     DateTimeField(name='startDate',
         accessor='start',
         widget=CalendarWidget(label='Start Date / Time')
@@ -76,42 +68,7 @@ ContractSchema = BaseSchema + Schema((
                   widget=CalendarWidget(label='End Date / Time'),
                   ),
 
-
     # BILLING SCHEMA
-
-    TextField('billing_address',
-              schemata='billing',
-              default_output_type='text/x-html-safe',
-              default_content_type='text/plain',
-              allowable_content_types=('text/plain'),
-              widget=TextAreaWidget(label='Billing address',
-                                    description='Billing address for invoices',
-                                    rows=5),
-              ),
-
-
-    StringField(name='currency',
-                schemata='billing',
-                default='NOK',
-                widget=SelectionWidget(label='Currency'),
-                                       vocabulary=DisplayList([('NOK', 'NOK'), ('EUR', 'EUR'), ('USD', 'USD')]),
-                ),
-
-    StringField(name='charge_type',
-                schemata='billing',
-                widget=SelectionWidget(label='Charge type'),
-                vocabulary=DisplayList([('timeandmaterials', 'Time and materials'),
-                                        ('fixed', 'Fixed price'),
-                                       ]),
-                ),
-
-    BooleanField('charge_mva',
-                 schemata='billing',
-                 widget=BooleanWidget(label='MVA/VAT',
-                                      description='Check this if we should charge MVA/VAT',
-                                      )
-                 ),
-
 
     TextField('invoicing rules',
               schemata='billing',
@@ -122,35 +79,6 @@ ContractSchema = BaseSchema + Schema((
                                     description='How often can we invoice, under what terms?',
                                     rows=5),
               ),
-
-    IntegerField('cost_ceiling',
-                 schemata='billing',
-                 required = False,
-                 default = None,
-                 widget = StringWidget(label = 'Cost Ceiling',
-                                       description='Agreed max price for the contract',
-                                       ),
-                 ),
-
-    StringField(name='recurring_invoicing_frequency',
-                schemata='billing',
-                widget=SelectionWidget(label='Invoicing frequency (for recurring invoices)'),
-                vocabulary=DisplayList([('', 'Not Recurring'),
-                                        ('monthly', 'Monthly'),
-                                        ('quarterly', 'Quarterly'),
-                                        ('every6', 'Every 6 months'),
-                                        ('every12', 'Annually'),
-                                       ]),
-                ),
-
-    IntegerField('recurring_fee',
-                schemata='billing',
-                required = False,
-                default = None,
-                widget = StringWidget(label = 'Recurring fee',
-                                      description='Fee per period for recurring contracts',
-                                       ),
-                ),
 
     ))
 
