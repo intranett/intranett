@@ -27,26 +27,23 @@
             <input type="submit" value="filter" />
         </fieldset>
 
-    <table metal:use-macro="context/@@timereport_macros/hours_table"/>
+        <table metal:use-macro="context/@@timereport_macros/hours_table"/>
 
-    <div tal:condition="view/finance_access">
-        Invoice number (last was:
-        <span tal:replace="view/last_invoice_number" />
-        )
-        <input type="text"
-               size="5"
-               name="invoiceNumber:string"
-               />
+        <div tal:condition="view/finance_access">
+            Invoice number (last was:
+            <span tal:replace="view/last_invoice_number" />
+            )
+            <input type="text"
+                   size="5"
+                   name="invoiceNumber:string"
+                   />
 
-        <input class="context"
-               type="submit"
-               name="create_invoice"
-               value="Create invoice"
-               />
-    </div>
-
-
-
+            <input class="context"
+                   type="submit"
+                   name="create_invoice"
+                   value="Create invoice"
+                   />
+        </div>
 
         <fieldset tal:define="project context/getExtropyProject">
             <legend>Moving wrongly booked hours</legend>
@@ -58,8 +55,6 @@
             </select>
             <button type="submit" name="move_hours" value="move_hours">Move selected hours</button>
         </fieldset>
-
-
 
     </form>
 </div>
