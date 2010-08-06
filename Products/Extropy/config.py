@@ -40,7 +40,7 @@ DEFAULT_BUGDET_CATEGORIES = (('Billable','Billable'),
                              ('Sales','Sales')
                              )
 
-BILLABLE_TYPES = ('ExtropyTask', 'ExtropyActivity', 'ExtropyFeature')
+BILLABLE_TYPES = ('ExtropyTask', 'ExtropyActivity', 'ExtropyFeature','Contract')
 
 PLAN_RELATIONSHIP = 'plannedItem'
 PLAN_ADDITIONAL_RELATIONSHIP = 'adHocItem'

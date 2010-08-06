@@ -45,6 +45,22 @@
                />
     </div>
 
+
+
+
+        <fieldset tal:define="project context/getExtropyProject">
+            <legend>Moving wrongly booked hours</legend>
+            <select name="targetuid">
+                <option value="">--</option>
+                <optgroup tal:repeat="phase project/getActivePhases" tal:attributes="label phase/Title">
+                    <option tal:repeat="item phase/getActivities" tal:attributes="value item/UID" tal:content="item/Title">foo</option>
+                </optgroup>
+            </select>
+            <button type="submit" name="move_hours" value="move_hours">Move selected hours</button>
+        </fieldset>
+
+
+
     </form>
 </div>
 

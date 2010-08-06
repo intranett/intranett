@@ -77,13 +77,11 @@ class ExtropyHours(BaseContent):
     def getExtropyParent(self, metatype=None):
         """Gets the containg parent, if it is an ExtropyBase object.
         """
+        project_types=['ExtropyProject','Contract']
         for o in self.aq_chain:
             if o is not self:
-                if IExtropyBase.providedBy(o):
-                    if metatype is None:
-                        return o
-                    elif hasattr(o,'meta_type') and metatype == o.meta_type:
-                        return o
+                if hasattr(o,'meta_type') and o.meta_type in project_types:
+                    return o
         return None
 
     security.declarePrivate('findBudgetCategory')
