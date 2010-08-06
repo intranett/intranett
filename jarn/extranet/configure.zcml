@@ -4,35 +4,15 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="jarn.extranet">
-
-    <include package=".browser" />
-    <include package="borg.localrole" />
-
-  <cmf:registerDirectory
-      name="skins"
-      directory="skins"
-      recursive="True"
-      />
+    i18n_domain="Extropy">
 
     <five:registerPackage package="." initialize=".initialize" />
+    <include package=".browser" />
 
-    <class class="jarn.extranet.person.Person" />
-
-    <adapter for=".person.Person"
-             factory=".user.UserIdProvider"
-             />
-
-    <adapter factory=".group.LocalRoles"
-            provides="borg.localrole.interfaces.ILocalRoleProvider"
-            for="jarn.extranet.interfaces.ICustomer"
-            />
-
-    <browser:page
-        for="*"
-        name="printInfo"
-        class=".printinfo.PrintInfoView"
-        permission="zope2.View"
+    <cmf:registerDirectory
+        name="skins"
+        directory="skins"
+        recursive="True"
         />
 
     <genericsetup:registerProfile

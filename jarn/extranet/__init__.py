@@ -4,18 +4,12 @@ from jarn.extranet import config
 from Products.Archetypes import atapi
 from Products.CMFCore import utils
 
-_ = MessageFactory('jarn.extranet')
+_ = MessageFactory('Extropy')
 
 
 def initialize(context):
-    """Initializer called when used as a Zope 2 product.
-    """
-
     import jarn.extranet.customer
-    import jarn.extranet.person
     import jarn.extranet.contract
-    import jarn.extranet.sitedocumentation
-
 
     content_types, constructors, ftis = atapi.process_types(
         atapi.listTypes(config.PROJECTNAME),
