@@ -7,6 +7,8 @@ from Products.Archetypes.public import BaseSchema
 from Products.Archetypes.public import ImageField
 from Products.Archetypes.public import ImageWidget
 from Products.Archetypes.public import Schema
+from Products.Archetypes.public import StringField
+from Products.Archetypes.public import StringWidget
 from Products.Archetypes.public import TextAreaWidget
 from Products.Archetypes.public import TextField
 
@@ -15,6 +17,12 @@ from jarn.extranet.interfaces import ICustomer
 
 
 CustomerSchema = BaseSchema + Schema((
+
+    StringField('code',
+                required=False,
+                widget=StringWidget(label='Unique customer code',
+                                    description='Technical identifer used as the unique id in all tools.'),
+                ),
 
     TextField('description',
               accessor='Description',
