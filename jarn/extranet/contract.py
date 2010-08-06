@@ -33,9 +33,8 @@ ContractSchema = BaseSchema + Schema((
                 ),
 
     TextField('contract_terms',
-              default_output_type='text/x-html-safe',
               default_content_type='text/plain',
-              allowable_content_types=('text/plain'),
+              allowable_content_types=('text/plain', ),
               widget=TextAreaWidget(label='Notable contract terms',
                                     description='This field is for internal use',
                                     rows=5),
@@ -49,9 +48,8 @@ ContractSchema = BaseSchema + Schema((
 
 
     TextField('orginial_contract_text',
-              default_output_type='text/x-html-safe',
               default_content_type='text/plain',
-              allowable_content_types=('text/plain'),
+              allowable_content_types=('text/plain', ),
               searchable=True,
               widget=TextAreaWidget(label='The full contract text contents',
                                     description='The full contract text. Optional.',
@@ -68,13 +66,10 @@ ContractSchema = BaseSchema + Schema((
                   widget=CalendarWidget(label='End Date / Time'),
                   ),
 
-    # BILLING SCHEMA
-
     TextField('invoicing rules',
               schemata='billing',
-              default_output_type='text/x-html-safe',
               default_content_type='text/plain',
-              allowable_content_types=('text/plain'),
+              allowable_content_types=('text/plain', ),
               widget=TextAreaWidget(label='Invoicing rules',
                                     description='How often can we invoice, under what terms?',
                                     rows=5),
