@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="extropy">
+<body>
+
+<metal:content-core fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
+
+        <div tal:define="worked here/getWorkedHours;
+                         URL here/absolute_url;
+                         bar nocall:context/@@progressbar;
+                         ">
+            <p tal:replace="structure python:bar(worked, URL)"/>
+        </div>
+
+        <p style="text-align: right">
+            <a tal:attributes="href string:${here/absolute_url}/add_work_hours">
+            <img tal:replace="structure here/hour_icon.gif" />Register work hours</a>
+        </p>
+
+        <metal:field use-macro="python:context.widget('contract_number', mode='view')">
+            Contract number
+        </metal:field>
+
+        <metal:field use-macro="python:context.widget('contract_type', mode='view')">
+            Contract Type
+        </metal:field>
+
+        <metal:field use-macro="python:context.widget('contract_terms', mode='view')">
+            Contract terms
+        </metal:field>
+
+        <metal:field use-macro="python:context.widget('original_contract', mode='view')">
+            Original contract
+        </metal:field>
+
+        <metal:field use-macro="python:context.widget('original_contract_text', mode='view')">
+            Original contract text
+        </metal:field>
+
+        <metal:field use-macro="python:context.widget('startDate', mode='view')">
+            Start date
+        </metal:field>
+
+        <metal:field use-macro="python:context.widget('endDate', mode='view')">
+            End date
+        </metal:field>
+
+        <metal:field use-macro="python:context.widget('invoicing_rules', mode='view')">
+            Invoicing rules
+        </metal:field>
+
+        <div class="visualClear"><!----></div>
+
+        <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
+
+
+    </metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

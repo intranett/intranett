@@ -15,6 +15,8 @@ from Products.Archetypes.public import StringField
 from Products.Archetypes.public import StringWidget
 from Products.Archetypes.public import TextAreaWidget
 from Products.Archetypes.public import TextField
+from Products.CMFCore.utils import getToolByName
+from Products.Extropy.config import TIMETOOLNAME
 
 from jarn.extranet.config import PROJECTNAME
 from jarn.extranet.interfaces import IContract
@@ -45,13 +47,13 @@ ContractSchema = BaseSchema + Schema((
               ),
 
 
-    FileField('orginial_contract',
+    FileField('original_contract',
               widget=FileWidget(label='Original Signed Contract',
                                 description="A scanned copy of the full contract text. Preferably the signed version")
         ),
 
 
-    TextField('orginial_contract_text',
+    TextField('original_contract_text',
               default_content_type='text/plain',
               allowable_content_types=('text/plain', ),
               searchable=True,
@@ -70,7 +72,7 @@ ContractSchema = BaseSchema + Schema((
                   widget=CalendarWidget(label='End Date / Time'),
                   ),
 
-    TextField('invoicing rules',
+    TextField('invoicing_rules',
               default_content_type='text/plain',
               allowable_content_types=('text/plain', ),
               widget=TextAreaWidget(label='Invoicing rules',
@@ -89,6 +91,11 @@ class Contract(BaseFolder):
 
     schema = ContractSchema
     security = ClassSecurityInfo()
+
+    def getWorkedHours(self):
+        """get the total amount of time worked for this object"""
+        tool = getToolByName(self,TIMETOOLNAME)
+        return tool.countIntervalHours(node=self)
 
 
 registerType(Contract, PROJECTNAME)
