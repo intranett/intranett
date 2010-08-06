@@ -15,7 +15,7 @@
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-        <h1 class="documentFirstHeading"> 
+        <h1 class="documentFirstHeading">
             All customers
         </h1>
 
@@ -25,15 +25,15 @@
         <p class="documentDescription">
             List of all customers
         </p>
-        
+
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-        
+
         <ul tal:define="customers python:context.restrictedTraverse('@@searchResults')(Type='Customer')">
-            <li tal:repeat="customer customers"><a href="" tal:attributes="href customer/getURL"><img tal:define="logo customer/getRawLogo" tal:attributes="src string:${customer/getURL}/logo; title customer/Title;alt customer/Title" /></a> 
+            <li tal:repeat="customer customers"><a href="" tal:attributes="href customer/getURL"><img tal:define="logo customer/getRawLogo" tal:attributes="src string:${customer/getURL}/logo; title customer/Title;alt customer/Title" /></a>
                 </li>
         </ul>
-    
+
         <div tal:replace="structure provider:plone.belowcontentbody" />
 
     </tal:main-macro>
