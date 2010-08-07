@@ -1,5 +1,8 @@
-from Products.Five import BrowserView
+from Acquisition import aq_parent
 from Products.CMFCore.utils import getToolByName
+from Products.Five import BrowserView
+from Products.ZCatalog.Lazy import LazyCat
+
 from Products.Extropy.browser.worklog import DateToPeriod, WorkLogView
 
 
@@ -8,6 +11,8 @@ class ProjectsListing(BrowserView):
     def projects(self):
         etool = getToolByName(self.context, 'extropy_tracking_tool')
         brains = etool.searchResults(meta_type=['ExtropyProject'], review_state=['active', 'closable'], sort_on='getId')
+        contracts = self.contracts()
+        brains = LazyCat((brains, contracts))
         active = dict(title='Active projects', projects=[])
         closable = dict(title='Finished projects waiting for invoicing', projects=[])
         other = dict(title='Other', projects=[])
@@ -20,9 +25,14 @@ class ProjectsListing(BrowserView):
                 activity = worklog.activity()
                 hours = sum([x['summary']['hours'] for x in activity])
                 persons = [x['title'] for x in activity]
+                title = project.Title()
+                customer_title = None
+                if project.portal_type == 'Contract':
+                    customer_title = aq_parent(project).Title()
                 data = dict(
                     url=project.absolute_url(),
-                    title=project.Title(),
+                    title=title,
+                    customer_title=customer_title,
                     project_manager=project.getProjectManager(),
                     status=project.getProjectStatus(),
                     hours=hours,
