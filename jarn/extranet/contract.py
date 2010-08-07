@@ -108,6 +108,13 @@ class Contract(BaseFolder):
         """Returns the current project."""
         return self
 
+    security.declarePrivate('getExtropyParentChain')
+    def getExtropyParentChain(self, include_self=False):
+        """Gets the containg parent chain."""
+        if include_self:
+            return [self]
+        return []
+
     security.declareProtected(VIEW_PERMISSION, 'getProjectTitle')
     def getProjectTitle(self):
         """Returns the title of the current project."""
