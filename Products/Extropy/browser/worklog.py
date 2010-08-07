@@ -6,6 +6,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.Extropy.config import TIMETOOLNAME
 from Products.Archetypes.utils import OrderedDict
 
+
 class IWorkLogView(Interface):
     def activity(period=None, people="all", group_by="day", start=None):
         """Return a grouped list of work activity.
@@ -16,6 +17,7 @@ class IWorkLogView(Interface):
 
         This is returned as a list of (userid, full name) tuples.
         """
+
 
 def DateToPeriod(period="week", date=None):
     """Return the start and end dates for a time period defined by a
@@ -37,7 +39,7 @@ def DateToPeriod(period="week", date=None):
         if end.day()<28:
             end-=end.day()
     else:
-        raise ValueError, "undefined period" 
+        raise ValueError("undefined period")
 
     return (start, end)
 
@@ -60,7 +62,6 @@ class WorkLogView(BrowserView):
             start=DateTime()
         (self.start, self.end)=DateToPeriod(period=self.period, date=start)
 
-
     def getMemberName(self, userid):
         member=self.mt.getMemberById(userid)
         if member is None:
@@ -69,14 +70,12 @@ class WorkLogView(BrowserView):
         name=member.getProperty("fullname")
         return name and name or userid
 
-
     def summarize(self, bookings):
-        return dict(hours=sum((booking["hours"] for booking in bookings)),
-                )
+        return dict(hours=sum((booking["hours"] for booking in bookings)))
 
     def MorphHourBrain(self, brain):
-        obj=brain.getObject()
-        author=fullname=brain.Creator
+        obj = brain.getObject()
+        author = brain.Creator
 
         chain=[dict(url=link.absolute_url(), title=link.Title())
                 for link in obj.getExtropyParentChain(True)]
@@ -94,7 +93,6 @@ class WorkLogView(BrowserView):
                 url=brain.getURL(),
                 chain=chain,
                 )
-
 
     def activity(self):
         query=dict(
@@ -123,19 +121,15 @@ class WorkLogView(BrowserView):
             results[key].append(booking)
 
         results=[dict(title=key, summary=self.summarize(value), bookings=value)
-                        for (key,value) in results.items()]
-        if self.group_by!="day":
+                        for (key, value) in results.items()]
+        if self.group_by != "day":
             results.sort(key=lambda x: x["title"])
 
         return results
 
-
-
     def people(self):
         people=self.tool.Indexes["Creator"].uniqueValues()
         creators=[(userid, self.getMemberName(userid)) for userid in people]
-        creators.sort(key=lambda x:x[1])
+        creators.sort(key=lambda x: x[1])
         creators.insert(0, ("all", "Everyone"))
-
         return creators
-
