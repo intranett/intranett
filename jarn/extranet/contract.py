@@ -132,6 +132,11 @@ class Contract(BaseFolder):
             return [self]
         return []
 
+    security.declarePrivate('getResponsiblePerson')
+    def getResponsiblePerson(self):
+        """fake responsible person for indexing"""
+        return ['all']
+
     security.declareProtected(VIEW_PERMISSION, 'getProjectTitle')
     def getProjectTitle(self):
         """Returns the title of the current project."""
