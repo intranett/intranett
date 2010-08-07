@@ -39,6 +39,23 @@ ContractSchema = BaseSchema + Schema((
 
                 ),
 
+    StringField(
+        name='projectManager',
+        widget=StringWidget(
+            label='Project Manager',
+            size='20',
+        ),
+    ),
+
+    StringField(
+        name='projectStatus',
+        widget=StringWidget(
+            label='Project Status',
+            description='The current project status.',
+            size='60',
+        ),
+    ),
+
     TextField('contract_terms',
               default_content_type='text/plain',
               allowable_content_types=('text/plain', ),
