@@ -119,7 +119,7 @@
                           <option value="">-</option>
                           <tal:projects tal:repeat="proj groupedtasks">
                               <optgroup tal:repeat="phase python:etool.dictifyBrains(proj[1], 'getProjectTitle').items()"
-                                                   tal:attributes="label python:'%s - %s' % (proj[0], phase[0])">
+                                                   tal:attributes="label python:proj[0]">
                                     <option tal:repeat="task python:phase[1]" tal:attributes="value task/UID; label python:task.Title; selected python: last_task == path('task/UID')"
                                               tal:content="python:task.Title">task title</option>
                               </optgroup>
