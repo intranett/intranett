@@ -19,7 +19,7 @@
                  gaps python:tool.fillGaps(hours, start=start, end=end);
                  sumhours python:tool.countHours(hours);
                  timefmt python:'%h.%d %H:%M';
-                 tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates());
+                 tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature', 'Contract'] , getResponsiblePerson=[user.getUserName(), 'all'], review_state=etool.getOpenStates());
                  groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').items()">
     
     <form method="get" 

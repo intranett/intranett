@@ -58,8 +58,8 @@ class ItemsTree(Persistent):
         self.data.sort(key=lambda d: (
             d['getProjectTitle'].lower(), d['getPhaseTitle'].lower(),
             d['getDeliverableTitle'].lower(),
-            d['portal_type'] in ('ExtropyTask', 'ExtropyActivity') and
-                d['Title'].lower() or ''))
+            d['portal_type'] in ('ExtropyTask', 'ExtropyActivity', 'Contract')
+                and d['Title'].lower() or ''))
 
     def __iter__(self):
         for (prtitle, pritems) in groupby(
@@ -78,7 +78,8 @@ class ItemsTree(Persistent):
                 chain(next, pritems), itemgetter('getPhaseTitle')):
                 # Reconstruct enough info for a phase
                 next = [phitems.next()]
-                phase = dict(depth=1, Title=safe_unicode(phtitle),
+                title = phtitle and safe_unicode(phtitle) or ''
+                phase = dict(depth=1, Title=title,
                              getURL=_reconstructURL(project, next[0]))
                 yield phase
 
@@ -128,13 +129,13 @@ class Renderer(base.Renderer):
         etool = getToolByName(self, TOOLNAME)
         user = getSecurityManager().getUser().getUserName()
         projects = etool.searchResults(
-            portal_type='ExtropyProject',
+            portal_type=['ExtropyProject', 'Customer'],
             getParticipants=user,
             review_state='active')
         items = etool.searchResults(
             portal_type=('ExtropyActivity', 'ExtropyFeature',
-                         'ExtropyTask'),
-            getResponsiblePerson=user,
+                         'ExtropyTask', 'Contract'),
+            getResponsiblePerson=[user, 'all'],
             review_state=OPEN_STATES)
         return ItemsTree(list(projects) + list(items))
 
