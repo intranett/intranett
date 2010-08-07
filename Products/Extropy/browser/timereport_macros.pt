@@ -19,11 +19,9 @@
     metal:define-macro="creator_filter">
     <option value="">All people</option>
     <tal:options repeat="person view/people">
-    <option tal:define="mtool nocall:context/portal_membership;
-                        author python:mtool.getMemberInfo(person)"
-            tal:attributes="value person;
+    <option tal:attributes="value person;
             selected python:person == request.get('Creator','')"
-            tal:content="author/fullname|person" />
+            tal:content="person/fullname|person" />
     </tal:options>
 </select>
 <select name="getBudgetCategory"

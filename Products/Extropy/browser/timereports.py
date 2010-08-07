@@ -41,9 +41,18 @@ class TimeReportQuery(object):
             self._query()
         return self._sum
 
-    @property
     def people(self):
-        return self.ettool.uniqueValuesFor('Creator')
+        creators = self.ettool.uniqueValuesFor('Creator')
+        mt = getToolByName(self.context, 'portal_membership')
+        users = []
+        for c in creators:
+            member = mt.getMemberInfo(c)
+            if member:
+                users.append((0, member))
+            else:
+                users.append((1, c))
+        users.sort()
+        return [u[1] for u in users]
 
     @property
     def categories(self):
