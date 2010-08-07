@@ -23,16 +23,16 @@
 
         <div>
             <h3>Billing address</h3>
-            <metal:field use-macro="python:context.widget('billing_address', mode='view')">
-                billing address
-            </metal:field>
+            <div tal:content="structure context/getBilling_address">
+                 billing address
+            </div>
         </div>
 
         <div>
             <h3>Billing information</h3>
-            <metal:field use-macro="python:context.widget('billing_information', mode='view')">
-                billing information
-            </metal:field>
+            <div tal:content="structure context/getBilling_information">
+                 billing information
+            </div>
         </div>
 
         <div class="visualClear"><!----></div>
