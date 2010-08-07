@@ -1,6 +1,7 @@
 from zope.interface import implements
 
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_parent
 from Products.Archetypes.public import registerType
 from Products.Archetypes.public import BaseFolder
 from Products.Archetypes.public import BaseSchema
@@ -140,7 +141,7 @@ class Contract(BaseFolder):
     security.declareProtected(VIEW_PERMISSION, 'getProjectTitle')
     def getProjectTitle(self):
         """Returns the title of the current project."""
-        return self.Title()
+        return aq_parent(self).Title()
 
     security.declareProtected(VIEW_PERMISSION, 'getWorkedHours')
     def getWorkedHours(self):
