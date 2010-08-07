@@ -84,7 +84,7 @@
                    gaps python:tool.fillGaps(hours);
                    sumhours python:tool.countHours(hours);
                    timefmt python:'%h.%d %H:%M';
-                   tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature', 'Contract'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates(), sort_on='getProjectTitle');
+                   tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature', 'Contract'] , getResponsiblePerson=[user.getUserName(), 'all'], review_state=etool.getOpenStates(), sort_on='getProjectTitle');
                    groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').iteritems()">
 
       <p style="float:right; background-color: white; padding: 1em; border: 1px solid black;"><a href="/" tal:attributes="href portal_url">Back to Jarn intranet</a></p>
