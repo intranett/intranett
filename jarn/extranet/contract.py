@@ -149,6 +149,13 @@ class Contract(BaseFolder):
         tool = getToolByName(self,TIMETOOLNAME)
         return tool.countIntervalHours(node=self)
 
+    security.declareProtected(VIEW_PERMISSION, 'getUnbilledTime')
+    def getUnbilledTime(self):
+        """get the amount of unilled time worked for this object"""
+        tool = getToolByName(self, TIMETOOLNAME)
+        return tool.countIntervalHours(node=self,
+            review_state='entered', getBudgetCategory='Billable')
+
     security.declareProtected(VIEW_PERMISSION, 'getBudgetCategory')
     def getBudgetCategory(self):
         """The budget category."""
@@ -158,6 +165,5 @@ class Contract(BaseFolder):
     def getDefaultBudgetCategory(self):
         """The default budget category."""
         return 'Billable'
-
 
 registerType(Contract, PROJECTNAME)
