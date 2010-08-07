@@ -1,15 +1,9 @@
-#
-# ExtropyTrackingTestCase Skeleton
-#
-
-from Testing import ZopeTestCase
-from Products.Extropy.tests import ExtropyTrackingTestCase
-
 import transaction
 from DateTime import DateTime
 from Products.CMFPlone.utils import _createObjectByType
 
 from Products.Extropy.config import TIMETOOLNAME
+from Products.Extropy.tests import ExtropyTrackingTestCase
 
 
 class TestExtropyHourSetup(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
@@ -104,33 +98,9 @@ class TestExtropyHours(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.assertEqual(self.timetracktool.countIntervalHours( start=self.now -1, end=self.now ),1)
 
 
-class TestBudgeting(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
-
-    def afterSetUp(self):
-        self.timetracktool = getattr(self.portal,TIMETOOLNAME)
-        self.folder.invokeFactory('ExtropyProject','project',)
-        self.project = self.folder.project
-        self.project.invokeFactory('ExtropyPhase','phase')
-        self.project.phase.invokeFactory('ExtropyFeature','requirement')
-        self.project.phase.requirement.invokeFactory('ExtropyTask','t1')
-        self.now = DateTime()
-        self.h = 1.0/24.0
-
-    def testBudgetGroups(self):
-        self.project.phase.setBudgetCategory('Sales')
-        self.assertEqual(self.project.phase.getBudgetCategory(),'Sales')
-        self.timetracktool.addTimeTrackingHours( self.project.phase, 'foo', hours=1, start=None, end=None)
-        hours =  self.timetracktool.getHours( node=self.project.phase)
-        self.assertEqual(hours[0].workedHours,1)
-        self.assertEqual(hours[0].getBudgetCategory,'Sales')
-
-
-
-
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestExtropyHourSetup))
     suite.addTest(makeSuite(TestExtropyHours))
-    suite.addTest(makeSuite(TestBudgeting))
     return suite

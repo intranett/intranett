@@ -1,17 +1,12 @@
-#
-# ExtropyTrackingTestCase Skeleton
-#
-
-from Testing import ZopeTestCase
-from Products.Extropy.tests import ExtropyTrackingTestCase
+from zope.component import getMultiAdapter
+from zope.interface import Interface
 
 from DateTime import DateTime
 from Products.CMFPlone.utils import _createObjectByType, getToolByName
 
-from zope.component import getMultiAdapter
-from zope.interface import Interface
-
 from Products.Extropy.browser.timereports import InvoicingError
+from Products.Extropy.tests import ExtropyTrackingTestCase
+
 
 class TestTimeReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 

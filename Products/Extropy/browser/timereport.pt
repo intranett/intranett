@@ -45,7 +45,8 @@
                    />
         </div>
 
-        <fieldset tal:define="project context/getExtropyProject">
+        <fieldset tal:define="project context/getExtropyProject|nothing"
+                  tal:condition="python:project">
             <legend>Moving wrongly booked hours</legend>
             <select name="targetuid">
                 <option value="">--</option>
