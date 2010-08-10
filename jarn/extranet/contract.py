@@ -3,8 +3,6 @@ from zope.interface import implements
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_parent
 from Products.Archetypes.public import registerType
-from Products.Archetypes.public import BaseFolder
-from Products.Archetypes.public import BaseSchema
 from Products.Archetypes.public import CalendarWidget
 from Products.Archetypes.public import DateTimeField
 from Products.Archetypes.public import DisplayList
@@ -16,6 +14,8 @@ from Products.Archetypes.public import StringField
 from Products.Archetypes.public import StringWidget
 from Products.Archetypes.public import TextAreaWidget
 from Products.Archetypes.public import TextField
+from Products.ATContentTypes.content.folder import ATFolder
+from Products.ATContentTypes.content.folder import ATFolderSchema
 from Products.CMFCore.utils import getToolByName
 from Products.Extropy.config import VIEW_PERMISSION
 from Products.Extropy.config import TIMETOOLNAME
@@ -24,7 +24,7 @@ from jarn.extranet.config import PROJECTNAME
 from jarn.extranet.interfaces import IContract
 
 
-ContractSchema = BaseSchema + Schema((
+ContractSchema = ATFolderSchema + Schema((
 
     StringField(name='contract_number',
                 widget=StringWidget(label='Contract number'),
@@ -102,7 +102,7 @@ ContractSchema = BaseSchema + Schema((
     ))
 
 
-class Contract(BaseFolder):
+class Contract(ATFolder):
     """A contract for work"""
 
     _at_rename_after_creation = True

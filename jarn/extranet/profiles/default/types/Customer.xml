@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <object name="Customer"
-        meta_type="Factory-based Type Information"
+        meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title">Customer</property>
- <property
-    name="description">A Jarn Customer</property>
+ <property name="description">A Jarn Customer</property>
  <property name="icon_expr">string:${portal_url}/group.png</property>
  <property name="content_meta_type">Customer</property>
  <property name="product">jarn.extranet</property>
@@ -17,10 +16,15 @@
      <element value="Folder" />
  </property>
  <property name="allow_discussion">False</property>
- <alias from="(Default)" to="customer_view"/>
+ <property name="default_view">customer_view</property>
+ <property name="view_methods">
+   <element value="customer_view" />
+ </property>
+ <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="base_edit"/>
+ <alias from="view" to="(selected layout)" />
  <action title="View" action_id="view" category="object" condition_expr=""
-    url_expr="string:${object_url}/customer_view" visible="True">
+    url_expr="string:${object_url}/" visible="True">
   <permission value="View"/>
  </action>
  <action title="Edit" action_id="edit" category="object" condition_expr=""

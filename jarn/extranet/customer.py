@@ -2,8 +2,6 @@ from zope.interface import implements
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import registerType
-from Products.Archetypes.public import BaseFolder
-from Products.Archetypes.public import BaseSchema
 from Products.Archetypes.public import ImageField
 from Products.Archetypes.public import ImageWidget
 from Products.Archetypes.public import Schema
@@ -11,12 +9,14 @@ from Products.Archetypes.public import StringField
 from Products.Archetypes.public import StringWidget
 from Products.Archetypes.public import TextAreaWidget
 from Products.Archetypes.public import TextField
+from Products.ATContentTypes.content.folder import ATFolder
+from Products.ATContentTypes.content.folder import ATFolderSchema
 
 from jarn.extranet.config import PROJECTNAME
 from jarn.extranet.interfaces import ICustomer
 
 
-CustomerSchema = BaseSchema + Schema((
+CustomerSchema = ATFolderSchema + Schema((
 
     StringField('code',
                 required=True,
@@ -57,7 +57,7 @@ CustomerSchema = BaseSchema + Schema((
     ))
 
 
-class Customer(BaseFolder):
+class Customer(ATFolder):
     """A archetype representative for a Jarn Customer"""
 
     _at_rename_after_creation = True
