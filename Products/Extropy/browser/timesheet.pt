@@ -122,13 +122,15 @@
                                style="width: 20em">
                           <option value="">-</option>
                           <tal:projects tal:repeat="proj python:view.groupedtasks(username)">
-                              <optgroup tal:repeat="phase python:etool.dictifyBrains(proj[1], 'getProjectTitle').items()"
-                                                   tal:attributes="label python:proj[0]">
-                                    <option tal:repeat="task python:phase[1]"
-                                            tal:attributes="value task/UID;
-                                                            label python:task.Title;
-                                                            selected python: last_task == path('task/UID')"
-                                            tal:content="python:task.Title">task title</option>
+                              <optgroup tal:attributes="label python:proj[0]">
+                                  <tal:tasks tal:repeat="task python:proj[1]">
+                                      <option tal:define="uid task/UID;
+                                                          title task/Title"
+                                              tal:attributes="value uid;
+                                                              label title;
+                                                              selected python: last_task == uid"
+                                              tal:content="title">task title</option>
+                                  </tal:tasks>
                               </optgroup>
                           </tal:projects>
                        </select>

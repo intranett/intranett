@@ -40,7 +40,16 @@ class TimeSheet(BrowserView):
             getResponsiblePerson=[username, 'all'],
             review_state=etool.getOpenStates(),
             sort_on='getProjectTitle')
-        return etool.dictifyBrains(tasks, 'getProjectTitle').iteritems()
+        tasks = etool.dictifyBrains(tasks, 'getProjectTitle').iteritems()
+
+        result = {}
+        for project in tasks:
+            label = project[0]
+            phase = etool.dictifyBrains(project[1], 'getProjectTitle').values()
+            result[label] = []
+            for task in phase[0]:
+                result[label].append({'Title': task.Title, 'UID': task.UID})
+        return result.items()
 
     def process(self):
         context = self.context
