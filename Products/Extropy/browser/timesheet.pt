@@ -76,10 +76,10 @@
                    end startend/end;
                    tool view/timetool;
                    etool view/extropytool;
-                   hours python:view.hours(start, end, user.getUserName());
+                   username user/getUserName;
+                   hours python:view.hours(start, end, username);
                    sumhours hours/sumhours;
                    gaps hours/gaps;
-                   groupedtasks python:view.groupedtasks(user.getUserName());
                    context_url string:${context/absolute_url}/@@timesheet;">
 
       <p style="float:right; background-color: white; padding: 1em; border: 1px solid black;">
@@ -118,10 +118,10 @@
                <tr>
                    <td>
                        <select name="hours.task:records:string"
-                               tal:define="last_task request/last_task | nothing"
+                               tal:define="last_task request/last_task | nothing;"
                                style="width: 20em">
                           <option value="">-</option>
-                          <tal:projects tal:repeat="proj groupedtasks">
+                          <tal:projects tal:repeat="proj python:view.groupedtasks(username)">
                               <optgroup tal:repeat="phase python:etool.dictifyBrains(proj[1], 'getProjectTitle').items()"
                                                    tal:attributes="label python:proj[0]">
                                     <option tal:repeat="task python:phase[1]"
