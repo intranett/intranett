@@ -17,6 +17,8 @@ from Products.Archetypes.public import TextField
 from Products.ATContentTypes.content.folder import ATFolder
 from Products.ATContentTypes.content.folder import ATFolderSchema
 from Products.CMFCore.utils import getToolByName
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
 from Products.Extropy.config import VIEW_PERMISSION
 from Products.Extropy.config import TIMETOOLNAME
 
@@ -56,6 +58,14 @@ ContractSchema = ATFolderSchema + Schema((
             size='60',
         ),
     ),
+
+    DataGridField('work_types',
+            columns=('description', 'rate'),
+            default=({'description': 'Development', 'rate': '1200 NOK'}, ),
+            widget = DataGridWidget(
+                    label = 'Work types',
+                    ),
+            ),
 
     TextField('contract_terms',
               default_content_type='text/plain',
