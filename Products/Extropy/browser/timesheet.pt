@@ -78,8 +78,8 @@
                    tool view/timetool;
                    etool view/extropytool;
                    hours python:view.hours(start, end, user.getUserName());
-                   gaps python:tool.fillGaps(hours);
-                   sumhours python:tool.countHours(hours);
+                   sumhours hours/sumhours;
+                   gaps hours/gaps;
                    timefmt python:'%h.%d %H:%M';
                    groupedtasks python:view.groupedtasks(user.getUserName());">
 

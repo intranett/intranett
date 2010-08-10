@@ -19,8 +19,12 @@ class TimeSheet(BrowserView):
         return getToolByName(self.context, 'extropy_tracking_tool')
 
     def hours(self, start, end, username):
-        return self.timetool().getHours(
+        timetool = self.timetool()
+        result = timetool.getHours(
             self.context, start=start, end=end, Creator=username)
+        gaps = timetool.fillGaps(result)
+        sumhours = timetool.countHours(result)
+        return {'sumhours': sumhours, 'gaps': gaps}
 
     def groupedtasks(self, username):
         etool = self.extropytool()
