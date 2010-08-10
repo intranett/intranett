@@ -129,7 +129,7 @@ class Contract(ATFolder):
         types = []
         for row in values:
             types.append(row['description'])
-        return types
+        return tuple(types)
 
     security.declareProtected(VIEW_PERMISSION, 'getActivePhases')
     def getActivePhases(self):
