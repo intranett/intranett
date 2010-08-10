@@ -2,14 +2,14 @@
   This script is used by Tom Lazar. Ask him before changing anything here.
 <tal:comment/>
 <pre tal:define="portal_properties context/portal_properties;
-                object_title string:Timesheet;
-                putils context/plone_utils;
-                syntool context/portal_syndication;
-                url_tool nocall:context/portal_url;
-                portal url_tool/getPortalObject;
-                site_properties portal_properties/site_properties;
-                lang string:'en';
-                DateTime modules/DateTime;
+                 object_title string:Timesheet;
+                 putils context/plone_utils;
+                 syntool context/portal_syndication;
+                 url_tool nocall:context/portal_url;
+                 portal url_tool/getPortalObject;
+                 site_properties portal_properties/site_properties;
+                 lang string:'en';
+                 DateTime modules/DateTime;
                  datestring request/date | python:DateTime.DateTime().Date();
                  date python:DateTime.DateTime(datestring);
                  start python:DateTime.DateTime( '%s %s' %(datestring , '00:00'));
