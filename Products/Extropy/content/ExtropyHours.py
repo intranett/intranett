@@ -51,7 +51,7 @@ ExtropyHoursSchema = BaseSchema.copy() + Schema((
 
     StringField('worktype',
                   accessor='hourWorktype',
-                  vocabulary=WORKTYPES,
+                  vocabulary='worktype_vocabulary',
                   widget=SelectionWidget(label='Work Type',),
                   ),
 
@@ -129,21 +129,9 @@ class ExtropyHours(BaseContent):
             return package.getBudgetCategory() or 'Billable'
         return "Billable"
 
-    # security.declareProtected(ModifyPortalContent, 'setStartDate')
-    # def setStartDate(self, value, **kwargs):
-    #     field = self.getField('startDate')
-    #     field.set(self, value, **kwargs)
-    #     parent = self.getExtropyParent()
-    #     if parent is not None:
-    #         parent.reindexObject()
-    # 
-    # security.declareProtected(ModifyPortalContent, 'setEndDate')
-    # def setEndDate(self, value, **kwargs):
-    #     field = self.getField('endDate')
-    #     field.set(self, value, **kwargs)
-    #     parent = self.getExtropyParent()
-    #     if parent is not None:
-    #         parent.reindexObject()
+    security.declarePublic('worktype_vocabulary')
+    def worktype_vocabulary(self):
+        return WORKTYPES
 
 
 registerType(ExtropyHours, PROJECTNAME)
