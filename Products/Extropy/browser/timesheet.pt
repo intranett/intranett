@@ -75,13 +75,13 @@
                    date python:DateTime.DateTime(datestring);
                    start python:DateTime.DateTime( '%s %s' %(datestring , '00:00'));
                    end python:DateTime.DateTime('%s %s' % (datestring , '23:59'));
-                   tool nocall:context/extropy_timetracker_tool;
-                   etool nocall:context/extropy_tracking_tool;
-                   hours python:tool.getHours(context, start=start, end=end, Creator=user.getUserName());
+                   tool view/timetool;
+                   etool view/extropytool;
+                   hours python:view.hours(start, end, user.getUserName());
                    gaps python:tool.fillGaps(hours);
                    sumhours python:tool.countHours(hours);
                    timefmt python:'%h.%d %H:%M';
-                   tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature', 'Contract'] , getResponsiblePerson=[user.getUserName(), 'all'], review_state=etool.getOpenStates(), sort_on='getProjectTitle');
+                   tasks python:view.tasks(user.getUserName());
                    groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').iteritems()">
 
       <p style="float:right; background-color: white; padding: 1em; border: 1px solid black;"><a href="/" tal:attributes="href portal_url">Back to Jarn intranet</a></p>

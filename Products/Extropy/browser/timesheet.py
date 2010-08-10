@@ -12,13 +12,32 @@ class TimeSheet(BrowserView):
             self.process()
         return super(TimeSheet, self).__call__()
 
+    def timetool(self):
+        return getToolByName(self.context, 'extropy_timetracker_tool')
+
+    def extropytool(self):
+        return getToolByName(self.context, 'extropy_tracking_tool')
+
+    def hours(self, start, end, username):
+        return self.timetool().getHours(
+            self.context, start=start, end=end, Creator=username)
+
+    def tasks(self, username):
+        etool = self.extropytool()
+        return etool.trackingQuery(
+            self.context,
+            portal_type=['ExtropyActivity', 'Contract'],
+            getResponsiblePerson=[username, 'all'],
+            review_state=etool.getOpenStates(),
+            sort_on='getProjectTitle')
+
     def process(self):
         context = self.context
         request = self.request
 
         records = request.get('hours', [])
-        timetool = getToolByName(context, 'extropy_timetracker_tool')
-        extropytool = getToolByName(context, 'extropy_tracking_tool')
+        timetool = self.timetool()
+        extropytool = self.extropytool()
 
         # From the form
         date = DateTime(request.get('date'))
