@@ -29,6 +29,12 @@ ExtropyHoursSchema = BaseSchema.copy() + Schema((
                                           label = "Work ended",)
                   ),
 
+    StringField('worktype',
+                  accessor='hourWorktype',
+                  vocabulary='worktype_vocabulary',
+                  widget=SelectionWidget(label='Work Type',),
+                  ),
+
     TextField('summary',
               required=False,
               searchable=True,
@@ -48,12 +54,6 @@ ExtropyHoursSchema = BaseSchema.copy() + Schema((
                         i18n_domain = "plone",
                         allow_file_upload = zconf.ATDocument.allow_document_upload),
     ),
-
-    StringField('worktype',
-                  accessor='hourWorktype',
-                  vocabulary='worktype_vocabulary',
-                  widget=SelectionWidget(label='Work Type',),
-                  ),
 
     StringField(
         name='invoiceNumber',
