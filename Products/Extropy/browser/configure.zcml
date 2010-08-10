@@ -37,7 +37,15 @@
     permission="cmf.ModifyPortalContent"
     />
 
-<!-- Time reports -->
+<!-- Time sheet and reports -->
+
+<browser:page
+    for="*"
+    class=".timesheet.TimeSheet"
+    name="timesheet"
+    permission="cmf.ModifyPortalContent"
+    template="timesheet.pt"
+    />
 
 <browser:menu id="timereport" />
 
