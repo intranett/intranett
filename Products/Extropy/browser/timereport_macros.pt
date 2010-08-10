@@ -121,7 +121,7 @@ end:<input type="text" size="10" name="enddate" tal:attributes="value view/end/D
         <div class="hour-report-date">
             <a 
                 tal:define="indexdate days/date"
-                tal:attributes="href string:${portal_url}/timesheet?date=${indexdate/Date}"
+                tal:attributes="href string:${portal_url}/@@timesheet?date=${indexdate/Date}"
                 tal:content="python:indexdate.strftime('%a %b %d')"></a>
         </div>
         <tal:hour tal:repeat="hour days/hours">

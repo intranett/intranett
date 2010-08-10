@@ -27,7 +27,7 @@
   <dd class="portletFooter">
       <a href="#"
          class="tile"
-         tal:attributes="href string:${portal_url}/timesheet_fast">
+         tal:attributes="href string:${portal_url}/@@timesheet">
           Register hours&hellip;
       </a>
       <span class="portletBottomLeft"></span>
