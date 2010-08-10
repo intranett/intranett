@@ -121,15 +121,15 @@
                                tal:define="last_task request/last_task | nothing;"
                                style="width: 20em">
                           <option value="">-</option>
-                          <tal:projects tal:repeat="proj python:view.groupedtasks(username)">
-                              <optgroup tal:attributes="label python:proj[0]">
-                                  <tal:tasks tal:repeat="task python:proj[1]">
-                                      <option tal:define="uid task/UID;
-                                                          title task/Title"
+                          <tal:projects tal:repeat="customer python:view.groupedtasks(username)">
+                              <optgroup tal:attributes="label python:customer[0]">
+                                  <tal:tasks tal:repeat="contract python:customer[1]">
+                                      <option tal:define="uid contract/UID;
+                                                          title contract/Title"
                                               tal:attributes="value uid;
                                                               label title;
                                                               selected python: last_task == uid"
-                                              tal:content="title">task title</option>
+                                              tal:content="title">contract title</option>
                                   </tal:tasks>
                               </optgroup>
                           </tal:projects>

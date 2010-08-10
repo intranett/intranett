@@ -34,24 +34,24 @@ class TimeSheet(BrowserView):
 
     def groupedtasks(self, username):
         etool = self.extropytool()
-        tasks = etool.trackingQuery(
+        brains = etool.trackingQuery(
             self.context,
             portal_type=['ExtropyActivity', 'Contract'],
             getResponsiblePerson=[username, 'all'],
             review_state=etool.getOpenStates(),
             sort_on='getProjectTitle')
 
-        tasks = etool.dictifyBrains(tasks, 'getProjectTitle').items()
-        # [('Project Name', [<brain object at ...>]), ...]
+        customers = etool.dictifyBrains(brains, 'getProjectTitle').items()
+        # [('Customer name', [<brain object at ...>]), ...]
 
         def _key(value):
             return value['Title']
 
         result = {}
-        for label, brains in tasks:
+        for label, contracts in customers:
             result[label] = []
-            for task in brains:
-                result[label].append({'Title': task.Title, 'UID': task.UID})
+            for c in contracts:
+                result[label].append({'Title': c.Title, 'UID': c.UID})
             result[label].sort(key=_key)
         return result.items()
 
