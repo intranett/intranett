@@ -83,7 +83,11 @@
                    timefmt python:'%h.%d %H:%M';
                    groupedtasks python:view.groupedtasks(user.getUserName());">
 
-      <p style="float:right; background-color: white; padding: 1em; border: 1px solid black;"><a href="/" tal:attributes="href portal_url">Back to Jarn intranet</a></p>
+      <p style="float:right; background-color: white; padding: 1em; border: 1px solid black;">
+        <a href="/" tal:attributes="href portal_url">
+          Back to Jarn intranet
+        </a>
+      </p>
 
       <form method="get"
             class="enableUnloadProtection"
