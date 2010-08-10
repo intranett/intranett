@@ -17,22 +17,22 @@
     tal:attributes="lang lang;">
 
     <metal:cache use-macro="context/global_cache_settings/macros/cacheheaders">
-    Get the global cache headers located in global_cache_settings.
+        Get the global cache headers located in global_cache_settings.
     </metal:cache>
 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <metal:baseslot define-slot="base">
-        <base tal:attributes="href plone_view/renderBase" /><!--[if lt IE 7]></base><![endif]-->
+        <base tal:attributes="href plone_view/renderBase" />
     </metal:baseslot>
 
     <div tal:replace="structure provider:plone.htmlhead" />
     <link tal:replace="structure provider:plone.htmlhead.links" />
 
-    <metal:block tal:define="dummy python:request.set('disable_border',1);
-                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
-                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+    <metal:block tal:define="dummy python:request.set('disable_border', 1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn', 1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn', 1);" />
 
     <metal:topslot define-slot="top_slot" />
     <metal:headslot define-slot="head_slot" />
@@ -49,8 +49,7 @@
                                    border: 1px solid black;}
     </style>
 
-    <metal:styleslot define-slot="style_slot">
-    </metal:styleslot>
+    <metal:styleslot define-slot="style_slot" />
     <metal:javascriptslot define-slot="javascript_head_slot" />
 
   </head>
@@ -61,7 +60,8 @@
 
 <div id="visual-portal-wrapper">
 <div id="portal-columns" class="row">
-<div id="portal-column-content" class="cell" tal:attributes="class python:sunburst_view.getColumnsClass(view)">
+<div id="portal-column-content" class="cell"
+     tal:attributes="class python:sunburst_view.getColumnsClass(view)">
 
   <div metal:use-macro="context/global_statusmessage/macros/portal_message">
    Status message
@@ -94,9 +94,13 @@
 
       <fieldset>
         <legend>Filter</legend>
-          Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()" />&nbsp;
-        <a tal:define="yesterday python:start-1" tal:attributes="href string:${context_url}?date=${yesterday/Date}">&larr; previous day</a> |
-        <a tal:define="tomorrow python:start+1" tal:attributes="href string:${context_url}?date=${tomorrow/Date}">next day &rarr;</a>
+        Date:
+        <input type="text" size="10" name="date:string"
+               tal:attributes="value python:start.Date()" />&nbsp;
+        <a tal:define="yesterday python:start-1"
+           tal:attributes="href string:${context_url}?date=${yesterday/Date}">&larr; previous day</a> |
+        <a tal:define="tomorrow python:start+1"
+           tal:attributes="href string:${context_url}?date=${tomorrow/Date}">next day &rarr;</a>
       </fieldset>
 
       <fieldset>
