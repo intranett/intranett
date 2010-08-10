@@ -131,7 +131,14 @@ class ExtropyHours(BaseContent):
 
     security.declarePublic('worktype_vocabulary')
     def worktype_vocabulary(self):
+        parent = self.getExtropyParent()
+        if parent is None:
+            return WORKTYPES
+        meta_type = getattr(parent, 'meta_type', '')
+        if meta_type == 'ExtropyProject':
+            return WORKTYPES
+        elif meta_type == 'Contract':
+            return parent.getUniqueWork_types()
         return WORKTYPES
-
 
 registerType(ExtropyHours, PROJECTNAME)
