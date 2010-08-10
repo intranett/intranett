@@ -5,7 +5,6 @@
                 object_title string:Timesheet;
                 putils context/plone_utils;
                 syntool context/portal_syndication;
-                template_id string:timesheet_fast;
                 url_tool nocall:context/portal_url;
                 portal url_tool/getPortalObject;
                 site_properties portal_properties/site_properties;
