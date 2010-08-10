@@ -61,7 +61,7 @@ ContractSchema = ATFolderSchema + Schema((
 
     DataGridField('work_types',
             columns=('description', 'rate'),
-            default=({'description': 'Development', 'rate': '1200 NOK'}, ),
+            default=({'description': 'development', 'rate': '1200 NOK'}, ),
             widget = DataGridWidget(
                     label = 'Work types',
                     ),
