@@ -31,6 +31,7 @@ ExtropyHoursSchema = BaseSchema.copy() + Schema((
 
     StringField('worktype',
                   accessor='hourWorktype',
+                  default_method='getDefaultWorktype',
                   vocabulary='worktype_vocabulary',
                   widget=SelectionWidget(label='Work Type',),
                   ),
@@ -128,6 +129,11 @@ class ExtropyHours(BaseContent):
         if package is not None:
             return package.getBudgetCategory() or 'Billable'
         return "Billable"
+
+    security.declareProtected(VIEW_PERMISSION, 'getDefaultWorktype')
+    def getDefaultWorktype(self):
+        """The default work type."""
+        return self.worktype_vocabulary()[0]
 
     security.declarePublic('worktype_vocabulary')
     def worktype_vocabulary(self):
