@@ -121,6 +121,16 @@ class Contract(ATFolder):
     schema = ContractSchema
     security = ClassSecurityInfo()
 
+    security.declareProtected(VIEW_PERMISSION, 'getUniqueWork_types')
+    def getUniqueWork_types(self):
+        """"""
+        # value = ({'rate': '1200 NOK', 'description': 'development'}, )
+        values = self.getField('work_types').get(self)
+        types = []
+        for row in values:
+            types.append(row['description'])
+        return types
+
     security.declareProtected(VIEW_PERMISSION, 'getActivePhases')
     def getActivePhases(self):
         """"""
