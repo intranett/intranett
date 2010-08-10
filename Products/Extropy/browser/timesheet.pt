@@ -81,8 +81,7 @@
                    gaps python:tool.fillGaps(hours);
                    sumhours python:tool.countHours(hours);
                    timefmt python:'%h.%d %H:%M';
-                   tasks python:view.tasks(user.getUserName());
-                   groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').iteritems()">
+                   groupedtasks python:view.groupedtasks(user.getUserName());">
 
       <p style="float:right; background-color: white; padding: 1em; border: 1px solid black;"><a href="/" tal:attributes="href portal_url">Back to Jarn intranet</a></p>
 

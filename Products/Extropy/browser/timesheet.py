@@ -22,14 +22,15 @@ class TimeSheet(BrowserView):
         return self.timetool().getHours(
             self.context, start=start, end=end, Creator=username)
 
-    def tasks(self, username):
+    def groupedtasks(self, username):
         etool = self.extropytool()
-        return etool.trackingQuery(
+        tasks = etool.trackingQuery(
             self.context,
             portal_type=['ExtropyActivity', 'Contract'],
             getResponsiblePerson=[username, 'all'],
             review_state=etool.getOpenStates(),
             sort_on='getProjectTitle')
+        return etool.dictifyBrains(tasks, 'getProjectTitle').iteritems()
 
     def process(self):
         context = self.context
