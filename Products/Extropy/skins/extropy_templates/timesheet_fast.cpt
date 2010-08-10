@@ -3,7 +3,7 @@
   &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
   &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" />
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
     tal:define="portal_state context/@@plone_portal_state;
         context_state context/@@plone_context_state;
         plone_view context/@@plone;
@@ -42,14 +42,11 @@
         table.listing th    {   background-color:#6BAC27;
                                 color: white;
                                 font-weight: normal}
-                          
+
         table.invisible th    { background-color:#6BAC27;
                                 color: white;
                                 font-weight: normal;
                                    border: 1px solid black;}
-              
-                                
-                                
     </style>
 
     <metal:styleslot define-slot="style_slot">
@@ -60,7 +57,7 @@
 
 <body tal:define="body_class python:plone_view.bodyClass(template, view);
                   sunburst_view python:context.restrictedTraverse('@@sunburstview')"
-    tal:attributes="class body_class;">
+      tal:attributes="class body_class;">
 
 <div id="visual-portal-wrapper">
 <div id="portal-columns" class="row">
@@ -89,7 +86,7 @@
 
       <p style="float:right; background-color: white; padding: 1em; border: 1px solid black;"><a href="/" tal:attributes="href portal_url">Back to Jarn intranet</a></p>
 
-      <form method="get" 
+      <form method="get"
             class="enableUnloadProtection"
             tal:attributes="action string:${here/absolute_url}/${template/getId}">
 
@@ -100,7 +97,7 @@
         <a tal:define="tomorrow python:start+1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${tomorrow/Date}">next day &rarr;</a>
 
       </fieldset>
-      
+
       <fieldset>
                       <legend>New entry</legend>
         <table class="invisible nosort">
@@ -184,7 +181,7 @@
                <tr tal:condition="not: is_gap">
                    <td><a tal:attributes="href gap/getURL" tal:content="python:gap.Title or '...unknown...'"></a>
                      <span class="discreet" tal:content="gap/getProjectTitle | nothing"></span></td>
-                   <td tal:content="python:gap.start.strftime('%H:%M')">10:00</td>  
+                   <td tal:content="python:gap.start.strftime('%H:%M')">10:00</td>
                    <td tal:content="python:gap.end.strftime('%H:%M')">11:00</td>
                    <td tal:content="gap/workedHours"></td>
                    <td><span tal:attributes="class string:budget-category-${gap/getBudgetCategory/lower}" tal:content="gap/getBudgetCategory"></span></td>
