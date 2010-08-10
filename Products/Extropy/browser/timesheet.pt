@@ -73,8 +73,8 @@
                    DateTime modules/DateTime;
                    datestring request/date | python:DateTime.DateTime().Date();
                    date python:DateTime.DateTime(datestring);
-                   start python:DateTime.DateTime( '%s %s' %(datestring , '00:00'));
-                   end python:DateTime.DateTime('%s %s' % (datestring , '23:59'));
+                   start python:DateTime.DateTime('%s %s' %(datestring, '00:00'));
+                   end python:DateTime.DateTime('%s %s' % (datestring, '23:59'));
                    tool view/timetool;
                    etool view/extropytool;
                    hours python:view.hours(start, end, user.getUserName());
