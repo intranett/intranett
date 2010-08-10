@@ -95,11 +95,10 @@
           Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()" />&nbsp;
         <a tal:define="yesterday python:start-1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${yesterday/Date}">&larr; previous day</a> |
         <a tal:define="tomorrow python:start+1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${tomorrow/Date}">next day &rarr;</a>
-
       </fieldset>
 
       <fieldset>
-                      <legend>New entry</legend>
+        <legend>New entry</legend>
         <table class="invisible nosort">
            <thead>
               <tr>
@@ -151,7 +150,6 @@
 
         <input type="submit" name="form.submitted" value="Submit" />
 
-
       </fieldset>
 
       <fieldset>
@@ -199,7 +197,6 @@
 
         </table>
         </fieldset>
-
 
       </form>
 
