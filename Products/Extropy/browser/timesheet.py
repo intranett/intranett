@@ -12,6 +12,12 @@ class TimeSheet(BrowserView):
             self.process()
         return super(TimeSheet, self).__call__()
 
+    def startend(self):
+        datestring = self.request.form.get('date', DateTime().Date())
+        start = DateTime('%s %s' % (datestring, '00:00'))
+        end = DateTime('%s %s' % (datestring, '23:59'))
+        return {'start': start, 'end': end}
+
     def timetool(self):
         return getToolByName(self.context, 'extropy_timetracker_tool')
 
