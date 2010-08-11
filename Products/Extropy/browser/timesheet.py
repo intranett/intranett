@@ -102,4 +102,4 @@ class TimeSheet(BrowserView):
         query = date.Date()
         if last_task:
             query += '&' + 'last_task=' + str(last_task)
-        return url + '?' + query
+        return url + '?date=' + query
