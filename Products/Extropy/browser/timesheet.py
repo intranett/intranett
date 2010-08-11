@@ -61,15 +61,19 @@ class TimeSheet(BrowserView):
                     # Contract can have multiple work types
                     obj = c.getObject()
                     work_types = obj.getUniqueWork_types()
-                    title = c.Title + ' — ' + work_types[0]
-                    result[label].append({'Title': title, 'UID': c.UID})
+                    w = work_types[0]
+                    title = c.Title + ' ➝ ' + w
+                    value = c.UID + '#' + w
+                    result[label].append({'Title': title, 'value': value})
                     if len(work_types) > 1:
                         for w in work_types[1:]:
                             title = ' ➝ ' + w
+                            value = c.UID + '#' + w
                             result[label].append(
-                                {'Title': title, 'UID': c.UID})
+                                {'Title': title, 'value': value})
                 else:
-                    result[label].append({'Title': c.Title, 'UID': c.UID})
+                    value = c.UID + '#'
+                    result[label].append({'Title': c.Title, 'value': value})
 
         return result.iteritems()
 
@@ -94,7 +98,13 @@ class TimeSheet(BrowserView):
                     mod = 1
                 else:
                     mod = 0
-                worktask = extropytool(UID=r.task)
+                identifier = r.task
+                if '#' in identifier:
+                    uid, work_type = r.task.split('#')
+                else:
+                    uid = identifier
+                    work_type = None
+                worktask = extropytool(UID=uid)
                 if worktask:
                     o = worktask[0].getObject()
                     title = r.title and r.title or o.Title()
@@ -103,6 +113,8 @@ class TimeSheet(BrowserView):
                     if addhour is None:
                         raise Exception("Failure adding hours")
                     addhour.setSummary(r.summary, mimetype="text/x-rst")
+                    if work_type:
+                        addhour.setWorktype(work_type)
                     added.append(safe_unicode(title))
                     last_task = r.task
         if added:

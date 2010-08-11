@@ -124,11 +124,11 @@
                           <tal:projects tal:repeat="customer python:view.groupedtasks(username)">
                               <optgroup tal:attributes="label python:customer[0]">
                                   <tal:tasks tal:repeat="contract python:customer[1]">
-                                      <option tal:define="uid contract/UID;
+                                      <option tal:define="value contract/value;
                                                           title contract/Title"
-                                              tal:attributes="value uid;
+                                              tal:attributes="value value;
                                                               label title;
-                                                              selected python: last_task == uid"
+                                                              selected python: last_task==value"
                                               tal:content="title">contract title</option>
                                   </tal:tasks>
                               </optgroup>
@@ -208,9 +208,16 @@
                     <td></td>
                 </tr>
                 <tr tal:condition="not: is_gap">
-                    <td>
-                        <a tal:attributes="href gap/getURL" tal:content="python:gap.Title or '...unknown...'"></a>
-                        <span class="discreet" tal:content="gap/getProjectTitle | nothing"></span>
+                    <td tal:define="project gap/getProjectTitle | nothing;
+                                    obj gap/getObject;
+                                    worktype obj/hourWorktype|nothing;">
+                        <a tal:attributes="href gap/getURL">
+                            <span tal:content="python:gap.Title or '...unknown...'"/>
+                            <tal:worktype tal:condition="worktype">
+                                — <span tal:content="worktype" />
+                            </tal:worktype>
+                        </a>
+                        <span class="discreet" tal:content="project" />
                     </td>
                     <td tal:content="python:gap.start.strftime('%H:%M')">10:00</td>
                     <td tal:content="python:gap.end.strftime('%H:%M')">11:00</td>
