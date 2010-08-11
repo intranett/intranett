@@ -9,7 +9,7 @@ class TimeSheet(BrowserView):
 
     def __call__(self):
         if 'form.submitted' in self.request.form:
-            self.process()
+            return self.request.response.redirect(self.process())
         return super(TimeSheet, self).__call__()
 
     def startend(self):
@@ -67,6 +67,7 @@ class TimeSheet(BrowserView):
         date = DateTime(request.get('date'))
 
         added = []
+        last_task = None
         for r in records:
             if r.task and r.start and r.end:
                 start = DateTime('%s %s' % (date, r.start))
@@ -85,7 +86,7 @@ class TimeSheet(BrowserView):
                         raise Exception("Failure adding hours")
                     addhour.setSummary(r.summary, mimetype="text/x-rst")
                     added.append(safe_unicode(title))
-                    request.set('last_task', r.task)
+                    last_task = r.task
         if added:
             message = u"Added workhours to " + u", ".join(added)
         else:
@@ -95,3 +96,10 @@ class TimeSheet(BrowserView):
                 message = u"No hours added"
 
         context.plone_utils.addPortalMessage(message)
+
+        url = context.absolute_url()
+        url = url + '/@@timesheet'
+        query = date.Date()
+        if last_task:
+            query += '&' + 'last_task=' + str(last_task)
+        return url + '?' + query
