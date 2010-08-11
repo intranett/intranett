@@ -61,13 +61,13 @@ class TimeSheet(BrowserView):
                     # Contract can have multiple work types
                     obj = c.getObject()
                     work_types = obj.getUniqueWork_types()
+                    title = c.Title + ' — ' + work_types[0]
+                    result[label].append({'Title': title, 'UID': c.UID})
                     if len(work_types) > 1:
-                        # TODO
-                        title = c.Title + ' — ' + work_types[0]
-                        result[label].append({'Title': title, 'UID': c.UID})
-                    else:
-                        title = c.Title + ' — ' + work_types[0]
-                        result[label].append({'Title': title, 'UID': c.UID})
+                        for w in work_types[1:]:
+                            title = ' ➝ ' + w
+                            result[label].append(
+                                {'Title': title, 'UID': c.UID})
                 else:
                     result[label].append({'Title': c.Title, 'UID': c.UID})
 
