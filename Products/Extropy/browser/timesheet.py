@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
+
 from zope.publisher.browser import BrowserView
 
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
+
+from Products.Extropy.odict import OrderedDict
 
 
 class TimeSheet(BrowserView):
@@ -45,15 +49,29 @@ class TimeSheet(BrowserView):
         # [('Customer name', [<brain object at ...>]), ...]
 
         def _key(value):
-            return value['Title']
+            return value.Title
 
-        result = {}
-        for label, contracts in customers:
+        result = OrderedDict()
+        for label, raw_contracts in sorted(customers):
             result[label] = []
+            contracts = list(raw_contracts)
+            contracts.sort(key=_key)
             for c in contracts:
-                result[label].append({'Title': c.Title, 'UID': c.UID})
-            result[label].sort(key=_key)
-        return result.items()
+                if c.portal_type == 'Contract':
+                    # Contract can have multiple work types
+                    obj = c.getObject()
+                    work_types = obj.getUniqueWork_types()
+                    if len(work_types) > 1:
+                        # TODO
+                        title = c.Title + ' — ' + work_types[0]
+                        result[label].append({'Title': title, 'UID': c.UID})
+                    else:
+                        title = c.Title + ' — ' + work_types[0]
+                        result[label].append({'Title': title, 'UID': c.UID})
+                else:
+                    result[label].append({'Title': c.Title, 'UID': c.UID})
+
+        return result.iteritems()
 
     def process(self):
         context = self.context
