@@ -1,4 +1,13 @@
 <?xml version="1.0"?>
 <object>
-
+    <order manager="plone.portalheader" skinname="Intranett.no base theme" based-on="Plone Default">
+      <viewlet name="plone.logo" insert-after="plone.skip_links" />
+    </order>
+    <order manager="plone.belowcontentbody" skinname="Intranett.no base theme" based-on="Plone Default">
+      <viewlet name="plone.belowcontenttitle.documentbyline" insert-after="*" />
+    </order>
+    
+    <hidden manager="plone.belowcontenttitle" skinname="Intranett.no base theme">
+      <viewlet name="plone.belowcontenttitle.documentbyline" />
+    </hidden>
 </object>

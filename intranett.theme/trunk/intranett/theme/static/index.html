@@ -31,15 +31,15 @@
             </nav>
         </header>
         
-        <div id="content-one-wrapper" class="row">
-            <section class="cell width-10 position-4">
+        <div id="portal-columns" class="row">
+            <article class="cell width-10 position-4">
                 <header>
                     <hgroup>
-                        <h1>Title of the page</h1>
-                        <h3>Description or a tagline for this page. Can have any length. Duis autem vel eum iriure dolor in hendrerit.</h3>
+                        <h1 class="documentFirstHeading">Title of the page</h1>
+                        <h3 class="documentDescription">Description or a tagline for this page. Can have any length. Duis autem vel eum iriure dolor in hendrerit.</h3>
                     </hgroup>
                 </header>
-                <article>
+                <div id='content-core'>
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
                     Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum 
                     iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto 
@@ -68,7 +68,7 @@
                     Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum 
                     iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto 
                     odio dignissim qui blandit praesent luptatum zzril delenit augue duis.</p>
-                </article>
+                </div>
                 <footer>
                     <small>Created May 7, 2010. By <a href="http://test.devnull">admin</a></small>
                     <ul id="document-actions">
@@ -76,25 +76,25 @@
                         <li><a href="#">Print this</a></li>
                     </ul>
                 </footer>
-            </section>
+            </article>
 
             <aside id="portal-column-one" class="cell width-4 position-0">        
                 <section class="portlet">
-                    <header>Dummy portlet</header>
-                    <div class="portletBody">
+                    <header class="portletHeader">Dummy portlet</header>
+                    <div class="portletItem">
                         <ul>
                             <li><a href="#">Just a link</a></li>
                             <li><a href="#">Just a link</a></li>
                             <li><a href="#">Just a link</a></li>
                         </ul>
                     </div>
-                    <footer>
+                    <footer class="portletFooter">
                         <a href="/news">More news</a>
                     </footer>
                 </section>
                 <section class="portlet">
-                    <header>Another super-duper portlet</header>
-                    <div class="portletBody">
+                    <header class="portletHeader">Another super-duper portlet</header>
+                    <div class="portletItem">
                         <p>Let's assume this is a static text portlet. Some paragraph text just for test and then we have a list:</p>
                         <ul>
                             <li><a href="#">Just a link</a></li>
@@ -102,7 +102,7 @@
                             <li><a href="#">Just a link</a></li>
                         </ul>
                     </div>
-                    <footer>
+                    <footer class="portletFooter">
                         <a href="/news">More news</a>
                     </footer>
                 </section>            
@@ -110,21 +110,21 @@
                   
             <aside class="cell width-2 position-14">        
                 <section class="portlet">
-                    <header>Dummy portlet</header>
-                    <div class="portletBody">
+                    <header class="portletHeader">Dummy portlet</header>
+                    <div class="portletItem">
                         <ul>
                             <li><a href="#">Just a link</a></li>
                             <li><a href="#">Just a link</a></li>
                             <li><a href="#">Just a link</a></li>
                         </ul>
                     </div>
-                    <footer>
+                    <footer class="portletFooter">
                         <a href="/news">More news</a>
                     </footer>
                 </section>
                 <section class="portlet">
-                    <header>Another super-duper portlet</header>
-                    <div class="portletBody">
+                    <header class="portletHeader">Another super-duper portlet</header>
+                    <div class="portletItem">
                         <p>Let's assume this is a static text portlet. Some paragraph text just for test and then we have a list:</p>
                         <ul>
                             <li><a href="#">Just a link</a></li>
@@ -132,7 +132,7 @@
                             <li><a href="#">Just a link</a></li>
                         </ul>
                     </div>
-                    <footer>
+                    <footer class="portletFooter">
                         <a href="/news">More news</a>
                     </footer>
                 </section>            

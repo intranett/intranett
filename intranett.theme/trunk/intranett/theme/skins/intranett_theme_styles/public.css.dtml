@@ -1,0 +1,1127 @@
+/*
+** Plone style sheet - Public-facing Elements
+**
+** Style sheet documentation can be found at http://plone.org/documentation
+**
+** You should preferrably use ploneCustom.css to add your own CSS classes and to
+** customize your portal, as these are the base fundaments of Plone, and will
+** change and be refined in newer versions. Keeping your changes in
+** ploneCustom.css will make it easier to upgrade.
+**
+** Feel free to use whole or parts of this for your own designs, but give credit
+** where credit is due.
+**
+*/
+
+/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+
+/* @group General */
+
+.visualCaseSensitive {
+    text-transform: none;
+}
+
+.even {
+    background-color: &dtml-evenRowBackgroundColor;;
+}
+.odd {
+    background-color: &dtml-oddRowBackgroundColor;;
+}
+.visualHighlight {
+    background-color: #ffc;
+}
+.discreet {
+    color: &dtml-discreetColor;;
+    font-size: &dtml-fontSmallSize;;
+    font-weight: normal;
+}
+.pullquote {
+    padding: 0 1em 0 1em;
+    margin: 0 0 1em 1em;
+    font-weight: bold;
+    color: #CC9933;
+    float: right;
+    width: 35%;
+    clear: right;
+    background-color: &dtml-backgroundColor;;
+    border-left: 4px solid &dtml-globalBorderColor;;
+}
+.callout {
+    font-weight: bold;
+    color: #CC9933;
+    padding: 0px 1em;
+}
+
+.notify,
+.documentEditable * .notify {
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-notifyBorderColor;;
+}
+.card {
+    background-color: &dtml-globalBackgroundColor;;
+    border-color: &dtml-globalBorderColor;;
+    border-width: &dtml-borderWidth;;
+    border-style: &dtml-borderStyle;;
+    float: left;
+    margin: 1em;
+    text-align: center;
+    width: 110px;
+    padding: 1em 0;
+}
+.card a {
+    text-decoration: none;
+}
+.portrait {
+    background-color: &dtml-globalBackgroundColor;;
+    border-color: &dtml-globalBorderColor;;
+    border-width: &dtml-borderWidth;;
+    border-style: &dtml-borderStyle;;
+    font-size: &dtml-fontSmallSize;;
+    margin: 0.5em;
+    padding: 1em 0 0.5em 0;
+    text-align: center;
+    width: 100px;
+}
+.portraitPhoto {
+    border: 1px solid black;
+}
+
+.eventDetails {
+    float: right;
+    clear: right;
+    margin: 0 0 0.5em 1em;
+}
+
+/* List classes without markers */
+ul.visualNoMarker,
+ol.visualNoMarker {
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0.5em 0 0 0;
+    line-height: 1em;
+}
+
+ul.discreet {
+    list-style-image: none;    
+    list-style-type: disc;
+}
+
+textarea.proportional {
+    font: 100% <dtml-var fontFamily>;
+}
+.productCredits {
+    text-align: right;
+    font-size: &dtml-fontSmallSize;;
+    clear: both;
+    font-weight: normal;
+    color: &dtml-discreetColor;;
+}
+
+/* For ghosted elements */
+.visualGhosted {
+    opacity: 0.2;
+}
+
+/* manage portlets */
+
+.section div {
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+}
+
+
+
+/* @end */
+
+/* @group Accessibility */
+
+body.largeText { font-size: 95%; }
+body.smallText { font-size: 60%; }
+
+/* @end */
+
+/* @group Compensation for inline-edit forms */
+
+body.kssActive h2.inlineEditable:hover,
+body.kssActive h1.inlineEditable:hover,
+body.kssActive h2.formlibInlineEditable:hover,
+body.kssActive h1.formlibInlineEditable:hover {
+    padding-bottom: 1px;
+}
+
+
+
+/* @end */
+
+/* @group Site actions */
+
+#portal-siteactions {
+	font-size: 85%;
+	padding-bottom: 2em;
+	text-align: center;
+}
+#portal-siteactions li {
+    margin-right: 0.5em;
+}
+#portal-siteactions li a:hover {
+    color: #75ad0a
+}
+
+/* @end */
+
+/* @group Search box */
+
+#portal-searchbox {
+    float: right;
+    clear: right;
+    background-color: transparent;
+    margin: 1.5em 0 0 0;
+    padding: 0 2em 0 0;
+    text-align: right;
+    text-transform: &dtml-textTransform;;
+    white-space: nowrap;
+    z-index: 2;
+}
+#portal-advanced-search {
+    margin-top: 0.2em;
+    clear: both;
+}
+#portal-advanced-search a {
+    color: &dtml-discreetColor;;
+    text-decoration: none;
+    text-transform: &dtml-textTransform;;
+}
+
+/* @group Search results */
+
+dl.searchResults dt {
+    font-size: 140%;
+    font-weight: normal;
+}
+
+form.searchPage {
+    text-align: center;
+}
+
+input.searchPage {
+    font-size: 200% !important;
+}
+
+form.searchPage input.searchButton {
+    background-position:5px 7px;
+    padding:1px 10px 1px 25px;
+}
+
+/* @end */
+
+/* Collapsible elements in search_form */
+
+.collapsible .collapser.collapsed {
+    padding-right: 14px;
+    background: url('&dtml-portal_url;/arrowRight.png') center right no-repeat;
+} 
+
+.collapsible .collapser.expanded {
+    padding-right: 14px;
+    background: url('&dtml-portal_url;/arrowDown.png') center right no-repeat;
+}
+
+/* @group Livesearch */
+
+.LSRes {
+    font-family:  <dtml-var fontFamily>;
+    visibility: visible;
+    color: &dtml-globalFontColor;;
+    background-color: &dtml-backgroundColor;;
+    vertical-align: middle;
+    display:block;
+    list-style-image: none;
+    list-style-type: none;
+    text-align: left;
+    min-width: 16.5em;
+    text-transform: none;
+    margin-left: 0;
+    line-height: 1.1em;
+}
+#LSHighlight,
+.LSHighlight {
+    background-color: &dtml-globalBackgroundColor;;
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    color: &dtml-globalFontColor;;
+}
+.LSTable {
+    margin: 1em 0;
+}
+.LSRow {
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-backgroundColor;;
+    white-space: normal;
+    padding:0;
+    margin: 0;
+    list-style-image: none;
+    list-style-type: none;
+}
+.LSRow a {
+    text-decoration: none;
+    font-weight:bold;
+    white-space:nowrap
+}
+.LSDescr {
+    color: &dtml-discreetColor;;
+    font-size: &dtml-fontSmallSize;;
+    font-weight: normal;
+    margin-left: 2.5em;
+}
+.LSResult {
+    position: relative;
+    display: block;
+    text-align: right;
+    padding-top: 5px;
+    margin: 0;
+    left: 3px;
+    z-index: 3;
+}
+.LSShadow {
+    position: relative;
+    text-align: right;
+}
+.livesearchContainer {
+    background-color: &dtml-backgroundColor;;
+    margin-top: 0;
+    padding: 0 !important;
+    position: absolute;
+    right: 0px;
+    /* Currently exposes a rendering bug in Mozilla */
+    top: 0;
+    white-space: normal;
+    font-family:  <dtml-var fontFamily>;
+    visibility: visible;
+    text-align: left;
+    color: &dtml-globalFontColor;;
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    width: 30em;
+    text-transform: none;
+}
+* html .livesearchContainer {
+    padding: &dtml-borderWidth; !important;
+    padding-top: 0 !important;
+    background-color: &dtml-globalBorderColor;;
+    border: 0;
+}
+#livesearchLegend {
+    line-height: 1em;
+    margin-top: -2em;
+    margin-left: -0.1em;
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    border-bottom: 0;
+}
+* html #livesearchLegend {
+    margin-top: -1.9em;
+    margin-left: -8px;
+    position: relative;
+}
+
+/* Workaround for Internet Explorer's broken z-index implementation */
+.LSIEFix {
+    background-color: &dtml-backgroundColor;;
+    padding: 0.5em !important;
+    z-index: 20;
+}
+.LSBox {
+    clear: left;
+    float: left;
+    text-align: right;
+    padding-right: 1px;
+    display:block;
+}
+#LSNothingFound {
+    text-align: center;
+    padding: 2px;
+}
+.LSBox label {
+    font-weight: normal;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group Personal tools */
+
+#portal-personaltools {
+	float: right;
+	background: #e3e3e3;
+	position: relative;
+	z-index: 3; /* personaltools should be above #portal-header (with z-index: 2) */
+	top: 0;
+	right: 0;
+	padding: 0.25em 0.5em;
+	font-size: 80%;
+	border-bottom-right-radius: 0.5em;
+	border-bottom-left-radius: 0.5em;
+	-webkit-border-bottom-right-radius: 0.5em;
+	-webkit-border-bottom-left-radius: 0.5em;
+	-moz-border-radius-bottomleft: 0.5em;
+	-moz-border-radius-bottomright: 0.5em;
+}
+#portal-personaltools li,
+#portal-personaltools dt {
+	list-style: none;
+	display: inline;
+}
+#portal-personaltools dd {
+	float: left;
+}
+#portal-personaltools dt a,
+#portal-personaltools li a {
+	float: left;
+	margin: 0 0.5em;
+}
+#portal-personaltools ul {
+	white-space: nowrap;
+}
+
+
+/* @end */
+
+/* @group Language selector */
+
+#portal-languageselector {
+    margin: 0 1em 0 1em;
+    float:right;
+}
+#portal-languageselector li {
+    display: inline;
+}
+
+/* @end */
+
+/* @group Breadcrumbs */
+
+#portal-breadcrumbs {
+    /* The path bar, including breadcrumbs */
+    border-bottom-color: &dtml-globalBorderColor;;
+    border-bottom-style: &dtml-borderStyle;;
+    border-bottom-width: &dtml-borderWidth;;
+    padding-left: 2em;
+    padding-right: 2em;
+    text-transform: &dtml-textTransform;;
+    line-height: 1.6em;
+}
+#portal-breadcrumbs a {
+    text-decoration: none;
+}
+.breadcrumbSeparator {
+    font-size: 120%;
+}
+
+/* @end */
+
+/* @group News item */
+
+.newsItem {
+    margin-bottom: 1em;
+    border-bottom: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+}
+.newsImage {
+    border: 1px solid #ccc;
+}
+.newsImageContainer {
+    float:right;
+    margin: 0 0 0.5em 1em;
+    width: 202px;
+}
+.newsContent {
+    padding: 0 1em 1em 1em;
+}
+.newsContent ul,
+.newsContent li {
+    display: block;
+    list-style: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
+}
+.newsAbout {
+    display: block;
+    color: &dtml-discreetColor;;
+    font-size: &dtml-fontSmallSize;;
+    padding: 0;
+    margin-top: 0;
+    list-style: none;
+    list-style-image: none;
+    float: right;
+    text-align: right;
+}
+.newsAbout li {
+    display: inline;
+}
+.newsFooter {
+
+}
+.newsFooter li {
+    display: inline;
+    margin: 0 1em 0 0;
+}
+
+/* @end */
+
+/* @group Document actions */
+
+.documentActions {
+    margin: 1em 0;
+    padding: 0;
+    text-align: right;
+    /*border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;*/
+}
+.documentActions ul {
+    margin: 0;
+    padding: 0 0.5em;
+    display: block;
+    margin-top: -0.9em;
+    list-style-type: none;
+    list-style-image: none;
+}
+.documentActions li {
+    display: inline;
+    font-size: &dtml-fontSmallSize;;
+    margin: 0 0.5em;
+    padding: 0 0.25em;
+    background-color: &dtml-backgroundColor;;
+}
+.documentActions a {
+    border: none !important;
+    text-decoration: none;
+}
+
+/* @end */
+
+/* @group Status message */
+
+dl.portalMessage {
+    font-size: &dtml-fontSmallSize;;
+    background-color: #ffffe3; 
+    border: 1px solid #996;    
+}
+dl.portalMessage a {
+    color: black;
+    border: none;
+    text-decoration: underline;
+}
+dl.portalMessage dt {
+    background-color: #996; 
+    font-weight: bold;
+    float: left;
+    margin: 0 0.5em 0 0;
+    padding: 0.5em 0.75em;
+    color: White;
+    line-height: 1.25em;
+}
+dl.portalMessage dd {
+    padding: 0.5em 0.5em; 
+    margin: 0;
+    line-height: 1.25em;
+}
+dl.warning {
+    border-color: #d80;
+}
+dl.warning dt {
+    background-color: #d80;
+}
+dl.error {
+    border-color: #d00;    
+}
+dl.error dt {
+    background-color: #d00; 
+}
+dl.warning {
+    border-color: #d80;    
+}
+dl.warning dd {
+    background-color: #fd7; 
+}
+dl.error {
+    border-color: #d80;    
+}
+dl.error dd {
+    background-color: #fd7; 
+}
+
+/* @end */
+
+/* @group Listing tables */
+table.listing,
+.stx table {
+    /* The default table for document listings. Contains name, document types, modification times etc in a file-browser-like fashion */
+    border-collapse: collapse;
+    border-spacing: 0;    
+    border-left: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    border-bottom: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    font-size: &dtml-fontSmallSize;;
+    margin: 1em 0em 1em 0em;
+}
+table.listing th,
+.stx table th {
+    background: &dtml-globalBackgroundColor;;
+    border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    border-bottom: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    border-right: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    font-weight: normal;
+    padding: 0.25em 0.5em;
+    text-transform: &dtml-textTransform;;
+}
+table.listing .top {
+    border-left: &dtml-borderWidth; &dtml-borderStyle; &dtml-backgroundColor;;
+    border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-backgroundColor; ! important;
+    border-right: &dtml-borderWidth; &dtml-borderStyle; &dtml-backgroundColor; ! important;
+    text-align: right ! important;
+    padding: 0em 0em 1em 0em;
+}
+table.listing .listingCheckbox {
+    text-align: center;
+}
+table.listing td,
+.stx table td {
+    border-right: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    padding: 0.25em 0.5em;
+}
+table.listing a {
+    text-decoration: none;
+}
+table.listing a:hover {
+    text-decoration: underline;
+}
+table.listing img {
+    vertical-align: middle;
+}
+table.listing td a label,
+.stx table td a label {
+    cursor: pointer;
+}
+
+/* Vertical addition class */
+
+/* @group Vertical table */
+
+table.vertical {
+    background-color: &dtml-backgroundColor;;	
+}
+table.vertical th {
+    padding: 0.5em;
+}
+table.vertical td {
+    border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    padding: 0.5em;
+}
+
+/* @end */
+
+/* grid addition class */
+
+table.grid td {
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    padding: 0.5em;
+}
+
+/* plain table class with light gray borders */
+
+table.plain,
+table.plain td,
+table.plain th {
+    border: 1px solid #ccc;
+    padding: 0.5em;
+    border-collapse: collapse;
+}
+
+/* @end */
+
+/* @group Batch */
+
+.listingBar {
+    background-color: &dtml-globalBackgroundColor;;
+    border-color: &dtml-globalBorderColor;;
+    border-style: &dtml-borderStyle;;
+    border-width: &dtml-borderWidth;;
+    padding: 0em 1em;
+    text-align: center;
+    text-transform: &dtml-textTransform;;
+    vertical-align: top;
+    margin: 1em 0em;
+    font-size: 94%;
+    clear: both;
+}
+.listingBar span.previous,
+.listingPrevious {
+    text-align: left;
+    float: left;
+    margin-right: 1em;
+}
+.listingBar span.next,
+.listingNext {
+    text-align: right;
+    float: right;
+    margin-left: 1em;
+}
+.listingBar img {
+    vertical-align: middle;
+}
+.listingBar a {
+    text-decoration: none;
+}
+
+/* @end */
+
+/* @group Listing tileItem */
+
+.tileItem,
+.item {
+    border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    padding-top: 0.5em;
+    margin-top: 0.5em;
+}
+.tileHeadline,
+.headline {
+    border: none;
+    font-size: 110%;
+    font-weight: bold;
+}
+.tileHeadline a,
+.headline a {
+    text-decoration: none;
+}
+.tileBody {
+    margin-bottom: 0.5em;
+}
+.tileImage {
+    float: right;
+    margin: 0 0 0.5em 0.5em;
+    border: 1px solid black;
+}
+
+/* @end */
+
+/* @group Site map */
+
+#portal-sitemap {
+    list-style: none;
+    list-style-image: none;
+    margin: 0;
+    font-size: 90%;
+    border: none;
+}
+#portal-sitemap a {
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-backgroundColor;;
+}
+#portal-sitemap a:hover {
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+}
+#portal-sitemap .navTreeLevel1 {
+    padding-left: 1em;
+    border-left: 0.5em solid &dtml-globalBorderColor;;
+    margin: 0 0 0 0.5em;
+}
+#portal-sitemap .navTreeLevel2 {
+    padding-left: 1em;
+    border-left: 0.5em solid &dtml-globalBackgroundColor;;
+    margin: 0 0 0 0.6em;
+}
+
+/* @end */
+
+/* @group Album view */
+
+.photoAlbumEntry {
+    float: left;
+    position:relative;
+    overflow: hidden;
+    height: 185px;
+    width: 143px;
+    margin: 0em;
+    padding: 0px 6px 0px 9px;
+    text-align: center;
+    background-image: url('&dtml-portal_url;/polaroid-single.png');
+    background-repeat: no-repeat;
+}
+.photoAlbumEntry img {
+    border: 1px solid #ccc;
+    display: block;
+    margin: 0 auto;
+}
+.photoAlbumEntryWrapper {
+    /*display: block;*/
+    height: 130px;
+    width: 128px;
+    margin-bottom: 7px;
+}
+.photoAlbumEntry a {
+    display: block;
+    text-decoration: none;
+    font-size: &dtml-fontSmallSize;;
+    height: 169px;
+    width: 130px;
+    margin: 16px auto 0px;
+}
+.photoAlbumFolder {
+    background-image: url('&dtml-portal_url;/polaroid-multi.png');
+    background-repeat: no-repeat;
+}
+.photoAlbumEntryTitle {
+    color: &dtml-discreetColor;;
+    display: block;
+    width: 128px;
+    height: 3.6em;
+}
+
+/* @end */
+
+/* @group Fullscreen */
+
+body.fullscreen #portal-logo,
+body.fullscreen #portal-siteactions {
+    display: none;
+}
+body.fullscreen #portal-globalnav {
+    margin-top: 4em;
+}
+body.fullscreen #portal-searchbox {
+    margin: 0.5em 2em 0 0.5em;
+    padding: 0;
+    position: relative;
+    z-index: 3;
+}
+
+/* @end */
+
+/* @group Image alignment */
+
+.image-left {
+   float: left;
+   clear: both;
+   margin: 0.5em 1em 0.5em 0;
+   border: 1px solid Black;
+}
+.image-inline {
+   float: none;
+}
+.image-right {
+   float: right;
+   clear: both;
+   margin: 0.5em;
+   border: 1px solid Black;
+}
+dd.image-caption {
+   text-align:left;
+   padding: 0; margin:0;
+}
+dl.captioned {
+   padding: 10px;
+}
+
+/* @end */
+
+/* @group Dashboard */
+
+#dashboard-info-message {
+    padding-top: 0.5em;
+}
+
+#dashboard {
+    width: 68em;
+}
+
+#dashboard-portlets1,
+#dashboard-portlets2,
+#dashboard-portlets3
+{
+    float:left;
+    width:16em;
+    padding:0.7em 1.3em 0 0;
+}
+
+#dashboard-portlets4 {
+    float:left;
+    width:16em;
+    padding-top:0.7em;
+}
+
+#dashboard-portlets1 a,
+#dashboard-portlets2 a,
+#dashboard-portlets3 a,
+#dashboard-portlets4 a {
+    border-bottom:medium none;
+}
+
+#dashboard-portlets1 dl.portlet,
+#dashboard-portlets2 dl.portlet,
+#dashboard-portlets3 dl.portlet,
+#dashboard-portlets4 dl.portlet {
+    margin-bottom:1.5em;
+}
+
+div.managedPortlet.portlet {
+    border-bottom:none;
+}
+#dashboard select {
+    width:100%;
+}
+
+.portletAssignments {
+    margin-top:1.5em;
+}
+
+#dashboard-portlets1 div.managedPortlet a,
+#dashboard-portlets2 div.managedPortlet a,
+#dashboard-portlets3 div.managedPortlet a,
+#dashboard-portlets4 div.managedPortlet a {
+    text-decoration: none;
+    color: &dtml-globalFontColor;;
+    border-bottom:1px solid &dtml-globalFontColor;;
+}
+
+#dashboard-portlets1 div.managedPortlet span a,
+#dashboard-portlets2 div.managedPortlet span a,
+#dashboard-portlets3 div.managedPortlet span a,
+#dashboard-portlets4 div.managedPortlet span a{
+    border-bottom:none;
+}
+
+#dashboard-actions {
+    float:right;
+}
+
+#dashboard-actions ul {
+    list-style-image:none;
+    list-style-position:outside;
+    list-style-type:none;    
+    margin-top:0;
+}
+
+#dashboard-actions ul li {
+    display:inline;
+    padding-left:0.7em;
+}
+
+#dashboard-actions ul li.portalUser {
+    padding-left:18px;
+}
+
+/* @end */
+
+/* @group Overlays */
+
+div.overlay {
+    width: auto;
+    height: auto;
+    /* initially overlay is hidden */
+    display:none;
+    /* some padding to layout nested elements nicely  */
+    margin:1em;
+}
+
+div.overlay-iframe,
+div.overlay-ajax {
+    width: 60%;
+    min-height: 100px;
+    z-index: 99; /* overlays should be above everything */
+}
+
+div.overlay-iframe {
+    height: 60%;
+}
+
+/* default close button positioned on upper-left corner */
+    div.overlaybg div.close,
+    div.overlay div.close {
+    background-image: url(&dtml-portal_url;/pb_close.png);
+    position: absolute;
+    left: -15px;
+    top: -15px;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+
+.pb-ajax {
+    overflow-y: auto;
+}
+
+.pb-ajax, .pb-image {
+    white-space: normal;
+    border:&dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+
+    -moz-box-shadow:0 0 1em #888;
+    -webkit-box-shadow:0 0 1em #888;
+}
+
+.pb-ajax > * {
+    background-color: &dtml-backgroundColor;;
+    padding: 1em;
+    white-space: normal;
+}
+
+.pb-ajax .documentActions {display:none}
+
+div.overlay div.close span {
+    display:block;
+    height:1px;
+    margin:-1px 0 0 -1px;
+    overflow:hidden;
+    padding:0;
+    width:1px;
+}
+
+/* Hide form elements that don't make sense within an overlay. */
+div.overlay .link-parent { display: none; }
+div.overlay #createGroup legend { display: none; }
+div.overlay #createGroup fieldset { border: none; }
+
+/* @end */
+
+/* @group Content History */
+
+#content-history #history dd {
+}
+
+#content-history div.historyRecord {
+	margin-bottom: 1em;
+}
+
+
+#content-history div.historyTools ul {
+	float: right;
+	margin: 0.5em 1em;	
+}
+
+#content-history div.historyTools ul li {
+	display: inline;
+	padding: 0 0.015em;
+}
+
+#content-history div.historyTools ul li a{
+	border-bottom: none;
+}
+
+#content-history div.historyTools form {
+	display: inline;
+}
+
+#content-history .historyAction {
+
+}
+
+#content-history .historyByLine {
+	background: #ddd;
+	padding: 0.5em;
+	border-top-right-radius: 0.5em;
+	border-top-left-radius: 0.5em;
+	-webkit-border-top-right-radius: 0.5em;
+	-webkit-border-top-left-radius: 0.5em;
+	-moz-border-radius-topleft: 0.5em;
+	-moz-border-radius-topright: 0.5em;
+}
+
+#content-history div.historyLinks {
+	float: right;
+	clear: right;
+	margin: 0.5em 1em 0 0;
+}
+
+
+#content-history div.historyComment {
+	padding: 0.5em 1em;
+	border: 1px solid #ddd;
+}
+
+#content-history div.historyComment p {
+	margin: 0;
+	padding-top: 1px;	
+}
+
+#content-history a.historyComparePrevious {
+	border-top: 1px dotted #ccc;
+	display: block;
+	margin-top: 3em;
+	text-align: center;
+}
+
+#content-history a.historyComparePrevious span {
+	background-color: white;
+	position: relative;
+	top: -0.75em;
+	padding: 0 0.5em;
+}
+
+/* @end */
+
+/* @group Core content type sprites */
+
+/* Generated using http://spritegen.website-performance.org, with the following
+   parameters:
+   - Build direction: Vertical
+   - Horizontal offset: (doesn't matter, but can't be 0)
+   - Vertical offset: 200px
+   - Compress image with OptiPNG: yes
+   - Class prefix: contenttype-
+   - Display width and height: no
+  Then, add 4 px to the background-position to line up the icons to text.
+
+.contenttype-document_icon { background-position: 0 0;  } 
+.contenttype-event_icon { background-position: 0 -216px;  } 
+.contenttype-file_icon { background-position: 0 -432px;  } 
+.contenttype-folder_icon { background-position: 0 -648px;  } 
+.contenttype-image_icon { background-position: 0 -864px;  } 
+.contenttype-link_icon { background-position: 0 -1080px;  } 
+.contenttype-newsitem_icon { background-position: 0 -1296px;  } 
+.contenttype-site_icon { background-position: 0 -1512px;  } 
+.contenttype-topic_icon { background-position: 0 -1728px;  } 
+
+*/
+
+.icons-on .contenttype-document {
+	background: no-repeat transparent 0px 4px url(contenttypes-sprite.png);
+}
+.icons-on .contenttype-event {
+	background: no-repeat transparent 0px -212px url(contenttypes-sprite.png);
+}
+.icons-on .contenttype-folder {
+	background: no-repeat transparent 0px -644px url(contenttypes-sprite.png);
+}
+.icons-on .contenttype-link {
+	background: no-repeat transparent 0px -1076px url(contenttypes-sprite.png);
+}
+.icons-on .contenttype-news-item {
+	background: no-repeat transparent 0px -1292px url(contenttypes-sprite.png);
+}
+.icons-on .contenttype-plone-site {	
+	background: no-repeat transparent 0px -1508px url(contenttypes-sprite.png);
+}
+.icons-on .contenttype-topic {
+	background: no-repeat transparent 0px -1724px url(contenttypes-sprite.png);
+}
+
+/* These should only appear in the add menu */
+.icons-on #plone-contentmenu-factories .contenttype-file {
+	background: no-repeat transparent 0px -428px url(contenttypes-sprite.png);
+}
+.icons-on #plone-contentmenu-factories .contenttype-image {
+	background: no-repeat transparent 0px -860px url(contenttypes-sprite.png);
+}
+
+
+
+.icons-on .contenttype-document,
+.icons-on .contenttype-event,
+.icons-on .contenttype-folder,
+.icons-on .contenttype-link,
+.icons-on .contenttype-news-item,
+.icons-on .contenttype-plone-site,
+.icons-on .contenttype-topic,
+.icons-on #plone-contentmenu-factories .contenttype-file,
+.icons-on #plone-contentmenu-factories .contenttype-image {
+	line-height: 2em;
+	display: inline-block;
+	padding-left: 20px !important;
+}
+
+/* @end */
+
+/* </dtml-with> */
