@@ -6,7 +6,6 @@
  <stylesheet id="++resource++intranett.theme.stylesheets/main.css" />     
     
  <stylesheet title="" id="base.css" enabled="0" />
- <stylesheet title="" id="portlets.css" enabled="0" /> 
- <stylesheet title="" id="public.css" enabled="0" /> 
+ <stylesheet title="" id="portlets.css" enabled="0" />
 
 </object>
