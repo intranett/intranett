@@ -1,9 +1,8 @@
-import urllib
+from re import search
 from zope import interface
 from Products import Five
 from DateTime import DateTime
 from Products.CMFCore import utils as cmf_utils
-from Products.Extropy import permissions
 
 
 # Iterators used by the view
@@ -13,7 +12,9 @@ from Products.Extropy import permissions
 class ReportKey:
     def __init__(self, key, data=None):
         self.keyname = key
-        if data is None:
+        if key == 'activity' and data is not None:
+            self.activity(key, data)
+        elif data is None:
             self.key = self.keyname
         else:
             nodekey = data
@@ -22,6 +23,27 @@ class ReportKey:
             if callable(nodekey):
                 nodekey = nodekey()
             self.key = nodekey
+
+    def activity(self, key, data):
+        # Group by task/activity typically indicated by #455 or keywords like
+        # meeting, discussion, mgmt/management, test, release in Title
+        nodekey = data
+        nodekey = getattr(nodekey, 'Title')
+        if callable(nodekey):
+            nodekey = nodekey()
+        m = search('(^#?|#)(\d+)', nodekey)
+        if m:
+            self.key = m.group(2)
+        elif search('[Rr]elease', nodekey):
+            self.key = 'Release'
+        elif search('[Pp]lan(ing|ed|\s)|[Mm]eeting|[Dd]iscuss(ion|ed|\s)', nodekey):
+            self.key = 'Communication'
+        elif search('[Mm](anage(ment|d|\s)|gmt)', nodekey):
+            self.key = 'Project mgmt'
+        elif search('[Tt]est(ing|ed|\s)', nodekey):
+            self.key = 'Testing'
+        else:
+            self.key = 'Other'
 
     def __hash__(self):
         # XXX Add mutable check somewhere
@@ -367,3 +389,35 @@ class TableView(ReportView):
 
         data = TableData(group_by, hours)
         return data
+
+class CSVView(TableView):
+    """Hour report
+    """
+
+    def __call__(self):
+        reqget = self.request.get
+        query = {}
+        for key in ['review_state','portal_type','getBudgetCategory']:
+            v = reqget(key, None)
+            if v is not None:
+                query[key] = v
+        group_by = reqget('group_by', 'activity:getBudgetCategory')
+        if not isinstance(group_by, (list, tuple)):
+            group_by = group_by.split(':')
+        data = self.getReportData(start=reqget('start', None), 
+                                  end=reqget('end', None), 
+                                  username=reqget('username', None), 
+                                  group_by=group_by, 
+                                  **query)
+        self.request.response.setHeader('Content-Type', 'text/csv; charset="utf-8"')
+        out = []
+        if len(data.getRowHeaders()) == 1:
+            out.append(','.join([str(x) for x in data.getColHeaders()]))
+            for row in data.rows():
+                out.append(','.join([str(col) for col in row]))
+        else:
+            out.append(','.join([data.getRowHeaders()[0].keyname] + [str(x) for x in data.getColHeaders()]))
+            for row in data.rows():
+                out.append(','.join([row.rowheader()] + [str(col) for col in row]))
+
+        return '\n'.join(out)

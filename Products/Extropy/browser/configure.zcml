@@ -94,6 +94,13 @@
 
 </browser:pages>
 
+<browser:view
+    for="*"
+    class=".reports.CSVView"
+    permission="zope2.View"
+    name="hourreport_csv"
+    />
+
 <!-- Weekly planning -->
 
 <browser:menu id="weeklyplan" />

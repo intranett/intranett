@@ -7,7 +7,7 @@ from Products.Extropy.tests import ExtropyTrackingTestCase
 
 from Products.CMFPlone.utils import _createObjectByType
 
-from Products.Extropy.browser.reports import ReportView, iteratorFactory, ReportIterator, ReportKey, TableView
+from Products.Extropy.browser.reports import ReportView, iteratorFactory, ReportIterator, ReportKey, TableView, CSVView
 
 
 class Dummyhours:
@@ -60,6 +60,23 @@ class TestReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.failUnlessEqual(res[2001].getValue(), 24)
         self.failUnlessEqual(res[2002].getValue(), 24*2)
 
+    def testGetReportDataActivity(self):
+        view = CSVView(self.portal, self.request)
+        self.folder.invokeFactory('Folder', 'extropy')
+        folder = self.folder.extropy
+        _createObjectByType('ExtropyHourGlass',folder, 'hourglass')
+        folder.hourglass.invokeFactory('ExtropyHours','test1', title='Project management', startDate='2001/01/01', endDate='2001/01/02')
+        folder.hourglass.invokeFactory('ExtropyHours','test2', title='#456 work', startDate='2002/01/01', endDate='2002/01/02')
+        folder.hourglass.invokeFactory('ExtropyHours','test3', title='#456 more work', startDate='2002/02/01', endDate='2002/02/02')
+        self.request.set('group_by', 'activity:getBudgetCategory')
+        out = view()
+        self.failUnlessEqual(out, 'Project mgmt,456\n24.0,48.0')
+
+        folder.hourglass.invokeFactory('ExtropyHours','test4', title='#457 even more work', startDate='2002/02/01', endDate='2002/02/02',budgetCategory='Administration')
+        out = view()
+        self.failUnlessEqual(out, 'getBudgetCategory,Project mgmt,456,457\nAdministration,0,0,24.0\nBillable,24.0,48.0,0')
+
+
     def testIteratorFactory(self):
         iterator = iteratorFactory(None)
         self.failUnless(isinstance(iterator, ReportIterator))
@@ -85,6 +102,34 @@ class TestReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         key2 = ReportKey(2001)
         self.failUnlessEqual(key1, key2)
 
+    def testReportKeyProject(self):
+        class K(object):
+            def __init__(self, title):
+                self.Title = title
+        k = ReportKey('activity', K('#456 worked hour'))
+        self.failUnlessEqual(str(k), '456')
+        k = ReportKey('activity', K('456 worked hour'))
+        self.failUnlessEqual(str(k), '456')
+        k = ReportKey('activity', K('Worked #456 hour'))
+        self.failUnlessEqual(str(k), '456')
+
+        k = ReportKey('activity', K('Planning meeting'))
+        self.failUnlessEqual(str(k), 'Communication')
+        k = ReportKey('activity', K('Discussed setup'))
+        self.failUnlessEqual(str(k), 'Communication')
+
+        k = ReportKey('activity', K('Project management'))
+        self.failUnlessEqual(str(k), 'Project mgmt')
+        k = ReportKey('activity', K('Project mgmt'))
+        self.failUnlessEqual(str(k), 'Project mgmt')
+        k = ReportKey('activity', K('Managed project'))
+        self.failUnlessEqual(str(k), 'Project mgmt')
+
+        k = ReportKey('activity', K('Tested ticket'))
+        self.failUnlessEqual(str(k), 'Testing')
+
+        k = ReportKey('activity', K('Nothing specific...'))
+        self.failUnlessEqual(str(k), 'Other')
 
 class TestTableViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 
