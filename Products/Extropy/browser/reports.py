@@ -233,6 +233,8 @@ class ReportView(Five.BrowserView):
             group_by = group_by.split(':')
         if not query.has_key('portal_type'):
             query['portal_type']='ExtropyHours'
+        if query.has_key('local'):
+            query['path'] = '/'.join(self.context.getPhysicalPath())
 
         if start is not None or end is not None:
             if start is None:
@@ -374,6 +376,9 @@ class TableView(ReportView):
         if not query.has_key('portal_type'):
             query['portal_type']='ExtropyHours'
 
+        if query.has_key('local'):
+            query['path'] = '/'.join(self.context.getPhysicalPath())
+
         if start is not None or end is not None:
             if start is None:
                 start = DateTime('2000/01/01')
@@ -401,6 +406,8 @@ class CSVView(TableView):
             v = reqget(key, None)
             if v is not None:
                 query[key] = v
+        if reqget('local'):
+            query['path'] = '/'.join(self.context.getPhysicalPath())
         group_by = reqget('group_by', 'activity:getBudgetCategory')
         if not isinstance(group_by, (list, tuple)):
             group_by = group_by.split(':')
