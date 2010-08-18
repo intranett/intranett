@@ -153,22 +153,6 @@ body.kssActive h1.formlibInlineEditable:hover {
 
 /* @end */
 
-/* @group Site actions */
-
-#portal-siteactions {
-	font-size: 85%;
-	padding-bottom: 2em;
-	text-align: center;
-}
-#portal-siteactions li {
-    margin-right: 0.5em;
-}
-#portal-siteactions li a:hover {
-    color: #75ad0a
-}
-
-/* @end */
-
 /* @group Search box */
 
 #portal-searchbox {

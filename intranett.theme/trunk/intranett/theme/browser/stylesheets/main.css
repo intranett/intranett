@@ -18,23 +18,42 @@ body {
           /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')";*/ /* IE8 */    
 }
 
+/* @group Typography */
+
+/* Le Corbusier method (http://lamb.cc/typograph/) with 100% as the base font size*/
+
+/**
+	Base numbers of the row:
+	 .4762
+	 .619
+	 .7619
+	1
+	1.2381
+	1.619
+	2
+	2.619
+	3.2381
+	4.2381
+**/
+
+
+body { font-size:100%; line-height:1.25; }
+h1, h2, h3 { margin-top:0; margin-bottom:0; }
+h1 { font-size:2.62em; margin:1.3em 0; }
+h2 { font-size:1.62em; margin:1.3em 0; }
+h3 { font-size:1.24em; margin:1.4em 0; }
+
+/* @end */
+
 h1, h2, h3, h4 {
     font-family: Baskerville, Times, "Times New Roman", serif;
     color: #000;
 }
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-weight: normal;
 }
 h1, h2 {
 	letter-spacing: -1px;
-}
-h2 {
-	font-size: 1.63em;
-	margin: 1em 0 0.62em;
-}
-h3 {
-	font-size: 1em;
-	margin: 0.62em 0;
 }
 section aside,
 section figure {
@@ -69,7 +88,7 @@ a:hover {
 	color: #1b7797;
 }
 small {
-	font-size: 0.63em;
+	font-size: 0.62em;
 }
 
 /* @end */
@@ -167,15 +186,13 @@ body > header nav li:last-child a {
 .documentFirstHeading {
 	margin: 0;
 	padding: 0;
-    font-size: 2.63em;
-    line-height: 1em;
 	text-transform: uppercase;
 }
 .documentDescription {
-	margin: 0.615em 0 0;
+	margin: 1.3em 0;
 	padding: 0;
-    line-height: 1em;	
-    font-size: 1.63em;
+    /*line-height: 1.25em;*/	
+    font-size: 1.62em;
 }
 #portal-columns article footer small {
 	display: block;
@@ -289,15 +306,34 @@ figcaption {
 
 /* @group Footer */
 
+/* @group Site actions */
+
+#portal-siteactions {
+	text-align: center;
+	list-style: none;
+	font-size: 0.762em;
+}
+#portal-siteactions li {
+    margin-right: 0.5em;
+	list-style: none;
+	display: inline;    
+}
+#portal-siteactions li a:hover {
+    color: #75ad0a
+}
+
+/* @end */
+
+
 body > footer {
 	text-align: right;
 	clear: both;
 	margin-bottom: 1.63em;
 	text-transform: uppercase;
 }
-body > footer small {
+/*body > footer small {
 	margin-left: 1em;
-}
+}*/
 body > footer strong {
 	font-weight: normal;
 }
