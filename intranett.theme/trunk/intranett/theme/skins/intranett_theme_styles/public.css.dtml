@@ -329,44 +329,6 @@ form.searchPage input.searchButton {
 
 /* @end */
 
-/* @group Personal tools */
-
-#portal-personaltools {
-	float: right;
-	background: #e3e3e3;
-	position: relative;
-	z-index: 3; /* personaltools should be above #portal-header (with z-index: 2) */
-	top: 0;
-	right: 0;
-	padding: 0.25em 0.5em;
-	font-size: 80%;
-	border-bottom-right-radius: 0.5em;
-	border-bottom-left-radius: 0.5em;
-	-webkit-border-bottom-right-radius: 0.5em;
-	-webkit-border-bottom-left-radius: 0.5em;
-	-moz-border-radius-bottomleft: 0.5em;
-	-moz-border-radius-bottomright: 0.5em;
-}
-#portal-personaltools li,
-#portal-personaltools dt {
-	list-style: none;
-	display: inline;
-}
-#portal-personaltools dd {
-	float: left;
-}
-#portal-personaltools dt a,
-#portal-personaltools li a {
-	float: left;
-	margin: 0 0.5em;
-}
-#portal-personaltools ul {
-	white-space: nowrap;
-}
-
-
-/* @end */
-
 /* @group Language selector */
 
 #portal-languageselector {
