@@ -160,7 +160,7 @@ body.kssActive h1.formlibInlineEditable:hover {
     clear: right;
     background-color: transparent;
     margin: 1.5em 0 0 0;
-    padding: 0 2em 0 0;
+    padding: 0;
     text-align: right;
     text-transform: &dtml-textTransform;;
     white-space: nowrap;
@@ -337,27 +337,6 @@ form.searchPage input.searchButton {
 }
 #portal-languageselector li {
     display: inline;
-}
-
-/* @end */
-
-/* @group Breadcrumbs */
-
-#portal-breadcrumbs {
-    /* The path bar, including breadcrumbs */
-    border-bottom-color: &dtml-globalBorderColor;;
-    border-bottom-style: &dtml-borderStyle;;
-    border-bottom-width: &dtml-borderWidth;;
-    padding-left: 2em;
-    padding-right: 2em;
-    text-transform: &dtml-textTransform;;
-    line-height: 1.6em;
-}
-#portal-breadcrumbs a {
-    text-decoration: none;
-}
-.breadcrumbSeparator {
-    font-size: 120%;
 }
 
 /* @end */

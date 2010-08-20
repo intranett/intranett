@@ -8,8 +8,14 @@
     </order>
     <order manager="plone.portalfooter" skinname="Intranett.no base theme" based-on="Plone Default">
       <viewlet name="plone.site_actions" insert-before="*" />
+    </order>
+    <order manager="plone.abovecolumns" skinname="Intranett.no base theme">
+      <viewlet name="plone.path_bar" />
     </order>    
-    
+       
+    <hidden manager="plone.abovecontent" skinname="Intranett.no base theme">
+      <viewlet name="plone.path_bar" />
+    </hidden>
     <hidden manager="plone.belowcontenttitle" skinname="Intranett.no base theme">
       <viewlet name="plone.belowcontenttitle.documentbyline" />
     </hidden>

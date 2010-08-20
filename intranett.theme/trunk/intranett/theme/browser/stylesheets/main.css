@@ -1,22 +1,15 @@
 /* @group Basic */
 
 html {
-    height: 100%;
+	background: #ccc;
 }
 
 body {
     font-family: Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif;
-    width: 960px;
-    margin: 0 auto;
     color: #5e5e5e;
-    background: transparent;	    
-    height: 100%;    
-    background-color: #fff;
-    /*background-image: -moz-linear-gradient(top, #fff, #e6e6e6);*/ /* FF3.6 */
-    /*background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fff),color-stop(1, #e6e6e6));*/ /* Saf4+, Chrome */
-              /*filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6');*/ /* IE6,IE7 */
-          /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')";*/ /* IE8 */    
+	height:100%;          
 }
+-webkit-gradient(linear, 0% 0%, 0% 100%, from(#00ABEB), color-stop(0.5, white), color-stop(0.5, #6C0), to(white));
 
 /* @group Typography */
 
@@ -91,10 +84,22 @@ small,
 .discreet {
 	font-size: 0.76em;
 }
+.contentAlignment {
+	width: 960px;
+	margin: 0 auto;
+}
 
 /* @end */
 
 /* @group Header */
+
+body > header {
+	border-bottom: 1px solid #eee;
+    background-image: -moz-linear-gradient(top, #f7f7f7, rgba(238, 238, 238, 0.9), #e6e6e6); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
+              /*filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6');*/ /* IE6,IE7 */
+          /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')";*/ /* IE8 */ 		
+}
 
 /* @group Personal tools */
 
@@ -163,7 +168,8 @@ a#portal-logo {
 	width: 20em;
 }
 .searchSection {
-	font-size: ;
+	font-size: .76em;
+	text-align: left;
 }
 
 /* @end */
@@ -173,15 +179,17 @@ a#portal-logo {
 body > header nav {
 	clear: left;
 	width: 100%;
-	/*float: left;
-	list-style: none;*/
-	/*text-align: right;*/
+	position: relative;
+	z-index:1;
+	bottom: -2px;
 }
 body > header nav ul {
-	margin: 0;
+	margin: 1.69em 0 0;
 	padding: 0;
 	display: table;
 	list-style: none;
+	background-color: #D5D5D5;
+	width: 100%;
 }
 body > header nav li {
 	display: table-cell;
@@ -192,24 +200,15 @@ body > header nav li {
 body > header nav li a {
 	display: block;
     margin: 0;
-	padding: 1em 1em 1em 0;    
+	padding: .62em 1.25em;    
     color: #333 !important;
     text-decoration: none;
     border-bottom: none;	
 	text-transform: uppercase;
     font-size: 1em;
 }
-body > header nav li a:focus {
-	outline: none;
-}
-body > header nav li a:hover {
-
-}
-body > header nav li:first-child a {
-	margin-left: 0;
-}
-body > header nav li:last-child a {
-	margin-right: 0;
+body > header nav li.selected a {
+	background: #fff;
 }
 
 /* @end */
@@ -217,6 +216,103 @@ body > header nav li:last-child a {
 
 
 /* @end */
+
+/* @group Breadcrumbs */
+
+.breadCrumb {
+	display:block;
+	float:left;
+	height:21px;
+	margin:0 auto;
+	overflow:hidden;
+	padding:5px 0;
+	width:960px;
+}
+.breadCrumb ul {
+	display:block;
+	height:21px;
+	margin:0;
+	padding:0;
+}
+.breadCrumb ul li {
+	background:url("/chevron.gif") 100% 0 no-repeat;
+	display:block;
+	float:left;
+	font-size:0.9167em;
+	height:21px;
+	line-height:21px;
+	margin:0 6px 0 0;
+	overflow:hidden;
+	padding:0 10px 0 0;
+	position:relative;
+}
+.breadCrumb ul li div.chevronOverlay {
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:2;
+}
+.breadCrumb ul li span {
+	display:block;
+	overflow:hidden;
+}
+.breadCrumb ul li a {
+	display:block;
+	float:left;
+	height:21px;
+	line-height:21px;
+	overflow:hidden;
+	position:relative;
+}
+.breadCrumb ul li.first a {
+	background:url("/icon_home.gif") 0 0 no-repeat;
+	height:16px !important;
+	margin-top:2px;
+	overflow:hidden;
+	padding:0;
+	text-indent:-1000em;
+	width:16px;
+}
+.breadCrumb ul li.first a:hover {
+	background-position:0 -16px;
+}
+.breadCrumb ul li.last {
+	background:none;
+	margin-right:0;
+	padding-right:0;
+}
+.chevronOverlay {
+	background:url("/chevron_overlay.png") 100% 0 no-repeat;
+	display:none;
+	height:20px;
+	width:13px;
+}
+
+/* @end */
+
+/* @group Columns */
+
+#portal-columns {
+    background: #fff;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #E6E6E6;    
+}
+#portal-column-content {
+	clear: both;
+}
+#portal-column-content,
+#portal-column-one,
+#portal-column-two {
+	padding: 3.3em 0;
+}
+#portal-columns > aside {
+	border-radius: none;
+	background: transparent;
+}
+.managePortletsFallback {
+	margin: 1.25em 0;
+	display: inline-block;
+}
 
 /* @group Content */
 
@@ -236,9 +332,6 @@ body > header nav li:last-child a {
 }
 #portal-columns article footer small {
 	display: block;
-}
-#portal-column-content {
-	margin-bottom: 1.25em;
 }
 
 /* @group Document Actions */
@@ -280,7 +373,6 @@ body > header nav li:last-child a {
 
 .contentViews {
     background-color: transparent;
-    padding-left: 1em;
     line-height: normal;
     margin: 0;
     list-style: none;
@@ -537,17 +629,6 @@ figcaption {
 
 /* @end */
 
-/* @group Columns */
-
-#portal-columns > aside {
-	border-radius: none;
-	background: transparent;
-}
-.managePortletsFallback {
-	margin: 1.25em 0;
-	display: inline-block;
-}
-
 /* @group Portlets */
 
 .portlet {
@@ -594,12 +675,36 @@ figcaption {
 
 /* @group Footer */
 
+body > footer {
+	clear: both;
+	text-align: right;	
+	text-transform: uppercase;	
+	padding-bottom: 1.63em;
+	padding-top: 1.25em;	
+	border-top: 1px solid #F7F7F7;
+    background-image: -moz-linear-gradient(top, #f7f7f7, rgba(245, 245, 245, 0.9), #EEEEEE); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(245, 245, 245, 0.9)), to(#EEEEEE)); /* Saf4+, Chrome */
+              /*filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6');*/ /* IE6,IE7 */
+          /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')";*/ /* IE8 */ 
+}
+body > footer small {
+	font-size: 0.62em;
+}
+body > footer strong {
+	font-weight: normal;
+}
+#portal-colophon li {
+	list-style: none;
+}
+
+
 /* @group Site actions */
 
 #portal-siteactions {
 	text-align: center;
 	list-style: none;
 	font-size: 0.762em;
+	margin-bottom: 1.25em;
 }
 #portal-siteactions li {
     margin-right: 0.5em;
@@ -611,23 +716,6 @@ figcaption {
 }
 
 /* @end */
-
-
-body > footer {
-	text-align: right;
-	clear: both;
-	margin-bottom: 1.63em;
-	text-transform: uppercase;
-}
-body > footer small {
-	font-size: 0.62em;
-}
-body > footer strong {
-	font-weight: normal;
-}
-#portal-colophon li {
-	list-style: none;
-}
 
 /* @end */
 

@@ -74,18 +74,27 @@
   <body tal:define="isRTL portal_state/is_rtl;
                     sl python:plone_view.have_portlets('plone.leftcolumn', view);
                     sr python:plone_view.have_portlets('plone.rightcolumn', view);
+                    conten_pos python:sl and 'position-4' or 'position-0';
+                    content_width python: sl and 'width-12' or 'width-16';
                     body_class python:plone_view.bodyClass(template, view);"
         tal:attributes="class body_class;
                         dir python: isRTL and 'rtl' or 'ltr'">
         
         <header i18n:domain="plone">
-            <div tal:replace="structure provider:plone.portaltop" tal:condition="not:ajax_load" />
+            <div class="contentAlignment">
+                <div tal:replace="structure provider:plone.portaltop" tal:condition="not:ajax_load" />
+            </div>
         </header>
                         
-        <div id="portal-columns">
-            
+        <div id="portal-columns" class="row">            
+            <div class="contentAlignment">   
+                
+            <div id="viewlet-above-columns" class="row" tal:content="structure provider:intranett.abovecolumns" />                
+                             
             <tal:comment replace="nothing"> Start of main content block </tal:comment>            
-            <div class="cell width-10 position-4" id="portal-column-content">
+            <div class="cell width-10 position-4"
+                 id="portal-column-content"
+                 tal:attributes="class string:cell $content_width $conten_pos">
 
                 <div id="viewlet-above-content" tal:content="structure provider:plone.abovecontent" />
                 
@@ -192,14 +201,14 @@
                 </aside>
                 <tal:comment replace="nothing"> End of the right column </tal:comment>
             </tal:notajax>
-            
+            </div>
         </div>
         
         <tal:comment replace="nothing"> end column wrapper </tal:comment>        
                         
-        <metal:block i18n:domain="plone" tal:condition="not:ajax_load">
-            <footer><div tal:replace="structure provider:plone.portalfooter" /></footer>
-        </metal:block>                        
+        <footer i18n:domain="plone" tal:condition="not:ajax_load">
+            <div class="contentAlignment"><div tal:replace="structure provider:plone.portalfooter" /></div>
+        </footer>                        
 
         <div id="kss-spinner" tal:condition="not:ajax_load"><img tal:attributes="src string:${portal_url}/spinner.png" alt="" /></div>
 </body>

@@ -43,6 +43,23 @@
       class="plone.app.layout.viewlets.content.DocumentBylineViewlet"
       permission="zope2.View"
       layer=".interfaces.IThemeSpecific"
+      />  
+      
+  <!-- The breadcrumbs -->
+  <browser:viewlet
+      name="plone.path_bar"
+      manager=".interfaces.IAboveColumns"
+      class="plone.app.layout.viewlets.common.PathBarViewlet"
+      permission="zope2.View"
+      layer=".interfaces.IThemeSpecific"
       />      
+    
+  <browser:viewletManager
+      name="intranett.abovecolumns"
+      provides=".interfaces.IAboveColumns"
+      permission="zope2.View"
+      class="plone.app.viewletmanager.manager.OrderedViewletManager"
+      layer=".interfaces.IThemeSpecific"
+      />          
 
 </configure>
