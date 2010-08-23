@@ -13,7 +13,7 @@ body {
 
 /* @group Typography */
 
-/* Le Corbusier method (http://lamb.cc/typograph/) with 100% as the base font size*/
+/* Le Corbusier's Modulor (http://en.wikipedia.org/wiki/Modulor) method with 100% as the base font size (http://lamb.cc/typograph/) */
 
 /**
 	Base numbers of the row:
@@ -206,9 +206,11 @@ body > header nav li a {
     border-bottom: none;	
 	text-transform: uppercase;
     font-size: 1em;
+	border-bottom:1px solid #CCCCCC;    
 }
 body > header nav li.selected a {
 	background: #fff;
+	border-bottom:1px solid #fff;	
 }
 
 /* @end */
