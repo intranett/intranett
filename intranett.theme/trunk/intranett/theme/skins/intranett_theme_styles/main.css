@@ -227,7 +227,7 @@ body > header nav li.selected a {
 	height:21px;
 	margin:0 auto;
 	overflow:hidden;
-	padding:5px 0;
+	padding:0.62em 0 0;
 	width:960px;
 }
 .breadCrumb ul {
@@ -237,7 +237,7 @@ body > header nav li.selected a {
 	padding:0;
 }
 .breadCrumb ul li {
-	background:url("/chevron.gif") 100% 0 no-repeat;
+	background:url("chevron.gif") 100% 0 no-repeat;
 	display:block;
 	float:left;
 	font-size:0.9167em;
@@ -284,7 +284,7 @@ body > header nav li.selected a {
 	padding-right:0;
 }
 .chevronOverlay {
-	background:url("/chevron_overlay.png") 100% 0 no-repeat;
+	background:url("chevron_overlay.png") 100% 0 no-repeat;
 	display:none;
 	height:20px;
 	width:13px;
