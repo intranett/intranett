@@ -208,6 +208,9 @@ body > header nav li a {
     font-size: 1em;
 	border-bottom:1px solid #CCCCCC;    
 }
+body > header nav li a:hover {
+	background-color: #ddd;
+}
 body > header nav li.selected a {
 	background: #fff;
 	border-bottom:1px solid #fff;	
