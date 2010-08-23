@@ -11,6 +11,9 @@
  <object name="intranett_theme_styles"
     meta_type="Filesystem Directory View"
     directory="intranett.theme:skins/intranett_theme_styles"/>
+ <object name="intranett_theme_javascripts"
+    meta_type="Filesystem Directory View"
+    directory="intranett.theme:skins/intranett_theme_javascripts"/>    
 
  <skin-path name="Intranett.no base theme" based-on="Plone Default">
   <layer name="intranett_theme_custom_images"
@@ -19,6 +22,8 @@
      insert-after="intranett_theme_custom_images"/>
   <layer name="intranett_theme_styles"
      insert-after="intranett_theme_custom_templates"/>
+  <layer name="intranett_theme_javascripts"
+     insert-after="intranett_theme_styles"/>     
  </skin-path>
 
 </object>

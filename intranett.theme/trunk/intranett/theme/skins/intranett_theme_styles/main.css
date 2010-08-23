@@ -1,0 +1,723 @@
+/* @group Basic */
+
+html {
+	background: #EEEEEE;
+}
+
+body {
+    font-family: Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif;
+    color: #5e5e5e;
+	height:100%;          
+}
+-webkit-gradient(linear, 0% 0%, 0% 100%, from(#00ABEB), color-stop(0.5, white), color-stop(0.5, #6C0), to(white));
+
+/* @group Typography */
+
+/* Le Corbusier's Modulor (http://en.wikipedia.org/wiki/Modulor) method with 100% as the base font size (http://lamb.cc/typograph/) */
+
+/**
+	Base numbers of the row:
+	 .4762
+	 .619
+	 .7619
+	1
+	1.2381
+	1.619
+	2
+	2.619
+	3.2381
+	4.2381
+	
+	base line-height for normal text: 1.25em;
+	base top/bottom nmargins for normal text: 1.25em;
+**/
+
+
+body { font-size:100%; line-height:1.25; }
+h1, h2, h3 { margin-top:0; margin-bottom:0; }
+h1 { font-size:2.62em; margin:1.3em 0; }
+h2 { font-size:1.62em; margin:1.3em 0; }
+h3 { font-size:1.24em; margin:1.4em 0; }
+
+/* @end */
+
+h1, h2, h3, h4 {
+    font-family: Baskerville, Times, "Times New Roman", serif;
+    color: #000;
+}
+h1, h2, h3, h4 {
+    font-weight: normal;
+}
+section aside,
+section figure {
+	float: right;
+	width: 15.57em;
+	background: #d5d5d5;
+	padding: 0.62em;
+	margin: 0 0 1.25em 1.25em;
+	color: #676767;
+	
+	border-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-right-radius: 5px;	
+}
+p {
+	margin: 1.25em 0;
+}
+a {
+	color: #2dadda;
+	text-decoration: none;
+}
+a:visited {
+
+}
+a:hover {
+	color: #1b7797;
+}
+small,
+.discreet {
+	font-size: 0.76em;
+}
+.contentAlignment {
+	width: 960px;
+	margin: 0 auto;
+}
+
+/* @end */
+
+/* @group Header */
+
+body > header {
+	border-bottom: 1px solid #eee;
+    background-image: -moz-linear-gradient(top, #f7f7f7, rgba(238, 238, 238, 0.9), #e6e6e6); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
+              /*filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6');*/ /* IE6,IE7 */
+          /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')";*/ /* IE8 */ 		
+}
+
+/* @group Personal tools */
+
+#portal-personaltools {
+	float: right;
+	background: #e3e3e3;
+	position: relative;
+	z-index: 3; /* personaltools should be above #portal-header (with z-index: 2) */
+	top: 0;
+	right: 0;
+	padding: 0.62em;
+	font-size: 0.762em;
+	border-bottom-right-radius: 0.62em;
+	border-bottom-left-radius: 0.62em;
+	-webkit-border-bottom-right-radius: 0.62em;
+	-webkit-border-bottom-left-radius: 0.62em;
+	-moz-border-radius-bottomleft: 0.62em;
+	-moz-border-radius-bottomright: 0.62em;
+}
+#portal-personaltools li,
+#portal-personaltools dt {
+	list-style: none;
+	display: inline;
+}
+#portal-personaltools dd {
+	float: left;
+}
+#portal-personaltools dt a,
+#portal-personaltools li a {
+	float: left;
+	margin: 0 0.762em;
+}
+#portal-personaltools ul {
+	white-space: nowrap;
+}
+
+
+/* @end */
+
+
+/* @group Logo */
+
+body > header h1 {
+	width: 300px;
+	float: left;
+	font-weight: bold;
+	line-height: 1em;
+	letter-spacing:0;
+	margin:0.62em 0;
+	position:relative;
+	color: #3c3c3c;
+}
+a#portal-logo {
+	color: #000;
+	display: block;
+}
+
+/* @end */
+
+/* @group Search box */
+
+#search-box {
+	float: right;
+}
+#searchGadget {
+	width: 20em;
+}
+.searchSection {
+	font-size: .76em;
+	text-align: left;
+}
+
+/* @end */
+
+/* @group Global navigation */
+
+body > header nav {
+	clear: left;
+	width: 100%;
+	position: relative;
+	z-index:1;
+	bottom: -2px;
+}
+body > header nav ul {
+	margin: 1.69em 0 0;
+	padding: 0;
+	display: table;
+	list-style: none;
+	background-color: #D5D5D5;
+	width: 100%;
+}
+body > header nav li {
+	display: table-cell;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+body > header nav li a {
+	display: block;
+    margin: 0;
+	padding: .62em 1.25em;    
+    color: #333 !important;
+    text-decoration: none;
+    border-bottom: none;	
+	text-transform: uppercase;
+    font-size: 1em;
+	border-bottom:1px solid #CCCCCC;    
+}
+body > header nav li.selected a {
+	background: #fff;
+	border-bottom:1px solid #fff;	
+}
+
+/* @end */
+
+
+
+/* @end */
+
+/* @group Breadcrumbs */
+
+.breadCrumb {
+	display:block;
+	float:left;
+	height:21px;
+	margin:0 auto;
+	overflow:hidden;
+	padding:5px 0;
+	width:960px;
+}
+.breadCrumb ul {
+	display:block;
+	height:21px;
+	margin:0;
+	padding:0;
+}
+.breadCrumb ul li {
+	background:url("/chevron.gif") 100% 0 no-repeat;
+	display:block;
+	float:left;
+	font-size:0.9167em;
+	height:21px;
+	line-height:21px;
+	margin:0 6px 0 0;
+	overflow:hidden;
+	padding:0 10px 0 0;
+	position:relative;
+}
+.breadCrumb ul li div.chevronOverlay {
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:2;
+}
+.breadCrumb ul li span {
+	display:block;
+	overflow:hidden;
+}
+.breadCrumb ul li a {
+	display:block;
+	float:left;
+	height:21px;
+	line-height:21px;
+	overflow:hidden;
+	position:relative;
+}
+.breadCrumb ul li.first a {
+	background:url("icon_home.gif") 0 0 no-repeat;
+	height:16px !important;
+	margin-top:2px;
+	overflow:hidden;
+	padding:0;
+	text-indent:-1000em;
+	width:16px;
+}
+.breadCrumb ul li.first a:hover {
+	background-position:0 -16px;
+}
+.breadCrumb ul li.last {
+	background:none;
+	margin-right:0;
+	padding-right:0;
+}
+.chevronOverlay {
+	background:url("/chevron_overlay.png") 100% 0 no-repeat;
+	display:none;
+	height:20px;
+	width:13px;
+}
+
+/* @end */
+
+/* @group Columns */
+
+#portal-columns {
+    background: #fff;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #E6E6E6;    
+}
+#portal-column-content {
+	clear: both;
+}
+#portal-column-content,
+#portal-column-one,
+#portal-column-two {
+	padding: 3.3em 0;
+}
+#portal-columns > aside {
+	border-radius: none;
+	background: transparent;
+}
+.managePortletsFallback {
+	margin: 1.25em 0;
+	display: inline-block;
+}
+
+/* @group Content */
+
+#content-core {
+	margin-bottom: 1.25em;
+}
+.documentFirstHeading {
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+}
+.documentDescription {
+	margin: .76em 0 1.4em;
+	padding: 0;
+    /*line-height: 1.25em;*/	
+    font-size: 1.24em;
+}
+#portal-columns article footer small {
+	display: block;
+}
+
+/* @group Document Actions */
+
+#document-actions {
+	margin-top: 1em;	
+	margin: 1em 0;
+	padding: 0;	
+	float: left;
+}
+
+#document-actions li {
+	display: inline;
+	list-style: none;
+	font-size: 0.63em;	
+}
+#document-actions li a {	
+	background: rgba(21, 49, 65, .5);
+	border:medium none;
+	float:left;
+	margin:0 1em 0 0;
+	padding:0.63em;
+	text-transform: uppercase;
+	
+	border-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-right-radius: 5px;	
+}
+
+/* @end */
+
+/* @group contentViews */
+
+.contentViews {
+    background-color: transparent;
+    line-height: normal;
+    margin: 0;
+    list-style: none;
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-contentViewBorderColor;;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+}
+.contentViews li {
+    display: inline;
+    padding-top: 0.5em;
+}
+.contentViews li a {
+    background-color: transparent;
+    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-contentViewBorderColor;;
+    border-style: &dtml-borderStyle;;
+    color: &dtml-contentViewFontColor;;
+    height: auto;
+    margin-right: 0.5em;
+    padding: 0em 1em;
+    line-height: normal;
+    text-decoration: none;
+    text-transform: &dtml-textTransform;;
+    z-index: 1;
+}
+.contentViews .selected a {
+    background-color: &dtml-contentViewBackgroundColor;;
+    border-bottom: &dtml-contentViewBackgroundColor; &dtml-borderWidth; &dtml-borderStyle;;
+    color: &dtml-contentViewFontColor;;
+}
+.contentViews li a:hover {
+    background-color: &dtml-contentViewBackgroundColor;;
+    color: &dtml-contentViewFontColor;;
+}
+.configlet .contentViews {
+    font-size: 90%;
+}
+
+/* @end */
+
+/* @group contentActions */
+
+.contentActions {
+    background-color: &dtml-contentViewBackgroundColor;;
+    border-left: &dtml-borderWidth; &dtml-borderStyle; &dtml-contentViewBorderColor;;
+    border-right: &dtml-borderWidth; &dtml-borderStyle; &dtml-contentViewBorderColor;;
+    color: &dtml-contentViewFontColor;;
+    text-align: right;
+    text-transform: &dtml-textTransform;;
+    padding: 0 0 0 1em;
+    z-index: 2;
+    position:relative;
+    height: 1.6em;
+}
+.contentActions ul,
+.contentActions li {
+    margin: 0;
+    list-style: none;
+    list-style-image: none;
+    color: &dtml-fontColor;;
+    text-align: left;
+    line-height: 1.6em;
+}
+.contentActions li {
+    float: right;
+    z-index: 4;
+    border-left: &dtml-borderWidth; &dtml-borderStyle; &dtml-contentViewBorderColor;;
+}
+.contentActions a {
+    text-decoration: none;
+    color: &dtml-contentViewFontColor;;
+    padding: 0 0.5em;
+    cursor: pointer;
+}
+.contentActions span.subMenuTitle {
+    padding: 0em 0.5em;
+    position: relative;
+    white-space: nowrap;
+    display: inline;
+}
+.contentActions a span.subMenuTitle {
+    padding: 0px;
+    display: inline;
+}
+
+/* @end */
+
+/* @group Action Menu */
+
+.actionMenu {
+    /*  The spec says we can't put this on an element with a float (although
+        Opera is the only one that cares) and we need it in order to catch
+        the position:absolute bubbling up */
+
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+.actionMenu .actionMenuHeader {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+.actionMenu.activated .actionMenuHeader {
+    position: relative;
+    z-index: 10;
+}
+.actionMenu .actionMenuHeader a {
+    display: block;
+}
+.arrowDownAlternative {
+    font-size: 0.85em;
+}
+.actionMenu .actionMenuContent {
+    display: none;
+    z-index: 5;
+    position: absolute;
+    top: 1.6em;
+    right: -1px;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+.actionMenu.activated .actionMenuContent {
+    display: block !important;
+}
+.actionMenu.activated .actionMenuContent {
+    /* this one will be ignored by IE, it is here to fix the cut-off error in
+       Firefox */
+    display: table !important;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.actionMenu.deactivated .actionMenuContent {
+    display: none !important;
+}
+.actionMenu .actionMenuContent ul {
+    display: block;
+    background: &dtml-contentViewBackgroundColor;;
+    border: &dtml-borderWidth; &dtml-contentViewBorderColor;;
+    border-style: none &dtml-borderStyle; &dtml-borderStyle; &dtml-borderStyle;;
+    margin: -2px 0 0 0;
+    padding: 0;
+}
+.actionMenu .actionMenuContent li {
+    float: none;
+    background-color: transparent;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+.actionMenu .actionMenuContent li a {
+    display: block;
+    white-space: nowrap;
+    margin: 0.2em 0;
+}
+.actionMenu .actionMenuContent .selected {
+    display: block;
+    white-space: nowrap;
+    padding: 0 0.5em;
+    margin: 0.2em 0;
+}
+.actionMenu .actionMenuContent li a:hover {
+    background-color: &dtml-contentViewBorderColor;;
+    color: White;
+}
+.actionMenu .actionMenuContent .actionSeparator a {
+    padding-top: 0.2em;
+    border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-contentViewBorderColor;;
+}
+.actionMenu .actionMenuContent .actionMenuSelected {
+    color: #000;
+    font-weight: bold;
+}
+#templateMenu li a {
+    padding-left: 16px;
+}
+
+/* @end */
+
+/* @group Configlets */
+
+ul.configlets {
+    margin: 1em 0;
+    list-style-image: none;
+    list-style: none;
+}
+ul.configlets li {
+    margin-bottom: 1em;
+}
+ul.configlets li a {
+    text-decoration: none;
+    border: none;
+}
+ul.configlets li a:visited {
+    color: &dtml-linkColor;;
+    background-color: transparent;
+}
+ul.configlets li a:active {
+    color: &dtml-linkColor;;
+    background-color: transparent;
+}
+ul.configlets li label {
+    font-weight: bold;
+}
+ul.configletDetails {
+    margin: 0em 1em 1em 4em;
+    list-style-image: none;
+    list-style: none;
+}
+ul.configletDetails li {
+    margin-bottom: 1em;
+    display: inline;
+}
+ul.configletDetails li a {
+	text-decoration: none;
+}
+ul.configletDetails li label {
+    font-weight: bold;
+}
+ul.configletDetails li.configletDescription {
+    display: block;
+    color: &dtml-discreetColor;;
+    font-size: &dtml-fontSmallSize;;
+    margin: 0;
+}
+
+/* @end */
+
+/* @group Figure */
+
+figure {
+	line-height: 1em;
+}
+figure a {
+	border: none;
+}
+figure a img {
+	border: none;
+}
+figure a:hover img {
+	opacity: .7;
+}
+figcaption {
+	font-size: 0.63em;
+	line-height: 1.2em;
+	margin-top: 0.6em;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group Portlets */
+
+.portlet {
+	margin-bottom: 1em;
+}
+.portlet .portletHeader {
+    text-transform: uppercase;	
+    line-height: 1em;
+}
+.portlet a {
+	border: none;
+}
+.portlet ul {
+	margin: 0;
+	padding: 0;
+}
+.portlet ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0;	
+}
+.portlet .portletItem {
+	padding-top: 0.63em;
+}
+.portlet .portletItem p {
+	text-indent: 0;
+	margin: 0.375em 0;
+}
+.portlet .portletItem > p:nth-child(1) {
+	margin-top: 0;
+}
+.portlet .portletItem a {
+	display: block;
+}
+.portlet .portletFooter {
+	font-size: 0.63em;
+	padding: 1em 0;
+	text-transform: uppercase;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group Footer */
+
+body > footer {
+	clear: both;
+	text-align: right;	
+	text-transform: uppercase;	
+	padding-bottom: 1.63em;
+	padding-top: 1.25em;	
+	border-top: 1px solid #F7F7F7;
+    background-image: -moz-linear-gradient(top, #f7f7f7, rgba(245, 245, 245, 0.9), #EEEEEE); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(245, 245, 245, 0.9)), to(#EEEEEE)); /* Saf4+, Chrome */
+              /*filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6');*/ /* IE6,IE7 */
+          /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')";*/ /* IE8 */ 
+}
+body > footer small {
+	font-size: 0.62em;
+}
+body > footer strong {
+	font-weight: normal;
+}
+#portal-colophon li {
+	list-style: none;
+}
+
+
+/* @group Site actions */
+
+#portal-siteactions {
+	text-align: center;
+	list-style: none;
+	font-size: 0.762em;
+	margin-bottom: 1.25em;
+}
+#portal-siteactions li {
+    margin-right: 0.5em;
+	list-style: none;
+	display: inline;    
+}
+#portal-siteactions li a:hover {
+    color: #75ad0a
+}
+
+/* @end */
+
+/* @end */
+

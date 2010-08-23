@@ -3,7 +3,7 @@
      tal:define="breadcrumbs view/breadcrumbs;
                  is_rtl view/is_rtl">
     <div id="portal-breadcrumbs" class="breadCrumb module">
-        <div class="breadCrumbWrapper">
+        <!-- <div class="breadCrumbWrapper"> -->
             <ul>
                 <li id="breadcrumbs-home">
                     <a i18n:translate="tabs_home"
@@ -64,6 +64,6 @@
                           tal:content="title">crumb</span>
                  </tal:item>
             </span> -->
-        </div>
+        <!-- </div> -->
     </div>
 </div>

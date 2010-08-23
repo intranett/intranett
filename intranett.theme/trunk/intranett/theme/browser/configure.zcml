@@ -8,27 +8,6 @@
       type="zope.publisher.interfaces.browser.IBrowserSkinType"
       name="Intranett.no base theme"
       />
-
-  <!-- Resource directory for images -->
-  <browser:resourceDirectory
-      name="intranett.theme.images"
-      directory="images"
-      layer=".interfaces.IThemeSpecific"
-      />
-
-  <!-- Resource directory for stylesheets -->
-  <browser:resourceDirectory
-      name="intranett.theme.stylesheets"
-      directory="stylesheets"
-      layer=".interfaces.IThemeSpecific"
-      />
-
-  <!-- Resource directory for javascript -->
-  <browser:resourceDirectory
-      name="intranett.theme.javascripts"
-      directory="javascripts"
-      layer=".interfaces.IThemeSpecific"
-      /> 
       
   <!-- Registration of z3c.jbot aware directory-->
   <include package="z3c.jbot" file="meta.zcml" />

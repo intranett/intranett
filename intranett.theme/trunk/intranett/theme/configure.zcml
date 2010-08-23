@@ -11,6 +11,7 @@
   <cmf:registerDirectory name="intranett_theme_custom_images"/>
   <cmf:registerDirectory name="intranett_theme_custom_templates"/>
   <cmf:registerDirectory name="intranett_theme_styles"/>
+  <cmf:registerDirectory name="intranett_theme_javascripts"/>  
 
   <genericsetup:registerProfile
       name="default"
