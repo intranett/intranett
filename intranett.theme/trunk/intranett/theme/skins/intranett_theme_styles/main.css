@@ -209,7 +209,7 @@ body > header nav li a {
 	border-bottom:1px solid #CCCCCC;    
 }
 body > header nav li a:hover {
-	background-color: #ddd;
+	background-color: #eee;
 }
 body > header nav li.selected a {
 	background: #fff;
