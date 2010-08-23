@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts">
  <javascript id="++resource++intranett.theme.javascripts/html5.js"
-             conditionalcomment="lt IE 9" />
+             conditionalcomment="lt IE 9"
+             insert-after="jquery.js" />
  <javascript id="++resource++intranett.theme.javascripts/modernizr.js" />             
+ <javascript id="++resource++intranett.theme.javascripts/jquery.easing.js" />
+ <javascript id="++resource++intranett.theme.javascripts/jquery.jBreadCrumb.js" />  
 </object>
