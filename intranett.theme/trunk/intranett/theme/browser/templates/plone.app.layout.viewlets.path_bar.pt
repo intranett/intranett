@@ -1,5 +1,6 @@
 <div class="breadCrumbHolder module"
      i18n:domain="plone"
+     tal:condition="breadcrumbs"
      tal:define="breadcrumbs view/breadcrumbs;
                  is_rtl view/is_rtl">
     <div id="portal-breadcrumbs" class="breadCrumb module">
