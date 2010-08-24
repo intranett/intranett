@@ -22,7 +22,23 @@
       class="plone.app.layout.viewlets.content.DocumentBylineViewlet"
       permission="zope2.View"
       layer=".interfaces.IThemeSpecific"
-      />  
+      />       
+  
+  <browser:viewletManager
+      name="intranett.abovecolumns"
+      provides=".interfaces.IAboveColumns"
+      permission="zope2.View"
+      class="plone.app.viewletmanager.manager.OrderedViewletManager"
+      layer=".interfaces.IThemeSpecific"
+      />          
+      
+  <browser:viewletManager
+      name="intranett.topbar"
+      provides=".interfaces.ITopBar"
+      permission="zope2.View"
+      class="plone.app.viewletmanager.manager.OrderedViewletManager"
+      layer=".interfaces.IThemeSpecific"
+      /> 
       
   <!-- The breadcrumbs -->
   <browser:viewlet
@@ -31,14 +47,14 @@
       class="plone.app.layout.viewlets.common.PathBarViewlet"
       permission="zope2.View"
       layer=".interfaces.IThemeSpecific"
-      />      
-    
-  <browser:viewletManager
-      name="intranett.abovecolumns"
-      provides=".interfaces.IAboveColumns"
+      />  
+      
+  <!-- The personal bar -->
+  <browser:viewlet
+      name="plone.personal_bar"
+      manager=".interfaces.ITopBar"
+      class="plone.app.layout.viewlets.common.PersonalBarViewlet"
       permission="zope2.View"
-      class="plone.app.viewletmanager.manager.OrderedViewletManager"
-      layer=".interfaces.IThemeSpecific"
-      />          
+      />             
 
 </configure>

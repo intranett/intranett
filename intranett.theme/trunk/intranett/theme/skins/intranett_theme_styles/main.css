@@ -3,13 +3,16 @@
 html {
 	background: #EEEEEE;
 }
-
 body {
     font-family: Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif;
     color: #5e5e5e;
-	height:100%;          
+	height:100%;  
+	line-height: 1.25;
 }
--webkit-gradient(linear, 0% 0%, 0% 100%, from(#00ABEB), color-stop(0.5, white), color-stop(0.5, #6C0), to(white));
+body#content {
+	background: #fff;	
+	padding: 3px;
+}
 
 /* @group Typography */
 
@@ -84,8 +87,11 @@ small,
 .discreet {
 	font-size: 0.76em;
 }
+ul, ol {
+	list-style-position: inside;
+}
 .contentAlignment {
-	width: 960px;
+	width: 61.25em; /* to have roughly 980px wide site with 16px as the default font-size */
 	margin: 0 auto;
 }
 
@@ -103,34 +109,37 @@ body > header {
 
 /* @group Personal tools */
 
+#portal-personaltools-wrapper {
+	background: #eee;
+	text-align: right;
+	border-bottom: 1px solid #ddd;
+}
 #portal-personaltools {
-	float: right;
-	background: #e3e3e3;
-	position: relative;
-	z-index: 3; /* personaltools should be above #portal-header (with z-index: 2) */
-	top: 0;
-	right: 0;
-	padding: 0.62em;
 	font-size: 0.762em;
-	border-bottom-right-radius: 0.62em;
-	border-bottom-left-radius: 0.62em;
-	-webkit-border-bottom-right-radius: 0.62em;
-	-webkit-border-bottom-left-radius: 0.62em;
-	-moz-border-radius-bottomleft: 0.62em;
-	-moz-border-radius-bottomright: 0.62em;
 }
 #portal-personaltools li,
-#portal-personaltools dt {
+#portal-personaltools dt,
+#portal-personaltools dd,
+#portal-personaltools dd ul {
 	list-style: none;
 	display: inline;
 }
-#portal-personaltools dd {
-	float: left;
-}
 #portal-personaltools dt a,
 #portal-personaltools li a {
-	float: left;
+	/*float: left;*/
 	margin: 0 0.762em;
+	display: inline-block;
+	line-height: 2em;
+}
+#portal-personaltools dt a:link,
+#portal-personaltools li a:link,
+#portal-personaltools dt a:visited,
+#portal-personaltools li a:visited {
+	color: #5e5e5e;
+}
+#portal-personaltools dt a:hover,
+#portal-personaltools li a:hover {
+	color: #000;
 }
 #portal-personaltools ul {
 	white-space: nowrap;
@@ -153,8 +162,16 @@ body > header h1 {
 	color: #3c3c3c;
 }
 a#portal-logo {
-	color: #000;
 	display: block;
+	/*text-shadow: 0px 1px 1px #fff;*/
+	/*text-shadow:0px 2px 3px #555;*/
+	text-shadow:0px 2px 0px #fff;
+	color: #5E5E5E;
+	/*color:#000;
+	text-shadow:0 0 4px #ccc, 0 -5px 4px #ff3, 2px -10px 6px #fd3, -2px -15px 11px #f80, 2px -18px 18px #f20;*/
+}
+a#portal-logo:hover {
+	color:#333;
 }
 
 /* @end */
@@ -184,7 +201,8 @@ body > header nav {
 	bottom: -2px;
 }
 body > header nav ul {
-	margin: 1.69em 0 0;
+	/*margin: 1.69em 0 0;*/
+	margin: 0;
 	padding: 0;
 	display: table;
 	list-style: none;
@@ -207,13 +225,15 @@ body > header nav li a {
 	text-transform: uppercase;
     font-size: 1em;
 	border-bottom:1px solid #CCCCCC;    
+	text-shadow: 0 1px 0 #f7f7f7;
 }
 body > header nav li a:hover {
 	background-color: #eee;
 }
 body > header nav li.selected a {
 	background: #fff;
-	border-bottom:1px solid #fff;	
+	border-bottom:1px solid #fff;
+	text-shadow: none;	
 }
 
 /* @end */
@@ -224,6 +244,9 @@ body > header nav li.selected a {
 
 /* @group Breadcrumbs */
 
+#portal-breadcrumbs {
+	margin: -1.6em 0 1.6em;
+}
 .breadCrumb {
 	display:block;
 	float:left;
@@ -298,6 +321,7 @@ body > header nav li.selected a {
 /* @group Columns */
 
 #portal-columns {
+	padding: 3.3em 0;
     background: #fff;
     border-top: 1px solid #CCCCCC;
     border-bottom: 1px solid #E6E6E6;    
@@ -305,11 +329,11 @@ body > header nav li.selected a {
 #portal-column-content {
 	clear: both;
 }
-#portal-column-content,
+/*#portal-column-content,
 #portal-column-one,
 #portal-column-two {
 	padding: 3.3em 0;
-}
+}*/
 #portal-columns > aside {
 	border-radius: none;
 	background: transparent;
@@ -337,6 +361,12 @@ body > header nav li.selected a {
 }
 #portal-columns article footer small {
 	display: block;
+}
+.newsImageContainer a {
+	
+}
+.newsImageContainer p.discreet {
+	margin: 0;
 }
 
 /* @group Document Actions */
@@ -387,7 +417,7 @@ body > header nav li.selected a {
     margin: 0;
     list-style: none;
 	border-bottom: 1px solid #CCCCCC;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #E6E6E6;
 }
 .contentViews li {
     display: inline;
@@ -531,6 +561,9 @@ body > header nav li.selected a {
     padding: 0 0.5em;
     margin: 0.2em 0;
 }
+.actionMenu .actionMenuContent li a:hover {
+	background-color: #e6e6e6;
+}
 .actionMenu .actionMenuContent .actionSeparator a {
     padding-top: 0.2em;
 }
@@ -617,10 +650,87 @@ figcaption {
 
 /* @end */
 
+/* @group Editing screen */
+
+ul.formTabs {
+	font-size: 0.76em;	
+	width: 100%;
+	background-color: #f7f7f7;
+    line-height: normal;
+    margin: 0;
+    list-style: none;
+	border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #eee;
+    position: relative;
+    display: block;
+    margin: 0 0 1.25em 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+li.formTab {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+li.formTab a {
+    /* this isn't supported by all browsers, so we keep it in a separate rule */
+    display: inline-block;
+    background-color: transparent;
+    height: auto;
+    padding: 0 1em;
+    line-height: 2em;
+    text-decoration: none;
+    z-index: 1;    
+}
+li.formTab a.selected {
+	background-color: #fff;
+}
+.formPanel.hidden {
+    display: none;
+}
+div.formControls input.hidden {
+    display: none;
+}
+div.field {
+	margin: 1.25em 0;
+}
+div.field label,
+label.formQuestion {
+	font-size:1.24em;
+    font-family: Baskerville, Times, "Times New Roman", serif;
+    color: #000;
+}
+div.formHelp {
+	font-size: 0.76em;
+	margin-bottom: 1em;
+}
+input#title {
+	width: 99%;	
+	font-size:1.6em;
+	font-family: Baskerville, Times, "Times New Roman", serif;	
+	text-transform: uppercase;
+}
+textarea#description {
+    width: 99%;
+    font-family: Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif;
+    color: #5e5e5e;   
+    padding: 2px; 
+}
+.fieldRequired {
+	color: #f44;
+}
+
+/* @end */
+
 /* @end */
 
 /* @group Portlets */
 
+.managePortletsLink {
+	font-size: .76em;
+	text-align: center;
+}
 .portlet {
 	margin-bottom: 1em;
 }
@@ -700,9 +810,6 @@ body > footer strong {
     margin-right: 0.5em;
 	list-style: none;
 	display: inline;    
-}
-#portal-siteactions li a:hover {
-    color: #75ad0a
 }
 
 /* @end */

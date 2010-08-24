@@ -423,9 +423,10 @@ form.searchPage input.searchButton {
 /* @group Status message */
 
 dl.portalMessage {
-    font-size: &dtml-fontSmallSize;;
     background-color: #ffffe3; 
-    border: 1px solid #996;    
+    border: 1px solid #996; 
+    margin: 1.25em 0;
+    font-size: .76em;
 }
 dl.portalMessage a {
     color: black;
