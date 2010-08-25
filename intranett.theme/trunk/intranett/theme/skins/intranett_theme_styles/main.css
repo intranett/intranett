@@ -74,14 +74,17 @@ p {
 	margin: 1.25em 0;
 }
 a {
-	color: #2dadda;
+	color: #25A4D1;
 	text-decoration: none;
 }
-a:visited {
-
+article#content a:visited {
+	color: #C27AC0;
 }
 a:hover {
-	color: #1b7797;
+	color: #13556c;
+}
+a:active {
+	color: #e95222;
 }
 small,
 .discreet {
@@ -719,6 +722,12 @@ textarea#description {
 }
 .fieldRequired {
 	color: #f44;
+}
+input.text:focus {
+	background-color: #7FFF00; color: #000;
+}
+input[type=checkbox]:focus + label, input[type=radio]:focus + label {
+	background-color: #FF6; color: #000; 
 }
 
 /* @end */
