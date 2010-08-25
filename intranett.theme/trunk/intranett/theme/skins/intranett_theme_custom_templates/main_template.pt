@@ -75,7 +75,7 @@
                     sl python:plone_view.have_portlets('plone.leftcolumn', view);
                     sr python:plone_view.have_portlets('plone.rightcolumn', view);
                     conten_pos python:sl and 'position-4' or 'position-0';
-                    content_width python: sl and 'width-12' or 'width-16';
+                    content_width python: (sl and sr) and 'width-8' or (sl and not sr) and 'width-12' or (not sl and not sr) and 'width-16';
                     body_class python:plone_view.bodyClass(template, view);"
         tal:attributes="class body_class;
                         dir python: isRTL and 'rtl' or 'ltr'">
@@ -193,7 +193,7 @@
             
             <tal:notajax tal:condition="not:ajax_load">
                 <tal:comment replace="nothing"> Start of right column </tal:comment>
-                <aside id="portal-column-two" class="cell width-2 position-14"
+                <aside id="portal-column-two" class="cell width-4 position-12"
                        metal:define-slot="column_two_slot"
                        tal:condition="sr">        
                    <metal:portlets define-slot="portlets_two_slot">

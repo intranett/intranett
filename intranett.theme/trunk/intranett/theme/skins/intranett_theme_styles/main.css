@@ -78,7 +78,7 @@ a {
 	text-decoration: none;
 }
 article#content a:visited {
-	color: #C27AC0;
+	color: #b13eac;
 }
 a:hover {
 	color: #13556c;
@@ -87,11 +87,15 @@ a:active {
 	color: #e95222;
 }
 small,
-.discreet {
+.discreet,
+.tileItem .documentByLine {
 	font-size: 0.76em;
 }
 ul, ol {
 	list-style-position: inside;
+}
+#content-core dd {
+	margin-left: 1.25em;
 }
 .contentAlignment {
 	width: 61.25em; /* to have roughly 980px wide site with 16px as the default font-size */
@@ -371,6 +375,27 @@ body > header nav li.selected a {
 .newsImageContainer p.discreet {
 	margin: 0;
 }
+
+/* @group Listings */
+
+/* @group Folder Listing */
+
+/*body.template-folder_listing #content-core dt {
+	margin-top: 1.25em;
+}*/
+
+/* @end */
+
+
+
+/*.tileItem:nth-child(odd) {
+	background: #F7F7F7;
+}*/
+.tileItem .documentByLine {
+	margin-top: -2.5em;
+}
+
+/* @end */
 
 /* @group Document Actions */
 

@@ -599,15 +599,13 @@ table.plain th {
 
 .tileItem,
 .item {
-    border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    /*border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
     padding-top: 0.5em;
-    margin-top: 0.5em;
+    margin-top: 0.5em;*/
 }
 .tileHeadline,
 .headline {
     border: none;
-    font-size: 110%;
-    font-weight: bold;
 }
 .tileHeadline a,
 .headline a {
