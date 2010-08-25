@@ -32,7 +32,7 @@
     background-color: #ffc;
 }
 .discreet {
-    color: &dtml-discreetColor;;
+    color: #5e5e5e;
     font-size: &dtml-fontSmallSize;;
     font-weight: normal;
 }
