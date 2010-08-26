@@ -41,6 +41,7 @@ h1, h2, h3 { margin-top:0; margin-bottom:0; }
 h1 { font-size:2.62em; margin:1.3em 0; }
 h2 { font-size:1.62em; margin:1.3em 0; }
 h3 { font-size:1.24em; margin:1.4em 0; }
+h4 { font-size:1em; margin:1.24em 0; }
 
 /* @end */
 
@@ -222,9 +223,11 @@ body > header nav li {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	height: 2.4em;
 }
 body > header nav li a {
 	display: block;
+	height: 100%;
     margin: 0;
 	padding: .62em 1.25em;    
     color: #333 !important;
@@ -336,6 +339,8 @@ body > header nav li.selected a {
 }
 #portal-column-content {
 	clear: both;
+	position: relative;
+	overflow: hidden;
 }
 /*#portal-column-content,
 #portal-column-one,
@@ -772,6 +777,10 @@ input[type=checkbox]:focus + label, input[type=radio]:focus + label {
 .portlet .portletHeader {
     text-transform: uppercase;	
     line-height: 1em;
+    background: #f7f7f7;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #E6E6E6;    
+    padding: 0.63em;
 }
 .portlet a {
 	border: none;
@@ -819,10 +828,15 @@ input[type=checkbox]:focus + label, input[type=radio]:focus + label {
 a.delete {
 	font-size: 1.24em;
 }
+.portletAssignments form select {
+	display: block;
+	margin: 0.62em 0;
+}
 
 /* @group Navigation portlet */
 
-.portletNavigationTree {
+.portletNavigationTree,
+.portletHourslastweek {
 	line-height: 1.5em;
 }
 .navTreeCurrentNode {
