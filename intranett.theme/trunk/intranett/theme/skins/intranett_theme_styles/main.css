@@ -206,12 +206,13 @@ body > header nav {
 	position: relative;
 	z-index:1;
 	bottom: -2px;
+	display: table;
 }
 body > header nav ul {
 	/*margin: 1.69em 0 0;*/
 	margin: 0;
 	padding: 0;
-	display: table;
+	display: table-row;
 	list-style: none;
 	background-color: #D5D5D5;
 	width: 100%;
@@ -802,6 +803,22 @@ input[type=checkbox]:focus + label, input[type=radio]:focus + label {
 	padding: 1em 0;
 	text-transform: uppercase;
 }
+.portletAssignments .managedPortlet {
+	background: #F7F7F7;
+	border-top: 1px solid #E6E6E6;
+	border-bottom: 1px solid #CCCCCC;
+}
+.portletAssignments .portletHeader {
+	padding: 0.5em 0;	
+}
+.managedPortletActions {
+	font-size: 0.76em;
+	text-transform: none;
+	float: right;
+}
+a.delete {
+	font-size: 1.24em;
+}
 
 /* @group Navigation portlet */
 
@@ -818,6 +835,7 @@ ul.navTreeLevel1 {
 	font-size: 0.76em;
 	font-weight: normal;
 	padding-left: 1.25em;
+	margin-bottom: 0.62em;
 	background: #F7F7F7;
 	border-bottom: 1px solid #ccc;	
 	border-top: 1px solid #e6e6e6;		

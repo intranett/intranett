@@ -779,10 +779,6 @@ dl.captioned {
 #dashboard-portlets4 dl.portlet {
     margin-bottom:1.5em;
 }
-
-div.managedPortlet.portlet {
-    border-bottom:none;
-}
 #dashboard select {
     width:100%;
 }
