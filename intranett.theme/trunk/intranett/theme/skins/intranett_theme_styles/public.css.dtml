@@ -479,17 +479,23 @@ table.listing,
     /* The default table for document listings. Contains name, document types, modification times etc in a file-browser-like fashion */
     border-collapse: collapse;
     border-spacing: 0;    
+    border-left: 1px solid #E6E6E6;
+    border-bottom: 1px solid #E6E6E6;
     margin: 1em 0em 1em 0em;
 }
 table.listing th,
 .stx table th {
-    background: &dtml-globalBackgroundColor;;
-    border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    background-image: -moz-linear-gradient(top, #f7f7f7, rgba(238, 238, 238, 0.9), #e6e6e6); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */
+    border-top: 1px solid #E6E6E6;
     border-bottom: 1px solid #CCCCCC;
-    border-right: 3px solid #FFFFFF;
+    border-right: 1px solid #E6E6E6;
     font-weight: normal;
-    padding: 0.38em 0.48em;
-    text-transform: &dtml-textTransform;;
+    padding: 0.38em 0.62em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 #fff;
 }
 table.listing .top {
     border-left: &dtml-borderWidth; &dtml-borderStyle; &dtml-backgroundColor;;
@@ -503,7 +509,7 @@ table.listing .listingCheckbox {
 }
 table.listing td,
 .stx table td {
-    border-right: 3px solid #FFFFFF;
+    border-right: 1px solid #E6E6E6;
     padding: 0.38em 0.48em;
 }
 table.listing a {

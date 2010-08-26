@@ -3,6 +3,9 @@
 html {
 	background: #EEEEEE;
 }
+html.kupu-html {
+	font-size: 1em;
+}
 body {
     font-family: Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif;
     color: #444;
@@ -111,8 +114,8 @@ body > header {
 	border-bottom: 1px solid #eee;
     background-image: -moz-linear-gradient(top, #f7f7f7, rgba(238, 238, 238, 0.9), #e6e6e6); /* FF3.6 */
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
-              /*filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6');*/ /* IE6,IE7 */
-          /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')";*/ /* IE8 */
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */
 }
 
 /* @group Personal tools */
@@ -754,12 +757,12 @@ textarea#description {
 .fieldRequired {
 	color: #f44;
 }
-input.text:focus {
+/*input.text:focus {
 	background-color: #7FFF00; color: #000;
 }
 input[type=checkbox]:focus + label, input[type=radio]:focus + label {
 	background-color: #FF6; color: #000; 
-}
+}*/
 
 /* @end */
 
@@ -872,8 +875,8 @@ body > footer {
 	border-top: 1px solid #F7F7F7;
     background-image: -moz-linear-gradient(top, #f7f7f7, rgba(245, 245, 245, 0.9), #EEEEEE); /* FF3.6 */
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(245, 245, 245, 0.9)), to(#EEEEEE)); /* Saf4+, Chrome */
-              /*filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6');*/ /* IE6,IE7 */
-          /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#e6e6e6')";*/ /* IE8 */ 
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */ 
 }
 body > footer small {
 	font-size: 0.62em;
