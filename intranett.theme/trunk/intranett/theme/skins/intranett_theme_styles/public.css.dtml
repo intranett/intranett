@@ -610,6 +610,9 @@ table.plain th {
 .headline {
     border: none;
 }
+h3.tileHeadline {
+	margin-bottom: 0.62em;
+}
 .tileHeadline a,
 .headline a {
     text-decoration: none;

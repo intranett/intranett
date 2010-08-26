@@ -41,10 +41,10 @@ body#content {
 
 body { font-size:100%; line-height:1.25; }
 h1, h2, h3 { margin-top:0; margin-bottom:0; }
-h1 { font-size:2.62em; margin:1.3em 0; }
-h2 { font-size:1.62em; margin:1.3em 0; }
-h3 { font-size:1.24em; margin:1.4em 0; }
-h4 { font-size:1em; margin:1.24em 0; }
+h1 { font-size:2.62em; margin:1.3em 0 0.62em; }
+h2 { font-size:1.62em; margin:1.3em 0 0.62em; }
+h3 { font-size:1.24em; margin:1.4em 0 0.62em; }
+h4 { font-size:1em; margin:1.24em 0 0.62em; }
 
 /* @end */
 
@@ -400,9 +400,9 @@ body > header nav li.selected a {
 /*.tileItem:nth-child(odd) {
 	background: #F7F7F7;
 }*/
-.tileItem .documentByLine {
+/*.tileItem .documentByLine {
 	margin-top: -2.5em;
-}
+}*/
 
 /* @end */
 
@@ -815,11 +815,11 @@ input[type=checkbox]:focus + label, input[type=radio]:focus + label {
 	padding: 1em 0;
 	text-transform: uppercase;
 }
-.portletAssignments .managedPortlet {
+/*.portletAssignments .managedPortlet {
 	background: #F7F7F7;
 	border-top: 1px solid #E6E6E6;
 	border-bottom: 1px solid #CCCCCC;
-}
+}*/
 .portletAssignments .portletHeader {
 	padding: 0.5em 0;	
 }
