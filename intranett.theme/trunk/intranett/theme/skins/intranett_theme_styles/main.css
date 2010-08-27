@@ -858,20 +858,28 @@ a.delete {
 #portlet-prefs {
 	line-height: 1.5em;
 }
-.navTreeCurrentNode {
+li.navTreeCurrentNode.navTreeFolderish {
 	border-top: 1px solid #e6e6e6;
+	background: #fff;
 }
 .navTreeCurrentNode > a {
 	color: #13556c;
 }
-ul.navTreeLevel1 {
-	font-size: 0.76em;
-	font-weight: normal;
-	padding-left: 1.25em;
+.navTreeFolderish ul {
 	margin-bottom: 0.62em;
 	background: #F7F7F7;
 	border-bottom: 1px solid #ccc;	
 	border-top: 1px solid #e6e6e6;		
+}
+.navTreeFolderish ul li a {
+	padding-left: 1.25em;	
+}
+.navTreeLevel1 {
+	font-size: 0.76em;
+	font-weight: normal;	
+}
+.navTreeLevel1 ul {
+	padding-left: 1.25em;		
 }
 
 /* @end */
