@@ -7,7 +7,7 @@
   </head>
 <body>
 
-<div metal:fill-slot="main"
+<div metal:fill-slot="content-core"
      tal:define="etool nocall:here/extropy_tracking_tool;">
 
 <div tal:define="projectsbystate view/projects;
@@ -16,9 +16,31 @@
 
     <div tal:repeat="state projectsbystate">
 
-        <h3 tal:content="state/title">Title</h3>
+        <h2 tal:content="state/title">Title</h2>
 
-        <dl tal:repeat="phase state/projects">
+        <div class="tileItem visualIEFloatFix" tal:repeat="phase state/projects">
+            <h3 class="tileHeadline" tal:define="customer_title phase/customer_title|nothing">
+                <a class="summary" tal:attributes="href phase/url">
+                    <span tal:replace="phase/title" />
+                </a>
+                <span class="discreet">
+                    <tal:customer tal:condition="customer_title">
+                        /
+                        <span tal:replace="customer_title" />
+                    </tal:customer>
+                    [<span tal:replace="phase/project_manager" />]
+                </span>
+            </h3>
+            <div class="tileBody">
+                <span class="description">
+                    <span tal:condition="phase/status|nothing"><tal:status content="phase/status">[status]</tal:status><br /></span>
+                    <tal:block tal:condition="phase/hours|nothing"><a tal:content="phase/hours" tal:attributes="title python:'%s - %s' % (phase['start'], phase['end']); href python:'%s/worklog?%s' % (phase['url'], ztu.make_query(period='week', person='all', group_by='person', start=phase['start']))">hours</a>h, <span tal:content="phase/persons">persons</span></tal:block>
+                    <tal:block tal:condition="not:phase/hours|nothing">No hours spent last week</tal:block>
+                </span>
+            </div>
+        </div>
+        
+        <!-- <dl tal:repeat="phase state/projects">
             <dt tal:define="customer_title phase/customer_title|nothing">
                 <a tal:attributes="href phase/url">
                     <span tal:replace="phase/title" />
@@ -35,7 +57,7 @@
                 <tal:block tal:condition="not:phase/hours">No hours spent last week</tal:block>
             </dd>
 
-        </dl>
+        </dl> -->
 
     </div>
 
