@@ -359,8 +359,6 @@ body > header nav li.selected a {
 }
 #portal-column-content {
 	clear: both;
-	position: relative;
-	overflow: hidden;
 }
 /*#portal-column-content,
 #portal-column-one,
@@ -856,7 +854,8 @@ a.delete {
 /* @group Navigation portlet */
 
 .portletNavigationTree,
-.portletHourslastweek {
+.portletHourslastweek,
+#portlet-prefs {
 	line-height: 1.5em;
 }
 .navTreeCurrentNode {
