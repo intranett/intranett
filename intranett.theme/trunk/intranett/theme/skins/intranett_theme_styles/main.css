@@ -747,6 +747,11 @@ div.formControls input.hidden {
 div.field {
 	margin: 1.25em 0;
 }
+div.error {
+	padding: 0.62em;
+	border: 1px solid #ff4725;
+	background: #FFBF25;
+}
 div.field label,
 label.formQuestion {
 	font-size:1.24em;
@@ -756,6 +761,9 @@ label.formQuestion {
 div.formHelp {
 	font-size: 0.76em;
 	margin-bottom: 1em;
+}
+.fieldErrorBox {
+	color: #ff4725;
 }
 input#title {
 	width: 99%;	
@@ -813,7 +821,7 @@ input[type=checkbox]:focus + label, input[type=radio]:focus + label {
 	padding: 0;	
 }
 .portlet .portletItem {
-	padding-top: 0.63em;
+	padding: 0.63em;
 }
 .portlet .portletItem p {
 	text-indent: 0;
@@ -880,6 +888,9 @@ li.navTreeCurrentNode.navTreeFolderish {
 }
 .navTreeLevel1 ul {
 	padding-left: 1.25em;		
+}
+.portletNavigationTree dd.portletItem {
+	padding: 0;
 }
 
 /* @end */

@@ -456,7 +456,7 @@ dl.error {
     border-color: #d00;    
 }
 dl.error dt {
-    background-color: #d00; 
+    background-color: #ff4725; 
 }
 dl.warning {
     border-color: #d80;    
@@ -468,7 +468,7 @@ dl.error {
     border-color: #d80;    
 }
 dl.error dd {
-    background-color: #fd7; 
+    background-color: #ffbf25; 
 }
 
 /* @end */
