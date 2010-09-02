@@ -822,6 +822,7 @@ input[type=checkbox]:focus + label, input[type=radio]:focus + label {
 }
 .portlet .portletItem {
 	padding: 0.63em;
+	font-size: 0.76em;
 }
 .portlet .portletItem p {
 	text-indent: 0;
@@ -891,6 +892,7 @@ li.navTreeCurrentNode.navTreeFolderish {
 }
 .portletNavigationTree dd.portletItem {
 	padding: 0;
+	font-size: 1em;
 }
 
 /* @end */
