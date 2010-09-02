@@ -143,6 +143,7 @@ body > header {
 	border-bottom: 1px solid #ddd;
 }
 #portal-personaltools {
+	width: 97.9167%; /* not 100% in order to align right edge with the columns, positioned with the grid */
 	font-size: 0.762em;
 }
 #portal-personaltools li,
@@ -223,7 +224,7 @@ a#portal-logo:hover {
 
 body > header nav {
 	clear: left;
-	width: 100%;
+	width: 97.9167%; /* not 100% in order to align right edge with the columns, positioned with the grid */
 	position: relative;
 	z-index:1;
 	bottom: -2px;
