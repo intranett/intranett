@@ -382,7 +382,7 @@ body > header nav li.selected a {
 .documentFirstHeading {
 	margin: 0;
 	padding: 0;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 .documentDescription {
 	margin: .76em 0 1.4em;
