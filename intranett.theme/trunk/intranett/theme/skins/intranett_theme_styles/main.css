@@ -383,6 +383,7 @@ body > header nav li.selected a {
 .documentFirstHeading {
 	margin: 0;
 	padding: 0;
+	clear: right;
 	/*text-transform: uppercase;*/
 }
 .documentDescription {
