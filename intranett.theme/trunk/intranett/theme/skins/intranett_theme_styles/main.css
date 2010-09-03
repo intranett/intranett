@@ -806,7 +806,6 @@ input#title {
 	width: 99%;	
 	font-size:1.6em;
 	font-family: Baskerville, Times, "Times New Roman", serif;	
-	text-transform: uppercase;
 }
 textarea#description {
     width: 99%;
@@ -904,25 +903,39 @@ a.delete {
 #portlet-prefs {
 	line-height: 1.5em;
 }
+li.navTreeCurrentNode {
+	/*background: #fff;*/	
+}
 li.navTreeCurrentNode.navTreeFolderish {
-	border-top: 1px solid #e6e6e6;
-	background: #fff;
+	/*border-top: 1px solid #e6e6e6;*/
 }
 .navTreeCurrentNode > a {
 	color: #13556c;
 }
 .navTreeFolderish ul {
 	margin-bottom: 0.62em;
-	background: #F7F7F7;
-	border-bottom: 1px solid #ccc;	
-	border-top: 1px solid #e6e6e6;		
+	/*border-bottom: 1px solid #ccc;*/	
+	/*border-top: 1px solid #e6e6e6;*/
+	line-height: 1.2;
 }
 .navTreeFolderish ul li a {
-	padding-left: 1.25em;	
+	padding: 0.4em 0 0.4em 1.25em;	
 }
 .navTreeLevel1 {
+	background: #F7F7F7;	
 	font-size: 0.76em;
 	font-weight: normal;	
+	border-bottom: 1px solid #ccc;	
+	border-top: 1px solid #e6e6e6;	
+}
+.navTreeLevel2 {
+	background: #eee;
+}
+.navTreeLevel3 {
+	background: #e6e6e6;
+}
+.navTreeLevel4 {
+	background: #ddd;
 }
 .navTreeLevel1 ul {
 	padding-left: 1.25em;		
