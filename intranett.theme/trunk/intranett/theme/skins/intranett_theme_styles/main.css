@@ -215,7 +215,7 @@ a#portal-logo:hover {
 	padding: 0.38em 0.48em;	
 	margin: 0;	
 	border: none;
-	color: #5E5E5E;
+	color: #808080;
 }
 #searchbox-fields-wrapper {
     background:#ddd;
@@ -224,12 +224,13 @@ a#portal-logo:hover {
 .searchSection {
 	font-size: .762em;
 	text-align: left;
+	color: #808080;
 }
 button.searchButton {
 	border: none;
 	background: transparent;
 	padding: 0.38em 0.76em;
-	color: #333;
+	color: #666666;
 	text-decoration: none;
 	text-transform: uppercase;
 	line-height: 1;
@@ -237,6 +238,9 @@ button.searchButton {
 	cursor: pointer;	
 	margin: 0;
 	text-shadow: 0 1px 0 rgba(247,247,247,0.9);
+}
+button.searchButton:hover {
+	color: #000;
 }
 
 /* @end */
