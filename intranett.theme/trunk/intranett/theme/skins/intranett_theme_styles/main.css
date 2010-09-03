@@ -508,12 +508,13 @@ body > header nav li.selected a {
     line-height: 2em;
     text-decoration: none;
     z-index: 1;
+    color: #444444;
 }
 .contentViews li a:hover {
-	background-color: #e6e6e6;
+	background-color: #d5d5d5;
 }
 .contentViews .selected a {
-	background: #fff;
+	background: #fff !important;
 	font-weight: bold;
 }
 /*.configlet .contentViews {
@@ -577,13 +578,22 @@ body > header nav li.selected a {
     margin: 0;
     padding: 0;
     font-weight: normal;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;    
 }
 .actionMenu.activated .actionMenuHeader {
+ 	background: #d5d5d5;
     position: relative;
+    border-color: #d5d5d5;
     z-index: 10;
 }
 .actionMenu .actionMenuHeader a {
     display: block;
+    color: #444;
+	outline: none;    
+}
+.actionMenu.activated .actionMenuHeader a {
+	color: #333;
 }
 .arrowDownAlternative {
     font-size: 0.85em;
@@ -599,7 +609,7 @@ body > header nav li.selected a {
     padding: 0;
     margin: 0;
     background: #f7f7f7;
-	border: 1px solid #eee;
+	border: 1px solid #E6E6E6;
 }
 .actionMenu.activated .actionMenuContent {
     display: block !important;
@@ -632,6 +642,7 @@ body > header nav li.selected a {
     display: block;
     white-space: nowrap;
     margin: 0.2em 0;
+    color: #444;
 }
 .actionMenu .actionMenuContent .selected {
     display: block;
@@ -917,7 +928,7 @@ li.navTreeCurrentNode.navTreeFolderish {
 	padding-left: 1.25em;		
 }
 .portletNavigationTree dd.portletItem {
-	padding: 0;
+	padding: 0 0.63em;
 	font-size: 1em;
 }
 
