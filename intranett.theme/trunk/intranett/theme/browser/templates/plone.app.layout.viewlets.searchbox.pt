@@ -11,25 +11,22 @@
                i18n:translate="text_search">Search Site</label>
 
         <div class="LSBox">
-        <input name="SearchableText"
-               type="text"
-               size="18"
-               value=""
-               title="Search Site"
-               accesskey="4"
-               i18n:attributes="title title_search_site;"
-               tal:attributes="value request/form/SearchableText|nothing;
-                               id search_input_id"
-               class="searchField inputLabel" />
+            <div id="searchbox-fields-wrapper">
+                <input name="SearchableText"
+                       type="text"
+                       size="18"
+                       value=""
+                       title="Search Site"
+                       accesskey="4"
+                       i18n:attributes="title title_search_site;"
+                       tal:attributes="value request/form/SearchableText|nothing;
+                                       id search_input_id"
+                       class="searchField inputLabel" />
 
-        <!-- <input class="searchButton"
-               type="submit"
-               value="Search"
-               i18n:attributes="value label_search;" /> -->
-        <button class="searchButton"       
-                type="submit"
-                i18n:translate="label_search">Search</button>
-
+                <button class="searchButton"       
+                        type="submit"
+                        i18n:translate="label_search">Search</button>
+            </div>
         <div class="searchSection">
             <input id="searchbox_currentfolder_only"
                    class="noborder"
