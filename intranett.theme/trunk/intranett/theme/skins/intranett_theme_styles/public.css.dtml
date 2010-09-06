@@ -233,19 +233,19 @@ form.searchPage input.searchButton {
     color: &dtml-globalFontColor;;
 }
 .LSTable {
-    margin: 1em 0;
+    margin: 0;
 }
 .LSRow {
-    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-backgroundColor;;
+    border: 1px solid #f7f7f7;
     white-space: normal;
     padding:0;
     margin: 0;
     list-style-image: none;
     list-style-type: none;
+    font-family: Baskerville, Times, "Times New Roman", serif;    
 }
 .LSRow a {
     text-decoration: none;
-    font-weight:bold;
     white-space:nowrap
 }
 .LSDescr {
@@ -268,7 +268,7 @@ form.searchPage input.searchButton {
     text-align: right;
 }
 .livesearchContainer {
-    background-color: &dtml-backgroundColor;;
+    background-color: #f7f7f7;
     margin-top: 0;
     padding: 0 !important;
     position: absolute;
@@ -280,9 +280,10 @@ form.searchPage input.searchButton {
     visibility: visible;
     text-align: left;
     color: &dtml-globalFontColor;;
-    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    border: none;
     width: 30em;
     text-transform: none;
+    margin-top: -1.5em;
 }
 * html .livesearchContainer {
     padding: &dtml-borderWidth; !important;
@@ -292,21 +293,21 @@ form.searchPage input.searchButton {
 }
 #livesearchLegend {
     line-height: 1em;
-    margin-top: -2em;
-    margin-left: -0.1em;
-    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
-    border-bottom: 0;
+    margin-top: 0;
+    margin-left: 0;
+    width: 23em;
+    padding: 0.61em 0.61em 0;
+    border: none;
+    background: #f7f7f7;
 }
 * html #livesearchLegend {
-    margin-top: -1.9em;
-    margin-left: -8px;
     position: relative;
 }
 
 /* Workaround for Internet Explorer's broken z-index implementation */
 .LSIEFix {
-    background-color: &dtml-backgroundColor;;
-    padding: 0.5em !important;
+    background-color: #f7f7f7;
+    padding: 0.76em !important;
     z-index: 20;
 }
 .LSBox {

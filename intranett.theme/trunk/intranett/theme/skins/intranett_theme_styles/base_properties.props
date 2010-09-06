@@ -4,7 +4,7 @@ plone_skin:string=Intranett.no base theme
 
 logoName:string=logo.jpg
 
-fontFamily:string="Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif
+fontFamily:string=Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif
 fontBaseSize:string=69%
 fontColor:string=Black
 fontSmallSize:string=0.76em
@@ -23,7 +23,7 @@ globalBorderColor:string=#E6E6E6
 globalBackgroundColor:string=#F7F7F7
 globalFontColor:string=#436976
 
-headingFontFamily:string="Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif
+headingFontFamily:string=Baskerville, Times, "Times New Roman", serif
 
 contentViewBorderColor:string=#fff
 contentViewBackgroundColor:string=#F7F7F7
