@@ -611,15 +611,18 @@ table.plain th {
 .headline {
     border: none;
 }
-h3.tileHeadline {
-	margin-bottom: 0.62em;
+h3.tileHeadline,
+h2.tileHeadline {
+	margin-bottom: 0.38em;
 }
 .tileHeadline a,
 .headline a {
     text-decoration: none;
 }
-.tileBody {
+.tileBody,
+.tileFooter {
     margin-bottom: 0.5em;
+    margin-top: 0.62em;
 }
 .tileImage {
     float: right;
