@@ -910,7 +910,7 @@ li.navTreeCurrentNode {
 	/*background: #fff;*/	
 }
 li.navTreeCurrentNode.navTreeFolderish {
-	/*border-top: 1px solid #e6e6e6;*/
+	background: #fff;
 }
 .navTreeCurrentNode > a {
 	color: #13556c;
