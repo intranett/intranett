@@ -830,6 +830,8 @@ textarea#description {
 }
 .fieldRequired {
 	color: #f44;
+	font-size:0.76em;
+	vertical-align:top;	
 }
 /*input.text:focus {
 	background-color: #7FFF00; color: #000;
