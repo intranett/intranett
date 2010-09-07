@@ -242,7 +242,7 @@ form.searchPage input.searchButton {
     margin: 0;
     list-style-image: none;
     list-style-type: none;
-    font-family: Baskerville, Times, "Times New Roman", serif;    
+    font-family: Georgia, Baskerville, Times, "Times New Roman", serif;    
 }
 .LSRow a {
     text-decoration: none;

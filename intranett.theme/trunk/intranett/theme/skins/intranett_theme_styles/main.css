@@ -41,15 +41,15 @@ body#content {
 
 body { font-size:100%; line-height:1.25; }
 h1, h2, h3 { margin-top:0; margin-bottom:0; }
-h1 { font-size:2.62em; margin:1.3em 0 0.62em; }
-h2 { font-size:1.62em; margin:1.3em 0 0.62em; }
-h3 { font-size:1.24em; margin:1.4em 0 0.62em; }
-h4 { font-size:1em; margin:1.24em 0 0.62em; }
+h1 { font-size:2.62em; margin:2em 0 1.3em; }
+h2 { font-size:1.62em; margin:2em 0 1.3em; }
+h3 { font-size:1.24em; margin:2em 0 1.4em; }
+h4 { font-size:1em; margin:2em 0 1.4em; }
 
 /* @end */
 
 h1, h2, h3, h4 {
-    font-family: Baskerville, Times, "Times New Roman", serif;
+    font-family: Georgia, Baskerville, Times, "Times New Roman", serif;
     color: #000;
 }
 h1, h2, h3, h4 {
@@ -423,10 +423,11 @@ body > header nav li.selected a {
 	/*text-transform: uppercase;*/
 }
 .documentDescription {
-	margin: .76em 0 1.4em;
-	padding: 0;
+	margin: 0;
+	padding: .76em 0 1.4em;
     /*line-height: 1.25em;*/	
     font-size: 1.24em;
+    border-bottom: 1px solid #ccc;
 }
 #portal-columns article footer small {
 	display: block;

@@ -23,7 +23,7 @@ globalBorderColor:string=#E6E6E6
 globalBackgroundColor:string=#F7F7F7
 globalFontColor:string=#436976
 
-headingFontFamily:string=Baskerville, Times, "Times New Roman", serif
+headingFontFamily:string=Georgia, Baskerville, Times, "Times New Roman", serif
 
 contentViewBorderColor:string=#fff
 contentViewBackgroundColor:string=#F7F7F7
