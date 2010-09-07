@@ -223,7 +223,7 @@ a#portal-logo:hover {
 }
 #searchbox-fields-wrapper {
     background:#ddd;
-    border: 1px solid #d5d5d5;
+    border: 1px solid #ccc;
 }
 .searchSection {
 	font-size: .762em;
@@ -772,6 +772,9 @@ ul.formTabs {
     list-style-type: none;
     text-align: center;
 }
+#content-core ul.formTabs {
+	margin-top: -1px;
+}
 li.formTab {
     display: inline;
     margin: 0;
@@ -833,12 +836,40 @@ textarea#description {
 	font-size:0.76em;
 	vertical-align:top;	
 }
-/*input.text:focus {
-	background-color: #7FFF00; color: #000;
+.standalone,
+.documentEditable * .standalone,
+.context,
+.formControls .actionButtons .button,
+.documentEditable * .context,
+.destructive,
+.documentEditable * .destructive {
+    background:#DDDDDD;
+	border:1px solid #ccc;
+	color:#222;
+	cursor:pointer;
+	line-height:1;
+	margin:0;
+	padding:0.38em 0.76em;
+	position:relative;
+	text-decoration:none;
+	text-shadow:0 1px 0 rgba(247, 247, 247, 0.9);
+	text-transform:uppercase;
 }
-input[type=checkbox]:focus + label, input[type=radio]:focus + label {
-	background-color: #FF6; color: #000; 
-}*/
+.standalone,
+.documentEditable * .standalone {
+	background: #bbb;
+	border-color: #aaa;
+}
+.destructive,
+.documentEditable * .destructive {
+    background: #ff8500;
+	border-color: #dd7300;
+	text-shadow:0 1px 0 rgba(255, 206, 153, 0.9);	
+	color: #552c00;
+}
+.formControls {
+	margin-top: 1.24em;
+}
 
 /* @end */
 
