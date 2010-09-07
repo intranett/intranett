@@ -99,7 +99,7 @@ ul, ol {
 	list-style-position: inside;
 }
 #content dl dt {
-    font-family: Baskerville, Times, "Times New Roman", serif;
+    font-family: Georgia, Baskerville, Times, "Times New Roman", serif;
     color: #000;
     font-size: 1.24em;
     margin-top:0.76em;
@@ -113,14 +113,16 @@ ul, ol {
 }
 fieldset {
 	margin: 1.62em 0;
+	padding: 0 1.25em;
 }
 legend {
 	font-size:1.24em; 
 	margin: 0;
 	padding: 0;
-	width: 99%;
-    font-family: Baskerville, Times, "Times New Roman", serif;
-    color: #000;
+	width: 100%;
+    font-family: Georgia, Baskerville, Times, "Times New Roman", serif;
+    color: #777;
+    margin-left: -1em;
 }
 
 /* @end */
@@ -138,9 +140,9 @@ body > header {
 /* @group Personal tools */
 
 #portal-personaltools-wrapper {
-	background: #eee;
+	background: #555;
 	text-align: right;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #333;
 }
 #portal-personaltools {
 	width: 97.9167%; /* not 100% in order to align right edge with the columns, positioned with the grid */
@@ -167,11 +169,11 @@ body > header {
 #portal-personaltools li a:link,
 #portal-personaltools dt a:visited,
 #portal-personaltools li a:visited {
-	color: #5e5e5e;
+	color: #e6e6e6;
 }
 #portal-personaltools dt a:hover,
 #portal-personaltools li a:hover {
-	color: #000;
+	color: #fff;
 }
 #portal-personaltools ul {
 	white-space: nowrap;
@@ -805,7 +807,7 @@ div.error {
 div.field label,
 label.formQuestion {
 	font-size:1.24em;
-    font-family: Baskerville, Times, "Times New Roman", serif;
+    font-family: Georgia, Baskerville, Times, "Times New Roman", serif;
     color: #000;
 }
 div.formHelp {
@@ -818,7 +820,7 @@ div.formHelp {
 input#title {
 	width: 99%;	
 	font-size:1.6em;
-	font-family: Baskerville, Times, "Times New Roman", serif;	
+	font-family: Georgia, Baskerville, Times, "Times New Roman", serif;	
 }
 textarea#description {
     width: 99%;
