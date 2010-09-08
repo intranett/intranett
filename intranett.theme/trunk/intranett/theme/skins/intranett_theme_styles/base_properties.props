@@ -2,7 +2,7 @@ title:string=Intranett.no base theme's color, font, logo and border defaults
 
 plone_skin:string=Intranett.no base theme
 
-logoName:string=logo.jpg
+logoName:string=logo.png
 
 fontFamily:string=Helvetica, Trebuchet, "Trebuchet MS", Verdana, sans-serif
 fontBaseSize:string=69%

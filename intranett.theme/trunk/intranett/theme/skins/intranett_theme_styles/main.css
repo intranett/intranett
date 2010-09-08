@@ -186,7 +186,6 @@ body > header {
 /* @group Logo */
 
 body > header h1 {
-	width: 300px;
 	float: left;
 	font-weight: bold;
 	line-height: 1em;
@@ -202,6 +201,9 @@ a#portal-logo {
 }
 a#portal-logo:hover {
 	color:#333;
+}
+a#portal-logo img {
+	display: block;
 }
 
 /* @end */

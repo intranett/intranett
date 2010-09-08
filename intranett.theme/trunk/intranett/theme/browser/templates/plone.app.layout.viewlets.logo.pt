@@ -6,5 +6,5 @@
    accesskey="1"
    i18n:domain="plone"
    i18n:attributes="title"
-   tal:attributes="href view/navigation_root_url"   
-   tal:content="site_title">intranett.no</a></h1>
+   tal:attributes="href view/navigation_root_url"><img src="logo.jpg" alt=""
+        tal:replace="structure view/logo_tag" /></a></h1>
