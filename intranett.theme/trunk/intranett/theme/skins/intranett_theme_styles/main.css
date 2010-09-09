@@ -854,7 +854,7 @@ textarea#description {
 	padding:0.38em 0.76em;
 	position:relative;
 	text-decoration:none;
-	text-shadow:0 1px 0 rgba(247, 247, 247, 0.9);
+	text-shadow:0 1px 0 rgba(247, 247, 247, 0.7);
 	text-transform:uppercase;
 }
 .standalone,
@@ -866,7 +866,7 @@ textarea#description {
 .documentEditable * .destructive {
     background: #ff8500;
 	border-color: #dd7300;
-	text-shadow:0 1px 0 rgba(255, 206, 153, 0.9);	
+	text-shadow:0 1px 0 rgba(255, 206, 153, 0.7);	
 	color: #552c00;
 }
 .formControls {
@@ -888,11 +888,11 @@ textarea#description {
 }
 .portlet .portletHeader {
     text-transform: uppercase;	
-    line-height: 1em;
+    line-height: normal;
     background: #f7f7f7;
     border-bottom: 1px solid #CCCCCC;
     border-top: 1px solid #E6E6E6;    
-    padding: 0.63em;
+    padding: 0.48em 0.63em;
 }
 .portlet a {
 	border: none;
@@ -919,6 +919,8 @@ textarea#description {
 }
 .portlet .portletItem a {
 	display: block;
+	line-height: 1.25em;
+	padding: 0.35em 0 0.4em;
 }
 .portlet .portletFooter {
 	font-size: 0.63em;
@@ -957,7 +959,7 @@ li.navTreeCurrentNode {
 	/*background: #fff;*/	
 }
 li.navTreeCurrentNode.navTreeFolderish {
-	background: #fff;
+	/*background: #fff;*/
 }
 .navTreeCurrentNode > a {
 	color: #13556c;
@@ -979,20 +981,20 @@ li.navTreeCurrentNode.navTreeFolderish {
 	border-top: 1px solid #e6e6e6;	
 }
 .navTreeLevel2 {
-	background: #eee;
+	/*background: #eee;*/
 }
 .navTreeLevel3 {
-	background: #e6e6e6;
+	/*background: #e6e6e6;*/
 }
 .navTreeLevel4 {
-	background: #ddd;
+	/*background: #ddd;*/
 }
 .navTreeLevel1 ul {
 	padding-left: 1.25em;		
 }
 .portletNavigationTree dd.portletItem {
-	padding: 0 0.63em;
-	font-size: 1em;
+	padding:0.63em 0.63em 0;
+	/*font-size: 1em;*/
 }
 
 /* @end */

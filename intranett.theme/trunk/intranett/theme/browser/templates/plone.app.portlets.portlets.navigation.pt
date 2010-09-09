@@ -1,0 +1,25 @@
+<tal:block i18n:domain="plone">
+<dl class="portlet portletNavigationTree"
+    tal:define="root view/navigation_root">
+
+    <dt class="portletHeader" 
+        tal:condition="view/include_top"
+        tal:define="rootIsPortal view/root_is_portal;">
+       <span tal:omit-tag=""
+             tal:condition="rootIsPortal"
+             i18n:translate="tabs_home">Home</span>
+       <span tal:condition="not:rootIsPortal"
+             tal:replace="root/Title">Root item title</span>
+    </dt>
+
+    <dd class="portletItem lastItem">
+        <ul class="navTree navTreeLevel0">
+            <li tal:replace="structure view/createNavTree">
+                SUBTREE
+            </li>
+        </ul>
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+</dl>
+</tal:block>
