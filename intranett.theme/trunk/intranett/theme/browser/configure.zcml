@@ -54,7 +54,17 @@
       name="plone.personal_bar"
       manager=".interfaces.ITopBar"
       class="plone.app.layout.viewlets.common.PersonalBarViewlet"
+      layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
-      />             
+      /> 
+      
+  <!-- Content views (tabs) -->
+  <browser:viewlet
+      name="intranett.collapse.contentviews"
+      manager="plone.app.layout.viewlets.interfaces.IContentViews"
+      template="templates/collapsible_contentviews.pt"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+      />                  
 
 </configure>

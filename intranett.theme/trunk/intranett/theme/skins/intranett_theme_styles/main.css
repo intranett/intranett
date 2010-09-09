@@ -872,6 +872,26 @@ textarea#description {
 .formControls {
 	margin-top: 1.24em;
 }
+#settings-toggle a {
+	display: inline-block;
+	float: right;
+	padding: 5px 10px 6px;	
+	font-size: 0.76em;
+	text-decoration: none;
+	text-transform: uppercase;
+	line-height: 1;	
+	background: #DDDDDD;
+	border: 1px solid #ccc;
+	color:#222;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	text-shadow:0 1px 0 rgba(247, 247, 247, 0.7);
+	position: relative;
+	cursor: pointer;
+}
+#content-views, .contentActions {
+	display: none;
+}
 
 /* @end */
 

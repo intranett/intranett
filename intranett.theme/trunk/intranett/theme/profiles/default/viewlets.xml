@@ -12,6 +12,9 @@
     <order manager="plone.portalfooter" skinname="Intranett.no base theme" based-on="Plone Default">
       <viewlet name="plone.site_actions" insert-before="*" />
     </order>
+    <order manager="plone.contentviews" skinname="Intranett.no base theme" based-on="Plone Default">
+      <viewlet name="intranett.collapse.contentviews" insert-before="*" />
+    </order>    
     <order manager="intranett.abovecolumns" skinname="Intranett.no base theme">
       <viewlet name="plone.path_bar" />
     </order>    
