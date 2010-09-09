@@ -297,7 +297,7 @@ body > header nav li a {
 	text-transform: uppercase;
     font-size: 1em;
 	border-bottom:1px solid #CCCCCC;    
-	text-shadow: 0 1px 0 #f7f7f7;
+	text-shadow: 0 1px 0 #eee;
 }
 body > header nav li a:hover {
 	background-color: #eee;
@@ -317,7 +317,7 @@ body > header nav li.selected a {
 /* @group Breadcrumbs */
 
 #portal-breadcrumbs {
-	margin: -1.6em 0 1.6em;
+	margin: -2.6em 0 0;
 }
 .breadCrumb {
 	display:block;
@@ -325,7 +325,7 @@ body > header nav li.selected a {
 	height:21px;
 	margin:0 auto;
 	overflow:hidden;
-	padding:0.62em 0 0;
+	padding:1.24em 0;
 	width:960px;
 }
 .breadCrumb ul {
@@ -393,7 +393,7 @@ body > header nav li.selected a {
 /* @group Columns */
 
 #portal-columns {
-	padding: 3.3em 0;
+	padding: 2.6em 0;
     background: #fff;
     border-top: 1px solid #CCCCCC;
     border-bottom: 1px solid #E6E6E6;    
@@ -421,16 +421,16 @@ body > header nav li.selected a {
 	margin-bottom: 1.25em;
 }
 .documentFirstHeading {
-	margin: 0;
+	margin: 0 0 0.38em;
 	padding: 0;
 	clear: right;
 	/*text-transform: uppercase;*/
 }
 .documentDescription {
-	margin: 0;
-	padding: .76em 0 1.4em;
+	margin: .76em 0 0;
+	padding: 0 0 1.4em;
     /*line-height: 1.25em;*/	
-    font-size: 1.24em;
+    color: #000;
     border-bottom: 1px solid #ccc;
 }
 #portal-columns article footer small {
