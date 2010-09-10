@@ -483,7 +483,8 @@ table.listing,
     border-left: 1px solid #E6E6E6;
     border-bottom: 1px solid #E6E6E6;
     margin: 1.25em 0em;
-    font-size: 0.76em;    
+    font-size: 0.62em;    
+    width: 99%;
 }
 table.listing th,
 .stx table th {
@@ -512,7 +513,7 @@ table.listing .listingCheckbox {
 table.listing td,
 .stx table td {
     border-right: 1px solid #E6E6E6;
-    padding: 0.48em;
+    padding: 0.76em;
 }
 table.listing a {
     text-decoration: none;
