@@ -871,6 +871,7 @@ textarea#description {
 }
 .formControls {
 	margin-top: 1.24em;
+	margin-bottom: 1.25em;
 }
 #settings-toggle a {
 	display: inline-block;
@@ -890,6 +891,19 @@ textarea#description {
 	cursor: pointer;
 }
 #content-views, .contentActions {
+	display: none;
+}
+
+/* @end */
+
+/* @group Login form */
+
+body.template-login_form #content-core {
+	width: 50%;
+	margin: 0 auto;
+}
+body.template-login_form #portal-globalnav,
+body.template-login_form #portal-searchbox {
 	display: none;
 }
 

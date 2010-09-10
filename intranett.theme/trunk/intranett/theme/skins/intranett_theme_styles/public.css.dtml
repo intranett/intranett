@@ -576,7 +576,7 @@ table.plain th {
     text-transform: &dtml-textTransform;;
     vertical-align: top;
     margin: 1em 0em;
-    font-size: 0.76em;
+    font-size: 0;
     clear: both;
 }
 .listingBar span.previous,
