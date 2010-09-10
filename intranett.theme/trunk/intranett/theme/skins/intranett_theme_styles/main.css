@@ -108,7 +108,7 @@ ul, ol {
 	margin-left: 1.25em;
 }
 .contentAlignment {
-	width: 61.25em; /* to have roughly 980px wide site with 16px as the default font-size */
+	max-width: 61.25em; /* to have roughly 980px wide site with 16px as the default font-size */
 	margin: 0 auto;
 }
 fieldset {
@@ -1063,6 +1063,9 @@ body > footer small {
 }
 body > footer strong {
 	font-weight: normal;
+}
+#portal-colophon {
+	width: 97.9167%;  /* not 100% in order to align right edge with the columns, positioned with the grid */
 }
 #portal-colophon li {
 	list-style: none;
