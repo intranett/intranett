@@ -890,9 +890,9 @@ textarea#description {
 	position: relative;
 	cursor: pointer;
 }
-#content-views, .contentActions {
+/*#content-views, .contentActions {
 	display: none;
-}
+}*/
 
 /* @end */
 

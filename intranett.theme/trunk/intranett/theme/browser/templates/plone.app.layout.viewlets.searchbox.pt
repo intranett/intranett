@@ -27,7 +27,7 @@
                         type="submit"
                         i18n:translate="label_search">Search</button>
             </div>
-        <div class="searchSection">
+        <!-- <div class="searchSection">
             <input id="searchbox_currentfolder_only"
                    class="noborder"
                    type="checkbox"
@@ -39,7 +39,7 @@
                    style="cursor: pointer">
                 only in current section
             </label>
-        </div>
+        </div> -->
 
         <div class="LSResult" id="LSResult" style=""><div class="LSShadow" id="LSShadow"></div></div>
         </div>
