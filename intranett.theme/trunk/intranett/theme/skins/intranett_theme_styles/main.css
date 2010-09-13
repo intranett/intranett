@@ -96,7 +96,11 @@ small,
 	font-size: 0.76em;
 }
 ul, ol {
-	list-style-position: inside;
+	list-style-position: outside;
+	margin-left: 1em;
+}
+li {
+	margin: 0 0 0.76em;
 }
 #content dl dt {
     font-family: Georgia, Baskerville, Times, "Times New Roman", serif;
@@ -297,7 +301,7 @@ body > header nav li a {
 	text-transform: uppercase;
     font-size: 0.9em;
 	border-bottom:1px solid #CCCCCC;    
-	text-shadow: 0 1px 0 #eee;
+	text-shadow: 0 1px 0 #e6e6e6;
 }
 body > header nav li a:hover {
 	background-color: #eee;
