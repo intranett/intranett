@@ -483,7 +483,7 @@ table.listing,
     border-left: 1px solid #E6E6E6;
     border-bottom: 1px solid #E6E6E6;
     margin: 1.25em 0em;
-    font-size: 0.62em;    
+    font-size: 0.76em;    
     width: 99%;
 }
 table.listing th,
