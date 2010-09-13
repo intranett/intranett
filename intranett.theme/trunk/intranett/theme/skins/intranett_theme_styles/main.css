@@ -541,7 +541,8 @@ body > header nav li.selected a {
 	display: inline-block;
 	position:absolute;
 	right: 0;
-	z-index: 3;	
+	top: 0;
+	z-index: 4;	
 	/*float: right;*/
 	padding: 0.5em 10px;	
 	/*font-size: 0.76em;*/
@@ -558,6 +559,14 @@ body > header nav li.selected a {
 	text-shadow:0 1px 0 #e7e7e7;
 	cursor: pointer;
 	outline: none;
+}
+#settings-toggle a#close-edit-bar {
+	z-index: 3;
+}
+#settings-toggle a#close-edit-bar span {
+	position: absolute;
+	left: -10000px;
+	z-index: 0;
 }
 /*#settings-toggle a:hover {
 	color: #000;

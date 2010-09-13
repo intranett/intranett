@@ -1,3 +1,4 @@
 <div id="settings-toggle">
-    <a href="#" title="Edit" i18n:attributes="title" i18n:translate="">Edit</a>
+    <a href="#" id="open-edit-bar" title="Edit" i18n:attributes="title" i18n:translate="">Edit</a>
+    <a href="#" id="close-edit-bar" title="Close edit bar" i18n:attributes="title" i18n:translate="">&times;<span>Close Edit bar</span></a>    
 </div>
