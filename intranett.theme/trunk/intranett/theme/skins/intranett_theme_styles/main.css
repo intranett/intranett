@@ -539,7 +539,10 @@ body > header nav li.selected a {
 }
 #settings-toggle a {
 	display: inline-block;
-	float: right;
+	position:absolute;
+	right: 0;
+	z-index: 3;	
+	/*float: right;*/
 	padding: 0.5em 10px;	
 	/*font-size: 0.76em;*/
 	text-decoration: none;
@@ -553,8 +556,6 @@ body > header nav li.selected a {
 	border: 1px solid #ccc;
 	color:#444;
 	text-shadow:0 1px 0 #e7e7e7;
-	position: relative;
-	z-index: 1;
 	cursor: pointer;
 	outline: none;
 }
