@@ -14,7 +14,7 @@
             }, 500, 'linear', function() {
                 var working = 1;
                 var isHidden = $("#open-edit-bar").is(":hidden");
-                isHidden ? $("#open-edit-bar").delay(50).fadeIn(200) : $("#open-edit-bar").delay(50).fadeOut(200);
+                isHidden ? $("#open-edit-bar").delay(0).fadeIn(200) : $("#open-edit-bar").delay(0).fadeOut(200); // delay in order to have both elements animated (contentMenus & contentActions) before we transform the button
             });
             return false;
         })      
