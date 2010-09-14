@@ -1,7 +1,9 @@
 <div id="contentviews-wrapper"
      i18n:domain="plone"
-     tal:define="ploneview context/@@plone;"
-     tal:condition="ploneview/showEditableBorder">
+     tal:define="ploneview context/@@plone;
+                 editbar_opened python:request.get('editbar_opened', 0);"
+     tal:condition="ploneview/showEditableBorder"
+     tal:attributes="style python:editbar_opened and 'display:block' or 'display:none'">
 
     <tal:block define="view_actions view/prepareObjectTabs;">
 

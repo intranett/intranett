@@ -558,9 +558,9 @@ dl.collapsible dd.collapsibleContent {
 #contentviews-wrapper {
 	width: 100%;
 }
-#contentviews-wrapper, .contentActions {
+/*#contentviews-wrapper, .contentActions {
 	display: none;
-}
+}*/
 .contentViews li {
     display: inline;
 }
