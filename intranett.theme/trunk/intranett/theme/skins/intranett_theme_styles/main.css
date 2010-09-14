@@ -537,7 +537,18 @@ dl.collapsible dd.collapsibleContent {
     line-height: normal;
     margin: 0;
     list-style: none;
-    border: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;    
+    width: 100%;
+    
+    float: left;
+    margin-bottom: 1em;
+}
+#contentviews-wrapper .contentViews {
+	float: none;
+	margin-bottom: 0;
+	border-right: none;
 }
 #contentviews-wrapper {
 	width: 100%;
@@ -549,18 +560,26 @@ dl.collapsible dd.collapsibleContent {
     display: inline;
 }
 .contentViews li a {
-	/*float: left;*/
 	display: inline-block;
-    background-color: transparent;
+	position: relative;
     height: auto;
     padding: 0 1em;
     line-height: 2em;
-    text-decoration: none;
-    z-index: 1;
+    z-index: 3;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;    
+    margin-right: -1px;
+    text-decoration: none;    
+    background-color: transparent;    
     color: #444444;
+    
+    float: left;
+}
+#contentviews-wrapper .contentViews li a {
+	float: none;
 }
 .contentViews li a:hover {
-	background-color: #eee;
+	background-color: #e6e6e6;
 }
 .contentViews .selected a {
 	background: #fff !important;
@@ -923,7 +942,7 @@ textarea#description {
 .documentEditable * .context,
 .destructive,
 .documentEditable * .destructive {
-    background:#DDDDDD;
+    background:#eee;
 	border:1px solid #ccc;
 	color:#222;
 	cursor:pointer;
@@ -937,7 +956,7 @@ textarea#description {
 }
 .standalone,
 .documentEditable * .standalone {
-	background: #bbb;
+	background: #ccc;
 	border-color: #aaa;
 }
 .destructive,
@@ -967,6 +986,19 @@ body.template-login_form #content-core {
 body.template-login_form #portal-globalnav,
 body.template-login_form #portal-searchbox {
 	display: none;
+}
+
+/* @end */
+
+/* @group Dashboard */
+
+body.template-dashboard #content dt.portletHeader {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 0.76em;
+}
+body.template-dashboard #content dd.portletItem,
+body.template-dashboard #content dd.portletFooter {
+	margin-left: 0;
 }
 
 /* @end */
@@ -1030,7 +1062,7 @@ body.template-login_form #portal-searchbox {
 	border-bottom: 1px solid #CCCCCC;
 }*/
 .portletAssignments .portletHeader {
-	padding: 0.5em 0;	
+	/*padding: 0.5em 0;*/	
 }
 .managedPortletActions {
 	font-size: 0.76em;
