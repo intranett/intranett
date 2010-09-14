@@ -39,19 +39,7 @@ function hideAllMenus(speed) {
         })        
     } else {
         jQuery('dl.actionMenu').removeClass('activated').addClass('deactivated');
-    }        
-    // if(speed == 0) {
-    //     jQuery('dl.actionMenu').removeClass('activated').addClass('deactivated');
-    // } else {
-    //     var switch_menu = jQuery('dl.actionMenu.activated').length > 0;    
-    //     if (switch_menu) {
-    //         jQuery('dl.actionMenu.activated').find('dd.actionMenuContent').slideUp(speed, function(){
-    //             jQuery(this).parents('.actionMenu:first').toggleClass('activated').toggleClass('deactivated');
-    //         })        
-    //     } else {
-    //         jQuery('dl.actionMenu').removeClass('activated').addClass('deactivated');
-    //     }        
-    // }
+    }
 };
 
 function toggleMenuHandler(event) {
@@ -76,20 +64,19 @@ function actionMenuDocumentMouseDown(event) {
     hideAllMenus('fast');
 };
 
-function actionMenuMouseOver(event) {
-    var menu_id = jQuery(event.target).parents('.actionMenu:first').attr('id');
-    if (!menu_id) return true;
-        
+function actionMenuMouseOver(event) {        
     var switch_menu = jQuery('dl.actionMenu.activated').length > 0;
-    // jQuery('dl.actionMenu').removeClass('activated').addClass('deactivated');
     if (switch_menu) {
         hideAllMenus(0);        
-        // jQuery('#' + menu_id).removeClass('deactivated').addClass('activated');
-        console.log(menu_id);
-        jQuery('#' + menu_id).find('dd.actionMenuContent')[0].slideDown('fast', function(){
-            jQuery(event.target).removeClass('deactivated').addClass('activated');        
-        });        
+        var menu = jQuery(event.target).parents('.actionMenu:first')[0];
+        var actionContent = jQuery(menu).find('dd.actionMenuContent')[0];
+        jQuery(actionContent).slideDown(0, function(){
+            jQuery(this).parents('.actionMenu:first')
+                .removeClass('deactivated')
+                .addClass('activated');        
+        });    
     }
+    return false;        
 };
 
 function initializeMenus() {
@@ -98,11 +85,9 @@ function initializeMenus() {
     hideAllMenus(0);
 
     // add toggle function to header links
-    // jQuery('dl.actionMenu dt.actionMenuHeader a')
-    //     .click(toggleMenuHandler)
-    //     .mouseover(actionMenuMouseOver);
-    jQuery('dl.actionMenu dt.actionMenuHeader a')
-        .click(toggleMenuHandler);    
+    jQuery('dl.actionMenu dt.actionMenuHeader, dl.actionMenu dt.actionMenuHeader a')
+        .click(toggleMenuHandler)
+        .mouseover(actionMenuMouseOver);
         
     // add hide function to all links in the dropdown, so the dropdown closes
     // when any link is clicked
