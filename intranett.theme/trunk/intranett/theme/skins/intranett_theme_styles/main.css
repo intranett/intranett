@@ -951,7 +951,10 @@ textarea#description {
 	margin-top: 1.24em;
 	margin-bottom: 1.25em;
 }
-
+form#periodform {
+	font-size: 0.76em;
+	margin-bottom: 2em;
+}
 
 /* @end */
 
