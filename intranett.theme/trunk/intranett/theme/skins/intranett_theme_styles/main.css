@@ -750,7 +750,7 @@ dl.collapsible dd.collapsibleContent {
 	border-bottom: 8px solid #ccc;
 	border-top: 0;
 }
-#background-overlay {
+#inner-tooltip-arrow {
 	border-bottom-color: #f7f7f7;
 	margin-top: -6px;
 }
