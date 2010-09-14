@@ -256,12 +256,13 @@ form.searchPage input.searchButton {
 }
 .LSResult {
     position: relative;
-    display: block;
+    display: none;
     text-align: right;
-    padding-top: 5px;
+    /*padding-top: 5px;*/
     margin: 0;
     left: 3px;
     z-index: 5;
+    font-size: 0.9em;
 }
 .LSShadow {
     position: relative;
@@ -269,21 +270,29 @@ form.searchPage input.searchButton {
 }
 .livesearchContainer {
     background-color: #f7f7f7;
-    margin-top: 0;
+    margin: 6px 0 0;
     padding: 0 !important;
     position: absolute;
     right: 0px;
+    
     /* Currently exposes a rendering bug in Mozilla */
-    top: 0;
+    
+    top: 12px;
     white-space: normal;
-    font-family:  <dtml-var fontFamily>;
     visibility: visible;
     text-align: left;
-    color: &dtml-globalFontColor;;
-    border: none;
     width: 30em;
     text-transform: none;
     margin-top: 0;
+    
+	border: 1px solid #ccc;
+	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;    
 }
 * html .livesearchContainer {
     padding: &dtml-borderWidth; !important;
@@ -292,13 +301,22 @@ form.searchPage input.searchButton {
     border: 0;
 }
 #livesearchLegend {
+	display: none;
     line-height: 1em;
     margin-top: 0;
-    margin-left: 0;
+    margin-left: 1px;
+    margin-right: 1px;    
     width: 23em;
     padding: 0.61em 0.61em 0;
     border: none;
     background: #f7f7f7;
+    
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;     
 }
 * html #livesearchLegend {
     position: relative;
@@ -309,6 +327,13 @@ form.searchPage input.searchButton {
     background-color: #f7f7f7;
     padding: 0.76em !important;
     z-index: 20;
+    
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;     
 }
 .LSBox {
     clear: left;

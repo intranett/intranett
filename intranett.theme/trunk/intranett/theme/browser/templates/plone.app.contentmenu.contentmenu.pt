@@ -39,7 +39,7 @@
               tal:condition="not:menuItem/extra/hideChildren | not:submenu | nothing">
             
             <span class="toolTipArrow">&nbsp;</span>
-            <span class="toolTipArrow" id="inner-tooltip-arrow">&nbsp;</span>            
+            <span class="toolTipArrow innerTooltipArrow">&nbsp;</span>            
             
             <ul>
                 <tal:block repeat="subMenuItem submenu">

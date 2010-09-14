@@ -735,7 +735,6 @@ dl.collapsible dd.collapsibleContent {
 	-webkit-border-top-right-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
 	-webkit-border-bottom-right-radius: 5px;
-	
 }
 .actionMenu.activated .actionMenuContent {
     display: block !important;
@@ -753,9 +752,17 @@ dl.collapsible dd.collapsibleContent {
 	border-bottom: 8px solid #ccc;
 	border-top: 0;
 }
-#inner-tooltip-arrow {
+#portal-searchbox .toolTipArrow {
+	border-width: 0 10px 12px;
+	margin-top: 0;
+	z-index: 1;
+}
+.innerTooltipArrow {
 	border-bottom-color: #f7f7f7;
 	margin-top: -6px;
+}
+#portal-searchbox .innerTooltipArrow {
+	margin-top: 2px !important;
 }
 .actionMenu.activated .actionMenuContent {
     /* this one will be ignored by IE, it is here to fix the cut-off error in
