@@ -102,6 +102,10 @@ ul, ol {
 li {
 	margin: 0 0 0.76em;
 }
+li ul,
+li ol {
+	margin-top: 0.76em;
+}
 #content dl dt {
     font-family: Georgia, Baskerville, Times, "Times New Roman", serif;
     color: #000;
@@ -113,6 +117,7 @@ li {
     font-family: Helvetica, Arial, sans-serif;
     margin: 0 0.5em 0 0;
     color: White;
+    clear: left;
 }
 #content dd {
 	margin-left: 1.25em;
@@ -973,6 +978,15 @@ textarea#description {
 form#periodform {
 	font-size: 0.76em;
 	margin-bottom: 2em;
+}
+div div.kupu-panels {
+	font-size: 0.76em;
+}
+.plonepopup {
+	background: #fff !important;
+}
+div.dialog-wrapper {
+	font-size: 0.76em;
 }
 
 /* @end */
