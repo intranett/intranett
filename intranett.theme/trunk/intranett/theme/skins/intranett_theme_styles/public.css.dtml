@@ -228,8 +228,7 @@ form.searchPage input.searchButton {
 }
 #LSHighlight,
 .LSHighlight {
-    background-color: &dtml-globalBackgroundColor;;
-    border: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+    background-color: #E6E6E6;
     color: &dtml-globalFontColor;;
 }
 .LSTable {
@@ -238,7 +237,7 @@ form.searchPage input.searchButton {
 .LSRow {
     border: 1px solid #f7f7f7;
     white-space: normal;
-    padding:0;
+    padding: 0.31em 0.46em;
     margin: 0;
     list-style-image: none;
     list-style-type: none;
@@ -246,7 +245,7 @@ form.searchPage input.searchButton {
 }
 .LSRow a {
     text-decoration: none;
-    white-space:nowrap
+    white-space:nowrap;
 }
 .LSDescr {
     color: &dtml-discreetColor;;
@@ -325,7 +324,7 @@ form.searchPage input.searchButton {
 /* Workaround for Internet Explorer's broken z-index implementation */
 .LSIEFix {
     background-color: #f7f7f7;
-    padding: 0.76em !important;
+    padding: 0.76em 0.46em !important;
     z-index: 20;
     
 	border-radius: 5px;
