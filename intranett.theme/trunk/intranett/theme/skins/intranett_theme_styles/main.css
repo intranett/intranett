@@ -687,31 +687,31 @@ dl.collapsible dd.collapsibleContent {
 
     position: relative;
     margin: 0;
-    padding: 0;
+    padding: 0;    
 }
 .actionMenu .actionMenuHeader {
     margin: 0;
     padding: 0;
     font-weight: normal;
     border-left: 1px solid #fff;
-    border-right: 1px solid #fff;    
+    border-right: 1px solid #fff;
 }
 .actionMenu.activated .actionMenuHeader {
- 	background: #d5d5d5;
+ 	/*background: #d5d5d5;*/
     position: relative;
-    border-color: #d5d5d5;
+    /*border-color: #d5d5d5;*/
     z-index: 10;
 }
 .actionMenu .actionMenuHeader a {
     display: block;
-    color: #444;
+    color: #777;
 	outline: none;    
 }
 .actionMenu.activated .actionMenuHeader a {
 	color: #333;
 }
 .arrowDownAlternative {
-    font-size: 0.85em;
+    font-size: 0.76em;
 }
 .actionMenu .actionMenuContent {
     display: none;
@@ -719,31 +719,55 @@ dl.collapsible dd.collapsibleContent {
     position: absolute;
     top: 1.6em;
     left: 0;
-    width: 100%;
+    width: auto;
     height: auto;
     padding: 0;
-    margin: 0;
+    margin: 6px 0 0;
     background: #f7f7f7;
-	border: 1px solid #E6E6E6;
+	border: 1px solid #ccc;
+	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	
 }
 .actionMenu.activated .actionMenuContent {
     display: block !important;
     
 }
+.toolTipArrow {
+	display: block;
+	position: absolute;
+	left: 1em;
+	margin-top: -8px;
+	width:0; 
+	height:0; 
+	border-left: 4px solid transparent; 
+	border-right: 4px solid transparent;
+	border-bottom: 8px solid #ccc;
+	border-top: 0;
+}
+#background-overlay {
+	border-bottom-color: #f7f7f7;
+	margin-top: -6px;
+}
 .actionMenu.activated .actionMenuContent {
     /* this one will be ignored by IE, it is here to fix the cut-off error in
        Firefox */
-    display: table !important;
+    /*display: table !important;*/
     border-collapse: collapse;
     border-spacing: 0;
 }
 .actionMenu.deactivated .actionMenuContent {
-    display: none !important;
+    display: none;
 }
 .actionMenu .actionMenuContent ul {
     display: block;
-    margin: -2px 0 0 0;
-    padding: 0;
+    margin: 0;
+    padding: 0.5em 0;
 }
 .actionMenu .actionMenuContent li {
     float: none;

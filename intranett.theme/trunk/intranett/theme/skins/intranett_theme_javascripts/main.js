@@ -17,6 +17,8 @@
                 isHidden ? $("#open-edit-bar").delay(0).fadeIn(200) : $("#open-edit-bar").delay(0).fadeOut(200); // delay in order to have both elements animated (contentMenus & contentActions) before we transform the button
             });
             return false;
-        })      
+        })  
+        
+        // $("a").tipTip();    
     }); 
 })(jQuery);
