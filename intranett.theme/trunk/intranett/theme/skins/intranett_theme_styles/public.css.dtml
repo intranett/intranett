@@ -499,6 +499,7 @@ table.listing th,
     padding: 0.38em 0.62em;
     text-transform: uppercase;
     text-shadow: 0 1px 0 #fff;
+    text-align: left;
 }
 table.listing .top {
     border-left: &dtml-borderWidth; &dtml-borderStyle; &dtml-backgroundColor;;
@@ -538,6 +539,9 @@ table.vertical {
 }
 table.vertical th {
     padding: 0.5em;
+    background-image: none;
+    background-color: #f7f7f7;
+    border-bottom-color: #E6E6E6;
 }
 table.vertical td {
     border-top: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
