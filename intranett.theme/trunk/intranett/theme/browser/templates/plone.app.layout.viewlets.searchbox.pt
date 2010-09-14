@@ -41,7 +41,7 @@
             </label>
         </div> -->
 
-        <div class="LSResult" id="LSResult" style=""><span class="toolTipArrow">&nbsp;</span>
+        <div class="LSResult" id="LSResult" style="display:none"><span class="toolTipArrow">&nbsp;</span>
         <span class="toolTipArrow innerTooltipArrow">&nbsp;</span><div class="LSShadow" id="LSShadow"></div></div>
         </div>
     </form>

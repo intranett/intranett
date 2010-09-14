@@ -255,7 +255,7 @@ form.searchPage input.searchButton {
 }
 .LSResult {
     position: relative;
-    display: none;
+    display: block;
     text-align: right;
     /*padding-top: 5px;*/
     margin: 0;
