@@ -536,7 +536,7 @@ dl.collapsible dd.collapsibleContent {
 	font-size: 0.76em;
 }
 .contentViews {
-	background-color: #ddd;
+	background-color: #f7f7f7;
     
     background-image: -moz-linear-gradient(top, #f7f7f7, rgba(238, 238, 238, 0.9), #e6e6e6); /* FF3.6 */
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
