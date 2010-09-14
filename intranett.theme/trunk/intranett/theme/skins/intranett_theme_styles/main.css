@@ -173,6 +173,9 @@ body > header {
 	list-style: none;
 	display: inline;
 }
+#portal-personaltools dd ul {
+	margin-left: 0;
+}
 #portal-personaltools dt a,
 #portal-personaltools li a {
 	/*float: left;*/

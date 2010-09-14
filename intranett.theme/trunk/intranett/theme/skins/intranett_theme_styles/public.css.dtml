@@ -261,7 +261,7 @@ form.searchPage input.searchButton {
     padding-top: 5px;
     margin: 0;
     left: 3px;
-    z-index: 3;
+    z-index: 5;
 }
 .LSShadow {
     position: relative;
@@ -283,7 +283,7 @@ form.searchPage input.searchButton {
     border: none;
     width: 30em;
     text-transform: none;
-    margin-top: -1.5em;
+    margin-top: 0;
 }
 * html .livesearchContainer {
     padding: &dtml-borderWidth; !important;
