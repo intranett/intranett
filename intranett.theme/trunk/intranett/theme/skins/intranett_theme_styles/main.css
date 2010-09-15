@@ -118,6 +118,8 @@ li ol {
     margin: 0 0.5em 0 0;
     color: White;
     clear: left;
+    font-weight: normal;
+    font-size: 1em;
 }
 #content dd {
 	margin-left: 1.25em;
