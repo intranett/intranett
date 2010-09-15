@@ -29,14 +29,7 @@ var livesearch = function (){
 
         function _hide() {
             // hides the result window
-            console.log("About to hide the results");
-            jQuery(".livesearchContainer").animate({
-                opacity:'toggle',
-                height:'toggle'
-            }, 1200, 'swing');            
-            console.log("results should be hidden by now");            
-            $$result.hide();
-            console.log("Everything is hiden now");                        
+            jQuery($$result).fadeOut('fast');
             $lastsearch = null;
         };
 
@@ -55,7 +48,7 @@ var livesearch = function (){
             jQuery(".livesearchContainer").animate({
                 opacity:'toggle',
                 height:'toggle'
-            }, 'slow', 'swing');         
+            }, 'fast', 'swing');         
         };
 
         function _search() {
