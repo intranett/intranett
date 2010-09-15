@@ -29,7 +29,18 @@ var livesearch = function (){
 
         function _hide() {
             // hides the result window
-            jQuery($$result).fadeOut('fast');
+            // jQuery($$result).find(".livesearchContainer").animate({
+            //     opacity:'toggle',
+            //     height:'toggle'
+            // }, 'fast', 'linear', function(){
+            //     jQuery($$result).find(".toolTipArrow").fadeOut('slow');                
+            // });
+            jQuery($$result).find(".livesearchContainer, .LSIEFix").slideUp('fast', function(){
+                jQuery($$result).find(".toolTipArrow").fadeOut(100, function(){
+                    $$result.hide();
+                    jQuery($$result).find(".toolTipArrow").show();                    
+                });
+            });
             $lastsearch = null;
         };
 
@@ -42,13 +53,18 @@ var livesearch = function (){
 
         function _show($data) {
             // shows the result
-            $shadow.html($data);
-            jQuery(".livesearchContainer").hide();
-            $$result.show();            
-            jQuery(".livesearchContainer").animate({
-                opacity:'toggle',
-                height:'toggle'
-            }, 'fast', 'swing');         
+            if((jQuery($$result).find(".livesearchContainer").length == 0) || jQuery($$result).find(".livesearchContainer").is(":hidden")) {
+                $shadow.html($data);                
+                jQuery($$result).find(".livesearchContainer").hide();                                            
+                $$result.show();
+                jQuery(".livesearchContainer").animate({
+                    opacity:'toggle',
+                    height:'toggle'
+                }, 'fast', 'swing');                
+            } else {
+                $$result.show();
+                $shadow.html($data);
+            }
         };
 
         function _search() {
@@ -135,7 +151,7 @@ var livesearch = function (){
         function _keyEscape() {
             // hide results window
             $shadow.find('li.LSHighlight').removeClass(_LSHighlight);
-            $$result.slideUp('slow');
+            $$result.hide();
         };
 
         function _handler($event) {
