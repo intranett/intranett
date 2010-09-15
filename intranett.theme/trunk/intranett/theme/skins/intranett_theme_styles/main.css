@@ -1031,14 +1031,13 @@ div.dialog-wrapper {
 
 body.template-login_form #content-core,
 body.template-logged_out #content-core {
-	width: 50%;
-	margin: 0 auto;
+	margin: 0 0 0 10em;
 }
 body.template-login_form div.field label,
 body.template-logged_out div.field label {
 	display: inline-block;
-	width: 10em;
-	margin-left: -11.3em;
+	width: 8em;
+	margin-left: -9em;
 	margin-right: 1em;
 	text-align: right;
 }
