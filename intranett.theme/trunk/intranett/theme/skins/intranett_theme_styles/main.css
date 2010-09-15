@@ -1027,14 +1027,31 @@ div.dialog-wrapper {
 
 /* @end */
 
-/* @group Login form */
+/* @group Login/Logout form */
 
-body.template-login_form #content-core {
+body.template-login_form #content-core,
+body.template-logged_out #content-core {
 	width: 50%;
 	margin: 0 auto;
 }
+body.template-login_form div.field label,
+body.template-logged_out div.field label {
+	display: inline-block;
+	width: 10em;
+	margin-left: -11.3em;
+	margin-right: 1em;
+	text-align: right;
+}
+body.template-login_form div.field input,
+body.template-logged_out div.field input {
+	font-size: 1em;
+}
 body.template-login_form #portal-globalnav,
-body.template-login_form #portal-searchbox {
+body.template-login_form #portal-searchbox,
+body.template-login_form #portal-personaltools-wrapper,
+body.template-logged_out #portal-globalnav,
+body.template-logged_out #portal-searchbox,
+body.template-logged_out #portal-personaltools-wrapper {
 	display: none;
 }
 
