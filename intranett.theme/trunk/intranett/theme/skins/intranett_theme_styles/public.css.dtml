@@ -282,7 +282,6 @@ form.searchPage input.searchButton {
     text-align: right;
 }
 .livesearchContainer {
-    margin: 6px 0 0;
     padding: 0 !important;
     position: absolute;
     right: 0px;
@@ -295,7 +294,7 @@ form.searchPage input.searchButton {
     text-align: left;
     width: 30em;
     text-transform: none;
-    margin-top: 0;
+    margin: 0;
     
 	border: 1px solid #000000;
 	

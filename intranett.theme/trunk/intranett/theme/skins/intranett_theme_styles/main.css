@@ -728,15 +728,26 @@ dl.collapsible dd.collapsibleContent {
     height: auto;
     padding: 0;
     margin: 6px 0 0;
-    background: #f7f7f7;
-	border: 1px solid #ccc;
 	
+	border: 1px solid #000000;
+	
+	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
-	-webkit-border-bottom-right-radius: 5px;
-	border-radius: 5px;	
+	-webkit-border-bottom-right-radius: 5px; 
+	
+    background-color: #222;
+    background-color: rgba(34,34,34,.8);    
+    background-image: -moz-linear-gradient(center top , rgba(26,26,26,.8), rgba(34,34,34,.5), rgba(34,34,34,.5), rgba(26,26,26,.8)); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(26,26,26,.8)), color-stop(0.3, rgba(34,34,34,.5)), color-stop(0.7, rgba(34,34,34,.5)), to(rgba(26,26,26,.8))); /* Saf4+, Chrome */
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#222', EndColorStr='#1a1a1a'); /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#222', EndColorStr='#1a1a1a')"; /* IE8 */	   
+
+	box-shadow: 0px 0px 4px #777;
+	-moz-box-shadow: 0px 0px 4px #777; 
+	-webkit-box-shadow: 0px 0px 4px #777; 
 }
 .actionMenu.activated .actionMenuContent {
     display: block !important;
@@ -746,12 +757,12 @@ dl.collapsible dd.collapsibleContent {
 	display: block;
 	position: absolute;
 	left: 1em;
-	margin-top: -8px;
+	margin-top: -10px;
 	width:0; 
 	height:0; 
-	border-left: 4px solid transparent; 
-	border-right: 4px solid transparent;
-	border-bottom: 8px solid #fff;
+	border-left: 10px solid transparent; 
+	border-right: 10px solid transparent;
+	border-bottom: 12px solid #fff;
 	border-top: 0;
 }
 #portal-searchbox .toolTipArrow {
@@ -761,7 +772,7 @@ dl.collapsible dd.collapsibleContent {
 }
 .innerTooltipArrow {
 	border-bottom-color: #1A1A1A;
-	margin-top: -6px;
+	margin-top: -7px;
 }
 #portal-searchbox .innerTooltipArrow {
 	margin-top: 1px !important;
@@ -778,8 +789,19 @@ dl.collapsible dd.collapsibleContent {
 }
 .actionMenu .actionMenuContent ul {
     display: block;
-    margin: 0;
-    padding: 0.5em 0;
+    padding: 0.5em;
+    z-index: 20;
+    margin: 1px;
+    background-color: transparent;    
+    border: 1px solid #fff;
+    
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px; 
+    
 }
 .actionMenu .actionMenuContent li {
     float: none;
@@ -793,7 +815,7 @@ dl.collapsible dd.collapsibleContent {
     display: block;
     white-space: nowrap;
     margin: 0.2em 0;
-    color: #444;
+    color: #00B2FF;
 }
 .actionMenu .actionMenuContent .selected {
     display: block;
@@ -802,13 +824,23 @@ dl.collapsible dd.collapsibleContent {
     margin: 0.2em 0;
 }
 .actionMenu .actionMenuContent li a:hover {
-	background-color: #e6e6e6;
+    background-color: #00B2FF;
+    color: #fff;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;	
 }
-.actionMenu .actionMenuContent .actionSeparator a {
+.actionMenu .actionMenuContent .actionSeparator {
+	display: block;
+	border-top: 1px solid #777;
     padding-top: 0.2em;
+    color: #fff;
 }
 .actionMenu .actionMenuContent .actionMenuSelected {
-    color: #000;
+    color: #fff;
     font-weight: bold;
 }
 #templateMenu li a {
