@@ -228,14 +228,23 @@ form.searchPage input.searchButton {
 }
 #LSHighlight,
 .LSHighlight {
-    background-color: #E6E6E6;
-    color: &dtml-globalFontColor;;
+    background-color: #00B2FF;
+    color: #fff;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px; 
+}
+#LSHighlight a,
+.LSHighlight a {
+	color: #fff;
 }
 .LSTable {
     margin: 0;
 }
 .LSRow {
-    border: 1px solid #f7f7f7;
     white-space: normal;
     padding: 0.31em 0.46em;
     margin: 0;
@@ -248,11 +257,15 @@ form.searchPage input.searchButton {
     white-space:nowrap;
 }
 .LSDescr {
-    color: &dtml-discreetColor;;
+    color: #aaa;
     font-size: 0.85em;
     font-weight: normal;
     margin-left: 2.5em;
     font-family: Helvetica, Arial, sans-serif;
+}
+#LSHighlight .LSDescr,
+.LSHighlight .LSDescr {
+	color: #222;
 }
 .LSResult {
     position: relative;
@@ -269,7 +282,6 @@ form.searchPage input.searchButton {
     text-align: right;
 }
 .livesearchContainer {
-    background-color: #f7f7f7;
     margin: 6px 0 0;
     padding: 0 !important;
     position: absolute;
@@ -285,19 +297,24 @@ form.searchPage input.searchButton {
     text-transform: none;
     margin-top: 0;
     
-	border: 1px solid #ccc;
+	border: 1px solid #000000;
 	
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
-	-webkit-border-bottom-right-radius: 5px;    
+	-webkit-border-bottom-right-radius: 5px; 
+	
+    background-color: #222;
+    background-image: -moz-linear-gradient(center top , #1A1A1A, #222, #222, #1A1A1A); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */	   
 }
 * html .livesearchContainer {
     padding: &dtml-borderWidth; !important;
     padding-top: 0 !important;
-    background-color: &dtml-globalBorderColor;;
     border: 0;
 }
 #livesearchLegend {
@@ -324,9 +341,11 @@ form.searchPage input.searchButton {
 
 /* Workaround for Internet Explorer's broken z-index implementation */
 .LSIEFix {
-    background-color: #f7f7f7;
+    background-color: transparent;
     padding: 0.76em 0.46em !important;
     z-index: 20;
+    margin: 1px;
+    border: 1px solid #fff;
     
 	border-radius: 5px;
 	-moz-border-radius: 5px;
