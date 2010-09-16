@@ -252,7 +252,7 @@ form.searchPage input.searchButton {
     font-size: 0.85em;
     font-weight: normal;
     margin-left: 2.5em;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 }
 .LSResult {
     position: relative;
