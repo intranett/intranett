@@ -307,7 +307,8 @@ form.searchPage input.searchButton {
 	-webkit-border-bottom-right-radius: 5px; 
 	
     background-color: #222;
-    background-image: -moz-linear-gradient(center top , #1A1A1A, #222, #222, #1A1A1A); /* FF3.6 */
+    background-color: rgba(34,34,34,.8);    
+    background-image: -moz-linear-gradient(center top , rgba(26,26,26,.8), rgba(34,34,34,.5), rgba(34,34,34,.5), rgba(26,26,26,.8)); /* FF3.6 */
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */	   
