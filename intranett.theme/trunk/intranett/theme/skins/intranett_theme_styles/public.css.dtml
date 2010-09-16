@@ -309,9 +309,9 @@ form.searchPage input.searchButton {
     background-color: #222;
     background-color: rgba(34,34,34,.8);    
     background-image: -moz-linear-gradient(center top , rgba(26,26,26,.8), rgba(34,34,34,.5), rgba(34,34,34,.5), rgba(26,26,26,.8)); /* FF3.6 */
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */	   
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(26,26,26,.8)), color-stop(0.3, rgba(34,34,34,.5)), color-stop(0.7, rgba(34,34,34,.5)), to(rgba(26,26,26,.8))); /* Saf4+, Chrome */
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#222', EndColorStr='#1a1a1a'); /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#222', EndColorStr='#1a1a1a')"; /* IE8 */	   
 }
 * html .livesearchContainer {
     padding: &dtml-borderWidth; !important;
@@ -319,22 +319,7 @@ form.searchPage input.searchButton {
     border: 0;
 }
 #livesearchLegend {
-	display: none;
-    line-height: 1em;
-    margin-top: 0;
-    margin-left: 1px;
-    margin-right: 1px;    
-    width: 23em;
-    padding: 0.61em 0.61em 0;
-    border: none;
-    background: #f7f7f7;
-    
-	border-radius: 5px 5px 0 0;
-	-moz-border-radius: 5px 5px 0 0;
-	-webkit-border-top-left-radius: 5px;
-	-webkit-border-top-right-radius: 5px;
-	-webkit-border-bottom-left-radius: 0px;
-	-webkit-border-bottom-right-radius: 0px;     
+	display: none;  
 }
 * html #livesearchLegend {
     position: relative;
