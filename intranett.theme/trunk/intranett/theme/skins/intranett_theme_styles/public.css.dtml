@@ -237,10 +237,6 @@ form.searchPage input.searchButton {
 	-webkit-border-bottom-left-radius: 5px;
 	-webkit-border-bottom-right-radius: 5px; 
 }
-#LSHighlight a,
-.LSHighlight a {
-	color: #fff;
-}
 .LSTable {
     margin: 0;
 }
@@ -255,6 +251,14 @@ form.searchPage input.searchButton {
 .LSRow a {
     text-decoration: none;
     white-space:nowrap;
+    color: #00B2FF;
+}
+.LSRow a:hover {
+	color: #fff;
+}
+#LSHighlight a,
+.LSHighlight a {
+	color: #fff;
 }
 .LSDescr {
     color: #aaa;
