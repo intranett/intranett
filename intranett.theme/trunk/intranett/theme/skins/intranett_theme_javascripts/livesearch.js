@@ -55,7 +55,7 @@ var livesearch = function (){
             // shows the result
             if((jQuery($$result).find(".livesearchContainer").length == 0) || jQuery($$result).find(".livesearchContainer").is(":hidden")) {
                 $shadow.html($data);                
-                jQuery($$result).find(".livesearchContainer").hide();                                            
+                jQuery($$result).find(".livesearchContainer").hide();
                 $$result.show();
                 jQuery(".livesearchContainer").animate({
                     opacity:'toggle',

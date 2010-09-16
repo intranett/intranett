@@ -249,9 +249,10 @@ form.searchPage input.searchButton {
 }
 .LSDescr {
     color: &dtml-discreetColor;;
-    font-size: &dtml-fontSmallSize;;
+    font-size: 0.85em;
     font-weight: normal;
     margin-left: 2.5em;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 .LSResult {
     position: relative;
