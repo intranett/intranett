@@ -64,6 +64,7 @@ section figure {
 	margin: 0 0 1.25em 1.25em;
 	color: #676767;
 	
+	border-radius: 5px;		
 	-moz-border-radius-topleft: 5px;
 	-webkit-border-top-left-radius: 5px;
 	-moz-border-radius-topright: 5px;
@@ -72,7 +73,6 @@ section figure {
 	-webkit-border-bottom-left-radius: 5px;
 	-moz-border-radius-bottomright: 5px;
 	-webkit-border-bottom-right-radius: 5px;	
-	border-radius: 5px;	
 }
 p {
 	margin: 1.25em 0;
@@ -130,7 +130,7 @@ li ol {
 }
 fieldset {
 	margin: 1.62em 0;
-	padding: 0 1.25em;
+	padding: 0;
 }
 legend {
 	font-size:1.24em; 
@@ -160,9 +160,9 @@ body > header {
 /* @group Personal tools */
 
 #portal-personaltools-wrapper {
-	background: #555;
+	background: #333;
 	text-align: right;
-	border-bottom: 1px solid #333;
+	border-bottom: 1px solid #333;	
 }
 #portal-personaltools {
 	width: 97.9167%; /* not 100% in order to align right edge with the columns, positioned with the grid */
@@ -181,12 +181,10 @@ body > header {
 #portal-personaltools dt a,
 #portal-personaltools li a {
 	/*float: left;*/
-	margin: 0 0.762em;
+	padding: 0 0.762em;
 	display: inline-block;
-	line-height: 2em;
-}
-#portal-personaltools li:last-child a {
-	margin-right: 0;
+	line-height: 1.4em;
+	margin: 0.3em 0;
 }
 #portal-personaltools dt a:link,
 #portal-personaltools li a:link,
@@ -197,6 +195,13 @@ body > header {
 #portal-personaltools dt a:hover,
 #portal-personaltools li a:hover {
 	color: #fff;
+	background: #777;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px; 
 }
 #portal-personaltools ul {
 	white-space: nowrap;
@@ -526,9 +531,9 @@ dl.collapsible dd.collapsibleContent {
 	padding:0.63em;
 	text-transform: uppercase;
 	
+	border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */        	
 	-moz-border-radius: 5px; /* FF1+ */
     -webkit-border-radius: 5px; /* Saf3-4 */	
-	border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */        
 }
 
 /* @end */
