@@ -833,8 +833,10 @@ dl.collapsible dd.collapsibleContent {
     margin: 0.2em 0;
 }
 .actionMenu .actionMenuContent li a:hover {
-    background-color: #00B2FF;
+    background-color: #3AA5DE;
     color: #fff;
+    text-shadow: 0 0 1px #10435e;
+    
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-top-left-radius: 5px;
