@@ -5,42 +5,19 @@
 
         <dl id="portal-personaltools"
             tal:condition="python:view.user_actions and not view.anonymous">
-          <tal:block condition="not: view/anonymous"> 
-          <dt>
-            <a id="user-name"
+          <tal:block condition="not: view/anonymous"><dt><a id="user-name"
                tal:attributes="href view/homelink_url"
                tal:content="view/user_name">
                 John
-            </a>
-          </dt>
-          <dd>
-            <ul>
-                <li tal:repeat="action view/user_actions"
-                    tal:attributes="id string:personaltools-${action/id}">
-                    <a href=""
+            </a></dt><dd><ul><li tal:repeat="action view/user_actions"
+                    tal:attributes="id string:personaltools-${action/id}"><a href=""
                        tal:attributes="href action/url"
                        tal:content="action/title"
-                       i18n:translate="">
-                        action title
-                    </a>
-                </li>
-            </ul>
-          </dd>
-          </tal:block>
-        </dl>
-
-        <dl id="portal-personaltools"
-            tal:condition="view/anonymous">
-          <dt id="anon-personalbar">
-            <tal:actions repeat="action view/user_actions">
-                <a href=""
+                       i18n:translate="">action title</a></li></ul></dd></tal:block></dl><dl id="portal-personaltools"
+            tal:condition="view/anonymous"><dt id="anon-personalbar"><tal:actions repeat="action view/user_actions"><a href=""
                    tal:attributes="href action/url"
                    tal:content="action/title"
-                   i18n:translate="">
-                    action title
-                </a>
-            </tal:actions>
-          </dt>
+                   i18n:translate="">action title</a></tal:actions></dt>
         </dl>
     </div>
 </div>

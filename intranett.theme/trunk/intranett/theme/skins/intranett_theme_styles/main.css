@@ -197,8 +197,8 @@ body > header {
 }
 #portal-personaltools dt a:hover,
 #portal-personaltools li a:hover {
-	color: #fff;
-	background: #777;
+	color: #000;
+	background: #ddd;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-top-left-radius: 5px;

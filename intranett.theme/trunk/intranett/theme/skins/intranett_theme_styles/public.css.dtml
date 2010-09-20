@@ -252,6 +252,7 @@ form.searchPage input.searchButton {
     text-decoration: none;
     white-space:nowrap;
     color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
 }
 .LSRow a:hover {
 	color: #fff;
@@ -259,6 +260,7 @@ form.searchPage input.searchButton {
 #LSHighlight a,
 .LSHighlight a {
 	color: #fff;
+    text-shadow: 0 0 1px #10435e;	
 }
 .LSDescr {
     color: #aaa;
