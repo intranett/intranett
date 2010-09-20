@@ -228,7 +228,7 @@ form.searchPage input.searchButton {
 }
 #LSHighlight,
 .LSHighlight {
-    background-color: #00B2FF;
+    background-color: #3AA5DE;
     color: #fff;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -251,7 +251,7 @@ form.searchPage input.searchButton {
 .LSRow a {
     text-decoration: none;
     white-space:nowrap;
-    color: #00B2FF;
+    color: #fff;
 }
 .LSRow a:hover {
 	color: #fff;
@@ -262,14 +262,14 @@ form.searchPage input.searchButton {
 }
 .LSDescr {
     color: #aaa;
-    font-size: 0.85em;
+    font-size: 0.8em;
     font-weight: normal;
     margin-left: 2.5em;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 #LSHighlight .LSDescr,
 .LSHighlight .LSDescr {
-	color: #222;
+	color: #000;
 }
 .LSResult {
     position: relative;
@@ -289,6 +289,7 @@ form.searchPage input.searchButton {
     padding: 0 !important;
     position: absolute;
     right: 0px;
+    color: #aaa;
     
     /* Currently exposes a rendering bug in Mozilla */
     
@@ -311,8 +312,8 @@ form.searchPage input.searchButton {
 	
     background-color: #222;
     background-color: rgba(34,34,34,.8);    
-    background-image: -moz-linear-gradient(center top , rgba(26,26,26,.8), rgba(34,34,34,.5), rgba(34,34,34,.5), rgba(26,26,26,.8)); /* FF3.6 */
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(26,26,26,.8)), color-stop(0.3, rgba(34,34,34,.5)), color-stop(0.7, rgba(34,34,34,.5)), to(rgba(26,26,26,.8))); /* Saf4+, Chrome */
+    background-image: -moz-linear-gradient(center top , rgba(26,26,26,.8), rgba(34,34,34,.7), rgba(34,34,34,.5), rgba(26,26,26,.8)); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(26,26,26,.8)), color-stop(0.3, rgba(34,34,34,.7)), color-stop(0.7, rgba(34,34,34,.5)), to(rgba(26,26,26,.8))); /* Saf4+, Chrome */
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#222', EndColorStr='#1a1a1a'); /* IE6,IE7 */
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#222', EndColorStr='#1a1a1a')"; /* IE8 */	   
 
@@ -1071,4 +1072,4 @@ div.overlay #createGroup fieldset { border: none; }
 
 /* @end */
 
-/* </dtml-with> */
+/* </dtml-with> */Plone as a CMS, what we have, whats missing, whats coming.
