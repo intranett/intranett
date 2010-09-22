@@ -19,7 +19,7 @@ class TestSiteSetup(IntranettTestCase):
         settings = registry.forInterface(IDiscussionSettings)
         self.assertEquals(settings.anonymous_comments, False)
         self.assertEquals(settings.captcha, 'disabled')
-        self.assertEquals(settings.globally_enabled, False)
+        self.assertEquals(settings.globally_enabled, True)
         self.assertEquals(settings.show_commenter_image, True)
         self.assertEquals(settings.text_transform, 'text/x-web-intelligent')
 
