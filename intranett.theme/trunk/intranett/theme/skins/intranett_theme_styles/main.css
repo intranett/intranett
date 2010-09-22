@@ -152,7 +152,6 @@ body > header {
 	background: #fff url("color_bg.png") bottom left repeat-x;
 }
 body > header > .contentAlignment {
-	backhround-color: #fff;
 	background-color:  rgba(255,255,255,.7);
 	margin-top: 1px;
 }
@@ -434,7 +433,7 @@ body > header nav li a .toolTipArrow {
 	padding: 3.3em 0;
 }*/
 #portal-columns > aside {
-	border-radius: none;
+	border-radius: 0;
 	background: transparent;
 }
 .managePortletsFallback {
@@ -450,7 +449,7 @@ body > header nav li a .toolTipArrow {
 .documentFirstHeading {
 	margin: 0 0 0.38em;
 	padding: 0;
-	/*clear: right;*/
+	clear: both;
 	/*text-transform: uppercase;*/
 }
 .documentDescription {
@@ -465,9 +464,6 @@ body > header nav li a .toolTipArrow {
 }
 .newsImageContainer a {
 	
-}
-.newsImageContainer p.discreet {
-	margin: 0;
 }
 dl.collapsible {
 	border:  none !important;
@@ -876,11 +872,11 @@ ul.configlets li a {
     border: none;
 }
 ul.configlets li a:visited {
-    color: &dtml-linkColor;;
+    color: #0081AF;
     background-color: transparent;
 }
 ul.configlets li a:active {
-    color: &dtml-linkColor;;
+    color: #0081AF;
     background-color: transparent;
 }
 ul.configlets li label {
@@ -903,8 +899,8 @@ ul.configletDetails li label {
 }
 ul.configletDetails li.configletDescription {
     display: block;
-    color: &dtml-discreetColor;;
-    font-size: &dtml-fontSmallSize;;
+    color: #797979;
+    font-size: 0.76em;
     margin: 0;
 }
 
