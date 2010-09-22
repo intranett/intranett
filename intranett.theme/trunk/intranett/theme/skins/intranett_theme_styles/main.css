@@ -200,14 +200,7 @@ body > header > .contentAlignment {
 }
 #portal-personaltools dt a:hover,
 #portal-personaltools li a:hover {
-	color: #000;
-	background: #ddd;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-top-left-radius: 5px;
-	-webkit-border-top-right-radius: 5px;
-	-webkit-border-bottom-left-radius: 5px;
-	-webkit-border-bottom-right-radius: 5px; 
+	color: #fff;
 }
 #portal-personaltools ul {
 	white-space: nowrap;
@@ -614,12 +607,13 @@ dl.collapsible dd.collapsibleContent {
 }
 #settings-toggle a {
 	display: inline-block;
+	text-align: center;
 	position:absolute;
 	right: 0;
 	top: 0;
 	z-index: 4;	
 	/*float: right;*/
-	padding: 0.5em 10px;	
+	padding: 0.5em;	
 	/*font-size: 0.76em;*/
 	text-decoration: none;
 	text-transform: uppercase;
@@ -635,10 +629,15 @@ dl.collapsible dd.collapsibleContent {
 	cursor: pointer;
 	outline: none;
 }
+#settings-toggle a#open-edit-bar img {
+	display: inline-block;
+	/*width: 21px;
+	height: 13px;*/
+}
 #settings-toggle a#close-edit-bar {
 	z-index: 3;
 }
-#settings-toggle a#close-edit-bar span {
+#settings-toggle a span {
 	position: absolute;
 	left: -10000px;
 	z-index: 0;
@@ -1267,16 +1266,12 @@ body > footer {
 	background: #fff url('color_bg.png') top right repeat;		
 }
 body > footer .contentAlignment {
-	background: #fff;
-	border-radius: 15px;		
-	-moz-border-radius-topleft: 15px;
-	-webkit-border-top-left-radius: 15px;
-	-moz-border-radius-topright: 15px;
-	-webkit-border-top-right-radius: 15px;
-	-moz-border-radius-bottomleft: 15px;
-	-webkit-border-bottom-left-radius: 15px;
-	-moz-border-radius-bottomright: 15px;
-	-webkit-border-bottom-right-radius: 15px;	
+	background: #fff;	
+	
+	transform: rotate(-2deg);
+	-webkit-transform: rotate(-2deg); 
+	-moz-transform: rotate(-2deg); 
+	-o-transform: rotate(-2deg);
 	
      box-shadow:0 0 15px #555555;		
 	-moz-box-shadow:0 0 15px #555555;
