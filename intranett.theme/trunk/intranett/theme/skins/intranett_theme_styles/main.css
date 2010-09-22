@@ -1254,22 +1254,13 @@ body > footer {
 	clear: both;
 	text-align: left;	
 	text-transform: uppercase;	
-	padding-bottom: 2em;
-	padding-top: 1.25em;
-	color: #555;
-	background: #fff url('color_bg.png') top right repeat;		
+	padding-bottom: 1.25em;
+	padding-top: 0;
+	color: #f7f7f7;
+	background: #f7f7f7;
 }
 body > footer .contentAlignment {
-	background: #fff;	
-	
-	transform: rotate(-1.5deg);
-	-webkit-transform: rotate(-1.5deg); 
-	-moz-transform: rotate(-1.5deg); 
-	-o-transform: rotate(-1.5deg);
-	
-     box-shadow:0 0 15px #555555;		
-	-moz-box-shadow:0 0 15px #555555;
-    -webkit-box-shadow:0 0 15px #555555;
+	background: transparent url('color_bg.png') 1em 0em no-repeat;	
 }
 body > footer small {
 	font-size: 0.62em;
