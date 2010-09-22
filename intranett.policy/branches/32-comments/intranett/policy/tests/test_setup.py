@@ -53,6 +53,12 @@ class TestSiteSetup(IntranettTestCase):
         # Make sure we have Monday
         self.assertEquals(calendar.firstweekday, 0)
 
+    def test_kss_disabled(self):
+        kss = getToolByName(self.portal, "portal_kss")
+        id_ = '++resource++plone.app.z3cform'
+        paz = kss.getResourcesDict()[id_]
+        self.assertEquals(paz.getEnabled(), False)
+
 
 class TestAdmin(IntranettTestCase):
 
