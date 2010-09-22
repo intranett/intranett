@@ -128,8 +128,9 @@ li ol {
 	margin-left: 1.25em;
 }
 .contentAlignment {
-	max-width: 61.25em; /* to have roughly 980px wide site with 16px as the default font-size */
+	max-width: 60.25em; /* to have roughly 980px wide site with 16px as the default font-size */
 	margin: 0 auto;
+	padding: 0 0 0 1em;
 }
 fieldset {
 	margin: 1.62em 0;
@@ -153,11 +154,12 @@ legend {
 /* @group Header */
 
 body > header {
-	border-bottom: 1px solid #eee;
-	background: url("color_bg.png") top left repeat;
+	/*border-bottom: 1px solid #eee;*/
+	background: #fff url("color_bg.png") bottom left repeat-x;
 }
 body > header > .contentAlignment {
 	background:  White;
+	margin-top: 1px;
 }
 
 /* @group Personal tools */
@@ -427,7 +429,7 @@ body > header nav li.selected a {
 #portal-columns {
 	padding: 2.6em 0;
     background: #fff;
-    border-top: 1px solid #CCCCCC;
+    /*border-top: 1px solid #CCCCCC;*/
     border-bottom: 1px solid #E6E6E6;    
 }
 #portal-column-content {
