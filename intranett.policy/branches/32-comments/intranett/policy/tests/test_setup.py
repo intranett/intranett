@@ -1,6 +1,3 @@
-from unittest import TestSuite
-from unittest import makeSuite
-
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
 from Products.CMFCore.utils import getToolByName
@@ -86,10 +83,3 @@ class TestAdmin(IntranettTestCase):
             (self.app, request), Interface, 'intranett-addsite')
         addsite()
         self.assert_('Plone' in self.app.keys())
-
-
-def test_suite():
-    return TestSuite([
-        makeSuite(TestSiteSetup),
-        makeSuite(TestAdmin),
-    ])
