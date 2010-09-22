@@ -7,6 +7,7 @@
 
   <include package="Products.CMFPlone" />
   <include package="experimental.catalogqueryplan" />
+  <include package="plone.app.discussion" />
   <include package="plonetheme.sunburst" />
   <include package="Products.PloneFormGen" />
   <include package="intranett.theme" />

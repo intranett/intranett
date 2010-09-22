@@ -3,7 +3,8 @@
   <version>1</version>
   <dependencies>
     <dependency>profile-plonetheme.sunburst:default</dependency>
+    <dependency>profile-plone.app.discussion:default</dependency>
     <dependency>profile-Products.PloneFormGen:default</dependency>
-    <dependency>profile-intranett.theme:default</dependency>    
+    <dependency>profile-intranett.theme:default</dependency>
   </dependencies>
 </metadata>
