@@ -23,5 +23,15 @@
             });
             return false;
         })
+        
+        $("li.LSRow").hover(
+            function() {
+                alert(this);
+            },
+            function() {
+                alert(this)
+            }
+        );
+            
     }); 
 })(jQuery);
