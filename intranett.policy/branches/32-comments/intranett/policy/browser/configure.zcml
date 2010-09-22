@@ -1,0 +1,19 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="intranett">
+
+  <browser:page
+      for="OFS.Folder.Folder"
+      name="intranett-addsite"
+      class=".admin.AddIntranettSite"
+      permission="zope2.ViewManagementScreens"
+      template="templates/addsite.pt"
+      />
+
+  <browser:resource
+      file="jarn-logo.jpg"
+      name="jarn-logo.jpg"
+      />
+
+</configure>

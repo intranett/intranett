@@ -1,0 +1,18 @@
+TODO
+====
+
+- Setup portlets, at least navigation
+- Take away options, review all settings
+- Mailhost (smtp settings?)
+- Workflow (intranet/extranet) without the extranet part
+- Hook up theme, once there is one
+
+- Prepare upgrade steps infrastructure, tests for it (make sure we do this
+  for the theme as well), put on test level 2
+
+- "Site admin" role
+
+- Customize colophon, footer (content portlets?)
+- Customize logo
+- New control panel for site title, logo and colophon/footer text
+
