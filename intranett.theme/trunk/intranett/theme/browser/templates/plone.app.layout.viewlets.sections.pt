@@ -11,9 +11,8 @@
              tal:attributes="id string:portaltab-${tid};
                             class python:selected_tab==tid and 'selected' or 'plain'"
             ><a href=""
-               tal:content="tab/name"
                tal:attributes="href tab/url;
                                title tab/description|nothing;">
-            Tab Name
-            </a></li></tal:tabs></ul></nav>
+            <span tal:replace="tab/name">Tab Name</span>
+            <span class="toolTipArrow" tal:condition="python:selected_tab==tid">&nbsp;</span></a></li></tal:tabs></ul></nav>
 </tal:sections>

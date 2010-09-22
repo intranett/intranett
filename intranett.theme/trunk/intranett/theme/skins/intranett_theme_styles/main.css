@@ -158,7 +158,8 @@ body > header {
 	background: #fff url("color_bg.png") bottom left repeat-x;
 }
 body > header > .contentAlignment {
-	background:  White;
+	backhround-color: #fff;
+	background-color:  rgba(255,255,255,.7);
 	margin-top: 1px;
 }
 
@@ -223,7 +224,7 @@ body > header h1 {
 	font-weight: bold;
 	line-height: 1em;
 	letter-spacing:0;
-	margin:0.62em 0;
+	margin:0.62em 0 0.76em;
 	position:relative;
 	color: #3c3c3c;
 }
@@ -301,7 +302,7 @@ body > header nav {
 	width: 97.9167%; /* not 100% in order to align right edge with the columns, positioned with the grid */
 	position: relative;
 	z-index:1;
-	bottom: -2px;
+	bottom: 0;
 	display: table;
 }
 body > header nav ul {
@@ -310,7 +311,7 @@ body > header nav ul {
 	padding: 0;
 	display: table-row;
 	list-style: none;
-	background-color: #D5D5D5;
+	background-color: #555;
 	width: 100%;
 }
 body > header nav li {
@@ -325,21 +326,26 @@ body > header nav li a {
 	height: 100%;
     margin: 0;
 	padding: .62em 1.25em;    
-    color: #333 !important;
+    color: #fff !important;
     text-decoration: none;
-    border-bottom: none;	
 	text-transform: uppercase;
-    font-size: 0.9em;
-	border-bottom:1px solid #CCCCCC;    
-	text-shadow: 0 1px 0 #e6e6e6;
+    font-size: 0.9em;   
+    border-left: 1px solid #888;
+}
+body > header nav li:first-child a {
+	border-left: none;
 }
 body > header nav li a:hover {
-	background-color: #eee;
+	background-color: #000;
 }
 body > header nav li.selected a {
-	background: #fff;
-	border-bottom:1px solid #fff;
-	text-shadow: none;	
+	background: #000;
+	text-shadow: none;		
+	position: relative;
+}
+body > header nav li a .toolTipArrow {
+	bottom: -1px;	
+	left: 0.62em;
 }
 
 /* @end */
@@ -429,7 +435,7 @@ body > header nav li.selected a {
 #portal-columns {
 	padding: 2.6em 0;
     background: #fff;
-    /*border-top: 1px solid #CCCCCC;*/
+    border-top: 1px solid #E6E6E6;
     border-bottom: 1px solid #E6E6E6;    
 }
 #portal-column-content {
@@ -1253,22 +1259,24 @@ li.navTreeCurrentNode.navTreeFolderish {
 
 body > footer {
 	clear: both;
-	text-align: right;	
+	text-align: left;	
 	text-transform: uppercase;	
-	padding-bottom: 1.63em;
-	padding-top: 1.25em;	
-	color: #f7f7f7;
-	border-top: 1px solid #555;
-    background-image: -moz-linear-gradient(center top , #808080, rgba(102, 102, 102, 0.9), #6F6F6F); /* FF3.6 */
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#808080), color-stop(0.5, rgba(102, 102, 102, 0.9)), to(#6F6F6F)); /* Saf4+, Chrome */
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#808080', EndColorStr='#6F6F6F'); /* IE6,IE7 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#808080', EndColorStr='#6F6F6F')"; /* IE8 */ 
+	padding-bottom: 1.25em;
+	padding-top: 1.25em;
+	color: #555;
+	background: #fff url('color_bg.png') top right repeat;		
 }
-body > footer a {
-	color: #49cfff;
-}
-body > footer a:hover {
-	color: #7cddff;
+body > footer .contentAlignment {
+	background: #fff;
+	border-radius: 15px;		
+	-moz-border-radius-topleft: 15px;
+	-webkit-border-top-left-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-webkit-border-top-right-radius: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-bottomright: 15px;
+	-webkit-border-bottom-right-radius: 15px;		
 }
 body > footer small {
 	font-size: 0.62em;
@@ -1278,9 +1286,13 @@ body > footer strong {
 }
 #portal-colophon {
 	width: 97.9167%;  /* not 100% in order to align right edge with the columns, positioned with the grid */
+	padding: 1.25em 0;	
 }
 #portal-colophon li {
 	list-style: none;
+}
+#portal-colophon a {
+	color: #444;
 }
 
 
