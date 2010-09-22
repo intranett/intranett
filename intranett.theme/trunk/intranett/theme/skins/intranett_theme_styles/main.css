@@ -1276,7 +1276,11 @@ body > footer .contentAlignment {
 	-moz-border-radius-bottomleft: 15px;
 	-webkit-border-bottom-left-radius: 15px;
 	-moz-border-radius-bottomright: 15px;
-	-webkit-border-bottom-right-radius: 15px;		
+	-webkit-border-bottom-right-radius: 15px;	
+	
+     box-shadow:0 0 15px #555555;		
+	-moz-box-shadow:0 0 15px #555555;
+    -webkit-box-shadow:0 0 15px #555555;
 }
 body > footer small {
 	font-size: 0.62em;
@@ -1290,6 +1294,7 @@ body > footer strong {
 }
 #portal-colophon li {
 	list-style: none;
+	margin-bottom: 0;
 }
 #portal-colophon a {
 	color: #444;
