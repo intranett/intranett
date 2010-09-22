@@ -6,7 +6,7 @@ from zope.component import queryUtility
 from intranett.policy.tests.base import IntranettTestCase
 
 
-class TestSiteSetup(IntranettTestCase):
+class TestCommenting(IntranettTestCase):
 
     def test_moderate_action_invisible(self):
         user = getToolByName(self.portal, 'portal_actions').user
