@@ -27,6 +27,12 @@ class TestSiteSetup(IntranettTestCase):
         tt = getToolByName(self.portal, 'portal_types')
         self.assert_('FormFolder' in tt.keys())
 
+    def test_discussion(self):
+        # Test that the profile got applied
+        cp = getToolByName(self.portal, 'portal_controlpanel')
+        actions = set([a.appId for a in cp.listActions()])
+        self.assert_('plone.app.discussion' in actions)
+
     def test_content(self):
         # This content is only created in the tests, it's too hard to avoid
         # its creation
