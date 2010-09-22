@@ -1,11 +1,5 @@
 /* @group Basic */
 
-html {
-	background: #EEEEEE;
-}
-iframe html {
-	background: #fff;
-}
 html.kupu-html {
 	font-size: 1em;
 }
@@ -1260,7 +1254,7 @@ body > footer {
 	clear: both;
 	text-align: left;	
 	text-transform: uppercase;	
-	padding-bottom: 1.25em;
+	padding-bottom: 2em;
 	padding-top: 1.25em;
 	color: #555;
 	background: #fff url('color_bg.png') top right repeat;		
@@ -1268,10 +1262,10 @@ body > footer {
 body > footer .contentAlignment {
 	background: #fff;	
 	
-	transform: rotate(-2deg);
-	-webkit-transform: rotate(-2deg); 
-	-moz-transform: rotate(-2deg); 
-	-o-transform: rotate(-2deg);
+	transform: rotate(-1.5deg);
+	-webkit-transform: rotate(-1.5deg); 
+	-moz-transform: rotate(-1.5deg); 
+	-o-transform: rotate(-1.5deg);
 	
      box-shadow:0 0 15px #555555;		
 	-moz-box-shadow:0 0 15px #555555;
