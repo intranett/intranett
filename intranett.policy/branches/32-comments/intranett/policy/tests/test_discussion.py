@@ -28,3 +28,9 @@ class TestSiteSetup(IntranettTestCase):
         self.assertEquals(tt['Document'].allow_discussion, True)
         self.assertEquals(tt['Event'].allow_discussion, True)
         self.assertEquals(tt['News Item'].allow_discussion, True)
+
+    def test_types_disabled(self):
+        tt = getToolByName(self.portal, 'portal_types')
+        self.assertEquals(tt['Folder'].allow_discussion, False)
+        self.assertEquals(tt['Link'].allow_discussion, False)
+        self.assertEquals(tt['Topic'].allow_discussion, False)
