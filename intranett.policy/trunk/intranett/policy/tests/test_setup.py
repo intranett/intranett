@@ -1,6 +1,3 @@
-from unittest import TestSuite
-from unittest import makeSuite
-
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
 from Products.CMFCore.utils import getToolByName
@@ -27,6 +24,12 @@ class TestSiteSetup(IntranettTestCase):
         tt = getToolByName(self.portal, 'portal_types')
         self.assert_('FormFolder' in tt.keys())
 
+    def test_discussion(self):
+        # Test that the profile got applied
+        cp = getToolByName(self.portal, 'portal_controlpanel')
+        actions = set([a.appId for a in cp.listActions()])
+        self.assert_('plone.app.discussion' in actions)
+
     def test_content(self):
         # This content is only created in the tests, it's too hard to avoid
         # its creation
@@ -49,6 +52,12 @@ class TestSiteSetup(IntranettTestCase):
         calendar = getToolByName(self.portal, "portal_calendar")
         # Make sure we have Monday
         self.assertEquals(calendar.firstweekday, 0)
+
+    def test_kss_disabled(self):
+        kss = getToolByName(self.portal, "portal_kss")
+        id_ = '++resource++plone.app.z3cform'
+        paz = kss.getResourcesDict()[id_]
+        self.assertEquals(paz.getEnabled(), False)
 
 
 class TestAdmin(IntranettTestCase):
@@ -80,10 +89,3 @@ class TestAdmin(IntranettTestCase):
             (self.app, request), Interface, 'intranett-addsite')
         addsite()
         self.assert_('Plone' in self.app.keys())
-
-
-def test_suite():
-    return TestSuite([
-        makeSuite(TestSiteSetup),
-        makeSuite(TestAdmin),
-    ])

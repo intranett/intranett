@@ -10,8 +10,11 @@ class HiddenProfiles(object):
     def getNonInstallableProfiles(self):
         return [
             u'borg.localrole:default',
+            u'plone.app.discussion:default',
             u'plone.app.iterate:plone.app.iterate',
             u'plone.app.openid:default',
+            u'plone.app.registry:default',
+            u'plone.app.z3cform:default',
             u'plonetheme.classic:default',
             u'plonetheme.sunburst:default',
             u'Products.PloneFormGen:default',
@@ -25,8 +28,11 @@ class HiddenProducts(object):
     def getNonInstallableProducts(self):
         return [
             'kupu',
+            'plone.app.discussion',
             'plone.app.iterate',
             'plone.app.openid',
+            'plone.app.registry',
+            'plone.app.z3cform',
             'plonetheme.classic',
             'Products.CMFPlacefulWorkflow',
             'Products.kupu',
