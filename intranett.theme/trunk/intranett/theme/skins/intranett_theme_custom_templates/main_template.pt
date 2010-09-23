@@ -40,7 +40,7 @@
     
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    -->
+    <![endif]-->
 
     <metal:baseslot define-slot="base">
       <base tal:attributes="href plone_view/renderBase" /><!--[if lt IE 7]></base><![endif]-->
@@ -54,7 +54,7 @@
         <!-- Disable IE6 image toolbar -->
         <!--[if IE]>
         <meta http-equiv="imagetoolbar" content="no" />
-        -->
+        <![endif]-->
     
         <tal:comment replace="nothing"> A slot where you can insert elements in the header from a template </tal:comment>
         <metal:headslot define-slot="head_slot" />
