@@ -1,0 +1,11 @@
+body.template-login_form div.field label,
+body.template-logged_out div.field label,
+body.template-login_failed div.field label {
+	margin-left: -230px !important;
+}
+body > header nav li {
+    disaplay: inline !important;
+}
+body > header nav li a {
+    display: inline-block !important;
+}
