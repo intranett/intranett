@@ -1072,15 +1072,15 @@ div.dialog-wrapper {
 body.template-login_form #content-core,
 body.template-logged_out #content-core,
 body.template-login_failed #content-core {
-	margin: 0 0 0 10em;
+	margin: 0 0 0 215px;
 }
 body.template-login_form div.field label,
 body.template-logged_out div.field label,
 body.template-login_failed div.field label {
 	display: inline-block;
-	width: 8em;
-	margin-left: -9em;
-	margin-right: 1em;
+	width: 200px;
+	margin-left: -215px;
+	margin-right: 15px;
 	text-align: right;
 }
 body.template-login_form div.field input,
