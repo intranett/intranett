@@ -1,0 +1,17 @@
+<registry>
+  <record field="anonymous_comments" interface="plone.app.discussion.interfaces.IDiscussionSettings" name="plone.app.discussion.interfaces.IDiscussionSettings.anonymous_comments">
+    <value>False</value>
+  </record>
+  <record field="captcha" interface="plone.app.discussion.interfaces.IDiscussionSettings" name="plone.app.discussion.interfaces.IDiscussionSettings.captcha">
+    <value>disabled</value>
+  </record>
+  <record field="globally_enabled" interface="plone.app.discussion.interfaces.IDiscussionSettings" name="plone.app.discussion.interfaces.IDiscussionSettings.globally_enabled">
+    <value>True</value>
+  </record>
+  <record field="show_commenter_image" interface="plone.app.discussion.interfaces.IDiscussionSettings" name="plone.app.discussion.interfaces.IDiscussionSettings.show_commenter_image">
+    <value>True</value>
+  </record>
+  <record field="text_transform" interface="plone.app.discussion.interfaces.IDiscussionSettings" name="plone.app.discussion.interfaces.IDiscussionSettings.text_transform">
+    <value>text/x-web-intelligent</value>
+  </record>
+</registry>
