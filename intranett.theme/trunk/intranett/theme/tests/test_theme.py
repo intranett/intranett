@@ -34,3 +34,24 @@ class TestTheme(IntranettTestCase):
         css = getToolByName(self.portal, 'portal_css')
         self.assertEquals(css.getResource('base.css').getEnabled(), False)
         self.assertEquals(css.getResource('portlets.css').getEnabled(), False)
+
+    def test_js_enabled(self):
+        js = getToolByName(self.portal, 'portal_javascripts')
+        ids = js.getResourcesDict().keys()
+        self.assert_('modernizr.js' in ids)
+        self.assert_('jquery.easing.js' in ids)
+        self.assert_('jquery.jBreadCrumb.js' in ids)
+        self.assert_('main.js' in ids)
+
+    def test_html5_js(self):
+        js = getToolByName(self.portal, 'portal_javascripts')
+        ids = js.getResourcesDict().keys()
+        self.assert_('html5.js' in ids)
+        h5 = js.getResource('html5.js')
+        self.assertEquals(h5.getConditionalcomment(), 'lt IE 9')
+
+        positions = {}
+        for pos, r in enumerate(js.getResources()):
+            positions[r.getId()] = pos
+
+        self.assert_(positions['html5.js'] > positions['jquery.js'])
