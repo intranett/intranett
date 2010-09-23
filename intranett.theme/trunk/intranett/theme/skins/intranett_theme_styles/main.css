@@ -246,6 +246,7 @@ a#portal-logo img {
 #searchbox-fields-wrapper {
     background:#ddd;
     border: 1px solid #ccc;
+    vertical-align: middle;
 }
 .searchSection {
 	font-size: .762em;
