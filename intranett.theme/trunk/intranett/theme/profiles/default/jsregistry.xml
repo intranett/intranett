@@ -3,8 +3,8 @@
  <javascript id="html5.js"
              conditionalcomment="lt IE 9"
              insert-after="jquery.js" />
- <javascript id="modernizr.js" />             
+ <javascript id="modernizr.js" />
  <javascript id="jquery.easing.js" />
- <javascript id="jquery.jBreadCrumb.js" />  
- <javascript id="main.js" />   
+ <javascript id="jquery.jBreadCrumb.js" />
+ <javascript id="main.js" />
 </object>

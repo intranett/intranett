@@ -2,7 +2,7 @@
 <object>
     <order manager="intranett.topbar" skinname="Intranett.no base theme">
       <viewlet name="plone.personal_bar" />
-    </order>    
+    </order>
     <order manager="plone.portalheader" skinname="Intranett.no base theme" based-on="Plone Default">
       <viewlet name="plone.logo" insert-after="plone.skip_links" />
     </order>
@@ -14,14 +14,14 @@
     </order>
     <order manager="plone.contentviews" skinname="Intranett.no base theme" based-on="Plone Default">
       <viewlet name="intranett.collapse.contentviews" insert-before="*" />
-    </order>    
+    </order>
     <order manager="intranett.abovecolumns" skinname="Intranett.no base theme">
       <viewlet name="plone.path_bar" />
-    </order>    
+    </order>
 
     <hidden manager="plone.portalheader" skinname="Intranett.no base theme">
       <viewlet name="plone.personal_bar" />
-    </hidden>       
+    </hidden>
     <hidden manager="plone.abovecontent" skinname="Intranett.no base theme">
       <viewlet name="plone.path_bar" />
     </hidden>
