@@ -3,7 +3,7 @@
   xmlns:five="http://namespaces.zope.org/five"
   i18n_domain="intranett">
 
-  <five:registerPackage package="." initialize=".initialize" />
+  <five:registerPackage package="." />
 
   <include package="Products.CMFPlone" />
   <include package="experimental.catalogqueryplan" />
