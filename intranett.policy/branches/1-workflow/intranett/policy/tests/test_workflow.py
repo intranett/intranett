@@ -42,9 +42,7 @@ class TestWorkflowSetup(IntranettTestCase):
             'File': (),
             'Image': (),
         }
-        workflowed_types = set(ttool.keys()) - no_workflow
-
-        for type_ in workflowed_types:
+        for type_ in set(ttool.keys()) - no_workflow:
             wf = self.wftool.getChainForPortalType(type_)
             expected = workflows.get(type_, ('intranett_workflow', ))
             self.assertEquals(wf, expected,
