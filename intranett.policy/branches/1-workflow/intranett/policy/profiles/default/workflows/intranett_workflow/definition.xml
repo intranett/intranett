@@ -4,14 +4,8 @@
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
- <state state_id="draft" title="Draft">
-  <description>Visible to all intranet users, editable by the owner.</description>
+ <state state_id="published" title="Published">
   <exit-transition transition_id="hide"/>
-  <exit-transition transition_id="publish"/>
- </state>
- <state state_id="internal" title="Internal">
-  <exit-transition transition_id="hide"/>
-  <exit-transition transition_id="redraft"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
@@ -40,9 +34,7 @@
   </permission-map>
  </state>
  <state state_id="private" title="Private">
-  <description>Can only be seen and edited by the owner.</description>
   <exit-transition transition_id="publish"/>
-  <exit-transition transition_id="show"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
@@ -76,18 +68,6 @@
  </transition>
  <transition transition_id="publish" title="Publish" new_state="internal" trigger="USER" before_script="" after_script="">
   <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
-  <guard>
-   <guard-permission>Modify portal content</guard-permission>
-  </guard>
- </transition>
- <transition transition_id="redraft" title="Redraft" new_state="draft" trigger="USER" before_script="" after_script="">
-  <action url="%(content_url)s/content_status_modify?workflow_action=redraft" category="workflow" icon="">Redraft</action>
-  <guard>
-   <guard-permission>Modify portal content</guard-permission>
-  </guard>
- </transition>
- <transition transition_id="show" title="Show" new_state="draft" trigger="USER" before_script="" after_script="">
-  <action url="%(content_url)s/content_status_modify?workflow_action=show" category="workflow" icon="">Show</action>
   <guard>
    <guard-permission>Modify portal content</guard-permission>
   </guard>
