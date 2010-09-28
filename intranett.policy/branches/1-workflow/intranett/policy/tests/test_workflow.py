@@ -22,24 +22,34 @@ class TestWorkflowSetup(IntranettTestCase):
             'ATPathCriterion', 'ATPortalTypeCriterion', 'ATReferenceCriterion',
             'ATRelativePathCriterion', 'ATSelectionCriterion',
             'ATSimpleIntCriterion', 'ATSimpleStringCriterion',
-            'ATSortCriterion', 'Discussion Item', 'FieldsetFolder',
-            'FormBooleanField', 'FormCaptchaField', 'FormCustomScriptAdapter',
-            'FormDateField', 'FormFileField', 'FormFixedPointField',
-            'FormIntegerField', 'FormLabelField', 'FormLikertField',
-            'FormLinesField', 'FormMailerAdapter', 'FormMultiSelectionField',
+            'ATSortCriterion', 'FieldsetFolder', 'FormBooleanField',
+            'FormCaptchaField', 'FormCustomScriptAdapter', 'FormDateField',
+            'FormFileField', 'FormFixedPointField', 'FormIntegerField',
+            'FormLabelField', 'FormLikertField', 'FormLinesField',
+            'FormMailerAdapter', 'FormMultiSelectionField',
             'FormPasswordField', 'FormRichLabelField', 'FormRichTextField',
             'FormSaveDataAdapter', 'FormSelectionField', 'FormStringField',
-            'FormTextField', 'FormThanksPage', 'Plone Site', 'TempFolder',
+            'FormTextField', 'FormThanksPage', 'Plone Site',
         ])
-        asset_workflow = set([
-            'File', 'Image',
-        ])
-        types = set(ttool.keys()) - no_workflow - asset_workflow
-        for type_ in types:
+        for type_ in no_workflow:
             wf = self.wftool.getChainForPortalType(type_)
-            self.assertEquals(wf, ('intranett_workflow', ),
+            self.assertEquals(wf, (),
                               'Found workflow %s for type %s, expected '
-                              '(\'intranett_workflow\'), ' % (wf, type_))
+                              '(), ' % (wf, type_))
+
+        workflows = {
+            'Discussion Item': ('one_state_workflow', ),
+            'File': (),
+            'Image': (),
+        }
+        workflowed_types = set(ttool.keys()) - no_workflow
+
+        for type_ in workflowed_types:
+            wf = self.wftool.getChainForPortalType(type_)
+            expected = workflows.get(type_, ('intranett_workflow', ))
+            self.assertEquals(wf, expected,
+                              'Found workflow %s for type %s, expected '
+                              '%s, ' % (wf, type_, expected))
 
 
 def test_suite():
