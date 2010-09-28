@@ -37,8 +37,6 @@ New finance report
 New HMS procedure
 
 - Hilde adds new document about recycling batteries
-- She is interrupted
-- Continues work a couple days after and adds more information
 - Publishes new document
 - Magnus reads it and leaves a comment
 - Hilde picks up the comment and extends the document
