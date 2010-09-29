@@ -32,7 +32,10 @@
  */
 
 function hideAllMenus(speed) {
-    var switch_menu = jQuery('dl.actionMenu.activated').length > 0;    
+    if($(this).parents('dl.actionMenu.activated')) {
+        return true;
+    }
+    var switch_menu = jQuery('dl.actionMenu.activated').length > 0;
     if (switch_menu) {
         jQuery('dl.actionMenu.activated').find('dd.actionMenuContent').slideUp(speed, function(){
             jQuery(this).parents('.actionMenu:first').toggleClass('activated').toggleClass('deactivated');
@@ -64,7 +67,7 @@ function actionMenuDocumentMouseDown(event) {
     hideAllMenus('fast');
 };
 
-function actionMenuMouseOver(event) {        
+function actionMenuMouseOver(event) {  
     var switch_menu = jQuery('dl.actionMenu.activated').length > 0;
     if (switch_menu) {
         hideAllMenus(0);        
