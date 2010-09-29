@@ -32,7 +32,7 @@
 
     <tal:albumsimages tal:condition="python:albums or images">
         <tal:images tal:condition="batch" tal:repeat="image batch">
-            <tal:beginrow content="string:<div class='photoAlbumEntryRow'>"
+            <tal:beginrow content="structure string:<div class='photoAlbumEntryRow'>"
                           condition="python:repeat['image'].even()" />
                 <div class="photoAlbumEntry">
                             <a tal:define="id python:int(b_start)+int(repeat['image'].number()-1)"
