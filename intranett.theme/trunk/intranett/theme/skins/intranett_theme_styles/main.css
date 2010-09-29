@@ -674,7 +674,7 @@ dl.collapsible dd.collapsibleContent {
 }
 .contentActions a {
     text-decoration: none;
-    padding: 0 0.5em;
+    padding: 0.2em 0.5em;
     cursor: pointer;
 }
 .contentActions span.subMenuTitle {
@@ -705,8 +705,7 @@ dl.collapsible dd.collapsibleContent {
     margin: 0;
     padding: 0;
     font-weight: normal;
-    border-left: 1px solid #fff;
-    border-right: 1px solid #fff;
+    border: none;
 }
 .actionMenu.activated .actionMenuHeader {
  	/*background: #d5d5d5;*/
@@ -816,7 +815,7 @@ dl.collapsible dd.collapsibleContent {
 .actionMenu .actionMenuContent li a {
     display: block;
     white-space: nowrap;
-    margin: 0.2em 0;
+    margin: 0;
     color: #fff;
 }
 .actionMenu .actionMenuContent .selected {
@@ -826,9 +825,9 @@ dl.collapsible dd.collapsibleContent {
     margin: 0.2em 0;
 }
 .actionMenu .actionMenuContent li a:hover {
-    background-color: #3AA5DE;
+    background-color: #646464;
     color: #fff;
-    text-shadow: 0 0 1px #10435e;
+    text-shadow: 0 0 2px #333;
     
 	border-radius: 5px;
 	-moz-border-radius: 5px;

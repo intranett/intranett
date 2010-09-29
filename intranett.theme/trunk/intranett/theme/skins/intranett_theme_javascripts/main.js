@@ -6,8 +6,8 @@
         jQuery.fn.jBreadCrumb.defaults.previewWidth = 15;           
         $("#portal-breadcrumbs").jBreadCrumb(); 
         
-        $("#settings-toggle a").click(function() {
-            // $("#contentviews-wrapper").stop(); 
+        $("#settings-toggle a").click(function(event) {
+            event.stopPropagation(); 
             $("#contentviews-wrapper, #contentviews-wrapper + .contentActions").animate({
                 height: ['toggle', 'swing'],                
                 opacity: 'toggle'
@@ -23,15 +23,6 @@
             });
             return false;
         })
-        
-        $("li.LSRow").hover(
-            function() {
-                alert(this);
-            },
-            function() {
-                alert(this)
-            }
-        );
             
     }); 
 })(jQuery);

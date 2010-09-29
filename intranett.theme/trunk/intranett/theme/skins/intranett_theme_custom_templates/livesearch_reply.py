@@ -127,13 +127,14 @@ else:
             display_title = full_title
         full_title = full_title.replace('"', '&quot;')
         klass = 'contenttype-%s' % ploneUtils.normalizeString(result.portal_type)
-        write('''<a href="%s" title="%s" class="%s">%s</a>''' % (itemUrl, full_title, klass, display_title))
+        write('''<a href="%s" title="%s" class="%s">%s''' % (itemUrl, full_title, klass, display_title))
         display_description = safe_unicode(result.Description)
         if len(display_description) > MAX_DESCRIPTION:
             display_description = ''.join((display_description[:MAX_DESCRIPTION],'...'))
         # need to quote it, to avoid injection of html containing javascript and other evil stuff
         display_description = html_quote(display_description)
         write('''<div class="LSDescr">%s</div>''' % (display_description))
+        write('''</a>''')
         write('''</li>''')
         full_title, display_title, display_description = None, None, None
 
@@ -147,6 +148,11 @@ else:
         write( '<a href="%s" style="font-weight:normal">%s</a>' % ('search?SearchableText=' + searchterms, ts.translate(label_show_all, context=REQUEST)))
         write('''</li>''')
     write('''</ul>''')
+    write('''<script>$("div#LSShadow li a").hover(function() {
+        var $shadow = $('div#LSShadow');                
+        $shadow.find('li.LSHighlight').removeClass('LSHighlight');
+        $(this).parent('li').addClass('LSHighlight');
+    });</script>''')
     write('''</div>''')
     write('''</fieldset>''')
 
