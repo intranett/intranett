@@ -32,9 +32,6 @@
  */
 
 function hideAllMenus(speed) {
-    if($(this).parents('dl.actionMenu.activated')) {
-        return true;
-    }
     var switch_menu = jQuery('dl.actionMenu.activated').length > 0;
     if (switch_menu) {
         jQuery('dl.actionMenu.activated').find('dd.actionMenuContent').slideUp(speed, function(){
@@ -94,7 +91,7 @@ function initializeMenus() {
         
     // add hide function to all links in the dropdown, so the dropdown closes
     // when any link is clicked
-    jQuery('dl.actionMenu > dd.actionMenuContent').click(hideAllMenus);
+    // jQuery('dl.actionMenu > dd.actionMenuContent').click(hideAllMenus);
 };
 
 jQuery(initializeMenus);
