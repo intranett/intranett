@@ -6,6 +6,36 @@
         jQuery.fn.jBreadCrumb.defaults.previewWidth = 15;           
         $("#portal-breadcrumbs").jBreadCrumb(); 
         
+        // Equal height for frontpage promo blocks 
+        var heightEqualizer = function(elems, base_height) {
+            if(elems.eq(0).hasClass("equalized")) {
+                return false;
+            }
+            if(base_height == 0) {
+                base_height = Math.max.apply(null, elems.map(function() { return $(this).height() }).get());           
+                elems.height(base_height);
+                elems.each(function() {
+                    if($(this).find("img").length == 0) {
+                        $(this).addClass("equalized");                    
+                    }                
+                });
+            }
+            else {
+                // if we pass base_height we make inner elements fill the 
+                // whole height
+                $(elems).each( function() {
+                    var outerStuff = $(this).outerHeight(true) - $(this).height();
+                    var elemHeight = base_height - outerStuff; 
+                    $(this).height(elemHeight);           
+                })           
+            }
+            return base_height;
+        }
+        
+        $(".photoAlbumEntryRow").each(function(){
+            heightEqualizer($(this).find(".photoAlbumEntry"), 0);
+        })                
+        
         $("#settings-toggle a").click(function(event) {
             event.stopPropagation(); 
             $("#contentviews-wrapper, #contentviews-wrapper + .contentActions").animate({
@@ -22,7 +52,14 @@
                 }
             });
             return false;
-        })
-            
+        });
+        $("table.listing tr").hover(
+            function() {
+                $(this).addClass("visualHighlight");                
+            },
+            function() {
+                $(this).removeClass("visualHighlight");                
+            }
+        );            
     }); 
 })(jQuery);
