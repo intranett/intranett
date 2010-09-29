@@ -1155,7 +1155,8 @@ body.template-dashboard #content dd.portletFooter {
 .portlet .portletItem > p:nth-child(1) {
 	margin-top: 0;
 }
-.portlet .portletItem a {
+.portlet .portletItem a.tile,
+.portletNavigationTree .portletItem a {
 	display: block;
 	line-height: 1.25em;
 	padding: 0.35em 0 0.4em;
