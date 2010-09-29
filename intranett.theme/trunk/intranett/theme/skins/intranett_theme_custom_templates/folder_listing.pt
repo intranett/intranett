@@ -82,7 +82,7 @@
                         </span>
                     </h2>
                 
-                    <div class="documentByLine discreet">
+                    <!-- <div class="documentByLine discreet">
                         <span tal:condition="python: item_type == 'Event' and item_sametime"
                               i18n:translate="label_event_byline_onlyfrom">
                              <abbr class="dtstart"
@@ -161,7 +161,7 @@
                                 </tal:comment>
                             </metal:description>
                         </tal:byline>
-                    </div>
+                    </div> -->
                 
 
                     <p class="tileBody" tal:condition="item_description">

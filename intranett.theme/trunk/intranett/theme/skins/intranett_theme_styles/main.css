@@ -1111,6 +1111,17 @@ body.template-dashboard #content dd.portletFooter {
 
 /* @end */
 
+/* @group Listings */
+
+h2.tileHeadline {
+	margin-bottom: 0.4em;
+}
+p.tileBody {
+	margin-top: 0;
+}
+
+/* @end */
+
 /* @end */
 
 /* @group Portlets */
