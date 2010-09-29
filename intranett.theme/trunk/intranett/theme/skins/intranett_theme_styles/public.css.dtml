@@ -313,11 +313,6 @@ form.searchPage input.searchButton {
 	-webkit-border-bottom-right-radius: 5px; 
 	
     background-color: #222;
-    background-color: rgba(34,34,34,.8);    
-    background-image: -moz-linear-gradient(center top , rgba(26,26,26,.8), rgba(34,34,34,.7), rgba(34,34,34,.5), rgba(26,26,26,.8)); /* FF3.6 */
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(26,26,26,.8)), color-stop(0.3, rgba(34,34,34,.7)), color-stop(0.7, rgba(34,34,34,.5)), to(rgba(26,26,26,.8))); /* Saf4+, Chrome */
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#222', EndColorStr='#1a1a1a'); /* IE6,IE7 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#222', EndColorStr='#1a1a1a')"; /* IE8 */	   
 
 	box-shadow: 0px 0px 4px #777;
 	-moz-box-shadow: 0px 0px 4px #777; 
