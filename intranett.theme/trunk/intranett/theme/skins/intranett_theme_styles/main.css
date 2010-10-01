@@ -1005,6 +1005,7 @@ textarea#description {
     font-family: Helvetica, Arial, sans-serif;
     color: #5e5e5e;   
     padding: 2px; 
+    font-size: 1em;
 }
 .fieldRequired {
 	color: #f44;
