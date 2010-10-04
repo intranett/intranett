@@ -1,4 +1,5 @@
 from zope.component import queryMultiAdapter
+from zope.component import queryUtility
 from zope.interface import Interface
 from Products.CMFCore.utils import getToolByName
 
@@ -30,6 +31,11 @@ class TestSiteSetup(IntranettTestCase):
         cp = getToolByName(self.portal, 'portal_controlpanel')
         actions = set([a.appId for a in cp.listActions()])
         self.assert_('plone.app.discussion' in actions)
+
+    def test_contentrules_disabled(self):
+        from plone.contentrules.engine.interfaces import IRuleStorage
+        rule = queryUtility(IRuleStorage)
+        self.assertFalse(rule.active)
 
     def test_content(self):
         # This content is only created in the tests, it's too hard to avoid

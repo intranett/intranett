@@ -1,5 +1,7 @@
+from plone.contentrules.engine.interfaces import IRuleStorage
 from plone.app.workflow.remap import remap_workflow
 from Products.CMFCore.utils import getToolByName
+from zope.component import queryUtility
 
 
 def setup_locale(site):
@@ -22,6 +24,12 @@ def ensure_workflow(site):
                    chain=('intranett_workflow',))
 
 
+def disable_contentrules(site):
+    rule = queryUtility(IRuleStorage)
+    if rule is not None:
+        rule.active = False
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -29,3 +37,4 @@ def various(context):
     site = context.getSite()
     setup_locale(site)
     ensure_workflow(site)
+    disable_contentrules(site)
