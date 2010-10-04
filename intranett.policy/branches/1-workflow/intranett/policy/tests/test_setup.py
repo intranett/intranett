@@ -70,7 +70,7 @@ class TestAdmin(IntranettTestCase):
 
     def test_addsite_profiles(self):
         self.loginAsPortalOwner()
-        addsite = self.app.unrestrictedTraverse('@@intranett-addsite')
+        addsite = self.app.unrestrictedTraverse('@@plone-addsite')
         extensions = addsite.profiles()['extensions']
         self.assertEquals(len(extensions), 1)
         profile = extensions[0]
@@ -78,7 +78,7 @@ class TestAdmin(IntranettTestCase):
 
     def test_addsite_call(self):
         self.loginAsPortalOwner()
-        addsite = self.app.unrestrictedTraverse('@@intranett-addsite')
+        addsite = self.app.unrestrictedTraverse('@@plone-addsite')
         result = addsite()
         self.assert_('Create intranet' in result, result)
 
@@ -86,6 +86,6 @@ class TestAdmin(IntranettTestCase):
         request = self.app.REQUEST
         request.form['form.submitted'] = True
         addsite = queryMultiAdapter(
-            (self.app, request), Interface, 'intranett-addsite')
+            (self.app, request), Interface, 'plone-addsite')
         addsite()
         self.assert_('Plone' in self.app.keys())
