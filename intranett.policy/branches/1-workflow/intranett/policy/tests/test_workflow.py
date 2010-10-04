@@ -1,10 +1,8 @@
 import doctest
 
 from Products.CMFCore.utils import getToolByName
-from Testing.ZopeTestCase import FunctionalDocFileSuite as Suite
 
 from intranett.policy.tests.base import IntranettTestCase
-from intranett.policy.tests.base import IntranettFunctionalTestCase
 
 OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
@@ -54,7 +52,4 @@ def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestWorkflowSetup))
-    suite.addTest(Suite('workflow.txt',
-                        optionflags=OPTIONFLAGS,
-                        test_class=IntranettFunctionalTestCase))
     return suite
