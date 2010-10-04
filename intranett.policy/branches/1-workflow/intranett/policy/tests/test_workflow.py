@@ -57,9 +57,10 @@ class TestWorkflowSetup(IntranettTestCase):
         # on the portal object
         self.assertTrue(sm.checkPermission('View', self.portal))
 
-        self.assertEquals(self.portal['front-page'].workflow_history.keys(),
-                          ['intranett_workflow'])
-        self.assertFalse(sm.checkPermission('View', self.portal['front-page']))
+        front = self.portal['front-page']
+        self.assertEquals(front.workflow_history.keys()[-1],
+                          'intranett_workflow')
+        self.assertFalse(sm.checkPermission('View', front))
 
 
 def test_suite():
