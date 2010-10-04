@@ -3,6 +3,8 @@ import doctest
 from AccessControl import getSecurityManager
 from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
+from plone.app.workflow.interfaces import ISharingPageRole
+from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
 
@@ -53,6 +55,12 @@ class TestWorkflowSetup(IntranettTestCase):
             self.assertEquals(wf, expected,
                               'Found workflow %s for type %s, expected '
                               '%s, ' % (wf, type_, expected))
+
+    def test_sharing_page_roles(self):
+        utilities = list(getUtilitiesFor(ISharingPageRole))
+        names = [name for name, util in utilities]
+        self.assertEquals(set(names),
+                          set([u'Contributor', u'Editor', u'Reader']))
 
 
 class TestWorkflowPermissions(IntranettTestCase):
