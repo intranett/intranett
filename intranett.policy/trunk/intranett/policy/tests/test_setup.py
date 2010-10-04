@@ -45,7 +45,7 @@ class TestSiteSetup(IntranettTestCase):
         except Unauthorized:
             self.assert_(True)
         else:
-            self.assert_(False, 'Unauthorized not raised.')
+            self.assert_(False, 'Unauthorized not raised.') # pragma: no cover
 
     def test_portlets_disabled(self):
         self.loginAsPortalOwner()
@@ -63,6 +63,10 @@ class TestSiteSetup(IntranettTestCase):
         ids = [a['addview'].split('/+/')[-1] for a in addable]
 
         self.assert_('plone.portlet.collection.Collection' not in ids)
+        self.assert_('portlets.Calendar' not in ids)
+        self.assert_('portlets.Classic' not in ids)
+        self.assert_('portlets.Login' not in ids)
+        self.assert_('portlets.Review' not in ids)
 
     def test_content(self):
         # This content is only created in the tests, it's too hard to avoid
