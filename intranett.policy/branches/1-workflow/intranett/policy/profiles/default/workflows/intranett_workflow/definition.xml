@@ -66,7 +66,7 @@
    <guard-permission>Modify portal content</guard-permission>
   </guard>
  </transition>
- <transition transition_id="publish" title="Publish" new_state="internal" trigger="USER" before_script="" after_script="">
+ <transition transition_id="publish" title="Publish" new_state="published" trigger="USER" before_script="" after_script="">
   <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
   <guard>
    <guard-permission>Modify portal content</guard-permission>

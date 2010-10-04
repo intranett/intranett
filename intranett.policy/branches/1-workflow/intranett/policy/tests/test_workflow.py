@@ -85,9 +85,35 @@ class TestWorkflowPermissions(IntranettTestCase):
         self.assertFalse(sm.checkPermission('View', folder1))
 
 
+class TestWorkflowTransitions(IntranettTestCase):
+
+    def afterSetUp(self):
+        self.wftool = getToolByName(self.portal, 'portal_workflow')
+        _doAddUser = self.portal.acl_users._doAddUser
+        _doAddUser('member', 'secret', ['Member'], [])
+        _doAddUser('manager', 'secret', ['Manager'], [])
+        _doAddUser('contributor' , 'secret', ['Contributor'],[])
+        _doAddUser('editor' , 'secret', ['Editor'],[])
+        _doAddUser('reader', 'secret', ['Reader'], [])
+
+        self.folder.invokeFactory('Document', id='doc')
+        self.doc = self.folder.doc
+
+    def test_owner_publish_and_hide(self):
+        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+                         'private')
+        self.wftool.doActionFor(self.doc, 'publish')
+        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+                         'published')
+        self.wftool.doActionFor(self.doc, 'hide')
+        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+                         'private')
+
+
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestWorkflowSetup))
     suite.addTest(makeSuite(TestWorkflowPermissions))
+    suite.addTest(makeSuite(TestWorkflowTransitions))
     return suite
