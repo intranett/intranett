@@ -48,6 +48,9 @@ class TestWorkflowSetup(IntranettTestCase):
                               'Found workflow %s for type %s, expected '
                               '%s, ' % (wf, type_, expected))
 
+
+class TestWorkflowPermissions(IntranettTestCase):
+
     def test_no_anonymous_view(self):
         self.logout()
         sm = getSecurityManager()
@@ -86,4 +89,5 @@ def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestWorkflowSetup))
+    suite.addTest(makeSuite(TestWorkflowPermissions))
     return suite
