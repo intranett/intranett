@@ -23,6 +23,7 @@ class TestSiteSetup(IntranettTestCase):
     def test_PloneFormGen(self):
         tt = getToolByName(self.portal, 'portal_types')
         self.assert_('FormFolder' in tt.keys())
+        self.assertEquals(tt['FormFolder'].getIconExprObject(), None)
 
     def test_discussion(self):
         # Test that the profile got applied
