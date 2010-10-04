@@ -17,6 +17,7 @@
       description=""
       handler="intranett.policy.setuphandlers.various">
     <depends name="toolset"/>
+    <depends name="workflow"/>
   </genericsetup:importStep>
 
   <utility factory=".profile.HiddenProfiles"

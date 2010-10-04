@@ -11,4 +11,20 @@
       template="templates/overview.pt"
       />
 
+  <browser:page
+      for="OFS.interfaces.IApplication"
+      name="plone-addsite"
+      class=".admin.AddIntranettSite"
+      permission="zope2.ViewManagementScreens"
+      template="templates/addsite.pt"
+      />
+
+  <browser:page
+      for="OFS.Folder.Folder"
+      name="plone-addsite"
+      class=".admin.AddIntranettSite"
+      permission="zope2.ViewManagementScreens"
+      template="templates/addsite.pt"
+      />
+
 </configure>

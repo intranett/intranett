@@ -24,7 +24,7 @@
 
   <form action="#"
         method="post"
-        tal:attributes="action string:${context/absolute_url}/@@intranett-addsite"
+        tal:attributes="action string:${context/absolute_url}/@@plone-addsite"
         tal:define="profiles view/profiles;
                     base_profiles profiles/base;
                     default_profile profiles/default;
