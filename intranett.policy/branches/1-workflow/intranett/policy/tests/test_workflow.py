@@ -1,5 +1,6 @@
 import doctest
 
+from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
@@ -46,6 +47,19 @@ class TestWorkflowSetup(IntranettTestCase):
             self.assertEquals(wf, expected,
                               'Found workflow %s for type %s, expected '
                               '%s, ' % (wf, type_, expected))
+
+    def test_no_anonymous_view(self):
+        self.logout()
+        sm = getSecurityManager()
+        self.assertFalse(sm.checkPermission('View', self.folder))
+        # We don't want this, but we first need to make sure the login form
+        # and standard error message views work without anon View permission
+        # on the portal object
+        self.assertTrue(sm.checkPermission('View', self.portal))
+
+        self.assertEquals(self.portal['front-page'].workflow_history.keys(),
+                          ['intranett_workflow'])
+        self.assertFalse(sm.checkPermission('View', self.portal['front-page']))
 
 
 def test_suite():
