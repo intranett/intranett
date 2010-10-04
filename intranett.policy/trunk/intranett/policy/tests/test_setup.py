@@ -47,6 +47,23 @@ class TestSiteSetup(IntranettTestCase):
         else:
             self.assert_(False, 'Unauthorized not raised.')
 
+    def test_portlets_disabled(self):
+        self.loginAsPortalOwner()
+        from plone.app.portlets.browser import manage
+        view = manage.ManageContextualPortlets(self.portal, self.app.REQUEST)
+
+        from plone.portlets.interfaces import IPortletManager
+        left = queryUtility(IPortletManager, name='plone.leftcolumn')
+
+        from plone.app.portlets.browser import editmanager
+        renderer = editmanager.EditPortletManagerRenderer(
+            self.portal, self.app.REQUEST, view, left)
+
+        addable = renderer.addable_portlets()
+        ids = [a['addview'].split('/+/')[-1] for a in addable]
+
+        self.assert_('plone.portlet.collection.Collection' not in ids)
+
     def test_content(self):
         # This content is only created in the tests, it's too hard to avoid
         # its creation

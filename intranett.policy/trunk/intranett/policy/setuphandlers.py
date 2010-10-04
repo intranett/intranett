@@ -40,6 +40,8 @@ def disable_collections(site):
     # changed (both depend on Plone 4.1)
     perm_id = 'Add portal topics'
     site.manage_permission(perm_id, roles=[], acquire=0)
+    perm_id = 'plone.portlet.collection: Add collection portlet'
+    site.manage_permission(perm_id, roles=[], acquire=0)
 
 
 def various(context):
