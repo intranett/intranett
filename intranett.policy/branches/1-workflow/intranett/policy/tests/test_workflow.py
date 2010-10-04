@@ -1,11 +1,17 @@
 import doctest
 
 from AccessControl import getSecurityManager
+from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
 
 OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
+
+
+def checkPerm(permission, obj):
+    sm = getSecurityManager()
+    return sm.checkPermission(permission, obj)
 
 
 class TestWorkflowSetup(IntranettTestCase):
@@ -53,47 +59,42 @@ class TestWorkflowPermissions(IntranettTestCase):
 
     def test_no_anonymous_view(self):
         self.logout()
-        sm = getSecurityManager()
         front = self.portal['front-page']
         self.assertEquals(front.workflow_history.keys()[-1],
                           'intranett_workflow')
-        self.assertFalse(sm.checkPermission('View', front))
+        self.assertFalse(checkPerm('View', front))
 
     def test_no_anonymous_view_portal(self):
         self.logout()
-        sm = getSecurityManager()
-        self.assertFalse(sm.checkPermission('View', self.folder))
+        self.assertFalse(checkPerm('View', self.folder))
         # We don't want this, but we first need to make sure the login form
         # and standard error message views work without anon View permission
         # on the portal object
-        self.assertTrue(sm.checkPermission('View', self.portal))
+        self.assertTrue(checkPerm('View', self.portal))
 
     def test_no_anonymous_view_new_page(self):
         self.loginAsPortalOwner()
         self.portal.invokeFactory('Document', 'doc1')
         doc1 = self.portal.doc1
         self.logout()
-        sm = getSecurityManager()
-        self.assertFalse(sm.checkPermission('View', doc1))
+        self.assertFalse(checkPerm('View', doc1))
 
     def test_no_anonymous_view_new_folder(self):
         self.loginAsPortalOwner()
         self.portal.invokeFactory('Folder', 'folder1')
         folder1 = self.portal.folder1
         self.logout()
-        sm = getSecurityManager()
-        self.assertFalse(sm.checkPermission('View', folder1))
+        self.assertFalse(checkPerm('View', folder1))
 
 
 class TestWorkflowTransitions(IntranettTestCase):
 
     def afterSetUp(self):
         self.wftool = getToolByName(self.portal, 'portal_workflow')
-        _doAddUser = self.portal.acl_users._doAddUser
+        _doAddUser = aq_get(self.portal, 'acl_users')._doAddUser
         _doAddUser('member', 'secret', ['Member'], [])
         _doAddUser('manager', 'secret', ['Manager'], [])
-        _doAddUser('contributor' , 'secret', ['Contributor'],[])
-        _doAddUser('editor' , 'secret', ['Editor'],[])
+        _doAddUser('editor', 'secret', ['Editor'], [])
         _doAddUser('reader', 'secret', ['Reader'], [])
 
         self.folder.invokeFactory('Document', id='doc')
@@ -108,6 +109,64 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.wftool.doActionFor(self.doc, 'hide')
         self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
                          'private')
+
+    def _check_edit(self, user):
+        if user is None:
+            self.logout()
+        else:
+            self.login(user)
+        return checkPerm('Modify portal content', self.doc)
+
+    def test_edit_permission_private(self):
+        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+                         'private')
+
+        self.assertFalse(self._check_edit('member'))
+        self.assertTrue(self._check_edit('manager'))
+        self.assertTrue(self._check_edit('editor'))
+        self.assertFalse(self._check_edit('reader'))
+        self.assertFalse(self._check_edit(None))
+
+    def test_edit_permission_published(self):
+        self.wftool.doActionFor(self.doc, 'publish')
+        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+                         'published')
+
+        self.assertFalse(self._check_edit('member'))
+        self.assertTrue(self._check_edit('manager'))
+        self.assertTrue(self._check_edit('editor'))
+        self.assertFalse(self._check_edit('reader'))
+        self.assertFalse(self._check_edit(None))
+
+    def _check_view(self, user):
+        if user is None:
+            self.logout()
+        else:
+            self.login(user)
+        view = checkPerm('View', self.doc)
+        access = checkPerm('Access contents information', self.doc)
+        return view and access
+
+    def test_view_permission_private(self):
+        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+                         'private')
+
+        self.assertFalse(self._check_view('member'))
+        self.assertTrue(self._check_view('manager'))
+        self.assertTrue(self._check_view('editor'))
+        self.assertTrue(self._check_view('reader'))
+        self.assertFalse(self._check_view(None))
+
+    def test_view_permission_published(self):
+        self.wftool.doActionFor(self.doc, 'publish')
+        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+                         'published')
+
+        self.assertTrue(self._check_view('member'))
+        self.assertTrue(self._check_view('manager'))
+        self.assertTrue(self._check_view('editor'))
+        self.assertTrue(self._check_view('reader'))
+        self.assertFalse(self._check_view(None))
 
 
 def test_suite():
