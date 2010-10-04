@@ -30,6 +30,11 @@ def disable_contentrules(site):
         rule.active = False
 
 
+def disallow_sendto(site):
+    perm_id = 'Allow sendto'
+    site.manage_permission(perm_id, roles=['Manager'], acquire=0)
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -38,3 +43,4 @@ def various(context):
     setup_locale(site)
     ensure_workflow(site)
     disable_contentrules(site)
+    disallow_sendto(site)

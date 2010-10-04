@@ -177,10 +177,18 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertFalse(self._check_view(None))
 
 
+class TestSitePermissions(IntranettTestCase):
+
+    def test_disallow_sendto(self):
+        self.logout()
+        self.assertFalse(checkPerm('Allow sendto', self.portal))
+
+
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestWorkflowSetup))
     suite.addTest(makeSuite(TestWorkflowPermissions))
     suite.addTest(makeSuite(TestWorkflowTransitions))
+    suite.addTest(makeSuite(TestSitePermissions))
     return suite
