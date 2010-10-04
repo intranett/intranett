@@ -51,16 +51,35 @@ class TestWorkflowSetup(IntranettTestCase):
     def test_no_anonymous_view(self):
         self.logout()
         sm = getSecurityManager()
+        front = self.portal['front-page']
+        self.assertEquals(front.workflow_history.keys()[-1],
+                          'intranett_workflow')
+        self.assertFalse(sm.checkPermission('View', front))
+
+    def test_no_anonymous_view_portal(self):
+        self.logout()
+        sm = getSecurityManager()
         self.assertFalse(sm.checkPermission('View', self.folder))
         # We don't want this, but we first need to make sure the login form
         # and standard error message views work without anon View permission
         # on the portal object
         self.assertTrue(sm.checkPermission('View', self.portal))
 
-        front = self.portal['front-page']
-        self.assertEquals(front.workflow_history.keys()[-1],
-                          'intranett_workflow')
-        self.assertFalse(sm.checkPermission('View', front))
+    def test_no_anonymous_view_new_page(self):
+        self.loginAsPortalOwner()
+        self.portal.invokeFactory('Document', 'doc1')
+        doc1 = self.portal.doc1
+        self.logout()
+        sm = getSecurityManager()
+        self.assertFalse(sm.checkPermission('View', doc1))
+
+    def test_no_anonymous_view_new_folder(self):
+        self.loginAsPortalOwner()
+        self.portal.invokeFactory('Folder', 'folder1')
+        folder1 = self.portal.folder1
+        self.logout()
+        sm = getSecurityManager()
+        self.assertFalse(sm.checkPermission('View', folder1))
 
 
 def test_suite():
