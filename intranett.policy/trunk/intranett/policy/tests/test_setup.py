@@ -1,3 +1,4 @@
+from AccessControl import Unauthorized
 from zope.component import queryMultiAdapter
 from zope.component import queryUtility
 from zope.interface import Interface
@@ -36,6 +37,15 @@ class TestSiteSetup(IntranettTestCase):
         from plone.contentrules.engine.interfaces import IRuleStorage
         rule = queryUtility(IRuleStorage)
         self.assertFalse(rule.active)
+
+    def test_collection_disabled(self):
+        self.loginAsPortalOwner()
+        try:
+            self.portal.invokeFactory('Topic', 'topic')
+        except Unauthorized:
+            self.assert_(True)
+        else:
+            self.assert_(False, 'Unauthorized not raised.')
 
     def test_content(self):
         # This content is only created in the tests, it's too hard to avoid

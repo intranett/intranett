@@ -21,7 +21,7 @@ def ensure_workflow(site):
     # Force the default content into the correct workflow
     remap_workflow(site,
                    type_ids=('Document', 'Folder', 'Topic'),
-                   chain=('intranett_workflow',))
+                   chain=('intranett_workflow', ))
 
 
 def disable_contentrules(site):
@@ -35,6 +35,13 @@ def disallow_sendto(site):
     site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
+def disable_collections(site):
+    # Once collections are usable or we have a SiteAdmin role this should be
+    # changed (both depend on Plone 4.1)
+    perm_id = 'Add portal topics'
+    site.manage_permission(perm_id, roles=[], acquire=0)
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -44,3 +51,4 @@ def various(context):
     ensure_workflow(site)
     disable_contentrules(site)
     disallow_sendto(site)
+    disable_collections(site)
