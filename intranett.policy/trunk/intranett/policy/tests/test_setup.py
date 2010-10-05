@@ -110,6 +110,12 @@ class TestSiteSetup(IntranettTestCase):
         paz = kss.getResourcesDict()[id_]
         self.assertEquals(paz.getEnabled(), False)
 
+    def test_mail_setup(self):
+        name = self.portal.getProperty('email_from_name')
+        self.assertNotEquals(name, '')
+        address = self.portal.getProperty('email_from_address')
+        self.assertNotEquals(address, '')
+
 
 class TestAdmin(IntranettTestCase):
 
