@@ -55,6 +55,11 @@ class TestSiteSetup(IntranettTestCase):
         else:
             self.assert_(False, 'Unauthorized not raised.') # pragma: no cover
 
+    def test_default_groups(self):
+        gtool = getToolByName(self.portal, 'portal_groups')
+        self.assertEquals(set(gtool.listGroupIds()),
+                          set(['AuthenticatedUsers']))
+
     def test_portlets_disabled(self):
         self.loginAsPortalOwner()
         from plone.app.portlets.browser import manage

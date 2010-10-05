@@ -60,6 +60,13 @@ def disable_portlets(site):
             p._p_changed = True
 
 
+def setup_default_groups(site):
+    gtool = getToolByName(site, 'portal_groups')
+    # We could add more groups like this:
+    # gtool.addGroup('Users', title='Users', roles=['Member'])
+    gtool.removeGroups(['Administrators', 'Reviewers'])
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -71,3 +78,4 @@ def various(context):
     disallow_sendto(site)
     disable_collections(site)
     disable_portlets(site)
+    setup_default_groups(site)
