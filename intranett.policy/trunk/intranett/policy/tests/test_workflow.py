@@ -1,5 +1,3 @@
-import doctest
-
 from AccessControl import getSecurityManager
 from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
@@ -7,8 +5,6 @@ from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
-
-OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
 
 def checkPerm(permission, obj):
