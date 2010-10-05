@@ -6,7 +6,7 @@
         <dl id="portal-personaltools"
             tal:condition="python:view.user_actions and not view.anonymous">
           <tal:block condition="not: view/anonymous"><dt><a id="user-name"
-               tal:attributes="href view/homelink_url"
+               tal:attributes="href string:${context/portal_url}/@@personal-information"
                tal:content="view/user_name">
                 John
             </a></dt><dd><ul><li tal:repeat="action view/user_actions"
