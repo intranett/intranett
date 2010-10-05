@@ -27,6 +27,14 @@ class TestSiteSetup(IntranettTestCase):
         self.assert_('FormFolder' in tt.keys())
         self.assertEquals(tt['FormFolder'].getIconExprObject(), None)
 
+    def test_site_actions(self):
+        self.setRoles('Manager')
+        at = getToolByName(self.portal, 'portal_actions')
+        actions = at.listActionInfos(object=self.portal,
+                                     categories=('site_actions', ))
+        ids = set([a['id'] for a in actions])
+        self.assertEquals(ids, set(['accessibility']))
+
     def test_discussion(self):
         # Test that the profile got applied
         cp = getToolByName(self.portal, 'portal_controlpanel')
