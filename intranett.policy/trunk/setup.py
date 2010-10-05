@@ -5,7 +5,8 @@ version = '0.1'
 setup(name='intranett.policy',
       version=version,
       description="",
-      long_description=open("README.txt").read(),
+      long_description=open("README.txt").read() + "\n" +
+                       open("CHANGES.txt").read(),
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
@@ -14,7 +15,7 @@ setup(name='intranett.policy',
       author='Jarn AS',
       author_email='info@jarn.com',
       url="",
-      license='Private',
+      license='GPL version 2',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['intranett'],
       include_package_data=True,
