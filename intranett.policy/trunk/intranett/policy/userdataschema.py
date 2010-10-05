@@ -1,3 +1,4 @@
+from plone.app.portlets.dashboard import DefaultDashboard
 from plone.app.users.userdataschema import checkEmailAddress
 from plone.app.users.userdataschema import IUserDataSchemaProvider
 from Products.CMFDefault.formlib.schema import FileUpload
@@ -56,3 +57,14 @@ class UserDataSchemaProvider(object):
 
     def getSchema(self):
         return ICustomUserDataSchema
+
+
+class CustomDefaultDashboard(DefaultDashboard):
+
+    def __call__(self):
+        return {
+            'plone.dashboard1': (),
+            'plone.dashboard2': (),
+            'plone.dashboard3': (),
+            'plone.dashboard4': (),
+        }
