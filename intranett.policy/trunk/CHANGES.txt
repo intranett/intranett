@@ -4,6 +4,8 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Added ``munin.zope`` and ``Products.signalstack`` as new dependencies.
+  [hannosch]
 
 0.1 - 2010-10-05
 ----------------
