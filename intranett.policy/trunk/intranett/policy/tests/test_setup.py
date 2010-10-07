@@ -39,6 +39,10 @@ class TestSiteSetup(IntranettTestCase):
         css = getToolByName(self.portal, 'portal_css')
         self.assertEqual(len(css.getEvaluatedResources(self.portal)), 1)
 
+    def test_js_resources(self):
+        js = getToolByName(self.portal, 'portal_javascripts')
+        self.assertEqual(len(js.getEvaluatedResources(self.portal)), 3)
+
     def test_discussion(self):
         # Test that the profile got applied
         cp = getToolByName(self.portal, 'portal_controlpanel')
