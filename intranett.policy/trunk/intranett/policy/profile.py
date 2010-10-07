@@ -10,6 +10,7 @@ class HiddenProfiles(object):
     def getNonInstallableProfiles(self):
         return [
             u'borg.localrole:default',
+            u'plone.app.caching:default',
             u'plone.app.discussion:default',
             u'plone.app.iterate:plone.app.iterate',
             u'plone.app.openid:default',
@@ -28,6 +29,7 @@ class HiddenProducts(object):
     def getNonInstallableProducts(self):
         return [
             'kupu',
+            'plone.app.caching',
             'plone.app.discussion',
             'plone.app.iterate',
             'plone.app.openid',
