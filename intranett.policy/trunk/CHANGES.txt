@@ -7,8 +7,9 @@ Changelog
 - Optimized CSS, KSS and JS resource merging.
   This closes https://jira.jarn.com/browse/INTRANETT-60.
 
-- Include ``plone.app.caching`` as a dependency.
-  Refs https://jira.jarn.com/browse/INTRANETT-76.
+- Include ``plone.app.caching`` as a dependency and configure simple caching
+  for stable resources, theme resources and feeds This closes
+  https://jira.jarn.com/browse/INTRANETT-76.
   [hannosch]
 
 0.2 - 2010-10-06
