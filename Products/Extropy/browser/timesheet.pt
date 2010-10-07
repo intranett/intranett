@@ -93,6 +93,7 @@
                                tal:attributes="value python:start.Date()" />&nbsp;
                         <a tal:define="yesterday python:start-1"
                            tal:attributes="href string:${context_url}?date=${yesterday/Date}">&larr; previous day</a> |
+                        <a tal:attributes="href string:${context_url}">today</a> |
                         <a tal:define="tomorrow python:start+1"
                            tal:attributes="href string:${context_url}?date=${tomorrow/Date}">next day &rarr;</a>
                     </div>
