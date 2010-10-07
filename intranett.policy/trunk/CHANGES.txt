@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Optimized CSS and JS resource merging.
+  https://jira.jarn.com/browse/INTRANETT-60.
+
 - Include ``plone.app.caching`` as a dependency.
   Refs https://jira.jarn.com/browse/INTRANETT-76.
   [hannosch]
