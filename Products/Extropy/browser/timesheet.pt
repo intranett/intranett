@@ -83,19 +83,25 @@
 
               <form method="get"
                     class="enableUnloadProtection"
+                    tal:define="last_task request/last_task | nothing;"
                     tal:attributes="action string:${context_url}">
 
                   <fieldset>
                     <legend>Filter</legend>
-                    <div class="field">
+                    <div class="field"
+                         tal:define="ztu modules/ZTUtils;
+                                     ltask last_task | string:'';">
                         <label for="date:string">Date:</label>
                         <input type="text" size="10" name="date:string"
                                tal:attributes="value python:start.Date()" />&nbsp;
-                        <a tal:define="yesterday python:start-1"
-                           tal:attributes="href string:${context_url}?date=${yesterday/Date}">&larr; previous day</a> |
-                        <a tal:attributes="href string:${context_url}">today</a> |
-                        <a tal:define="tomorrow python:start+1"
-                           tal:attributes="href string:${context_url}?date=${tomorrow/Date}">next day &rarr;</a>
+                        <a tal:define="yesterday python:start-1;
+                                       qs python:ztu.make_query(date=yesterday.Date(), last_task=ltask)"
+                           tal:attributes="href string:${context_url}?${qs}">&larr; previous day</a> |
+                        <a tal:define="qs python:ztu.make_query(last_task=ltask)"
+                           tal:attributes="href string:${context_url}?${qs}">today</a> |
+                        <a tal:define="tomorrow python:start+1;
+                                       qs python:ztu.make_query(date=tomorrow.Date(), last_task=ltask)"
+                           tal:attributes="href string:${context_url}?${qs}">next day &rarr;</a>
                     </div>
                   </fieldset>
 
@@ -116,7 +122,6 @@
                                <tr>
                                    <td>
                                        <select name="hours.task:records:string"
-                                               tal:define="last_task request/last_task | nothing;"
                                                style="width: 20em">
                                           <option value="">-</option>
                                           <tal:projects tal:repeat="customer python:view.groupedtasks(username)">
