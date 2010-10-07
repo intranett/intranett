@@ -35,6 +35,10 @@ class TestSiteSetup(IntranettTestCase):
         ids = set([a['id'] for a in actions])
         self.assertEquals(ids, set(['accessibility']))
 
+    def test_css_resources(self):
+        css = getToolByName(self.portal, 'portal_css')
+        self.assertEqual(len(css.getEvaluatedResources(self.portal)), 1)
+
     def test_discussion(self):
         # Test that the profile got applied
         cp = getToolByName(self.portal, 'portal_controlpanel')
