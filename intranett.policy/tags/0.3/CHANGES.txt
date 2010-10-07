@@ -1,0 +1,24 @@
+Changelog
+=========
+
+0.3 - 2010-10-07
+----------------
+
+- Optimized CSS, KSS and JS resource merging.
+  This closes https://jira.jarn.com/browse/INTRANETT-60.
+
+- Include ``plone.app.caching`` as a dependency and configure simple caching
+  for stable resources, theme resources and feeds This closes
+  https://jira.jarn.com/browse/INTRANETT-76.
+  [hannosch]
+
+0.2 - 2010-10-06
+----------------
+
+- Added ``munin.zope`` and ``Products.signalstack`` as new dependencies.
+  [hannosch]
+
+0.1 - 2010-10-05
+----------------
+
+- Initial release
