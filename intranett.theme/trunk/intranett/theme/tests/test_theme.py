@@ -56,7 +56,7 @@ class TestTheme(IntranettTestCase):
 
         self.assert_(positions['html5.js'] > positions['jquery.js'])
         
-    def test_frontpge_view_registration(self):
+    def test_frontpge_view(self):
         self.failUnless('frontpage_view' in [v[0] for v in self.portal.getAvailableLayouts()])
         
     def test_frontpage_view_is_default(self):

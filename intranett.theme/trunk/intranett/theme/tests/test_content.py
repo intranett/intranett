@@ -9,4 +9,4 @@ class TestContent(IntranettTestCase):
         self.assert_(u'navigation' in mapping.keys())
         nav = mapping[u'navigation']
         self.assertEquals(nav.topLevel, 1)
-        self.assertEquals(nav.currentFolderOnly, True)
+        self.assertEquals(nav.currentFolderOnly, True)        

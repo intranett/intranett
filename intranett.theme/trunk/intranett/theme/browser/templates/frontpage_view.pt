@@ -5,8 +5,29 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
+<head>
+    <metal:block fill-slot="top_slot"
+                 tal:define="disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+</head>      
 <body>
-
+    
+    <metal:content fill-slot="body">
+        <div id="frontpage-highlight" class="row fpBlock">
+            <div class="cell width-full position-0"><div class="visualPadding">Highlight</div></div>
+        </div>
+        <div id="frontpage-columns" class="row">
+            <div class="cell width-8 position-0 fpBlock">
+                <div class="visualPadding">Left column</div>
+            </div>
+            <div class="cell width-8 position-8 fpBlock">
+                <div class="visualPadding">Right column</div>
+            </div>            
+        </div>
+        <div id="frontpage-bottom" class="row fpBlock">
+            <div class="cell width-full position-0"><div class="visualPadding">Bottom. Just in case</div></div>
+        </div>        
+    </metal:content>
 
 </body>
 </html>

@@ -87,4 +87,4 @@ These do not strictly conform to the grid, but are useful for certain layouts. *
 
 /* Full/leftmost are useful synonyms for full width and leftmost positioning */
 .position-leftmost  { margin-left: -100%   }
-.width-full { width: 97.91667% }
+.width-full { width: 100% }
