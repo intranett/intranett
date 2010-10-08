@@ -67,4 +67,21 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="frontpage_view"
+      class=".frontpage.FrontpageView"
+      template="templates/frontpage_view.pt"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+      />
+
+  <browser:menuItem
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      menu="plone_displayviews"
+      title="Frontpage view"
+      action="frontpage_view"
+      description="Frontpage view for intranets."
+      />        
+
 </configure>
