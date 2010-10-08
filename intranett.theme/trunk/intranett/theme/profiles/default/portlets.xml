@@ -2,6 +2,25 @@
 <portlets
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="plone">
+    
+    <!-- Columns (portlet managers) -->
+
+    <portletmanager 
+      name="frontpage.highlight" 
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />
+    <portletmanager 
+      name="frontpage.portlets.left" 
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />
+    <portletmanager 
+      name="frontpage.portlets.right" 
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />
+    <portletmanager 
+      name="frontpage.bottom" 
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />                      
 
     <assignment name="navigation"
         category="context"
