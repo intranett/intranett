@@ -84,6 +84,15 @@
       title="Frontpage view"
       action="frontpage_view"
       description="Frontpage view for intranets."
-      />        
+      /> 
+      
+  <browser:page
+      name="manage-frontpage"        
+      for="plone.portlets.interfaces.ILocalPortletAssignable"
+      class="plone.app.portlets.browser.manage.ManageContextualPortlets"
+      permission="plone.app.portlets.ManagePortlets"
+      layer=".interfaces.IThemeSpecific"
+      template="templates/manage-frontpage.pt"
+      />
 
 </configure>
