@@ -28,7 +28,7 @@
         manager="frontpage.highlight"
         type="plone.portlet.static.Static"
         visible="True">
-        <property name="text">Test frontpage highlight text</property>        
+        <property name="header">Frontpage Highlight</property>        
         <property name="text">Test frontpage highlight text</property>
     </assignment>
     
@@ -38,6 +38,7 @@
         manager="frontpage.bottom"
         type="plone.portlet.static.Static"
         visible="True">
+        <property name="header">Frontpage Bottom</property>                
         <property name="text">Test frontpage bottom text</property>
     </assignment>
     
