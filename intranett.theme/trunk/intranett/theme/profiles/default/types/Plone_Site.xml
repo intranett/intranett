@@ -7,4 +7,9 @@
   <element value="frontpage_view" />
   <element value="folder_summary_view" remove="True"/>
  </property>
+ <action title="Edit" action_id="edit-frontpage" category="object" condition_expr=""
+    url_expr="string:${object_url}/manage-frontpage" visible="True"
+    i18n:attributes="title">
+  <permission value="plone.app.portlets.ManagePortlets"/>
+ </action> 
 </object>
