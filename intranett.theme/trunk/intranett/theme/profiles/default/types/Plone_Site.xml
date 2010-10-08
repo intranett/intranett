@@ -4,7 +4,7 @@
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="default_view">frontpage_view</property>   
  <property name="view_methods" purge="False">
-  <element value="folder_summary_view" remove="True"/>     
   <element value="frontpage_view" />
+  <element value="folder_summary_view" remove="True"/>
  </property>
 </object>
