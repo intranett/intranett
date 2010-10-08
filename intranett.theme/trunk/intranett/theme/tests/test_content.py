@@ -40,4 +40,24 @@ class TestFrontpage(IntranettTestCase):
         self.failUnless(IFrontpagePortletManagers.providedBy(highlight))
         self.failUnless(IFrontpagePortletManagers.providedBy(portlets_right))
         self.failUnless(IFrontpagePortletManagers.providedBy(portlets_left))        
-        self.failUnless(IFrontpagePortletManagers.providedBy(bottom))                
+        self.failUnless(IFrontpagePortletManagers.providedBy(bottom))    
+        
+    def test_static_portlet_in_highlight(self):
+        highlight = '++contextportlets++frontpage.highlight'
+        mapping = self.portal.restrictedTraverse(highlight)
+        self.assert_(u'highlight' in mapping.keys(), 'Highlight static portlet is not registered for frontpage.highlight')
+        
+    def test_static_portlet_in_bottom(self):
+        bottom = '++contextportlets++frontpage.bottom'
+        mapping = self.portal.restrictedTraverse(bottom)
+        self.assert_(u'bottom' in mapping.keys(), 'Bottom static portlet is not registered for frontpage.bottom')        
+        
+    def test_news_in_frontpage_left(self):
+        portlets_left = '++contextportlets++frontpage.portlets.left'
+        mapping = self.portal.restrictedTraverse(portlets_left)
+        self.assert_(u'news' in mapping.keys(), 'News portlet is not registered for portlets.left')
+        
+    def test_events_in_frontpage_right(self):
+        portlets_right = '++contextportlets++frontpage.portlets.right'
+        mapping = self.portal.restrictedTraverse(portlets_right)
+        self.assert_(u'events' in mapping.keys(), 'Events portlet is not registered for portlets.right')        

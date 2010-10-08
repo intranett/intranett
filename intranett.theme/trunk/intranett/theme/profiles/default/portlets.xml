@@ -22,6 +22,40 @@
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />                      
 
+    <assignment name="highlight"
+        category="context"
+        key="/"
+        manager="frontpage.highlight"
+        type="plone.portlet.static.Static"
+        visible="True">
+        <property name="text">"<p>Test frontpage highlight text</p>"</property>
+    </assignment>
+    
+    <assignment name="bottom"
+        category="context"
+        key="/"
+        manager="frontpage.bottom"
+        type="plone.portlet.static.Static"
+        visible="True">
+        <property name="text">"<p>Test frontpage bottom text</p>"</property>
+    </assignment>
+    
+    <assignment name="news"
+        category="context"
+        key="/"
+        manager="frontpage.portlets.left"
+        type="portlets.News"
+        visible="True">
+    </assignment>        
+    
+    <assignment name="events"
+        category="context"
+        key="/"
+        manager="frontpage.portlets.right"
+        type="portlets.Events"
+        visible="True">
+    </assignment>    
+
     <assignment name="navigation"
         category="context"
         key="/"
