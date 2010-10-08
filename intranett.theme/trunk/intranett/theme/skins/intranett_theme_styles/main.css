@@ -1306,6 +1306,10 @@ body > footer strong {
 
 /* @group Frontpage */
 
+#frontpage-highlight,
+#frontpage-columns {
+	margin: 0 0 1.25em;
+}
 .fpBlock .visualPadding {
 	padding: 1em;
 	border: 1px solid #CCCCCC;
@@ -1315,6 +1319,23 @@ body > footer strong {
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */
 }
+#frontpage-columns .width-8 {
+	width: 49% !important;
+}
+#frontpage-columns .position-8 {
+	margin-left: -49%;
+}
+
+/* @group Edit frontpage */
+
+body.template-manage-frontpage .portlets-manager .portletAssignments {
+	display: none;
+}
+body.template-manage-frontpage .portlets-manager .section+.portletAssignments {
+	display: block;
+}
+
+/* @end */
 
 /* @end */
 

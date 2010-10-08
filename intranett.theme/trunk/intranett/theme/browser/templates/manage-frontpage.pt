@@ -5,10 +5,13 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
 <head>
+    <metal:block fill-slot="top_slot"
+                 tal:define="disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />    
     <metal:javascript fill-slot="javascript_head_slot" tal:omit-tag="">
         <link type="text/css" rel="kinetic-stylesheet"
             tal:attributes="href string:${context/absolute_url}/++resource++manage-portlets.kss"/>
-    </metal:javascript>
+    </metal:javascript>    
 </head>
 
 <body>
@@ -54,8 +57,31 @@
           do so using the drop-down boxes. Portlets that are included by these categories
           are shown below the selection box.
       </p>
+      
+      <div id="frontpage-highlight" class="row fpBlock">
+          <div class="cell width-full position-0"><div class="visualPadding">
+              <tal:block replace="structure provider:frontpage.highlight" />
+          </div></div>
+      </div>
+      <div id="frontpage-columns" class="row">
+          <div class="cell width-8 position-0 fpBlock">
+              <div class="visualPadding">
+                  <tal:block replace="structure provider:frontpage.portlets.left" />
+              </div>
+          </div>
+          <div class="cell width-8 position-8 fpBlock">
+              <div class="visualPadding">
+                  <tal:block replace="structure provider:frontpage.portlets.right" />
+              </div>
+          </div>            
+      </div>
+      <div id="frontpage-bottom" class="row fpBlock">
+          <div class="cell width-full position-0"><div class="visualPadding">
+              <tal:block replace="structure provider:frontpage.bottom" />
+          </div></div>
+      </div>      
 
-      <div tal:condition="view/has_legacy_portlets">
+      <!-- <div tal:condition="view/has_legacy_portlets">
 
         <h2 i18n:translate="title_legacy_portlets">Legacy portlets</h2>
 
@@ -75,7 +101,8 @@
 
         </form>
 
-      </div>
+      </div> -->
+      
   </div>
   
 </metal:main>

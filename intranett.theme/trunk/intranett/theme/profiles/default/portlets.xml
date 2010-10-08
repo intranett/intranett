@@ -30,6 +30,7 @@
         visible="True">
         <property name="header">Frontpage Highlight</property>        
         <property name="text">Test frontpage highlight text</property>
+        <property name="omit_border">True</property>
     </assignment>
     
     <assignment name="bottom"
@@ -40,6 +41,7 @@
         visible="True">
         <property name="header">Frontpage Bottom</property>                
         <property name="text">Test frontpage bottom text</property>
+        <property name="omit_border">True</property>    
     </assignment>
     
     <assignment name="news"
