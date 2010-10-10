@@ -18,7 +18,7 @@ class TestContent(IntranettTestCase):
 
 class TestFrontpage(IntranettTestCase):
 
-    def test_frontpge_view_registration(self):
+    def test_frontpage_view_registration(self):
         layouts = [v[0] for v in self.portal.getAvailableLayouts()]
         self.assert_('frontpage_view' in layouts,
                      'frontpage_view is not registered for Plone Site')

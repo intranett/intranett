@@ -74,7 +74,6 @@
       name="frontpage_view"
       class=".frontpage.FrontpageView"
       template="templates/frontpage_view.pt"
-      layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
       />
 
