@@ -1312,12 +1312,11 @@ body > footer strong {
 }
 .fpBlock .visualPadding {
 	padding: 1em;
-	border: 1px solid #CCCCCC;
-	background-color: #f7f7f7;    
-    background-image: -moz-linear-gradient(top, #f7f7f7, rgba(238, 238, 238, 0.9), #e6e6e6); /* FF3.6 */
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */
+	border: 1px solid #ddd;
+	
+	/*box-shadow: 0px 0px 8px #eee;
+	-moz-box-shadow: 0px 0px 8px #eee; 
+	-webkit-box-shadow: 0px 0px 8px #eee;*/ 	
 }
 #frontpage-columns .width-8 {
 	width: 49% !important;
