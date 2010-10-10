@@ -88,7 +88,7 @@
   <browser:page
       name="manage-frontpage"
       for="plone.portlets.interfaces.ILocalPortletAssignable"
-      class="plone.app.portlets.browser.manage.ManageContextualPortlets"
+      class=".manage.IntranettManageContextualPortlets"
       permission="plone.app.portlets.ManagePortlets"
       layer=".interfaces.IThemeSpecific"
       template="templates/manage-frontpage.pt"
