@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
 <object name="Plone Site"
-   meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="default_view">frontpage_view</property>   
+ <property name="default_view">frontpage_view</property>
  <property name="view_methods" purge="False">
   <element value="frontpage_view" />
   <element value="folder_summary_view" remove="True"/>
  </property>
- <action title="Edit" action_id="edit-frontpage" category="object" condition_expr=""
-    url_expr="string:${object_url}/manage-frontpage" visible="True"
-    i18n:attributes="title">
+ <action title="Edit" action_id="edit-frontpage" category="object"
+    condition_expr="" url_expr="string:${object_url}/manage-frontpage"
+    visible="True" i18n:attributes="title">
   <permission value="plone.app.portlets.ManagePortlets"/>
- </action> 
+ </action>
 </object>
