@@ -19,19 +19,22 @@ class TestContent(IntranettTestCase):
 class TestFrontpage(IntranettTestCase):
 
     def test_frontpge_view_registration(self):
-        self.assert_('frontpage_view' in [v[0] for v in self.portal.getAvailableLayouts()], 'frontpage_view is not registered for Plone Site')
+        layouts = [v[0] for v in self.portal.getAvailableLayouts()]
+        self.assert_('frontpage_view' in layouts,
+                     'frontpage_view is not registered for Plone Site')
 
     def test_frontpage_view_is_default(self):
-        self.assertEquals(self.portal.getLayout(), 'frontpage_view', 'frontpage_view is not default view for Plone Site')
+        self.assertEquals(self.portal.getLayout(), 'frontpage_view',
+                          'frontpage_view is not default view for Plone Site')
 
     def test_portletmanagers_registration(self):
         sm = getSiteManager(self.portal)
         registrations = [r.name for r in sm.registeredUtilities()
-                            if IPortletManager == r.provided]
-        self.assert_('frontpage.highlight' in registrations, 'frontpage.highlight is not registered')
-        self.assert_('frontpage.portlets.left' in registrations, 'frontpage.portlets.left is not registered')
-        self.assert_('frontpage.portlets.right' in registrations, 'frontpage.portlets.right is not registered')
-        self.assert_('frontpage.bottom' in registrations, 'frontpage.bottom is not registered')
+                         if IPortletManager == r.provided]
+        self.assert_('frontpage.highlight' in registrations)
+        self.assert_('frontpage.portlets.left' in registrations)
+        self.assert_('frontpage.portlets.right' in registrations)
+        self.assert_('frontpage.bottom' in registrations)
 
     def testFrontpageInterfaces(self):
         highlight = getUtility(IPortletManager, 'frontpage.highlight')
@@ -47,19 +50,25 @@ class TestFrontpage(IntranettTestCase):
     def test_static_portlet_in_highlight(self):
         highlight = '++contextportlets++frontpage.highlight'
         mapping = self.portal.restrictedTraverse(highlight)
-        self.assert_(u'highlight' in mapping.keys(), 'Highlight static portlet is not registered for frontpage.highlight')
+        self.assert_(u'highlight' in mapping.keys(),
+                     'Highlight static portlet is not registered for '
+                     'frontpage.highlight')
 
     def test_static_portlet_in_bottom(self):
         bottom = '++contextportlets++frontpage.bottom'
         mapping = self.portal.restrictedTraverse(bottom)
-        self.assert_(u'bottom' in mapping.keys(), 'Bottom static portlet is not registered for frontpage.bottom')
+        self.assert_(u'bottom' in mapping.keys(),
+                     'Bottom static portlet is not registered for '
+                     'frontpage.bottom')
 
     def test_news_in_frontpage_left(self):
         portlets_left = '++contextportlets++frontpage.portlets.left'
         mapping = self.portal.restrictedTraverse(portlets_left)
-        self.assert_(u'news' in mapping.keys(), 'News portlet is not registered for portlets.left')
+        self.assert_(u'news' in mapping.keys(),
+                     'News portlet is not registered for portlets.left')
 
     def test_events_in_frontpage_right(self):
         portlets_right = '++contextportlets++frontpage.portlets.right'
         mapping = self.portal.restrictedTraverse(portlets_right)
-        self.assert_(u'events' in mapping.keys(), 'Events portlet is not registered for portlets.right')
+        self.assert_(u'events' in mapping.keys(),
+                     'Events portlet is not registered for portlets.right')
