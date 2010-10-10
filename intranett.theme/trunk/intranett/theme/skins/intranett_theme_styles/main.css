@@ -1325,6 +1325,9 @@ body > footer strong {
 #frontpage-columns .position-8 {
 	margin-left: -49%;
 }
+#viewlet-below-content .managePortletsFallback {
+	display: none;
+}
 
 /* @group Edit frontpage */
 
