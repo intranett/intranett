@@ -1,0 +1,33 @@
+body.template-login_form div.field label,
+body.template-logged_out div.field label,
+body.template-login_failed div.field label {
+	margin-left: -230px;
+}
+
+/*body > header nav ul:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    zoom: 1;
+}*/
+body > header nav li {
+    display: inline;
+}
+body > header nav li a {
+    float:left;
+    display: block;
+    padding-bottom: 1.7em;
+}
+#portal-searchbox button.searchButton {
+    font-size: 0.76em;
+    margin: 0;    
+    width: auto;
+    overflow:visible;    
+}
+#searchGadget {
+    border-color: transparent !important;
+    margin: 0;
+    float:left;
+}

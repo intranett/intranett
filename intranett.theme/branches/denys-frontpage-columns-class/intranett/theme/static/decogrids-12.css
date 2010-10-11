@@ -1,0 +1,76 @@
+/* The 12-column Deco Grid System. 
+ * Available in multiple variants, see http://deco.gs
+ *
+ * Cells are   6.25%    (=60px)
+ * Margins are 1.04166% (=10px) (times two, left and right)
+ * Total is    8.33333%. (=80px) (which makes 12 columns)
+ * 
+ * If page width is fixed to 960px width:
+ * Cell will be equivalent to 60px, left/right margin will be 10px.
+ *
+ */
+
+.row {
+  float: left;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+.cell {
+  position: relative;
+  float: left;
+  left: 100%;
+}
+
+/* Width classes. 
+   For a given cell width, the calculation is: 
+   width = (total cell width) * n - (margin*2) 
+   In this case: (8.333*n - 2.08333)% */
+.width-1  { width: 6.2500%   }
+.width-2  { width: 14.583% }
+.width-3  { width: 22.916% }
+.width-4  { width: 31.250% }
+.width-5  { width: 39.583% }
+.width-6  { width: 47.916% }
+.width-7  { width: 56.249% }
+.width-8  { width: 64.583% }
+.width-9  { width: 72.916% }
+.width-10 { width: 81.249% }
+.width-11 { width: 89.583% }
+.width-12 { width: 97.916% }
+
+/* Positioning classes, these are subtracting from a rightmost 
+   position, which is why they seem the wrong way around */
+/* For a given position, the calculation is:
+   -100 + (total cell width * n)
+   In this case: margin-left: -100 + (8.333*n) */
+.position-0  { margin-left: -100%    }
+.position-1  { margin-left: -91.667% }
+.position-2  { margin-left: -83.334% }
+.position-3  { margin-left: -75.001% }
+.position-4  { margin-left: -66.668% }
+.position-5  { margin-left: -58.335% }
+.position-6  { margin-left: -50.002% }
+.position-7  { margin-left: -41.669% }
+.position-8  { margin-left: -33.336% }
+.position-9  { margin-left: -25.003% }
+.position-10 { margin-left: -16.67% }
+.position-11 { margin-left: -8.337% }
+
+/* End of the core Deco Grid System */
+
+/* Convenience classes — ¼, ½, ¾ widths and ¼, ½, ¾ positions. 
+   Not strictly necessary. */
+.width-1\3a 2 { width:    47.916%; } /* .width-1:2 */
+.width-1\3a 4 { width:    22.916%; } /* .width-1:4 */
+.width-3\3a 4 { width:    72.916%; } /* .width-3:4 */
+.position-1\3a 4 {margin-left:    -75.001%;} /* .position-1:4 */
+.position-1\3a 2 {margin-left:    -50.002%;} /* .position-1:2 */
+.position-3\3a 4 {margin-left:    -25.003%;} /* .position-3:4 */
+
+
+/* Special classes for ⅓, ⅔ widths and ⅓, ⅔ positions. */
+.width-1\3a 3 { width: 31.250%; } /* .width-1:3 */
+.width-2\3a 3 { width: 64.583%; } /* .width-2:3 */
+.position-1\3a 3 {margin-left: -66.668%;} /* .position-1:3 */
+.position-2\3a 3 {margin-left: -33.336%;} /* .position-2:3 */
