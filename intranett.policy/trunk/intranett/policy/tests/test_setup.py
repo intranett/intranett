@@ -37,7 +37,9 @@ class TestSiteSetup(IntranettTestCase):
 
     def test_css_resources(self):
         css = getToolByName(self.portal, 'portal_css')
-        self.assertEqual(len(css.getEvaluatedResources(self.portal)), 2)
+        resources = css.getEvaluatedResources(self.portal)
+        self.assertEqual(len(resources), 2)
+        self.assert_(resources[1]._data['id'].startswith('IEFixes'))
 
     def test_kss_resources(self):
         kss = getToolByName(self.portal, 'portal_kss')
