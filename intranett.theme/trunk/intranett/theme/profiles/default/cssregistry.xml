@@ -4,7 +4,7 @@
  <stylesheet id="reset.css" insert-before="*" /> 
  <stylesheet id="decogrids-16.css" />
  <stylesheet id="main.css" />     
- <stylesheet id="IEFixes.css" insert-after="main.css" enabled="1"
+ <stylesheet id="IEFixes.css" insert-after="*" enabled="1"
              conditionalcomment="lt IE 9" /> 
     
  <stylesheet title="" id="base.css" enabled="0" />
