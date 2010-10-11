@@ -1310,6 +1310,12 @@ body > footer strong {
 #frontpage-columns {
 	margin: 0 0 22px;
 }
+/*#frontpage-columns {
+	display: table-row;
+}
+#frontpage-columns .fpBlock {
+	display: table-cell;
+}*/
 .fpBlock .visualPadding {
 	padding: 1em;
 	border: 1px solid #ddd;

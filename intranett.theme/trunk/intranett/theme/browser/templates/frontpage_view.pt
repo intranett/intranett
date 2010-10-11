@@ -12,30 +12,41 @@
 </head>      
 <body>
     
-    <metal:content fill-slot="body">
-        <div id="frontpage-highlight" class="row fpBlock">
+    <metal:content fill-slot="body"
+                   tal:define="highlight python:plone_view.have_portlets('frontpage.highlight', view);
+                               fp_left python:plone_view.have_portlets('frontpage.portlets.left', view);
+                               fp_central python:plone_view.have_portlets('frontpage.portlets.central', view);
+                               fp_right python:plone_view.have_portlets('frontpage.portlets.right', view);
+                               bottom python:plone_view.have_portlets('frontpage.bottom', view)">
+        <div id="frontpage-highlight" class="row fpBlock"
+             tal:condition="highlight">
             <div class="cell width-full position-0"><div class="visualPadding">
                 <tal:block replace="structure provider:frontpage.highlight" />
             </div></div>
         </div>
         <div id="frontpage-columns" class="row">
-            <div class="cell width-5 position-0 fpBlock">
+            <div class="cell width-5 position-0 fpBlock"
+                 tal:attributes="class python:"
+                 tal:condition="fp_left">
                 <div class="visualPadding">
                     <tal:block replace="structure provider:frontpage.portlets.left" />
                 </div>
             </div>
-            <div class="cell width-5 position-5 fpBlock">
+            <div class="cell width-5 position-5 fpBlock"
+                 tal:condition="fp_central">
                 <div class="visualPadding">
                     <tal:block replace="structure provider:frontpage.portlets.central" />
                 </div>
             </div>            
-            <div class="cell width-5 position-10 fpBlock">
+            <div class="cell width-5 position-10 fpBlock"
+                 tal:condition="fp_right">
                 <div class="visualPadding">
                     <tal:block replace="structure provider:frontpage.portlets.right" />
                 </div>
             </div>            
         </div>
-        <div id="frontpage-bottom" class="row fpBlock">
+        <div id="frontpage-bottom" class="row fpBlock"
+             tal:condition="bottom">
             <div class="cell width-full position-0"><div class="visualPadding">
                 <tal:block replace="structure provider:frontpage.bottom" />
             </div></div>
