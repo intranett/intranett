@@ -19,12 +19,17 @@
             </div></div>
         </div>
         <div id="frontpage-columns" class="row">
-            <div class="cell width-8 position-0 fpBlock">
+            <div class="cell width-5 position-0 fpBlock">
                 <div class="visualPadding">
                     <tal:block replace="structure provider:frontpage.portlets.left" />
                 </div>
             </div>
-            <div class="cell width-8 position-8 fpBlock">
+            <div class="cell width-5 position-5 fpBlock">
+                <div class="visualPadding">
+                    <tal:block replace="structure provider:frontpage.portlets.central" />
+                </div>
+            </div>            
+            <div class="cell width-5 position-10 fpBlock">
                 <div class="visualPadding">
                     <tal:block replace="structure provider:frontpage.portlets.right" />
                 </div>

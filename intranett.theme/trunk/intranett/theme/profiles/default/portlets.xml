@@ -14,6 +14,10 @@
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
     <portletmanager 
+      name="frontpage.portlets.central" 
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />      
+    <portletmanager 
       name="frontpage.portlets.right" 
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
@@ -55,10 +59,21 @@
     <assignment name="events"
         category="context"
         key="/"
-        manager="frontpage.portlets.right"
+        manager="frontpage.portlets.central"
         type="portlets.Events"
         visible="True">
-    </assignment>    
+    </assignment>
+    
+    <assignment name="fp_static_right"
+        category="context"
+        key="/"
+        manager="frontpage.portlets.right"
+        type="plone.portlet.static.Static"
+        visible="True">
+        <property name="header">Frontpage right column</property>                
+        <property name="text">Test frontpage right text</property>
+        <property name="omit_border">True</property>    
+    </assignment>        
 
     <assignment name="navigation"
         category="context"

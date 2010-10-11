@@ -33,17 +33,21 @@ class TestFrontpage(IntranettTestCase):
                          if IPortletManager == r.provided]
         self.assert_('frontpage.highlight' in registrations)
         self.assert_('frontpage.portlets.left' in registrations)
+        self.assert_('frontpage.portlets.central' in registrations)
         self.assert_('frontpage.portlets.right' in registrations)
         self.assert_('frontpage.bottom' in registrations)
 
     def testFrontpageInterfaces(self):
         highlight = getUtility(IPortletManager, 'frontpage.highlight')
         portlets_right = getUtility(IPortletManager, 'frontpage.portlets.left')
+        portlets_central = getUtility(IPortletManager,
+                                      'frontpage.portlets.central')
         portlets_left = getUtility(IPortletManager, 'frontpage.portlets.right')
         bottom = getUtility(IPortletManager, 'frontpage.bottom')
 
         self.failUnless(IFrontpagePortletManagers.providedBy(highlight))
         self.failUnless(IFrontpagePortletManagers.providedBy(portlets_right))
+        self.failUnless(IFrontpagePortletManagers.providedBy(portlets_central))
         self.failUnless(IFrontpagePortletManagers.providedBy(portlets_left))
         self.failUnless(IFrontpagePortletManagers.providedBy(bottom))
 
@@ -67,8 +71,14 @@ class TestFrontpage(IntranettTestCase):
         self.assert_(u'news' in mapping.keys(),
                      'News portlet is not registered for portlets.left')
 
-    def test_events_in_frontpage_right(self):
+    def test_events_in_frontpage_central(self):
+        portlets_central = '++contextportlets++frontpage.portlets.central'
+        mapping = self.portal.restrictedTraverse(portlets_central)
+        self.assert_(u'events' in mapping.keys(),
+                     'Events portlet is not registered for portlets.central')
+                     
+    def test_static_in_frontpage_right(self):
         portlets_right = '++contextportlets++frontpage.portlets.right'
         mapping = self.portal.restrictedTraverse(portlets_right)
-        self.assert_(u'events' in mapping.keys(),
-                     'Events portlet is not registered for portlets.right')
+        self.assert_(u'fp_static_right' in mapping.keys(),
+                     'FP static right is not registered for portlets.right')                     
