@@ -37,7 +37,7 @@ class TestSiteSetup(IntranettTestCase):
 
     def test_css_resources(self):
         css = getToolByName(self.portal, 'portal_css')
-        self.assertEqual(len(css.getEvaluatedResources(self.portal)), 1)
+        self.assertEqual(len(css.getEvaluatedResources(self.portal)), 2)
 
     def test_kss_resources(self):
         kss = getToolByName(self.portal, 'portal_kss')
