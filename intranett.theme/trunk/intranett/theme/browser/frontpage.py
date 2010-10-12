@@ -4,7 +4,7 @@ from zope.publisher.browser import BrowserView
 class FrontpageView(BrowserView):
     """Frontpage view
     """
-    
+
     def columns_class(self):
         ploneview = self.context.restrictedTraverse('@@plone')
         cols = ['frontpage.portlets.left',

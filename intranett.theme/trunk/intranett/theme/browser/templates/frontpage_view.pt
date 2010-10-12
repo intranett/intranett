@@ -9,9 +9,9 @@
     <metal:block fill-slot="top_slot"
                  tal:define="disable_column_one python:request.set('disable_plone.leftcolumn',1);
                              disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
-</head>      
+</head>
 <body>
-    
+
     <metal:content fill-slot="body"
                    tal:define="highlight python:plone_view.have_portlets('frontpage.highlight', view);
                                fp_left python:plone_view.have_portlets('frontpage.portlets.left', view);
@@ -39,21 +39,21 @@
                 <div class="visualPadding">
                     <tal:block replace="structure provider:frontpage.portlets.central" />
                 </div>
-            </div>            
+            </div>
             <div class="cell fpBlock"
                  tal:attributes="class string:cell fpBlock $columns_class"
                  tal:condition="fp_right">
                 <div class="visualPadding">
                     <tal:block replace="structure provider:frontpage.portlets.right" />
                 </div>
-            </div>            
+            </div>
         </div>
         <div id="frontpage-bottom" class="row fpBlock"
              tal:condition="bottom">
             <div class="cell width-full position-0"><div class="visualPadding">
                 <tal:block replace="structure provider:frontpage.bottom" />
             </div></div>
-        </div>        
+        </div>
     </metal:content>
 
 </body>
