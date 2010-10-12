@@ -2,29 +2,29 @@
 <portlets
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="plone">
-    
+
     <!-- Columns (portlet managers) -->
 
-    <portletmanager 
-      name="frontpage.highlight" 
+    <portletmanager
+      name="frontpage.highlight"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
-    <portletmanager 
-      name="frontpage.portlets.left" 
+    <portletmanager
+      name="frontpage.portlets.left"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
-    <portletmanager 
-      name="frontpage.portlets.central" 
-      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
-      />      
-    <portletmanager 
-      name="frontpage.portlets.right" 
+    <portletmanager
+      name="frontpage.portlets.central"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
-    <portletmanager 
-      name="frontpage.bottom" 
+    <portletmanager
+      name="frontpage.portlets.right"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
-      />                      
+      />
+    <portletmanager
+      name="frontpage.bottom"
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />
 
     <assignment name="highlight"
         category="context"
@@ -32,30 +32,30 @@
         manager="frontpage.highlight"
         type="plone.portlet.static.Static"
         visible="True">
-        <property name="header">Frontpage Highlight</property>        
+        <property name="header">Frontpage Highlight</property>
         <property name="text">Test frontpage highlight text</property>
         <property name="omit_border">True</property>
     </assignment>
-    
+
     <assignment name="bottom"
         category="context"
         key="/"
         manager="frontpage.bottom"
         type="plone.portlet.static.Static"
         visible="True">
-        <property name="header">Frontpage Bottom</property>                
+        <property name="header">Frontpage Bottom</property>
         <property name="text">Test frontpage bottom text</property>
-        <property name="omit_border">True</property>    
+        <property name="omit_border">True</property>
     </assignment>
-    
+
     <assignment name="news"
         category="context"
         key="/"
         manager="frontpage.portlets.left"
         type="portlets.News"
         visible="True">
-    </assignment>        
-    
+    </assignment>
+
     <assignment name="events"
         category="context"
         key="/"
@@ -63,17 +63,17 @@
         type="portlets.Events"
         visible="True">
     </assignment>
-    
+
     <assignment name="fp_static_right"
         category="context"
         key="/"
         manager="frontpage.portlets.right"
         type="plone.portlet.static.Static"
         visible="True">
-        <property name="header">Frontpage right column</property>                
+        <property name="header">Frontpage right column</property>
         <property name="text">Test frontpage right text</property>
-        <property name="omit_border">True</property>    
-    </assignment>        
+        <property name="omit_border">True</property>
+    </assignment>
 
     <assignment name="navigation"
         category="context"
