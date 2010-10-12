@@ -17,7 +17,8 @@
                                fp_left python:plone_view.have_portlets('frontpage.portlets.left', view);
                                fp_central python:plone_view.have_portlets('frontpage.portlets.central', view);
                                fp_right python:plone_view.have_portlets('frontpage.portlets.right', view);
-                               bottom python:plone_view.have_portlets('frontpage.bottom', view)">
+                               bottom python:plone_view.have_portlets('frontpage.bottom', view);
+                               columns_class view/">
         <div id="frontpage-highlight" class="row fpBlock"
              tal:condition="highlight">
             <div class="cell width-full position-0"><div class="visualPadding">
