@@ -61,7 +61,7 @@ ContractSchema = ATFolderSchema + Schema((
 
     DataGridField('work_types',
             columns=('description', 'rate'),
-            default=({'description': 'development', 'rate': '1200 NOK'}, ),
+            default=({'description': 'development', 'rate': '1300 NOK'}, ),
             widget = DataGridWidget(
                     label = 'Work types',
                     ),
@@ -124,7 +124,7 @@ class Contract(ATFolder):
     security.declareProtected(VIEW_PERMISSION, 'getUniqueWork_types')
     def getUniqueWork_types(self):
         """"""
-        # value = ({'rate': '1200 NOK', 'description': 'development'}, )
+        # value = ({'rate': '1300 NOK', 'description': 'development'}, )
         values = self.getField('work_types').get(self)
         types = []
         for row in values:
