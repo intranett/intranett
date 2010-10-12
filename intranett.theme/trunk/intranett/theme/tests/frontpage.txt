@@ -20,28 +20,40 @@ static portlet with dummy content assigned to it. The two rest should have
 nothing and should not be rendered since we have no news or events published
 yet. In this case we should get full-width CSS class from our view:
 
-  >>> 'class="cell width-16 fpBlock"' in browser.contents
+  >>> 'class="cell fpBlock width-16"' in browser.contents
   True
-
-Now we are adding one News Item and one Event in order to make 2 remaining
-column to show up on the frontpage view:
+  
+Now we are adding a News Item for it to show up on the frontpage:
 
   >>> self.folder.invokeFactory('News Item', id='n1', title='Test News Item')
   'n1'
-  >>> self.folder.invokeFactory('Event', id='e1', title='Test Event', start_date='2011-01-01', end_date='2100-01-01')
-  'e1'
-
   >>> from Products.CMFCore.utils import getToolByName
   >>> wftool = getToolByName(self.portal, 'portal_workflow')
   >>> wftool.doActionFor(self.folder.n1, 'publish')
-  >>> wftool.doActionFor(self.folder.e1, 'publish')
-
-We reload the page and see if the portlets show up:
+  
+We reload the page and see if the News portlet shows up:
 
   >>> browser.reload()
 
   >>> 'Test News Item' in browser.contents
   True
+
+Now we should get width spread between 2 portlets:
+
+  >>> 'class="cell fpBlock width-8"' in browser.contents
+  True  
+
+Now we are adding one Event in order to make the last remaining column to show
+up on the frontpage view:
+
+  >>> self.folder.invokeFactory('Event', id='e1', title='Test Event', start_date='2011-01-01', end_date='2100-01-01')
+  'e1'
+  >>> wftool.doActionFor(self.folder.e1, 'publish')
+
+We reload the page and see if the portlet show up:
+
+  >>> browser.reload()
+
   >>> 'Test Event' in browser.contents
   True
 
