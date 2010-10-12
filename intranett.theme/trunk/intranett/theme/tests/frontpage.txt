@@ -14,7 +14,7 @@ We know Frontpage View is the default view of the site, but let's make sure:
 
   >>> 'template-frontpage_view' in browser.contents
   True
-  
+
 By default we should have only one content column on the frontpage that has
 static portlet with dummy content assigned to it. The two rest should have
 nothing and should not be rendered since we have no news or events published
@@ -24,16 +24,16 @@ yet:
   >>> ploneview.have_portlets('frontpage.portlets.left', self.portal)
   False
   >>> ploneview.have_portlets('frontpage.portlets.central', self.portal)
-  False  
+  False
   >>> ploneview.have_portlets('frontpage.portlets.right', self.portal)
   True
-  
+
 In this case we should get full-width CSS class from our view:
 
   >>> frontpageview = self.portal.restrictedTraverse('@@frontpage_view')
   >>> frontpageview.columns_class()
   'width-16'
-  
+
 Now we are adding one News Item and one Event in order to make 2 remaining
 column to show up on the Frontpage View:
   >>> self.folder.invokeFactory('News Item', id='n1', title='Test News Item')
@@ -43,12 +43,13 @@ column to show up on the Frontpage View:
   >>> from Products.CMFCore.utils import getToolByName
   >>> wftool = getToolByName(self.portal, 'portal_workflow')
   >>> wftool.doActionFor(self.folder.n1, 'publish')
-  >>> wftool.doActionFor(self.folder.e1, 'publish')  
-  
+  >>> wftool.doActionFor(self.folder.e1, 'publish')
+
+  >>> browser.open(self.portal.absolute_url())
   >>> browser.url
   'http://nohost/plone'
-  
+
   >>> 'Test News Item' in browser.contents
   True
   >>> 'Test Event' in browser.contents
-  True  
+  True
