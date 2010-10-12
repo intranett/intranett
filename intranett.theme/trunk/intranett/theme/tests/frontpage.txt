@@ -53,3 +53,18 @@ column to show up on the Frontpage View:
   True
   >>> 'Test Event' in browser.contents
   True
+
+Now we should get width spread between 3 portlets now, as long as we make
+sure to clean the memoize caches:
+
+  >>> delattr(self.app.REQUEST, '__annotations__')
+
+  >>> ploneview.have_portlets('frontpage.portlets.left', self.portal)
+  True
+  >>> ploneview.have_portlets('frontpage.portlets.central', self.portal)
+  True
+  >>> ploneview.have_portlets('frontpage.portlets.right', self.portal)
+  True
+
+  >>> frontpageview.columns_class()
+  'width-5'
