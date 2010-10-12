@@ -13,8 +13,7 @@ To view the front page we currently need more rights:
   >>> browser.url
   'http://nohost/plone'
   
-We know should get Frontpage View as the default view of the site, but let's
-make sure:
+We know Frontpage View is the default view of the site, but let's make sure:
 
   >>> 'template-frontpage_view' in browser.contents
   True
@@ -37,3 +36,22 @@ In this case we should get full-width CSS class from our view:
   >>> frontpageview = self.portal.restrictedTraverse('@@frontpage_view')
   >>> frontpageview.columns_class()
   'width-16'
+  
+Now we are adding one News Item and one Event in order to make 2 remaining
+column to show up on the Frontpage View:
+  >>> self.folder.invokeFactory('News Item', id='n1', title='Test News Item')
+  'n1'
+  >>> self.folder.invokeFactory('Event', id='e1', title='Test Event', start_date='2011-01-01', end_date='2100-01-01')
+  'e1'
+  >>> from Products.CMFCore.utils import getToolByName
+  >>> wftool = getToolByName(self.portal, 'portal_workflow')
+  >>> wftool.doActionFor(self.folder.n1, 'publish')
+  >>> wftool.doActionFor(self.folder.e1, 'publish')  
+  
+  >>> browser.url
+  'http://nohost/plone'
+  
+  >>> 'Test News Item' in browser.contents
+  True
+  >>> 'Test Event' in browser.contents
+  True  
