@@ -8,7 +8,7 @@ Get us a test browser, logged in as a normal user:
 To view the front page we currently need more rights:
 
   >>> self.setRoles(('Manager', ))
-  >>> browser.open(portal.absolute_url())
+  >>> browser.open(self.portal.absolute_url())
 
   >>> browser.url
   'http://nohost/plone'
