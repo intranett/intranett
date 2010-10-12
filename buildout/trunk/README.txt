@@ -51,3 +51,29 @@ After the ticket is done, all tests are written, it's been tested TTW,
 upgrade notes or automatic steps are in place and quality assurance has been
 performed, you can merge your changes back to the trunk and integrate any
 required changes into the buildout files.
+
+Procedures
+----------
+
+For this project we adhere to our highest professional standards. You should
+have an idea of what this means. Some of these include:
+
+- The code on trunk is always in a production ready state.
+
+- We don't deploy code from version control systems, but make releases.
+
+- We work on branches for features and only merge them once they are *really*
+  done, including translations, UI testing, documentation or whatever else.
+
+- We keep 100% test coverage for all our code. This makes sure we don't have
+  SyntaxErrors or other stupid mistakes anywhere. We force ourselves to do
+  this by treating missing coverage in the same way as broken tests.
+
+- We keep story tickets and define acceptance criteria. Ideally those criteria
+  are directly transferable into functional tests.
+
+- If we cannot solve a problem or write tests for something, we ask others to
+  help us, instead of ignoring the problem - even if that means we cannot
+  finish something as early as we'd like to.
+
+- ... to be continued ...
