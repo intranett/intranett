@@ -4,15 +4,12 @@ Frontpage
 Get us a test browser, logged in as a normal user:
 
   >>> browser = self.getBrowser()
-
-To view the front page we currently need more rights:
-
   >>> browser.handleErrors = False
   >>> browser.open(self.portal.absolute_url())
 
   >>> browser.url
   'http://nohost/plone'
-  
+
 We know Frontpage View is the default view of the site, but let's make sure:
 
   >>> 'template-frontpage_view' in browser.contents
