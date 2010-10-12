@@ -96,9 +96,8 @@ class TestSiteSetup(IntranettTestCase):
         self.assert_('portlets.Review' not in ids)
 
     def test_content(self):
-        # This content is only created in the tests, it's too hard to avoid
-        # its creation
-        test_content = set(['front-page', 'news', 'events', 'Members'])
+        # This content is only created in the tests
+        test_content = set(['Members'])
         content = set(self.portal.contentIds())
         self.assertEquals(content - test_content, set())
 

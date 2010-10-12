@@ -61,13 +61,6 @@ class TestWorkflowSetup(IntranettTestCase):
 
 class TestWorkflowPermissions(IntranettTestCase):
 
-    def test_no_anonymous_view(self):
-        self.logout()
-        front = self.portal['front-page']
-        self.assertEquals(front.workflow_history.keys()[-1],
-                          'intranett_workflow')
-        self.assertFalse(checkPerm('View', front))
-
     def test_no_anonymous_view_portal(self):
         self.logout()
         self.assertFalse(checkPerm('View', self.folder))

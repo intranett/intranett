@@ -4,6 +4,9 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Explicitly remove stupid default content (front-page, news, events) in tests.
+  [hannosch]
+
 - Added convenience methods to functional test case to set up a test browser.
   [hannosch]
 
