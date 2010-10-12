@@ -1,5 +1,14 @@
 Frontpage
 ---------
 
-    >>> 1==1
-    True
+Get us a test browser, logged in as a normal user:
+
+  >>> browser = self.getBrowser()
+
+To view the front page we currently need more rights:
+
+  >>> self.setRoles(('Manager', ))
+  >>> browser.open(portal.absolute_url())
+
+  >>> browser.url
+  'http://nohost/plone'
