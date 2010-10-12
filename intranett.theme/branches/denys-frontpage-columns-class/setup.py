@@ -23,6 +23,9 @@ setup(name='intranett.theme',
       namespace_packages=['intranett'],
       include_package_data=True,
       zip_safe=False,
+      extras_require=dict(test=[
+        'intranett.policy >= 0.4',
+      ]),
       install_requires=[
           'setuptools',
           'z3c.jbot'

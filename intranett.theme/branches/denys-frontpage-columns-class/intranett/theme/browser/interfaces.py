@@ -1,7 +1,6 @@
+from plone.portlets.interfaces import IPortletManager
 from plone.theme.interfaces import IDefaultPloneLayer
 from zope.viewlet.interfaces import IViewletManager
-
-from plone.portlets.interfaces import IPortletManager
 
 
 class IThemeSpecific(IDefaultPloneLayer):
@@ -19,7 +18,8 @@ class ITopBar(IViewletManager):
        else in the site and is rendered as the bar across the
        screen at the top
     """
-    
+
+
 class IFrontpagePortletManagers(IPortletManager):
     """ General interface for portlet managers on the Frontpage View.
     """

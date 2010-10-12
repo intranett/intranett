@@ -1,16 +1,10 @@
 from zope.component import getMultiAdapter
+from zope.publisher.browser import BrowserView
 
-from Products.Five import BrowserView
-from Products.CMFCore.utils import getToolByName
 
 class FrontpageView(BrowserView):
+    """Frontpage view
     """
-    Frontpage view
-    """
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
 
     # def columns_class(self):
     #     """ CSS class that is assigned to columns on the frontpage. """

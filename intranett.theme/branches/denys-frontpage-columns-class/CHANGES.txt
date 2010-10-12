@@ -4,6 +4,9 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Added base skeleton for browser tests and add a test requirement on
+  ``intranett.policy``.
+  [ggozad, hannosch]
 
 0.1 - 2010-10-05
 ----------------
