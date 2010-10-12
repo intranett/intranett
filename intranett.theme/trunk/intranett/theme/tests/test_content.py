@@ -39,10 +39,10 @@ class TestFrontpage(IntranettTestCase):
 
     def testFrontpageInterfaces(self):
         highlight = getUtility(IPortletManager, 'frontpage.highlight')
-        portlets_right = getUtility(IPortletManager, 'frontpage.portlets.left')
+        portlets_right = getUtility(IPortletManager, 'frontpage.portlets.right')
         portlets_central = getUtility(IPortletManager,
                                       'frontpage.portlets.central')
-        portlets_left = getUtility(IPortletManager, 'frontpage.portlets.right')
+        portlets_left = getUtility(IPortletManager, 'frontpage.portlets.left')
         bottom = getUtility(IPortletManager, 'frontpage.bottom')
 
         self.failUnless(IFrontpagePortletManagers.providedBy(highlight))
