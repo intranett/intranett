@@ -7,7 +7,6 @@ Get us a test browser, logged in as a normal user:
 
 To view the front page we currently need more rights:
 
-  >>> self.setRoles(('Manager', ))
   >>> browser.handleErrors = False
   >>> browser.open(self.portal.absolute_url())
 
