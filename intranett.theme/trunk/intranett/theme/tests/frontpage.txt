@@ -20,7 +20,7 @@ static portlet with dummy content assigned to it. The two rest should have
 nothing and should not be rendered since we have no news or events published
 yet. In this case we should get full-width CSS class from our view:
 
-  >>> 'class="cell width-16 position-0"' in browser.contents
+  >>> 'class="cell width-16 fpBlock"' in browser.contents
   True
 
 Now we are adding one News Item and one Event in order to make 2 remaining
