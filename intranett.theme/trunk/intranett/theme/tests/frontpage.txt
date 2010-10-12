@@ -12,3 +12,28 @@ To view the front page we currently need more rights:
 
   >>> browser.url
   'http://nohost/plone'
+  
+We know should get Frontpage View as the default view of the site, but let's
+make sure:
+
+  >>> 'template-frontpage_view' in browser.contents
+  True
+  
+By default we should have only one content column on the frontpage that has
+static portlet with dummy content assigned to it. The two rest should have
+nothing and should not be rendered since we have no news or events published
+yet:
+
+  >>> ploneview = self.portal.restrictedTraverse('@@plone')
+  >>> ploneview.have_portlets('frontpage.portlets.left', self.portal)
+  False
+  >>> ploneview.have_portlets('frontpage.portlets.central', self.portal)
+  False  
+  >>> ploneview.have_portlets('frontpage.portlets.right', self.portal)
+  True
+  
+In this case we should get full-width CSS class from our view:
+
+  >>> frontpageview = self.portal.restrictedTraverse('@@frontpage_view')
+  >>> frontpageview.columns_class()
+  'width-16'
