@@ -6,6 +6,7 @@ html.kupu-html {
 body {
     font-family: Helvetica, Arial, sans-serif;
     color: #444;
+    background-color: #F7F7F7;
 	height:100%;  
 	line-height: 1.25;
 }
@@ -1048,9 +1049,10 @@ input#title {
 textarea#description {
     width: 99%;
     font-family: Helvetica, Arial, sans-serif;
-    color: #5e5e5e;   
+    color: #000;   
     padding: 2px; 
     font-size: 1em;
+    line-height: 1.25;
 }
 .fieldRequired {
 	color: #f44;
@@ -1104,6 +1106,21 @@ div div.kupu-panels {
 }
 div.dialog-wrapper {
 	font-size: 0.76em;
+}
+.ploneSkin tr.mceFirst {
+	background-color: #f7f7f7;
+    
+    background-image: -moz-linear-gradient(top, #f7f7f7, rgba(238, 238, 238, 0.9), #e6e6e6); /* FF3.6 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */
+    line-height: normal;
+    margin: 0;
+    list-style: none;
+}
+.ploneSkin tr.mceFirst td.mceToolbar {
+	border: 1px solid #ccc !important;
+	border-style: solid solid none !important;
 }
 
 /* @end */

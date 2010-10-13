@@ -4,6 +4,12 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- TinyMCE's toolbar now looks as other toolbars - grey gradient with a border.
+  [denys]
+
+- Aligned portal message with open/close edit-bar button.
+  [denys]
+
 - Equalize height of dl.portalMessage dt and .portalMessage dd in order to
   make them equally high in cases the message wraps into more than one line.
   [denys]
