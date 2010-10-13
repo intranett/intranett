@@ -4,6 +4,9 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Customized some basic stylesheets, used in TinyMCE visual editor.
+  [denys]
+
 - Re-enabled edit-bar on manage-frontpage view. Test for this is supplied.
   [denys]
 
