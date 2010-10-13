@@ -1122,6 +1122,23 @@ div.dialog-wrapper {
 	border: 1px solid #ccc !important;
 	border-style: solid solid none !important;
 }
+.ploneSkin table.mceLayout tr.mceLast td.mceStatusbar {
+	border: 1px solid #ccc !important;
+	border-style: none solid solid !important;
+}
+.ploneSkin td.mceIframeContainer {
+	border: 1px solid #CCCCCC !important;
+	border-style: solid solid none !important;	
+}
+body > .plonepopup_modalBlocker {
+	opacity: 0.8 !important;
+}
+body > .plonepopup {
+	border: 1px solid #ccc !important;
+	box-shadow: 0px 0px 1em #bbb !important;
+	-moz-box-shadow: 0px 0px 1em #bbb !important; 
+	-webkit-box-shadow: 0px 0px 1em #bbb !important; 	
+}
 
 /* @end */
 
