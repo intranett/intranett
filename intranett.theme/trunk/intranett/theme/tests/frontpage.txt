@@ -33,15 +33,14 @@ Now we are adding a News Item for it to show up on the frontpage:
   
 We reload the page and see if the News portlet shows up:
 
-  >>> browser.reload()
+  >>> browser.open('http://nohost/plone')
 
   >>> 'Test News Item' in browser.contents
   True
 
 Now we should get width spread between 2 portlets:
-
-  >>> 'class="cell fpBlock width-8"' in browser.contents
-  True  
+  >>> browser.contents
+  '...<div id="frontpage-columns"...class="cell fpBlock width-8"...class="cell fpBlock width-8"...<div id="frontpage-bottom"...' 
 
 Now we are adding one Event in order to make the last remaining column to show
 up on the frontpage view:

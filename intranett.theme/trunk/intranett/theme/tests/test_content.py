@@ -76,9 +76,9 @@ class TestFrontpage(IntranettTestCase):
         mapping = self.portal.restrictedTraverse(portlets_central)
         self.assert_(u'events' in mapping.keys(),
                      'Events portlet is not registered for portlets.central')
-                     
+
     def test_static_in_frontpage_right(self):
         portlets_right = '++contextportlets++frontpage.portlets.right'
         mapping = self.portal.restrictedTraverse(portlets_right)
         self.assert_(u'fp_static_right' in mapping.keys(),
-                     'FP static right is not registered for portlets.right')                     
+                     'FP static right is not registered for portlets.right')
