@@ -53,13 +53,13 @@
             });
             return false;
         });
-        $("table.listing tr").hover(
-            function() {
-                $(this).addClass("visualHighlight");                
-            },
-            function() {
-                $(this).removeClass("visualHighlight");                
-            }
-        );            
+        // $("table.listing tr").hover(
+        //     function() {
+        //         $(this).addClass("visualHighlight");                
+        //     },
+        //     function() {
+        //         $(this).removeClass("visualHighlight");                
+        //     }
+        // );            
     }); 
 })(jQuery);

@@ -4,6 +4,15 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Styles for the images in the content (.image-left, image-right).
+  [denys]
+
+- Remove highlighting when hovering over a table.
+  [denys]
+
+- Styles for "Default page" popup.
+  [denys]
+
 - Added base skeleton for browser tests and add a test requirement on
   ``intranett.policy``.
   [ggozad, hannosch]
