@@ -63,6 +63,7 @@ Now we should get width spread between 3 portlets:
   
 Let's make sure we have edit-bar when we edit the frontpage:
 
+  >>> self.setRoles(['Manager'])
   >>> browser.open('http://nohost/plone/manage-frontpage')
-  >>> '<ul id="content-views" class="contentViews">' in browser.contents
+  >>> '<ul class="contentViews" id="content-views">' in browser.contents
   True
