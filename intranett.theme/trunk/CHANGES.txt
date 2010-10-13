@@ -4,6 +4,10 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Customized image_view_fullscreen to get rid of annoying underlining under
+  the image.
+  [denys]
+
 - Moved ploneCustom.css to after main.css in order to be able to customize
   styles for separate projects.
   [denys]
