@@ -58,5 +58,5 @@ We reload the page and see if the portlet show up:
 
 Now we should get width spread between 3 portlets:
 
-  >>> 'class="cell fpBlock width-5"' in browser.contents
-  True
+  >>> browser.contents
+  '...<div id="frontpage-columns"...class="cell fpBlock width-5"...class="cell fpBlock width-5"...class="cell fpBlock width-5"...<div id="frontpage-bottom"...'
