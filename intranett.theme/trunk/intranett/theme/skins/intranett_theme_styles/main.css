@@ -989,6 +989,9 @@ ul.formTabs {
     list-style-type: none;
     text-align: center;
 }
+.dialog-wrapper ul.formTabs {
+	font-size: 1em !important;
+}
 #content-core ul.formTabs {
 	margin-top: -1px;
 }
@@ -1101,6 +1104,9 @@ form#periodform {
 div div.kupu-panels {
 	font-size: 0.76em;
 }
+
+/* @group Visual Editor */
+
 .plonepopup {
 	background: #fff !important;
 }
@@ -1139,6 +1145,10 @@ body > .plonepopup {
 	-moz-box-shadow: 0px 0px 1em #bbb !important; 
 	-webkit-box-shadow: 0px 0px 1em #bbb !important; 	
 }
+#general_panel .formHelp,
+#general_panel #internalpath {margin: 1.25em 0 !important;}
+
+/* @end */
 
 /* @end */
 
