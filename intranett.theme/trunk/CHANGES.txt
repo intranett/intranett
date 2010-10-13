@@ -4,6 +4,9 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Got rid of the right column on edit screens byt customizing base_edit.cpt.
+  [denys]
+
 - TinyMCE's toolbar now looks as other toolbars - grey gradient with a border.
   [denys]
 
