@@ -4,6 +4,9 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Re-enabled edit-bar on manage-frontpage view. Test for this is supplied.
+  [denys]
+
 - Got rid of the right column on edit screens byt customizing base_edit.cpt.
   [denys]
 
