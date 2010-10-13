@@ -4,6 +4,10 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Moved ploneCustom.css to after main.css in order to be able to customize
+  styles for separate projects.
+  [denys]
+
 - Styles for the images in the content (.image-left, image-right).
   [denys]
 
