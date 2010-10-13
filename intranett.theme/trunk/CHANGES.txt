@@ -4,6 +4,10 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Equalize height of dl.portalMessage dt and .portalMessage dd in order to
+  make them equally high in cases the message wraps into more than one line.
+  [denys]
+
 - Customized image_view_fullscreen to get rid of annoying underlining under
   the image.
   [denys]

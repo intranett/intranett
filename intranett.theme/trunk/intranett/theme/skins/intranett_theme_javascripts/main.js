@@ -36,6 +36,8 @@
             heightEqualizer($(this).find(".photoAlbumEntry"), 0);
         })                
         
+        heightEqualizer($("dl.portalMessage dt, dl.portalMessage dd"), 0);
+        
         $("#settings-toggle a").click(function(event) {
             event.stopPropagation(); 
             $("#contentviews-wrapper, #contentviews-wrapper + .contentActions").animate({
