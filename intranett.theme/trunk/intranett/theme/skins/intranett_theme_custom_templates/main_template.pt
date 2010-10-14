@@ -90,7 +90,7 @@
         <div id="portal-columns" class="row">            
             <div class="contentAlignment">   
                 
-            <div id="viewlet-above-columns" class="row" tal:condition="not:ajax_load" tal:content="structure provider:intranett.abovecolumns" />                
+            <div id="viewlet-above-columns" tal:condition="not:ajax_load" tal:content="structure provider:intranett.abovecolumns" />                
                              
             <tal:comment replace="nothing"> Start of main content block </tal:comment>            
             <div class="cell width-10 position-4"
