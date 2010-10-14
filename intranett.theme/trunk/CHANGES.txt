@@ -1,8 +1,11 @@
 Changelog
 =========
 
-0.2 - unreleased
+0.3 - unreleased
 ----------------
+
+0.2 - October 14, 2010
+----------------------
 
 - Fixes to stylings in IE7+
   [denys]
