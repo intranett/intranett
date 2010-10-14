@@ -26,7 +26,7 @@ body > header nav li a {
     width: auto;
     overflow:visible;    
 }
-#portal-columns .contentAlignment {padding-left: 0.3em;}
+#portal-columns .contentAlignment {*padding-left: 0.3em;}
 #searchGadget {
     *border-color: transparent !important;
     *margin: 0;

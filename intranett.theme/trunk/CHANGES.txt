@@ -4,6 +4,9 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Fixes to stylings in IE7+
+  [denys]
+
 - Customized some basic stylesheets, used in TinyMCE visual editor.
   [denys]
 
