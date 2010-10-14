@@ -1,0 +1,53 @@
+Changelog
+=========
+
+0.2 - unreleased
+----------------
+
+- Fixes to stylings in IE7+
+  [denys]
+
+- Customized some basic stylesheets, used in TinyMCE visual editor.
+  [denys]
+
+- Re-enabled edit-bar on manage-frontpage view. Test for this is supplied.
+  [denys]
+
+- Got rid of the right column on edit screens byt customizing base_edit.cpt.
+  [denys]
+
+- TinyMCE's toolbar now looks as other toolbars - grey gradient with a border.
+  [denys]
+
+- Aligned portal message with open/close edit-bar button.
+  [denys]
+
+- Equalize height of dl.portalMessage dt and .portalMessage dd in order to
+  make them equally high in cases the message wraps into more than one line.
+  [denys]
+
+- Customized image_view_fullscreen to get rid of annoying underlining under
+  the image.
+  [denys]
+
+- Moved ploneCustom.css to after main.css in order to be able to customize
+  styles for separate projects.
+  [denys]
+
+- Styles for the images in the content (.image-left, image-right).
+  [denys]
+
+- Remove highlighting when hovering over a table.
+  [denys]
+
+- Styles for "Default page" popup.
+  [denys]
+
+- Added base skeleton for browser tests and add a test requirement on
+  ``intranett.policy``.
+  [ggozad, hannosch]
+
+0.1 - 2010-10-05
+----------------
+
+- Initial release

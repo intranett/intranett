@@ -1,0 +1,97 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="intranett">
+
+  <include package="plone.app.contentmenu" />
+
+  <interface
+      interface=".interfaces.IThemeSpecific"
+      type="zope.publisher.interfaces.browser.IBrowserSkinType"
+      name="Intranett.no base theme"
+      />
+
+  <!-- Registration of z3c.jbot aware directory-->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="templates"
+      layer=".interfaces.IThemeSpecific" />
+
+  <!-- Render the document byline -->
+  <browser:viewlet
+      name="plone.belowcontenttitle.documentbyline"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+      class="plone.app.layout.viewlets.content.DocumentBylineViewlet"
+      permission="zope2.View"
+      layer=".interfaces.IThemeSpecific"
+      />
+
+  <browser:viewletManager
+      name="intranett.abovecolumns"
+      provides=".interfaces.IAboveColumns"
+      permission="zope2.View"
+      class="plone.app.viewletmanager.manager.OrderedViewletManager"
+      layer=".interfaces.IThemeSpecific"
+      />
+
+  <browser:viewletManager
+      name="intranett.topbar"
+      provides=".interfaces.ITopBar"
+      permission="zope2.View"
+      class="plone.app.viewletmanager.manager.OrderedViewletManager"
+      layer=".interfaces.IThemeSpecific"
+      />
+
+  <!-- The breadcrumbs -->
+  <browser:viewlet
+      name="plone.path_bar"
+      manager=".interfaces.IAboveColumns"
+      class="plone.app.layout.viewlets.common.PathBarViewlet"
+      permission="zope2.View"
+      layer=".interfaces.IThemeSpecific"
+      />
+
+  <!-- The personal bar -->
+  <browser:viewlet
+      name="plone.personal_bar"
+      manager=".interfaces.ITopBar"
+      class="plone.app.layout.viewlets.common.PersonalBarViewlet"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+      />
+
+  <!-- Content views (tabs) -->
+  <browser:viewlet
+      name="intranett.collapse.contentviews"
+      manager="plone.app.layout.viewlets.interfaces.IContentViews"
+      template="templates/collapsible_contentviews.pt"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="frontpage_view"
+      class=".frontpage.FrontpageView"
+      template="templates/frontpage_view.pt"
+      permission="zope2.View"
+      />
+
+  <browser:menuItem
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      menu="plone_displayviews"
+      title="Frontpage view"
+      action="frontpage_view"
+      description="Frontpage view for intranets."
+      />
+
+  <browser:page
+      name="manage-frontpage"
+      for="plone.portlets.interfaces.ILocalPortletAssignable"
+      class=".manage.IntranettManageContextualPortlets"
+      permission="plone.app.portlets.ManagePortlets"
+      layer=".interfaces.IThemeSpecific"
+      template="templates/manage-frontpage.pt"
+      />
+
+</configure>
