@@ -1222,6 +1222,14 @@ p.tileBody {
 
 /* @end */
 
+/* @group Comments */
+
+#commenting {
+	margin: 2em 0;
+}
+
+/* @end */
+
 /* @end */
 
 /* @group Portlets */
@@ -1360,7 +1368,7 @@ body > footer {
 	text-transform: uppercase;	
 	padding-bottom: 1.25em;
 	padding-top: 0;
-	color: #f7f7f7;
+	color: #888;
 	background: #f7f7f7;
 }
 body > footer .contentAlignment {
@@ -1372,15 +1380,7 @@ body > footer small {
 body > footer strong {
 	font-weight: normal;
 }
-#portal-colophon {
-	width: 97.9167%;  /* not 100% in order to align right edge with the columns, positioned with the grid */
-	padding: 1.25em 0;	
-}
-#portal-colophon li {
-	list-style: none;
-	margin-bottom: 0;
-}
-#portal-colophon a {
+body > footer a {
 	color: #444;
 }
 
@@ -1388,15 +1388,33 @@ body > footer strong {
 /* @group Site actions */
 
 #portal-siteactions {
-	text-align: center;
 	list-style: none;
-	font-size: 0.762em;
-	margin-bottom: 1.25em;
+	font-size: 1em;
+	padding: 1.25em 0 1.25em 1em;
+	margin-left: 0;
+	width: 97.9167%;  /* not 100% in order to align right edge with the columns, positioned with the grid */	
 }
 #portal-siteactions li {
     margin-right: 0.5em;
 	list-style: none;
 	display: inline;    
+	font-size: 0.762em;
+}
+
+/* @end */
+
+/* @group Colophon */
+
+#portal-footer {
+	margin-left: 1em;
+}
+#portal-colophon {
+	width: 97.9167%;  /* not 100% in order to align right edge with the columns, positioned with the grid */
+	padding: 0;	
+}
+#portal-colophon li {
+	list-style: none;
+	margin-bottom: 0;
 }
 
 /* @end */

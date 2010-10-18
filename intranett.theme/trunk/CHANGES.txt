@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Fixed styling for footer of the site.
+  [denys]
+
 - Styles for Table of Contents. References #49.
   [denys]
 
