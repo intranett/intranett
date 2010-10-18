@@ -1459,3 +1459,36 @@ body.template-manage-frontpage .portlets-manager .section+.portletAssignments {
 /* @end */
 
 /* @end */
+
+
+@media print {
+/* @group Print styles */
+
+body > header,
+body > footer,
+#kss-spinner,
+.overlay,
+#viewlet-above-columns,
+#portal-column-one,
+#viewlet-above-content,
+#viewlet-below-content,
+#edit-bar,
+.portalMessage,
+#content-history {
+	display: none;
+}
+body {
+	font-size: 12pt;
+}
+a {
+	color: #0081af !important;
+	text-decoration: underline;
+}
+#portal-columns {
+	border: none;
+}
+
+
+/* @end */
+}
+

@@ -4,6 +4,12 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Print styles. References #51.
+  [denys]
+
+- New favicon.ico
+  [denys]
+
 0.2 - October 14, 2010
 ----------------------
 

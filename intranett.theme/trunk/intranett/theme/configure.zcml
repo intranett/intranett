@@ -19,5 +19,14 @@
       directory="profiles/default"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+      
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.theme from revision 0.2 to 0.3"
+      description="Removes 'media' query for main.css stylesheet's registration."
+      source="1"
+      destination="0.3"
+      handler="intranett.theme.upgradehandlers.add_media_query_maincss"
+      profile="intranett.theme:default"
+      />      
 
 </configure>
