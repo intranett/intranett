@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Styles for Table of Contents. References #49.
+  [denys]
+
 - Print styles. References #51.
   [denys]
 

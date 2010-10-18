@@ -1212,6 +1212,16 @@ p.tileBody {
 
 /* @end */
 
+/* @group TOC */
+
+#document-toc {
+	float: right;
+	width: 13em;
+	margin: 1.5em 0 1.25em 1.25em;
+}
+
+/* @end */
+
 /* @end */
 
 /* @group Portlets */
