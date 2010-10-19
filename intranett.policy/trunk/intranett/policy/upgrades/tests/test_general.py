@@ -2,7 +2,9 @@ from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
 
-POLICY_PROFILE = "intranett.policy:default"
+POLICY_PROFILE = u"intranett.policy:default"
+CMF_PROFILE = u"Products.CMFDefault:default"
+PAI_PROFILE = u"plone.app.iterate:plone.app.iterate"
 
 
 class TestFullUpgrade(IntranettTestCase):
@@ -11,7 +13,23 @@ class TestFullUpgrade(IntranettTestCase):
         # There should be no upgrade steps from the current version
         setup = getToolByName(self.portal, "portal_setup")
         upgrades = setup.listUpgrades(POLICY_PROFILE)
-        self.failUnless(len(upgrades) == 0)
+        self.assertEquals(len(upgrades), 0,
+                          "Found unexpected upgrades: %s" % upgrades)
+
+    def test_list_steps_for_addons(self):
+        setup = getToolByName(self.portal, "portal_setup")
+        profiles = set(setup.listProfilesWithUpgrades())
+        # Don't test our own profile twice
+        profiles.remove(POLICY_PROFILE)
+        # We don't care about the CMFDefault profile in Plone
+        profiles.remove(CMF_PROFILE)
+        # The iterate profile has a general reinstall profile in it, we ignore
+        # it since we don't use iterate
+        profiles.remove(PAI_PROFILE)
+        for profile in profiles:
+            upgrades = setup.listUpgrades(profile)
+            self.assertEquals(len(upgrades), 0,
+                              "Found unexpected upgrades: %s" % upgrades)
 
     def test_do_upgrades(self):
         setup = getToolByName(self.portal, "portal_setup")
