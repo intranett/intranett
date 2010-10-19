@@ -1305,15 +1305,16 @@ small.commentDate {
 	font-size: 0.76em;
 	line-height: normal;
 }
-.commentImage {
-	width: 100px;
-	height: 100px;
+.comment .commentImage {
+	width: auto;
+	height: auto;
 	margin: 1em 0;
 }
 #commenting .commentImage {
 	margin:0;
 }
 .commentImage img {
+	display: block;
 	border: 1px solid #ccc;
 }
 .commentWrapper {

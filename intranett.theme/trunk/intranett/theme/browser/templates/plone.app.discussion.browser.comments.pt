@@ -142,6 +142,7 @@
 
                 </div>
             
+                <span class="visualClear"><!-- --></span>
             </div>
 
         </tal:getreplies>

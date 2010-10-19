@@ -63,10 +63,10 @@
         //         $(this).removeClass("visualHighlight");                
         //     }
         // );    
-        $("form#comment-workflow a").click(function(event) {
-            $("form#comment-workflow").submit();
-            return False;
-        })
+        // $("form#comment-workflow a").click(function(event) {
+        //     $("form#comment-workflow").submit();
+        //     return False;
+        // })
         $(".commentActions li form a").click(function() {
             var trigger = this;
             console.log(trigger);
@@ -80,12 +80,14 @@
                 success: function(data) { 
                     console.log($(trigger).parents(".discussion").find(".comment").length);
                     if($(".discussion .comment").length == 1) {
-                        $(".discussion").fadeOut();
-                        $(".discussion").remove().delay(500);
+                        $(".discussion").fadeOut('fast', function() {
+                            $(".discussion").remove();
+                        });
                     } 
                     else {
-                        $(this).fadeOut();
-                        $(this).remove().delay(500);
+                        $(this).fadeOut('fast', function() {
+                            $(this).remove();
+                        });
                     }
                 },
                 error: function(req, error) {
