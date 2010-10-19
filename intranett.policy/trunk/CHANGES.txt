@@ -4,6 +4,9 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Added basic upgrade step infrastructure.
+  [hannosch]
+
 - Explicitly remove stupid default content (front-page, news, events) in tests.
   [hannosch]
 
