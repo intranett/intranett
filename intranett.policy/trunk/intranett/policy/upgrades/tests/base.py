@@ -1,3 +1,4 @@
+import re
 from os.path import abspath
 from os.path import dirname
 from os.path import join
@@ -19,6 +20,7 @@ class FunctionalUpgradeTestCase(Sandboxed, IntranettTestCase,
 
     _setup_fixture = 0
     site_id = 'Plone'
+    rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
 
     def afterSetUp(self):
         self.loginAsPortalOwner()
@@ -27,6 +29,11 @@ class FunctionalUpgradeTestCase(Sandboxed, IntranettTestCase,
         # Clean out some test setup artifacts
         self.portal.portal_membership.deleteMembers([default_user])
         del self.portal['Members']
+        skins = self.portal.portal_skins
+        for s in list(skins.keys()):
+            if s.startswith('sunburst'):
+                del skins[s]
+        del skins.selections['Sunburst Theme']
 
         setup = getToolByName(self.portal, 'portal_setup')
         expected_export = setup.runAllExportSteps()

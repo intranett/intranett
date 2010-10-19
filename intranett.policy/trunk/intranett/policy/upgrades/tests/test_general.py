@@ -61,5 +61,31 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
         oldsite, result = self.migrate()
 
         diff = self.export()
-        len_diff = len(diff.split('\n'))
-        self.failUnless(len_diff <= 500)
+        strings = [f for f in diff.split('Index: ') if f]
+        files = {}
+        for s in strings:
+            name, content = self.rediff.match(s).groups()
+            files[name] = content
+
+        # There's a couple files where we get diffs for ordering changes,
+        # but the order is not important
+        expected_diff = set([
+            'portlets.xml',
+            'registry.xml',
+            'structure/acl_users/portal_role_manager.xml',
+            'types/FieldsetFolder.xml',
+            'types/FormFolder.xml',
+            'viewlets.xml',
+        ])
+
+        # XXX These actually do show us real problems
+        expected_diff.add('properties.xml')
+        expected_diff.add('actions.xml')
+
+        remaining = {}
+        for n, v in files.items():
+            if n not in expected_diff:
+                remaining[n] = v # pragma: no cover
+
+        self.assertEquals(set(files.keys()) - expected_diff, set([]),
+                          "Unexpected diffs in:\n %s" % remaining.items())
