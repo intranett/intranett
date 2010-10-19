@@ -55,8 +55,8 @@ class TestTheme(IntranettTestCase):
             positions[r.getId()] = pos
 
         self.assert_(positions['html5.js'] > positions['jquery.js'])
-        
+
     def test_media_for_maincss(self):
         css = getToolByName(self.portal, 'portal_css')
         main = css.getResource('main.css')
-        self.assertEquals(main.getMedia(), None)        
+        self.assertEquals(main.getMedia(), None)
