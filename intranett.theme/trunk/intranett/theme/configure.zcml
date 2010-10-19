@@ -21,10 +21,19 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.theme from version 0.2 to 0.3"
-      description="Removes 'media' query for main.css stylesheet's registration."
+      title="Upgrade intranett.theme from version 1 to 2."
+      description="Empty step, we don't have upgrades for the first version."
       source="1"
       destination="2"
+      handler="intranett.theme.upgradehandlers.null_upgrade_step"
+      profile="intranett.theme:default"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.theme from version 2 to 3"
+      description="Removes 'media' query for main.css stylesheet's registration."
+      source="2"
+      destination="3"
       handler="intranett.theme.upgradehandlers.add_media_query_maincss"
       profile="intranett.theme:default"
       />
