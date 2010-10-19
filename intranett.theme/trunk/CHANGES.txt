@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Fixing styles for <header> so that it would not look broken without global
+  navigation items.
+  [denys]
+
 - Styling and js support for comments. References #72.
   [denys]
   
