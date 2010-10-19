@@ -7,13 +7,13 @@ THEME_PROFILE = "intranett.theme:default"
 
 class TestFullUpgrade(IntranettTestCase):
 
-    def testListUpgradeSteps(self):
+    def test_list_steps(self):
         # There should be no upgrade steps from the current version
         setup = getToolByName(self.portal, "portal_setup")
         upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) == 0)
 
-    def testDoUpgrades(self):
+    def test_do_upgrades(self):
         setup = getToolByName(self.portal, "portal_setup")
         self.setRoles(['Manager'])
 
