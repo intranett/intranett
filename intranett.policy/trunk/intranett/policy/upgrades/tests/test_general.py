@@ -1,6 +1,7 @@
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.upgrades.tests.base import FunctionalUpgradeTestCase
 
 POLICY_PROFILE = u"intranett.policy:default"
 CMF_PROFILE = u"Products.CMFDefault:default"
@@ -61,3 +62,17 @@ class TestFullUpgrade(IntranettTestCase):
         # There are no more upgrade steps available
         upgrades = setup.listUpgrades(POLICY_PROFILE)
         self.failUnless(len(upgrades) == 0)
+
+
+class TestFunctionalMigrations(FunctionalUpgradeTestCase):
+
+    def test_upgrade_from_version_two(self):
+        self.importFile(__file__, 'two.zexp')
+        oldsite, result = self.migrate()
+
+        mig = oldsite.portal_migration
+        self.failIf(mig.needUpgrading())
+
+        diff = self.export()
+        len_diff = len(diff.split('\n'))
+        # self.failUnless(len_diff <= 2500)
