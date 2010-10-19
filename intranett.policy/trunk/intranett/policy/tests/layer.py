@@ -27,13 +27,9 @@ class IntranettLayer(BasePTCLayer):
             self.portal.setDefaultPage(None)
             del self.portal[id_]
         # We don't remove the Members/test_user_1_ folder, as it is too
-        # convinient to use in tests
+        # convenient to use in tests
         for id_ in ('news', 'events'):
             if id_ in self.portal:
                 del self.portal[id_]
-
-    def beforeTearDown(self):
-        pass
-
 
 intranett = IntranettLayer(bases=[ptc_layer])
