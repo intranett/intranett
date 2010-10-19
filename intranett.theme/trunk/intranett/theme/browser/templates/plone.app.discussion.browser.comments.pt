@@ -51,13 +51,13 @@
                                tal:attributes="href author_home_url">
                          <img src="defaultUser.gif"
                               alt=""
-                              height="100"
+                              width="100"
                               tal:attributes="src portrait_url;
                                               alt reply/Creator" />
                     </a>
                     <img src="defaultUser.gif"
                          alt=""
-                         height="100"
+                         width="100"
                          tal:condition="not: has_author_link"
                          tal:attributes="src portrait_url;
                                          alt reply/Creator" />
