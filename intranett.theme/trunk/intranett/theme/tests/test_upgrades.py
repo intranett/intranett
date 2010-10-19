@@ -51,7 +51,7 @@ class TestUpgrades(IntranettTestCase):
         from ..upgradehandlers import add_media_query_maincss
         css = getToolByName(self.portal, 'portal_css')
         main = css.getResource('main.css')
-        main.setMedia("print")
+        main.setMedia("screen")
         self.assert_(main.getMedia())
         # Run the step
         add_media_query_maincss(self.portal)
