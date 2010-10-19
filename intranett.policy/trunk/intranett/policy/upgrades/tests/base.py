@@ -18,7 +18,6 @@ from intranett.policy.upgrades import run_upgrade
 class FunctionalUpgradeTestCase(Sandboxed, IntranettTestCase,
                                 WarningInterceptor):
 
-    _setup_fixture = 0
     site_id = 'Plone'
     rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
 
