@@ -1,6 +1,7 @@
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.upgrades import run_upgrade
 
 THEME_PROFILE = "intranett.theme:default"
 
@@ -21,18 +22,7 @@ class TestFullUpgrade(IntranettTestCase):
         upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) > 0)
 
-        request = self.portal.REQUEST
-        request.form['profile_id'] = THEME_PROFILE
-
-        steps = []
-        for u in upgrades:
-            if isinstance(u, list): # pragma: no cover
-                steps.extend([s['id'] for s in u])
-            else:
-                steps.append(u['id'])
-
-        request.form['upgrades'] = steps
-        setup.manage_doUpgrades(request=request)
+        run_upgrade(setup, THEME_PROFILE)
 
         # And we have reached our current profile version
         current = setup.getVersionForProfile(THEME_PROFILE)
