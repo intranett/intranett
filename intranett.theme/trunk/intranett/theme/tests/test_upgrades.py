@@ -43,3 +43,17 @@ class TestFullUpgrade(IntranettTestCase):
         # There are no more upgrade steps available
         upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) == 0)
+
+
+class TestUpgrades(IntranettTestCase):
+
+    def test_one_to_two(self):
+        from ..upgradehandlers import add_media_query_maincss
+        css = getToolByName(self.portal, 'portal_css')
+        main = css.getResource('main.css')
+        main.setMedia("print")
+        self.assert_(main.getMedia())
+        # Run the step
+        add_media_query_maincss(self.portal)
+        main = css.getResource('main.css')
+        self.assert_(not main.getMedia())
