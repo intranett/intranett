@@ -2,25 +2,27 @@ from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
 
+THEME_PROFILE = "intranett.theme:default"
+
 
 class TestFullUpgrade(IntranettTestCase):
 
     def testListUpgradeSteps(self):
         # There should be no upgrade steps from the current version
         setup = getToolByName(self.portal, "portal_setup")
-        upgrades = setup.listUpgrades("intranett.theme:default")
+        upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) == 0)
 
     def testDoUpgrades(self):
         setup = getToolByName(self.portal, "portal_setup")
         self.setRoles(['Manager'])
 
-        setup.setLastVersionForProfile("intranett.theme:default", '1')
-        upgrades = setup.listUpgrades("intranett.theme:default")
+        setup.setLastVersionForProfile(THEME_PROFILE, '1')
+        upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) > 0)
 
         request = self.portal.REQUEST
-        request.form['profile_id'] = "intranett.theme:default"
+        request.form['profile_id'] = THEME_PROFILE
 
         steps = []
         for u in upgrades:
@@ -33,11 +35,11 @@ class TestFullUpgrade(IntranettTestCase):
         setup.manage_doUpgrades(request=request)
 
         # And we have reached our current profile version
-        current = setup.getVersionForProfile("intranett.theme:default")
+        current = setup.getVersionForProfile(THEME_PROFILE)
         current = tuple(current.split('.'))
-        last = setup.getLastVersionForProfile("intranett.theme:default")
+        last = setup.getLastVersionForProfile(THEME_PROFILE)
         self.assertEquals(last, current)
 
         # There are no more upgrade steps available
-        upgrades = setup.listUpgrades("intranett.theme:default")
+        upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) == 0)
