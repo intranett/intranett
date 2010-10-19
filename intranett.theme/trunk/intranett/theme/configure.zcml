@@ -11,7 +11,7 @@
   <cmf:registerDirectory name="intranett_theme_custom_images"/>
   <cmf:registerDirectory name="intranett_theme_custom_templates"/>
   <cmf:registerDirectory name="intranett_theme_styles"/>
-  <cmf:registerDirectory name="intranett_theme_javascripts"/>  
+  <cmf:registerDirectory name="intranett_theme_javascripts"/>
 
   <genericsetup:registerProfile
       name="default"
@@ -19,14 +19,14 @@
       directory="profiles/default"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-      
+
   <genericsetup:upgradeStep
-      title="Upgrade intranett.theme from revision 0.2 to 0.3"
+      title="Upgrade intranett.theme from version 0.2 to 0.3"
       description="Removes 'media' query for main.css stylesheet's registration."
       source="1"
-      destination="0.3"
+      destination="2"
       handler="intranett.theme.upgradehandlers.add_media_query_maincss"
       profile="intranett.theme:default"
-      />      
+      />
 
 </configure>
