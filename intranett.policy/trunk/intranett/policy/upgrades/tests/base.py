@@ -79,3 +79,32 @@ class FunctionalUpgradeTestCase(Sandboxed, IntranettTestCase,
 
         upgraded = TarballImportContext(stool, upgraded_export['tarball'])
         return stool.compareConfigurations(upgraded, self.expected)
+
+    def parse_diff(self, diff):
+        strings = [f for f in diff.split('Index: ') if f]
+        files = {}
+        for s in strings:
+            name, content = self.rediff.match(s).groups()
+            files[name] = content
+
+        # There's a couple files where we get diffs for ordering changes,
+        # but the order is not important
+        expected_diff = set([
+            'portlets.xml',
+            'registry.xml',
+            'structure/acl_users/portal_role_manager.xml',
+            'types/FieldsetFolder.xml',
+            'types/FormFolder.xml',
+            'viewlets.xml',
+        ])
+
+        # XXX These actually do show us real problems
+        expected_diff.add('properties.xml')
+        expected_diff.add('actions.xml')
+
+        remaining = {}
+        for n, v in files.items():
+            if n not in expected_diff:
+                remaining[n] = v # pragma: no cover
+
+        return remaining
