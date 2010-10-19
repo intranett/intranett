@@ -17,6 +17,27 @@ class TestUserdataSchema(IntranettTestCase):
         schema = util.getSchema()
         self.assertEquals(schema, ICustomUserDataSchema)
 
+    def test_memberdatafields(self):
+        from plone.app.users.userdataschema import IUserDataSchemaProvider
+        util = queryUtility(IUserDataSchemaProvider)
+        schema = util.getSchema()
+        self.failUnless('department' in schema)
+        self.failUnless('phone' in schema)
+        self.failUnless('mobile' in schema)
+
+    def test_userpanel(self):
+        from ..userdataschema import ICustomUserDataSchema
+        panel = ICustomUserDataSchema(self.portal)
+        self.assertEquals(panel.department, '')
+        panel.department = 'it'
+        self.assertEquals(panel.department, 'it')
+        self.assertEquals(panel.phone, '')
+        panel.phone = '+47 55533'
+        self.assertEquals(panel.phone, '+47 55533')
+        self.assertEquals(panel.mobile, '')
+        panel.mobile = '+47 55533'
+        self.assertEquals(panel.mobile, '+47 55533')
+
 
 class TestDashboard(IntranettTestCase):
 
