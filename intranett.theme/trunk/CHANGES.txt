@@ -4,10 +4,6 @@ Changelog
 0.3 - unreleased
 ----------------
 
-- Fixed the profile version to be 3, as the live site deployed based on 0.2
-  had a version of 2 already.
-  [hannosch]
-
 - Added basic upgrade tests.
   [hannosch]
 
