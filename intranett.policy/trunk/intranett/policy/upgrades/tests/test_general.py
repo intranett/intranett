@@ -1,21 +1,14 @@
 from Products.CMFCore.utils import getToolByName
 
+from intranett.policy.config import POLICY_PROFILE
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.upgrades import run_upgrade
 from intranett.policy.upgrades.tests.utils import ensure_no_addon_upgrades
-from intranett.policy.upgrades.tests.utils import POLICY_PROFILE
 
 
 class TestFullUpgrade(IntranettTestCase):
 
     def test_list_steps(self):
-        # There should be no upgrade steps from the current version
-        setup = getToolByName(self.portal, "portal_setup")
-        upgrades = setup.listUpgrades(POLICY_PROFILE)
-        self.assertEquals(len(upgrades), 0,
-                          "Found unexpected upgrades: %s" % upgrades)
-
-    def test_list_steps_for_addons(self):
         setup = getToolByName(self.portal, "portal_setup")
         upgrades = ensure_no_addon_upgrades(setup)
         for profile, steps in upgrades.items():
