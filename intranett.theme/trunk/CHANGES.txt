@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Added basic upgrade tests.
+  [hannosch]
+
 - Fixed styling for footer of the site.
   [denys]
 
@@ -16,8 +19,8 @@ Changelog
 - New favicon.ico
   [denys]
 
-0.2 - October 14, 2010
-----------------------
+0.2 - 2010-10-14
+----------------
 
 - Fixes to stylings in IE7+
   [denys]
