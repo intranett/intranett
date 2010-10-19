@@ -31,5 +31,13 @@ class IntranettLayer(BasePTCLayer):
         for id_ in ('news', 'events'):
             if id_ in self.portal:
                 del self.portal[id_]
+        # The helpful testing machinery installs sunburst for us :(
+        skins = self.portal.portal_skins
+        for s in list(skins.keys()):
+            if s.startswith('sunburst'):
+                del skins[s]
+        del skins.selections['Sunburst Theme']
+        # TODO, there's also an actions.xml
+
 
 intranett = IntranettLayer(bases=[ptc_layer])

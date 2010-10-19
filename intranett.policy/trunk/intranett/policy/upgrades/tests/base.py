@@ -29,11 +29,6 @@ class FunctionalUpgradeTestCase(Sandboxed, IntranettTestCase,
         # Clean out some test setup artifacts
         self.portal.portal_membership.deleteMembers([default_user])
         del self.portal['Members']
-        skins = self.portal.portal_skins
-        for s in list(skins.keys()):
-            if s.startswith('sunburst'):
-                del skins[s]
-        del skins.selections['Sunburst Theme']
 
         setup = getToolByName(self.portal, 'portal_setup')
         expected_export = setup.runAllExportSteps()
