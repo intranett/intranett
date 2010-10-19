@@ -8,7 +8,7 @@ def null_upgrade_step(tool):
 
 def run_upgrade(setup, profile_id=u"intranett.policy:default"):
     request = aq_get(setup, 'REQUEST')
-    request.form['profile_id'] = profile_id
+    request['profile_id'] = profile_id
 
     upgrades = setup.listUpgrades(profile_id)
 
