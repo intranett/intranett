@@ -1326,10 +1326,10 @@ small.commentDate {
 /*.discussion .comment:nth-child(odd) .commentWrapper {
 	background: #f7f7f7;
 }*/
-.commentBody {
+.commentWrapper .commentBody {
 	clear: none;
 }
-.discussion .documentByLine {
+.discussion .commentWrapper .documentByLine {
 	float: none;
 }
 .commentActions {
@@ -1347,6 +1347,10 @@ small.commentDate {
 	margin-left: 0;
 }
 .commentActions ul li {
+	display: inline;
+}
+.commentActions ul li form,
+.commentActions ul li input {
 	display: inline;
 }
 .commentActions ul li small {

@@ -92,46 +92,47 @@
                                 </small>                                
                             </li>
                             <li tal:condition="canManage">
-                                <small id="delete-comment">
-                                    <form name="delete"
-                                          action=""
-                                          method="post"
-                                          tal:attributes="action string:${reply/absolute_url}/@@moderate-delete-comment">
-                                        <input name="form.button.DeleteComment"
-                                               class="hiddenStructure"
-                                               type="submit"
-                                               value="Delete"
-                                               i18n:attributes="value label_delete;"
-                                               />
+                                <form name="delete"
+                                      action=""
+                                      method="post"
+                                      tal:attributes="action string:${reply/absolute_url}/@@moderate-delete-comment">
+                                    <input name="form.button.DeleteComment"
+                                           class="hiddenStructure"
+                                           type="submit"
+                                           value="Delete"
+                                           i18n:attributes="value label_delete;"
+                                           />
+                                    <small class="deleteComment">                                               
                                         <a href="" title="Delete" 
                                            tal:attributes="href string:${reply/absolute_url}/@@moderate-delete-comment"
-                                           i18n:attributes="label_delete; title label_delete">Delete</a>
-                                    </form>
-                                </small>
+                                           i18n:attributes="title label_delete"
+                                           i18n:translate="label_delete">Delete</a>
+                                    </small>                                           
+                                </form>
                             </li>
                             <li tal:condition="canManage"
                                 tal:repeat="action reply_dict/actions|nothing">
-                                <small>
-                                    <!-- Workflow actions (e.g. 'publish') -->
-                                    <form name=""
-                                          id="comment-workflow"
-                                          action=""
-                                          method="get"
-                                          tal:attributes="action string:${reply/absolute_url}/@@moderate-publish-comment;
-                                                          name action/id">
-                                        <input type="hidden" name="workflow_action" tal:attributes="value action/id" />
-                                        <input name="form.button.PublishComment"
-                                               class="hiddenStructure"
-                                               type="submit"
-                                               tal:attributes="value action/title"
-                                               i18n:attributes="value"
-                                               />
-                                       <a href=""
-                                          tal:attributes="href string:${reply/absolute_url}/@@moderate-publish-comment"
-                                          tal:content="action/title"
-                                          i18n:translate="">Publish</a>
-                                    </form>
-                               </small>
+                                <!-- Workflow actions (e.g. 'publish') -->
+                                <form name=""
+                                      id="comment-workflow"
+                                      action=""
+                                      method="get"
+                                      tal:attributes="action string:${reply/absolute_url}/@@moderate-publish-comment;
+                                                      name action/id">
+                                    <input type="hidden" name="workflow_action" tal:attributes="value action/id" />
+                                    <input name="form.button.PublishComment"
+                                           class="hiddenStructure"
+                                           type="submit"
+                                           tal:attributes="value action/title"
+                                           i18n:attributes="value"
+                                           />
+                                    <small>
+                                        <a href=""
+                                           tal:attributes="href string:${reply/absolute_url}/@@moderate-publish-comment"
+                                           tal:content="action/title"
+                                           i18n:translate="">Publish</a>
+                                    </small>
+                                </form>
                             </li>
                         </ul>
                         
