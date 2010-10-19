@@ -9,6 +9,21 @@ CMF_PROFILE = u"Products.CMFDefault:default"
 PAI_PROFILE = u"plone.app.iterate:plone.app.iterate"
 
 
+def ensure_no_addon_upgrades(setup):
+    profiles = set(setup.listProfilesWithUpgrades())
+    # Don't test our own profile twice
+    profiles.remove(POLICY_PROFILE)
+    # We don't care about the CMFDefault profile in Plone
+    profiles.remove(CMF_PROFILE)
+    # The iterate profile has a general reinstall profile in it, we ignore
+    # it since we don't use iterate
+    profiles.remove(PAI_PROFILE)
+    upgrades = {}
+    for profile in profiles:
+        upgrades[profile] = setup.listUpgrades(profile)
+    return upgrades
+
+
 class TestFullUpgrade(IntranettTestCase):
 
     def test_list_steps(self):
@@ -20,18 +35,10 @@ class TestFullUpgrade(IntranettTestCase):
 
     def test_list_steps_for_addons(self):
         setup = getToolByName(self.portal, "portal_setup")
-        profiles = set(setup.listProfilesWithUpgrades())
-        # Don't test our own profile twice
-        profiles.remove(POLICY_PROFILE)
-        # We don't care about the CMFDefault profile in Plone
-        profiles.remove(CMF_PROFILE)
-        # The iterate profile has a general reinstall profile in it, we ignore
-        # it since we don't use iterate
-        profiles.remove(PAI_PROFILE)
-        for profile in profiles:
-            upgrades = setup.listUpgrades(profile)
-            self.assertEquals(len(upgrades), 0,
-                              "Found unexpected upgrades: %s" % upgrades)
+        upgrades = ensure_no_addon_upgrades(setup)
+        for profile, steps in upgrades.items():
+            self.assertEquals(len(steps), 0,
+                              "Found unexpected upgrades: %s" % steps)
 
     def test_do_upgrades(self):
         setup = getToolByName(self.portal, "portal_setup")
@@ -54,9 +61,9 @@ class TestFullUpgrade(IntranettTestCase):
         self.failUnless(len(upgrades) == 0)
 
 
-class TestFunctionalMigrations(FunctionalUpgradeTestCase):
+class TestFunctionalMigrationsFromVersion2(FunctionalUpgradeTestCase):
 
-    def test_upgrade_from_version_two(self):
+    def test_gs_diff(self):
         self.importFile(__file__, 'two.zexp')
         oldsite, result = self.migrate()
 
@@ -89,3 +96,13 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
 
         self.assertEquals(set(files.keys()) - expected_diff, set([]),
                           "Unexpected diffs in:\n %s" % remaining.items())
+
+    def test_list_steps_for_addons(self):
+        self.importFile(__file__, 'two.zexp')
+        oldsite, result = self.migrate()
+
+        setup = getToolByName(oldsite, "portal_setup")
+        upgrades = ensure_no_addon_upgrades(setup)
+        for profile, steps in upgrades.items():
+            self.assertEquals(len(steps), 0,
+                              "Found unexpected upgrades: %s" % steps)
