@@ -4,8 +4,11 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Styling and js support for comments. References #72.
+  [denys]
+  
 - Added basic upgrade tests.
-  [hannosch]
+  [hannosch]  
 
 - Fixed styling for footer of the site.
   [denys]

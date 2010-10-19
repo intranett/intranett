@@ -41,7 +41,7 @@
         $("#settings-toggle a").click(function(event) {
             event.stopPropagation(); 
             $("#contentviews-wrapper, #contentviews-wrapper + .contentActions").animate({
-                height: ['toggle', 'swing'],                
+                height: ['toggle', 'swing'],
                 opacity: 'toggle'
             }, 200, 'linear', function() {
                 var isHidden = $("#open-edit-bar").is(":hidden");
@@ -62,6 +62,70 @@
         //     function() {
         //         $(this).removeClass("visualHighlight");                
         //     }
-        // );            
+        // );    
+        $("form#comment-workflow a").click(function(event) {
+            $("form#comment-workflow").submit();
+            return False;
+        })
+        $(".commentActions li form a").click(function() {
+            var trigger = this;
+            console.log(trigger);
+            var form = $(this).parents("form");
+            var data = $(form).serialize();
+            var form_url = $(form).attr("action");
+            $.ajax({
+                type:'POST',
+                url:form_url,
+                context: $(trigger).parents(".comment"),
+                success: function(data) { 
+                    console.log($(trigger).parents(".discussion").find(".comment").length);
+                    if($(".discussion .comment").length == 1) {
+                        $(".discussion").fadeOut();
+                        $(".discussion").remove().delay(500);
+                    } 
+                    else {
+                        $(this).fadeOut();
+                        $(this).remove().delay(500);
+                    }
+                },
+                error: function(req, error) {
+                    return True;
+                }
+            });
+            return false;
+        })
+        $("#commenting form#form").submit(function(){
+            var button = $("#commenting form#form .formControls input.submitting");
+            $(button).attr('disabled', 'disabled');
+                        
+            var data = $("#commenting form#form").serialize() + '&' + $(button).attr("name") + '=' + $(button).attr("value");
+            var form_url = $(this).attr("action");
+            $(this).get(0).reset();
+            $.ajax({
+                type: 'POST',
+                url: form_url,
+                data: data,
+                success: function(data) {
+                    var jqobj = $(data);
+                    var new_comment;
+                    console.log($(".discussion").length > 0);
+                    if($(".discussion").length > 0) {
+                        new_comment = $(jqobj).find(".discussion .comment:last-child");
+                        $(new_comment).hide();
+                        $(".discussion").append(new_comment);                        
+                    } else {
+                        new_comment = $(jqobj).find(".discussion");
+                        $(new_comment).hide();                        
+                        $(new_comment).insertBefore("#commenting");
+                    }
+                    $(new_comment).fadeIn('medium');
+                    $(button).removeAttr('disabled');
+                },
+                error: function(req,error){
+                    return True
+                }
+            });
+            return false;
+        })
     }); 
 })(jQuery);
