@@ -1,7 +1,25 @@
 from Acquisition import aq_get
 from zope.component import queryUtility
-
+from Products.CMFCore.utils import getToolByName
 from intranett.policy.tests.base import IntranettTestCase
+
+
+class TestMembershipTool(IntranettTestCase):
+
+    def test_tool_registered(self):
+        #Check we can get the tool by name
+        from ..membershiptool import MembershipTool
+        tool = getToolByName(self.portal, 'portal_membership')
+        self.failUnless(isinstance(tool, MembershipTool))
+        #Check we can get the tool by PlonePAS interface
+        from Products.PlonePAS.interfaces.membership import IMembershipTool
+        mt = queryUtility(IMembershipTool)
+        self.failIf(mt is None)
+        self.failUnless(isinstance(mt, MembershipTool))
+        #Check we can get the tool by CMFCore interface
+        from Products.CMFCore.interfaces import IMembershipTool
+        mt2 = queryUtility(IMembershipTool)
+        self.failUnless(mt == mt2)
 
 
 class TestUserdataSchema(IntranettTestCase):
@@ -62,5 +80,6 @@ def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestUserdataSchema))
+    suite.addTest(makeSuite(TestMembershipTool))
     suite.addTest(makeSuite(TestDashboard))
     return suite

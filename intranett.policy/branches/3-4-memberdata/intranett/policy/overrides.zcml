@@ -8,6 +8,9 @@
   <utility provides=".userdataschema.IUserDataSchemaProvider"
            factory=".userdataschema.UserDataSchemaProvider"/>
 
+  <utility provides="Products.PlonePAS.interfaces.membership.IMembershipTool"
+          factory=".membershiptool.MembershipTool"/>
+
   <adapter
     provides=".userdataschema.ICustomUserDataSchema"
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
