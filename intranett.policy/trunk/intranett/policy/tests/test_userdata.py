@@ -11,15 +11,6 @@ class TestMemberTools(IntranettTestCase):
         from ..tools import MembershipTool
         tool = getToolByName(self.portal, 'portal_membership')
         self.failUnless(isinstance(tool, MembershipTool))
-        #Check we can get the tool by PlonePAS interface
-        from Products.PlonePAS.interfaces.membership import IMembershipTool
-        mt = queryUtility(IMembershipTool)
-        self.failIf(mt is None)
-        self.failUnless(isinstance(mt, MembershipTool))
-        #Check we can get the tool by CMFCore interface
-        from Products.CMFCore.interfaces import IMembershipTool
-        mt2 = queryUtility(IMembershipTool)
-        self.failUnless(mt == mt2)
 
     def test_memberdata_tool_registered(self):
         # Check we can get the tool by name
