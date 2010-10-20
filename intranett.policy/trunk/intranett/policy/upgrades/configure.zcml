@@ -12,4 +12,13 @@
       profile="intranett.policy:default"
       />
 
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.policy from 2 to 3."
+      description="Add additional memberdata."
+      source="2"
+      destination="3"
+      handler="intranett.policy.upgrades.two.add_memberdata"
+      profile="intranett.policy:default"
+      />
+
 </configure>
