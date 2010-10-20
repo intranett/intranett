@@ -9,7 +9,7 @@
            factory=".userdataschema.UserDataSchemaProvider"/>
 
   <utility provides="Products.PlonePAS.interfaces.membership.IMembershipTool"
-          factory=".membershiptool.MembershipTool"/>
+          factory=".tools.MembershipTool"/>
 
   <adapter
     provides=".userdataschema.ICustomUserDataSchema"

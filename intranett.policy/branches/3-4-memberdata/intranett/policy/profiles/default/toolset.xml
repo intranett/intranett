@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <tool-setup>
   <required tool_id="portal_membership"
-            class="intranett.policy.membershiptool.MembershipTool"/>
+            class="intranett.policy.tools.MembershipTool"/>
+  <required tool_id="portal_memberdata"
+            class="intranett.policy.tools.MemberDataTool"/>
+
 </tool-setup>

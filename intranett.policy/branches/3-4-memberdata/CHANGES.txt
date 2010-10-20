@@ -3,7 +3,8 @@ Changelog
 
 0.4 - unreleased
 ----------------
-
+- Extend member data to include phones, department, and two image sizes for
+  the portraits. [ggozad, stefan]
 - Explicitly remove stupid default content (front-page, news, events) in tests.
   [hannosch]
 

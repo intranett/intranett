@@ -4,11 +4,11 @@ from Products.CMFCore.utils import getToolByName
 from intranett.policy.tests.base import IntranettTestCase
 
 
-class TestMembershipTool(IntranettTestCase):
+class TestMemberTools(IntranettTestCase):
 
-    def test_tool_registered(self):
+    def test_membership_tool_registered(self):
         #Check we can get the tool by name
-        from ..membershiptool import MembershipTool
+        from ..tools import MembershipTool
         tool = getToolByName(self.portal, 'portal_membership')
         self.failUnless(isinstance(tool, MembershipTool))
         #Check we can get the tool by PlonePAS interface
@@ -20,6 +20,12 @@ class TestMembershipTool(IntranettTestCase):
         from Products.CMFCore.interfaces import IMembershipTool
         mt2 = queryUtility(IMembershipTool)
         self.failUnless(mt == mt2)
+
+    def test_memberdata_tool_registered(self):
+        #Check we can get the tool by name
+        from ..tools import MemberDataTool
+        tool = getToolByName(self.portal, 'portal_memberdata')
+        self.failUnless(isinstance(tool, MemberDataTool))
 
 
 class TestUserdataSchema(IntranettTestCase):
@@ -56,6 +62,21 @@ class TestUserdataSchema(IntranettTestCase):
         panel.mobile = '+47 55533'
         self.assertEquals(panel.mobile, '+47 55533')
 
+    def test_portraits(self):
+        import os
+        from .utils import makeFileUpload
+        from ..tools import PORTRAIT_SIZE, PORTRAIT_THUMBNAIL_SIZE
+        image_file = os.path.join(os.path.dirname(__file__), 'images', 'test.jpg')
+        image_file = makeFileUpload(image_file, 'image/jpeg', 'myportrait.jpg')
+        mt = getToolByName(self.portal, 'portal_membership')
+        mt.changeMemberPortrait(image_file)
+        portrait_thumb = mt.getPersonalPortrait()
+
+        self.assertEquals(portrait_thumb.width, PORTRAIT_THUMBNAIL_SIZE[0])
+        self.assertEquals(portrait_thumb.height, PORTRAIT_THUMBNAIL_SIZE[1])
+        portrait = mt.getPersonalPortrait(thumbnail=False)
+        self.assertEquals(portrait.width, PORTRAIT_SIZE[0])
+        self.assertEquals(portrait.height, PORTRAIT_SIZE[1])
 
 class TestDashboard(IntranettTestCase):
 
@@ -80,6 +101,6 @@ def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestUserdataSchema))
-    suite.addTest(makeSuite(TestMembershipTool))
+    suite.addTest(makeSuite(TestMemberTools))
     suite.addTest(makeSuite(TestDashboard))
     return suite
