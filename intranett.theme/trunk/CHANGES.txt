@@ -4,6 +4,14 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Prevent "You already clicked" message from showing up when filling out "Add
+  comment" form.
+  [denys]
+
+- Live binding click event on "Delete" actions of the comments, returned by
+  Ajax calls.
+  [denys]
+
 - Fixing styles for <header> so that it would not look broken without global
   navigation items.
   [denys]

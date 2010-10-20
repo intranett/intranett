@@ -67,7 +67,8 @@
         //     $("form#comment-workflow").submit();
         //     return False;
         // })
-        $(".commentActions li form a").click(function() {
+        $("#form-buttons-comment").addClass("allowMultiSubmit");
+        $(".commentActions li form a").live('click', function() {
             var trigger = this;
             console.log(trigger);
             var form = $(this).parents("form");
@@ -120,7 +121,7 @@
                         $(new_comment).hide();                        
                         $(new_comment).insertBefore("#commenting");
                     }
-                    $(new_comment).fadeIn('medium');
+                    $(new_comment).fadeIn('slow');
                     $(button).removeAttr('disabled');
                 },
                 error: function(req,error){
