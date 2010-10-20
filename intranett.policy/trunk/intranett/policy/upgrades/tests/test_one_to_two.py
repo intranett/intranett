@@ -13,6 +13,7 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
         diff = self.export()
         remaining = self.parse_diff(diff)
 
+        # TODO: Enable again, once we have a released version
         # self.assertEquals(set(remaining.keys()), set([]),
         #                   "Unexpected diffs in:\n %s" % remaining.items())
 
