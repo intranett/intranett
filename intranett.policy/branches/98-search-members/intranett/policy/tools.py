@@ -1,13 +1,64 @@
 from OFS.Image import Image
+from Acquisition import aq_base
+from zope.component import getUtility
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.interfaces import ISiteRoot
 from Products.PlonePAS.tools.membership import MembershipTool as BaseMembershipTool
 from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataTool
+from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
 from Products.PlonePAS.tools.membership import default_portrait
 from Products.PlonePAS.utils import scale_image
 
 PORTRAIT_SIZE = (300, 300,)
 PORTRAIT_THUMBNAIL_SIZE = (100, 100,)
+
+
+class MemberData(BaseMemberData):
+    """This is a catalog-aware MemberData. We add functions to allow the
+    catalog to index member data.
+    """
+
+    def notifyModified(self):
+        super(MemberData, self).notifyModified()
+        plone = getUtility(ISiteRoot)
+        ct = getToolByName(plone, 'portal_catalog')
+        ct.reindexObject(self)
+
+    def getPhysicalPath(self):
+        plone = getUtility(ISiteRoot)
+        return plone.getPhysicalPath() + ('author', self.getId())
+
+    def Title(self):
+        return self.getProperty('fullname')
+
+    def Description(self):
+        return self.getProperty('description')
+
+    def Email(self):
+        return self.getProperty('email')
+
+    def Location(self):
+        return self.getProperty('location')
+
+    def Department(self):
+        return self.getProperty('department')
+
+    def Phone(self):
+        return self.getProperty('phone')
+
+    def Mobile(self):
+        return self.getProperty('mobile')
+
+    def SearchableText(self):
+        return ' '.join([self.Title(),
+                         self.Description(),
+                         self.Email(),
+                         self.Location(),
+                         self.Department(),
+                         self.Phone(),
+                         self.Mobile()])
+
 
 class MemberDataTool(BaseMemberDataTool):
 
@@ -35,6 +86,16 @@ class MemberDataTool(BaseMemberDataTool):
         super(MemberDataTool, self)._deletePortrait(member_id)
         if member_id in self.thumbnails:
             self.thumbnails._delObject(member_id)
+
+    def wrapUser(self, u):
+        """ Override wrapUser only to use our MemberData
+        """
+        id = u.getId()
+        members = self._members
+        if not members.has_key(id):
+            base = aq_base(self)
+            members[id] = MemberData(base, id)
+        return members[id].__of__(self).__of__(u)
 
 
 class MembershipTool(BaseMembershipTool):

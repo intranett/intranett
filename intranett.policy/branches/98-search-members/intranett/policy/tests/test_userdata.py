@@ -129,6 +129,20 @@ class TestUserPortraits(IntranettTestCase):
         mt.getPersonalPortrait(id='')
         mt.changeMemberPortrait(self.image_gif, id='')
 
+
+class TestUserSearch(IntranettTestCase):
+
+    def test_update_member_and_search(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': 'John Doe',
+                                    'phone': '12345',
+                                    'mobile': '67890',
+                                    'department': 'it',
+                                    'email': 'info@jarn.com'})
+        results = self.portal.portal_catalog.searchResults(Title='John')
+        self.assertEquals(len(results), 1)
+
 class TestDashboard(IntranettTestCase):
 
     def test_default_dashboard(self):
@@ -154,5 +168,6 @@ def test_suite():
     suite.addTest(makeSuite(TestMemberTools))
     suite.addTest(makeSuite(TestUserdataSchema))
     suite.addTest(makeSuite(TestUserPortraits))
+    suite.addTest(makeSuite(TestUserSearch))
     suite.addTest(makeSuite(TestDashboard))
     return suite
