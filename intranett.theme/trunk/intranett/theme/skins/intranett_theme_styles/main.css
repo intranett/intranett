@@ -151,6 +151,7 @@ legend {
 body > header {
 	/*border-bottom: 1px solid #eee;*/
 	background: #fff url("color_bg.png") bottom left repeat-x;
+	min-height: 150px;
 }
 body > header > .contentAlignment {
 	background-color:  rgba(255,255,255,.7);
