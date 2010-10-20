@@ -7,18 +7,17 @@ from intranett.policy.upgrades.tests.utils import ensure_no_addon_upgrades
 class TestFunctionalMigrations(FunctionalUpgradeTestCase):
 
     def test_gs_diff(self):
-        self.importFile(__file__, 'two.zexp')
+        self.importFile(__file__, 'one.zexp')
         oldsite, result = self.migrate()
 
         diff = self.export()
         remaining = self.parse_diff(diff)
 
-        # XXX: Disable until memberdata upgrade steps are written
         # self.assertEquals(set(remaining.keys()), set([]),
         #                   "Unexpected diffs in:\n %s" % remaining.items())
 
     def test_list_steps_for_addons(self):
-        self.importFile(__file__, 'two.zexp')
+        self.importFile(__file__, 'one.zexp')
         oldsite, result = self.migrate()
 
         setup = getToolByName(oldsite, "portal_setup")

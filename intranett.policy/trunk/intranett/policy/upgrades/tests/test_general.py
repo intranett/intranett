@@ -21,7 +21,8 @@ class TestFullUpgrade(IntranettTestCase):
 
         setup.setLastVersionForProfile(POLICY_PROFILE, '1')
         upgrades = setup.listUpgrades(POLICY_PROFILE)
-        self.failUnless(len(upgrades) > 0)
+        # TODO: Enable again once we have upgrade steps
+        # self.failUnless(len(upgrades) > 0)
 
         run_upgrade(setup)
 

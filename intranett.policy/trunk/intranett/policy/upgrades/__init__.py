@@ -3,7 +3,7 @@ from Acquisition import aq_get
 
 def null_upgrade_step(tool):
     """This is a null upgrade, use it when nothing happens."""
-    pass
+    pass # pragma: no cover
 
 
 def run_upgrade(setup, profile_id=u"intranett.policy:default"):
