@@ -1,0 +1,18 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:five="http://namespaces.zope.org/five"
+  i18n_domain="intranett">
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <include package="Products.CMFPlone" />
+  <include package="experimental.catalogqueryplan" />
+  <include package="plone.app.discussion" />
+  <include package="Products.PloneFormGen" />
+  <include package="intranett.theme" />
+
+  <include package=".browser" />
+  <include package=".upgrades" />
+  <include file="profile.zcml" />
+
+</configure>
