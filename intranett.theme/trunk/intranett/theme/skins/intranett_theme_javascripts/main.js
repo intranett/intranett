@@ -63,14 +63,9 @@
         //         $(this).removeClass("visualHighlight");                
         //     }
         // );    
-        // $("form#comment-workflow a").click(function(event) {
-        //     $("form#comment-workflow").submit();
-        //     return False;
-        // })
         $("#form-buttons-comment").addClass("allowMultiSubmit");
-        $(".commentActions li form a").live('click', function() {
+        $("a[class='form.button.DeleteComment']").live('click', function() {
             var trigger = this;
-            console.log(trigger);
             var form = $(this).parents("form");
             var data = $(form).serialize();
             var form_url = $(form).attr("action");
@@ -92,11 +87,33 @@
                     }
                 },
                 error: function(req, error) {
-                    return True;
+                    return true;
                 }
             });
             return false;
         })
+        $("a[class='form.button.PublishComment']").live('click', function() {
+	        var trigger = this;
+            var form = $(this).parents("form");
+            var data = $(form).serialize();
+            var form_url = $(form).attr("action");
+	        $.ajax({
+	            type: "GET",
+	            url: form_url,
+	            data: "workflow_action=publish",
+	            context: trigger,
+	            success: function (msg) {
+	                // fade out row
+	                $(this).parents("li").fadeOut("normal", function () {
+	                    $(this).parents("li").remove();
+	                });
+	            },
+	            error: function (msg) {
+	                return true;
+	            }
+	        });
+	        return false;
+	    });
         $("#commenting form#form").submit(function(){
             var button = $("#commenting form#form .formControls input.submitting");
             $(button).attr('disabled', 'disabled');
@@ -125,7 +142,7 @@
                     $(button).removeAttr('disabled');
                 },
                 error: function(req,error){
-                    return True
+                    return true
                 }
             });
             return false;

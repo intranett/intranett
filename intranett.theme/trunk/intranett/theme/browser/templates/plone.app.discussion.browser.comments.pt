@@ -101,14 +101,13 @@
                                            /><small 
                                       class="deleteComment"><a 
                                       href="" title="Delete" 
+                                           class="form.button.DeleteComment"
                                            tal:attributes="href string:${reply/absolute_url}/@@moderate-delete-comment"
                                            i18n:attributes="title label_delete"
-                                           i18n:translate="label_delete">Delete</a></small></form>
-                            </li><li 
+                                           i18n:translate="label_delete">Delete</a></small></form></li><li 
                             tal:condition="canManage"
                                 tal:repeat="action reply_dict/actions|nothing"><form 
                                       name=""
-                                      id="comment-workflow"
                                       action=""
                                       method="get"
                                       tal:attributes="action string:${reply/absolute_url}/@@moderate-publish-comment;
@@ -120,8 +119,9 @@
                                            tal:attributes="value action/title"
                                            i18n:attributes="value"
                                            /><small><a 
-                                    href=""
-                                           tal:attributes="href string:${reply/absolute_url}/@@moderate-publish-comment"
+                                    href="" title="" class="form.button.PublishComment"
+                                           tal:attributes="href string:${reply/absolute_url}/@@moderate-publish-comment;
+                                                           title action/title"
                                            tal:content="action/title"
                                            i18n:translate="">Publish</a></small></form>
                             </li>

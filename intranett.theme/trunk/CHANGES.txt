@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Ajaxified publishing of a comment when comment_review_workflow is the main
+  workflow for the comments.
+  [denys]
+
 - Prevent "You already clicked" message from showing up when filling out "Add
   comment" form.
   [denys]
