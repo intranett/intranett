@@ -42,6 +42,22 @@ class TestUserdataSchema(IntranettTestCase):
         self.failUnless('phone' in schema)
         self.failUnless('mobile' in schema)
 
+    def test_memberinfo(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'phone': '12345',
+                                    'mobile': '67890',
+                                    'department': 'it',
+                                    'email': 'info@jarn.com'})
+        info = mt.getMemberInfo()
+        self.assertEquals(info['phone'], '12345')
+        self.assertEquals(info['mobile'], '67890')
+        self.assertEquals(info['department'], 'it')
+        self.assertEquals(info['email'], 'info@jarn.com')
+
+        info = mt.getMemberInfo(memberId='foo')
+        self.failUnless(info is None)
+
     def test_userpanel(self):
         from ..userdataschema import ICustomUserDataSchema
         panel = ICustomUserDataSchema(self.portal)

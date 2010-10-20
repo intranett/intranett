@@ -39,6 +39,20 @@ class MemberDataTool(BaseMemberDataTool):
 
 class MembershipTool(BaseMembershipTool):
 
+    def getMemberInfo(self, memberId=None):
+        memberinfo = super(MembershipTool, self).getMemberInfo(memberId)
+        if memberinfo is None:
+            return None
+        if not memberId:
+            member = self.getAuthenticatedMember()
+        else:
+            member = self.getMemberById(memberId)
+        memberinfo['email'] = member.getProperty('email')
+        memberinfo['phone'] = member.getProperty('phone')
+        memberinfo['mobile'] = member.getProperty('mobile')
+        memberinfo['department'] = member.getProperty('department')
+        return memberinfo
+
     def changeMemberPortrait(self, portrait, id=None):
         """update the portait of a member.
 
