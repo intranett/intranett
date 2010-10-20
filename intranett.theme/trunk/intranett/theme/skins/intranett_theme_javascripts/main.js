@@ -74,7 +74,6 @@
                 url:form_url,
                 context: $(trigger).parents(".comment"),
                 success: function(data) { 
-                    console.log($(trigger).parents(".discussion").find(".comment").length);
                     if($(".discussion .comment").length == 1) {
                         $(".discussion").fadeOut('fast', function() {
                             $(".discussion").remove();
@@ -128,7 +127,6 @@
                 success: function(data) {
                     var jqobj = $(data);
                     var new_comment;
-                    console.log($(".discussion").length > 0);
                     if($(".discussion").length > 0) {
                         new_comment = $(jqobj).find(".discussion .comment:last-child");
                         $(new_comment).hide();

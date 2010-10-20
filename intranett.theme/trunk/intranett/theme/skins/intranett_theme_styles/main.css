@@ -1367,6 +1367,9 @@ small.commentDate {
 .commentActions ul li small a {
 	display: block;
 }
+#commenting textarea#form-widgets-text {
+	height: 70px;
+}
 
 /* @end */
 

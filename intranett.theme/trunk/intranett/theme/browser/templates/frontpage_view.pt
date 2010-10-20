@@ -25,7 +25,8 @@
                 <tal:block replace="structure provider:frontpage.highlight" />
             </div></div>
         </div>
-        <div id="frontpage-columns" class="row">
+        <div id="frontpage-columns" class="row"
+             tal:condition="columns_class">
             <div class="cell fpBlock"
                  tal:attributes="class string:cell fpBlock $columns_class"
                  tal:condition="fp_left">

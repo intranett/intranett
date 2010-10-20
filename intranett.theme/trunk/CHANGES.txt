@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Fixed edge case of the frontpage when no portlets registered in the
+  frontpage columns. Fixes #97.
+  [denys]
+
 - Ajaxified publishing of a comment when comment_review_workflow is the main
   workflow for the comments.
   [denys]
