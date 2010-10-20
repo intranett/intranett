@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name="portal_memberdata">
+  <property name="phone" type="string"></property>
+  <property name="mobile" type="string"></property>
+  <property name="department" type="string"></property>
+</object>
