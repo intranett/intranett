@@ -12,8 +12,7 @@ class FrontpageView(BrowserView):
         i = 0
         for manager in cols:
             if ploneview.have_portlets(manager, self):
-                i+=1
+                i += 1
         if i != 0:
             return 'width-%s' % (16/i)
-        else:
-            return False
+        return False
