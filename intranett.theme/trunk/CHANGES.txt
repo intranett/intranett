@@ -9,7 +9,7 @@ Changelog
 
 - Fixed edge case of the frontpage when no portlets registered in the
   frontpage columns. Fixes #97.
-  [denys]
+  [denys, hannosch]
 
 - Ajaxified publishing of a comment when comment_review_workflow is the main
   workflow for the comments.
