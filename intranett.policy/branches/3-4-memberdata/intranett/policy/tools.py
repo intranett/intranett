@@ -1,7 +1,6 @@
 from OFS.Image import Image
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.utils import _checkPermission
 from Products.PlonePAS.tools.membership import MembershipTool as BaseMembershipTool
 from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataTool
 from Products.PlonePAS.tools.membership import default_portrait
@@ -63,7 +62,7 @@ class MembershipTool(BaseMembershipTool):
             image = Image(id=safe_id, file=scaled, title='')
             membertool._setPortrait(image, safe_id, thumbnail=True)
 
-    def getPersonalPortrait(self, id=None, verifyPermission=0, thumbnail=True):
+    def getPersonalPortrait(self, id=None, thumbnail=True):
         """Return a members personal portait.
 
         Modified to make it possible to return the thumbnail portrait.
@@ -75,12 +74,7 @@ class MembershipTool(BaseMembershipTool):
             safe_id = self.getAuthenticatedMember().getId()
 
         portrait = membertool._getPortrait(safe_id, thumbnail=thumbnail)
-        if isinstance(portrait, str):
-            portrait = None
-        if portrait is not None:
-            if verifyPermission and not _checkPermission('View', portrait):
-                # Don't return the portrait if the user can't get to it
-                portrait = None
+
         if portrait is None:
             portal = getToolByName(self, 'portal_url').getPortalObject()
             portrait = getattr(portal, default_portrait, None)
