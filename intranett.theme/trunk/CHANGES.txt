@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Profile page (author.cpt). References #67.
+  [denys]
+
 - Fixed edge case of the frontpage when no portlets registered in the
   frontpage columns. Fixes #97.
   [denys]
