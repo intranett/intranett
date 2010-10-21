@@ -4,6 +4,9 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Translations basis with basic norwegian translations.
+  [denys]
+
 - Adjust profile version back to `1`. We will recreate the first site from
   scratch once more.
   [hannosch]
