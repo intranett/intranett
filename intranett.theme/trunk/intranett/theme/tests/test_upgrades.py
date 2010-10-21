@@ -46,4 +46,4 @@ class TestUpgrades(IntranettTestCase):
         # Run the step
         add_media_query_maincss(self.portal)
         main = css.getResource('main.css')
-        self.assert_(not main.getMedia())        
+        self.assert_(not main.getMedia())

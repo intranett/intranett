@@ -8,7 +8,7 @@
 <body>
 
     <metal:content fill-slot="content">
-    
+        <span tal:content="view/employees"/>
         <div id="settings-toggle">
             We are going to have view switcher here.
         </div>

@@ -19,7 +19,7 @@ def test_suite():
             test_class=IntranettFunctionalTestCase,
             optionflags=optionflags),
         ZopeDocFileSuite(
-            'personslisting.txt', package='intranett.theme.tests',
+            'employeelisting.txt', package='intranett.theme.tests',
             test_class=IntranettFunctionalTestCase,
             optionflags=optionflags)])
     return suite

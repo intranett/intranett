@@ -99,15 +99,16 @@ class TestFrontpage(IntranettTestCase):
         view = self.portal.unrestrictedTraverse('@@frontpage_view')
         self.assertEquals(view.columns_class(), False)
 
-class TestPersonsListing(IntranettTestCase):
+class TestEmployeeListing(IntranettTestCase):
 
     def test_view_exists(self):
         try:
-            self.portal.unrestrictedTraverse('@@persons-listing')
+            self.portal.unrestrictedTraverse('@@employee-listing')
         except AttributeError: # pragma: no cover
-            self.fail("@@persons_listing doesn't exist.")
+            self.fail("@@employee-listing doesn't exist.")
 
-    def test_personslisting_action(self):
+    def test_employeelisting_action(self):
         at = getToolByName(self.portal, 'portal_actions')
         tabs = at.portal_tabs
-        self.assert_('persons-listing' in tabs.objectIds(), '"persons-listing" action is not registered.')
+        self.assert_('employee-listing' in tabs.objectIds(), '"employee-listing" action is not registered.')
+
