@@ -1,9 +1,12 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
   xmlns:five="http://namespaces.zope.org/five"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
   i18n_domain="intranett">
 
   <five:registerPackage package="." initialize=".initialize" />
+  
+  <i18n:registerTranslations directory="locales" />
 
   <include package="Products.CMFPlone" />
   <include package="experimental.catalogqueryplan" />
