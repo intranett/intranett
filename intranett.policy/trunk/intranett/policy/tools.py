@@ -46,9 +46,6 @@ class MemberData(BaseMemberData):
         else:
             return "%s%s" %(position, department)
 
-    def BirthDate(self):
-        return self.getProperty('birth_date')
-
     security.declareProtected('SearchableText', 'View')
     def SearchableText(self):
         return ' '.join([self.getProperty('fullname') or '',
