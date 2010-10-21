@@ -9,6 +9,3 @@ def add_media_query_maincss(context):
     css = getToolByName(context, 'portal_css')
     main = css.getResource('main.css')
     main.setMedia("")
-    
-def add_personslisting_action(context):
-    pass
