@@ -29,7 +29,7 @@ class ICustomUserDataSchema(Interface):
         required=False)
 
     mobile = schema.ASCIILine(
-        title=_(u'label_mobile', default=u'Mobile'),
+        title=_(u'label_mobile', default=u'Mobile phone'),
         description=_(u'help_mobile',
                       default=u'Your mobile phone number.'),
         required=False)
@@ -60,8 +60,8 @@ class ICustomUserDataSchema(Interface):
         description=_(u'help_portrait',
                       default=u'To add or change the portrait: click the '
                       '"Browse" button; select a picture of yourself. '
-                      'Recommended image size is 75 pixels wide by 100 '
-                      'pixels tall.'),
+                      'We recommend to upload a square image not smaller '
+                      'than 300px wide by 300px tall.'),
         required=False)
 
     pdelete = schema.Bool(
