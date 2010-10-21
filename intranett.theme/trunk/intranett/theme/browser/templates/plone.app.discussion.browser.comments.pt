@@ -4,9 +4,9 @@
 <tal:block define="userHasReplyPermission view/can_reply;
                    isAnonymousDiscussionAllowed view/anonymous_discussion_allowed;
                    isAnon view/is_anonymous;
-                   canManage view/can_manage;
-                   replies python:view.get_replies(canManage);
-                   has_replies python:view.has_replies(canManage);
+                   canReview view/can_review;
+                   replies python:view.get_replies(canReview);
+                   has_replies python:view.has_replies(canReview);
                    showCommenterImage view/show_commenter_image;
                    errors options/state/getErrors|nothing;
                    wtool context/@@plone_tools/workflow;">
@@ -44,7 +44,7 @@
                  tal:attributes="class python:'comment replyTreeLevel'+str(depth)+' state-'+str(review_state);
                                  style string:margin-left: ${depth}em;
                                  id string:${reply/getId}"
-                 tal:condition="python:canManage or review_state == 'published'">
+                 tal:condition="python:canReview or review_state == 'published'">
 
                 <div class="commentImage" tal:condition="showCommenterImage">
                     <a href="" tal:condition="has_author_link"
@@ -89,7 +89,7 @@
                                      tal:content="python:view.format_time(reply.modification_date)">
                                      8/23/2001 12:40:44 PM
                             </small></li><li 
-                            tal:condition="canManage"><form name="delete"
+                            tal:condition="canReview"><form name="delete"
                                       action=""
                                       method="post"
                                       tal:attributes="action string:${reply/absolute_url}/@@moderate-delete-comment"><input 
@@ -105,7 +105,7 @@
                                            tal:attributes="href string:${reply/absolute_url}/@@moderate-delete-comment"
                                            i18n:attributes="title label_delete"
                                            i18n:translate="label_delete">Delete</a></small></form></li><li 
-                            tal:condition="canManage"
+                            tal:condition="canReview"
                                 tal:repeat="action reply_dict/actions|nothing"><form 
                                       name=""
                                       action=""
@@ -140,7 +140,7 @@
     </div>
 
     <div class="reply"
-         tal:condition="python:isDiscussionAllowed and (isAnon and not isAnonymousDiscussionAllowed)">
+         tal:condition="python:has_replies and (isAnon and not isAnonymousDiscussionAllowed)">
         <form tal:attributes="action view/login_action">
             <input class="standalone"
                    style="margin-bottom: 1.25em;"
