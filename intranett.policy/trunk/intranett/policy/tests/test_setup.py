@@ -128,6 +128,9 @@ class TestSiteSetup(IntranettTestCase):
         self.assertNotEquals(name, '')
         address = self.portal.getProperty('email_from_address')
         self.assertNotEquals(address, '')
+        mailhost = self.portal.MailHost
+        self.assertNotEquals(mailhost.smtp_host, '')
+        self.assertNotEquals(mailhost.smtp_port, '')
 
 
 class TestAdmin(IntranettTestCase):

@@ -4,6 +4,9 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Include Gocept mail server configuration into the profile. Refs #65.
+  [hannosch]
+
 - Translations basis with basic norwegian translations.
   [denys]
 
