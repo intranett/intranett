@@ -16,15 +16,15 @@ msgstr ""
 
 #: ./browser/templates/overview.pt:68
 msgid "Create a new intranet"
-msgstr ""
+msgstr "Opprett nytt intranett"
 
 #: ./browser/templates/addsite.pt:13
 msgid "Create an intranet"
-msgstr ""
+msgstr "Opprett nytt intranett"
 
 #: ./browser/templates/addsite.pt:90
 msgid "Create intranet"
-msgstr ""
+msgstr "Opprett nytt intranett"
 
 #: ./browser/templates/overview.pt:43
 msgid "This site configuration is outdated and needs to be upgraded:"
@@ -32,15 +32,15 @@ msgstr ""
 
 #: ./browser/templates/overview.pt:53
 msgid "Upgrade&hellip;"
-msgstr ""
+msgstr "Oppgrader&hellip;"
 
 #: ./browser/templates/overview.pt:35
 msgid "View your intranet"
-msgstr ""
+msgstr "Se intranettet"
 
 #: ./browser/templates/overview.pt:26
 msgid "Your intranet is up and running."
-msgstr ""
+msgstr "Intranettet ditt er klart"
 
 #: ./browser/templates/overview.pt:61
 msgid "Your intranett.no instance has not been added yet:"
@@ -49,7 +49,7 @@ msgstr ""
 #. Default: "A short overview of who you are and what you do. Will be displayed on your author page, linked from the items you create."
 #: ./userdataschema.py:39
 msgid "help_biography"
-msgstr ""
+msgstr "En kort oversikt over hvem du er og hva du gjør. Vil vises for andre på profilsiden din."
 
 #. Default: "Your department in the company."
 #: ./userdataschema.py:47
@@ -59,17 +59,17 @@ msgstr ""
 #. Default: "Your location - either city and country - or in a company setting, where your office is located."
 #: ./userdataschema.py:53
 msgid "help_location"
-msgstr ""
+msgstr "Sted (By, land, kontor etc.)"
 
 #. Default: "Your mobile phone number."
 #: ./userdataschema.py:33
 msgid "help_mobile"
-msgstr ""
+msgstr "Mobiltelefonnummer"
 
 #. Default: "Your company phone number."
 #: ./userdataschema.py:27
 msgid "help_phone"
-msgstr ""
+msgstr "Telefonnummer arbeid"
 
 #. Default: "To add or change the portrait: click the \"Browse\" button; select a picture of yourself. We recommend to upload a square image not smaller than 300px wide by 300px tall."
 #: ./userdataschema.py:60
@@ -79,7 +79,7 @@ msgstr ""
 #. Default: "Biography"
 #: ./userdataschema.py:38
 msgid "label_biography"
-msgstr ""
+msgstr "Beskrivelse"
 
 #. Default: "Delete Portrait"
 #: ./userdataschema.py:68
@@ -116,7 +116,8 @@ msgstr "Mobiltelefon"
 msgid "label_phone"
 msgstr "Telefon"
 
-#. Default: "Portrait"
+#. Defau
+lt: "Portrait"
 #: ./userdataschema.py:59
 msgid "label_portrait"
 msgstr "Portrett"
