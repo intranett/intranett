@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+    <metal:content fill-slot="content">
+    
+        <div id="settings-toggle">
+            We are going to have view switcher here.
+        </div>
+    
+        <div class="tileItem visualIEFloatFix row">
+            <div class="cell width-4 position-0">
+                <a href="#">
+                    <img width="100" class="image-left" alt="" src="http://localhost:8080/Plone/portal_memberdata/thumbnails/admin">
+                </a> 
+            </div>
+            <div class="cell width-12 position-4">
+                <h2 class="tileHeadline">
+                    <span class="summary">
+                        <a class="contenttype-document state-private url" href="http://localhost:8080/Plone/test-page">Test Page</a>
+                    </span>
+                </h2>
+                <p class="tileBody">
+                    <span class="description">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</span>
+                </p>
+            </div>
+        </div>
+        <div class="tileItem visualIEFloatFix">
+            <a href="#" class="image-left commentImage">
+                <img width="100" alt="" src="http://localhost:8080/Plone/portal_memberdata/thumbnails/admin">
+            </a> 
+            <div class="commentWrapper">
+                <h2 class="tileHeadline">
+                    <span class="summary">
+                        <a class="contenttype-document state-private url" href="http://localhost:8080/Plone/test-page">Test Page</a>
+                    </span>
+                </h2>
+                <p class="tileBody">
+                    <span class="description">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</span>
+                </p>
+            </div>
+        </div>
+        <div class="tileItem visualIEFloatFix">
+            <a href="#" class="image-left commentImage">
+                <img width="100" alt="" src="http://localhost:8080/Plone/portal_memberdata/thumbnails/admin">
+            </a> 
+            <div class="commentWrapper">
+                <h2 class="tileHeadline">
+                    <span class="summary">
+                        <a class="contenttype-document state-private url" href="http://localhost:8080/Plone/test-page">Test Page</a>
+                    </span>
+                </h2>
+                <p class="tileBody">
+                    <span class="description">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</span>
+                </p>
+            </div>
+        </div>                
+    </metal:content>
+
+</body>
+</html>
+

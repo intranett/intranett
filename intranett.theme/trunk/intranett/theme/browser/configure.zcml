@@ -69,6 +69,7 @@
       permission="zope2.View"
       />
 
+  <!-- Frontpage -->
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="frontpage_view"
@@ -93,5 +94,14 @@
       layer=".interfaces.IThemeSpecific"
       template="templates/manage-frontpage.pt"
       />
-
+      
+  <!-- Persons listing -->
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="persons-listing"
+      class=".personslisting.PersonsListingView"
+      template="templates/personslisting_view.pt"
+      permission="zope2.View"
+      />
+      
 </configure>

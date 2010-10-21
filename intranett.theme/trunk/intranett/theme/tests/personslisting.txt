@@ -1,0 +1,8 @@
+Persons listing
+---------------
+
+Get us a test browser, logged in as a normal user:
+
+  >>> browser = self.getBrowser()
+  >>> browser.handleErrors = False
+  >>> browser.open('http://nohost/plone/persons-listing')

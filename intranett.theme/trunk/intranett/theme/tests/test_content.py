@@ -1,9 +1,9 @@
 from zope.component import getSiteManager, getUtility
 from plone.portlets.interfaces import IPortletManager
+from Products.CMFCore.utils import getToolByName
+
 from intranett.theme.browser.interfaces import IFrontpagePortletManagers
-
 from intranett.policy.tests.base import IntranettTestCase
-
 
 class TestContent(IntranettTestCase):
 
@@ -82,3 +82,32 @@ class TestFrontpage(IntranettTestCase):
         mapping = self.portal.restrictedTraverse(portlets_right)
         self.assert_(u'fp_static_right' in mapping.keys(),
                      'FP static right is not registered for portlets.right')
+                     
+    def test_columns_class_default(self):
+        view = self.portal.unrestrictedTraverse('@@frontpage_view')
+        self.assertEquals(view.columns_class(), 'width-16')
+
+    def test_columns_class_no_portlets(self):
+        sm = getSiteManager(self.portal)
+        sm.unregisterUtility(provided=IPortletManager,
+                             name=u'frontpage.portlets.left')
+        sm.unregisterUtility(provided=IPortletManager,
+                             name=u'frontpage.portlets.central')
+        sm.unregisterUtility(provided=IPortletManager,
+                             name=u'frontpage.portlets.right')
+
+        view = self.portal.unrestrictedTraverse('@@frontpage_view')
+        self.assertEquals(view.columns_class(), False)                     
+                     
+class TestPersonsListing(IntranettTestCase):
+    
+    def test_view_exists(self):
+        try:
+            self.portal.unrestrictedTraverse('@@persons-listing')
+        except AttributeError:
+            self.fail("@@persons_listing doesn't exist.")
+            
+    def test_personslisting_action(self):
+        at = getToolByName(self.portal, 'portal_actions')
+        tabs = at.portal_tabs
+        self.assert_('persons-listing' in tabs.objectIds(), '"persons-listing" action is not registered.')
