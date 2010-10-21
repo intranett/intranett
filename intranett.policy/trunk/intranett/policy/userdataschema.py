@@ -1,12 +1,13 @@
+from zope.interface import implements
+from zope.interface import Interface
+from zope import schema
+
 from plone.app.portlets.dashboard import DefaultDashboard
 from plone.app.users.userdataschema import checkEmailAddress
 from plone.app.users.userdataschema import IUserDataSchemaProvider
 from plone.app.users.browser.personalpreferences import UserDataPanelAdapter
 from Products.CMFDefault.formlib.schema import FileUpload
 from Products.CMFPlone import PloneMessageFactory as _
-from zope.interface import implements
-from zope.interface import Interface
-from zope import schema
 
 
 class ICustomUserDataSchema(Interface):
@@ -40,6 +41,12 @@ class ICustomUserDataSchema(Interface):
                       default=u"A short overview of who you are and what you "
                       "do. Will be displayed on your author page, linked "
                       "from the items you create."),
+        required=False)
+
+    position = schema.TextLine(
+        title=_(u'label_position', default=u'Position'),
+        description=_(u'help_position',
+                      default=u"Your position in the company."),
         required=False)
 
     department = schema.TextLine(
@@ -79,6 +86,12 @@ class UserDataSchemaProvider(object):
 
 
 class CustomUserDataPanelAdapter(UserDataPanelAdapter):
+
+    def get_position(self):
+        return self.context.getProperty('position', '')
+    def set_position(self, value):
+        self.context.setMemberProperties({'position': value})
+    position = property(get_position, set_position)
 
     def get_department(self):
         return self.context.getProperty('department', '')

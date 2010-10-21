@@ -1,13 +1,67 @@
 from OFS.Image import Image
+from App.class_init import InitializeClass
+from Acquisition import aq_base
+from AccessControl import ClassSecurityInfo
+from zope.component import getUtility
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.interfaces import ISiteRoot
 from Products.PlonePAS.tools.membership import MembershipTool as BaseMembershipTool
 from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataTool
+from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
 from Products.PlonePAS.tools.membership import default_portrait
 from Products.PlonePAS.utils import scale_image
 
 PORTRAIT_SIZE = (300, 300,)
 PORTRAIT_THUMBNAIL_SIZE = (100, 100,)
+
+
+class MemberData(BaseMemberData):
+    """This is a catalog-aware MemberData. We add functions to allow the
+    catalog to index member data.
+    """
+    security = ClassSecurityInfo()
+    security.declareObjectProtected('View')
+
+    def notifyModified(self):
+        super(MemberData, self).notifyModified()
+        plone = getUtility(ISiteRoot)
+        ct = getToolByName(plone, 'portal_catalog')
+        ct.reindexObject(self)
+
+    def getPhysicalPath(self):
+        plone = getUtility(ISiteRoot)
+        return plone.getPhysicalPath() + ('author', self.getId())
+
+    security.declareProtected('Title', 'View')
+    def Title(self):
+        return self.getProperty('fullname')
+
+    security.declareProtected('Description', 'View')
+    def Description(self):
+        position = self.getProperty('position', '')
+        department = self.getProperty('department', '')
+        if position and department:
+            return "%s, %s" %(position, department)
+        else:
+            return "%s%s" %(position, department)
+
+    def BirthDate(self):
+        return self.getProperty('birth_date')
+
+    security.declareProtected('SearchableText', 'View')
+    def SearchableText(self):
+        return ' '.join([self.getProperty('fullname') or '',
+                         self.getProperty('email') or '',
+                         self.getProperty('position') or '',
+                         self.getProperty('department') or '',
+                         self.getProperty('location') or '',
+                         self.getProperty('description') or '',
+                         self.getProperty('phone') or '',
+                         self.getProperty('mobile') or ''])
+
+InitializeClass(MemberData)
+
 
 class MemberDataTool(BaseMemberDataTool):
 
@@ -36,6 +90,16 @@ class MemberDataTool(BaseMemberDataTool):
         if member_id in self.thumbnails:
             self.thumbnails._delObject(member_id)
 
+    def wrapUser(self, u):
+        """ Override wrapUser only to use our MemberData
+        """
+        id = u.getId()
+        members = self._members
+        if not members.has_key(id):
+            base = aq_base(self)
+            members[id] = MemberData(base, id)
+        return members[id].__of__(self).__of__(u)
+
 
 class MembershipTool(BaseMembershipTool):
 
@@ -50,7 +114,9 @@ class MembershipTool(BaseMembershipTool):
         memberinfo['email'] = member.getProperty('email')
         memberinfo['phone'] = member.getProperty('phone')
         memberinfo['mobile'] = member.getProperty('mobile')
+        memberinfo['position'] = member.getProperty('position')
         memberinfo['department'] = member.getProperty('department')
+        memberinfo['birth_date'] = member.getProperty('birth_date')
         return memberinfo
 
     def changeMemberPortrait(self, portrait, id=None):

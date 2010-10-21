@@ -1,8 +1,10 @@
+# -*- coding:utf-8 -*-
 from Acquisition import aq_get
 from zope.component import queryUtility
 from Products.CMFCore.utils import getToolByName
 from intranett.policy.tests.base import IntranettTestCase
 from Products.PloneTestCase.ptc import default_user
+
 
 class TestMemberTools(IntranettTestCase):
 
@@ -38,22 +40,29 @@ class TestUserdataSchema(IntranettTestCase):
         from plone.app.users.userdataschema import IUserDataSchemaProvider
         util = queryUtility(IUserDataSchemaProvider)
         schema = util.getSchema()
+        self.failUnless('position' in schema)
         self.failUnless('department' in schema)
         self.failUnless('phone' in schema)
         self.failUnless('mobile' in schema)
 
     def test_memberinfo(self):
+        from DateTime import DateTime
         mt = getToolByName(self.portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
         member.setMemberProperties({'phone': '12345',
                                     'mobile': '67890',
+                                    'position': 'Øngønør',
                                     'department': 'it',
-                                    'email': 'info@jarn.com'})
+                                    'email': 'info@jarn.com',
+                                    'birth_date': DateTime('23/11/2008')})
+
         info = mt.getMemberInfo()
         self.assertEquals(info['phone'], '12345')
         self.assertEquals(info['mobile'], '67890')
+        self.assertEquals(info['position'], 'Øngønør')
         self.assertEquals(info['department'], 'it')
         self.assertEquals(info['email'], 'info@jarn.com')
+        self.assertEquals(info['birth_date'], DateTime('23/11/2008'))
 
         info = mt.getMemberInfo(memberId='foo')
         self.failUnless(info is None)
@@ -61,12 +70,18 @@ class TestUserdataSchema(IntranettTestCase):
     def test_userpanel(self):
         from ..userdataschema import ICustomUserDataSchema
         panel = ICustomUserDataSchema(self.portal)
+        self.assertEquals(panel.position, '')
+        panel.position = 'Øngønør'
+        self.assertEquals(panel.position, 'Øngønør')
+
         self.assertEquals(panel.department, '')
         panel.department = 'it'
         self.assertEquals(panel.department, 'it')
+
         self.assertEquals(panel.phone, '')
         panel.phone = '+47 55533'
         self.assertEquals(panel.phone, '+47 55533')
+
         self.assertEquals(panel.mobile, '')
         panel.mobile = '+47 55533'
         self.assertEquals(panel.mobile, '+47 55533')
@@ -129,6 +144,52 @@ class TestUserPortraits(IntranettTestCase):
         mt.getPersonalPortrait(id='')
         mt.changeMemberPortrait(self.image_gif, id='')
 
+
+class TestUserSearch(IntranettTestCase):
+
+    def test_update_member_and_search(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': u'John Døe',
+                                    'phone': '12345',
+                                    'mobile': '67890',
+                                    'position': 'Øngønør',
+                                    'department': 'it',
+                                    'location': 'Tønsberg',
+                                    'email': 'info@jarn.com'})
+        catalog = self.portal.portal_catalog
+        results = catalog.searchResults(Title='Døe')
+        self.assertEquals(len(results), 1)
+        john_brain = results[0]
+        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.Title, 'John Døe')
+        self.assertEquals(john_brain.Description, 'Øngønør, it')
+        results = catalog.searchResults(SearchableText='12345')
+        self.assertEquals(len(results), 1)
+        john_brain = results[0]
+        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        results = catalog.searchResults(SearchableText='67890')
+        self.assertEquals(len(results), 1)
+        john_brain = results[0]
+        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        results = catalog.searchResults(SearchableText='Øngønør')
+        self.assertEquals(len(results), 1)
+        john_brain = results[0]
+        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        results = catalog.searchResults(SearchableText='it')
+        self.assertEquals(len(results), 1)
+        john_brain = results[0]
+        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        results = catalog.searchResults(SearchableText='Tønsberg')
+        self.assertEquals(len(results), 1)
+        john_brain = results[0]
+        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        results = catalog.searchResults(SearchableText='info@jarn.com')
+        self.assertEquals(len(results), 1)
+        john_brain = results[0]
+        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+
+
 class TestDashboard(IntranettTestCase):
 
     def test_default_dashboard(self):
@@ -154,5 +215,6 @@ def test_suite():
     suite.addTest(makeSuite(TestMemberTools))
     suite.addTest(makeSuite(TestUserdataSchema))
     suite.addTest(makeSuite(TestUserPortraits))
+    suite.addTest(makeSuite(TestUserSearch))
     suite.addTest(makeSuite(TestDashboard))
     return suite
