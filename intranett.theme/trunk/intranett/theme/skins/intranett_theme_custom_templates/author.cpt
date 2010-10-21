@@ -95,26 +95,24 @@
                              class="portraitPhoto image-left"
                              tal:attributes="src portrait/absolute_url" />
                              
-                        <ul class="visualClear" i18n:domain="intranett.policy">
+                        <ul class="visualClear" i18n:domain="intranett">
                             <li tal:condition="authorinfo/department">
                                 <!-- Department -->
-                                <b i18n:translate="text_department">Department:</b>
-                                <span tal:content="authorinfo/department"
-                                      tal:omit-tag="">
+                                <b><span tal:omit-tag="" i18n:translate="label_department">Department</span>:</b>
+                                <span tal:replace="authorinfo/department">
                                     Some department
                                 </span>
                             </li>
                             <li tal:condition="authorinfo/location">
                                 <!-- Location  -->
-                                <b i18n:translate="text_location">Location:</b>
-                                <span tal:content="authorinfo/location"
-                                      tal:omit-tag="">
+                                <b><span tal:omit-tag="" i18n:translate="label_location">Location</span>:</b>
+                                <span tal:replace="authorinfo/location">
                                     Some location
                                 </span>
                             </li>
                             <li tal:condition="authorinfo/email">
                                 <!-- E-mail  -->
-                                <b i18n:translate="text_email">Email:</b>
+                                <b><span tal:omit-tag="" i18n:translate="label_email">Email</span>:</b>
                                 <a href="" title=""
                                    tal:attributes="href string:mailto:${authorinfo/email}"
                                    tal:content="authorinfo/email">
@@ -123,7 +121,7 @@
                             </li>
                             <li tal:condition="authorinfo/phone">
                                 <!-- Phone -->
-                                <b i18n:translate="text_phone">Phone:</b>
+                                <b><span tal:omit-tag="" i18n:translate="label_phone">Phone</span>:</b>
                                 <span tal:content="authorinfo/phone"
                                       tal:omit-tag="">
                                     Phone
@@ -131,7 +129,7 @@
                             </li>
                             <li tal:condition="authorinfo/mobile">
                                 <!-- Mobile phone -->
-                                <b i18n:translate="text_mobile">Mobile phone:</b>
+                                <b><span tal:omit-tag="" i18n:translate="label_mobile">Mobile phone</span>:</b>
                                 <span tal:content="authorinfo/mobile"
                                       tal:omit-tag="">
                                     Mobile phone

@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Hooked translations from ``intranett`` domain to profile view.
+  [denys]
+
 - Profile page (author.cpt). References #67.
   [denys]
 

@@ -84,7 +84,9 @@
 .portraitPhoto {
     border: 1px solid #ccc;
 }
-
+body.template-author .portraitPhoto {
+	margin-bottom: 1.25em !important;
+}
 .eventDetails {
     float: right;
     clear: right;
