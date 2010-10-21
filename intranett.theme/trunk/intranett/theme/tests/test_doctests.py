@@ -13,5 +13,10 @@ def test_suite():
         ZopeDocFileSuite(
             'frontpage.txt', package='intranett.theme.tests',
             test_class=IntranettFunctionalTestCase,
-            optionflags=optionflags)])
+            optionflags=optionflags),
+        ZopeDocFileSuite(
+            'robots.txt', package='intranett.theme.tests',
+            test_class=IntranettFunctionalTestCase,
+            optionflags=optionflags),
+        ])
     return suite

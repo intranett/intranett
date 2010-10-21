@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Added a ``robots.txt`` to disallow any robot from indexing the site.
+  This refs #78.
+  [hannosch]
+
 - Prevent the front page view from being accessible by anonymous users.
   Refs #68.
   [hannosch]
