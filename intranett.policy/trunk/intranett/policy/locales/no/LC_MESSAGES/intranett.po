@@ -9,10 +9,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
-"Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
 
 #: ./browser/templates/overview.pt:68
 msgid "Create a new intranet"
@@ -116,9 +112,7 @@ msgstr "Mobiltelefon"
 msgid "label_phone"
 msgstr "Telefon"
 
-#. Defau
-lt: "Portrait"
+#. Default: "Portrait"
 #: ./userdataschema.py:59
 msgid "label_portrait"
 msgstr "Portrett"
-
