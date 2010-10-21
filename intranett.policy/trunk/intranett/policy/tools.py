@@ -24,6 +24,9 @@ class MemberData(BaseMemberData):
     security = ClassSecurityInfo()
     security.declareObjectProtected(View)
 
+    # This is to make Plone's search machinery happy
+    meta_type = portal_type = 'MemberData'
+
     def notifyModified(self):
         super(MemberData, self).notifyModified()
         plone = getUtility(ISiteRoot)
