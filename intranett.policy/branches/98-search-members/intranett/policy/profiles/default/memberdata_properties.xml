@@ -19,6 +19,8 @@
   <!-- Additional properties-->
   <property name="phone" type="string"></property>
   <property name="mobile" type="string"></property>
+  <property name="position" type="string"></property>
   <property name="department" type="string"></property>
+  <property name="birth_date" type="date">2000/01/01</property>
   
 </object>

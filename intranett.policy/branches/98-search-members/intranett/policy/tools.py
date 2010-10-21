@@ -1,5 +1,7 @@
 from OFS.Image import Image
+from App.class_init import InitializeClass
 from Acquisition import aq_base
+from AccessControl import ClassSecurityInfo
 from zope.component import getUtility
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
@@ -18,6 +20,8 @@ class MemberData(BaseMemberData):
     """This is a catalog-aware MemberData. We add functions to allow the
     catalog to index member data.
     """
+    security = ClassSecurityInfo()
+    security.declareObjectProtected('View')
 
     def notifyModified(self):
         super(MemberData, self).notifyModified()
@@ -29,36 +33,34 @@ class MemberData(BaseMemberData):
         plone = getUtility(ISiteRoot)
         return plone.getPhysicalPath() + ('author', self.getId())
 
+    security.declareProtected('Title', 'View')
     def Title(self):
         return self.getProperty('fullname')
 
+    security.declareProtected('Description', 'View')
     def Description(self):
-        return self.getProperty('description')
+        position = self.getProperty('position', '')
+        department = self.getProperty('department', '')
+        if position and department:
+            return "%s, %s" %(position, department)
+        else:
+            return "%s%s" %(position, department)
 
-    def Email(self):
-        return self.getProperty('email')
+    def BirthDate(self):
+        return self.getProperty('birth_date')
 
-    def Location(self):
-        return self.getProperty('location')
-
-    def Department(self):
-        return self.getProperty('department')
-
-    def Phone(self):
-        return self.getProperty('phone')
-
-    def Mobile(self):
-        return self.getProperty('mobile')
-
+    security.declareProtected('SearchableText', 'View')
     def SearchableText(self):
-        return ' '.join([self.Title(),
-                         self.Description(),
-                         self.Email(),
-                         self.Location(),
-                         self.Department(),
-                         self.Phone(),
-                         self.Mobile()])
+        return ' '.join([self.getProperty('fullname') or '',
+                         self.getProperty('email') or '',
+                         self.getProperty('position') or '',
+                         self.getProperty('department') or '',
+                         self.getProperty('location') or '',
+                         self.getProperty('description') or '',
+                         self.getProperty('phone') or '',
+                         self.getProperty('mobile') or ''])
 
+InitializeClass(MemberData)
 
 class MemberDataTool(BaseMemberDataTool):
 
@@ -111,7 +113,9 @@ class MembershipTool(BaseMembershipTool):
         memberinfo['email'] = member.getProperty('email')
         memberinfo['phone'] = member.getProperty('phone')
         memberinfo['mobile'] = member.getProperty('mobile')
+        memberinfo['position'] = member.getProperty('position')
         memberinfo['department'] = member.getProperty('department')
+        memberinfo['birth_date'] = member.getProperty('birth_date')
         return memberinfo
 
     def changeMemberPortrait(self, portrait, id=None):
