@@ -37,6 +37,10 @@ class MemberData(BaseMemberData):
         plone = getUtility(ISiteRoot)
         return plone.getPhysicalPath() + ('author', self.getId())
 
+    security.declareProtected(View, 'Type')
+    def Type(self):
+        return self.portal_type
+
     security.declareProtected(View, 'Title')
     def Title(self):
         return self.getProperty('fullname')
