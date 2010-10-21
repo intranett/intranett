@@ -25,42 +25,34 @@ class ICustomUserDataSchema(Interface):
 
     phone = schema.ASCIILine(
         title=_(u'label_phone', default=u'Phone'),
-        description=_(u'help_phone',
-                      default=u'Your company phone number.'),
+        description=u'',
         required=False)
 
     mobile = schema.ASCIILine(
         title=_(u'label_mobile', default=u'Mobile phone'),
-        description=_(u'help_mobile',
-                      default=u'Your mobile phone number.'),
+        description=u'',
         required=False)
 
     description = schema.Text(
         title=_(u'label_biography', default=u'Biography'),
         description=_(u'help_biography',
                       default=u"A short overview of who you are and what you "
-                      "do. Will be displayed on your author page, linked "
-                      "from the items you create."),
+                      "do. Will be displayed on your profile page"),
         required=False)
 
     position = schema.TextLine(
         title=_(u'label_position', default=u'Position'),
-        description=_(u'help_position',
-                      default=u"Your position in the company."),
+        description=u'',
         required=False)
 
     department = schema.TextLine(
         title=_(u'label_department', default=u'Department'),
-        description=_(u'help_department',
-                      default=u"Your department in the company."),
+        description=u'',
         required=False)
 
     location = schema.TextLine(
         title=_(u'label_location', default=u'Location'),
-        description=_(u'help_location',
-                      default=u"Your location - either city and "
-                      "country - or in a company setting, where "
-                      "your office is located."),
+        description=u'',
         required=False)
 
     portrait = FileUpload(title=_(u'label_portrait', default=u'Portrait'),
