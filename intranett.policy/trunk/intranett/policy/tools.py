@@ -6,6 +6,7 @@ from zope.component import getUtility
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
+from Products.CMFCore.permissions import View
 from Products.PlonePAS.tools.membership import MembershipTool as BaseMembershipTool
 from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataTool
 from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
@@ -21,7 +22,7 @@ class MemberData(BaseMemberData):
     catalog to index member data.
     """
     security = ClassSecurityInfo()
-    security.declareObjectProtected('View')
+    security.declareObjectProtected(View)
 
     def notifyModified(self):
         super(MemberData, self).notifyModified()
@@ -33,11 +34,11 @@ class MemberData(BaseMemberData):
         plone = getUtility(ISiteRoot)
         return plone.getPhysicalPath() + ('author', self.getId())
 
-    security.declareProtected('Title', 'View')
+    security.declareProtected(View, 'Title')
     def Title(self):
         return self.getProperty('fullname')
 
-    security.declareProtected('Description', 'View')
+    security.declareProtected(View, 'Description')
     def Description(self):
         position = self.getProperty('position', '')
         department = self.getProperty('department', '')
@@ -46,7 +47,7 @@ class MemberData(BaseMemberData):
         else:
             return "%s%s" %(position, department)
 
-    security.declareProtected('SearchableText', 'View')
+    security.declareProtected(View, 'SearchableText')
     def SearchableText(self):
         return ' '.join([self.getProperty('fullname') or '',
                          self.getProperty('email') or '',
