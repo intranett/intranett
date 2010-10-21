@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Prevent the front page view from being accessible by anonymous users.
+  Refs #68.
+  [hannosch]
+
 - Hooked translations from ``intranett`` domain to profile view.
   [denys]
 

@@ -1,7 +1,21 @@
 Frontpage
 ---------
 
-Get us a test browser, logged in as a normal user:
+Get us a test browser, as an anonymous user:
+
+  >>> browser = self.getBrowser(loggedIn=False)
+  >>> browser.open(self.portal.absolute_url())
+
+Navigating to the front page redirects us to the login form:
+
+  >>> 'require_login' in browser.url
+  True
+  >>> 'template-login_form' in browser.contents
+  True
+  >>> 'id="login_form"' in browser.contents
+  True
+
+Now get us a test browser, logged in as a normal user:
 
   >>> browser = self.getBrowser()
   >>> browser.handleErrors = False

@@ -13,7 +13,9 @@
 <body>
 
     <metal:content fill-slot="body"
-                   tal:define="highlight python:plone_view.have_portlets('frontpage.highlight', view);
+                   tal:define="isAnon context/@@plone_portal_state/anonymous;
+                               raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
+                               highlight python:plone_view.have_portlets('frontpage.highlight', view);
                                fp_left python:plone_view.have_portlets('frontpage.portlets.left', view);
                                fp_central python:plone_view.have_portlets('frontpage.portlets.central', view);
                                fp_right python:plone_view.have_portlets('frontpage.portlets.right', view);
