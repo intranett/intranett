@@ -95,12 +95,12 @@
       template="templates/manage-frontpage.pt"
       />
       
-  <!-- Persons listing -->
+  <!-- Employee listing -->
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="persons-listing"
-      class=".personslisting.PersonsListingView"
-      template="templates/personslisting_view.pt"
+      name="employee-listing"
+      class=".employeelisting.EmployeeListingView"
+      template="templates/employeelisting_view.pt"
       permission="zope2.View"
       />
       
