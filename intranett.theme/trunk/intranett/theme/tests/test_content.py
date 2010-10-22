@@ -1,9 +1,16 @@
 from zope.component import getSiteManager, getUtility
 from plone.portlets.interfaces import IPortletManager
 from Products.CMFCore.utils import getToolByName
+from Products.PloneTestCase.ptc import default_user
 
 from intranett.theme.browser.interfaces import IFrontpagePortletManagers
 from intranett.policy.tests.base import IntranettTestCase
+
+import os
+from intranett.policy.tests.utils import makeFileUpload
+from intranett.policy import tests
+image_file = os.path.join(os.path.dirname(tests.__file__), 'images', 'test.jpg')
+
 
 class TestContent(IntranettTestCase):
 
@@ -99,7 +106,24 @@ class TestFrontpage(IntranettTestCase):
         view = self.portal.unrestrictedTraverse('@@frontpage_view')
         self.assertEquals(view.columns_class(), False)
 
+
 class TestEmployeeListing(IntranettTestCase):
+
+    def afterSetUp(self):
+        super(TestEmployeeListing, self).afterSetUp()
+        membership = self.portal.portal_membership
+        default_member = membership.getMemberById(default_user)
+        default_member.setMemberProperties(
+            dict(fullname='Skip McDonald', email='skip@slaterock.com',
+                 position='Manager', department='Rock & Gravel'))
+        default_member.changeMemberPortrait(
+            makeFileUpload(image_file, 'portrait.jpg', 'image/jpeg'))
+        membership.addMember('fred', 'secret', ['Member'], [],
+            dict(fullname='Fred Flintstone', email='ff@slaterock.com',
+                 position='Crane Operator', department='Rock & Gravel'))
+        membership.addMember('barney', 'secret', ['Member'], [],
+            dict(fullname='Barney Rubble', email='br@slaterock.com',
+                 position='Head Accountant', department='Accounting'))
 
     def test_view_exists(self):
         try:
@@ -111,4 +135,20 @@ class TestEmployeeListing(IntranettTestCase):
         at = getToolByName(self.portal, 'portal_actions')
         tabs = at.portal_tabs
         self.assert_('employee-listing' in tabs.objectIds(), '"employee-listing" action is not registered.')
+
+    def test_list_employees(self):
+        view = self.portal.unrestrictedTraverse('@@employee-listing')
+        self.assertEqual([x['fullname'] for x in view.employees()],
+                         ['Barney Rubble', 'Fred Flintstone', 'Skip McDonald'])
+
+    def test_list_departments(self):
+        view = self.portal.unrestrictedTraverse('@@employee-listing')
+        self.assertEqual(view.departments(), ['Accounting', 'Rock & Gravel'])
+
+    def test_list_employees_by_department(self):
+        view = self.portal.unrestrictedTraverse('@@employee-listing')
+        self.assertEqual([x['fullname'] for x in view.employees('Rock & Gravel')],
+                         ['Fred Flintstone', 'Skip McDonald'])
+        self.assertEqual([x['fullname'] for x in view.employees('Accounting')],
+                         ['Barney Rubble'])
 
