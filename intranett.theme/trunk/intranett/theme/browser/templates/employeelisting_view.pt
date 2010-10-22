@@ -8,22 +8,40 @@
 <body>
 
     <metal:content fill-slot="content"
-                   tal:define="department python:request.get('department', None);
-                               employees python:department and view.employees(department) or view.employees()">
+                   tal:define="department_request python:request.get('department', None);
+                               employees python:department_request and view.employees(department_request) or view.employees()">
                    
-        <!-- <span tal:content="employees"></span> -->
-        <div tal:condition="view/departments">
-            Departments:
-            <ul id="departments-list">
-                <li tal:repeat="department view/departments">
-                    <a href="" title="" 
+        <!-- <span tal:content="department_request"></span> -->
+        <div id="edit-bar" tal:condition="view/departments">
+            <strong><span tal:omit-tag="" 
+                          i18n:translate="" 
+                          i18n:domain="intranett">Departments</span>:</strong> <a href="" title="Show all employees"
+            tal:condition="department_request"
+            tal:attributes="href string:${context/absolute_url}/employee-listing">Show employees of all departments.</a>
+            <ul class="contentViews" id="departments-list">
+                <li tal:repeat="department view/departments"
+                    tal:attributes="class python:department_request == department and 'selected' or 'plain'">
+                    <a href="" title=""
                        tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
                        tal:content="department">IT Department</a>
                 </li>
             </ul>
         </div>
+        
+        <dl tal:condition="department_request"
+            class="portalMessage info visualClear">
+            <dt i18n:translate="">Info</dt>
+            <dd i18n:translate="number_of_employees_found" i18n:domain="intranett">
+                <tal:employees_number i18n:name="employees_number" content="python:len(employees)" />
+                <tal:employess_text>employees are found in</tal:employess_text>
+                <b tal:content="department_request" i18n:name="employees_department">Department</b>
+                department.
+            </dd>
+        </dl>
+        
         <tal:employees repeat="employee employees">
-        <div class="tileItem visualIEFloatFix row">
+        <div class="tileItem visualIEFloatFix row"
+             tal:define="department employee/department|nothing">
             <div class="cell width-3 position-0">
                 <a href="#"
                    tal:attributes="href string:$portal_url/author/${employee/username};
@@ -43,11 +61,16 @@
                            tal:content="employee/fullname | employee/username"
                            tal:attributes="href string:$portal_url/author/${employee/username};
                                            title employee/fullname">Test Page</a>
+                        <sup class="manageUser"
+                             tal:condition="view/can_manage"><a href="" title="" 
+                           tal:attributes="href string:$portal_url/@@user-information?userid=${employee/username};">Edit</a></sup>
                     </span>
                 </h2>
                 <div class="tileBody" i18n:domain="intranett">
                     <tal:position condition="employee/position"><span tal:replace="employee/position" />,</tal:position>
-                    <tal:department condition="employee/department"><span tal:content="employee/department" /></tal:department>
+                    <tal:department condition="employee/department"><a href="" 
+                         tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
+                         tal:content="employee/department">Departent</a></tal:department>
                     <tal:mobile condition="employee/mobile"><br /><span tal:omit-tag="" i18n:translate="label_mobile">Mobile phone</span>: <span tal:content="employee/mobile" /></tal:mobile>
                     <tal:phone condition="employee/phone"><br/><span tal:omit-tag="" i18n:translate="label_phone">Phone</span>: <span tal:content="employee/phone" /></tal:phone>
                 </div>

@@ -1,4 +1,6 @@
 from zope.publisher.browser import BrowserView
+from Acquisition import aq_inner
+from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 
 
@@ -27,6 +29,9 @@ class EmployeeListingView(BrowserView):
         self.member_info.sort(key=lambda a:a['fullname'])
         self.department_info = list(self.department_info)
         self.department_info.sort()
+        
+    def can_manage(self):
+        return getSecurityManager().checkPermission('Manage users', aq_inner(self.context))
 
     def departments(self):
         return self.department_info

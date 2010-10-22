@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Employee listing styles for thumbnails view.
+  [denys]
+
 - Linked department info on the ``profile`` view to ``employee-listing`` of
   this department.
   [denys]

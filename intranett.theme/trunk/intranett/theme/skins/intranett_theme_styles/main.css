@@ -495,7 +495,7 @@ dl.collapsible dd.collapsibleContent {
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6)); /* Saf4+, Chrome */
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6'); /* IE6,IE7 */
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f7', EndColorStr='#e6e6e6')"; /* IE8 */
-	padding: 0.62em;
+	padding: 0.41em;
 }
 
 .image-left {
@@ -1637,6 +1637,18 @@ body.template-manage-frontpage .portlets-manager .section+.portletAssignments {
 
 /* @end */
 
+/* @group Employee listing */
+
+sup.manageUser {
+	vertical-align: super;
+	font-size: small;
+	float
+}
+sup.manageUser a {
+	color: #E3005A;	
+}
+
+/* @end */
 
 @media print {
 /* @group Print styles */

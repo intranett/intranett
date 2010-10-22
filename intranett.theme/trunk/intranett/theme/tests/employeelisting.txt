@@ -1,8 +1,37 @@
-Employee listing
----------------
+General Employee listing
+------------------------
+
+Preparations:
+
+  >>> self.loginAsPortalOwner()
+  
+  >>> from Acquisition import aq_get
+  >>> _doAddUser = aq_get(self.portal, 'acl_users')._doAddUser
+  >>> _doAddUser('member', 'secret', ['Member', 'Reader'], [])
+  
+  >>> mtool = getToolByName(self.portal, 'portal_membership')
+  >>> mdata = mtool.getMemberById('member')
+  >>> mdata.setMemberProperties(dict(fullname='M\xc3\xa5mb\xc3\xb8r'))
+  
+  >>> self.logout()
 
 Get us a test browser, logged in as a normal user:
 
   >>> browser = self.getBrowser()
   >>> browser.handleErrors = False
   >>> browser.open('http://nohost/plone/employee-listing')
+
+If a user has no portrait, the view doesn't blow up and the user gets standard portrait fallback:
+
+  
+
+Only users with 'Manage users' permission can see "manage" link for a user
+  
+Department employee listing
+---------------------------
+
+2. We get poralMessage with the number of department employees
+3. the current department is selected in the bar
+4. The number of department employees is correct
+5. If we are in a department we should see 'show all' link
+6. If there are users without a department we should get 'unspecified' in the bar in order to edit those users
