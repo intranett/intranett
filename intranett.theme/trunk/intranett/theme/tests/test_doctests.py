@@ -11,6 +11,10 @@ optionflags = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 def test_suite():
     suite = TestSuite([
         ZopeDocFileSuite(
+            'comments.txt', package='intranett.theme.tests',
+            test_class=IntranettFunctionalTestCase,
+            optionflags=optionflags),
+        ZopeDocFileSuite(
             'employeelisting.txt', package='intranett.theme.tests',
             test_class=IntranettFunctionalTestCase,
             optionflags=optionflags),
