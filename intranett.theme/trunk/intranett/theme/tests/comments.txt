@@ -15,9 +15,7 @@ Preparations:
 
   >>> mtool = getToolByName(self.portal, 'portal_membership')
   >>> mdata = mtool.getMemberById('member')
-
-  # TODO: This exposes a bug in p.a.discussion
-  # >>> mdata.setMemberProperties(dict(fullname='M\xc3\xa5mb\xc3\xb8r'))
+  >>> mdata.setMemberProperties(dict(fullname='M\xc3\xa5mb\xc3\xb8r'))
 
   >>> self.logout()
 
@@ -41,5 +39,5 @@ Fill in a comment:
 The comment was added and the link turned into a proper clickable one:
 
   >>> browser.contents
-  '...<a href="http://nohost/plone/author/member">member</a>...
+  '...<a href="http://nohost/plone/author/member">M\xc3\xa5mb\xc3\xb8r</a>...
   T&aring;st <a href="http://intranett.no"...>http://intranett.no</a>...'
