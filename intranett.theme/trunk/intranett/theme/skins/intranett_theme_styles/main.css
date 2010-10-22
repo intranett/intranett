@@ -503,6 +503,9 @@ dl.collapsible dd.collapsibleContent {
    clear: both;
    margin: 0.5em 1em 0.5em 0;
 }
+body.template-employee-listing .tileItem .image-left {
+	margin-top: 0;
+}
 .image-right {
    float: right;
    clear: both;
@@ -1206,6 +1209,9 @@ body.template-dashboard #content dd.portletFooter {
 
 h2.tileHeadline {
 	margin-bottom: 0.4em;
+}
+body.template-employee-listing .tileItem h2.tileHeadline {
+	margin-top: 0;
 }
 p.tileBody {
 	margin-top: 0;

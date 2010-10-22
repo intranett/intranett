@@ -8,10 +8,9 @@
 <body>
 
     <metal:content fill-slot="content">
-        <span tal:content="view/employees"/>
-        <div id="settings-toggle">
+        <!-- <div id="settings-toggle">
             We are going to have view switcher here.
-        </div>
+        </div> -->
         <tal:employees repeat="employee view/employees">
         <div class="tileItem visualIEFloatFix row">
             <div class="cell width-3 position-0">
@@ -32,9 +31,12 @@
                                            title employee/fullname">Test Page</a>
                     </span>
                 </h2>
-                <p class="tileBody ">
-                    <span tal:content="employee/position" />, <span tal:content="employee/department" />
-                </p>
+                <div class="tileBody" i18n:domain="intranett">
+                    <tal:position condition="employee/position"><span tal:replace="employee/position" />,</tal:position>
+                    <tal:department condition="employee/department"><span tal:content="employee/department" /></tal:department>
+                    <tal:mobile condition="employee/mobile"><br /><span tal:omit-tag="" i18n:translate="label_mobile">Mobile phone</span>: <span tal:content="employee/mobile" /></tal:mobile>
+                    <tal:phone condition="employee/phone"><br/><span tal:omit-tag="" i18n:translate="label_phone">Phone</span>: <span tal:content="employee/phone" /></tal:phone>
+                </div>
             </div>
         </div>
         </tal:employees>
