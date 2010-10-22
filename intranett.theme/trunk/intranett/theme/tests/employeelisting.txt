@@ -1,20 +1,6 @@
 General Employee listing
 ------------------------
 
-Preparations:
-
-  >>> self.loginAsPortalOwner()
-  
-  >>> from Acquisition import aq_get
-  >>> _doAddUser = aq_get(self.portal, 'acl_users')._doAddUser
-  >>> _doAddUser('member', 'secret', ['Member', 'Reader'], [])
-  
-  >>> mtool = getToolByName(self.portal, 'portal_membership')
-  >>> mdata = mtool.getMemberById('member')
-  >>> mdata.setMemberProperties(dict(fullname='M\xc3\xa5mb\xc3\xb8r'))
-  
-  >>> self.logout()
-
 Get us a test browser, logged in as a normal user:
 
   >>> browser = self.getBrowser()
