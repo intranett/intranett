@@ -7,6 +7,9 @@ Changelog
 - Removed contact form from author.pt.
   [denys]
 
+- Added employee-listing view.
+  [ggozad]
+
 - Added a ``robots.txt`` to disallow any robot from indexing the site.
   This refs #78.
   [hannosch]
