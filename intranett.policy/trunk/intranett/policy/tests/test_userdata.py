@@ -3,6 +3,7 @@ from Acquisition import aq_get
 from zope.component import queryUtility
 from Products.CMFCore.utils import getToolByName
 from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.tests.base import IntranettFunctionalTestCase
 from Products.PloneTestCase.ptc import default_user
 
 
@@ -145,7 +146,7 @@ class TestUserPortraits(IntranettTestCase):
         mt.changeMemberPortrait(self.image_gif, id='')
 
 
-class TestUserSearch(IntranettTestCase):
+class TestUserSearch(IntranettFunctionalTestCase):
 
     def test_update_member_and_search(self):
         mt = getToolByName(self.portal, 'portal_membership')
@@ -188,6 +189,23 @@ class TestUserSearch(IntranettTestCase):
         self.assertEquals(len(results), 1)
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+
+    def test_ttw_search(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': u'John Døe',
+                                    'phone': '12345',
+                                    'mobile': '67890',
+                                    'position': 'Øngønør',
+                                    'department': 'it',
+                                    'location': 'Tønsberg',
+                                    'email': 'info@jarn.com'})
+        browser = self.getBrowser()
+        browser.open(self.portal.absolute_url())
+        browser.getControl(name='SearchableText').value = 'Døe'
+        browser.getForm(name='searchform').submit()
+        self.failUnless('John Døe' in browser.contents)
+        self.failUnless('Øngønør, it' in browser.contents)
 
 
 class TestDashboard(IntranettTestCase):
