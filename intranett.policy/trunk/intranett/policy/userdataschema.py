@@ -1,7 +1,6 @@
 from zope.interface import implements
 from zope.interface import Interface
 from zope import schema
-
 from plone.app.portlets.dashboard import DefaultDashboard
 from plone.app.users.userdataschema import checkEmailAddress
 from plone.app.users.userdataschema import IUserDataSchemaProvider

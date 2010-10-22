@@ -55,7 +55,8 @@ class TestUserdataSchema(IntranettTestCase):
                                     'position': 'Øngønør',
                                     'department': 'it',
                                     'email': 'info@jarn.com',
-                                    'birth_date': DateTime('23/11/2008')})
+                                    'birth_date': DateTime('23/11/2008'),
+                                    'description': "<p>Kjære Python!</p>"})
 
         info = mt.getMemberInfo()
         self.assertEquals(info['phone'], '12345')
@@ -64,9 +65,36 @@ class TestUserdataSchema(IntranettTestCase):
         self.assertEquals(info['department'], 'it')
         self.assertEquals(info['email'], 'info@jarn.com')
         self.assertEquals(info['birth_date'], DateTime('23/11/2008'))
-
+        self.assertEquals(info['description'], "<p>Kjære Python!</p>")
         info = mt.getMemberInfo(memberId='foo')
         self.failUnless(info is None)
+
+    def test_safe_transform_description(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'description': """
+            <script> document.load(something) </script>
+            <object> some object </object>
+            <span>This is ok</span>
+        """})
+        info = mt.getMemberInfo()
+        self.assertEquals(info['description'].strip(), "<span>This is ok</span>")
+
+    def test_personal_information_widget(self):
+        from zope.component import getMultiAdapter
+        from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
+        view = getMultiAdapter((self.portal, self.app.REQUEST),
+                               name='personal-information')
+        self.assertEquals(view.form_fields['description'].custom_widget,
+                          WYSIWYGWidget)
+
+    def test_user_information_widget(self):
+        from zope.component import getMultiAdapter
+        from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
+        view = getMultiAdapter((self.portal, self.app.REQUEST),
+                             name='user-information')
+        self.assertEquals(view.form_fields['description'].custom_widget,
+                        WYSIWYGWidget)
 
     def test_userpanel(self):
         from ..userdataschema import ICustomUserDataSchema
@@ -157,7 +185,8 @@ class TestUserSearch(IntranettFunctionalTestCase):
                                     'position': 'Øngønør',
                                     'department': 'it',
                                     'location': 'Tønsberg',
-                                    'email': 'info@jarn.com'})
+                                    'email': 'info@jarn.com',
+                                    'description': '<p>Kjære Python!</p>'})
         catalog = self.portal.portal_catalog
         results = catalog.searchResults(Title='Døe')
         self.assertEquals(len(results), 1)
@@ -189,6 +218,16 @@ class TestUserSearch(IntranettFunctionalTestCase):
         self.assertEquals(len(results), 1)
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        results = catalog.searchResults(SearchableText='Kjære')
+        self.assertEquals(len(results), 1)
+        john_brain = results[0]
+        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+
+    def test_safe_transform_searchable_text(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'description': '<p>Kjære Python!</p>'})
+        self.assertEquals(member.SearchableText().strip(), 'Kjære Python!')
 
     def test_ttw_search(self):
         mt = getToolByName(self.portal, 'portal_membership')

@@ -3,6 +3,22 @@
   xmlns:browser="http://namespaces.zope.org/browser"
   i18n_domain="intranett">
 
+  <!-- Personal Info form.-->
+  <browser:page
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    name="personal-information"
+    class=".personalpreferences.CustomUserDataPanel"
+    permission="cmf.SetOwnProperties"
+    />
+
+  <browser:page
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    name="user-information"
+    class=".personalpreferences.CustomUserDataConfiglet"
+    permission="zope2.ManageUsers"
+    />
+
+  <!-- Intranett creation forms -->
   <browser:page
       for="OFS.interfaces.IApplication"
       name="plone-overview"

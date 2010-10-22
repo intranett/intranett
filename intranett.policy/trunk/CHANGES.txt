@@ -4,6 +4,9 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Made biography in user preferences use rich text widget.
+  [stefan, ggozad]
+
 - Include Gocept mail server configuration into the profile. Refs #65.
   [hannosch]
 
