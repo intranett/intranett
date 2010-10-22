@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Removed contact form from author.pt.
+  [denys]
+
 - Added a ``robots.txt`` to disallow any robot from indexing the site.
   This refs #78.
   [hannosch]
