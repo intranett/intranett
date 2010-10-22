@@ -165,3 +165,10 @@ class MembershipTool(BaseMembershipTool):
             portrait = getattr(portal, default_portrait, None)
 
         return portrait
+
+
+# Make sure MemberData can be found via Plone search
+def getUserFriendlyTypes(self, typesList=[]):
+    friendlyTypes = self._old_getUserFriendlyTypes(typesList)
+    return friendlyTypes + ['MemberData']
+
