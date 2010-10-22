@@ -7,19 +7,33 @@
       i18n:domain="plone">
 <body>
 
-    <metal:content fill-slot="content">
-        <!-- <div id="settings-toggle">
-            We are going to have view switcher here.
-        </div> -->
-        <tal:employees repeat="employee view/employees">
+    <metal:content fill-slot="content"
+                   tal:define="department python:request.get('department', None);
+                               employees python:department and view.employees(department) or view.employees()">
+                   
+        <!-- <span tal:content="employees"></span> -->
+        <div tal:condition="view/departments">
+            Departments:
+            <ul id="departments-list">
+                <li tal:repeat="department view/departments">
+                    <a href="" title="" 
+                       tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
+                       tal:content="department">IT Department</a>
+                </li>
+            </ul>
+        </div>
+        <tal:employees repeat="employee employees">
         <div class="tileItem visualIEFloatFix row">
             <div class="cell width-3 position-0">
-                <a href="#" 
+                <a href="#"
                    tal:attributes="href string:$portal_url/author/${employee/username};
                                    title employee/fullname">
-                    <img width="100" class="image-left" alt="" 
-                         tal:attributes="src string:$portal_url/portal_memberdata/thumbnails/${employee/username}"
-                         src="http://localhost:8080/Plone/portal_memberdata/thumbnails/admin">
+                    <img width="100" class="image-left" alt="" src=""
+                         tal:condition="employee/thumbnail_url"
+                         tal:attributes="src employee/thumbnail_url" />
+                    <img width="100" class="image-left" alt="" src=""
+                         tal:condition="not:employee/thumbnail_url"
+                         tal:attributes="src string:$portal_url/defaultUser.png" />
                 </a> 
             </div>
             <div class="cell width-13 position-3">
