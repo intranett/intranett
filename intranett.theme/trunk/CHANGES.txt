@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Linked department info on the ``profile`` view to ``employee-listing`` of
+  this department.
+  [denys]
+
 - Removed contact form from author.pt.
   [denys]
 
