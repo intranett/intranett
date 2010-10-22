@@ -6,7 +6,7 @@
   i18n_domain="intranett">
 
   <five:registerPackage package="." initialize=".initialize" />
-  
+
   <i18n:registerTranslations directory="locales" />
 
   <include package="Products.CMFPlone" />
@@ -19,10 +19,12 @@
   <include package=".upgrades" />
   <include file="profile.zcml" />
 
-  <adapter for=".tools.MemberData
-                Products.CMFPlone.interfaces.IPloneCatalogTool"
-           factory="plone.indexer.wrapper.IndexableObjectWrapper"
-           provides="plone.indexer.interfaces.IIndexableObject"/>
+  <adapter
+    for=".tools.MemberData
+         Products.CMFPlone.interfaces.IPloneCatalogTool"
+    factory="plone.indexer.wrapper.IndexableObjectWrapper"
+    provides="plone.indexer.interfaces.IIndexableObject"
+    />
 
   <monkey:patch
     description="Makes MemberData findable via Plone's search"
