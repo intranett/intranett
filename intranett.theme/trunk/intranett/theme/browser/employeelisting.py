@@ -14,7 +14,7 @@ class EmployeeListingView(BrowserView):
         self.department_info = set()
         for member in members:
             info = mt.getMemberInfo(member)
-            if md.portraits.has_key(member):
+            if member in md.portraits:
                 info['portrait_url'] = "%s/portraits/%s" % (md.absolute_url(), member)
                 info['thumbnail_url'] = "%s/thumbnails/%s" % (md.absolute_url(), member)
             else:
