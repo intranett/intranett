@@ -23,6 +23,7 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'collective.testcaselayer',
+          'collective.monkeypatcher',
           'experimental.catalogqueryplan',
           'munin.zope',
           'Plone',
