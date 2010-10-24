@@ -1,23 +1,84 @@
 General Employee listing
 ------------------------
 
+Preparations:
+
+    >>> self.loginAsPortalOwner()
+    >>> from DateTime import DateTime
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> mtool = getToolByName(self.portal, 'portal_membership')
+    >>> from Acquisition import aq_get
+    >>> _doAddUser = aq_get(self.portal, 'acl_users')._doAddUser
+
+Let's add some members to the site:
+
+    >>> for i in range(1, 8):
+    ...     mi = 'member-%s' % str(i)
+    ...     _doAddUser(mi, 'secret', ['Member'], [])
+    ...     mdata = mtool.getMemberById(mi)
+    ...     fullname = 'Member %s' % str(i)
+    ...     img = 'http://nohost/plone/portal_memberdata/thumbnails/%s' % mi
+    ...     mdata.setMemberProperties(dict(fullname=fullname, 
+    ...                               department='User Interface',
+    ...                               thumbnail_url=img))
+
+We are super-company, so we have more than one department - for 2 of the added
+users let's change the department:
+
+    >>> for i in range(6, 8):
+    ...     mi = 'member-%s' % str(i)
+    ...     mdata = mtool.getMemberById(mi)
+    ...     mdata.setMemberProperties(dict(department='Design'))
+
+    >>> self.logout()
+  
 Get us a test browser, logged in as a normal user:
 
-  >>> browser = self.getBrowser()
-  >>> browser.handleErrors = False
-  >>> browser.open('http://nohost/plone/employee-listing')
+    >>> browser = self.getBrowser()
+    >>> browser.handleErrors = False
+    >>> browser.open('http://nohost/plone/employee-listing')
+
+Let's make sure we get members from both our departments:
+
+    >>> "User Interface" in browser.contents
+    True
+
+    >>> "Design" in browser.contents
+    True
+  
+In the global navigation 'employee-listing' tab should be selected:
+
+We do have breadcrumbs on this view even though it's not a content:
 
 If a user has no portrait, the view doesn't blow up and the user gets standard portrait fallback:
 
-  
+    >>> mdata = mtool.getMemberById('member-7')
+    >>> mdata.setMemberProperties(dict(thumbnail_url=''))
+    >>> browser.reload()
+    >>> browser.contents
+    '...<a... href="http://nohost/plone/author/member-7"...http://nohost/plone/defaultUser.png...</a>...'
 
-Only users with 'Manage users' permission can see "manage" link for a user
-  
+Only users with 'Manage users' permission can see 'Edit' link for a user. Since we are regular user we should not see 'Edit' link:
+
+    >>> mtool.checkPermission('Manage users', self.portal)
+    False
+    >>> 'class="manageUser"' in browser.contents
+    False
+
+Now we grant 'Manage users' permission to the current user. We should be able to edit the users after reloading the page:
+
 Department employee listing
 ---------------------------
 
-2. We get poralMessage with the number of department employees
-3. the current department is selected in the bar
-4. The number of department employees is correct
-5. If we are in a department we should see 'show all' link
-6. If there are users without a department we should get 'unspecified' in the bar in order to edit those users
+We do see the department in the breadcrumbs right after 'Employees' entry:
+
+We get poralMessage with the number of department employees:
+
+The current department is selected in the bar:
+
+The number of department employees is correct:
+
+If we are in a department we should see 'show all' link:
+
+If there are users without a department we should get 'unspecified' in the bar
+in order to edit those users:
