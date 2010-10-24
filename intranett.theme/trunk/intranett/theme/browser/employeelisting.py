@@ -16,8 +16,9 @@ class EmployeeListingView(BrowserView):
         for member in members:
             info = mt.getMemberInfo(member)
             if member in md.portraits:
-                info['portrait_url'] = "%s/portraits/%s" % (md.absolute_url(), member)
-                info['thumbnail_url'] = "%s/thumbnails/%s" % (md.absolute_url(), member)
+                md_url = md.absolute_url()
+                info['portrait_url'] = "%s/portraits/%s" % (md_url, member)
+                info['thumbnail_url'] = "%s/thumbnails/%s" % (md_url, member)
             else:
                 info['portrait_url'] = ''
                 info['thumbnail_url'] = ''
@@ -25,12 +26,13 @@ class EmployeeListingView(BrowserView):
             if info['department']:
                 self.department_info.add(info['department'])
 
-        self.member_info.sort(key=lambda a:a['fullname'])
+        self.member_info.sort(key=lambda a: a['fullname'])
         self.department_info = list(self.department_info)
         self.department_info.sort()
 
     def can_manage(self):
-        return getSecurityManager().checkPermission('Manage users', aq_inner(self.context))
+        sm = getSecurityManager()
+        return sm.checkPermission('Manage users', aq_inner(self.context))
 
     def departments(self):
         return self.department_info
