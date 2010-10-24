@@ -60,7 +60,7 @@ If a user has no portrait, the view doesn't blow up and the user gets standard p
 
 Only users with 'Manage users' permission can see 'Edit' link for a user. Since we are regular user we should not see 'Edit' link:
 
-    >>> mtool.checkPermission('Manage users', self.portal)
+    >>> bool(mtool.checkPermission('Manage users', self.portal))
     False
     >>> 'class="manageUser"' in browser.contents
     False
