@@ -158,3 +158,10 @@ class TestEmployeeListing(IntranettTestCase):
         self.assertEqual(rocks, ['Fred Flintstone', 'Skip McDonald'])
         accounting = [x['fullname'] for x in view.employees('Accounting')]
         self.assertEqual(accounting, ['Barney Rubble'])
+
+    def test_can_manage(self):
+        view = self.portal.unrestrictedTraverse('@@employee-listing')
+        self.login()
+        self.assertFalse(view.can_manage())
+        self.loginAsPortalOwner()
+        self.assertTrue(view.can_manage())
