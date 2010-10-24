@@ -1,15 +1,17 @@
-from zope.component import getSiteManager, getUtility
+import os.path
+
 from plone.portlets.interfaces import IPortletManager
+from zope.component import getSiteManager, getUtility
 from Products.CMFCore.utils import getToolByName
 from Products.PloneTestCase.ptc import default_user
 
-from intranett.theme.browser.interfaces import IFrontpagePortletManagers
-from intranett.policy.tests.base import IntranettTestCase
-
-import os
-from intranett.policy.tests.utils import makeFileUpload
 from intranett.policy import tests
-image_file = os.path.join(os.path.dirname(tests.__file__), 'images', 'test.jpg')
+from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.tests.utils import makeFileUpload
+from intranett.theme.browser.interfaces import IFrontpagePortletManagers
+
+test_dir = os.path.dirname(tests.__file__)
+image_file = os.path.join(test_dir, 'images', 'test.jpg')
 
 
 class TestContent(IntranettTestCase):
@@ -46,7 +48,8 @@ class TestFrontpage(IntranettTestCase):
 
     def testFrontpageInterfaces(self):
         highlight = getUtility(IPortletManager, 'frontpage.highlight')
-        portlets_right = getUtility(IPortletManager, 'frontpage.portlets.right')
+        portlets_right = getUtility(IPortletManager,
+                                    'frontpage.portlets.right')
         portlets_central = getUtility(IPortletManager,
                                       'frontpage.portlets.central')
         portlets_left = getUtility(IPortletManager, 'frontpage.portlets.left')
@@ -134,7 +137,8 @@ class TestEmployeeListing(IntranettTestCase):
     def test_employeelisting_action(self):
         at = getToolByName(self.portal, 'portal_actions')
         tabs = at.portal_tabs
-        self.assert_('employee-listing' in tabs.objectIds(), '"employee-listing" action is not registered.')
+        self.assert_('employee-listing' in tabs.objectIds(),
+                     '"employee-listing" action is not registered.')
 
     def test_list_employees(self):
         view = self.portal.unrestrictedTraverse('@@employee-listing')
@@ -147,8 +151,7 @@ class TestEmployeeListing(IntranettTestCase):
 
     def test_list_employees_by_department(self):
         view = self.portal.unrestrictedTraverse('@@employee-listing')
-        self.assertEqual([x['fullname'] for x in view.employees('Rock & Gravel')],
-                         ['Fred Flintstone', 'Skip McDonald'])
-        self.assertEqual([x['fullname'] for x in view.employees('Accounting')],
-                         ['Barney Rubble'])
-
+        rocks = [x['fullname'] for x in view.employees('Rock & Gravel')]
+        self.assertEqual(rocks, ['Fred Flintstone', 'Skip McDonald'])
+        accounting = [x['fullname'] for x in view.employees('Accounting')]
+        self.assertEqual(accounting, ['Barney Rubble'])
