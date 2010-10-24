@@ -142,15 +142,18 @@ class TestEmployeeListing(IntranettTestCase):
 
     def test_list_employees(self):
         view = self.portal.unrestrictedTraverse('@@employee-listing')
+        view.update()
         self.assertEqual([x['fullname'] for x in view.employees()],
                          ['Barney Rubble', 'Fred Flintstone', 'Skip McDonald'])
 
     def test_list_departments(self):
         view = self.portal.unrestrictedTraverse('@@employee-listing')
+        view.update()
         self.assertEqual(view.departments(), ['Accounting', 'Rock & Gravel'])
 
     def test_list_employees_by_department(self):
         view = self.portal.unrestrictedTraverse('@@employee-listing')
+        view.update()
         rocks = [x['fullname'] for x in view.employees('Rock & Gravel')]
         self.assertEqual(rocks, ['Fred Flintstone', 'Skip McDonald'])
         accounting = [x['fullname'] for x in view.employees('Accounting')]

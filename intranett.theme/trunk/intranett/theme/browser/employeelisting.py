@@ -7,8 +7,7 @@ from Products.CMFCore.utils import getToolByName
 class EmployeeListingView(BrowserView):
     """Employee listing"""
 
-    def __init__(self, context, request):
-        super(EmployeeListingView, self).__init__(context, request)
+    def update(self):
         mt = getToolByName(self.context, 'portal_membership')
         md = getToolByName(self.context, 'portal_memberdata')
         members = mt.listMemberIds()
@@ -29,7 +28,7 @@ class EmployeeListingView(BrowserView):
         self.member_info.sort(key=lambda a:a['fullname'])
         self.department_info = list(self.department_info)
         self.department_info.sort()
-        
+
     def can_manage(self):
         return getSecurityManager().checkPermission('Manage users', aq_inner(self.context))
 
