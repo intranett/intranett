@@ -48,7 +48,7 @@ class MemberData(BaseMemberData):
         ct = getToolByName(plone, 'portal_catalog')
         ct.reindexObject(self)
 
-    def getPhysicalPath(self): # pragma: no cover
+    def getPhysicalPath(self):
         plone = getUtility(ISiteRoot)
         # Work around broken PAS which *might* return a unicode id.
         user_id = self.getId()
