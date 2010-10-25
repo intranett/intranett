@@ -2,6 +2,7 @@ from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
 from plone.app.users.browser.personalpreferences import UserDataPanel,\
     UserDataConfiglet
 
+
 class CustomUserDataPanel(UserDataPanel):
     """This overrides p.a.u. UserDataPanel to modify the bio widget.
     """

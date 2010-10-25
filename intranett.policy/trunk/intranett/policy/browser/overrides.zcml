@@ -5,7 +5,7 @@
 
   <!-- Personal Info form.-->
   <browser:page
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
     name="personal-information"
     class=".personalpreferences.CustomUserDataPanel"
     permission="cmf.SetOwnProperties"
