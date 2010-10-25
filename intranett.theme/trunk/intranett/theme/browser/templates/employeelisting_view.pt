@@ -62,10 +62,10 @@
                             <a href="#"
                                tal:attributes="href string:$portal_url/author/${employee/username};
                                                title employee/fullname">
-                                <img height="100" class="image-left" alt="" src=""
+                                <img class="image-left" alt="" src=""
                                      tal:condition="employee/thumbnail_url"
                                      tal:attributes="src employee/thumbnail_url" />
-                                <img height="100" class="image-left" alt="" src=""
+                                <img class="image-left" alt="" src=""
                                      tal:condition="not:employee/thumbnail_url"
                                      tal:attributes="src string:$portal_url/defaultUser.png" />
                             </a>

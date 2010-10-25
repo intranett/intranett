@@ -4,6 +4,9 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Removed hardcoded height for the thumbnails in employee-listing.
+  [denys]
+
 
 0.3 - 2010-10-25
 ----------------
