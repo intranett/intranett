@@ -94,12 +94,12 @@
                              alt=""
                              class="portraitPhoto image-left"
                              tal:attributes="src portrait/absolute_url" />
-                             
+
                         <ul class="visualClear" i18n:domain="intranett">
                             <li tal:condition="authorinfo/department">
                                 <!-- Department -->
                                 <b><span tal:omit-tag="" i18n:translate="label_department">Department</span>:</b>
-                                <a href="" 
+                                <a href=""
                                      tal:attributes="href string:${context/absolute_url}/employee-listing?department=${authorinfo/department}"
                                      tal:content="authorinfo/department">Departent</a>
                             </li>
@@ -148,8 +148,8 @@
 
                         <div class="documentDescription" tal:content="authorinfo/description">
                             Author description.
-                        </div>         
-                        
+                        </div>
+
                         <p tal:condition="python:mtool.getHomeFolder(id=author)">
                         <a href="#" tal:attributes="href python:mtool.getHomeFolder(id=author).absolute_url()"
                            i18n:translate="label_author_internal_home_page">Author's home page in this site&hellip;</a>
@@ -161,7 +161,7 @@
                            tal:attributes="href authorinfo/home_page"
                            i18n:translate="label_author_external_home_page">Author's external home page&hellip;</a>
                         </p>
-                        
+
                         <tal:authorContent define="author_content python:context.portal_catalog.searchResults(Creator=author, sort_on='created', sort_order='reverse')[:10];"
                                            condition="author_content">
 
@@ -199,7 +199,7 @@
                             </p>
 
                         </tal:authorContent>
-                                                             
+
                     </div>
                 </div>
 
