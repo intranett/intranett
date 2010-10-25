@@ -185,6 +185,31 @@ class TestUserPortraits(IntranettTestCase):
 
 class TestUserSearch(IntranettFunctionalTestCase):
 
+    def test_type(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        self.assertEqual(member.meta_type, 'MemberData')
+        self.assertEqual(member.portal_type, 'MemberData')
+        self.assertEqual(member.Type(), 'MemberData')
+
+    def test_title(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': 'John Døe'})
+        self.assertEqual(member.Title(), 'John Døe')
+
+    def test_description(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'position': None, 'department': None})
+        self.assertEqual(member.Description(), '')
+        member.setMemberProperties({'position': None, 'department': 'Øl'})
+        self.assertEqual(member.Description(), 'Øl')
+        member.setMemberProperties({'position': 'Tørst', 'department': None})
+        self.assertEqual(member.Description(), 'Tørst')
+        member.setMemberProperties({'position': 'Tørst', 'department': 'Øl'})
+        self.assertEqual(member.Description(), 'Tørst, Øl')
+
     def test_update_member_and_search(self):
         mt = getToolByName(self.portal, 'portal_membership')
         member = mt.getAuthenticatedMember()

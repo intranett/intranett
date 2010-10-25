@@ -64,12 +64,12 @@ class MemberData(BaseMemberData):
 
     security.declareProtected(View, 'Description')
     def Description(self):
-        position = self.getProperty('position', '')
-        department = self.getProperty('department', '')
+        position = self.getProperty('position') or ''
+        department = self.getProperty('department') or ''
         if position and department:
-            return "%s, %s" %(position, department)
+            return "%s, %s" % (position, department)
         else:
-            return "%s%s" %(position, department)
+            return "%s%s" % (position, department)
 
     security.declareProtected(View, 'SearchableText')
     def SearchableText(self):
