@@ -99,21 +99,26 @@ class TestUserdataSchema(IntranettTestCase):
     def test_userpanel(self):
         from ..userdataschema import ICustomUserDataSchema
         panel = ICustomUserDataSchema(self.portal)
+
+        self.assertEquals(panel.fullname, '')
+        panel.fullname = 'John Døe'
+        self.assertEquals(panel.position, unicode('John Døe', 'utf-8'))
+
         self.assertEquals(panel.position, '')
         panel.position = 'Øngønør'
-        self.assertEquals(panel.position, 'Øngønør')
+        self.assertEquals(panel.position, unicode('Øngønør', 'utf-8'))
 
         self.assertEquals(panel.department, '')
         panel.department = 'it'
-        self.assertEquals(panel.department, 'it')
+        self.assertEquals(panel.department, u'it')
 
         self.assertEquals(panel.phone, '')
         panel.phone = '+47 55533'
-        self.assertEquals(panel.phone, '+47 55533')
+        self.assertEquals(panel.phone, u'+47 55533')
 
         self.assertEquals(panel.mobile, '')
         panel.mobile = '+47 55533'
-        self.assertEquals(panel.mobile, '+47 55533')
+        self.assertEquals(panel.mobile, u'+47 55533')
 
 
 class TestUserPortraits(IntranettTestCase):
@@ -179,7 +184,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
     def test_update_member_and_search(self):
         mt = getToolByName(self.portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
-        member.setMemberProperties({'fullname': u'John Døe',
+        member.setMemberProperties({'fullname': 'John Døe',
                                     'phone': '12345',
                                     'mobile': '67890',
                                     'position': 'Øngønør',
@@ -241,11 +246,12 @@ class TestUserSearch(IntranettFunctionalTestCase):
         _bget(name='form.position').value = 'Øngønør'
         _bget(name='form.department').value = 'Tøst'
         _bget(name='form.actions.save').click()
+        self.assert_(browser.url.endswith('@@personal-information'))
 
     def test_ttw_search(self):
         mt = getToolByName(self.portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
-        member.setMemberProperties({'fullname': u'John Døe',
+        member.setMemberProperties({'fullname': 'John Døe',
                                     'phone': '12345',
                                     'mobile': '67890',
                                     'position': 'Øngønør',

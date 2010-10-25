@@ -52,34 +52,44 @@ class MemberData(BaseMemberData):
         plone = getUtility(ISiteRoot)
         return plone.getPhysicalPath() + ('author', self.getId())
 
+    def _getProperty(self, name, default=''):
+        # The catalog needs utf-8 strings, so encode anything we want to
+        # put into it. Our own getProperty sometimes returns utf-8 and
+        # sometimes Unicode, depending on where it is stored (acl_users) or
+        # memberdata tool
+        value = self.getProperty(name, default)
+        if isinstance(value, unicode):
+            value = value.encode('utf-8')
+        return value
+
     security.declareProtected(View, 'Type')
     def Type(self):
         return self.portal_type
 
     security.declareProtected(View, 'Title')
     def Title(self):
-        return self.getProperty('fullname')
+        return self._getProperty('fullname')
 
     security.declareProtected(View, 'Description')
     def Description(self):
-        position = self.getProperty('position', '')
-        department = self.getProperty('department', '')
+        position = self._getProperty('position')
+        department = self._getProperty('department')
         if position and department:
-            return "%s, %s" %(position, department)
+            return "%s, %s" % (position, department)
         else:
-            return "%s%s" %(position, department)
+            return "%s%s" % (position, department)
 
     security.declareProtected(View, 'SearchableText')
     def SearchableText(self):
         description = safe_transform(
             self, self.getProperty('description') or '', 'text/plain')
-        return ' '.join([self.getProperty('fullname') or '',
-                         self.getProperty('email') or '',
-                         self.getProperty('position') or '',
-                         self.getProperty('department') or '',
-                         self.getProperty('location') or '',
-                         self.getProperty('phone') or '',
-                         self.getProperty('mobile') or '',
+        return ' '.join([self._getProperty('fullname') or '',
+                         self._getProperty('email') or '',
+                         self._getProperty('position') or '',
+                         self._getProperty('department') or '',
+                         self._getProperty('location') or '',
+                         self._getProperty('phone') or '',
+                         self._getProperty('mobile') or '',
                          description or ''])
 
 InitializeClass(MemberData)
