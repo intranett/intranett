@@ -154,7 +154,6 @@ class MembershipTool(BaseMembershipTool):
 
         membertool = getToolByName(self, 'portal_memberdata')
         if portrait and portrait.filename:
-            #import pdb; pdb.set_trace( )
             scaled, mimetype = scale_image(portrait,
                                            max_size=PORTRAIT_SIZE)
             image = Image(id=safe_id, file=scaled, title='')
