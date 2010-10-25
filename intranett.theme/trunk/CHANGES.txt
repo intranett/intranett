@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3 - unreleased
+0.3 - 2010-10-25
 ----------------
 
 - Split eployee-listing view into 2 columns to make the view more compact.
