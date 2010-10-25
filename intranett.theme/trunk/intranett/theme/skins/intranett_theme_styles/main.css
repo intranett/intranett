@@ -1646,9 +1646,7 @@ ul.horrList,
 ul.horrList li {
 	list-style: none;
 	margin-left: 0;
-}
-ul.horrList li {
-	display: inline;	
+	display: inline;
 }
 ul.horrList li a {
 	border-left:1px solid #CCCCCC;
@@ -1659,12 +1657,11 @@ ul.horrList li:nth-child(1) a {
 	border: none;
 	padding-left: 0;
 }
-sup.manageUser {
-	vertical-align: super;
-	font-size: small;
+ul#departments-list li:nth-child(1) a {
+	padding-left: 0.5em;
 }
-sup.manageUser a {
-	color: #E3005A;	
+#employee-listing-wrapper {
+	margin-top: 1.25em;
 }
 #employee-listing-wrapper .tileItem {
 	float: left;
@@ -1672,6 +1669,13 @@ sup.manageUser a {
 }
 #employee-listing-wrapper .tileItem:nth-child(odd) {
 	clear: left;
+}
+sup.manageUser {
+	vertical-align: super;
+	font-size: small;
+}
+sup.manageUser a {
+	color: #E3005A;	
 }
 
 /* @end */

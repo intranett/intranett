@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Split eployee-listing view into 2 columns to make the view more compact.
+  Reduced the noise in departments listing and title.
+  [denys]
+
 - Employee listing styles for thumbnails view.
   [denys]
 
