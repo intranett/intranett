@@ -183,7 +183,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
                                     'phone': '12345',
                                     'mobile': '67890',
                                     'position': 'Øngønør',
-                                    'department': 'it',
+                                    'department': 'Tøst',
                                     'location': 'Tønsberg',
                                     'email': 'info@jarn.com',
                                     'description': '<p>Kjære Python!</p>'})
@@ -193,7 +193,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
         self.assertEquals(john_brain.Title, 'John Døe')
-        self.assertEquals(john_brain.Description, 'Øngønør, it')
+        self.assertEquals(john_brain.Description, 'Øngønør, Tøst')
         results = catalog.searchResults(SearchableText='12345')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
@@ -206,7 +206,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
         self.assertEquals(len(results), 1)
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
-        results = catalog.searchResults(SearchableText='it')
+        results = catalog.searchResults(SearchableText='Tøst')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
@@ -236,15 +236,16 @@ class TestUserSearch(IntranettFunctionalTestCase):
                                     'phone': '12345',
                                     'mobile': '67890',
                                     'position': 'Øngønør',
-                                    'department': 'it',
+                                    'department': 'Tøst',
                                     'location': 'Tønsberg',
-                                    'email': 'info@jarn.com'})
+                                    'email': 'info@jarn.com',
+                                    'description': '<p>Kjære Python!</p>'})
         browser = self.getBrowser()
         browser.open(self.portal.absolute_url())
         browser.getControl(name='SearchableText').value = 'Døe'
         browser.getForm(name='searchform').submit()
         self.failUnless('John Døe' in browser.contents)
-        self.failUnless('Øngønør, it' in browser.contents)
+        self.failUnless('Øngønør, Tøst' in browser.contents)
 
 
 class TestDashboard(IntranettTestCase):
