@@ -79,7 +79,7 @@ class UserDataSchemaProvider(object):
 class CustomUserDataPanelAdapter(UserDataPanelAdapter):
 
     def get_fullname(self):
-        value = self.context.getProperty('fullname', u'')
+        value = self.context.getProperty('fullname', '')
         if value is not None:
             return value.decode('utf-8')
 
@@ -91,7 +91,7 @@ class CustomUserDataPanelAdapter(UserDataPanelAdapter):
     fullname = property(get_fullname, set_fullname)
 
     def get_position(self):
-        value = self.context.getProperty('position', u'')
+        value = self.context.getProperty('position', '')
         if value is not None:
             return value.decode('utf-8')
 
@@ -103,7 +103,7 @@ class CustomUserDataPanelAdapter(UserDataPanelAdapter):
     position = property(get_position, set_position)
 
     def get_department(self):
-        value = self.context.getProperty('department', u'')
+        value = self.context.getProperty('department', '')
         if value is not None:
             return value.decode('utf-8')
 
@@ -115,7 +115,7 @@ class CustomUserDataPanelAdapter(UserDataPanelAdapter):
     department = property(get_department, set_department)
 
     def get_location(self):
-        value = self.context.getProperty('location', u'')
+        value = self.context.getProperty('location', '')
         if value is not None:
             return value.decode('utf-8')
 
@@ -127,7 +127,7 @@ class CustomUserDataPanelAdapter(UserDataPanelAdapter):
     location = property(get_location, set_location)
 
     def get_phone(self):
-        value = self.context.getProperty('phone', u'')
+        value = self.context.getProperty('phone', '')
         if value is not None:
             return value.decode('utf-8')
 
@@ -139,7 +139,7 @@ class CustomUserDataPanelAdapter(UserDataPanelAdapter):
     phone = property(get_phone, set_phone)
 
     def get_mobile(self):
-        value = self.context.getProperty('mobile', u'')
+        value = self.context.getProperty('mobile', '')
         if value is not None:
             return value.decode('utf-8')
 
