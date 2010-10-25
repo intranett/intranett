@@ -21,10 +21,7 @@ def safe_transform(context, text, mt='text/x-html-safe'):
     """Use the safe_html transform to protect text output. This also
     ensures that resolve UID links are transformed into real links.
     """
-    # Portal transforms needs encoded strings
-    if not isinstance(text, unicode):
-        text = unicode(text, 'utf-8', 'ignore')
-    text = text.encode('utf-8')
+    # Portal transforms needs encoded strings, and getProperty returns them
     transformer = getToolByName(context, 'portal_transforms')
     data = transformer.convertTo(mt, text,
                                  context=context, mimetype='text/html')
