@@ -229,6 +229,19 @@ class TestUserSearch(IntranettFunctionalTestCase):
         member.setMemberProperties({'description': '<p>Kjære Python!</p>'})
         self.assertEquals(member.SearchableText().strip(), 'Kjære Python!')
 
+    def test_ttw_editing(self):
+        browser = self.getBrowser()
+        browser.handleErrors = False
+        browser.open(self.portal.absolute_url() + '/@@personal-information')
+        _bget = browser.getControl
+        _bget(name='form.fullname').value = 'John Døe'
+        _bget(name='form.email').value = 'test@example.com'
+        _bget(name='form.description').value = '<p>Kjære Python!</p>'
+        _bget(name='form.location').value = 'Tønsberg'
+        _bget(name='form.position').value = 'Øngønør'
+        _bget(name='form.department').value = 'Tøst'
+        _bget(name='form.actions.save').click()
+
     def test_ttw_search(self):
         mt = getToolByName(self.portal, 'portal_membership')
         member = mt.getAuthenticatedMember()

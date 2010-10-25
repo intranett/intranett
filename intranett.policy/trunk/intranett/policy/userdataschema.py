@@ -79,25 +79,25 @@ class UserDataSchemaProvider(object):
 class CustomUserDataPanelAdapter(UserDataPanelAdapter):
 
     def get_position(self):
-        return self.context.getProperty('position', '')
+        return self._getProperty('position')
     def set_position(self, value):
         self.context.setMemberProperties({'position': value})
     position = property(get_position, set_position)
 
     def get_department(self):
-        return self.context.getProperty('department', '')
+        return self._getProperty('department')
     def set_department(self, value):
         self.context.setMemberProperties({'department': value})
     department = property(get_department, set_department)
 
     def get_phone(self):
-        return self.context.getProperty('phone', '')
+        return self._getProperty('phone')
     def set_phone(self, value):
         self.context.setMemberProperties({'phone': value})
     phone = property(get_phone, set_phone)
 
     def get_mobile(self):
-        return self.context.getProperty('mobile', '')
+        return self._getProperty('mobile')
     def set_mobile(self, value):
         self.context.setMemberProperties({'mobile': value})
     mobile = property(get_mobile, set_mobile)
