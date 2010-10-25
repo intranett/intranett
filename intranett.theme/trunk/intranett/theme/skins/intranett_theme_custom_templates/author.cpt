@@ -15,13 +15,6 @@
 
 <body>
 
-<tal:comment replace="nothing">
-    Please note that this template fills the "content" slot instead of the
-    "main" slot, this is done so we can provide stuff like the content
-    tabs. This also means that we have to supply things that are normally
-    present from main_template.
-</tal:comment>
-
 <metal:main fill-slot="content"
     tal:define="errors options/state/getErrors;">
     <tal:main-macro metal:define-macro="main"
@@ -55,7 +48,6 @@
             </div>
         </tal:noAuthor>
 
-
         <tal:haveAuthor condition="authorinfo"
             tal:define="isOwner python:member.getId()==author;
                         isAnon context/@@plone_portal_state/anonymous;">
@@ -80,7 +72,6 @@
                 <div class="contentActions">&nbsp;</div>
                  <!-- end simulated tabs -->
             </div>
-
 
             <div metal:use-macro="context/global_statusmessage/macros/portal_message">
                 Portal status message
@@ -204,8 +195,6 @@
                 </div>
 
             </div>
-
-
 
             </tal:haveAuthor>
 
