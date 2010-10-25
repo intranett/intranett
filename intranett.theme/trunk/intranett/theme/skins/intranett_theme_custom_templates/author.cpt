@@ -137,7 +137,7 @@
                             Author ID
                         </h1>
 
-                        <div class="documentDescription" tal:content="authorinfo/description">
+                        <div class="documentDescription" tal:content="structure authorinfo/description">
                             Author description.
                         </div>
 
