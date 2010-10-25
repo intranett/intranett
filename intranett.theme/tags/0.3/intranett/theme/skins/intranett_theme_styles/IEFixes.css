@@ -1,0 +1,45 @@
+body.template-login_form div.field label,
+body.template-logged_out div.field label,
+body.template-login_failed div.field label {
+	margin-left: -230px;
+}
+
+/*body > header nav ul:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    zoom: 1;
+}*/
+body > header nav li {
+    display: inline;
+}
+body > header nav li a {
+    float:left;
+    display: block;
+    padding-bottom: 1.7em;
+}
+#portal-searchbox button.searchButton {
+    font-size: 0.76em;
+    margin: 0;    
+    width: auto;
+    overflow:visible;    
+}
+#portal-columns .contentAlignment {*padding-left: 0.3em;}
+#searchGadget {
+    *border-color: transparent !important;
+    *margin: 0;
+    *float: left;
+}
+#settings-toggle a#open-edit-bar {
+    *padding: 0.6em 0.5em 0.5em;
+}
+body.template-author .portraitPhoto {
+    filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', /* IE6,IE7 */ 
+             M11=0.9914448613738104, M12=-0.13052619222005157,M21=0.13052619222005157, M22=0.9914448613738104); 
+-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(
+             M11=0.9914448613738104, M12=-0.13052619222005157, M21=0.13052619222005157, M22=0.9914448613738104, 
+             sizingMethod='auto expand')"; /* IE8 */
+      zoom: 1;    
+}
