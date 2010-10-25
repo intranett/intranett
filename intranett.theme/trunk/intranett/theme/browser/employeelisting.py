@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 from zope.publisher.browser import BrowserView
 from Acquisition import aq_inner
 from AccessControl import getSecurityManager
@@ -26,7 +28,7 @@ class EmployeeListingView(BrowserView):
             if info['department']:
                 self.department_info.add(info['department'])
 
-        self.member_info.sort(key=lambda a: a['fullname'])
+        self.member_info.sort(key=itemgetter('fullname'))
         self.department_info = list(self.department_info)
         self.department_info.sort()
 
