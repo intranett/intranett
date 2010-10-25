@@ -78,28 +78,76 @@ class UserDataSchemaProvider(object):
 
 class CustomUserDataPanelAdapter(UserDataPanelAdapter):
 
+    def get_fullname(self):
+        value = self.context.getProperty('fullname', u'')
+        if value is not None:
+            return value.decode('utf-8')
+
+    def set_fullname(self, value):
+        if value is not None:
+            value = value.encode('utf-8')
+        self.context.setMemberProperties({'fullname': value})
+
+    fullname = property(get_fullname, set_fullname)
+
     def get_position(self):
-        return self._getProperty('position')
+        value = self.context.getProperty('position', u'')
+        if value is not None:
+            return value.decode('utf-8')
+
     def set_position(self, value):
+        if value is not None:
+            value = value.encode('utf-8')
         self.context.setMemberProperties({'position': value})
+
     position = property(get_position, set_position)
 
     def get_department(self):
-        return self._getProperty('department')
+        value = self.context.getProperty('department', u'')
+        if value is not None:
+            return value.decode('utf-8')
+
     def set_department(self, value):
+        if value is not None:
+            value = value.encode('utf-8')
         self.context.setMemberProperties({'department': value})
+
     department = property(get_department, set_department)
 
+    def get_location(self):
+        value = self.context.getProperty('location', u'')
+        if value is not None:
+            return value.decode('utf-8')
+
+    def set_location(self, value):
+        if value is not None:
+            value = value.encode('utf-8')
+        self.context.setMemberProperties({'location': value})
+
+    location = property(get_location, set_location)
+
     def get_phone(self):
-        return self._getProperty('phone')
+        value = self.context.getProperty('phone', u'')
+        if value is not None:
+            return value.decode('utf-8')
+
     def set_phone(self, value):
+        if value is not None:
+            value = value.encode('utf-8')
         self.context.setMemberProperties({'phone': value})
+
     phone = property(get_phone, set_phone)
 
     def get_mobile(self):
-        return self._getProperty('mobile')
+        value = self.context.getProperty('mobile', u'')
+        if value is not None:
+            return value.decode('utf-8')
+
     def set_mobile(self, value):
+        if value is not None:
+            value = value.encode('utf-8')
         self.context.setMemberProperties({'mobile': value})
+
     mobile = property(get_mobile, set_mobile)
 
 

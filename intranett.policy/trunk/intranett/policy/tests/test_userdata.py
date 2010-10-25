@@ -100,25 +100,29 @@ class TestUserdataSchema(IntranettTestCase):
         from ..userdataschema import ICustomUserDataSchema
         panel = ICustomUserDataSchema(self.portal)
 
-        self.assertEquals(panel.fullname, '')
-        panel.fullname = 'John Døe'
-        self.assertEquals(panel.position, unicode('John Døe', 'utf-8'))
+        self.assertEquals(panel.fullname, u'')
+        panel.fullname = u'Geir Bœkholly'
+        self.assertEquals(panel.fullname, u'Geir Bœkholly')
 
-        self.assertEquals(panel.position, '')
-        panel.position = 'Øngønør'
-        self.assertEquals(panel.position, unicode('Øngønør', 'utf-8'))
+        self.assertEquals(panel.position, u'')
+        panel.position = u'Øngønør'
+        self.assertEquals(panel.position, u'Øngønør')
 
-        self.assertEquals(panel.department, '')
-        panel.department = 'it'
-        self.assertEquals(panel.department, u'it')
+        self.assertEquals(panel.department, u'')
+        panel.department = u'IT Tønsberg'
+        self.assertEquals(panel.department, u'IT Tønsberg')
+
+        self.assertEquals(panel.location, u'')
+        panel.location = u'Tønsberg'
+        self.assertEquals(panel.location, u'Tønsberg')
 
         self.assertEquals(panel.phone, '')
         panel.phone = '+47 55533'
-        self.assertEquals(panel.phone, u'+47 55533')
+        self.assertEquals(panel.phone, '+47 55533')
 
         self.assertEquals(panel.mobile, '')
         panel.mobile = '+47 55533'
-        self.assertEquals(panel.mobile, u'+47 55533')
+        self.assertEquals(panel.mobile, '+47 55533')
 
 
 class TestUserPortraits(IntranettTestCase):
@@ -188,7 +192,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
                                     'phone': '12345',
                                     'mobile': '67890',
                                     'position': 'Øngønør',
-                                    'department': 'Tøst',
+                                    'department': 'it',
                                     'location': 'Tønsberg',
                                     'email': 'info@jarn.com',
                                     'description': '<p>Kjære Python!</p>'})
@@ -198,7 +202,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
         self.assertEquals(john_brain.Title, 'John Døe')
-        self.assertEquals(john_brain.Description, 'Øngønør, Tøst')
+        self.assertEquals(john_brain.Description, 'Øngønør, it')
         results = catalog.searchResults(SearchableText='12345')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
@@ -211,7 +215,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
         self.assertEquals(len(results), 1)
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
-        results = catalog.searchResults(SearchableText='Tøst')
+        results = catalog.searchResults(SearchableText='it')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
@@ -234,20 +238,6 @@ class TestUserSearch(IntranettFunctionalTestCase):
         member.setMemberProperties({'description': '<p>Kjære Python!</p>'})
         self.assertEquals(member.SearchableText().strip(), 'Kjære Python!')
 
-    def test_ttw_editing(self):
-        browser = self.getBrowser()
-        browser.handleErrors = False
-        browser.open(self.portal.absolute_url() + '/@@personal-information')
-        _bget = browser.getControl
-        _bget(name='form.fullname').value = 'John Døe'
-        _bget(name='form.email').value = 'test@example.com'
-        _bget(name='form.description').value = '<p>Kjære Python!</p>'
-        _bget(name='form.location').value = 'Tønsberg'
-        _bget(name='form.position').value = 'Øngønør'
-        _bget(name='form.department').value = 'Tøst'
-        _bget(name='form.actions.save').click()
-        self.assert_(browser.url.endswith('@@personal-information'))
-
     def test_ttw_search(self):
         mt = getToolByName(self.portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
@@ -255,16 +245,15 @@ class TestUserSearch(IntranettFunctionalTestCase):
                                     'phone': '12345',
                                     'mobile': '67890',
                                     'position': 'Øngønør',
-                                    'department': 'Tøst',
+                                    'department': 'it',
                                     'location': 'Tønsberg',
-                                    'email': 'info@jarn.com',
-                                    'description': '<p>Kjære Python!</p>'})
+                                    'email': 'info@jarn.com'})
         browser = self.getBrowser()
         browser.open(self.portal.absolute_url())
         browser.getControl(name='SearchableText').value = 'Døe'
         browser.getForm(name='searchform').submit()
         self.failUnless('John Døe' in browser.contents)
-        self.failUnless('Øngønør, Tøst' in browser.contents)
+        self.failUnless('Øngønør, it' in browser.contents)
 
 
 class TestDashboard(IntranettTestCase):
