@@ -1639,13 +1639,39 @@ body.template-manage-frontpage .portlets-manager .section+.portletAssignments {
 
 /* @group Employee listing */
 
+#departments-wrapper {
+	margin: 0 0 1em;
+}
+ul.horrList,
+ul.horrList li {
+	list-style: none;
+	margin-left: 0;
+}
+ul.horrList li {
+	display: inline;	
+}
+ul.horrList li a {
+	border-left:1px solid #CCCCCC;
+	display:inline-block;
+	padding:0 0.5em;
+}
+ul.horrList li:nth-child(1) a {
+	border: none;
+	padding-left: 0;
+}
 sup.manageUser {
 	vertical-align: super;
 	font-size: small;
-	float
 }
 sup.manageUser a {
 	color: #E3005A;	
+}
+#employee-listing-wrapper .tileItem {
+	float: left;
+	width: 50%;
+}
+#employee-listing-wrapper .tileItem:nth-child(odd) {
+	clear: left;
 }
 
 /* @end */
