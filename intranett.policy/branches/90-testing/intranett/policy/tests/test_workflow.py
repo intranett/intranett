@@ -6,11 +6,14 @@ from Products.CMFCore.utils import getToolByName
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import TEST_USER_ID
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.tests.layer import INTRANETT_FIXTURE
 
 
 def checkPerm(permission, obj):
@@ -20,12 +23,9 @@ def checkPerm(permission, obj):
 
 class TestWorkflowSetup(IntranettTestCase):
 
-    def setUp(self):
-        portal = self.layer['portal']
-        self.wftool = getToolByName(portal, 'portal_workflow')
-
     def test_workflow_assignments(self):
         portal = self.layer['portal']
+        wftool = getToolByName(portal, 'portal_workflow')
         ttool = getToolByName(portal, 'portal_types')
         no_workflow = set([
             'ATBooleanCriterion', 'ATCurrentAuthorCriterion',
@@ -43,7 +43,7 @@ class TestWorkflowSetup(IntranettTestCase):
             'FormTextField', 'FormThanksPage', 'Plone Site',
         ])
         for type_ in no_workflow:
-            wf = self.wftool.getChainForPortalType(type_)
+            wf = wftool.getChainForPortalType(type_)
             self.assertEquals(wf, (),
                               'Found workflow %s for type %s, expected '
                               '(), ' % (wf, type_))
@@ -54,7 +54,7 @@ class TestWorkflowSetup(IntranettTestCase):
             'Image': (),
         }
         for type_ in set(ttool.keys()) - no_workflow:
-            wf = self.wftool.getChainForPortalType(type_)
+            wf = wftool.getChainForPortalType(type_)
             expected = workflows.get(type_, ('intranett_workflow', ))
             self.assertEquals(wf, expected,
                               'Found workflow %s for type %s, expected '
@@ -96,11 +96,11 @@ class TestWorkflowPermissions(IntranettTestCase):
         self.assertFalse(checkPerm('View', folder1))
 
 
-class TestWorkflowTransitions(IntranettTestCase):
+class WorkflowTransitionsLayer(PloneSandboxLayer):
 
-    def setUp(self):
-        portal = self.layer['portal']
-        self.wftool = getToolByName(portal, 'portal_workflow')
+    defaultBases = (INTRANETT_FIXTURE, )
+
+    def setUpPloneSite(self, portal):
         _doAddUser = aq_get(portal, 'acl_users')._doAddUser
         _doAddUser('member', 'secret', ['Member'], [])
         _doAddUser('manager', 'secret', ['Manager'], [])
@@ -109,6 +109,22 @@ class TestWorkflowTransitions(IntranettTestCase):
 
         folder = portal['test-folder']
         folder.invokeFactory('Document', id='doc')
+
+
+WORKFLOW_TRANSITIONS_FIXTURE = WorkflowTransitionsLayer()
+WORKFLOW_TRANSITIONS_INTEGRATION = IntegrationTesting(
+    bases=(WORKFLOW_TRANSITIONS_FIXTURE, ),
+    name="intranett:workflow_transitions")
+
+
+class TestWorkflowTransitions(IntranettTestCase):
+
+    layer = WORKFLOW_TRANSITIONS_INTEGRATION
+
+    def setUp(self):
+        portal = self.layer['portal']
+        self.wftool = getToolByName(portal, 'portal_workflow')
+        folder = portal['test-folder']
         self.doc = folder.doc
 
     def test_owner_publish_and_hide(self):
