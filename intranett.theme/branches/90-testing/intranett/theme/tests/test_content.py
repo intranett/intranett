@@ -1,7 +1,7 @@
-import unittest2 as unittest
 import os.path
 
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.portlets.interfaces import IPortletManager
 from zope.component import getSiteManager, getUtility
 from Products.CMFCore.utils import getToolByName
@@ -160,10 +160,9 @@ class TestEmployeeListing(IntranettTestCase):
         accounting = [x['fullname'] for x in view.employees('Accounting')]
         self.assertEqual(accounting, ['Barney Rubble'])
 
-    @unittest.expectedFailure
     def test_can_manage(self):
         view = self.portal.unrestrictedTraverse('@@employee-listing')
-        self.login()
+        self.login(TEST_USER_NAME)
         self.assertFalse(view.can_manage())
         self.loginAsPortalOwner()
         self.assertTrue(view.can_manage())

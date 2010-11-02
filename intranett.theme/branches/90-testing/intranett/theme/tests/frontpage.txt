@@ -42,8 +42,8 @@ yet. In this case we should get full-width CSS class from our view:
 Now we are adding a News Item for it to show up on the frontpage:
 
   >>> from plone.app.testing import login
-  >>> from plone.app.testing import TEST_USER_ID
-  >>> login(portal, TEST_USER_ID)
+  >>> from plone.app.testing import TEST_USER_NAME
+  >>> login(portal, TEST_USER_NAME)
   >>> folder = portal['test-folder']
   >>> folder.invokeFactory('News Item', id='n1', title='Test News Item')
   'n1'
@@ -84,6 +84,7 @@ Now we should get width spread between 3 portlets:
 Let's make sure we have edit-bar when we edit the frontpage:
 
   >>> from plone.app.testing import setRoles
+  >>> from plone.app.testing import TEST_USER_ID
   >>> setRoles(portal, TEST_USER_ID, ['Manager'])
   >>> browser.open('http://nohost/plone/manage-frontpage')
   >>> '<ul class="contentViews" id="content-views">' in browser.contents
