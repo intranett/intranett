@@ -115,63 +115,6 @@ class TestFrontpage(IntranettTestCase):
         self.assertEquals(view.columns_class(), False)
 
 
-class TestEmployeeListing(IntranettTestCase):
-
-    def setUp(self):
-        super(TestEmployeeListing, self).setUp()
-        membership = self.portal.portal_membership
-        default_member = membership.getMemberById(TEST_USER_ID)
-        default_member.setMemberProperties(
-            dict(fullname='Skip McDonald', email='skip@slaterock.com',
-                 position='Manager', department='Rock & Gravel'))
-        default_member.changeMemberPortrait(
-            makeFileUpload(image_file, 'portrait.jpg', 'image/jpeg'))
-        membership.addMember('fred', 'secret', ['Member'], [],
-            dict(fullname='Fred Flintstone', email='ff@slaterock.com',
-                 position='Crane Operator', department='Rock & Gravel'))
-        membership.addMember('barney', 'secret', ['Member'], [],
-            dict(fullname='Barney Rubble', email='br@slaterock.com',
-                 position='Head Accountant', department='Accounting'))
-
-    def test_view_exists(self):
-        try:
-            self.portal.unrestrictedTraverse('@@employee-listing')
-        except AttributeError: # pragma: no cover
-            self.fail("@@employee-listing doesn't exist.")
-
-    def test_employeelisting_action(self):
-        at = getToolByName(self.portal, 'portal_actions')
-        tabs = at.portal_tabs
-        self.assert_('employee-listing' in tabs.objectIds(),
-                     '"employee-listing" action is not registered.')
-
-    def test_list_employees(self):
-        view = self.portal.unrestrictedTraverse('@@employee-listing')
-        view.update()
-        self.assertEqual([x['fullname'] for x in view.employees()],
-                         ['Barney Rubble', 'Fred Flintstone', 'Skip McDonald'])
-
-    def test_list_departments(self):
-        view = self.portal.unrestrictedTraverse('@@employee-listing')
-        view.update()
-        self.assertEqual(view.departments(), ['Accounting', 'Rock & Gravel'])
-
-    def test_list_employees_by_department(self):
-        view = self.portal.unrestrictedTraverse('@@employee-listing')
-        view.update()
-        rocks = [x['fullname'] for x in view.employees('Rock & Gravel')]
-        self.assertEqual(rocks, ['Fred Flintstone', 'Skip McDonald'])
-        accounting = [x['fullname'] for x in view.employees('Accounting')]
-        self.assertEqual(accounting, ['Barney Rubble'])
-
-    def test_can_manage(self):
-        view = self.portal.unrestrictedTraverse('@@employee-listing')
-        self.login(TEST_USER_NAME)
-        self.assertFalse(view.can_manage())
-        self.loginAsPortalOwner()
-        self.assertTrue(view.can_manage())
-
-
 class TestFunctionalFrontpage(IntranettFunctionalTestCase):
 
     def test_anon_frontpage(self):
@@ -243,3 +186,60 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
         browser.open('http://nohost/plone/@@manage-frontpage')
         self.assert_('<ul class="contentViews" id="content-views">'
                      in browser.contents)
+
+
+class TestEmployeeListing(IntranettTestCase):
+
+    def setUp(self):
+        super(TestEmployeeListing, self).setUp()
+        membership = self.portal.portal_membership
+        default_member = membership.getMemberById(TEST_USER_ID)
+        default_member.setMemberProperties(
+            dict(fullname='Skip McDonald', email='skip@slaterock.com',
+                 position='Manager', department='Rock & Gravel'))
+        default_member.changeMemberPortrait(
+            makeFileUpload(image_file, 'portrait.jpg', 'image/jpeg'))
+        membership.addMember('fred', 'secret', ['Member'], [],
+            dict(fullname='Fred Flintstone', email='ff@slaterock.com',
+                 position='Crane Operator', department='Rock & Gravel'))
+        membership.addMember('barney', 'secret', ['Member'], [],
+            dict(fullname='Barney Rubble', email='br@slaterock.com',
+                 position='Head Accountant', department='Accounting'))
+
+    def test_view_exists(self):
+        try:
+            self.portal.unrestrictedTraverse('@@employee-listing')
+        except AttributeError: # pragma: no cover
+            self.fail("@@employee-listing doesn't exist.")
+
+    def test_employeelisting_action(self):
+        at = getToolByName(self.portal, 'portal_actions')
+        tabs = at.portal_tabs
+        self.assert_('employee-listing' in tabs.objectIds(),
+                     '"employee-listing" action is not registered.')
+
+    def test_list_employees(self):
+        view = self.portal.unrestrictedTraverse('@@employee-listing')
+        view.update()
+        self.assertEqual([x['fullname'] for x in view.employees()],
+                         ['Barney Rubble', 'Fred Flintstone', 'Skip McDonald'])
+
+    def test_list_departments(self):
+        view = self.portal.unrestrictedTraverse('@@employee-listing')
+        view.update()
+        self.assertEqual(view.departments(), ['Accounting', 'Rock & Gravel'])
+
+    def test_list_employees_by_department(self):
+        view = self.portal.unrestrictedTraverse('@@employee-listing')
+        view.update()
+        rocks = [x['fullname'] for x in view.employees('Rock & Gravel')]
+        self.assertEqual(rocks, ['Fred Flintstone', 'Skip McDonald'])
+        accounting = [x['fullname'] for x in view.employees('Accounting')]
+        self.assertEqual(accounting, ['Barney Rubble'])
+
+    def test_can_manage(self):
+        view = self.portal.unrestrictedTraverse('@@employee-listing')
+        self.login(TEST_USER_NAME)
+        self.assertFalse(view.can_manage())
+        self.loginAsPortalOwner()
+        self.assertTrue(view.can_manage())
