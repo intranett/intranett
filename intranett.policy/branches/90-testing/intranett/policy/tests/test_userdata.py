@@ -6,6 +6,7 @@ from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
 
+from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
 
@@ -268,7 +269,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
         self.assertEquals(member.SearchableText().strip(), 'Kjære Python!')
 
     def test_ttw_editing(self):
-        browser = self.getBrowser()
+        browser = get_browser(self.layer)
         browser.handleErrors = False
         browser.open(self.portal.absolute_url() + '/@@personal-information')
         _bget = browser.getControl
@@ -291,7 +292,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
                                     'department': 'Tøst',
                                     'location': 'Tønsberg',
                                     'email': 'info@jarn.com'})
-        browser = self.getBrowser()
+        browser = get_browser(self.layer)
         browser.open(self.portal.absolute_url())
         browser.getControl(name='SearchableText').value = 'Døe'
         browser.getForm(name='searchform').submit()

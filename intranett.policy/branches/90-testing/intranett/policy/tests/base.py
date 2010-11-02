@@ -56,6 +56,3 @@ class IntranettTestCase(unittest.TestCase, MigrateHelper):
 class IntranettFunctionalTestCase(unittest.TestCase, MigrateHelper):
 
     layer = layer.INTRANETT_FUNCTIONAL
-
-    def getBrowser(self, loggedIn=True):
-        return get_browser(self.layer, loggedIn=loggedIn)
