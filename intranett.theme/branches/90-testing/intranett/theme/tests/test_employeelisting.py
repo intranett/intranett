@@ -37,7 +37,7 @@ class EmployeeListingLayer(IntranettLayer):
 EMPLOYEE_LISTING_FIXTURE = EmployeeListingLayer()
 EMPLOYEE_LISTING_INTEGRATION = IntegrationTesting(
     bases=(EMPLOYEE_LISTING_FIXTURE, ),
-    name="intranett:employee_listing")
+    name="employee_listing:Integration")
 
 
 class TestEmployeeListing(unittest.TestCase):
