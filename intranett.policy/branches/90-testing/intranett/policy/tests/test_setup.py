@@ -91,7 +91,7 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Manager'])
         from plone.app.portlets.browser import manage
-        request = aq_get(self.layer['app'], 'REQUEST')
+        request = self.layer['request']
         view = manage.ManageContextualPortlets(portal, request)
 
         from plone.portlets.interfaces import IPortletManager
@@ -181,7 +181,7 @@ class TestAdmin(IntranettTestCase):
 
     def test_addsite_create(self):
         app = self.layer['app']
-        request = aq_get(app, 'REQUEST')
+        request = self.layer['request']
         request.form['form.submitted'] = True
         addsite = queryMultiAdapter((app, request), Interface, 'plone-addsite')
         addsite()
