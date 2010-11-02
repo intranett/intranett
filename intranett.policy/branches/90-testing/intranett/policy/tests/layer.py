@@ -25,8 +25,13 @@ class IntranettLayer(PloneSandboxLayer):
                        context=configurationContext)
 
         z2.installProduct(app, 'Products.PloneFormGen')
-        z2.installProduct(app, 'intranett.policy')
         z2.installProduct(app, 'intranett.theme')
+        z2.installProduct(app, 'intranett.policy')
+
+    def tearDownZope(self, app):
+        z2.uninstallProduct(app, 'intranett.policy')
+        z2.uninstallProduct(app, 'intranett.theme')
+        z2.uninstallProduct(app, 'Products.PloneFormGen')
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'intranett.policy:default')
