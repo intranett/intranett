@@ -14,16 +14,18 @@ from intranett.theme.browser.interfaces import IFrontpagePortletManagers
 class TestFrontpage(IntranettTestCase):
 
     def test_frontpage_view_registration(self):
-        layouts = [v[0] for v in self.portal.getAvailableLayouts()]
+        portal = self.layer['portal']
+        layouts = [v[0] for v in portal.getAvailableLayouts()]
         self.assert_('frontpage_view' in layouts,
                      'frontpage_view is not registered for Plone Site')
 
     def test_frontpage_view_is_default(self):
-        self.assertEquals(self.portal.getLayout(), 'frontpage_view',
+        portal = self.layer['portal']
+        self.assertEquals(portal.getLayout(), 'frontpage_view',
                           'frontpage_view is not default view for Plone Site')
 
     def test_portletmanagers_registration(self):
-        sm = getSiteManager(self.portal)
+        sm = getSiteManager()
         registrations = [r.name for r in sm.registeredUtilities()
                          if IPortletManager == r.provided]
         self.assert_('frontpage.highlight' in registrations)
@@ -49,42 +51,48 @@ class TestFrontpage(IntranettTestCase):
 
     def test_static_portlet_in_highlight(self):
         highlight = '++contextportlets++frontpage.highlight'
-        mapping = self.portal.restrictedTraverse(highlight)
+        portal = self.layer['portal']
+        mapping = portal.restrictedTraverse(highlight)
         self.assert_(u'highlight' in mapping.keys(),
                      'Highlight static portlet is not registered for '
                      'frontpage.highlight')
 
     def test_static_portlet_in_bottom(self):
         bottom = '++contextportlets++frontpage.bottom'
-        mapping = self.portal.restrictedTraverse(bottom)
+        portal = self.layer['portal']
+        mapping = portal.restrictedTraverse(bottom)
         self.assert_(u'bottom' in mapping.keys(),
                      'Bottom static portlet is not registered for '
                      'frontpage.bottom')
 
     def test_news_in_frontpage_left(self):
         portlets_left = '++contextportlets++frontpage.portlets.left'
-        mapping = self.portal.restrictedTraverse(portlets_left)
+        portal = self.layer['portal']
+        mapping = portal.restrictedTraverse(portlets_left)
         self.assert_(u'news' in mapping.keys(),
                      'News portlet is not registered for portlets.left')
 
     def test_events_in_frontpage_central(self):
         portlets_central = '++contextportlets++frontpage.portlets.central'
-        mapping = self.portal.restrictedTraverse(portlets_central)
+        portal = self.layer['portal']
+        mapping = portal.restrictedTraverse(portlets_central)
         self.assert_(u'events' in mapping.keys(),
                      'Events portlet is not registered for portlets.central')
 
     def test_static_in_frontpage_right(self):
         portlets_right = '++contextportlets++frontpage.portlets.right'
-        mapping = self.portal.restrictedTraverse(portlets_right)
+        portal = self.layer['portal']
+        mapping = portal.restrictedTraverse(portlets_right)
         self.assert_(u'fp_static_right' in mapping.keys(),
                      'FP static right is not registered for portlets.right')
 
     def test_columns_class_default(self):
-        view = self.portal.unrestrictedTraverse('@@frontpage_view')
+        portal = self.layer['portal']
+        view = portal.unrestrictedTraverse('@@frontpage_view')
         self.assertEquals(view.columns_class(), 'width-16')
 
     def test_columns_class_no_portlets(self):
-        sm = getSiteManager(self.portal)
+        sm = getSiteManager()
         sm.unregisterUtility(provided=IPortletManager,
                              name=u'frontpage.portlets.left')
         sm.unregisterUtility(provided=IPortletManager,
@@ -92,7 +100,8 @@ class TestFrontpage(IntranettTestCase):
         sm.unregisterUtility(provided=IPortletManager,
                              name=u'frontpage.portlets.right')
 
-        view = self.portal.unrestrictedTraverse('@@frontpage_view')
+        portal = self.layer['portal']
+        view = portal.unrestrictedTraverse('@@frontpage_view')
         self.assertEquals(view.columns_class(), False)
 
 

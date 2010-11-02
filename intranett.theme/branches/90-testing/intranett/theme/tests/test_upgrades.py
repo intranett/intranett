@@ -12,7 +12,8 @@ class TestFullUpgrade(IntranettTestCase):
 
     def test_list_steps(self):
         # There should be no upgrade steps from the current version
-        setup = getToolByName(self.portal, "portal_setup")
+        portal = self.layer['portal']
+        setup = getToolByName(portal, "portal_setup")
         upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) == 0)
 
@@ -42,11 +43,12 @@ class TestUpgrades(IntranettTestCase):
 
     def test_one_to_two(self):
         from ..upgradehandlers import add_media_query_maincss
-        css = getToolByName(self.portal, 'portal_css')
+        portal = self.layer['portal']
+        css = getToolByName(portal, 'portal_css')
         main = css.getResource('main.css')
         main.setMedia("screen")
         self.assert_(main.getMedia())
         # Run the step
-        add_media_query_maincss(self.portal)
+        add_media_query_maincss(portal)
         main = css.getResource('main.css')
         self.assert_(not main.getMedia())
