@@ -21,8 +21,8 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
     site_id = 'Plone'
     rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
 
-    def classSetUp(self):
-        super(FunctionalUpgradeTestCase, self).classSetUp()
+    def setUpClass(self):
+        super(FunctionalUpgradeTestCase, self).setUpClass()
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Manager'])
         setSite(portal)
@@ -36,8 +36,8 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
         self.expected = TarballImportContext(setup, expected_export['tarball'])
         setSite(None)
 
-    def classTearDown(self):
-        super(FunctionalUpgradeTestCase, self).classTearDown()
+    def tearDownClass(self):
+        super(FunctionalUpgradeTestCase, self).tearDownClass()
         app = self.layer['app']
         if self.site_id in app:
             app._delObject(self.site_id)
