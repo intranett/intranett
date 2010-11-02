@@ -3,10 +3,11 @@ Robots
 
 Get us a test browser, as an anonymous user:
 
-  >>> browser = self.getBrowser(loggedIn=False)
-  >>> browser.open(self.portal.absolute_url() + '/robots.txt')
+  >>> from intranett.policy.tests.base import get_browser
+  >>> browser = get_browser(layer, loggedIn=False)
 
 We should be allowed to view the page and see the disallow line:
 
+  >>> browser.open(layer['portal'].absolute_url() + '/robots.txt')
   >>> "Disallow: /" in browser.contents
   True

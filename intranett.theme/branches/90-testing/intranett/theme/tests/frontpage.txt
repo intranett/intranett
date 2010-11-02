@@ -3,11 +3,13 @@ Frontpage
 
 Get us a test browser, as an anonymous user:
 
-  >>> browser = self.getBrowser(loggedIn=False)
-  >>> browser.open(self.portal.absolute_url())
+  >>> from intranett.policy.tests.base import get_browser
+  >>> browser = get_browser(layer, loggedIn=False)
+  >>> portal = layer['portal']
 
 Navigating to the front page redirects us to the login form:
 
+  >>> browser.open(portal.absolute_url())
   >>> 'require_login' in browser.url
   True
   >>> 'template-login_form' in browser.contents
@@ -17,9 +19,9 @@ Navigating to the front page redirects us to the login form:
 
 Now get us a test browser, logged in as a normal user:
 
-  >>> browser = self.getBrowser()
+  >>> browser = get_browser(layer)
   >>> browser.handleErrors = False
-  >>> browser.open(self.portal.absolute_url())
+  >>> browser.open(portal.absolute_url())
 
   >>> browser.url
   'http://nohost/plone'
@@ -39,12 +41,15 @@ yet. In this case we should get full-width CSS class from our view:
   
 Now we are adding a News Item for it to show up on the frontpage:
 
-  >>> self.login()
-  >>> self.folder.invokeFactory('News Item', id='n1', title='Test News Item')
+  >>> from plone.app.testing import login
+  >>> from plone.app.testing import TEST_USER_ID
+  >>> login(portal, TEST_USER_ID)
+  >>> folder = portal['test-folder']
+  >>> folder.invokeFactory('News Item', id='n1', title='Test News Item')
   'n1'
   >>> from Products.CMFCore.utils import getToolByName
-  >>> wftool = getToolByName(self.portal, 'portal_workflow')
-  >>> wftool.doActionFor(self.folder.n1, 'publish')
+  >>> wftool = getToolByName(portal, 'portal_workflow')
+  >>> wftool.doActionFor(folder.n1, 'publish')
 
 We reload the page and see if the News portlet shows up:
 
@@ -60,9 +65,9 @@ Now we should get width spread between 2 portlets:
 Now we are adding one Event in order to make the last remaining column to show
 up on the frontpage view:
 
-  >>> self.folder.invokeFactory('Event', id='e1', title='Test Event', start_date='2011-01-01', end_date='2100-01-01')
+  >>> folder.invokeFactory('Event', id='e1', title='Test Event', start_date='2011-01-01', end_date='2100-01-01')
   'e1'
-  >>> wftool.doActionFor(self.folder.e1, 'publish')
+  >>> wftool.doActionFor(folder.e1, 'publish')
 
 We reload the page and see if the portlet show up:
 
@@ -78,7 +83,8 @@ Now we should get width spread between 3 portlets:
   
 Let's make sure we have edit-bar when we edit the frontpage:
 
-  >>> self.setRoles(['Manager'])
+  >>> from plone.app.testing import setRoles
+  >>> setRoles(portal, TEST_USER_ID, ['Manager'])
   >>> browser.open('http://nohost/plone/manage-frontpage')
   >>> '<ul class="contentViews" id="content-views">' in browser.contents
   True

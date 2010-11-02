@@ -3,9 +3,14 @@ Employee listing
 
 Preparations:
 
-    >>> self.loginAsPortalOwner()
+    >>> from plone.app.testing import setRoles
+    >>> from plone.app.testing import TEST_USER_ID
+    >>> portal = layer['portal']
+    >>> setRoles(portal, TEST_USER_ID, ['Manager'])
+
     >>> from Products.CMFCore.utils import getToolByName
-    >>> mtool = getToolByName(self.portal, 'portal_membership')
+    >>> portal = layer['portal']
+    >>> mtool = getToolByName(portal, 'portal_membership')
 
 Let's add some members to the site:
 
@@ -24,12 +29,16 @@ Set a user to a different department:
 
     >>> member = mtool.getMemberById('member-3')
     >>> member.setMemberProperties(dict(department='Dept\xc3\xa5 2'))
-    >>> self.logout()
+
+    >>> from plone.app.testing import logout
+    >>> logout()
 
 As a normal user we can view the listing:
 
-    >>> browser = self.getBrowser()
+    >>> from intranett.policy.tests.base import get_browser
+    >>> browser = get_browser(layer)
     >>> browser.handleErrors = False
+
     >>> browser.open('http://nohost/plone/employee-listing')
     >>> browser.url.endswith('employee-listing')
     True
