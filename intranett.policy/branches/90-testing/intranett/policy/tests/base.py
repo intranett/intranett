@@ -37,11 +37,8 @@ class MigrateHelper(object):
         login(self.layer['portal'], user)
 
     def loginAsPortalOwner(self):
-        self.setRoles(['Manager'])
-
-    def setRoles(self, roles):
         from plone.app.testing import setRoles as sr
-        sr(self.layer['portal'], TEST_USER_ID, roles)
+        sr(self.layer['portal'], TEST_USER_ID, ['Manager'])
 
 
 class IntranettTestCase(unittest.TestCase, MigrateHelper):

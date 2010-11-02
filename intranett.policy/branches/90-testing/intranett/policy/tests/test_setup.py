@@ -1,7 +1,7 @@
-import unittest2 as unittest
-
 from AccessControl import Unauthorized
 from Acquisition import aq_get
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryMultiAdapter
 from zope.component import queryUtility
@@ -30,11 +30,11 @@ class TestSiteSetup(IntranettTestCase):
         self.assert_('FormFolder' in tt.keys())
         self.assertEquals(tt['FormFolder'].getIconExprObject(), None)
 
-    @unittest.expectedFailure
     def test_site_actions(self):
-        self.setRoles('Manager')
-        at = getToolByName(self.portal, 'portal_actions')
-        actions = at.listActionInfos(object=self.portal,
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        at = getToolByName(portal, 'portal_actions')
+        actions = at.listActionInfos(object=portal,
                                      categories=('site_actions', ))
         ids = set([a['id'] for a in actions])
         self.assertEquals(ids, set(['accessibility']))

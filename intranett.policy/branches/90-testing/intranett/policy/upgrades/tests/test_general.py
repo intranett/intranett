@@ -1,3 +1,5 @@
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.config import POLICY_PROFILE
@@ -16,8 +18,9 @@ class TestFullUpgrade(IntranettTestCase):
                               "Found unexpected upgrades: %s" % steps)
 
     def test_do_upgrades(self):
-        setup = getToolByName(self.portal, "portal_setup")
-        self.setRoles(['Manager'])
+        portal = self.layer['portal']
+        setup = getToolByName(portal, "portal_setup")
+        setRoles(portal, TEST_USER_ID, ['Manager'])
 
         setup.setLastVersionForProfile(POLICY_PROFILE, '1')
         upgrades = setup.listUpgrades(POLICY_PROFILE)
