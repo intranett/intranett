@@ -2,7 +2,6 @@ import unittest2 as unittest
 
 from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
-import transaction
 
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettFunctionalTestCase
