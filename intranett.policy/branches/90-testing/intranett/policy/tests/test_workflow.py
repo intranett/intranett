@@ -5,6 +5,8 @@ from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import login
 from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 
@@ -76,14 +78,14 @@ class TestWorkflowPermissions(IntranettTestCase):
         self.assertTrue(checkPerm('View', portal))
 
     def test_no_anonymous_view_new_page(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Document', 'doc1')
         doc1 = self.portal.doc1
         logout()
         self.assertFalse(checkPerm('View', doc1))
 
     def test_no_anonymous_view_new_folder(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Folder', 'folder1')
         folder1 = self.portal.folder1
         logout()

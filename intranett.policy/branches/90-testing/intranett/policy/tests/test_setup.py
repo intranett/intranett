@@ -65,7 +65,7 @@ class TestSiteSetup(IntranettTestCase):
         self.assertFalse(rule.active)
 
     def test_collection_disabled(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         try:
             self.portal.invokeFactory('Topic', 'topic')
         except Unauthorized:
@@ -79,7 +79,7 @@ class TestSiteSetup(IntranettTestCase):
                           set(['AuthenticatedUsers']))
 
     def test_portlets_disabled(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         from plone.app.portlets.browser import manage
         request = aq_get(self.layer['app'], 'REQUEST')
         view = manage.ManageContextualPortlets(self.portal, request)
@@ -141,13 +141,13 @@ class TestSiteSetup(IntranettTestCase):
 class TestAdmin(IntranettTestCase):
 
     def test_overview(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         overview = self.layer['app'].unrestrictedTraverse('@@plone-overview')
         result = overview()
         self.assert_('View your intranet' in result, result)
 
     def test_addsite_profiles(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         addsite = self.layer['app'].unrestrictedTraverse('@@plone-addsite')
         extensions = addsite.profiles()['extensions']
         self.assertEquals(len(extensions), 1)
@@ -155,7 +155,7 @@ class TestAdmin(IntranettTestCase):
         self.assertEquals(profile['id'], u'intranett.policy:default')
 
     def test_addsite_call(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         addsite = self.layer['app'].unrestrictedTraverse('@@plone-addsite')
         result = addsite()
         self.assert_('Create intranet' in result, result)

@@ -5,6 +5,7 @@ from os.path import join
 
 import transaction
 from plone.app.testing import logout
+from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.tests.base.testcase import WarningInterceptor
@@ -22,7 +23,7 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
 
     def setUp(self):
         super(FunctionalUpgradeTestCase, self).setUp()
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         setSite(self.portal)
 
         # Clean out some test setup artifacts
