@@ -15,20 +15,11 @@ def get_browser(layer, loggedIn=True):
     return browser
 
 
-class MigrateHelper(object):
-
-    layer = None
-
-    @property
-    def portal(self):
-        return self.layer['portal']
-
-
-class IntranettTestCase(unittest.TestCase, MigrateHelper):
+class IntranettTestCase(unittest.TestCase):
 
     layer = layer.INTRANETT_INTEGRATION
 
 
-class IntranettFunctionalTestCase(unittest.TestCase, MigrateHelper):
+class IntranettFunctionalTestCase(unittest.TestCase):
 
     layer = layer.INTRANETT_FUNCTIONAL

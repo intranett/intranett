@@ -21,10 +21,12 @@ def checkPerm(permission, obj):
 class TestWorkflowSetup(IntranettTestCase):
 
     def setUp(self):
-        self.wftool = getToolByName(self.portal, 'portal_workflow')
+        portal = self.layer['portal']
+        self.wftool = getToolByName(portal, 'portal_workflow')
 
     def test_workflow_assignments(self):
-        ttool = getToolByName(self.portal, 'portal_types')
+        portal = self.layer['portal']
+        ttool = getToolByName(portal, 'portal_types')
         no_workflow = set([
             'ATBooleanCriterion', 'ATCurrentAuthorCriterion',
             'ATDateCriteria', 'ATDateRangeCriterion', 'ATListCriterion',
@@ -78,16 +80,18 @@ class TestWorkflowPermissions(IntranettTestCase):
         self.assertTrue(checkPerm('View', portal))
 
     def test_no_anonymous_view_new_page(self):
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Document', 'doc1')
-        doc1 = self.portal.doc1
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        portal.invokeFactory('Document', 'doc1')
+        doc1 = portal.doc1
         logout()
         self.assertFalse(checkPerm('View', doc1))
 
     def test_no_anonymous_view_new_folder(self):
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'folder1')
-        folder1 = self.portal.folder1
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        portal.invokeFactory('Folder', 'folder1')
+        folder1 = portal.folder1
         logout()
         self.assertFalse(checkPerm('View', folder1))
 
@@ -180,4 +184,5 @@ class TestSitePermissions(IntranettTestCase):
 
     def test_disallow_sendto(self):
         logout()
-        self.assertFalse(checkPerm('Allow sendto', self.portal))
+        portal = self.layer['portal']
+        self.assertFalse(checkPerm('Allow sendto', portal))

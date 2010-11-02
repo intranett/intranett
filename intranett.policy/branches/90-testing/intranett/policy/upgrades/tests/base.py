@@ -23,14 +23,15 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
 
     def setUp(self):
         super(FunctionalUpgradeTestCase, self).setUp()
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        setSite(self.portal)
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        setSite(portal)
 
         # Clean out some test setup artifacts
-        self.portal.portal_membership.deleteMembers([TEST_USER_ID])
-        del self.portal['test-folder']
+        portal.portal_membership.deleteMembers([TEST_USER_ID])
+        del portal['test-folder']
 
-        setup = getToolByName(self.portal, 'portal_setup')
+        setup = getToolByName(portal, 'portal_setup')
         expected_export = setup.runAllExportSteps()
         self.expected = TarballImportContext(setup, expected_export['tarball'])
         setSite(None)

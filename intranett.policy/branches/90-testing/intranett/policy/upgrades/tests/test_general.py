@@ -11,7 +11,8 @@ from intranett.policy.upgrades.tests.utils import ensure_no_addon_upgrades
 class TestFullUpgrade(IntranettTestCase):
 
     def test_list_steps(self):
-        setup = getToolByName(self.portal, "portal_setup")
+        portal = self.layer['portal']
+        setup = getToolByName(portal, "portal_setup")
         upgrades = ensure_no_addon_upgrades(setup)
         for profile, steps in upgrades.items():
             self.assertEquals(len(steps), 0,
