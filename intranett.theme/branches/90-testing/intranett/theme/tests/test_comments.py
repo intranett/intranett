@@ -1,7 +1,4 @@
 from Acquisition import aq_get
-from plone.app.testing import login
-from plone.app.testing import logout
-from plone.app.testing import TEST_USER_NAME
 from Products.CMFCore.utils import getToolByName
 import transaction
 
@@ -15,7 +12,6 @@ class TestComments(IntranettFunctionalTestCase):
         portal = self.layer['portal']
         folder = portal['test-folder']
 
-        login(portal, TEST_USER_NAME)
         folder.invokeFactory('Document', 'doc1')
         wftool = getToolByName(portal, 'portal_workflow')
         wftool.doActionFor(folder.doc1, 'publish')
@@ -27,7 +23,6 @@ class TestComments(IntranettFunctionalTestCase):
         mdata = mtool.getMemberById('member')
         mdata.setMemberProperties(dict(fullname='M\xc3\xa5mb\xc3\xb8r'))
 
-        logout()
         transaction.commit()
 
         # Get us a test browser with our new user
