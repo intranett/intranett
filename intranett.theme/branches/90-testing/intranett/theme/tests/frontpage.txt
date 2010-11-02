@@ -51,17 +51,6 @@ Now we are adding a News Item for it to show up on the frontpage:
   >>> wftool = getToolByName(portal, 'portal_workflow')
   >>> wftool.doActionFor(folder.n1, 'publish')
 
-We reload the page and see if the News portlet shows up:
-
-  >>> browser.reload()
-
-  >>> 'Test News Item' in browser.contents
-  True
-
-Now we should get width spread between 2 portlets:
-  >>> browser.contents
-  '...<div id="frontpage-columns"...class="cell fpBlock width-8"...class="cell fpBlock width-8"...<div id="frontpage-bottom"...' 
-
 Now we are adding one Event in order to make the last remaining column to show
 up on the frontpage view:
 
@@ -69,9 +58,12 @@ up on the frontpage view:
   'e1'
   >>> wftool.doActionFor(folder.e1, 'publish')
 
-We reload the page and see if the portlet show up:
+We reload the page and see if the portlets show up:
 
   >>> browser.reload()
+
+  >>> 'Test News Item' in browser.contents
+  True
 
   >>> 'Test Event' in browser.contents
   True
@@ -83,9 +75,6 @@ Now we should get width spread between 3 portlets:
   
 Let's make sure we have edit-bar when we edit the frontpage:
 
-  >>> from plone.app.testing import setRoles
-  >>> from plone.app.testing import TEST_USER_ID
-  >>> setRoles(portal, TEST_USER_ID, ['Manager'])
   >>> browser.open('http://nohost/plone/manage-frontpage')
   >>> '<ul class="contentViews" id="content-views">' in browser.contents
   True

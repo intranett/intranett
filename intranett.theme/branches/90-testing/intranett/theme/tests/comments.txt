@@ -35,7 +35,7 @@ Get us a test browser, logged in as our new user:
 
   >>> browser.open(folder.doc1.absolute_url())
   >>> browser.url
-  'http://nohost/plone/doc1'
+  'http://nohost/plone/test-folder/doc1'
 
 Fill in a comment:
 
