@@ -119,7 +119,7 @@ class WorkflowTransitionsLayer(IntranettLayer):
 WORKFLOW_TRANSITIONS_FIXTURE = WorkflowTransitionsLayer()
 WORKFLOW_TRANSITIONS_INTEGRATION = IntegrationTesting(
     bases=(WORKFLOW_TRANSITIONS_FIXTURE, ),
-    name="intranett:workflow_transitions")
+    name="workflow_transitions:Integration")
 
 
 class TestWorkflowTransitions(unittest.TestCase):

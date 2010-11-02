@@ -53,6 +53,6 @@ class IntranettLayer(PloneSandboxLayer):
 INTRANETT_FIXTURE = IntranettLayer()
 
 INTRANETT_INTEGRATION = IntegrationTesting(bases=(INTRANETT_FIXTURE, ),
-                                           name="intranett:integration")
+                                           name="intranett:Integration")
 INTRANETT_FUNCTIONAL = FunctionalTesting(bases=(INTRANETT_FIXTURE, ),
-                                         name="intranett:functional")
+                                         name="intranett:Functional")
