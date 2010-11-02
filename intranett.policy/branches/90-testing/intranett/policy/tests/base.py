@@ -24,10 +24,6 @@ class MigrateHelper(object):
     def portal(self):
         return self.layer['portal']
 
-    @property
-    def folder(self):
-        return self.layer['portal']['test-folder']
-
     def loginAsPortalOwner(self):
         from plone.app.testing import setRoles as sr
         sr(self.layer['portal'], TEST_USER_ID, ['Manager'])

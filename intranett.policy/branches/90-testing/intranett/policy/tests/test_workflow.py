@@ -68,11 +68,12 @@ class TestWorkflowPermissions(IntranettTestCase):
 
     def test_no_anonymous_view_portal(self):
         logout()
-        self.assertFalse(checkPerm('View', self.folder))
+        portal = self.layer['portal']
+        self.assertFalse(checkPerm('View', portal['test-folder']))
         # We don't want this, but we first need to make sure the login form
         # and standard error message views work without anon View permission
         # on the portal object
-        self.assertTrue(checkPerm('View', self.portal))
+        self.assertTrue(checkPerm('View', portal))
 
     def test_no_anonymous_view_new_page(self):
         self.loginAsPortalOwner()
@@ -92,15 +93,17 @@ class TestWorkflowPermissions(IntranettTestCase):
 class TestWorkflowTransitions(IntranettTestCase):
 
     def setUp(self):
-        self.wftool = getToolByName(self.portal, 'portal_workflow')
-        _doAddUser = aq_get(self.portal, 'acl_users')._doAddUser
+        portal = self.layer['portal']
+        self.wftool = getToolByName(portal, 'portal_workflow')
+        _doAddUser = aq_get(portal, 'acl_users')._doAddUser
         _doAddUser('member', 'secret', ['Member'], [])
         _doAddUser('manager', 'secret', ['Manager'], [])
         _doAddUser('editor', 'secret', ['Editor'], [])
         _doAddUser('reader', 'secret', ['Reader'], [])
 
-        self.folder.invokeFactory('Document', id='doc')
-        self.doc = self.folder.doc
+        folder = portal['test-folder']
+        folder.invokeFactory('Document', id='doc')
+        self.doc = folder.doc
 
     def test_owner_publish_and_hide(self):
         self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
