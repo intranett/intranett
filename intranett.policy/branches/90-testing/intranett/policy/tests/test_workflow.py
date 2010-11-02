@@ -3,6 +3,7 @@ import unittest2 as unittest
 from AccessControl import getSecurityManager
 from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
+from plone.app.testing import logout
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 
@@ -65,7 +66,7 @@ class TestWorkflowSetup(IntranettTestCase):
 class TestWorkflowPermissions(IntranettTestCase):
 
     def test_no_anonymous_view_portal(self):
-        self.logout()
+        logout()
         self.assertFalse(checkPerm('View', self.folder))
         # We don't want this, but we first need to make sure the login form
         # and standard error message views work without anon View permission
@@ -76,14 +77,14 @@ class TestWorkflowPermissions(IntranettTestCase):
         self.loginAsPortalOwner()
         self.portal.invokeFactory('Document', 'doc1')
         doc1 = self.portal.doc1
-        self.logout()
+        logout()
         self.assertFalse(checkPerm('View', doc1))
 
     def test_no_anonymous_view_new_folder(self):
         self.loginAsPortalOwner()
         self.portal.invokeFactory('Folder', 'folder1')
         folder1 = self.portal.folder1
-        self.logout()
+        logout()
         self.assertFalse(checkPerm('View', folder1))
 
 
@@ -112,7 +113,7 @@ class TestWorkflowTransitions(IntranettTestCase):
 
     def _check_edit(self, user):
         if user is None:
-            self.logout()
+            logout()
         else:
             self.login(user)
         return checkPerm('Modify portal content', self.doc)
@@ -140,7 +141,7 @@ class TestWorkflowTransitions(IntranettTestCase):
 
     def _check_view(self, user):
         if user is None:
-            self.logout()
+            logout()
         else:
             self.login(user)
         view = checkPerm('View', self.doc)
@@ -172,5 +173,5 @@ class TestWorkflowTransitions(IntranettTestCase):
 class TestSitePermissions(IntranettTestCase):
 
     def test_disallow_sendto(self):
-        self.logout()
+        logout()
         self.assertFalse(checkPerm('Allow sendto', self.portal))

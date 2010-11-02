@@ -29,10 +29,6 @@ class MigrateHelper(object):
     def folder(self):
         return self.layer['portal']['test-folder']
 
-    def logout(self):
-        from plone.app.testing import logout as lo
-        lo()
-
     def login(self, user):
         login(self.layer['portal'], user)
 

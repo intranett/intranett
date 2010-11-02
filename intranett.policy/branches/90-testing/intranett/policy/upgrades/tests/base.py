@@ -4,6 +4,7 @@ from os.path import dirname
 from os.path import join
 
 import transaction
+from plone.app.testing import logout
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.tests.base.testcase import WarningInterceptor
@@ -37,7 +38,7 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
         app = self.layer['app']
         if self.site_id in app:
             app._delObject(self.site_id)
-        self.logout()
+        logout()
         transaction.commit()
 
     def importFile(self, context, name):
