@@ -2,7 +2,6 @@ import os.path
 
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy import tests
@@ -67,7 +66,6 @@ class TestEmployeeListing(IntranettTestCase):
 
     def test_can_manage(self):
         view = self.portal.unrestrictedTraverse('@@employee-listing')
-        self.login(TEST_USER_NAME)
         self.assertFalse(view.can_manage())
         self.loginAsPortalOwner()
         self.assertTrue(view.can_manage())
