@@ -3,6 +3,7 @@ import unittest2 as unittest
 from AccessControl import getSecurityManager
 from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
+from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
@@ -115,7 +116,7 @@ class TestWorkflowTransitions(IntranettTestCase):
         if user is None:
             logout()
         else:
-            self.login(user)
+            login(self.layer['portal'], user)
         return checkPerm('Modify portal content', self.doc)
 
     def test_edit_permission_private(self):
@@ -143,7 +144,7 @@ class TestWorkflowTransitions(IntranettTestCase):
         if user is None:
             logout()
         else:
-            self.login(user)
+            login(self.layer['portal'], user)
         view = checkPerm('View', self.doc)
         access = checkPerm('Access contents information', self.doc)
         return view and access

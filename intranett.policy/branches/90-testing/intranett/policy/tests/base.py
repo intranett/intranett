@@ -1,6 +1,5 @@
 import unittest2 as unittest
 
-from plone.app.testing import login
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
@@ -28,9 +27,6 @@ class MigrateHelper(object):
     @property
     def folder(self):
         return self.layer['portal']['test-folder']
-
-    def login(self, user):
-        login(self.layer['portal'], user)
 
     def loginAsPortalOwner(self):
         from plone.app.testing import setRoles as sr
