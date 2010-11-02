@@ -16,8 +16,8 @@ Preparations:
   >>> wftool.doActionFor(folder.doc1, 'publish')
 
   >>> from Acquisition import aq_get
-  >>> _doAddUser = aq_get(portal, 'acl_users')._doAddUser
-  >>> _doAddUser('member', 'secret', ['Member', 'Reader'], [])
+  >>> addUser = aq_get(portal, 'acl_users').userFolderAddUser
+  >>> addUser('member', 'secret', ['Member', 'Reader'], [])
 
   >>> mtool = getToolByName(portal, 'portal_membership')
   >>> mdata = mtool.getMemberById('member')
@@ -33,7 +33,7 @@ Get us a test browser, logged in as our new user:
   >>> browser.addHeader('Authorization', 'Basic member:secret')
   >>> browser.handleErrors = False
 
-  >>> browser.open(folder.absolute_url() + '/doc1')
+  >>> browser.open(folder.doc1.absolute_url())
   >>> browser.url
   'http://nohost/plone/doc1'
 
