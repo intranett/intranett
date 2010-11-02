@@ -324,8 +324,8 @@ class TestDashboard(IntranettTestCase):
         from plone.portlets.interfaces import IPortletManager
 
         portal = self.layer['portal']
-        _doAddUser = aq_get(portal, 'acl_users')._doAddUser
-        _doAddUser('member', 'secret', ['Member'], [])
+        addUser = aq_get(portal, 'acl_users').userFolderAddUser
+        addUser('member', 'secret', ['Member'], [])
 
         prefix = 'plone.dashboard'
         for i in range(1, 5):

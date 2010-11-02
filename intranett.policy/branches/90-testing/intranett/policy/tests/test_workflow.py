@@ -7,13 +7,12 @@ from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.app.testing import IntegrationTesting
-from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import TEST_USER_ID
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
-from intranett.policy.tests.layer import INTRANETT_FIXTURE
+from intranett.policy.tests.layer import IntranettLayer
 
 
 def checkPerm(permission, obj):
@@ -96,16 +95,22 @@ class TestWorkflowPermissions(IntranettTestCase):
         self.assertFalse(checkPerm('View', folder1))
 
 
-class WorkflowTransitionsLayer(PloneSandboxLayer):
+class TestSitePermissions(IntranettTestCase):
 
-    defaultBases = (INTRANETT_FIXTURE, )
+    def test_disallow_sendto(self):
+        logout()
+        portal = self.layer['portal']
+        self.assertFalse(checkPerm('Allow sendto', portal))
+
+
+class WorkflowTransitionsLayer(IntranettLayer):
 
     def setUpPloneSite(self, portal):
-        _doAddUser = aq_get(portal, 'acl_users')._doAddUser
-        _doAddUser('member', 'secret', ['Member'], [])
-        _doAddUser('manager', 'secret', ['Manager'], [])
-        _doAddUser('editor', 'secret', ['Editor'], [])
-        _doAddUser('reader', 'secret', ['Reader'], [])
+        addUser = aq_get(portal, 'acl_users').userFolderAddUser
+        addUser('member', 'secret', ['Member'], [])
+        addUser('manager', 'secret', ['Manager'], [])
+        addUser('editor', 'secret', ['Editor'], [])
+        addUser('reader', 'secret', ['Reader'], [])
 
         folder = portal['test-folder']
         folder.invokeFactory('Document', id='doc')
@@ -117,7 +122,7 @@ WORKFLOW_TRANSITIONS_INTEGRATION = IntegrationTesting(
     name="intranett:workflow_transitions")
 
 
-class TestWorkflowTransitions(IntranettTestCase):
+class TestWorkflowTransitions(unittest.TestCase):
 
     layer = WORKFLOW_TRANSITIONS_INTEGRATION
 
@@ -194,11 +199,3 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertTrue(self._check_view('editor'))
         self.assertTrue(self._check_view('reader'))
         self.assertFalse(self._check_view(None))
-
-
-class TestSitePermissions(IntranettTestCase):
-
-    def test_disallow_sendto(self):
-        logout()
-        portal = self.layer['portal']
-        self.assertFalse(checkPerm('Allow sendto', portal))
