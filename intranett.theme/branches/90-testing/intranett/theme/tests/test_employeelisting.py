@@ -18,7 +18,6 @@ image_file = os.path.join(test_dir, 'images', 'test.jpg')
 class TestEmployeeListing(IntranettTestCase):
 
     def setUp(self):
-        super(TestEmployeeListing, self).setUp()
         portal = self.layer['portal']
         membership = getToolByName(portal, 'portal_membership')
         default_member = membership.getMemberById(TEST_USER_ID)
