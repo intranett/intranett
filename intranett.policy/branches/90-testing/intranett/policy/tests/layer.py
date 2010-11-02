@@ -6,7 +6,6 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.testing import z2
-import transaction
 from zope.configuration import xmlconfig
 
 
@@ -36,7 +35,6 @@ class IntranettLayer(PloneSandboxLayer):
         portal.invokeFactory('Folder', 'test-folder')
         setRoles(portal, TEST_USER_ID, ['Member'])
         self.removeContent(portal)
-        transaction.commit()
 
     def removeContent(self, portal):
         # The helpful testing machinery installs sunburst for us :(

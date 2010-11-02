@@ -3,7 +3,6 @@ from os.path import abspath
 from os.path import dirname
 from os.path import join
 
-import transaction
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -21,8 +20,7 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
     site_id = 'Plone'
     rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
 
-    def setUpClass(self):
-        super(FunctionalUpgradeTestCase, self).setUpClass()
+    def setUp(self):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Manager'])
         setSite(portal)
@@ -36,13 +34,11 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
         self.expected = TarballImportContext(setup, expected_export['tarball'])
         setSite(None)
 
-    def tearDownClass(self):
-        super(FunctionalUpgradeTestCase, self).tearDownClass()
+    def tearDown(self):
         app = self.layer['app']
         if self.site_id in app:
-            app._delObject(self.site_id)
+            del app[self.site_id]
         logout()
-        transaction.commit()
 
     def importFile(self, context, name):
         path = join(abspath(dirname(context)), 'data', name)
