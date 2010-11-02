@@ -14,8 +14,5 @@ def test_suite():
         layered(DocFileSuite('employeelisting.txt',
                              package='intranett.theme.tests'),
                 layer=INTRANETT_FUNCTIONAL),
-        # layered(DocFileSuite('frontpage.txt',
-        #                      package='intranett.theme.tests'),
-        #         layer=INTRANETT_FUNCTIONAL),
     ])
     return suite

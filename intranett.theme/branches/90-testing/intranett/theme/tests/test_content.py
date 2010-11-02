@@ -1,4 +1,5 @@
 import os.path
+import unittest2 as unittest
 
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
@@ -7,9 +8,12 @@ from zope.component import getSiteManager, getUtility
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy import tests
+from intranett.policy.tests.base import get_browser
+from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.utils import makeFileUpload
 from intranett.theme.browser.interfaces import IFrontpagePortletManagers
+
 
 test_dir = os.path.dirname(tests.__file__)
 image_file = os.path.join(test_dir, 'images', 'test.jpg')
@@ -166,3 +170,76 @@ class TestEmployeeListing(IntranettTestCase):
         self.assertFalse(view.can_manage())
         self.loginAsPortalOwner()
         self.assertTrue(view.can_manage())
+
+
+class TestFunctionalFrontpage(IntranettFunctionalTestCase):
+
+    def test_anon_frontpage(self):
+        portal = self.layer['portal']
+        browser = get_browser(self.layer, loggedIn=False)
+
+        # Navigating to the front page redirects us to the login form
+        browser.open(portal.absolute_url())
+        self.assert_('require_login' in browser.url)
+        self.assert_('template-login_form' in browser.contents)
+        self.assert_('id="login_form"' in browser.contents)
+
+    def test_one_column(self):
+        portal = self.layer['portal']
+        browser = get_browser(self.layer)
+        browser.open(portal.absolute_url())
+        self.assertEquals(browser.url, 'http://nohost/plone')
+
+        # The frontpage view is the default view of the site
+        self.assert_('template-frontpage_view' in browser.contents)
+
+        # By default we should have only one content column on the frontpage,
+        # which has a static portlet with dummy content assigned to it. The two
+        # other columns should have nothing and should not be rendered since
+        # we have no news or events published yet. In this case we should get
+        # full-width CSS class from our view
+        self.assert_('class="cell fpBlock width-16"' in browser.contents)
+
+    @unittest.expectedFailure
+    def test_two_columns(self):
+        portal = self.layer['portal']
+        folder = portal['test-folder']
+
+        # Add a News Item to show on the frontpage
+        folder.invokeFactory('News Item', id='n1', title='Test News Item')
+        wftool = getToolByName(portal, 'portal_workflow')
+        wftool.doActionFor(folder.n1, 'publish')
+
+        browser = get_browser(self.layer)
+        browser.open(portal.absolute_url())
+
+        self.assert_('Test News Item' in browser.contents)
+        self.assert_('"cell fpBlock width-8"' in browser.contents)
+
+    @unittest.expectedFailure
+    def test_three_columns(self):
+        portal = self.layer['portal']
+        folder = portal['test-folder']
+
+        # Add a News Item and Event to show on the frontpage
+        folder.invokeFactory('News Item', id='n1', title='Test News Item')
+        folder.invokeFactory('Event', id='e1', title='Test Event',
+                             start_date='2011-01-01', end_date='2100-01-01')
+
+        wftool = getToolByName(portal, 'portal_workflow')
+        wftool.doActionFor(folder.n1, 'publish')
+        wftool.doActionFor(folder.e1, 'publish')
+
+        browser = get_browser(self.layer)
+        browser.open(portal.absolute_url())
+
+        self.assert_('Test News Item' in browser.contents)
+        self.assert_('Test Event' in browser.contents)
+        self.assert_('"cell fpBlock width-5"' in browser.contents)
+
+    def test_manage_frontpage(self):
+        # Let's make sure we have edit-bar when we edit the frontpage
+        browser = get_browser(self.layer)
+        browser.open('http://nohost/plone/@@manage-frontpage')
+        self.assert_('<ul class="contentViews" id="content-views">'
+                     in browser.contents)
