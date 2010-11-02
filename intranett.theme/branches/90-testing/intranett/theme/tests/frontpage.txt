@@ -39,12 +39,13 @@ yet. In this case we should get full-width CSS class from our view:
   
 Now we are adding a News Item for it to show up on the frontpage:
 
+  >>> self.login()
   >>> self.folder.invokeFactory('News Item', id='n1', title='Test News Item')
   'n1'
   >>> from Products.CMFCore.utils import getToolByName
   >>> wftool = getToolByName(self.portal, 'portal_workflow')
   >>> wftool.doActionFor(self.folder.n1, 'publish')
-  
+
 We reload the page and see if the News portlet shows up:
 
   >>> browser.reload()
