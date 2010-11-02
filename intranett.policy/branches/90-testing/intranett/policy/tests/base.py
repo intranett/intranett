@@ -2,6 +2,7 @@ import unittest2 as unittest
 
 from plone.app.testing import login
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
 from plone.testing.z2 import Browser
 
@@ -11,7 +12,7 @@ from intranett.policy.tests import layer
 def get_browser(layer, loggedIn=True):
     browser = Browser(layer['app'])
     if loggedIn:
-        auth = 'Basic %s:%s' % (TEST_USER_ID, TEST_USER_PASSWORD)
+        auth = 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD)
         browser.addHeader('Authorization', auth)
     return browser
 
@@ -36,7 +37,7 @@ class MigrateHelper(object):
         from plone.app.testing import logout as lo
         lo()
 
-    def login(self, user=TEST_USER_ID):
+    def login(self, user):
         login(self.layer['portal'], user)
 
     def loginAsPortalOwner(self):
