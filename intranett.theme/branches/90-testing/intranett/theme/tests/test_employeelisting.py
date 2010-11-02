@@ -67,7 +67,7 @@ class TestEmployeeListing(IntranettTestCase):
     def test_can_manage(self):
         view = self.portal.unrestrictedTraverse('@@employee-listing')
         self.assertFalse(view.can_manage())
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.assertTrue(view.can_manage())
 
 
