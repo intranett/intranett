@@ -1,6 +1,7 @@
 import os.path
 import unittest2 as unittest
 
+from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.portlets.interfaces import IPortletManager
@@ -243,3 +244,32 @@ class TestEmployeeListing(IntranettTestCase):
         self.assertFalse(view.can_manage())
         self.loginAsPortalOwner()
         self.assertTrue(view.can_manage())
+
+
+class TestFunctionalEmployeeListing(IntranettFunctionalTestCase):
+
+    def test_employee_listing_view(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        mtool = getToolByName(portal, 'portal_membership')
+
+        # Add some users
+        for i in range(1, 4):
+            mid = 'member-%d' % i
+            mtool.addMember(mid, 'secret', ['Member'], [])
+            member = mtool.getMemberById(mid)
+            email = 'ff%d@slaterock.com' % i
+            fullname='Memb\xc3\xa5r %d' % i
+            member.setMemberProperties(dict(fullname=fullname,
+                                           email=email,
+                                           position='Crane Operator',
+                                           department='Dept\xc3\xa5 1'))
+
+        # Set a user to a different department
+        member = mtool.getMemberById('member-3')
+        member.setMemberProperties(dict(department='Dept\xc3\xa5 2'))
+
+        # As a normal user we can view the listing
+        browser = get_browser(self.layer)
+        browser.open('http://nohost/plone/employee-listing')
+        self.assert_(browser.url.endswith('employee-listing'))
