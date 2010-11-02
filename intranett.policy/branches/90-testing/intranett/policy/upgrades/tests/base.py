@@ -34,26 +34,27 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
         setSite(None)
 
     def beforeTearDown(self):
-        if self.site_id in self.app:
-            self.app._delObject(self.site_id)
+        app = self.layer['app']
+        if self.site_id in app:
+            app._delObject(self.site_id)
         self.logout()
         transaction.commit()
 
     def importFile(self, context, name):
         path = join(abspath(dirname(context)), 'data', name)
         self._trap_warning_output()
-        self.app._importObjectFromFile(path, verify=0)
+        self.layer['app']._importObjectFromFile(path, verify=0)
         self._free_warning_output()
 
     def migrate(self):
-        oldsite = getattr(self.app, self.site_id)
+        oldsite = getattr(self.layer['app'], self.site_id)
         mig = oldsite.portal_migration
         components = getattr(oldsite, '_components', None)
         if components is not None:
             setSite(oldsite)
 
         # Adjust for some things changed by the testing infrastructure
-        oldsite = getattr(self.app, self.site_id)
+        oldsite = getattr(self.layer['app'], self.site_id)
         oldsite.setTitle('Plone site')
 
         result = mig.upgrade(swallow_errors=False)
@@ -65,7 +66,7 @@ class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
         return (oldsite, result)
 
     def export(self):
-        oldsite = getattr(self.app, self.site_id)
+        oldsite = getattr(self.layer['app'], self.site_id)
         setSite(oldsite)
         stool = oldsite.portal_setup
         upgraded_export = stool.runAllExportSteps()

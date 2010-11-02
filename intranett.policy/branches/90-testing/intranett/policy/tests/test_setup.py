@@ -1,6 +1,7 @@
 import unittest2 as unittest
 
 from AccessControl import Unauthorized
+from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryMultiAdapter
 from zope.component import queryUtility
@@ -80,14 +81,15 @@ class TestSiteSetup(IntranettTestCase):
     def test_portlets_disabled(self):
         self.loginAsPortalOwner()
         from plone.app.portlets.browser import manage
-        view = manage.ManageContextualPortlets(self.portal, self.app.REQUEST)
+        request = aq_get(self.layer['app'], 'REQUEST')
+        view = manage.ManageContextualPortlets(self.portal, request)
 
         from plone.portlets.interfaces import IPortletManager
         left = queryUtility(IPortletManager, name='plone.leftcolumn')
 
         from plone.app.portlets.browser import editmanager
         renderer = editmanager.EditPortletManagerRenderer(
-            self.portal, self.app.REQUEST, view, left)
+            self.portal, request, view, left)
 
         addable = renderer.addable_portlets()
         ids = [a['addview'].split('/+/')[-1] for a in addable]
@@ -140,13 +142,13 @@ class TestAdmin(IntranettTestCase):
 
     def test_overview(self):
         self.loginAsPortalOwner()
-        overview = self.app.unrestrictedTraverse('@@plone-overview')
+        overview = self.layer['app'].unrestrictedTraverse('@@plone-overview')
         result = overview()
         self.assert_('View your intranet' in result, result)
 
     def test_addsite_profiles(self):
         self.loginAsPortalOwner()
-        addsite = self.app.unrestrictedTraverse('@@plone-addsite')
+        addsite = self.layer['app'].unrestrictedTraverse('@@plone-addsite')
         extensions = addsite.profiles()['extensions']
         self.assertEquals(len(extensions), 1)
         profile = extensions[0]
@@ -154,14 +156,14 @@ class TestAdmin(IntranettTestCase):
 
     def test_addsite_call(self):
         self.loginAsPortalOwner()
-        addsite = self.app.unrestrictedTraverse('@@plone-addsite')
+        addsite = self.layer['app'].unrestrictedTraverse('@@plone-addsite')
         result = addsite()
         self.assert_('Create intranet' in result, result)
 
     def test_addsite_create(self):
-        request = self.app.REQUEST
+        app = self.layer['app']
+        request = aq_get(app, 'REQUEST')
         request.form['form.submitted'] = True
-        addsite = queryMultiAdapter(
-            (self.app, request), Interface, 'plone-addsite')
+        addsite = queryMultiAdapter((app, request), Interface, 'plone-addsite')
         addsite()
-        self.assert_('Plone' in self.app.keys())
+        self.assert_('Plone' in app.keys())

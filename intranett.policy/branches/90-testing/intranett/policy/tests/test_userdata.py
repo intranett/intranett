@@ -87,7 +87,8 @@ class TestUserdataSchema(IntranettTestCase):
     def test_personal_information_widget(self):
         from zope.component import getMultiAdapter
         from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
-        view = getMultiAdapter((self.portal, self.app.REQUEST),
+        request = aq_get(self.layer['app'], 'REQUEST')
+        view = getMultiAdapter((self.portal, request),
                                name='personal-information')
         self.assertEquals(view.form_fields['description'].custom_widget,
                           WYSIWYGWidget)
@@ -95,7 +96,8 @@ class TestUserdataSchema(IntranettTestCase):
     def test_user_information_widget(self):
         from zope.component import getMultiAdapter
         from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
-        view = getMultiAdapter((self.portal, self.app.REQUEST),
+        request = aq_get(self.layer['app'], 'REQUEST')
+        view = getMultiAdapter((self.portal, request),
                              name='user-information')
         self.assertEquals(view.form_fields['description'].custom_widget,
                         WYSIWYGWidget)

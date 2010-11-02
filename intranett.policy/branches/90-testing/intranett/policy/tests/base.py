@@ -22,10 +22,6 @@ class MigrateHelper(object):
     layer = None
 
     @property
-    def app(self):
-        return self.layer['app']
-
-    @property
     def portal(self):
         return self.layer['portal']
 
