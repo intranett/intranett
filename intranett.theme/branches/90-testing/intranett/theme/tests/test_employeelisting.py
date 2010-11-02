@@ -1,13 +1,13 @@
 import os.path
 import unittest2 as unittest
 
-from plone.app.testing import IntegrationTesting
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy import tests
 from intranett.policy.tests.base import get_browser
+from intranett.policy.tests.layer import IntegrationTesting
 from intranett.policy.tests.layer import IntranettLayer
 from intranett.policy.tests.utils import makeFileUpload
 
