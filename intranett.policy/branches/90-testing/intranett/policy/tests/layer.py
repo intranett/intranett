@@ -35,30 +35,21 @@ class IntranettLayer(PloneSandboxLayer):
         setRoles(portal, TEST_USER_ID, ['Manager'])
         portal.invokeFactory('Folder', 'test-folder')
         setRoles(portal, TEST_USER_ID, ['Member'])
+        self.removeContent(portal)
         transaction.commit()
 
-    # def removeContent(self):
-    #     id_ = 'front-page'
-    #     if id_ in self.portal:
-    #         self.loginAsPortalOwner()
-    #         self.portal.setDefaultPage(None)
-    #         del self.portal[id_]
-    #     # We don't remove the Members/test_user_1_ folder, as it is too
-    #     # convenient to use in tests
-    #     for id_ in ('news', 'events'):
-    #         if id_ in self.portal:
-    #             del self.portal[id_]
-    #     # The helpful testing machinery installs sunburst for us :(
-    #     skins = self.portal.portal_skins
-    #     for s in list(skins.keys()):
-    #         if s.startswith('sunburst'):
-    #             del skins[s]
-    #     del skins.selections['Sunburst Theme']
-    #    # TODO, there's also an actions.xml
+    def removeContent(self, portal):
+        # The helpful testing machinery installs sunburst for us :(
+        skins = portal.portal_skins
+        for s in list(skins.keys()):
+            if s.startswith('sunburst'):
+                del skins[s]
+        del skins.selections['Sunburst Theme']
+        # TODO, there's also an actions.xml
 
 INTRANETT_FIXTURE = IntranettLayer()
 
-INTRANETT_INTEGRATION = IntegrationTesting(bases=(INTRANETT_FIXTURE,),
+INTRANETT_INTEGRATION = IntegrationTesting(bases=(INTRANETT_FIXTURE, ),
                                            name="intranett:integration")
-INTRANETT_FUNCTIONAL = FunctionalTesting(bases=(INTRANETT_FIXTURE,),
+INTRANETT_FUNCTIONAL = FunctionalTesting(bases=(INTRANETT_FIXTURE, ),
                                          name="intranett:functional")

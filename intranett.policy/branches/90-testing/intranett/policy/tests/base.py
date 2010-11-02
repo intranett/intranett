@@ -8,6 +8,14 @@ from plone.testing.z2 import Browser
 from intranett.policy.tests import layer
 
 
+def get_browser(layer, loggedIn=True):
+    browser = Browser(layer['app'])
+    if loggedIn:
+        auth = 'Basic %s:%s' % (TEST_USER_ID, TEST_USER_PASSWORD)
+        browser.addHeader('Authorization', auth)
+    return browser
+
+
 class MigrateHelper(object):
 
     layer = None
@@ -48,12 +56,5 @@ class IntranettFunctionalTestCase(unittest.TestCase, MigrateHelper):
 
     layer = layer.INTRANETT_FUNCTIONAL
 
-    def getCredentials(self):
-        return '%s:%s' % (TEST_USER_ID, TEST_USER_PASSWORD)
-
     def getBrowser(self, loggedIn=True):
-        browser = Browser(self.layer['app'])
-        if loggedIn:
-            auth = 'Basic %s' % self.getCredentials()
-            browser.addHeader('Authorization', auth)
-        return browser
+        return get_browser(self.layer, loggedIn=loggedIn)
