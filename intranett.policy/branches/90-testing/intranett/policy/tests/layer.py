@@ -1,18 +1,38 @@
 from plone.app.testing import applyProfile
-from plone.app.testing import FunctionalTesting
-from plone.app.testing import IntegrationTesting
-from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import PloneFixture
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing.layers import PloneTestLifecycle
 from plone.testing import z2
 from zope.configuration import xmlconfig
+
+
+class NightPloneFixture(PloneFixture):
+
+    # No sunburst please
+    extensionProfiles = ()
+
+NIGHT_PLONE_FIXTURE = NightPloneFixture()
+
+
+class NightPloneTestLifecycle(PloneTestLifecycle):
+
+    defaultBases = (NIGHT_PLONE_FIXTURE, )
+
+
+class IntegrationTesting(NightPloneTestLifecycle, z2.IntegrationTesting):
+    pass
+
+
+class FunctionalTesting(NightPloneTestLifecycle, z2.FunctionalTesting):
+    pass
 
 
 class IntranettLayer(PloneSandboxLayer):
     """ layer for integration tests """
 
-    defaultBases = (PLONE_FIXTURE, )
+    defaultBases = (NIGHT_PLONE_FIXTURE, )
 
     def setUpZope(self, app, configurationContext):
         import intranett.policy
@@ -39,16 +59,7 @@ class IntranettLayer(PloneSandboxLayer):
         setRoles(portal, TEST_USER_ID, ['Manager'])
         portal.invokeFactory('Folder', 'test-folder')
         setRoles(portal, TEST_USER_ID, ['Member'])
-        self.removeContent(portal)
 
-    def removeContent(self, portal):
-        # The helpful testing machinery installs sunburst for us :(
-        skins = portal.portal_skins
-        for s in list(skins.keys()):
-            if s.startswith('sunburst'):
-                del skins[s]
-        del skins.selections['Sunburst Theme']
-        # TODO, there's also an actions.xml
 
 INTRANETT_FIXTURE = IntranettLayer()
 

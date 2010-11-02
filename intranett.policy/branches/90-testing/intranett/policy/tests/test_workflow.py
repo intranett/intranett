@@ -6,12 +6,12 @@ from Products.CMFCore.utils import getToolByName
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
-from plone.app.testing import IntegrationTesting
 from plone.app.testing import TEST_USER_ID
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.tests.layer import IntegrationTesting
 from intranett.policy.tests.layer import IntranettLayer
 
 
