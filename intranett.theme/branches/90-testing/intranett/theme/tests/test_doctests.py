@@ -11,14 +11,11 @@ optionflags = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 def test_suite():
     suite = TestSuite()
     suite.addTests([
-        layered(DocFileSuite('comments.txt',
-                             package='intranett.theme.tests'),
-                layer=INTRANETT_FUNCTIONAL),
         layered(DocFileSuite('employeelisting.txt',
                              package='intranett.theme.tests'),
                 layer=INTRANETT_FUNCTIONAL),
-        layered(DocFileSuite('frontpage.txt',
-                             package='intranett.theme.tests'),
-                layer=INTRANETT_FUNCTIONAL),
+        # layered(DocFileSuite('frontpage.txt',
+        #                      package='intranett.theme.tests'),
+        #         layer=INTRANETT_FUNCTIONAL),
     ])
     return suite
