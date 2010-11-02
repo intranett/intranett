@@ -4,30 +4,29 @@ from os.path import dirname
 from os.path import join
 
 import transaction
+from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.tests.base.testcase import WarningInterceptor
 from Products.GenericSetup.context import TarballImportContext
-from Products.PloneTestCase.ptc import default_user
-from Testing.ZopeTestCase.sandbox import Sandboxed
 from zope.site.hooks import setSite
 
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.upgrades import run_upgrade
 
 
-class FunctionalUpgradeTestCase(Sandboxed, IntranettTestCase,
-                                WarningInterceptor):
+class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
 
     site_id = 'Plone'
     rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
 
-    def afterSetUp(self):
+    def setUp(self):
+        super(FunctionalUpgradeTestCase, self).setUp()
         self.loginAsPortalOwner()
         setSite(self.portal)
 
         # Clean out some test setup artifacts
-        self.portal.portal_membership.deleteMembers([default_user])
-        del self.portal['Members']
+        self.portal.portal_membership.deleteMembers([TEST_USER_ID])
+        del self.portal['test-folder']
 
         setup = getToolByName(self.portal, 'portal_setup')
         expected_export = setup.runAllExportSteps()

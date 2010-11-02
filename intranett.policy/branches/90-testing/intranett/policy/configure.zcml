@@ -11,6 +11,7 @@
 
   <include package="Products.CMFPlone" />
   <include package="experimental.catalogqueryplan" />
+  <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
   <include package="Products.PloneFormGen" />
   <include package="intranett.theme" />

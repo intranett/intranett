@@ -1,43 +1,64 @@
-from collective.testcaselayer.ptc import BasePTCLayer, ptc_layer
-from Products.Five import zcml
-from Products.Five import fiveconfigure
-from Testing import ZopeTestCase as ztc
+from plone.app.testing import applyProfile
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.testing import z2
+import transaction
+from zope.configuration import xmlconfig
 
 
-class IntranettLayer(BasePTCLayer):
+class IntranettLayer(PloneSandboxLayer):
     """ layer for integration tests """
 
-    def afterSetUp(self):
-        self.removeContent()
+    defaultBases = (PLONE_FIXTURE, )
 
+    def setUpZope(self, app, configurationContext):
         import intranett.policy
-        fiveconfigure.debug_mode = True
-        zcml.load_config("meta.zcml", intranett.policy)
-        zcml.load_config("configure.zcml", intranett.policy)
-        zcml.load_config("overrides.zcml", intranett.policy)
-        fiveconfigure.debug_mode = False
-        ztc.installPackage("intranett.policy", quiet=True)
-        ztc.installPackage("intranett.theme", quiet=True)
-        self.addProfile('intranett.policy:default')
 
-    def removeContent(self):
-        id_ = 'front-page'
-        if id_ in self.portal:
-            self.loginAsPortalOwner()
-            self.portal.setDefaultPage(None)
-            del self.portal[id_]
-        # We don't remove the Members/test_user_1_ folder, as it is too
-        # convenient to use in tests
-        for id_ in ('news', 'events'):
-            if id_ in self.portal:
-                del self.portal[id_]
-        # The helpful testing machinery installs sunburst for us :(
-        skins = self.portal.portal_skins
-        for s in list(skins.keys()):
-            if s.startswith('sunburst'):
-                del skins[s]
-        del skins.selections['Sunburst Theme']
-        # TODO, there's also an actions.xml
+        xmlconfig.file("meta.zcml", intranett.policy,
+                       context=configurationContext)
+        xmlconfig.file("configure.zcml", intranett.policy,
+                       context=configurationContext)
+        xmlconfig.file("overrides.zcml", intranett.policy,
+                       context=configurationContext)
 
+        z2.installProduct(app, 'Products.PloneFormGen')
+        z2.installProduct(app, 'intranett.policy')
+        z2.installProduct(app, 'intranett.theme')
 
-intranett = IntranettLayer(bases=[ptc_layer])
+    def setUpPloneSite(self, portal):
+        applyProfile(portal, 'intranett.policy:default')
+
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        portal.invokeFactory('Folder', 'test-folder')
+        setRoles(portal, TEST_USER_ID, ['Member'])
+        transaction.commit()
+
+    # def removeContent(self):
+    #     id_ = 'front-page'
+    #     if id_ in self.portal:
+    #         self.loginAsPortalOwner()
+    #         self.portal.setDefaultPage(None)
+    #         del self.portal[id_]
+    #     # We don't remove the Members/test_user_1_ folder, as it is too
+    #     # convenient to use in tests
+    #     for id_ in ('news', 'events'):
+    #         if id_ in self.portal:
+    #             del self.portal[id_]
+    #     # The helpful testing machinery installs sunburst for us :(
+    #     skins = self.portal.portal_skins
+    #     for s in list(skins.keys()):
+    #         if s.startswith('sunburst'):
+    #             del skins[s]
+    #     del skins.selections['Sunburst Theme']
+    #    # TODO, there's also an actions.xml
+
+INTRANETT_FIXTURE = IntranettLayer()
+
+INTRANETT_INTEGRATION = IntegrationTesting(bases=(INTRANETT_FIXTURE,),
+                                           name="intranett:integration")
+INTRANETT_FUNCTIONAL = FunctionalTesting(bases=(INTRANETT_FIXTURE,),
+                                         name="intranett:functional")

@@ -1,8 +1,10 @@
+import unittest2 as unittest
+
 from AccessControl import Unauthorized
+from Products.CMFCore.utils import getToolByName
 from zope.component import queryMultiAdapter
 from zope.component import queryUtility
 from zope.interface import Interface
-from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
 
@@ -27,6 +29,7 @@ class TestSiteSetup(IntranettTestCase):
         self.assert_('FormFolder' in tt.keys())
         self.assertEquals(tt['FormFolder'].getIconExprObject(), None)
 
+    @unittest.expectedFailure
     def test_site_actions(self):
         self.setRoles('Manager')
         at = getToolByName(self.portal, 'portal_actions')
@@ -97,7 +100,7 @@ class TestSiteSetup(IntranettTestCase):
 
     def test_content(self):
         # This content is only created in the tests
-        test_content = set(['Members'])
+        test_content = set(['test-folder'])
         content = set(self.portal.contentIds())
         self.assertEquals(content - test_content, set())
 

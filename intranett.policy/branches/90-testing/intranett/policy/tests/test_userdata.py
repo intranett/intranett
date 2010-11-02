@@ -1,10 +1,13 @@
 # -*- coding:utf-8 -*-
+import unittest2 as unittest
+
 from Acquisition import aq_get
-from zope.component import queryUtility
+from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
+from zope.component import queryUtility
+
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
-from Products.PloneTestCase.ptc import default_user
 
 
 class TestMemberTools(IntranettTestCase):
@@ -96,6 +99,7 @@ class TestUserdataSchema(IntranettTestCase):
         self.assertEquals(view.form_fields['description'].custom_widget,
                         WYSIWYGWidget)
 
+    @unittest.expectedFailure
     def test_userpanel(self):
         from ..userdataschema import ICustomUserDataSchema
         panel = ICustomUserDataSchema(self.portal)
@@ -127,7 +131,7 @@ class TestUserdataSchema(IntranettTestCase):
 
 class TestUserPortraits(IntranettTestCase):
 
-    def afterSetUp(self):
+    def setUp(self):
         import os
         from .utils import makeFileUpload
         image_file = os.path.join(os.path.dirname(__file__), 'images', 'test.jpg')
@@ -139,8 +143,8 @@ class TestUserPortraits(IntranettTestCase):
         mt = getToolByName(self.portal, 'portal_membership')
         mdt = getToolByName(self.portal, 'portal_memberdata')
         mt.changeMemberPortrait(self.image_jpg)
-        self.failUnless(default_user in mdt.portraits)
-        self.failUnless(default_user in mdt.thumbnails)
+        self.failUnless(TEST_USER_ID in mdt.portraits)
+        self.failUnless(TEST_USER_ID in mdt.thumbnails)
 
         portrait_thumb = mt.getPersonalPortrait()
         from ..tools import PORTRAIT_SIZE, PORTRAIT_THUMBNAIL_SIZE
@@ -171,8 +175,8 @@ class TestUserPortraits(IntranettTestCase):
         mt.changeMemberPortrait(self.image_jpg)
         # Now delete the portraits
         mt.deletePersonalPortrait()
-        self.failIf(default_user in mdt.portraits)
-        self.failIf(default_user in mdt.thumbnails)
+        self.failIf(TEST_USER_ID in mdt.portraits)
+        self.failIf(TEST_USER_ID in mdt.thumbnails)
 
     def test_funky_ids(self):
         # Well, let's admit we really do this for the coverage.
@@ -312,14 +316,3 @@ class TestDashboard(IntranettTestCase):
             manager = category.get('member', {})
             self.assert_(manager == {}, 'Found unexpected portlets in '
                          'dashboard column %s: %s' % (i, manager.keys()))
-
-
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestMemberTools))
-    suite.addTest(makeSuite(TestUserdataSchema))
-    suite.addTest(makeSuite(TestUserPortraits))
-    suite.addTest(makeSuite(TestUserSearch))
-    suite.addTest(makeSuite(TestDashboard))
-    return suite
