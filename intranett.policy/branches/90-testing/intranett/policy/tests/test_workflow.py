@@ -2,12 +2,10 @@ import unittest2 as unittest
 
 from AccessControl import getSecurityManager
 from Acquisition import aq_get
-from Acquisition import aq_parent
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
-from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import TEST_USER_ID
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
@@ -61,7 +59,6 @@ class TestWorkflowSetup(IntranettTestCase):
                               'Found workflow %s for type %s, expected '
                               '%s, ' % (wf, type_, expected))
 
-    @unittest.expectedFailure
     def test_sharing_page_roles(self):
         utilities = list(getUtilitiesFor(ISharingPageRole))
         names = [name for name, util in utilities]
@@ -116,14 +113,6 @@ class WorkflowTransitionsLayer(IntranettLayer):
 
         folder = portal['test-folder']
         folder.invokeFactory('Document', id='doc')
-
-    def tearDownPloneSite(self, portal):
-        # XXX This should be cleaned automatically
-        login(aq_parent(portal), SITE_OWNER_NAME)
-        mtool = getToolByName(portal, 'portal_membership')
-        mtool.deleteMembers(['member', 'manager', 'editor', 'reader'])
-        del portal['test-folder']['doc']
-        logout()
 
 
 WORKFLOW_TRANSITIONS_FIXTURE = WorkflowTransitionsLayer()
@@ -196,7 +185,6 @@ class TestWorkflowTransitions(unittest.TestCase):
         access = checkPerm('Access contents information', doc)
         return view and access
 
-    @unittest.expectedFailure
     def test_view_permission_private(self):
         portal = self.layer['portal']
         doc = portal['test-folder'].doc

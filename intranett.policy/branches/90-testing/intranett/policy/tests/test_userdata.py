@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 import os
-import unittest2 as unittest
 
 from Acquisition import aq_get
 from plone.app.testing import TEST_USER_ID
@@ -110,7 +109,6 @@ class TestUserdataSchema(IntranettTestCase):
         self.assertEquals(view.form_fields['description'].custom_widget,
                         WYSIWYGWidget)
 
-    @unittest.expectedFailure
     def test_userpanel(self):
         from ..userdataschema import ICustomUserDataSchema
         portal = self.layer['portal']
@@ -283,7 +281,6 @@ class TestUserSearch(IntranettTestCase):
         john_brain = results[0]
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
 
-    @unittest.expectedFailure
     def test_safe_transform_searchable_text(self):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
