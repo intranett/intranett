@@ -5,6 +5,7 @@ from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import login
 from plone.app.testing import logout
+from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.workflow.interfaces import ISharingPageRole
@@ -12,7 +13,7 @@ from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.layer import IntegrationTesting
-from intranett.policy.tests.layer import IntranettLayer
+from intranett.policy.tests.layer import INTRANETT_FIXTURE
 
 
 def checkPerm(permission, obj):
@@ -102,7 +103,9 @@ class TestSitePermissions(IntranettTestCase):
         self.assertFalse(checkPerm('Allow sendto', portal))
 
 
-class WorkflowTransitionsLayer(IntranettLayer):
+class WorkflowTransitionsLayer(PloneSandboxLayer):
+
+    defaultBases = (INTRANETT_FIXTURE, )
 
     def setUpPloneSite(self, portal):
         addUser = aq_get(portal, 'acl_users').userFolderAddUser
