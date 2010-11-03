@@ -11,6 +11,7 @@ from Products.CMFCore.utils import getToolByName
 
 from intranett.policy import tests
 from intranett.policy.tests.base import get_browser
+from intranett.policy.tests.layer import FunctionalTesting
 from intranett.policy.tests.layer import IntegrationTesting
 from intranett.policy.tests.layer import IntranettLayer
 from intranett.policy.tests.utils import makeFileUpload
@@ -53,6 +54,9 @@ EMPLOYEE_LISTING_FIXTURE = EmployeeListingLayer()
 EMPLOYEE_LISTING_INTEGRATION = IntegrationTesting(
     bases=(EMPLOYEE_LISTING_FIXTURE, ),
     name="employee_listing:Integration")
+EMPLOYEE_LISTING_FUNCTIONAL = FunctionalTesting(
+    bases=(EMPLOYEE_LISTING_FIXTURE, ),
+    name="employee_listing:Functional")
 
 
 class TestEmployeeListing(unittest.TestCase):
@@ -102,9 +106,13 @@ class TestEmployeeListing(unittest.TestCase):
         setRoles(portal, TEST_USER_ID, ['Manager'])
         self.assertTrue(view.can_manage())
 
+
+class TestFunctionalEmployeeListing(unittest.TestCase):
+
+    layer = EMPLOYEE_LISTING_FUNCTIONAL
+
     def test_employee_listing_view(self):
-        # As a normal user we can view the listing, note this isn't in a
-        # functional test layer, so don't commit anything to the database
+        # As a normal user we can view the listing
         browser = get_browser(self.layer)
         browser.open('http://nohost/plone/employee-listing')
         self.assert_(browser.url.endswith('employee-listing'))
