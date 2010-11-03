@@ -189,6 +189,7 @@ class TestWorkflowTransitions(unittest.TestCase):
         access = checkPerm('Access contents information', self.doc)
         return view and access
 
+    @unittest.expectedFailure
     def test_view_permission_private(self):
         self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
                          'private')
