@@ -141,11 +141,11 @@ class TestUserPortraits(IntranettTestCase):
 
     def setUp(self):
         import os
-        from .utils import makeFileUpload
+        from .utils import make_file_upload
         image_file = os.path.join(os.path.dirname(__file__), 'images', 'test.jpg')
-        self.image_jpg = makeFileUpload(image_file, 'image/jpeg', 'myportrait.jpg')
+        self.image_jpg = make_file_upload(image_file, 'image/jpeg', 'myportrait.jpg')
         image_file = os.path.join(os.path.dirname(__file__), 'images', 'test.gif')
-        self.image_gif = makeFileUpload(image_file, 'image/gif', 'myportrait.gif')
+        self.image_gif = make_file_upload(image_file, 'image/gif', 'myportrait.gif')
 
     def test_set_portraits(self):
         portal = self.layer['portal']

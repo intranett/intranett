@@ -9,7 +9,7 @@ class DummyFieldStorage(object):
         self.headers = headers
 
 
-def makeFileUpload(data, content_type=None, filename=None):
+def make_file_upload(data, content_type=None, filename=None):
     headers = {}
     if isinstance(data, str):
         data = open(data, 'rb')
