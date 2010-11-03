@@ -1,6 +1,7 @@
 import os.path
 import unittest2 as unittest
 
+from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
@@ -9,7 +10,7 @@ from intranett.policy import tests
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.layer import FunctionalTesting
 from intranett.policy.tests.layer import IntegrationTesting
-from intranett.policy.tests.layer import IntranettLayer
+from intranett.policy.tests.layer import INTRANETT_FIXTURE
 from intranett.policy.tests.utils import make_file_upload
 
 
@@ -17,7 +18,9 @@ test_dir = os.path.dirname(tests.__file__)
 image_file = os.path.join(test_dir, 'images', 'test.jpg')
 
 
-class EmployeeListingLayer(IntranettLayer):
+class EmployeeListingLayer(PloneSandboxLayer):
+
+    defaultBases = (INTRANETT_FIXTURE, )
 
     def setUpPloneSite(self, portal):
         mtool = getToolByName(portal, 'portal_membership')
