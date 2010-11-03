@@ -14,7 +14,7 @@ from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.layer import FunctionalTesting
 from intranett.policy.tests.layer import IntegrationTesting
 from intranett.policy.tests.layer import IntranettLayer
-from intranett.policy.tests.utils import makeFileUpload
+from intranett.policy.tests.utils import make_file_upload
 
 
 test_dir = os.path.dirname(tests.__file__)
@@ -30,7 +30,7 @@ class EmployeeListingLayer(IntranettLayer):
             dict(fullname='Memb\xc3\xa5r', email='skip@slaterock.com',
                  position='Manager', department='Rock & Gravel'))
         default_member.changeMemberPortrait(
-            makeFileUpload(image_file, 'portrait.jpg', 'image/jpeg'))
+            make_file_upload(image_file, 'portrait.jpg', 'image/jpeg'))
         mtool.addMember('fred', 'secret', ['Member'], [],
             dict(fullname='Fred Flintstone', email='ff@slaterock.com',
                  position='Crane Operator', department='Rock & Gravel'))
