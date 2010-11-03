@@ -11,11 +11,12 @@ from Products.CMFCore.tests.base.testcase import WarningInterceptor
 from Products.GenericSetup.context import TarballImportContext
 from zope.site.hooks import setSite
 
-from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.upgrades import run_upgrade
 
 
-class FunctionalUpgradeTestCase(IntranettTestCase, WarningInterceptor):
+class FunctionalUpgradeTestCase(IntranettFunctionalTestCase,
+                                WarningInterceptor):
 
     site_id = 'Plone'
     rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
