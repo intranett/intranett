@@ -1,7 +1,11 @@
 import os.path
 import unittest2 as unittest
 
+from Acquisition import aq_parent
+from plone.app.testing import login
+from plone.app.testing import logout
 from plone.app.testing import setRoles
+from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 
@@ -19,19 +23,30 @@ image_file = os.path.join(test_dir, 'images', 'test.jpg')
 class EmployeeListingLayer(IntranettLayer):
 
     def setUpPloneSite(self, portal):
-        membership = getToolByName(portal, 'portal_membership')
-        default_member = membership.getMemberById(TEST_USER_ID)
+        mtool = getToolByName(portal, 'portal_membership')
+        default_member = mtool.getMemberById(TEST_USER_ID)
         default_member.setMemberProperties(
             dict(fullname='Memb\xc3\xa5r', email='skip@slaterock.com',
                  position='Manager', department='Rock & Gravel'))
         default_member.changeMemberPortrait(
             makeFileUpload(image_file, 'portrait.jpg', 'image/jpeg'))
-        membership.addMember('fred', 'secret', ['Member'], [],
+        mtool.addMember('fred', 'secret', ['Member'], [],
             dict(fullname='Fred Flintstone', email='ff@slaterock.com',
                  position='Crane Operator', department='Rock & Gravel'))
-        membership.addMember('barney', 'secret', ['Member'], [],
+        mtool.addMember('barney', 'secret', ['Member'], [],
             dict(fullname='Barney Rubble', email='br@slaterock.com',
                  position='Head Accountant', department='Dept\xc3\xa5'))
+
+    def tearDownPloneSite(self, portal):
+        # XXX This should be cleaned automatically
+        login(aq_parent(portal), SITE_OWNER_NAME)
+        mtool = getToolByName(portal, 'portal_membership')
+        mtool.deleteMembers(['fred', 'barney'])
+        default_member = mtool.getMemberById(TEST_USER_ID)
+        default_member.setMemberProperties(
+            dict(fullname='', email='', position='', department=''))
+        mtool.deletePersonalPortrait(id=TEST_USER_ID)
+        logout()
 
 
 EMPLOYEE_LISTING_FIXTURE = EmployeeListingLayer()
@@ -58,13 +73,10 @@ class TestEmployeeListing(unittest.TestCase):
         self.assert_('employee-listing' in tabs.objectIds(),
                      '"employee-listing" action is not registered.')
 
-    @unittest.expectedFailure
     def test_list_employees(self):
         portal = self.layer['portal']
         view = portal.unrestrictedTraverse('@@employee-listing')
         view.update()
-        # em = view.employees()
-        # import pdb; pdb.set_trace( )
         self.assertEqual([x['fullname'] for x in view.employees()],
                          ['Barney Rubble', 'Fred Flintstone', 'Memb\xc3\xa5r'])
 
