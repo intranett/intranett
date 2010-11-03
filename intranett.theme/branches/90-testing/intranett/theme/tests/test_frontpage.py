@@ -1,5 +1,3 @@
-import unittest2 as unittest
-
 from plone.portlets.interfaces import IPortletManager
 import transaction
 from zope.component import getSiteManager
@@ -87,7 +85,6 @@ class TestFrontpage(IntranettTestCase):
         self.assert_(u'fp_static_right' in mapping.keys(),
                      'FP static right is not registered for portlets.right')
 
-    @unittest.expectedFailure
     def test_columns_class_default(self):
         portal = self.layer['portal']
         view = portal.unrestrictedTraverse('@@frontpage_view')
@@ -135,7 +132,6 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
         # full-width CSS class from our view
         self.assert_('class="cell fpBlock width-16"' in browser.contents)
 
-    @unittest.expectedFailure
     def test_two_columns(self):
         portal = self.layer['portal']
         folder = portal['test-folder']

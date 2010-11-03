@@ -1,11 +1,7 @@
 import os.path
 import unittest2 as unittest
 
-from Acquisition import aq_parent
-from plone.app.testing import login
-from plone.app.testing import logout
 from plone.app.testing import setRoles
-from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 
@@ -37,17 +33,6 @@ class EmployeeListingLayer(IntranettLayer):
         mtool.addMember('barney', 'secret', ['Member'], [],
             dict(fullname='Barney Rubble', email='br@slaterock.com',
                  position='Head Accountant', department='Dept\xc3\xa5'))
-
-    def tearDownPloneSite(self, portal):
-        # XXX This should be cleaned automatically
-        login(aq_parent(portal), SITE_OWNER_NAME)
-        mtool = getToolByName(portal, 'portal_membership')
-        mtool.deleteMembers(['fred', 'barney'])
-        default_member = mtool.getMemberById(TEST_USER_ID)
-        default_member.setMemberProperties(
-            dict(fullname='', email='', position='', department=''))
-        mtool.deletePersonalPortrait(id=TEST_USER_ID)
-        logout()
 
 
 EMPLOYEE_LISTING_FIXTURE = EmployeeListingLayer()
