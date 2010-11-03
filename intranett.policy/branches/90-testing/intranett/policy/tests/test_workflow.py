@@ -136,20 +136,17 @@ class TestWorkflowTransitions(unittest.TestCase):
 
     layer = WORKFLOW_TRANSITIONS_INTEGRATION
 
-    def setUp(self):
-        portal = self.layer['portal']
-        self.wftool = getToolByName(portal, 'portal_workflow')
-        folder = portal['test-folder']
-        self.doc = folder.doc
-
     def test_owner_publish_and_hide(self):
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'private')
-        self.wftool.doActionFor(self.doc, 'publish')
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        wftool.doActionFor(doc, 'publish')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'published')
-        self.wftool.doActionFor(self.doc, 'hide')
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        wftool.doActionFor(doc, 'hide')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'private')
 
     def _check_edit(self, user):
@@ -157,10 +154,15 @@ class TestWorkflowTransitions(unittest.TestCase):
             logout()
         else:
             login(self.layer['portal'], user)
-        return checkPerm('Modify portal content', self.doc)
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        return checkPerm('Modify portal content', doc)
 
     def test_edit_permission_private(self):
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'private')
 
         self.assertFalse(self._check_edit('member'))
@@ -170,8 +172,11 @@ class TestWorkflowTransitions(unittest.TestCase):
         self.assertFalse(self._check_edit(None))
 
     def test_edit_permission_published(self):
-        self.wftool.doActionFor(self.doc, 'publish')
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        wftool.doActionFor(doc, 'publish')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'published')
 
         self.assertFalse(self._check_edit('member'))
@@ -181,18 +186,22 @@ class TestWorkflowTransitions(unittest.TestCase):
         self.assertFalse(self._check_edit(None))
 
     def _check_view(self, user):
+        portal = self.layer['portal']
         if user is None:
             logout()
         else:
-            login(self.layer['portal'], user)
-        view = checkPerm('View', self.doc)
-        access = checkPerm('Access contents information', self.doc)
+            login(portal, user)
+        doc = portal['test-folder'].doc
+        view = checkPerm('View', doc)
+        access = checkPerm('Access contents information', doc)
         return view and access
 
     @unittest.expectedFailure
     def test_view_permission_private(self):
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
-                         'private')
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'), 'private')
 
         self.assertFalse(self._check_view('member'))
         self.assertTrue(self._check_view('manager'))
@@ -201,8 +210,11 @@ class TestWorkflowTransitions(unittest.TestCase):
         self.assertFalse(self._check_view(None))
 
     def test_view_permission_published(self):
-        self.wftool.doActionFor(self.doc, 'publish')
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        wftool.doActionFor(doc, 'publish')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'published')
 
         self.assertTrue(self._check_view('member'))
