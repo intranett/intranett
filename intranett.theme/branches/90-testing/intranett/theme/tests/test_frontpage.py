@@ -1,6 +1,7 @@
 import unittest2 as unittest
 
 from plone.portlets.interfaces import IPortletManager
+import transaction
 from zope.component import getSiteManager
 from zope.component import getUtility
 from Products.CMFCore.utils import getToolByName
@@ -86,6 +87,7 @@ class TestFrontpage(IntranettTestCase):
         self.assert_(u'fp_static_right' in mapping.keys(),
                      'FP static right is not registered for portlets.right')
 
+    @unittest.expectedFailure
     def test_columns_class_default(self):
         portal = self.layer['portal']
         view = portal.unrestrictedTraverse('@@frontpage_view')
@@ -143,13 +145,14 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
         wftool = getToolByName(portal, 'portal_workflow')
         wftool.doActionFor(folder.n1, 'publish')
 
+        transaction.commit()
+
         browser = get_browser(self.layer)
         browser.open(portal.absolute_url())
 
         self.assert_('Test News Item' in browser.contents)
         self.assert_('"cell fpBlock width-8"' in browser.contents)
 
-    @unittest.expectedFailure
     def test_three_columns(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
@@ -162,6 +165,8 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
         wftool = getToolByName(portal, 'portal_workflow')
         wftool.doActionFor(folder.n1, 'publish')
         wftool.doActionFor(folder.e1, 'publish')
+
+        transaction.commit()
 
         browser = get_browser(self.layer)
         browser.open(portal.absolute_url())
