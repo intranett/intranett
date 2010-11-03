@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+import os
 import unittest2 as unittest
 
 from Acquisition import aq_get
@@ -6,9 +7,12 @@ from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
 
+from .utils import make_file_upload
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
+
+TEST_IMAGES = os.path.join(os.path.dirname(__file__), 'images')
 
 
 class TestMemberTools(IntranettTestCase):
@@ -139,19 +143,13 @@ class TestUserdataSchema(IntranettTestCase):
 
 class TestUserPortraits(IntranettTestCase):
 
-    def setUp(self):
-        import os
-        from .utils import make_file_upload
-        image_file = os.path.join(os.path.dirname(__file__), 'images', 'test.jpg')
-        self.image_jpg = make_file_upload(image_file, 'image/jpeg', 'myportrait.jpg')
-        image_file = os.path.join(os.path.dirname(__file__), 'images', 'test.gif')
-        self.image_gif = make_file_upload(image_file, 'image/gif', 'myportrait.gif')
-
     def test_set_portraits(self):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         mdt = getToolByName(portal, 'portal_memberdata')
-        mt.changeMemberPortrait(self.image_jpg)
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        mt.changeMemberPortrait(image_jpg)
         self.failUnless(TEST_USER_ID in mdt.portraits)
         self.failUnless(TEST_USER_ID in mdt.thumbnails)
 
@@ -166,14 +164,18 @@ class TestUserPortraits(IntranettTestCase):
     def test_change_portraits(self):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
-        mt.changeMemberPortrait(self.image_jpg)
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        mt.changeMemberPortrait(image_jpg)
         portrait = mt.getPersonalPortrait(thumbnail=False)
         old_portrait_size = portrait.get_size()
         portrait = mt.getPersonalPortrait(thumbnail=True)
         old_thumbnail_size = portrait.get_size()
 
         # Now change the portraits
-        mt.changeMemberPortrait(self.image_gif)
+        path = os.path.join(TEST_IMAGES, 'test.gif')
+        image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
+        mt.changeMemberPortrait(image_gif)
         portrait = mt.getPersonalPortrait(thumbnail=False)
         self.failIfEqual(old_portrait_size, portrait.get_size())
         portrait = mt.getPersonalPortrait(thumbnail=True)
@@ -183,7 +185,9 @@ class TestUserPortraits(IntranettTestCase):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         mdt = getToolByName(portal, 'portal_memberdata')
-        mt.changeMemberPortrait(self.image_jpg)
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        mt.changeMemberPortrait(image_jpg)
         # Now delete the portraits
         mt.deletePersonalPortrait()
         self.failIf(TEST_USER_ID in mdt.portraits)
@@ -196,7 +200,9 @@ class TestUserPortraits(IntranettTestCase):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         mt.getPersonalPortrait(id='')
-        mt.changeMemberPortrait(self.image_gif, id='')
+        path = os.path.join(TEST_IMAGES, 'test.gif')
+        image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
+        mt.changeMemberPortrait(image_gif, id='')
 
 
 class TestUserSearch(IntranettTestCase):
