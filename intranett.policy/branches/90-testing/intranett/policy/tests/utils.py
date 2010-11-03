@@ -1,19 +1,19 @@
 from ZPublisher.HTTPRequest import FileUpload
 
 
-class DummyFieldStorage:
+class DummyFieldStorage(object):
 
-    def __init__(self, file, filename, headers):
-        self.file = file
+    def __init__(self, data, filename, headers):
+        self.file = data
         self.filename = filename
         self.headers = headers
 
 
-def makeFileUpload(file, content_type=None, filename=None):
+def makeFileUpload(data, content_type=None, filename=None):
     headers = {}
-    if type(file) == type(''):
-        file = open(file, 'rb')
+    if isinstance(data, str):
+        data = open(data, 'rb')
     if content_type:
         headers['content-type'] = content_type
-    fs = DummyFieldStorage(file, filename, headers)
+    fs = DummyFieldStorage(data, filename, headers)
     return FileUpload(fs)
