@@ -1,0 +1,34 @@
+div.top,
+#portal-logo,
+#portal-siteactions,
+.hiddenStructure,
+#portal-searchbox,
+#portal-globalnav,
+#portal-personaltools,
+#portal-breadcrumbs,
+#portal-column-one,
+#portal-column-two,
+.contentViews,
+.contentActions,
+.help,
+.legend,
+.portalMessage,
+div.documentActions,
+.documentByLine,
+.netscape4,
+#portal-footer,
+#portal-colophon,
+input,
+#kss-spinner,
+.skipnav,
+.visualNoPrint,
+#edit-bar,
+.overlay,
+#pfgqedit {
+    /* Hides all the elements irrelevant for presentations */
+    display: none;
+}
+body {color:#000;}
+
+/* Hide comments when printing */
+.discussion { display:none; }
