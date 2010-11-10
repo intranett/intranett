@@ -16,4 +16,13 @@
 
   <adapter factory=".userdataschema.CustomDefaultDashboard" />
 
+  <!-- Remove unwanted registrations -->
+  <include package="z3c.unconfigure" file="meta.zcml" />
+  <unconfigure>
+    <utility
+        name="Reviewer"
+        factory="plone.app.workflow.localroles.ReviewerRole"
+        />
+  </unconfigure>
+
 </configure>

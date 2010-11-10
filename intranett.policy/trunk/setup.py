@@ -37,6 +37,7 @@ setup(name='intranett.policy',
           'Zope2',
           'zope.component',
           'zope.interface',
+          'z3c.unconfigure',
           'intranett.theme',
       ],
       )
