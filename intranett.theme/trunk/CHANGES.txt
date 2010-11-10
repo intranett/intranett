@@ -4,6 +4,10 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Copied over styles for calendar that were missing for PloneFormGen calendars.
+  Closes https://jira.jarn.com/browse/INTRANETT-106
+  [denys]
+
 - Removed hardcoded height for the thumbnails in employee-listing.
   [denys]
 
