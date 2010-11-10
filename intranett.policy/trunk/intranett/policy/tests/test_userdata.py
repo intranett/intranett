@@ -267,14 +267,13 @@ class TestUserSearch(IntranettFunctionalTestCase):
         browser = self.getBrowser()
         browser.handleErrors = False
         browser.open(self.portal.absolute_url() + '/@@personal-information')
-        _bget = browser.getControl
-        _bget(name='form.fullname').value = 'John Døe'
-        _bget(name='form.email').value = 'test@example.com'
-        _bget(name='form.description').value = '<p>Kjære Python!</p>'
-        _bget(name='form.location').value = 'Tønsberg'
-        _bget(name='form.position').value = 'Øngønør'
-        _bget(name='form.department').value = 'Tøst'
-        _bget(name='form.actions.save').click()
+        browser.getControl(name='form.fullname').value = 'John Døe'
+        browser.getControl(name='form.email').value = 'test@example.com'
+        browser.getControl(name='form.description').value = '<p>Kjære Python!</p>'
+        browser.getControl(name='form.location').value = 'Tønsberg'
+        browser.getControl(name='form.position').value = 'Øngønør'
+        browser.getControl(name='form.department').value = 'Tåst'
+        browser.getControl(name='form.actions.save').click()
         self.assert_(browser.url.endswith('@@personal-information'))
 
     def test_ttw_search(self):
