@@ -4,7 +4,7 @@ Changelog
 0.4 - unreleased
 ----------------
 
-- Print stylesheets. References https://jira.jarn.com/browse/INTRANETT-51
+- Print stylesheet. References https://jira.jarn.com/browse/INTRANETT-51
   [denys]
 
 - Re-introduced workflow-state colors with member.css. Closes
