@@ -68,6 +68,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <meta name="generator" content="Plone - http://plone.org" />
+    
+    <!--  Mobile viewport optimized: j.mp/bplateviewport -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 
     <tal:comment tal:condition="nothing">
       Internet Explorer fix, forces IE8 into newest possible rendering
