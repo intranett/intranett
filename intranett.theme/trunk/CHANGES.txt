@@ -4,6 +4,10 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Added default "no-js" class on <html> element to provide proper fallback for
+  modernizr.js library.
+  [denys]
+
 - Print stylesheet. References https://jira.jarn.com/browse/INTRANETT-51
   [denys]
 
