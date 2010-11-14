@@ -4,6 +4,9 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Improved printing stylesheet by adding more styles from html5boilerplate.com.
+  [denys]
+
 - chrome=1 property added to X-UA-Compatible <meta> to support "Google Chrome
   Frame".
   [denys]
