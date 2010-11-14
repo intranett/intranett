@@ -76,7 +76,7 @@
     </tal:comment>
     
     <!--[if IE]>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <![endif]-->
 
     <metal:baseslot define-slot="base">

@@ -4,6 +4,10 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- chrome=1 property added to X-UA-Compatible <meta> to support "Google Chrome
+  Frame".
+  [denys]
+
 - Added default "no-js" class on <html> element to provide proper fallback for
   modernizr.js library.
   [denys]
