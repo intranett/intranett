@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 - unreleased
+0.5 - 2010-11-15
 ----------------
 
 - Use `z3c.unconfigure` to disable the reviewer role in the sharing page.
