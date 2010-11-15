@@ -30,6 +30,22 @@ class NightPloneTestLifecycle(PloneTestLifecycle):
 
     defaultBases = (NIGHT_PLONE_FIXTURE, )
 
+    def testSetUp(self):
+        super(NightPloneTestLifecycle, self).testSetUp()
+
+        # Make sure browser tests use the topmost db
+        import Zope2
+        self['_stuff'] = Zope2.bobo_application._stuff
+        Zope2.bobo_application._stuff = (self['zodbDB'],) + self['_stuff'][1:]
+
+    def testTearDown(self):
+        super(NightPloneTestLifecycle, self).testTearDown()
+
+        # Cleanup global variables
+        import Zope2
+        Zope2.bobo_application._stuff = self['_stuff']
+        del self['_stuff']
+
 
 class IntegrationTesting(NightPloneTestLifecycle, z2.IntegrationTesting):
     pass
