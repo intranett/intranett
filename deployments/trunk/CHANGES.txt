@@ -8,6 +8,12 @@ Changelog
 0.1 - 2010-11-15
 ----------------
 
+- Updated distributions:
+  * intranett.policy = 0.5
+  * intranett.theme = 0.4.
+  * plone.app.controlpanel = 2.0.4
+  * plone.app.z3cform = 0.5.1
+
 - Added ZEO authentication. This closes
   https://jira.jarn.com/browse/INTRANETT-112.
   [hannosch]
