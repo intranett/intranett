@@ -4,6 +4,8 @@ Changelog
 0.2 - unreleased
 ----------------
 
+- Updated distributions:
+  * z3c.recipe.usercrontab = 1.1
 
 0.1 - 2010-11-15
 ----------------
