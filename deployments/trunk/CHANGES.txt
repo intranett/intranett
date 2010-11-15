@@ -1,0 +1,13 @@
+Changelog
+=========
+
+0.2 - unreleased
+----------------
+
+
+0.1 - 2010-11-15
+----------------
+
+- Added ZEO authentication. This closes
+  https://jira.jarn.com/browse/INTRANETT-112.
+  [hannosch]
