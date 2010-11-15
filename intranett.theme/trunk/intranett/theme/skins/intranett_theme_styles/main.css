@@ -335,7 +335,8 @@ a#portal-logo img {
 button.searchButton {
 	border: none;
 	background: transparent;
-	padding: 0.38em 0.76em;
+	padding: 0.28em 0.76em;
+	font-size: 0.76em;
 	color: #666666;
 	text-decoration: none;
 	text-transform: uppercase;
