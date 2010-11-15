@@ -1,25 +1,25 @@
 Changelog
 =========
 
-0.4 - unreleased
+0.4 - 2010-11-15
 ----------------
 
-- Improved printing stylesheet by adding more styles from html5boilerplate.com.
+- Improved print stylesheet by adding more styles from html5boilerplate.com.
   [denys]
 
-- chrome=1 property added to X-UA-Compatible <meta> to support "Google Chrome
-  Frame".
+- ``chrome=1`` property added to `X-UA-Compatible` ``<meta>`` to support
+  `Google Chrome Frame`.
   [denys]
 
-- Added default "no-js" class on <html> element to provide proper fallback for
-  modernizr.js library.
+- Added default `no-js` class on ``<html>`` element to provide proper fallback
+  for `modernizr.js` library.
   [denys]
 
-- Print stylesheet. References https://jira.jarn.com/browse/INTRANETT-51
+- Print stylesheet. References https://jira.jarn.com/browse/INTRANETT-51.
   [denys]
 
-- Re-introduced workflow-state colors with member.css. Closes
-  https://jira.jarn.com/browse/INTRANETT-86
+- Re-introduced workflow-state colors with `member.css`. Closes
+  https://jira.jarn.com/browse/INTRANETT-86.
   [denys]
 
 - Copied over styles for calendar that were missing for PloneFormGen calendars.
