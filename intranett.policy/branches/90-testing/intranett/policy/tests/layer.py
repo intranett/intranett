@@ -1,9 +1,9 @@
 from plone.app.testing import applyProfile
 from plone.app.testing import PloneFixture
+from plone.app.testing import PloneTestLifecycle
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.app.testing.layers import PloneTestLifecycle
 from plone.testing import z2
 from zope.configuration import xmlconfig
 
@@ -12,6 +12,16 @@ class NightPloneFixture(PloneFixture):
 
     # No sunburst please
     extensionProfiles = ()
+
+    def setUpZCML(self):
+        super(NightPloneFixture, self).setUpZCML()
+
+        # Work around z3c.unconfigure not doing its job in test setups
+        from zope.component import getGlobalSiteManager
+        from plone.app.workflow.interfaces import ISharingPageRole
+        sm = getGlobalSiteManager()
+        sm.unregisterUtility(provided=ISharingPageRole, name=u'Reviewer')
+
 
 NIGHT_PLONE_FIXTURE = NightPloneFixture()
 
