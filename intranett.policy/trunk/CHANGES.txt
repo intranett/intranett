@@ -4,6 +4,11 @@ Changelog
 0.5 - unreleased
 ----------------
 
+- Use `z3c.unconfigure` to disable the reviewer role in the sharing page.
+  [stefan]
+
+- Make sure Description works even if some properties are None. Refs #100.
+  [stefan]
 
 0.4 - 2010-10-25
 ----------------
