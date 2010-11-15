@@ -7,6 +7,9 @@ Changelog
 - Updated distributions:
   * z3c.recipe.usercrontab = 1.1
 
+- Updated to haproxy = 1.4.9.
+  [hannosch]
+
 - Move in configuration files into this Subversion location, avoiding an
   external definition.
   [hannosch]
