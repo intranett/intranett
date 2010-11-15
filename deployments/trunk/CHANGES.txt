@@ -7,7 +7,7 @@ Changelog
 - Updated distributions:
   * z3c.recipe.usercrontab = 1.1
 
-- Updated to haproxy = 1.4.9.
+- Updated to haproxy = 1.4.9 and Varnish = 2.1.4.
   [hannosch]
 
 - Move in configuration files into this Subversion location, avoiding an
