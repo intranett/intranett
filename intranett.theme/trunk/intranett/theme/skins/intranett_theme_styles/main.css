@@ -1230,7 +1230,7 @@ div div.kupu-panels {
   font-weight: bold;
   padding: 1px;
   border: 1px solid #000;
-  background: ActiveCaption;
+  background: #ccc;
   color: CaptionText;
   text-align: center;
 }

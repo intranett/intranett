@@ -4,6 +4,9 @@ Changelog
 0.5 - unreleased
 ----------------
 
+- Fixed background color for the calendar in Chrome. Closes #INTRANETT-122.
+  [denys]
+
 
 0.4 - 2010-11-15
 ----------------
