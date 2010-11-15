@@ -1895,6 +1895,9 @@ body > footer a {
 	width: 97.9167%;  /* not 100% in order to align right edge with the columns, positioned with the grid */
 	padding: 0;	
 }
+#portal-colophon ul {
+	margin-left: 1em;
+}
 #portal-colophon li {
 	list-style: none;
 	margin-bottom: 0;
