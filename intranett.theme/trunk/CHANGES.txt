@@ -4,10 +4,13 @@ Changelog
 0.5 - unreleased
 ----------------
 
+- Remove home folder references from `author.cpt`. Refs #123.
+  [hannosch]
+
 - Updated livesearch.js to conform with JSLint code checker.
   [denys]
 
-- Fixed background color for the calendar in Chrome. Closes #INTRANETT-122.
+- Fixed background color for the calendar in Chrome. Closes #122.
   [denys]
 
 
