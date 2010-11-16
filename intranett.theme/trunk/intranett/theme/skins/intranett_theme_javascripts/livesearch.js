@@ -1,216 +1,234 @@
-var livesearch = function (){
+var livesearch = (function () {
+
+    var search_delay, hide_delay, searchhandlers, LSHighlight;
 
     // Delay in milliseconds until the search starts after the last key was
     // pressed. This keeps the number of requests to the server low.
-    var _search_delay = 400;
+    search_delay = 400;
     // Delay in milliseconds until the results window closes after the
     // searchbox looses focus.
-    var _hide_delay = 400;
+    hide_delay = 400;
 
     // stores information for each searchbox on the page
-    var _search_handlers = {};
+    searchhandlers = {};
 
     // constants for better compression
-    var _LSHighlight = "LSHighlight";
+    LSHighlight = "LSHighlight";
 
-    function _searchfactory($form, $inputnode) {
+    function searchfactory($form, $inputnode) {
         // returns the search functions in a dictionary.
         // we need a factory to get a local scope for the event, this is
         // necessary, because IE doesn't have a way to get the target of
         // an event in a way we need it.
-        var $lastsearch = null;
-        var $request = null;
-        var $cache = {};
-        var $querytarget = "livesearch_reply";
-        var $querytarget = $form.attr('action').replace(/search$/g,"") + $querytarget;
-        var $$result = $form.find('div.LSResult');
-        var $shadow = $form.find('div.LSShadow');
-        var $path = $form.find('input[name=path]');
+        var $lastsearch, $request, $cache, $querytarget, $$result, $shadow, $path;
 
-        function _hide() {
+        $lastsearch = null;
+        $request = null;
+        $cache = {};
+        $querytarget = "livesearch_reply";
+        $querytarget = $form.attr('action').replace(/search$/g, "") + $querytarget;
+        $$result = $form.find('div.LSResult');
+        $shadow = $form.find('div.LSShadow');
+        $path = $form.find('input[name=path]');
+
+        function hide() {
             // hides the result window
             // jQuery($$result).find(".livesearchContainer").animate({
             //     opacity:'toggle',
             //     height:'toggle'
-            // }, 'fast', 'linear', function(){
+            // }, 'fast', 'linear', function () {
             //     jQuery($$result).find(".toolTipArrow").fadeOut('slow');                
             // });
-            jQuery($$result).find(".livesearchContainer, .LSIEFix").slideUp('fast', function(){
-                jQuery($$result).find(".toolTipArrow").fadeOut(100, function(){
+            jQuery($$result).find(".livesearchContainer, .LSIEFix").slideUp('fast', function () {
+                jQuery($$result).find(".toolTipArrow").fadeOut(100, function () {
                     $$result.hide();
-                    jQuery($$result).find(".toolTipArrow").show();                    
+                    jQuery($$result).find(".toolTipArrow").show();
                 });
             });
             $lastsearch = null;
-        };
+        }
 
-        function _hide_delayed() {
+        function hide_delayed() {
             // hides the result window after a short delay
             window.setTimeout(
                 'livesearch.hide("' + $form.attr('id') + '")',
-                _hide_delay);
-        };
+                hide_delay);
+        }
 
-        function _show($data) {
+        function show($data) {
             // shows the result
-            if((jQuery($$result).find(".livesearchContainer").length == 0) || jQuery($$result).find(".livesearchContainer").is(":hidden")) {
-                $shadow.html($data);                
+            if ((jQuery($$result).find(".livesearchContainer").length === 0) || jQuery($$result).find(".livesearchContainer").is(":hidden")) {
+                $shadow.html($data);
                 jQuery($$result).find(".livesearchContainer").hide();
                 $$result.show();
                 jQuery(".livesearchContainer").animate({
-                    opacity:'toggle',
-                    height:'toggle'
-                }, 'fast', 'swing');                
+                    opacity: 'toggle',
+                    height: 'toggle'
+                }, 'fast', 'swing');
             } else {
                 $$result.show();
                 $shadow.html($data);
             }
-        };
+        }
 
-        function _search() {
+        function search() {
             // does the actual search
-            if ($lastsearch == $inputnode.value) {
+            if ($lastsearch === $inputnode.value) {
                 // do nothing if the input didn't change
                 return;
             }
             $lastsearch = $inputnode.value;
-            
-            if ($request && $request.readyState < 4)
+
+            if ($request && $request.readyState < 4) {
                 // abort any pending request
                 $request.abort();
-                
+            }
+
             // Do nothing as long as we have less then two characters - 
             // the search results makes no sense, and it's harder on the server.
             if ($inputnode.value.length < 2) {
-                _hide();
+                hide();
                 return;
             }
-            
+
             var $$query = { q: $inputnode.value };
-            if ($path.length && $path[0].checked)
-                $$query['path'] = $path.val();
+            if ($path.length && $path[0].checked) {
+                $$query.path = $path.val();
+            }
             // turn into a string for use as a cache key
             $$query = jQuery.param($$query);
 
             // check cache
             if ($cache[$$query]) {
-                _show($cache[$$query]);
+                show($cache[$$query]);
                 return;
             }
 
             // the search request (retrieve as text, not a document)
-            $request = jQuery.get($querytarget, $$query, function($data) {
+            $request = jQuery.get($querytarget, $$query, function ($data) {
                 // show results if there are any and cache them
-                _show($data);
+                show($data);
                 $cache[$$query] = $data;
             }, 'text');
-        };
+        }
 
-        function _search_delayed() {
+        function search_delayed() {
             // search after a small delay, used by onfocus
             window.setTimeout(
                 'livesearch.search("' + $form.attr('id') + '")', 
-                _search_delay);
-        };
+                search_delay);
+        }
 
         return {
-            hide: _hide,
-            hide_delayed: _hide_delayed,
-            search: _search,
-            search_delayed: _search_delayed
+            hide: hide,
+            hide_delayed: hide_delayed,
+            search: search,
+            search_delayed: search_delayed
         };
-    };
+    }
 
-    function _keyhandlerfactory($form) {
+    function keyhandlerfactory($form) {
         // returns the key event handler functions in a dictionary.
         // we need a factory to get a local scope for the event, this is
         // necessary, because IE doesn't have a way to get the target of
         // an event in a way we need it.
-        var $timeout = null;
-        var $$result = $form.find('div.LSResult');
-        var $shadow = $form.find('div.LSShadow');
+        var $timeout, $$result, $shadow, $cur, $prev, $next;
 
-        function _keyUp() {
+        $timeout = null;
+        $$result = $form.find('div.LSResult');
+        $shadow = $form.find('div.LSShadow');
+
+        function keyUp() {
             // select the previous element
-            $cur = $shadow.find('li.LSHighlight').removeClass(_LSHighlight);
+            $cur = $shadow.find('li.LSHighlight').removeClass(LSHighlight);
             $prev = $cur.prev('li');
-            if (!$prev.length) $prev = $shadow.find('li:last');
-            $prev.addClass(_LSHighlight);
+            if (!$prev.length) {
+                $prev = $shadow.find('li:last');
+            }
+            $prev.addClass(LSHighlight);
             return false;
-        };
+        }
 
-        function _keyDown() {
+        function keyDown() {
             // select the next element
-            $cur = $shadow.find('li.LSHighlight').removeClass(_LSHighlight);
+            $cur = $shadow.find('li.LSHighlight').removeClass(LSHighlight);
             $next = $cur.next('li');
-            if (!$next.length) $next = $shadow.find('li:first');
-            $next.addClass(_LSHighlight);
+            if (!$next.length) {
+                $next = $shadow.find('li:first');
+            }
+            $next.addClass(LSHighlight);
             return false;
-        };
+        }
 
-        function _keyEscape() {
+        function keyEscape() {
             // hide results window
-            $shadow.find('li.LSHighlight').removeClass(_LSHighlight);
+            $shadow.find('li.LSHighlight').removeClass(LSHighlight);
             $$result.hide();
-        };
+        }
 
-        function _handler($event) {
+        function handler($event) {
             // dispatch to specific functions and handle the search timer
             window.clearTimeout($timeout);
             switch ($event.keyCode) {
-                case 38: return _keyUp();
-                case 40: return _keyDown();
-                case 27: return _keyEscape();
-                case 37: break; // keyLeft
-                case 39: break; // keyRight
-                default: {
-                    $timeout = window.setTimeout(
-                        'livesearch.search("' + $form.attr('id') + '")',
-                        _search_delay);
-                }
+            case 38:
+                return keyUp();
+            case 40:
+                return keyDown();
+            case 27:
+                return keyEscape();
+            case 37:
+                break; // keyLeft
+            case 39:
+                break; // keyRight
+            default:
+                $timeout = window.setTimeout('livesearch.search("' + $form.attr('id') + '")', search_delay);
             }
-        };
+        }
 
-        function _submit() {
+        function submit() {
             // check whether a search result was selected with the keyboard
             // and open it
             var $target = $shadow.find('li.LSHighlight a').attr('href');
-            if (!$target) return;
+            if (!$target) {
+                return;
+            }
             window.location = $target;
             return false;
-        };
+        }
 
         return {
-            handler: _handler,
-            submit: _submit
+            handler: handler,
+            submit: submit
         };
-    };
+    }
 
-    function _setup(i) {
+    function setup(i) {
+        var $id, $form, $keyhandler;
+
         // add an id which is used by other functions to find the correct node
-        var $id = 'livesearch' + i;
-        var $form = jQuery(this).parents('form:first');
-        var $key_handler = _keyhandlerfactory($form);
-        _search_handlers[$id] = _searchfactory($form, this);
+        $id = 'livesearch' + i;
+        $form = jQuery(this).parents('form:first');
+        $keyhandler = keyhandlerfactory($form);
+        searchhandlers[$id] = searchfactory($form, this);
 
-        $form.attr('id', $id).css('white-space', 'nowrap').submit($key_handler.submit);
-        jQuery(this).attr('autocomplete','off')
-               .keydown($key_handler.handler)
-               .focus(_search_handlers[$id].search_delayed)
-               .blur(_search_handlers[$id].hide_delayed);
-    };
+        $form.attr('id', $id).css('white-space', 'nowrap').submit($keyhandler.submit);
+        jQuery(this).attr('autocomplete', 'off')
+               .keydown($keyhandler.handler)
+               .focus(searchhandlers[$id].search_delayed)
+               .blur(searchhandlers[$id].hide_delayed);
+    }
 
-    jQuery(function() {
+    jQuery(function () {
         // find all search fields and set them up
-        jQuery("#searchGadget,input.portlet-search-gadget").each(_setup);
+        jQuery("#searchGadget,input.portlet-search-gadget").each(setup);
     });
 
     return {
-        search: function(id) {
-            _search_handlers[id].search();
+        search: function (id) {
+            searchhandlers[id].search();
         },
-        hide: function(id) {
-            _search_handlers[id].hide();
+        hide: function (id) {
+            searchhandlers[id].hide();
         }
     };
-}();
+}());

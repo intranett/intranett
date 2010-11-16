@@ -4,6 +4,9 @@ Changelog
 0.5 - unreleased
 ----------------
 
+- Updated livesearch.js to conform with JSLint code checker.
+  [denys]
+
 - Fixed background color for the calendar in Chrome. Closes #INTRANETT-122.
   [denys]
 
