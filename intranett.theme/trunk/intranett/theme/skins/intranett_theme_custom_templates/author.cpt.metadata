@@ -3,10 +3,3 @@ title=Author information
 
 [security]
 View=0:Anonymous
-
-[validators]
-validators=validate_feedback
-
-[actions]
-action.success=traverse_to:string:send_feedback
-action.failure=traverse_to:string:author
