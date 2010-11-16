@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Generate the nginx config from the buildout to deploy the error page changes
+  to all servers. This closes https://jira.jarn.com/browse/INTRANETT-119.
+  [hannosch]
+
 - Added nicer error page to Nginx, which will be shown during software
   upgrades. Refs https://jira.jarn.com/browse/INTRANETT-119.
   [hannosch]
