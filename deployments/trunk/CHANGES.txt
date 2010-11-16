@@ -4,6 +4,9 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Added nicer error page to Nginx, which will be shown during software
+  upgrades. Refs https://jira.jarn.com/browse/INTRANETT-119.
+  [hannosch]
 
 0.2 - 2010-11-15
 ----------------
