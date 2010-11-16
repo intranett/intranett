@@ -4,6 +4,9 @@ Changelog
 0.6 - unreleased
 ----------------
 
+- Moved `Employees` tab to the last position in the navigation bar.
+  This closes https://jira.jarn.com/browse/INTRANETT-115.
+  [denys, hannosch]
 
 0.5 - 2010-11-15
 ----------------
