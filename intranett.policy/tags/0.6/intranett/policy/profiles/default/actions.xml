@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<object name="portal_actions" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <object name="user">
+  <object name="review-comments">
+   <property name="visible">False</property>
+  </object>
+ </object>
+ <object name="site_actions">
+  <object name="sitemap">
+   <property name="visible">False</property>
+  </object>
+  <object name="contact">
+   <property name="visible">False</property>
+  </object>
+  <object name="plone_setup">
+   <property name="visible">False</property>
+  </object>
+ </object>
+</object>
