@@ -17,10 +17,8 @@
 
 <metal:main fill-slot="content">
     <tal:main-macro metal:define-macro="main"
-                    tal:define="site_properties context/portal_properties/site_properties;
-                                allowAnonymousViewAbout python:site_properties.getProperty('allowAnonymousViewAbout', True);
-                                isAnon context/@@plone_portal_state/anonymous;
-                                raiseUnauthorized python:(not isAnon or allowAnonymousViewAbout) or context.raiseUnauthorized();
+                    tal:define="isAnon context/@@plone_portal_state/anonymous;
+                                raiseUnauthorized python:(not isAnon) or context.raiseUnauthorized();
                                 url_unquote_plus python:modules['Products.PythonScripts.standard'].url_unquote_plus;
                                 username view/username;
                                 mtool python:context.portal_membership;
@@ -140,8 +138,9 @@
                             Author description.
                         </div>
 
-                        <tal:authorContent define="author_content python:context.portal_catalog.searchResults(Creator=username, sort_on='created', sort_order='reverse')[:10];"
-                                           condition="author_content">
+                        <tal:authorContent define="user_content view/user_content;
+                                                   toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
+                                           condition="user_content">
 
                             <h2 i18n:translate="heading_author_content">
                                 Latest content created by this user
@@ -151,10 +150,9 @@
                             <table class="vertical listing"
                                    summary="Lists content written by an author grouped by content type"
                                    i18n:attributes="summary summary_author_content_list;">
-                                <tal:repeat repeat="item author_content">
+                                <tal:repeat repeat="item user_content">
                                     <tr>
-                                        <th tal:define="toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
-                                            tal:content="python:toLocalizedTime(item.Date)"
+                                        <th tal:content="python:toLocalizedTime(item.Date)"
                                             style="white-space: nowrap">
                                             Date
                                         </th>
