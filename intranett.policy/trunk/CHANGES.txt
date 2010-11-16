@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6 - unreleased
+0.6 - 2010-11-16
 ----------------
 
 - Moved `Employees` tab to the last position in the navigation bar.
