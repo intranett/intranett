@@ -4,6 +4,10 @@ Changelog
 0.3 - unreleased
 ----------------
 
+- Updated distributions:
+  * intranett.policy = 0.6
+  * intranett.theme = 0.5
+
 - Generate the nginx config from the buildout to deploy the error page changes
   to all servers. This closes https://jira.jarn.com/browse/INTRANETT-119.
   [hannosch]
@@ -30,7 +34,7 @@ Changelog
 
 - Updated distributions:
   * intranett.policy = 0.5
-  * intranett.theme = 0.4.
+  * intranett.theme = 0.4
   * plone.app.controlpanel = 2.0.4
   * plone.app.z3cform = 0.5.1
 
