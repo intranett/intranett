@@ -9,8 +9,11 @@ class UserView(BrowserView):
 
     def user_content(self):
         catalog = getToolByName(self.context, 'portal_catalog')
+        username = self.username()
+        if not username:
+            return []
         query = {
-            'Creator': self.username(),
+            'Creator': username,
             'sort_on': 'created',
             'sort_order': 'reverse',
             'sort_limit': 10,
