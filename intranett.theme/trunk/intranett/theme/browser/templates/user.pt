@@ -15,26 +15,25 @@
 
 <body>
 
-<metal:main fill-slot="content"
-    tal:define="errors options/state/getErrors;">
+<metal:main fill-slot="content">
     <tal:main-macro metal:define-macro="main"
-                    tal:define="site_properties here/portal_properties/site_properties;
+                    tal:define="site_properties context/portal_properties/site_properties;
                                 allowAnonymousViewAbout python:site_properties.getProperty('allowAnonymousViewAbout', True);
                                 isAnon context/@@plone_portal_state/anonymous;
-                                raiseUnauthorized python:(not isAnon or allowAnonymousViewAbout) or here.raiseUnauthorized();
+                                raiseUnauthorized python:(not isAnon or allowAnonymousViewAbout) or context.raiseUnauthorized();
                                 url_unquote_plus python:modules['Products.PythonScripts.standard'].url_unquote_plus;
-                                author python:(len(request.traverse_subpath) > 0 and url_unquote_plus(request.traverse_subpath[0])) or request.get('author', None);
+                                username view/username;
                                 mtool python:context.portal_membership;
-                                portrait python: mtool.getPersonalPortrait(author, thumbnail=False);
+                                portrait python: mtool.getPersonalPortrait(username, thumbnail=False);
                                 portal_types context/portal_types;
-                                authorinfo python: mtool.getMemberInfo(author);
+                                userinfo python: mtool.getMemberInfo(username);
                                 portal_url context/@@plone_portal_state/navigation_root_url;
                                 here_url context/@@plone_context_state/object_url;
                                 member context/@@plone_portal_state/member;
                                 portal context/@@plone_portal_state/portal;
                                 email_from_address portal/email_from_address">
 
-        <tal:noAuthor condition="not: authorinfo">
+        <tal:noAuthor condition="not: userinfo">
             <dl class="portalMessage error">
                 <dt i18n:translate="">
                     Error
@@ -48,8 +47,8 @@
             </div>
         </tal:noAuthor>
 
-        <tal:haveAuthor condition="authorinfo"
-            tal:define="isOwner python:member.getId()==author;
+        <tal:haveAuthor condition="userinfo"
+            tal:define="isOwner python:member.getId()==username;
                         isAnon context/@@plone_portal_state/anonymous;">
 
             <div id="edit-bar" tal:condition="isOwner">
@@ -60,7 +59,7 @@
                     <a href=""
                         tal:define="url_quote_plus python:modules['Products.PythonScripts.standard'].url_quote_plus;
                                     memberurl python:url_quote_plus(member.getId())"
-                       tal:attributes="href string:${portal_url}/author/${memberurl}"
+                       tal:attributes="href string:${portal_url}/@@user?name=${memberurl}"
                        i18n:translate="label_view">View</a>
                   </li>
                   <li>
@@ -87,41 +86,41 @@
                              tal:attributes="src portrait/absolute_url" />
 
                         <ul class="visualClear" i18n:domain="intranett">
-                            <li tal:condition="authorinfo/department">
+                            <li tal:condition="userinfo/department">
                                 <!-- Department -->
                                 <b><span tal:omit-tag="" i18n:translate="label_department">Department</span>:</b>
                                 <a href=""
-                                     tal:attributes="href string:${context/absolute_url}/employee-listing?department=${authorinfo/department}"
-                                     tal:content="authorinfo/department">Departent</a>
+                                     tal:attributes="href string:${context/absolute_url}/employee-listing?department=${userinfo/department}"
+                                     tal:content="userinfo/department">Departent</a>
                             </li>
-                            <li tal:condition="authorinfo/location">
+                            <li tal:condition="userinfo/location">
                                 <!-- Location  -->
                                 <b><span tal:omit-tag="" i18n:translate="label_location">Location</span>:</b>
-                                <span tal:replace="authorinfo/location">
+                                <span tal:replace="userinfo/location">
                                     Some location
                                 </span>
                             </li>
-                            <li tal:condition="authorinfo/email">
+                            <li tal:condition="userinfo/email">
                                 <!-- E-mail  -->
                                 <b><span tal:omit-tag="" i18n:translate="label_email">Email</span>:</b>
                                 <a href="" title=""
-                                   tal:attributes="href string:mailto:${authorinfo/email}"
-                                   tal:content="authorinfo/email">
+                                   tal:attributes="href string:mailto:${userinfo/email}"
+                                   tal:content="userinfo/email">
                                     joe@doe.com
                                 </a>
                             </li>
-                            <li tal:condition="authorinfo/phone">
+                            <li tal:condition="userinfo/phone">
                                 <!-- Phone -->
                                 <b><span tal:omit-tag="" i18n:translate="label_phone">Phone</span>:</b>
-                                <span tal:content="authorinfo/phone"
+                                <span tal:content="userinfo/phone"
                                       tal:omit-tag="">
                                     Phone
                                 </span>
                             </li>
-                            <li tal:condition="authorinfo/mobile">
+                            <li tal:condition="userinfo/mobile">
                                 <!-- Mobile phone -->
                                 <b><span tal:omit-tag="" i18n:translate="label_mobile">Mobile phone</span>:</b>
-                                <span tal:content="authorinfo/mobile"
+                                <span tal:content="userinfo/mobile"
                                       tal:omit-tag="">
                                     Mobile phone
                                 </span>
@@ -129,19 +128,19 @@
                         </ul>
                     </div>
                     <div class="cell width-10 position-6">
-                        <h1 class="documentFirstHeading" tal:condition="authorinfo/fullname" tal:content="authorinfo/fullname">
+                        <h1 class="documentFirstHeading" tal:condition="userinfo/fullname" tal:content="userinfo/fullname">
                             Author name
                         </h1>
 
-                        <h1 class="documentFirstHeading" tal:condition="not: authorinfo/fullname" tal:content="author">
+                        <h1 class="documentFirstHeading" tal:condition="not: userinfo/fullname" tal:content="username">
                             Author ID
                         </h1>
 
-                        <div class="documentDescription" tal:content="structure authorinfo/description">
+                        <div class="documentDescription" tal:content="structure userinfo/description">
                             Author description.
                         </div>
 
-                        <tal:authorContent define="author_content python:context.portal_catalog.searchResults(Creator=author, sort_on='created', sort_order='reverse')[:10];"
+                        <tal:authorContent define="author_content python:context.portal_catalog.searchResults(Creator=username, sort_on='created', sort_order='reverse')[:10];"
                                            condition="author_content">
 
                             <h2 i18n:translate="heading_author_content">
@@ -170,10 +169,10 @@
 
                             <p>
                             <a href=""
-                               tal:attributes="href string:$here_url/search?Creator=${author}&amp;sort_on=created&amp;sort_order=reverse"
+                               tal:attributes="href string:$here_url/search?Creator=${username}&amp;sort_on=created&amp;sort_order=reverse"
                                i18n:translate="go_to_search_author_content">
                                 All content created by
-                                <span i18n:name="user" tal:omit-tag="" tal:content="python:authorinfo['fullname'] or author"/>&hellip;
+                                <span i18n:name="user" tal:omit-tag="" tal:content="python:userinfo['fullname'] or username"/>&hellip;
                             </a>
                             </p>
 

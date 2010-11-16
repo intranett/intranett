@@ -4,6 +4,10 @@ Changelog
 0.5 - unreleased
 ----------------
 
+- Reimplemented author page as a browser page and renamed it to `@@user`,
+  while using query strings instead of traversal for the name reference.
+  [hannosch]
+
 - Remove home folder references from `author.cpt`. Refs #123.
   [hannosch]
 
