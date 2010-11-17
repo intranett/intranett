@@ -1,3 +1,6 @@
+/* The following line defines gliobal variables defined elsewhere. */
+/*global jQuery:false, document: false, window: false*/
+
 var livesearch = (function () {
 
     var search_delay, hide_delay, searchhandlers, LSHighlight;
@@ -13,7 +16,7 @@ var livesearch = (function () {
     searchhandlers = {};
 
     // constants for better compression
-    LSHighlight = "LSHighlight";
+    LSHighlight = 'LSHighlight';
 
     function searchfactory($form, $inputnode) {
         // returns the search functions in a dictionary.
@@ -25,8 +28,8 @@ var livesearch = (function () {
         $lastsearch = null;
         $request = null;
         $cache = {};
-        $querytarget = "livesearch_reply";
-        $querytarget = $form.attr('action').replace(/search$/g, "") + $querytarget;
+        $querytarget = 'livesearch_reply';
+        $querytarget = $form.attr('action').replace(/search$/g, '') + $querytarget;
         $$result = $form.find('div.LSResult');
         $shadow = $form.find('div.LSShadow');
         $path = $form.find('input[name=path]');
@@ -37,12 +40,12 @@ var livesearch = (function () {
             //     opacity:'toggle',
             //     height:'toggle'
             // }, 'fast', 'linear', function () {
-            //     jQuery($$result).find(".toolTipArrow").fadeOut('slow');                
+            //     jQuery($$result).find(".toolTipArrow").fadeOut('slow');
             // });
-            jQuery($$result).find(".livesearchContainer, .LSIEFix").slideUp('fast', function () {
-                jQuery($$result).find(".toolTipArrow").fadeOut(100, function () {
+            jQuery($$result).find('.livesearchContainer, .LSIEFix').slideUp('fast', function () {
+                jQuery($$result).find('.toolTipArrow').fadeOut(100, function () {
                     $$result.hide();
-                    jQuery($$result).find(".toolTipArrow").show();
+                    jQuery($$result).find('.toolTipArrow').show();
                 });
             });
             $lastsearch = null;
@@ -57,11 +60,11 @@ var livesearch = (function () {
 
         function show($data) {
             // shows the result
-            if ((jQuery($$result).find(".livesearchContainer").length === 0) || jQuery($$result).find(".livesearchContainer").is(":hidden")) {
+            if ((jQuery($$result).find('.livesearchContainer').length === 0) || jQuery($$result).find('.livesearchContainer').is(':hidden')) {
                 $shadow.html($data);
-                jQuery($$result).find(".livesearchContainer").hide();
+                jQuery($$result).find('.livesearchContainer').hide();
                 $$result.show();
-                jQuery(".livesearchContainer").animate({
+                jQuery('.livesearchContainer').animate({
                     opacity: 'toggle',
                     height: 'toggle'
                 }, 'fast', 'swing');
@@ -84,7 +87,7 @@ var livesearch = (function () {
                 $request.abort();
             }
 
-            // Do nothing as long as we have less then two characters - 
+            // Do nothing as long as we have less then two characters -
             // the search results makes no sense, and it's harder on the server.
             if ($inputnode.value.length < 2) {
                 hide();
@@ -115,7 +118,7 @@ var livesearch = (function () {
         function search_delayed() {
             // search after a small delay, used by onfocus
             window.setTimeout(
-                'livesearch.search("' + $form.attr('id') + '")', 
+                'livesearch.search("' + $form.attr('id') + '")',
                 search_delay);
         }
 
@@ -220,7 +223,7 @@ var livesearch = (function () {
 
     jQuery(function () {
         // find all search fields and set them up
-        jQuery("#searchGadget,input.portlet-search-gadget").each(setup);
+        jQuery('#searchGadget,input.portlet-search-gadget').each(setup);
     });
 
     return {
