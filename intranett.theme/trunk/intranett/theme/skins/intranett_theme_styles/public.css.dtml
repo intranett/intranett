@@ -81,16 +81,16 @@
     text-align: center;
     width: 100px;
 }
-.portraitPhoto {
+.template-user {
     border: 1px solid #ccc;
 }
-body.template-author .portraitPhoto {
+body.template-user .portraitPhoto {
 	margin-bottom: 2em !important;
 
-          transform: rotate(-3deg);	
-     -moz-transform: rotate(-3deg);  /* FF3.5+ */
-       -o-transform: rotate(-3deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(-3deg);  /* Saf3.1+, Chrome */
+    transform: rotate(-3deg);	
+    -moz-transform: rotate(-3deg);  /* FF3.5+ */
+    -o-transform: rotate(-3deg);  /* Opera 10.5 */
+    -webkit-transform: rotate(-3deg);  /* Saf3.1+, Chrome */
 }
 .eventDetails {
     float: right;

@@ -4,6 +4,10 @@ Changelog
 0.6 - unreleased
 ----------------
 
+- Updated styles to work with template-user instead of template-author after
+  the tenmplate's renaming.
+  [denys]
+
 
 0.5 - 2010-11-16
 ----------------
