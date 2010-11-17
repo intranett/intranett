@@ -4,10 +4,13 @@ Changelog
 0.6 - unreleased
 ----------------
 
+- Remove `tal` statements from comments in main_template and avoid an internal
+  reference to be present in the rendered HTML.
+  [hannosch]
+
 - Updated styles to work with template-user instead of template-author after
   the tenmplate's renaming.
   [denys]
-
 
 0.5 - 2010-11-16
 ----------------
