@@ -4,6 +4,11 @@ Changelog
 0.6 - unreleased
 ----------------
 
+- Involved SCSS (SASS) for writing styles. Don't edit styles in main.css! Use
+  main.scss instead and let SASS convert it to CSS.
+  http://sass-lang.com/tutorial.html for more info. 
+  [denys]
+
 - Remove `tal` statements from comments in main_template and avoid an internal
   reference to be present in the rendered HTML.
   [hannosch]

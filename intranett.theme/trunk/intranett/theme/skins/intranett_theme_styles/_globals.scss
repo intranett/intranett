@@ -35,10 +35,10 @@ $width-full: 97.9167%; /* not 100% in order to align right edge with the columns
     -webkit-border-radius: $radius; /* Saf3-4 */
     border-radius: $radius; /* Opera 10.5, IE 9, Saf5, Chrome */
 }
-@mixin box-shadow($toright, $tobottom, $blur, $color) {
-    -moz-box-shadow: $toright $tobottom $blur $color; /* FF3.5+ */
-    -webkit-box-shadow: $toright $tobottom $blur $color; /* Saf3.0+, Chrome */
-    box-shadow: $toright $tobottom $blur $color; /* Opera 10.5, IE 9 */
+@mixin box-shadow($toright, $tobottom, $spread, $color) {
+    -moz-box-shadow: $toright $tobottom $spread $color; /* FF3.5+ */
+    -webkit-box-shadow: $toright $tobottom $spread $color; /* Saf3.0+, Chrome */
+    box-shadow: $toright $tobottom $spread $color; /* Opera 10.5, IE 9 */
 }
 
 /* @end */
