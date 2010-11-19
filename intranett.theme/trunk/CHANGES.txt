@@ -4,6 +4,10 @@ Changelog
 0.6 - unreleased
 ----------------
 
+- Added selectivizr.js to make IE understand CSS3 selectors. 
+  References INTRANETT-126.
+  [denys]
+
 - Involved SCSS (SASS) for writing styles. Don't edit styles in main.css! Use
   main.scss instead and let SASS convert it to CSS.
   http://sass-lang.com/tutorial.html for more info. 

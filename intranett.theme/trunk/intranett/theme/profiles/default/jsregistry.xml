@@ -6,5 +6,6 @@
  <javascript id="modernizr.js" />
  <javascript id="jquery.easing.js" />
  <javascript id="jquery.jBreadCrumb.js" />
+ <javascript id="selectivizr.js" conditionalcomment="lt IE 9"/>
  <javascript id="main.js" />
 </object>

@@ -41,6 +41,7 @@ class TestTheme(IntranettTestCase):
         self.assert_('modernizr.js' in ids)
         self.assert_('jquery.easing.js' in ids)
         self.assert_('jquery.jBreadCrumb.js' in ids)
+        self.assert_('selectivizr.js' in ids)
         self.assert_('main.js' in ids)
 
     def test_html5_js(self):
