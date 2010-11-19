@@ -654,9 +654,9 @@ dd.image-caption {
   /* FF3.6 */
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), color-stop(0.5, rgba(238, 238, 238, 0.9)), to(#e6e6e6));
   /* Saf4+, Chrome */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='$lightgrey', EndColorStr='#e6e6e6');
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#f7f7f7, EndColorStr='#e6e6e6');
   /* IE6,IE7 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='$lightgrey', EndColorStr='#e6e6e6')";
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr=#f7f7f7, EndColorStr='#e6e6e6')";
   /* IE8 */
   line-height: normal;
   margin: 0;
