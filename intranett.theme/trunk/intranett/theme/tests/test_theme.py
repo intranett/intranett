@@ -44,18 +44,18 @@ class TestTheme(IntranettTestCase):
         self.assert_('selectivizr.js' in ids)
         self.assert_('main.js' in ids)
 
-    def test_html5_js(self):
+    def test_selectivizr_js(self):
         js = getToolByName(self.portal, 'portal_javascripts')
         ids = js.getResourcesDict().keys()
-        self.assert_('html5.js' in ids)
-        h5 = js.getResource('html5.js')
-        self.assertEquals(h5.getConditionalcomment(), 'lt IE 9')
+        self.assert_('selectivizr.js' in ids)
+        selectivizr = js.getResource('selectivizr.js')
+        self.assertEquals(selectivizr.getConditionalcomment(), 'lt IE 9')
 
         positions = {}
         for pos, r in enumerate(js.getResources()):
             positions[r.getId()] = pos
 
-        self.assert_(positions['html5.js'] > positions['jquery.js'])
+        self.assert_(positions['selectivizr.js'] > positions['jquery.js'])
 
     def test_media_for_maincss(self):
         css = getToolByName(self.portal, 'portal_css')

@@ -4,6 +4,9 @@ Changelog
 0.6 - unreleased
 ----------------
 
+- Removed html5.js since all of what it does is included in modernizr.js.
+  [denys]
+
 - Added selectivizr.js to make IE understand CSS3 selectors. 
   References INTRANETT-126.
   [denys]
