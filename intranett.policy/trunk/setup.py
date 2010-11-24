@@ -40,4 +40,7 @@ setup(name='intranett.policy',
           'z3c.unconfigure',
           'intranett.theme',
       ],
-      )
+      entry_points="""
+      [zopectl.command]
+      upgrade = intranett.policy.commands:upgrade
+      """)
