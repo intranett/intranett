@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.7 - unreleased
+0.7 - 2010-11-24
 ----------------
 
 - Added test to check `selectivizr.js` requirement on linking CSS files.
