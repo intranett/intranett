@@ -10,8 +10,6 @@
   <javascript id="formUnload.js" authenticated="False" />
   <javascript id="formsubmithelpers.js" authenticated="False" />
   <javascript id="unlockOnFormUnload.js" authenticated="False" />
-
-  <!-- TODO: Split the JS resources before TinyMCE -->
   <javascript id="tiny_mce.js" authenticated="False" />
   <javascript id="++resource++kukit.js" authenticated="False" />
   <javascript id="tiny_mce_init.js" authenticated="False" />
