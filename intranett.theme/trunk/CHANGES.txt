@@ -4,6 +4,8 @@ Changelog
 0.7 - unreleased
 ----------------
 
+- Remove some excessive legal text from the footer. Refs #79.
+  [hannosch]
 
 0.6 - 2010-11-24
 ----------------
