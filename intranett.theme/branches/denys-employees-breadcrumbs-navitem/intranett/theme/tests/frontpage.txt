@@ -1,0 +1,83 @@
+Frontpage
+---------
+
+Get us a test browser, as an anonymous user:
+
+  >>> browser = self.getBrowser(loggedIn=False)
+  >>> browser.open(self.portal.absolute_url())
+
+Navigating to the front page redirects us to the login form:
+
+  >>> 'require_login' in browser.url
+  True
+  >>> 'template-login_form' in browser.contents
+  True
+  >>> 'id="login_form"' in browser.contents
+  True
+
+Now get us a test browser, logged in as a normal user:
+
+  >>> browser = self.getBrowser()
+  >>> browser.handleErrors = False
+  >>> browser.open(self.portal.absolute_url())
+
+  >>> browser.url
+  'http://nohost/plone'
+
+We know Frontpage View is the default view of the site, but let's make sure:
+
+  >>> 'template-frontpage_view' in browser.contents
+  True
+
+By default we should have only one content column on the frontpage that has
+static portlet with dummy content assigned to it. The two rest should have
+nothing and should not be rendered since we have no news or events published
+yet. In this case we should get full-width CSS class from our view:
+
+  >>> 'class="cell fpBlock width-16"' in browser.contents
+  True
+  
+Now we are adding a News Item for it to show up on the frontpage:
+
+  >>> self.folder.invokeFactory('News Item', id='n1', title='Test News Item')
+  'n1'
+  >>> from Products.CMFCore.utils import getToolByName
+  >>> wftool = getToolByName(self.portal, 'portal_workflow')
+  >>> wftool.doActionFor(self.folder.n1, 'publish')
+  
+We reload the page and see if the News portlet shows up:
+
+  >>> browser.reload()
+
+  >>> 'Test News Item' in browser.contents
+  True
+
+Now we should get width spread between 2 portlets:
+  >>> browser.contents
+  '...<div id="frontpage-columns"...class="cell fpBlock width-8"...class="cell fpBlock width-8"...<div id="frontpage-bottom"...' 
+
+Now we are adding one Event in order to make the last remaining column to show
+up on the frontpage view:
+
+  >>> self.folder.invokeFactory('Event', id='e1', title='Test Event', start_date='2011-01-01', end_date='2100-01-01')
+  'e1'
+  >>> wftool.doActionFor(self.folder.e1, 'publish')
+
+We reload the page and see if the portlet show up:
+
+  >>> browser.reload()
+
+  >>> 'Test Event' in browser.contents
+  True
+
+Now we should get width spread between 3 portlets:
+
+  >>> browser.contents
+  '...<div id="frontpage-columns"...class="cell fpBlock width-5"...class="cell fpBlock width-5"...class="cell fpBlock width-5"...<div id="frontpage-bottom"...'
+  
+Let's make sure we have edit-bar when we edit the frontpage:
+
+  >>> self.setRoles(['Manager'])
+  >>> browser.open('http://nohost/plone/manage-frontpage')
+  >>> '<ul class="contentViews" id="content-views">' in browser.contents
+  True
