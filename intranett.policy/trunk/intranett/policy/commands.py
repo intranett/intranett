@@ -4,13 +4,6 @@ import sys
 logger = logging.getLogger()
 
 
-def compare_profile_versions(setup, profile_id):
-    current = setup.getVersionForProfile(profile_id)
-    current = tuple(current.split('.'))
-    last = setup.getLastVersionForProfile(profile_id)
-    return current == last
-
-
 def upgrade(app, args=None):
     # Display all messages on stderr
     logger.setLevel(logging.DEBUG)
@@ -32,6 +25,7 @@ def upgrade(app, args=None):
     import transaction
     from intranett.policy.config import POLICY_PROFILE
     from intranett.policy.config import THEME_PROFILE
+    from intranett.policy.upgrades import compare_profile_versions
     from intranett.policy.upgrades import run_upgrade
 
     logger.info("Starting the upgrade.\n\n")

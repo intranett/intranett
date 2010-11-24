@@ -1,7 +1,9 @@
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.config import POLICY_PROFILE
+from intranett.policy.config import THEME_PROFILE
 from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.upgrades import compare_profile_versions
 from intranett.policy.upgrades import run_upgrade
 from intranett.policy.upgrades.tests.utils import ensure_no_addon_upgrades
 
@@ -20,18 +22,21 @@ class TestFullUpgrade(IntranettTestCase):
         self.setRoles(['Manager'])
 
         setup.setLastVersionForProfile(POLICY_PROFILE, '1')
-        upgrades = setup.listUpgrades(POLICY_PROFILE)
-        # TODO: Enable again once we have upgrade steps
-        # self.failUnless(len(upgrades) > 0)
+        setup.setLastVersionForProfile(THEME_PROFILE, '1')
 
+        upgrades = setup.listUpgrades(THEME_PROFILE)
+        self.failUnless(len(upgrades) > 0)
+
+        run_upgrade(setup, THEME_PROFILE)
         run_upgrade(setup)
 
         # And we have reached our current profile version
-        current = setup.getVersionForProfile(POLICY_PROFILE)
-        current = tuple(current.split('.'))
-        last = setup.getLastVersionForProfile(POLICY_PROFILE)
-        self.assertEquals(last, current)
+        self.assertTrue(compare_profile_versions(setup, THEME_PROFILE))
+        self.assertTrue(compare_profile_versions(setup, POLICY_PROFILE))
 
         # There are no more upgrade steps available
+        upgrades = setup.listUpgrades(THEME_PROFILE)
+        self.failUnless(len(upgrades) == 0)
+
         upgrades = setup.listUpgrades(POLICY_PROFILE)
         self.failUnless(len(upgrades) == 0)

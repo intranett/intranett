@@ -21,3 +21,10 @@ def run_upgrade(setup, profile_id=u"intranett.policy:default"):
 
     request.form['upgrades'] = steps
     setup.manage_doUpgrades(request=request)
+
+
+def compare_profile_versions(setup, profile_id):
+    current = setup.getVersionForProfile(profile_id)
+    current = tuple(current.split('.'))
+    last = setup.getLastVersionForProfile(profile_id)
+    return current == last
