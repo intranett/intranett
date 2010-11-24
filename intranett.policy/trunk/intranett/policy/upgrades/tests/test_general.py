@@ -3,8 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from intranett.policy.config import POLICY_PROFILE
 from intranett.policy.config import THEME_PROFILE
 from intranett.policy.tests.base import IntranettTestCase
-from intranett.policy.upgrades import compare_profile_versions
-from intranett.policy.upgrades import run_upgrade
+from intranett.policy.upgrades import run_all_upgrades
 from intranett.policy.upgrades.tests.utils import ensure_no_addon_upgrades
 
 
@@ -27,12 +26,10 @@ class TestFullUpgrade(IntranettTestCase):
         upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) > 0)
 
-        run_upgrade(setup, THEME_PROFILE)
-        run_upgrade(setup)
+        all_finished = run_all_upgrades(setup)
 
-        # And we have reached our current profile version
-        self.assertTrue(compare_profile_versions(setup, THEME_PROFILE))
-        self.assertTrue(compare_profile_versions(setup, POLICY_PROFILE))
+        # And we have reached our current profile versions
+        self.assertTrue(all_finished)
 
         # There are no more upgrade steps available
         upgrades = setup.listUpgrades(THEME_PROFILE)

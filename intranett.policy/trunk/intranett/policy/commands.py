@@ -9,6 +9,7 @@ def upgrade(app, args=None):
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
 
+    # Make app.REQUEST available
     from Testing import makerequest
     root = makerequest.makerequest(app)
     site = root.get('Plone', None)
@@ -16,6 +17,7 @@ def upgrade(app, args=None):
         logger.error("No site called `Plone` found in the database.")
         sys.exit(1)
 
+    # Set up local site manager
     from zope.site.hooks import setHooks
     from zope.site.hooks import setSite
     setHooks()
@@ -23,22 +25,13 @@ def upgrade(app, args=None):
     setup = site.portal_setup
 
     import transaction
-    from intranett.policy.config import POLICY_PROFILE
-    from intranett.policy.config import THEME_PROFILE
-    from intranett.policy.upgrades import compare_profile_versions
-    from intranett.policy.upgrades import run_upgrade
+    from intranett.policy.upgrades import run_all_upgrades
 
     logger.info("Starting the upgrade.\n\n")
-    run_upgrade(setup, u"intranett.theme:default")
-    logger.info("Ran theme upgrade.")
-    run_upgrade(setup)
-    logger.info("Ran policy upgrade.")
+    all_finished = run_all_upgrades(setup)
+    logger.info("Ran upgrade steps.")
 
-    # Check if we reached the current version
-    policy_updated = compare_profile_versions(setup, POLICY_PROFILE)
-    theme_updated = compare_profile_versions(setup, THEME_PROFILE)
-
-    if policy_updated and theme_updated:
+    if all_finished:
         logger.info("Upgrade successful.")
 
         # Recook resources, as some CSS/JS/KSS files might have changed.
