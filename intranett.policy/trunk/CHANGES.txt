@@ -6,7 +6,7 @@ Changelog
 
 - Added command line script to upgrade an existing site and recook all
   resources. Call it via ``bin/instance run
-  <path to policy egg>/intranett/policy/commands.py upgrade``. In Zope 2.13+
+  <path to policy egg>/intranett/policy/commands.py upgrade``. In Zope 2.12.12+
   we can re-factor this as a script exposed via `setup.py` like `bin/upgrade`.
   [hannosch]
 
