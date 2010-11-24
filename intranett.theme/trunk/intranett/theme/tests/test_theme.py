@@ -51,11 +51,14 @@ class TestTheme(IntranettTestCase):
         selectivizr = js.getResource('selectivizr.js')
         self.assertEquals(selectivizr.getConditionalcomment(), 'lt IE 9')
 
+        # We need to split the JS files before tiny_mce.js, as it doesn't work
+        # if merged together with the rest. We use selectivizr.js here, as it
+        # has a conditional comment, which causes the splitting for us
         positions = {}
         for pos, r in enumerate(js.getResources()):
             positions[r.getId()] = pos
 
-        self.assert_(positions['selectivizr.js'] > positions['jquery.js'])
+        self.assert_(positions['selectivizr.js'] > positions['tiny_mce.js'])
 
     def test_media_for_maincss(self):
         css = getToolByName(self.portal, 'portal_css')

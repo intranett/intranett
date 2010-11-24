@@ -23,5 +23,5 @@ def add_selectivizr_remove_html5_js(context):
 
     sel = js.getResource('selectivizr.js')
     sel.setConditionalcomment('lt IE 9')
-    js.moveResourceAfter('selectivizr.js', 'jquery.js')
+    js.moveResourceBefore('selectivizr.js', 'tiny_mce.js')
     js.cookResources()
