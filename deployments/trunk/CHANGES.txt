@@ -4,6 +4,9 @@ Changelog
 0.4 - unreleased
 ----------------
 
+- Updated distributions:
+  * intranett.policy = 0.7
+  * intranett.theme = 0.6
 
 0.3 - 2010-11-16
 ----------------
