@@ -51,3 +51,18 @@ After the ticket is done, all tests are written, it's been tested TTW,
 upgrade notes or automatic steps are in place and quality assurance has been
 performed, you can merge your changes back to the trunk and integrate any
 required changes into the buildout files.
+
+
+Working with CSS
+----------------
+
+We are using `SASS <http://sass-lang.com/>`_ to generate our CSS files. On Mac
+OS use macports to install it::
+
+  sudo port install rb19-haml
+
+The Ruby 1.8 version available via `rb-haml` is too outdated for our purposes.
+
+To update all CSS files from their SCSS source files, call::
+
+  sass --update src/intranett.theme/intranett/theme/skins/intranett_theme_styles:src/intranett.theme/intranett/theme/skins/intranett_theme_styles
