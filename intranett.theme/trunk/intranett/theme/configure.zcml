@@ -29,4 +29,13 @@
       profile="intranett.theme:default"
       />
 
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.theme from version 2 to 3"
+      description="Change some JS file registrations."
+      source="2"
+      destination="3"
+      handler="intranett.theme.upgradehandlers.add_selectivizr_remove_html_js"
+      profile="intranett.theme:default"
+      />
+
 </configure>
