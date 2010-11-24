@@ -58,7 +58,7 @@ class TestTheme(IntranettTestCase):
         for pos, r in enumerate(js.getResources()):
             positions[r.getId()] = pos
 
-        self.assert_(positions['selectivizr.js'] > positions['tiny_mce.js'])
+        self.assert_(positions['selectivizr.js'] < positions['tiny_mce.js'])
 
     def test_media_for_maincss(self):
         css = getToolByName(self.portal, 'portal_css')
