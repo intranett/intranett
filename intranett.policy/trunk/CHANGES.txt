@@ -4,6 +4,8 @@ Changelog
 0.7 - unreleased
 ----------------
 
+- Removes reference to no longer included `html5.js`.
+  [hannosch]
 
 0.6 - 2010-11-16
 ----------------
