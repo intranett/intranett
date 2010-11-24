@@ -4,16 +4,15 @@ Changelog
 0.6 - unreleased
 ----------------
 
-- Removed html5.js since all of what it does is included in modernizr.js.
+- Removed `html5.js` since all of what it does is included in `modernizr.js`.
   [denys]
 
-- Added selectivizr.js to make IE understand CSS3 selectors. 
-  References INTRANETT-126.
+- Added `selectivizr.js` to make IE understand CSS3 selectors. Refs #126.
   [denys]
 
 - Involved SCSS (SASS) for writing styles. Don't edit styles in main.css! Use
-  main.scss instead and let SASS convert it to CSS.
-  http://sass-lang.com/tutorial.html for more info. 
+  `main.scss` instead and let SASS convert it to CSS.
+  http://sass-lang.com/tutorial.html for more info.
   [denys]
 
 - Remove `tal` statements from comments in main_template and avoid an internal
@@ -125,9 +124,9 @@ Changelog
 
 - Styling and js support for comments. References #72.
   [denys]
-  
+
 - Added basic upgrade tests.
-  [hannosch]  
+  [hannosch]
 
 - Fixed styling for footer of the site.
   [denys]
