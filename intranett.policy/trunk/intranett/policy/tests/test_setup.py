@@ -61,6 +61,21 @@ class TestSiteSetup(IntranettTestCase):
                 continue
             self.assertEquals(resource.getRendering(), 'link', id_)
 
+    def test_selectivizr_jquery_unsupported_syntax(self):
+        # According to http://selectivizr.com/ the jQuery version does not
+        # support certain selectors, let's check that we don't introduce those
+        css = getToolByName(self.portal, 'portal_css')
+        unsupported_patterns = ('^=', '$=', '*=', ':nth-last-child',
+            ':nth-of-type', ':nth-last-of-type', ':root', ':first-of-type',
+            ':last-of-type', ':only-of-type', ':empty', )
+        for id_, resource in css.getResourcesDict().items():
+            if not resource.getEnabled():
+                continue
+            text = css.getInlineResource(id_, self.portal)
+            for pattern in unsupported_patterns:
+                self.assert_(pattern not in text,
+                    '%s found in %s' % (pattern, id_))
+
     def test_discussion(self):
         # Test that the profile got applied
         cp = getToolByName(self.portal, 'portal_controlpanel')
