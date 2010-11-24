@@ -34,7 +34,7 @@
       description="Change some JS file registrations."
       source="2"
       destination="3"
-      handler="intranett.theme.upgradehandlers.add_selectivizr_remove_html_js"
+      handler="intranett.theme.upgradehandlers.add_selectivizr_remove_html5_js"
       profile="intranett.theme:default"
       />
 

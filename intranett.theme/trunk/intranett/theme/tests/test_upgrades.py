@@ -47,3 +47,14 @@ class TestUpgrades(IntranettTestCase):
         add_media_query_maincss(self.portal)
         main = css.getResource('main.css')
         self.assert_(not main.getMedia())
+
+    def test_two_to_three(self):
+        from ..upgradehandlers import add_selectivizr_remove_html5_js
+        js = getToolByName(self.portal, 'portal_javascripts')
+        js.registerScript('html5.js')
+        js.unregisterResource('selectivizr.js')
+        # Run the step
+        add_selectivizr_remove_html5_js(self.portal)
+        ids = js.getResourcesDict().keys()
+        self.assert_('html5.js' not in ids)
+        self.assert_('selectivizr.js' in ids)

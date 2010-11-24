@@ -11,9 +11,17 @@ def add_media_query_maincss(context):
     main.setMedia("")
 
 
-def add_selectivizr_remove_html_js(context):
+def add_selectivizr_remove_html5_js(context):
     js = getToolByName(context, 'portal_javascripts')
+    ids = js.getResourcesDict().keys()
     # remove html5.js
-    pass
-    # add selectivizr.js conditionalcomment="lt IE 9" insert-after="jquery.js"
-    pass
+    if 'html5.js' in ids:
+        js.unregisterResource('html5.js')
+    # add selectivizr.js
+    if 'selectivizr.js' not in ids:
+        js.registerScript('selectivizr.js')
+
+    sel = js.getResource('selectivizr.js')
+    sel.setConditionalcomment('lt IE 9')
+    js.moveResourceAfter('selectivizr.js', 'jquery.js')
+    js.cookResources()
