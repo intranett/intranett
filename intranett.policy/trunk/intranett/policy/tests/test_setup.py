@@ -49,6 +49,18 @@ class TestSiteSetup(IntranettTestCase):
         js = getToolByName(self.portal, 'portal_javascripts')
         self.assertEqual(len(js.getEvaluatedResources(self.portal)), 3)
 
+    def test_selectivizr_requires_css_linking(self):
+        # According to http://selectivizr.com/: Style sheets MUST be added to
+        # the page using a <link> tag but you can still use @import in your
+        # style sheets
+        # Since its a good idea anyways, we test all CSS files and not just
+        # our own where we might use CSS3 selectors
+        css = getToolByName(self.portal, 'portal_css')
+        for id_, resource in css.getResourcesDict().items():
+            if not resource.getEnabled():
+                continue
+            self.assertEquals(resource.getRendering(), 'link', id_)
+
     def test_discussion(self):
         # Test that the profile got applied
         cp = getToolByName(self.portal, 'portal_controlpanel')

@@ -4,6 +4,9 @@ Changelog
 0.7 - unreleased
 ----------------
 
+- Added test to check `selectivizr.js` requirement on linking CSS files.
+  [hannosch]
+
 - Removes reference to no longer included `html5.js`.
   [hannosch]
 
