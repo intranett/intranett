@@ -4,6 +4,10 @@ Changelog
 0.5 - unreleased
 ----------------
 
+- Added a basic `munin` resource monitoring client configuration. This refs
+  https://jira.jarn.com/browse/INTRANETT-81.
+  [hannosch]
+
 - Updated distributions:
   * Plone = 4.0.2
   * Zope = 2.12.13
