@@ -1,0 +1,3 @@
+<div metal:define-macro="portal_footer" i18n:domain="plone" tal:omit-tag="">
+    <div id="portal-footer"></div>
+</div>
