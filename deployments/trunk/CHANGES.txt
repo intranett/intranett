@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 - unreleased
+0.5 - 2010-11-28
 ----------------
 
 - Added a basic `munin` resource monitoring client configuration. This refs
