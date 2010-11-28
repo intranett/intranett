@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.8 - unreleased
+0.8 - 2010-11-28
 ----------------
 
 - Expose new command line script as a `zopectl.command` entry point, now
