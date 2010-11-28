@@ -1,9 +1,12 @@
 Changelog
 =========
 
-0.6 - unreleased
+0.6 - 2010-11-28
 ----------------
 
+- Updated distributions:
+  * intranett.policy = 0.8
+  * intranett.theme = 0.7
 
 0.5 - 2010-11-28
 ----------------
