@@ -1,0 +1,28 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <include package="Products.CMFPlone" file="overrides.zcml" />
+
+  <include package=".browser" file="overrides.zcml" />
+
+  <utility provides=".userdataschema.IUserDataSchemaProvider"
+           factory=".userdataschema.UserDataSchemaProvider"/>
+
+  <adapter
+    provides=".userdataschema.ICustomUserDataSchema"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
+    factory=".userdataschema.CustomUserDataPanelAdapter"
+    />
+
+  <adapter factory=".userdataschema.CustomDefaultDashboard" />
+
+  <!-- Remove unwanted registrations -->
+  <include package="z3c.unconfigure" file="meta.zcml" />
+  <unconfigure>
+    <utility
+        name="Reviewer"
+        factory="plone.app.workflow.localroles.ReviewerRole"
+        />
+  </unconfigure>
+
+</configure>
