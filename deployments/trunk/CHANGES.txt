@@ -4,6 +4,9 @@ Changelog
 0.7 - unreleased
 ----------------
 
+- Updated distributions:
+  * intranett.policy = 0.9
+
 - Added Zope instance specific monitoring to munin.
   [hannosch]
 
