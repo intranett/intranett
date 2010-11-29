@@ -26,7 +26,7 @@ class TestComments(IntranettFunctionalTestCase):
         transaction.commit()
 
         # Get us a test browser with our new user
-        browser = get_browser(self.layer, loggedIn=False)
+        browser = get_browser(self.layer['app'], loggedIn=False)
         browser.addHeader('Authorization', 'Basic member:secret')
 
         browser.open(folder.doc1.absolute_url())

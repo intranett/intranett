@@ -10,7 +10,7 @@ from intranett.policy import tests
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.layer import FunctionalTesting
 from intranett.policy.tests.layer import IntegrationTesting
-from intranett.policy.tests.layer import INTRANETT_FIXTURE
+from intranett.policy.tests.layer import INTRANETT_LAYER
 from intranett.policy.tests.utils import make_file_upload
 
 
@@ -20,7 +20,7 @@ image_file = os.path.join(test_dir, 'images', 'test.jpg')
 
 class EmployeeListingLayer(PloneSandboxLayer):
 
-    defaultBases = (INTRANETT_FIXTURE, )
+    defaultBases = (INTRANETT_LAYER,)
 
     def setUpPloneSite(self, portal):
         mtool = getToolByName(portal, 'portal_membership')
@@ -38,13 +38,11 @@ class EmployeeListingLayer(PloneSandboxLayer):
                  position='Head Accountant', department='Dept\xc3\xa5'))
 
 
-EMPLOYEE_LISTING_FIXTURE = EmployeeListingLayer()
+EMPLOYEE_LISTING_LAYER = EmployeeListingLayer()
 EMPLOYEE_LISTING_INTEGRATION = IntegrationTesting(
-    bases=(EMPLOYEE_LISTING_FIXTURE, ),
-    name="employee_listing:Integration")
+    bases=(EMPLOYEE_LISTING_LAYER,), name="EmployeeListingLayer:Integration")
 EMPLOYEE_LISTING_FUNCTIONAL = FunctionalTesting(
-    bases=(EMPLOYEE_LISTING_FIXTURE, ),
-    name="employee_listing:Functional")
+    bases=(EMPLOYEE_LISTING_LAYER,), name="EmployeeListingLayer:Functional")
 
 
 class TestEmployeeListing(unittest.TestCase):
@@ -101,6 +99,6 @@ class TestFunctionalEmployeeListing(unittest.TestCase):
 
     def test_employee_listing_view(self):
         # As a normal user we can view the listing
-        browser = get_browser(self.layer)
+        browser = get_browser(self.layer['app'])
         browser.open('http://nohost/plone/employee-listing')
         self.assert_(browser.url.endswith('employee-listing'))

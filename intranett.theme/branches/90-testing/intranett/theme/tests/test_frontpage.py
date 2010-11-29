@@ -108,7 +108,7 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
 
     def test_anon_frontpage(self):
         portal = self.layer['portal']
-        browser = get_browser(self.layer, loggedIn=False)
+        browser = get_browser(self.layer['app'], loggedIn=False)
 
         # Navigating to the front page redirects us to the login form
         browser.open(portal.absolute_url())
@@ -118,7 +118,7 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
 
     def test_one_column(self):
         portal = self.layer['portal']
-        browser = get_browser(self.layer)
+        browser = get_browser(self.layer['app'])
         browser.open(portal.absolute_url())
         self.assertEquals(browser.url, 'http://nohost/plone')
 
@@ -143,7 +143,7 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
 
         transaction.commit()
 
-        browser = get_browser(self.layer)
+        browser = get_browser(self.layer['app'])
         browser.open(portal.absolute_url())
 
         self.assert_('Test News Item' in browser.contents)
@@ -164,7 +164,7 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
 
         transaction.commit()
 
-        browser = get_browser(self.layer)
+        browser = get_browser(self.layer['app'])
         browser.open(portal.absolute_url())
 
         self.assert_('Test News Item' in browser.contents)
@@ -173,7 +173,7 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
 
     def test_manage_frontpage(self):
         # Let's make sure we have edit-bar when we edit the frontpage
-        browser = get_browser(self.layer)
+        browser = get_browser(self.layer['app'])
         browser.open('http://nohost/plone/@@manage-frontpage')
         self.assert_('<ul class="contentViews" id="content-views">'
                      in browser.contents)
