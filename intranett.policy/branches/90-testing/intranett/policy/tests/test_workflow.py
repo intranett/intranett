@@ -13,7 +13,27 @@ from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.layer import IntegrationTesting
-from intranett.policy.tests.layer import INTRANETT_FIXTURE
+from intranett.policy.tests.layer import INTRANETT_LAYER
+
+
+class WorkflowTransitionsLayer(PloneSandboxLayer):
+
+    defaultBases = (INTRANETT_LAYER,)
+
+    def setUpPloneSite(self, portal):
+        addUser = aq_get(portal, 'acl_users').userFolderAddUser
+        addUser('member', 'secret', ['Member'], [])
+        addUser('manager', 'secret', ['Manager'], [])
+        addUser('editor', 'secret', ['Editor'], [])
+        addUser('reader', 'secret', ['Reader'], [])
+
+        folder = portal['test-folder']
+        folder.invokeFactory('Document', id='doc')
+
+
+WORKFLOW_TRANSITIONS_LAYER = WorkflowTransitionsLayer()
+WORKFLOW_TRANSITIONS_INTEGRATION = IntegrationTesting(
+    bases=(WORKFLOW_TRANSITIONS_LAYER,), name="WorkflowTransitionsLayer:Integration")
 
 
 def checkPerm(permission, obj):
@@ -101,27 +121,6 @@ class TestSitePermissions(IntranettTestCase):
         logout()
         portal = self.layer['portal']
         self.assertFalse(checkPerm('Allow sendto', portal))
-
-
-class WorkflowTransitionsLayer(PloneSandboxLayer):
-
-    defaultBases = (INTRANETT_FIXTURE, )
-
-    def setUpPloneSite(self, portal):
-        addUser = aq_get(portal, 'acl_users').userFolderAddUser
-        addUser('member', 'secret', ['Member'], [])
-        addUser('manager', 'secret', ['Manager'], [])
-        addUser('editor', 'secret', ['Editor'], [])
-        addUser('reader', 'secret', ['Reader'], [])
-
-        folder = portal['test-folder']
-        folder.invokeFactory('Document', id='doc')
-
-
-WORKFLOW_TRANSITIONS_FIXTURE = WorkflowTransitionsLayer()
-WORKFLOW_TRANSITIONS_INTEGRATION = IntegrationTesting(
-    bases=(WORKFLOW_TRANSITIONS_FIXTURE, ),
-    name="workflow_transitions:Integration")
 
 
 class TestWorkflowTransitions(unittest.TestCase):
