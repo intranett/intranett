@@ -7,16 +7,15 @@ from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.tests.base.testcase import WarningInterceptor
 from Products.GenericSetup.context import TarballImportContext
 from zope.site.hooks import setSite
 
 from intranett.policy.tests.base import IntranettFunctionalTestCase
+from intranett.policy.tests.utils import suppress_warnings
 from intranett.policy.upgrades import run_upgrade
 
 
-class FunctionalUpgradeTestCase(IntranettFunctionalTestCase,
-                                WarningInterceptor):
+class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
 
     site_id = 'Plone'
     rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
@@ -41,11 +40,10 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase,
             del app[self.site_id]
         logout()
 
+    @suppress_warnings
     def importFile(self, context, name):
         path = join(abspath(dirname(context)), 'data', name)
-        self._trap_warning_output()
         self.layer['app']._importObjectFromFile(path, verify=0)
-        self._free_warning_output()
 
     def migrate(self):
         oldsite = getattr(self.layer['app'], self.site_id)
