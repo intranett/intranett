@@ -1,20 +1,20 @@
-from plone.app.testing import applyProfile
+from zope.configuration import xmlconfig
+from plone.testing import z2
 from plone.app.testing import PloneFixture
 from plone.app.testing import PloneTestLifecycle
 from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import applyProfile
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.testing import z2
-from zope.configuration import xmlconfig
 
 
-class NightPloneFixture(PloneFixture):
+class IntranettFixture(PloneFixture):
 
     # No sunburst please
     extensionProfiles = ()
 
     def setUpZCML(self):
-        super(NightPloneFixture, self).setUpZCML()
+        super(IntranettFixture, self).setUpZCML()
 
         # Work around z3c.unconfigure not doing its job in test setups
         from zope.component import getGlobalSiteManager
@@ -22,43 +22,25 @@ class NightPloneFixture(PloneFixture):
         sm = getGlobalSiteManager()
         sm.unregisterUtility(provided=ISharingPageRole, name=u'Reviewer')
 
-
-NIGHT_PLONE_FIXTURE = NightPloneFixture()
-
-
-class NightPloneTestLifecycle(PloneTestLifecycle):
-
-    defaultBases = (NIGHT_PLONE_FIXTURE, )
-
-    def testSetUp(self):
-        super(NightPloneTestLifecycle, self).testSetUp()
-
-        # Make sure browser tests use the topmost db
-        import Zope2
-        self['_stuff'] = Zope2.bobo_application._stuff
-        Zope2.bobo_application._stuff = (self['zodbDB'],) + self['_stuff'][1:]
-
-    def testTearDown(self):
-        super(NightPloneTestLifecycle, self).testTearDown()
-
-        # Cleanup global variables
-        import Zope2
-        Zope2.bobo_application._stuff = self['_stuff']
-        del self['_stuff']
+INTRANETT_FIXTURE = IntranettFixture()
 
 
-class IntegrationTesting(NightPloneTestLifecycle, z2.IntegrationTesting):
+class IntranettTestLifecycle(PloneTestLifecycle):
+
+    defaultBases = (INTRANETT_FIXTURE,)
+
+
+class IntegrationTesting(IntranettTestLifecycle, z2.IntegrationTesting):
     pass
 
-
-class FunctionalTesting(NightPloneTestLifecycle, z2.FunctionalTesting):
+class FunctionalTesting(IntranettTestLifecycle, z2.FunctionalTesting):
     pass
 
 
 class IntranettLayer(PloneSandboxLayer):
     """ layer for integration tests """
 
-    defaultBases = (NIGHT_PLONE_FIXTURE, )
+    defaultBases = (INTRANETT_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
         import intranett.policy
@@ -87,9 +69,8 @@ class IntranettLayer(PloneSandboxLayer):
         setRoles(portal, TEST_USER_ID, ['Member'])
 
 
-INTRANETT_FIXTURE = IntranettLayer()
-
-INTRANETT_INTEGRATION = IntegrationTesting(bases=(INTRANETT_FIXTURE, ),
-                                           name="intranett:Integration")
-INTRANETT_FUNCTIONAL = FunctionalTesting(bases=(INTRANETT_FIXTURE, ),
-                                         name="intranett:Functional")
+INTRANETT_LAYER = IntranettLayer()
+INTRANETT_INTEGRATION = IntegrationTesting(
+    bases=(INTRANETT_LAYER,), name="IntranettLayer:Integration")
+INTRANETT_FUNCTIONAL = FunctionalTesting(
+    bases=(INTRANETT_LAYER,), name="IntranettLayer:Functional")
