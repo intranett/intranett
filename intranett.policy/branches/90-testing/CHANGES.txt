@@ -4,6 +4,9 @@ Changelog
 0.5 - unreleased
 ----------------
 
+- Tests now work with plone(.app).testing trunk. Importing a helper from
+  CMFCore.tests caused ZTC to be loaded as a side-effect.
+  [stefan]
 
 0.4 - 2010-10-25
 ----------------
