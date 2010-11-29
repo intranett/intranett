@@ -4,6 +4,9 @@ Changelog
 0.7 - unreleased
 ----------------
 
+- Added ``missingok`` to `logrotate.conf` to avoid errors on new servers where
+  some services haven't been started yet.
+  [hannosch]
 
 0.6 - 2010-11-28
 ----------------
