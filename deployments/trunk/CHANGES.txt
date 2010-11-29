@@ -4,6 +4,9 @@ Changelog
 0.7 - unreleased
 ----------------
 
+- Added Zope instance specific monitoring to munin.
+  [hannosch]
+
 - Added ``missingok`` to `logrotate.conf` to avoid errors on new servers where
   some services haven't been started yet.
   [hannosch]
