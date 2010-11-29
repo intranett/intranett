@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import os
+import transaction
 
 from Acquisition import aq_get
 from plone.app.testing import TEST_USER_ID
@@ -292,7 +293,8 @@ class TestUserSearch(IntranettTestCase):
 class TestFunctionalUserSearch(IntranettFunctionalTestCase):
 
     def test_ttw_editing(self):
-        browser = get_browser(self.layer)
+        browser = get_browser(self.layer['app'])
+        browser.handleErrors = False
         portal = self.layer['portal']
         browser.open(portal.absolute_url() + '/@@personal-information')
         browser.getControl(name='form.fullname').value = 'John Døe'
@@ -305,21 +307,25 @@ class TestFunctionalUserSearch(IntranettFunctionalTestCase):
         self.assert_(browser.url.endswith('@@personal-information'))
 
     def test_ttw_search(self):
+        browser = get_browser(self.layer['app'])
+        browser.handleErrors = False
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
-        member.setMemberProperties({'fullname': 'John Døe',
+        member.setMemberProperties({'fullname': 'Bob Døe',
                                     'phone': '12345',
                                     'mobile': '67890',
                                     'position': 'Øngønør',
                                     'department': 'Tøst',
                                     'location': 'Tønsberg',
                                     'email': 'info@jarn.com'})
-        browser = get_browser(self.layer)
+        transaction.commit()
         browser.open(portal.absolute_url())
         browser.getControl(name='SearchableText').value = 'Døe'
         browser.getForm(name='searchform').submit()
-        self.failUnless('John Døe' in browser.contents)
+        self.failUnless('Bob Døe' in browser.contents)
+        self.failUnless('Øngønør' in browser.contents)
+        self.failUnless('Tøst' in browser.contents)
         self.failUnless('Øngønør, Tøst' in browser.contents)
 
 
