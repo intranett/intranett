@@ -7,8 +7,8 @@ from plone.testing.z2 import Browser
 from intranett.policy.tests import layer
 
 
-def get_browser(layer, loggedIn=True):
-    browser = Browser(layer['app'])
+def get_browser(app, loggedIn=True):
+    browser = Browser(app)
     if loggedIn:
         auth = 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD)
         browser.addHeader('Authorization', auth)
