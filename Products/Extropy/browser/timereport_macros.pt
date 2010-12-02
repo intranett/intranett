@@ -19,8 +19,9 @@
     metal:define-macro="creator_filter">
     <option value="">All people</option>
     <tal:options repeat="person view/people">
-    <option tal:attributes="value person;
-            selected python:person == request.get('Creator','')"
+    <option tal:define="username person/username|person"
+            tal:attributes="value username;
+            selected python:username == request.get('Creator','')"
             tal:content="person/fullname|person" />
     </tal:options>
 </select>

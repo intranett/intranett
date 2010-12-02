@@ -11,7 +11,7 @@
                   group_by request/group_by|string:getBudgetCategory:Creator;
                   group_by python:group_by and same_type(group_by,'') and group_by.split(':') or group_by;
                   query python:{};
-                  dummy python:[query.setdefault(x,request.get(x)) for x in ['review_state','portal_type','getBudgetCategory'] if request.has_key(x)];
+                  dummy python:[query.setdefault(x,request.get(x)) for x in ['review_state','portal_type','getBudgetCategory', 'local'] if request.has_key(x)];
                   results python:view.getReportData(start=start,end=end,username=username,group_by=group_by, **query)">
 
         <h1>Hour report</h1>
