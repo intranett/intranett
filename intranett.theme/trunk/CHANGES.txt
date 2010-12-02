@@ -4,6 +4,9 @@ Changelog
 0.8 - unreleased
 ----------------
 
+- Upgraded Modernizr to 1.6. This fixes "testdb" issue from INTRANETT-41.
+  [denys]
+
 
 0.7 - 2010-11-27
 ----------------
