@@ -58,9 +58,9 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
 
         result = mig.upgrade(swallow_errors=False)
 
-        # Run the upgrades for policy and theme
-        run_upgrade(oldsite.portal_setup)
+        # Run the upgrades for theme and policy
         run_upgrade(oldsite.portal_setup, u"intranett.theme:default")
+        run_upgrade(oldsite.portal_setup)
 
         return (oldsite, result)
 

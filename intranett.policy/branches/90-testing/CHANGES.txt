@@ -1,11 +1,53 @@
 Changelog
 =========
 
-0.5 - unreleased
+1.0 - unreleased
 ----------------
 
 - Tests now work with plone(.app).testing trunk. Importing a helper from
   CMFCore.tests caused ZTC to be loaded as a side-effect.
+  [stefan]
+
+0.9 - 2010-11-29
+----------------
+
+- Include `munin.zope` ZCML configuration.
+  [hannosch]
+
+0.8 - 2010-11-28
+----------------
+
+- Expose new command line script as a `zopectl.command` entry point, now
+  callable via ``bin/instance upgrade``.
+  [hannosch]
+
+- Added command line script to upgrade an existing site and recook all
+  resources.
+  [hannosch]
+
+0.7 - 2010-11-24
+----------------
+
+- Added test to check `selectivizr.js` requirement on linking CSS files.
+  [hannosch]
+
+- Removes reference to no longer included `html5.js`.
+  [hannosch]
+
+0.6 - 2010-11-16
+----------------
+
+- Moved `Employees` tab to the last position in the navigation bar.
+  This closes https://jira.jarn.com/browse/INTRANETT-115.
+  [denys, hannosch]
+
+0.5 - 2010-11-15
+----------------
+
+- Use `z3c.unconfigure` to disable the reviewer role in the sharing page.
+  [stefan]
+
+- Make sure Description works even if some properties are None. Refs #100.
   [stefan]
 
 0.4 - 2010-10-25

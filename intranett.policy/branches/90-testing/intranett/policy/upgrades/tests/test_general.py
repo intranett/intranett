@@ -3,8 +3,9 @@ from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.config import POLICY_PROFILE
+from intranett.policy.config import THEME_PROFILE
 from intranett.policy.tests.base import IntranettTestCase
-from intranett.policy.upgrades import run_upgrade
+from intranett.policy.upgrades import run_all_upgrades
 from intranett.policy.upgrades.tests.utils import ensure_no_addon_upgrades
 
 
@@ -24,18 +25,19 @@ class TestFullUpgrade(IntranettTestCase):
         setRoles(portal, TEST_USER_ID, ['Manager'])
 
         setup.setLastVersionForProfile(POLICY_PROFILE, '1')
-        upgrades = setup.listUpgrades(POLICY_PROFILE)
-        # TODO: Enable again once we have upgrade steps
-        # self.failUnless(len(upgrades) > 0)
+        setup.setLastVersionForProfile(THEME_PROFILE, '1')
 
-        run_upgrade(setup)
+        upgrades = setup.listUpgrades(THEME_PROFILE)
+        self.failUnless(len(upgrades) > 0)
 
-        # And we have reached our current profile version
-        current = setup.getVersionForProfile(POLICY_PROFILE)
-        current = tuple(current.split('.'))
-        last = setup.getLastVersionForProfile(POLICY_PROFILE)
-        self.assertEquals(last, current)
+        all_finished = run_all_upgrades(setup)
+
+        # And we have reached our current profile versions
+        self.assertTrue(all_finished)
 
         # There are no more upgrade steps available
+        upgrades = setup.listUpgrades(THEME_PROFILE)
+        self.failUnless(len(upgrades) == 0)
+
         upgrades = setup.listUpgrades(POLICY_PROFILE)
         self.failUnless(len(upgrades) == 0)

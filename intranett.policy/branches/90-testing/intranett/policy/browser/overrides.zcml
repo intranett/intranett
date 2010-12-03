@@ -18,6 +18,15 @@
     permission="zope2.ManageUsers"
     />
 
+  <!-- We override the order of portal tabs -->
+  <browser:page
+      for="*"
+      name="portal_tabs_view"
+      class=".navigation.CatalogNavigationTabs"
+      permission="zope.Public"
+      allowed_attributes="topLevelTabs"
+      />
+
   <!-- Intranett creation forms -->
   <browser:page
       for="OFS.interfaces.IApplication"

@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.5'
+version = '1.0'
 
 setup(name='intranett.policy',
       version=version,
@@ -40,4 +40,7 @@ setup(name='intranett.policy',
           'z3c.unconfigure',
           'intranett.theme',
       ],
-      )
+      entry_points="""
+      [zopectl.command]
+      upgrade = intranett.policy.commands:upgrade
+      """)
