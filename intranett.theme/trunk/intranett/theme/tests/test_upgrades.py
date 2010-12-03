@@ -1,3 +1,5 @@
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tests.base import IntranettTestCase
@@ -10,13 +12,15 @@ class TestFullUpgrade(IntranettTestCase):
 
     def test_list_steps(self):
         # There should be no upgrade steps from the current version
-        setup = getToolByName(self.portal, "portal_setup")
+        portal = self.layer['portal']
+        setup = getToolByName(portal, "portal_setup")
         upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) == 0)
 
     def test_do_upgrades(self):
-        setup = getToolByName(self.portal, "portal_setup")
-        self.setRoles(['Manager'])
+        portal = self.layer['portal']
+        setup = getToolByName(portal, "portal_setup")
+        setRoles(portal, TEST_USER_ID, ['Manager'])
 
         setup.setLastVersionForProfile(THEME_PROFILE, '1')
         upgrades = setup.listUpgrades(THEME_PROFILE)
@@ -39,22 +43,24 @@ class TestUpgrades(IntranettTestCase):
 
     def test_one_to_two(self):
         from ..upgradehandlers import add_media_query_maincss
-        css = getToolByName(self.portal, 'portal_css')
+        portal = self.layer['portal']
+        css = getToolByName(portal, 'portal_css')
         main = css.getResource('main.css')
         main.setMedia("screen")
         self.assert_(main.getMedia())
         # Run the step
-        add_media_query_maincss(self.portal)
+        add_media_query_maincss(portal)
         main = css.getResource('main.css')
         self.assert_(not main.getMedia())
 
     def test_two_to_three(self):
         from ..upgradehandlers import add_selectivizr_remove_html5_js
-        js = getToolByName(self.portal, 'portal_javascripts')
+        portal = self.layer['portal']
+        js = getToolByName(portal, 'portal_javascripts')
         js.registerScript('html5.js')
         js.unregisterResource('selectivizr.js')
         # Run the step
-        add_selectivizr_remove_html5_js(self.portal)
+        add_selectivizr_remove_html5_js(portal)
         ids = js.getResourcesDict().keys()
         self.assert_('html5.js' not in ids)
         self.assert_('selectivizr.js' in ids)
