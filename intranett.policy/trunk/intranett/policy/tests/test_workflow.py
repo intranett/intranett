@@ -1,40 +1,14 @@
-import unittest2 as unittest
-
 from AccessControl import getSecurityManager
 from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import login
 from plone.app.testing import logout
-from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
-from intranett.policy.tests.layer import IntegrationTesting
-from intranett.policy.tests.layer import INTRANETT_LAYER
-
-
-class WorkflowTransitionsLayer(PloneSandboxLayer):
-
-    defaultBases = (INTRANETT_LAYER, )
-
-    def setUpPloneSite(self, portal):
-        addUser = aq_get(portal, 'acl_users').userFolderAddUser
-        addUser('member', 'secret', ['Member'], [])
-        addUser('manager', 'secret', ['Manager'], [])
-        addUser('editor', 'secret', ['Editor'], [])
-        addUser('reader', 'secret', ['Reader'], [])
-
-        folder = portal['test-folder']
-        folder.invokeFactory('Document', id='doc')
-
-
-WORKFLOW_TRANSITIONS_LAYER = WorkflowTransitionsLayer()
-WORKFLOW_TRANSITIONS_INTEGRATION = IntegrationTesting(
-    bases=(WORKFLOW_TRANSITIONS_LAYER, ),
-    name="WorkflowTransitionsLayer:Integration")
 
 
 def checkPerm(permission, obj):
@@ -124,9 +98,19 @@ class TestSitePermissions(IntranettTestCase):
         self.assertFalse(checkPerm('Allow sendto', portal))
 
 
-class TestWorkflowTransitions(unittest.TestCase):
+class TestWorkflowTransitions(IntranettTestCase):
 
-    layer = WORKFLOW_TRANSITIONS_INTEGRATION
+    def setUp(self):
+        super(TestWorkflowTransitions, self).setUp()
+        portal = self.layer['portal']
+        addUser = aq_get(portal, 'acl_users').userFolderAddUser
+        addUser('member', 'secret', ['Member'], [])
+        addUser('manager', 'secret', ['Manager'], [])
+        addUser('editor', 'secret', ['Editor'], [])
+        addUser('reader', 'secret', ['Reader'], [])
+
+        folder = portal['test-folder']
+        folder.invokeFactory('Document', id='doc')
 
     def test_owner_publish_and_hide(self):
         portal = self.layer['portal']
