@@ -48,21 +48,25 @@ class TestTheme(IntranettTestCase):
         self.assert_('modernizr.js' in ids)
         self.assert_('jquery.easing.js' in ids)
         self.assert_('jquery.jBreadCrumb.js' in ids)
+        self.assert_('selectivizr.js' in ids)
         self.assert_('main.js' in ids)
 
-    def test_html5_js(self):
+    def test_selectivizr_js(self):
         portal = self.layer['portal']
         js = getToolByName(portal, 'portal_javascripts')
         ids = js.getResourcesDict().keys()
-        self.assert_('html5.js' in ids)
-        h5 = js.getResource('html5.js')
-        self.assertEquals(h5.getConditionalcomment(), 'lt IE 9')
+        self.assert_('selectivizr.js' in ids)
+        selectivizr = js.getResource('selectivizr.js')
+        self.assertEquals(selectivizr.getConditionalcomment(), 'lt IE 9')
 
+        # We need to split the JS files before tiny_mce.js, as it doesn't work
+        # if merged together with the rest. We use selectivizr.js here, as it
+        # has a conditional comment, which causes the splitting for us
         positions = {}
         for pos, r in enumerate(js.getResources()):
             positions[r.getId()] = pos
 
-        self.assert_(positions['html5.js'] > positions['jquery.js'])
+        self.assert_(positions['selectivizr.js'] < positions['tiny_mce.js'])
 
     def test_media_for_maincss(self):
         portal = self.layer['portal']

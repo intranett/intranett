@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts">
- <javascript id="html5.js"
+ <javascript id="selectivizr.js" 
              conditionalcomment="lt IE 9"
-             insert-after="jquery.js" />
+             insert-before="tiny_mce.js" />
  <javascript id="modernizr.js" />
  <javascript id="jquery.easing.js" />
  <javascript id="jquery.jBreadCrumb.js" />

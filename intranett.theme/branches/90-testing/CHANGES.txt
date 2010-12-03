@@ -1,12 +1,88 @@
 Changelog
 =========
 
-0.4 - unreleased
+0.8 - unreleased
 ----------------
+
+- Upgraded Modernizr to 1.6. This fixes "testdb" issue from INTRANETT-41.
+  [denys]
+
+0.7 - 2010-11-27
+----------------
+
+- Remove some excessive legal text from the footer. Refs #79.
+  [hannosch]
+
+0.6 - 2010-11-24
+----------------
+
+- Move `selectivizr.js` before `tinymce.js` to keep the splitting we got via
+  `html5.js` before. Refs #126.
+  [hannosch]
+
+- Removed `html5.js` since all of what it does is included in `modernizr.js`.
+  [denys]
+
+- Added `selectivizr.js` to make IE understand CSS3 selectors. Refs #126.
+  [denys]
+
+- Involved SCSS (SASS) for writing styles. Don't edit styles in main.css! Use
+  `main.scss` instead and let SASS convert it to CSS.
+  http://sass-lang.com/tutorial.html for more info.
+  [denys]
+
+- Remove `tal` statements from comments in main_template and avoid an internal
+  reference to be present in the rendered HTML.
+  [hannosch]
+
+- Updated styles to work with template-user instead of template-author after
+  the tenmplate's renaming.
+  [denys]
+
+0.5 - 2010-11-16
+----------------
+
+- Reimplemented author page as a browser page and renamed it to `@@user`,
+  while using query strings instead of traversal for the name reference.
+  Refs #123.
+  [hannosch]
+
+- Remove home folder references from `author.cpt`. Refs #123.
+  [hannosch]
+
+- Updated livesearch.js to conform with JSLint code checker.
+  [denys]
+
+- Fixed background color for the calendar in Chrome. Closes #122.
+  [denys]
+
+0.4 - 2010-11-15
+----------------
+
+- Improved print stylesheet by adding more styles from html5boilerplate.com.
+  [denys]
+
+- ``chrome=1`` property added to `X-UA-Compatible` ``<meta>`` to support
+  `Google Chrome Frame`.
+  [denys]
+
+- Added default `no-js` class on ``<html>`` element to provide proper fallback
+  for `modernizr.js` library.
+  [denys]
+
+- Print stylesheet. References https://jira.jarn.com/browse/INTRANETT-51.
+  [denys]
+
+- Re-introduced workflow-state colors with `member.css`. Closes
+  https://jira.jarn.com/browse/INTRANETT-86.
+  [denys]
+
+- Copied over styles for calendar that were missing for PloneFormGen calendars.
+  Closes https://jira.jarn.com/browse/INTRANETT-106
+  [denys]
 
 - Removed hardcoded height for the thumbnails in employee-listing.
   [denys]
-
 
 0.3 - 2010-10-25
 ----------------
@@ -64,9 +140,9 @@ Changelog
 
 - Styling and js support for comments. References #72.
   [denys]
-  
+
 - Added basic upgrade tests.
-  [hannosch]  
+  [hannosch]
 
 - Fixed styling for footer of the site.
   [denys]

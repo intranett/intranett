@@ -60,7 +60,7 @@
                          tal:define="department employee/department|nothing">
                         <div class="cell width-5 position-0">
                             <a href="#"
-                               tal:attributes="href string:$portal_url/author/${employee/username};
+                               tal:attributes="href string:$portal_url/@@user?name=${employee/username};
                                                title employee/fullname">
                                 <img class="image-left" alt="" src=""
                                      tal:condition="employee/thumbnail_url"
@@ -75,7 +75,7 @@
                                 <span class="summary">
                                     <a class="contenttype-document state-private url"
                                        tal:content="employee/fullname | employee/username"
-                                       tal:attributes="href string:$portal_url/author/${employee/username};
+                                       tal:attributes="href string:$portal_url/@@user?name=${employee/username};
                                                        title employee/fullname">Test Page</a>
                                     <!-- <sup class="manageUser"
                                          tal:condition="view/can_manage"><a href="" title=""
