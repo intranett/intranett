@@ -83,7 +83,7 @@ class TestSiteSetup(IntranettTestCase):
         for id_, resource in css.getResourcesDict().items():
             if not resource.getEnabled():
                 continue
-            text = css.getInlineResource(id_, self.portal)
+            text = css.getInlineResource(id_, portal)
             for pattern in unsupported_patterns:
                 self.assert_(pattern not in text,
                     '%s found in %s' % (pattern, id_))
