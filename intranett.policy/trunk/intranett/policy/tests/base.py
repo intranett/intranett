@@ -1,29 +1,25 @@
-from Products.Five.testbrowser import Browser
-from Products.PloneTestCase import ptc
+import unittest2 as unittest
+
+from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import TEST_USER_PASSWORD
+from plone.testing.z2 import Browser
 
 from intranett.policy.tests import layer
 
-ptc.installProduct("PloneFormGen", quiet=1)
-ptc.setupPloneSite()
+
+def get_browser(app, loggedIn=True):
+    browser = Browser(app)
+    if loggedIn:
+        auth = 'Basic %s:%s' % (TEST_USER_NAME, TEST_USER_PASSWORD)
+        browser.addHeader('Authorization', auth)
+    return browser
 
 
-class IntranettTestCase(ptc.PloneTestCase):
-    """ base class for integration tests """
+class IntranettTestCase(unittest.TestCase):
 
-    layer = layer.intranett
+    layer = layer.INTRANETT_INTEGRATION
 
 
-class IntranettFunctionalTestCase(ptc.FunctionalTestCase):
-    """ base class for functional tests """
+class IntranettFunctionalTestCase(unittest.TestCase):
 
-    layer = layer.intranett
-
-    def getCredentials(self):
-        return '%s:%s' % (ptc.default_user, ptc.default_password)
-
-    def getBrowser(self, loggedIn=True):
-        browser = Browser()
-        if loggedIn:
-            auth = 'Basic %s' % self.getCredentials()
-            browser.addHeader('Authorization', auth)
-        return browser
+    layer = layer.INTRANETT_FUNCTIONAL

@@ -13,8 +13,8 @@ from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
 from Products.PlonePAS.tools.membership import default_portrait
 from Products.PlonePAS.utils import scale_image
 
-PORTRAIT_SIZE = (300, 300,)
-PORTRAIT_THUMBNAIL_SIZE = (100, 100,)
+PORTRAIT_SIZE = (300, 300, )
+PORTRAIT_THUMBNAIL_SIZE = (100, 100, )
 
 
 def safe_transform(context, text, mt='text/x-html-safe'):

@@ -1,10 +1,40 @@
+import unittest2 as unittest
+
 from AccessControl import getSecurityManager
 from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
+from plone.app.testing import login
+from plone.app.testing import logout
+from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import getUtilitiesFor
 
 from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.tests.layer import IntegrationTesting
+from intranett.policy.tests.layer import INTRANETT_LAYER
+
+
+class WorkflowTransitionsLayer(PloneSandboxLayer):
+
+    defaultBases = (INTRANETT_LAYER, )
+
+    def setUpPloneSite(self, portal):
+        addUser = aq_get(portal, 'acl_users').userFolderAddUser
+        addUser('member', 'secret', ['Member'], [])
+        addUser('manager', 'secret', ['Manager'], [])
+        addUser('editor', 'secret', ['Editor'], [])
+        addUser('reader', 'secret', ['Reader'], [])
+
+        folder = portal['test-folder']
+        folder.invokeFactory('Document', id='doc')
+
+
+WORKFLOW_TRANSITIONS_LAYER = WorkflowTransitionsLayer()
+WORKFLOW_TRANSITIONS_INTEGRATION = IntegrationTesting(
+    bases=(WORKFLOW_TRANSITIONS_LAYER, ),
+    name="WorkflowTransitionsLayer:Integration")
 
 
 def checkPerm(permission, obj):
@@ -14,11 +44,10 @@ def checkPerm(permission, obj):
 
 class TestWorkflowSetup(IntranettTestCase):
 
-    def afterSetUp(self):
-        self.wftool = getToolByName(self.portal, 'portal_workflow')
-
     def test_workflow_assignments(self):
-        ttool = getToolByName(self.portal, 'portal_types')
+        portal = self.layer['portal']
+        wftool = getToolByName(portal, 'portal_workflow')
+        ttool = getToolByName(portal, 'portal_types')
         no_workflow = set([
             'ATBooleanCriterion', 'ATCurrentAuthorCriterion',
             'ATDateCriteria', 'ATDateRangeCriterion', 'ATListCriterion',
@@ -35,7 +64,7 @@ class TestWorkflowSetup(IntranettTestCase):
             'FormTextField', 'FormThanksPage', 'Plone Site',
         ])
         for type_ in no_workflow:
-            wf = self.wftool.getChainForPortalType(type_)
+            wf = wftool.getChainForPortalType(type_)
             self.assertEquals(wf, (),
                               'Found workflow %s for type %s, expected '
                               '(), ' % (wf, type_))
@@ -46,13 +75,13 @@ class TestWorkflowSetup(IntranettTestCase):
             'Image': (),
         }
         for type_ in set(ttool.keys()) - no_workflow:
-            wf = self.wftool.getChainForPortalType(type_)
+            wf = wftool.getChainForPortalType(type_)
             expected = workflows.get(type_, ('intranett_workflow', ))
             self.assertEquals(wf, expected,
                               'Found workflow %s for type %s, expected '
                               '%s, ' % (wf, type_, expected))
 
-    def XXX_test_sharing_page_roles(self):
+    def test_sharing_page_roles(self):
         utilities = list(getUtilitiesFor(ISharingPageRole))
         names = [name for name, util in utilities]
         self.assertEquals(set(names),
@@ -62,60 +91,70 @@ class TestWorkflowSetup(IntranettTestCase):
 class TestWorkflowPermissions(IntranettTestCase):
 
     def test_no_anonymous_view_portal(self):
-        self.logout()
-        self.assertFalse(checkPerm('View', self.folder))
+        logout()
+        portal = self.layer['portal']
+        self.assertFalse(checkPerm('View', portal['test-folder']))
         # We don't want this, but we first need to make sure the login form
         # and standard error message views work without anon View permission
         # on the portal object
-        self.assertTrue(checkPerm('View', self.portal))
+        self.assertTrue(checkPerm('View', portal))
 
     def test_no_anonymous_view_new_page(self):
-        self.loginAsPortalOwner()
-        self.portal.invokeFactory('Document', 'doc1')
-        doc1 = self.portal.doc1
-        self.logout()
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        portal.invokeFactory('Document', 'doc1')
+        doc1 = portal.doc1
+        logout()
         self.assertFalse(checkPerm('View', doc1))
 
     def test_no_anonymous_view_new_folder(self):
-        self.loginAsPortalOwner()
-        self.portal.invokeFactory('Folder', 'folder1')
-        folder1 = self.portal.folder1
-        self.logout()
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        portal.invokeFactory('Folder', 'folder1')
+        folder1 = portal.folder1
+        logout()
         self.assertFalse(checkPerm('View', folder1))
 
 
-class TestWorkflowTransitions(IntranettTestCase):
+class TestSitePermissions(IntranettTestCase):
 
-    def afterSetUp(self):
-        self.wftool = getToolByName(self.portal, 'portal_workflow')
-        _doAddUser = aq_get(self.portal, 'acl_users')._doAddUser
-        _doAddUser('member', 'secret', ['Member'], [])
-        _doAddUser('manager', 'secret', ['Manager'], [])
-        _doAddUser('editor', 'secret', ['Editor'], [])
-        _doAddUser('reader', 'secret', ['Reader'], [])
+    def test_disallow_sendto(self):
+        logout()
+        portal = self.layer['portal']
+        self.assertFalse(checkPerm('Allow sendto', portal))
 
-        self.folder.invokeFactory('Document', id='doc')
-        self.doc = self.folder.doc
+
+class TestWorkflowTransitions(unittest.TestCase):
+
+    layer = WORKFLOW_TRANSITIONS_INTEGRATION
 
     def test_owner_publish_and_hide(self):
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'private')
-        self.wftool.doActionFor(self.doc, 'publish')
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        wftool.doActionFor(doc, 'publish')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'published')
-        self.wftool.doActionFor(self.doc, 'hide')
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        wftool.doActionFor(doc, 'hide')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'private')
 
     def _check_edit(self, user):
         if user is None:
-            self.logout()
+            logout()
         else:
-            self.login(user)
-        return checkPerm('Modify portal content', self.doc)
+            login(self.layer['portal'], user)
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        return checkPerm('Modify portal content', doc)
 
     def test_edit_permission_private(self):
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'private')
 
         self.assertFalse(self._check_edit('member'))
@@ -125,8 +164,11 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertFalse(self._check_edit(None))
 
     def test_edit_permission_published(self):
-        self.wftool.doActionFor(self.doc, 'publish')
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        wftool.doActionFor(doc, 'publish')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'published')
 
         self.assertFalse(self._check_edit('member'))
@@ -136,17 +178,21 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertFalse(self._check_edit(None))
 
     def _check_view(self, user):
+        portal = self.layer['portal']
         if user is None:
-            self.logout()
+            logout()
         else:
-            self.login(user)
-        view = checkPerm('View', self.doc)
-        access = checkPerm('Access contents information', self.doc)
+            login(portal, user)
+        doc = portal['test-folder'].doc
+        view = checkPerm('View', doc)
+        access = checkPerm('Access contents information', doc)
         return view and access
 
     def test_view_permission_private(self):
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
-                         'private')
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'), 'private')
 
         self.assertFalse(self._check_view('member'))
         self.assertTrue(self._check_view('manager'))
@@ -155,8 +201,11 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertFalse(self._check_view(None))
 
     def test_view_permission_published(self):
-        self.wftool.doActionFor(self.doc, 'publish')
-        self.assertEqual(self.wftool.getInfoFor(self.doc, 'review_state'),
+        portal = self.layer['portal']
+        doc = portal['test-folder'].doc
+        wftool = getToolByName(portal, 'portal_workflow')
+        wftool.doActionFor(doc, 'publish')
+        self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'published')
 
         self.assertTrue(self._check_view('member'))
@@ -164,20 +213,3 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertTrue(self._check_view('editor'))
         self.assertTrue(self._check_view('reader'))
         self.assertFalse(self._check_view(None))
-
-
-class TestSitePermissions(IntranettTestCase):
-
-    def test_disallow_sendto(self):
-        self.logout()
-        self.assertFalse(checkPerm('Allow sendto', self.portal))
-
-
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestWorkflowSetup))
-    suite.addTest(makeSuite(TestWorkflowPermissions))
-    suite.addTest(makeSuite(TestWorkflowTransitions))
-    suite.addTest(makeSuite(TestSitePermissions))
-    return suite

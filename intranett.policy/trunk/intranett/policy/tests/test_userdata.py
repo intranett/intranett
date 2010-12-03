@@ -1,10 +1,18 @@
 # -*- coding:utf-8 -*-
+import os
+import transaction
+
 from Acquisition import aq_get
-from zope.component import queryUtility
+from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
+from zope.component import queryUtility
+
+from .utils import make_file_upload
+from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
-from Products.PloneTestCase.ptc import default_user
+
+TEST_IMAGES = os.path.join(os.path.dirname(__file__), 'images')
 
 
 class TestMemberTools(IntranettTestCase):
@@ -12,13 +20,15 @@ class TestMemberTools(IntranettTestCase):
     def test_membership_tool_registered(self):
         # Check we can get the tool by name
         from ..tools import MembershipTool
-        tool = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
         self.failUnless(isinstance(tool, MembershipTool))
 
     def test_memberdata_tool_registered(self):
         # Check we can get the tool by name
         from ..tools import MemberDataTool
-        tool = getToolByName(self.portal, 'portal_memberdata')
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_memberdata')
         self.failUnless(isinstance(tool, MemberDataTool))
         from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
         self.failUnless(isinstance(tool.thumbnails, BTreeFolder2))
@@ -48,7 +58,8 @@ class TestUserdataSchema(IntranettTestCase):
 
     def test_memberinfo(self):
         from DateTime import DateTime
-        mt = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
         member.setMemberProperties({'phone': '12345',
                                     'mobile': '67890',
@@ -70,7 +81,8 @@ class TestUserdataSchema(IntranettTestCase):
         self.failUnless(info is None)
 
     def test_safe_transform_description(self):
-        mt = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
         member.setMemberProperties({'description': """
             <script> document.load(something) </script>
@@ -83,22 +95,25 @@ class TestUserdataSchema(IntranettTestCase):
     def test_personal_information_widget(self):
         from zope.component import getMultiAdapter
         from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
-        view = getMultiAdapter((self.portal, self.app.REQUEST),
-                               name='personal-information')
+        portal = self.layer['portal']
+        request = self.layer['request']
+        view = getMultiAdapter((portal, request), name='personal-information')
         self.assertEquals(view.form_fields['description'].custom_widget,
                           WYSIWYGWidget)
 
     def test_user_information_widget(self):
         from zope.component import getMultiAdapter
         from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
-        view = getMultiAdapter((self.portal, self.app.REQUEST),
-                             name='user-information')
+        portal = self.layer['portal']
+        request = self.layer['request']
+        view = getMultiAdapter((portal, request), name='user-information')
         self.assertEquals(view.form_fields['description'].custom_widget,
                         WYSIWYGWidget)
 
     def test_userpanel(self):
         from ..userdataschema import ICustomUserDataSchema
-        panel = ICustomUserDataSchema(self.portal)
+        portal = self.layer['portal']
+        panel = ICustomUserDataSchema(portal)
 
         self.assertEquals(panel.fullname, u'')
         panel.fullname = u'Geir Bœkholly'
@@ -127,20 +142,15 @@ class TestUserdataSchema(IntranettTestCase):
 
 class TestUserPortraits(IntranettTestCase):
 
-    def afterSetUp(self):
-        import os
-        from .utils import makeFileUpload
-        image_file = os.path.join(os.path.dirname(__file__), 'images', 'test.jpg')
-        self.image_jpg = makeFileUpload(image_file, 'image/jpeg', 'myportrait.jpg')
-        image_file = os.path.join(os.path.dirname(__file__), 'images', 'test.gif')
-        self.image_gif = makeFileUpload(image_file, 'image/gif', 'myportrait.gif')
-
     def test_set_portraits(self):
-        mt = getToolByName(self.portal, 'portal_membership')
-        mdt = getToolByName(self.portal, 'portal_memberdata')
-        mt.changeMemberPortrait(self.image_jpg)
-        self.failUnless(default_user in mdt.portraits)
-        self.failUnless(default_user in mdt.thumbnails)
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mdt = getToolByName(portal, 'portal_memberdata')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        mt.changeMemberPortrait(image_jpg)
+        self.failUnless(TEST_USER_ID in mdt.portraits)
+        self.failUnless(TEST_USER_ID in mdt.thumbnails)
 
         portrait_thumb = mt.getPersonalPortrait()
         from ..tools import PORTRAIT_SIZE, PORTRAIT_THUMBNAIL_SIZE
@@ -151,55 +161,69 @@ class TestUserPortraits(IntranettTestCase):
         self.assertEquals(portrait.height, PORTRAIT_SIZE[1])
 
     def test_change_portraits(self):
-        mt = getToolByName(self.portal, 'portal_membership')
-        mt.changeMemberPortrait(self.image_jpg)
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        mt.changeMemberPortrait(image_jpg)
         portrait = mt.getPersonalPortrait(thumbnail=False)
         old_portrait_size = portrait.get_size()
         portrait = mt.getPersonalPortrait(thumbnail=True)
         old_thumbnail_size = portrait.get_size()
 
         # Now change the portraits
-        mt.changeMemberPortrait(self.image_gif)
+        path = os.path.join(TEST_IMAGES, 'test.gif')
+        image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
+        mt.changeMemberPortrait(image_gif)
         portrait = mt.getPersonalPortrait(thumbnail=False)
         self.failIfEqual(old_portrait_size, portrait.get_size())
         portrait = mt.getPersonalPortrait(thumbnail=True)
         self.failIfEqual(old_thumbnail_size, portrait.get_size())
 
     def test_delete_portraits(self):
-        mt = getToolByName(self.portal, 'portal_membership')
-        mdt = getToolByName(self.portal, 'portal_memberdata')
-        mt.changeMemberPortrait(self.image_jpg)
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mdt = getToolByName(portal, 'portal_memberdata')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        mt.changeMemberPortrait(image_jpg)
         # Now delete the portraits
         mt.deletePersonalPortrait()
-        self.failIf(default_user in mdt.portraits)
-        self.failIf(default_user in mdt.thumbnails)
+        self.failIf(TEST_USER_ID in mdt.portraits)
+        self.failIf(TEST_USER_ID in mdt.thumbnails)
 
     def test_funky_ids(self):
         # Well, let's admit we really do this for the coverage.
         # There is this retarded check in changeMemberPortrait
         # that we copied and have to cover.
-        mt = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         mt.getPersonalPortrait(id='')
-        mt.changeMemberPortrait(self.image_gif, id='')
+        path = os.path.join(TEST_IMAGES, 'test.gif')
+        image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
+        mt.changeMemberPortrait(image_gif, id='')
 
 
-class TestUserSearch(IntranettFunctionalTestCase):
+class TestUserSearch(IntranettTestCase):
 
     def test_type(self):
-        mt = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
         self.assertEqual(member.meta_type, 'MemberData')
         self.assertEqual(member.portal_type, 'MemberData')
         self.assertEqual(member.Type(), 'MemberData')
 
     def test_title(self):
-        mt = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
         member.setMemberProperties({'fullname': 'John Døe'})
         self.assertEqual(member.Title(), 'John Døe')
 
     def test_description(self):
-        mt = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
         member.setMemberProperties({'position': '', 'department': ''})
         self.assertEqual(member.Description(), '')
@@ -211,7 +235,8 @@ class TestUserSearch(IntranettFunctionalTestCase):
         self.assertEqual(member.Description(), 'Tørst, Øl')
 
     def test_update_member_and_search(self):
-        mt = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
         member.setMemberProperties({'fullname': 'John Døe',
                                     'phone': '12345',
@@ -221,7 +246,7 @@ class TestUserSearch(IntranettFunctionalTestCase):
                                     'location': 'Tønsberg',
                                     'email': 'info@jarn.com',
                                     'description': '<p>Kjære Python!</p>'})
-        catalog = self.portal.portal_catalog
+        catalog = getToolByName(portal, 'portal_catalog')
         results = catalog.searchResults(Title='Døe')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
@@ -258,15 +283,20 @@ class TestUserSearch(IntranettFunctionalTestCase):
         self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
 
     def test_safe_transform_searchable_text(self):
-        mt = getToolByName(self.portal, 'portal_membership')
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
         member.setMemberProperties({'description': '<p>Kjære Python!</p>'})
         self.assertEquals(member.SearchableText().strip(), 'Kjære Python!')
 
+
+class TestFunctionalUserSearch(IntranettFunctionalTestCase):
+
     def test_ttw_editing(self):
-        browser = self.getBrowser()
+        browser = get_browser(self.layer['app'])
         browser.handleErrors = False
-        browser.open(self.portal.absolute_url() + '/@@personal-information')
+        portal = self.layer['portal']
+        browser.open(portal.absolute_url() + '/@@personal-information')
         browser.getControl(name='form.fullname').value = 'John Døe'
         browser.getControl(name='form.email').value = 'test@example.com'
         browser.getControl(name='form.description').value = '<p>Kjære Python!</p>'
@@ -277,20 +307,25 @@ class TestUserSearch(IntranettFunctionalTestCase):
         self.assert_(browser.url.endswith('@@personal-information'))
 
     def test_ttw_search(self):
-        mt = getToolByName(self.portal, 'portal_membership')
+        browser = get_browser(self.layer['app'])
+        browser.handleErrors = False
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
-        member.setMemberProperties({'fullname': 'John Døe',
+        member.setMemberProperties({'fullname': 'Bob Døe',
                                     'phone': '12345',
                                     'mobile': '67890',
                                     'position': 'Øngønør',
                                     'department': 'Tøst',
                                     'location': 'Tønsberg',
                                     'email': 'info@jarn.com'})
-        browser = self.getBrowser()
-        browser.open(self.portal.absolute_url())
+        transaction.commit()
+        browser.open(portal.absolute_url())
         browser.getControl(name='SearchableText').value = 'Døe'
         browser.getForm(name='searchform').submit()
-        self.failUnless('John Døe' in browser.contents)
+        self.failUnless('Bob Døe' in browser.contents)
+        self.failUnless('Øngønør' in browser.contents)
+        self.failUnless('Tøst' in browser.contents)
         self.failUnless('Øngønør, Tøst' in browser.contents)
 
 
@@ -300,8 +335,9 @@ class TestDashboard(IntranettTestCase):
         from plone.portlets.constants import USER_CATEGORY
         from plone.portlets.interfaces import IPortletManager
 
-        _doAddUser = aq_get(self.portal, 'acl_users')._doAddUser
-        _doAddUser('member', 'secret', ['Member'], [])
+        portal = self.layer['portal']
+        addUser = aq_get(portal, 'acl_users').userFolderAddUser
+        addUser('member', 'secret', ['Member'], [])
 
         prefix = 'plone.dashboard'
         for i in range(1, 5):
@@ -311,14 +347,3 @@ class TestDashboard(IntranettTestCase):
             manager = category.get('member', {})
             self.assert_(manager == {}, 'Found unexpected portlets in '
                          'dashboard column %s: %s' % (i, manager.keys()))
-
-
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestMemberTools))
-    suite.addTest(makeSuite(TestUserdataSchema))
-    suite.addTest(makeSuite(TestUserPortraits))
-    suite.addTest(makeSuite(TestUserSearch))
-    suite.addTest(makeSuite(TestDashboard))
-    return suite

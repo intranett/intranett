@@ -1,3 +1,6 @@
+from Acquisition import aq_parent
+from plone.app.testing import login
+from plone.app.testing import SITE_OWNER_NAME
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.upgrades.tests.base import FunctionalUpgradeTestCase
@@ -10,12 +13,12 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
         self.importFile(__file__, 'one.zexp')
         oldsite, result = self.migrate()
 
+        login(aq_parent(oldsite), SITE_OWNER_NAME)
         diff = self.export()
         remaining = self.parse_diff(diff)
 
-        # TODO: Enable again, once we have a released version
-        # self.assertEquals(set(remaining.keys()), set([]),
-        #                   "Unexpected diffs in:\n %s" % remaining.items())
+        self.assertEquals(set(remaining.keys()), set([]),
+                          "Unexpected diffs in:\n %s" % remaining.items())
 
     def test_list_steps_for_addons(self):
         self.importFile(__file__, 'one.zexp')
