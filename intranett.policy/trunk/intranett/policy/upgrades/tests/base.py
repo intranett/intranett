@@ -83,6 +83,7 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
         # There's a couple files where we get diffs for ordering changes,
         # but the order is not important
         expected_diff = set([
+            'browserlayer.xml',
             'portlets.xml',
             'registry.xml',
             'structure/acl_users/portal_role_manager.xml',
