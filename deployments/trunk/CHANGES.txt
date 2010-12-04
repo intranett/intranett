@@ -8,6 +8,8 @@ Changelog
   [hannosch]
 
 - Updated distributions:
+  * intranett.policy = 1.0
+  * intranett.theme = 0.8
   * plone.app.testing = 1.0a3-jarn2
   * plone.testing = 1.0a3-jarn2
 
