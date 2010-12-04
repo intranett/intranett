@@ -4,6 +4,9 @@ Changelog
 0.9 - unreleased
 ----------------
 
+- Added basic `mr.awsome` config, provided stub fabfile and integrated SSH
+  server and user management.
+  [hannosch]
 
 0.8 - 2010-12-04
 ----------------
