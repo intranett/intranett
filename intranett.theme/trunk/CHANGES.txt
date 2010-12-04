@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.8 - unreleased
+0.8 - 2010-12-04
 ----------------
 
 - Changed tests to use plone.app.testing.
