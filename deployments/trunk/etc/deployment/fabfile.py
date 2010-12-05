@@ -8,7 +8,6 @@ from fabric.api import local
 from fabric.api import run
 from fabric.api import settings
 from fabric.api import show
-from fabric.api import sudo
 import pkg_resources
 
 env.shell = "/bin/bash -c"
@@ -34,14 +33,15 @@ def svn_info():
 
 def dump_db():
     with cd(VENV):
-        run('rm var/snapshotbackups/*')
+        with settings(hide('warnings'), warn_only=True):
+            run('rm var/snapshotbackups/*')
         run('bin/snapshotbackup')
 
 
 def download_last_dump():
     with settings(hide('warnings', 'running', 'stdout', 'stderr'),
                   warn_only=True):
-        existing = sudo('ls -rt1 %s/var/snapshotbackups/*' % VENV, user='jarn')
+        existing = run('ls -rt1 %s/var/snapshotbackups/*' % VENV)
     for e in existing.split('\n'):
         get(e, os.path.join(os.getcwd(), 'var', 'snapshotbackups'))
 
