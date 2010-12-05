@@ -101,7 +101,7 @@ def init_server():
         run('rm %s/crontab.tmp' % home)
 
     SVN_AUTH = '--username=intranett --password=mfrOW0LW2ipAnW'
-    SVN_FLAGS = '--trust-server-cert --non-interactive'
+    SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
     SVN_CONFIG = os.path.join(home, '.subversion', 'config')
     SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
 
