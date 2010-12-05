@@ -39,23 +39,26 @@ def download_last_dump():
 
 
 def init_server():
+    # XXX
     home = '/home/hannosch'
     # set up environment variables
     with settings(hide('stdout', 'stderr')):
         profile = run('cat %s/.bash_profile' % home)
     profile_lines = profile.split('\n')
+    subdomain = env.host_string
+    domain_line = 'export INTRANETT_DOMAIN=%s.intranett.no' % subdomain
+    with settings(hide('stdout', 'stderr')):
+        front_ip = run('/sbin/ifconfig ethfe | head -n 2 | tail -n 1')
+    front_ip = front_ip.lstrip('inet addr:').split()[0]
+    front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
+
     exports = [l for l in profile_lines if l.startswith('export INTRANETT_')]
     if len(exports) < 2:
         start, end = profile_lines[:2], profile_lines[2:]
-        subdomain = env.host_string
-        domain_line = 'export INTRANETT_DOMAIN=%s.intranett.no\n' % subdomain
-        with settings(hide('stdout', 'stderr')):
-            front_ip = run('/sbin/ifconfig ethfe | head -n 2 | tail -n 1')
-        front_ip = front_ip.lstrip('inet addr:').split()[0]
-        front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
-
-        new_file = start + [front_line] + [domain_line] + end
+        new_file = start + [front_line] + [domain_line + '\n'] + end
         with settings(hide('running', 'stdout', 'stderr')):
+            # run(domain_line)
+            # run(front_line)
             run('echo -e "{content}" > {home}/.bash_profile'.format(
                 home=home, content='\n'.join(new_file)))
 
@@ -100,7 +103,7 @@ def init_server():
     with settings(hide('stdout', 'stderr')):
         run('rm %s/crontab.tmp' % home)
 
-    SVN_AUTH = '--username=intranett --password=mfrOW0LW2ipAnW'
+    SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
     SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
     SVN_CONFIG = os.path.join(home, '.subversion', 'config')
     SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
@@ -162,4 +165,6 @@ def init_server():
     # buildout
     with cd(venv):
         run('bin/python2.6 bootstrap.py -d')
-        run('bin/buildout')
+        with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
+            run('mkdir downloads')
+        run('{x1}; {x2}; bin/buildout'.format(x1=front_line, x2=domain_line))
