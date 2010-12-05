@@ -12,7 +12,7 @@ from fabric.api import sudo
 from pkg_resources import parse_version
 
 env.shell = "/bin/bash -c"
-home = '/srv/jarn'
+HOME = '/srv/jarn'
 
 DISTRIBUTE_VERSION = '0.6.14'
 PIL_VERSION = '1.1.7-jarn1'
@@ -20,12 +20,12 @@ PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 
 
 def svn_info():
-    with cd(home):
+    with cd(HOME):
         sudo('pwd && svn info', user='jarn')
 
 
 def dump_db():
-    with cd(home):
+    with cd(HOME):
         sudo('rm var/snapshotbackups/*', user='jarn')
         sudo('bin/snapshotbackup', user='jarn')
 
@@ -33,17 +33,17 @@ def dump_db():
 def download_last_dump():
     with settings(hide('warnings', 'running', 'stdout', 'stderr'),
                   warn_only=True):
-        existing = sudo('ls -rt1 %s/var/snapshotbackups/*' % home, user='jarn')
+        existing = sudo('ls -rt1 %s/var/snapshotbackups/*' % HOME, user='jarn')
     for e in existing.split('\n'):
         get(e, os.path.join(os.getcwd(), 'var', 'snapshotbackups'))
 
 
 def init_server():
     # XXX
-    home = '/home/hannosch'
+    HOME = '/home/hannosch'
     # set up environment variables
     with settings(hide('stdout', 'stderr')):
-        profile = run('cat %s/.bash_profile' % home)
+        profile = run('cat %s/.bash_profile' % HOME)
     profile_lines = profile.split('\n')
     subdomain = env.host_string
     domain_line = 'export INTRANETT_DOMAIN=%s.intranett.no' % subdomain
@@ -60,13 +60,13 @@ def init_server():
             # run(domain_line)
             # run(front_line)
             run('echo -e "{content}" > {home}/.bash_profile'.format(
-                home=home, content='\n'.join(new_file)))
+                home=HOME, content='\n'.join(new_file)))
 
     # set cron mailto
     with settings(hide('stdout'), warn_only=True):
         # if no crontab exists, this crontab -l has an exit code of 1
-        run('crontab -l > %s/crontab.tmp' % home)
-        crontab = run('cat %s/crontab.tmp' % home)
+        run('crontab -l > %s/crontab.tmp' % HOME)
+        crontab = run('cat %s/crontab.tmp' % HOME)
     cron_lines = crontab.split('\n')
     mailto = [l for l in cron_lines if l.startswith('MAILTO')]
     # XXX hosting@jarn.com
@@ -98,14 +98,14 @@ def init_server():
             new_cron_lines.append('MAILTO=%s' % CRON_MAILTO)
         with settings(hide('running', 'stdout', 'stderr')):
             run('echo -e "{content}" > {home}/crontab.tmp'.format(
-                home=home, content='\n'.join(new_cron_lines)))
-            run('crontab %s/crontab.tmp' % home)
+                home=HOME, content='\n'.join(new_cron_lines)))
+            run('crontab %s/crontab.tmp' % HOME)
     with settings(hide('stdout', 'stderr')):
-        run('rm %s/crontab.tmp' % home)
+        run('rm %s/crontab.tmp' % HOME)
 
     SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
     SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
-    SVN_CONFIG = os.path.join(home, '.subversion', 'config')
+    SVN_CONFIG = os.path.join(HOME, '.subversion', 'config')
     SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
 
     # disable storing svn passwords
@@ -138,9 +138,9 @@ def init_server():
 
     # bootstrap virtualenv
     with settings(hide('stdout', 'stderr')):
-        run('cd %s && virtualenv-2.6 --no-site-packages --distribute venv' % home)
+        run('cd %s && virtualenv-2.6 --no-site-packages --distribute venv' % HOME)
         run('rm -rf /tmp/distribute*')
-        venv = os.path.join(home, 'venv')
+        venv = os.path.join(HOME, 'venv')
         with cd(venv):
             run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
             run('rm %s/bin/activate' % venv)
