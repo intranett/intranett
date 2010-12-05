@@ -9,7 +9,7 @@ from fabric.api import run
 from fabric.api import settings
 from fabric.api import show
 from fabric.api import sudo
-from pkg_resources import parse_version
+import pkg_resources
 
 env.shell = "/bin/bash -c"
 
@@ -131,7 +131,7 @@ def init_server():
         tags = local('svn {flags} ls {auth} {svn}'.format(
             auth=SVN_AUTH, flags=SVN_FLAGS, svn=SVN_PREFIX))
     tags = [t.rstrip('/') for t in tags.split('\n')]
-    tags = [(parse_version(t), t) for t in tags]
+    tags = [(pkg_resources.parse_version(t), t) for t in tags]
     tags.sort()
     latest_tag = tags[-1][1]
 
