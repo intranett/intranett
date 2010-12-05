@@ -18,6 +18,7 @@ CRON_MAILTO = 'hanno@jarn.com'
 DISTRIBUTE_VERSION = '0.6.14'
 # XXX /srv/jarn
 HOME = '/home/hannosch'
+VENV = '/home/hannosch/venv'
 PIL_VERSION = '1.1.7-jarn1'
 PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
@@ -27,12 +28,12 @@ SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
 
 
 def svn_info():
-    with cd(HOME):
+    with cd(VENV):
         sudo('pwd && svn info', user='jarn')
 
 
 def dump_db():
-    with cd(HOME):
+    with cd(VENV):
         sudo('rm var/snapshotbackups/*', user='jarn')
         sudo('bin/snapshotbackup', user='jarn')
 
@@ -40,7 +41,7 @@ def dump_db():
 def download_last_dump():
     with settings(hide('warnings', 'running', 'stdout', 'stderr'),
                   warn_only=True):
-        existing = sudo('ls -rt1 %s/var/snapshotbackups/*' % HOME, user='jarn')
+        existing = sudo('ls -rt1 %s/var/snapshotbackups/*' % VENV, user='jarn')
     for e in existing.split('\n'):
         get(e, os.path.join(os.getcwd(), 'var', 'snapshotbackups'))
 
@@ -136,36 +137,36 @@ def init_server():
 
     # bootstrap virtualenv
     with settings(hide('stdout', 'stderr')):
-        run('cd %s && virtualenv-2.6 --no-site-packages --distribute venv' % HOME)
+        with cd(HOME):
+            run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
         run('rm -rf /tmp/distribute*')
-        venv = os.path.join(HOME, 'venv')
-        with cd(venv):
+        with cd(VENV):
             run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
-            run('rm %s/bin/activate' % venv)
-            run('rm %s/bin/activate_this.py' % venv)
-            run('rm %s/bin/pip' % venv)
+            run('rm bin/activate')
+            run('rm bin/activate_this.py')
+            run('rm bin/pip')
             # Only install PIL if it isn't there
             with settings(hide('warnings'), show('stdout'), warn_only=True):
                 out = run('bin/python -c "from PIL import Image; print(Image.__version__)"')
             if PIL_VERSION not in out:
                 run('bin/easy_install-2.6 %s' % PIL_LOCATION)
-                run('rm %s/bin/pil*.py' % venv)
+                run('rm bin/pil*.py')
 
     # is this already a checkout?
     with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        out = run('svn info %s' % venv)
+        out = run('svn info %s' % VENV)
     command = 'switch' if 'Revision' in out else 'co'
     with settings(hide('stdout', 'stderr', 'running')):
         run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
             flags=SVN_FLAGS, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
-            tag=latest_tag, loc=venv))
+            tag=latest_tag, loc=VENV))
 
     # buildout
-    with cd(venv):
+    with cd(VENV):
         run('bin/python2.6 bootstrap.py -d')
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
-        run('{x1}; {x2}; bin/buildout'.format(x1=front_line, x2=domain_line))
+        run('{x1}; {x2}; bin/buildout -N'.format(x1=front_line, x2=domain_line))
 
     # XXX don't try to start anything for the hannosch user
     run('crontab -r')
