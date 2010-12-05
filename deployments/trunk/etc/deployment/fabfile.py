@@ -68,7 +68,7 @@ def init_server():
                 home=HOME, content='\n'.join(new_file)))
 
     # set cron mailto
-    with settings(hide('stdout'), warn_only=True):
+    with settings(hide('stdout', 'warnings'), warn_only=True):
         # if no crontab exists, this crontab -l has an exit code of 1
         run('crontab -l > %s/crontab.tmp' % HOME)
         crontab = run('cat %s/crontab.tmp' % HOME)
@@ -166,3 +166,6 @@ def init_server():
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
         run('{x1}; {x2}; bin/buildout'.format(x1=front_line, x2=domain_line))
+
+    # XXX don't try to start anything for the hannosch user
+    run('crontab -r')
