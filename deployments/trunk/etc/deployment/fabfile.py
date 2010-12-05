@@ -1,18 +1,34 @@
 import os
 
-from fabric.api import cd, env, run, sudo, settings, hide, get
+from fabric.api import cd
+from fabric.api import env
+from fabric.api import get
+from fabric.api import hide
+from fabric.api import local
+from fabric.api import run
+from fabric.api import settings
+from fabric.api import show
+from fabric.api import sudo
+from pkg_resources import parse_version
 
 env.shell = "/bin/bash -c"
 home = '/srv/jarn'
+
+DISTRIBUTE_VERSION = '0.6.14'
+PIL_VERSION = '1.1.7-jarn1'
+PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
+
 
 def svn_info():
     with cd(home):
         sudo('pwd && svn info', user='jarn')
 
+
 def dump_db():
     with cd(home):
         sudo('rm var/snapshotbackups/*', user='jarn')
         sudo('bin/snapshotbackup', user='jarn')
+
 
 def download_last_dump():
     with settings(hide('warnings', 'running', 'stdout', 'stderr'),
@@ -20,6 +36,7 @@ def download_last_dump():
         existing = sudo('ls -rt1 %s/var/snapshotbackups/*' % home, user='jarn')
     for e in existing.split('\n'):
         get(e, os.path.join(os.getcwd(), 'var', 'snapshotbackups'))
+
 
 def init_server():
     home = '/home/hannosch'
@@ -38,8 +55,9 @@ def init_server():
         front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
 
         new_file = start + [front_line] + [domain_line] + end
-        run('echo -e "{content}" > {home}/.bash_profile'.format(
-            home=home, content='\n'.join(new_file)))
+        with settings(hide('running', 'stdout', 'stderr')):
+            run('echo -e "{content}" > {home}/.bash_profile'.format(
+                home=home, content='\n'.join(new_file)))
 
     # set cron mailto
     with settings(hide('stdout'), warn_only=True):
@@ -75,9 +93,73 @@ def init_server():
                 new_cron_lines.append(line)
         if not added:
             new_cron_lines.append('MAILTO=%s' % CRON_MAILTO)
-        with settings(hide('stdout', 'stderr')):
+        with settings(hide('running', 'stdout', 'stderr')):
             run('echo -e "{content}" > {home}/crontab.tmp'.format(
                 home=home, content='\n'.join(new_cron_lines)))
             run('crontab %s/crontab.tmp' % home)
     with settings(hide('stdout', 'stderr')):
         run('rm %s/crontab.tmp' % home)
+
+    SVN_AUTH = '--username=intranett --password=mfrOW0LW2ipAnW'
+    SVN_FLAGS = '--trust-server-cert --non-interactive'
+    SVN_CONFIG = os.path.join(home, '.subversion', 'config')
+    SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
+
+    # disable storing svn passwords
+    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
+        # run svn info once, so we create ~/.subversion/config
+        run('svn info')
+        output = run('cat %s' % SVN_CONFIG)
+    lines = output.split('\n')
+    new_lines = []
+    changed = False
+    for line in lines:
+        if 'store-passwords = no' in line:
+            changed = True
+            new_lines.append('store-passwords = no')
+        else:
+            new_lines.append(line)
+    if changed:
+        with settings(hide('running', 'stdout', 'stderr')):
+            run('echo -e "{content}" > {config}'.format(
+                content='\n'.join(new_lines), config=SVN_CONFIG))
+
+    # calculate latest tag
+    with settings(hide('running')):
+        tags = local('svn {flags} ls {auth} {svn}'.format(
+            auth=SVN_AUTH, flags=SVN_FLAGS, svn=SVN_PREFIX))
+    tags = [t.rstrip('/') for t in tags.split('\n')]
+    tags = [(parse_version(t), t) for t in tags]
+    tags.sort()
+    latest_tag = tags[-1][1]
+
+    # bootstrap virtualenv
+    with settings(hide('stdout', 'stderr')):
+        run('cd %s && virtualenv-2.6 --no-site-packages --distribute venv' % home)
+        run('rm -rf /tmp/distribute*')
+        venv = os.path.join(home, 'venv')
+        with cd(venv):
+            run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
+            run('rm %s/bin/activate' % venv)
+            run('rm %s/bin/activate_this.py' % venv)
+            run('rm %s/bin/pip' % venv)
+            # Only install PIL if it isn't there
+            with settings(hide('warnings'), show('stdout'), warn_only=True):
+                out = run('bin/python -c "from PIL import Image; print(Image.__version__)"')
+            if PIL_VERSION not in out:
+                run('bin/easy_install-2.6 %s' % PIL_LOCATION)
+                run('rm %s/bin/pil*.py' % venv)
+
+    # is this already a checkout?
+    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
+        out = run('svn info %s' % venv)
+    command = 'switch' if 'Revision' in out else 'co'
+    with settings(hide('stdout', 'stderr', 'running')):
+        run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
+            flags=SVN_FLAGS, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
+            tag=latest_tag, loc=venv))
+
+    # buildout
+    with cd(venv):
+        run('bin/python2.6 bootstrap.py -d')
+        run('bin/buildout')
