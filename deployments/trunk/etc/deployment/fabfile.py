@@ -47,28 +47,83 @@ def download_last_dump():
 
 
 def init_server():
-    # set up environment variables
-    with settings(hide('stdout', 'stderr')):
-        profile = run('cat %s/.bash_profile' % HOME)
-    profile_lines = profile.split('\n')
-    subdomain = env.host_string
-    domain_line = 'export INTRANETT_DOMAIN=%s.intranett.no' % subdomain
-    with settings(hide('stdout', 'stderr')):
-        front_ip = run('/sbin/ifconfig ethfe | head -n 2 | tail -n 1')
-    front_ip = front_ip.lstrip('inet addr:').split()[0]
-    front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
+    envvars = _set_environment_vars()
+    _set_cron_mailto()
+    _disable_svn_store_passwords()
+    _virtualenv()
 
-    exports = [l for l in profile_lines if l.startswith('export INTRANETT_')]
-    if len(exports) < 2:
-        start, end = profile_lines[:2], profile_lines[2:]
-        new_file = start + [front_line] + [domain_line + '\n'] + end
+    # is this already a checkout?
+    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
+        out = run('svn info %s' % VENV)
+    command = 'switch' if 'Revision' in out else 'co'
+    latest_tag = _latest_svn_tag()
+    with settings(hide('stdout', 'stderr', 'running')):
+        run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
+            flags=SVN_FLAGS, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
+            tag=latest_tag, loc=VENV))
+
+    # buildout
+    domain = envvars['domain']
+    front = envvars['front']
+    with cd(VENV):
+        run('bin/python2.6 bootstrap.py -d')
+        with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
+            run('mkdir downloads')
+        run('{x1}; {x2}; bin/buildout -N'.format(x1=front, x2=domain))
+
+    # XXX don't try to start anything for the hannosch user
+    run('crontab -r')
+
+
+def _virtualenv():
+    with settings(hide('stdout', 'stderr')):
+        with cd(HOME):
+            run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
+        run('rm -rf /tmp/distribute*')
+        with cd(VENV):
+            run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
+            run('rm bin/activate')
+            run('rm bin/activate_this.py')
+            run('rm bin/pip')
+            # Only install PIL if it isn't there
+            with settings(hide('warnings'), show('stdout'), warn_only=True):
+                out = run('bin/python -c "from PIL import Image; print(Image.__version__)"')
+            if PIL_VERSION not in out:
+                run('bin/easy_install-2.6 %s' % PIL_LOCATION)
+                run('rm bin/pil*.py')
+
+
+def _disable_svn_store_passwords():
+    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
+        # run svn info once, so we create ~/.subversion/config
+        run('svn info')
+        output = run('cat %s' % SVN_CONFIG)
+    lines = output.split('\n')
+    new_lines = []
+    changed = False
+    for line in lines:
+        if 'store-passwords = no' in line:
+            changed = True
+            new_lines.append('store-passwords = no')
+        else:
+            new_lines.append(line)
+    if changed:
         with settings(hide('running', 'stdout', 'stderr')):
-            # run(domain_line)
-            # run(front_line)
-            run('echo -e "{content}" > {home}/.bash_profile'.format(
-                home=HOME, content='\n'.join(new_file)))
+            run('echo -e "{content}" > {config}'.format(
+                content='\n'.join(new_lines), config=SVN_CONFIG))
 
-    # set cron mailto
+
+def _latest_svn_tag():
+    with settings(hide('running')):
+        tags = local('svn {flags} ls {auth} {svn}'.format(
+            auth=SVN_AUTH, flags=SVN_FLAGS, svn=SVN_PREFIX))
+    tags = [t.rstrip('/') for t in tags.split('\n')]
+    tags = [(pkg_resources.parse_version(t), t) for t in tags]
+    tags.sort()
+    return tags[-1][1]
+
+
+def _set_cron_mailto():
     with settings(hide('stdout', 'warnings'), warn_only=True):
         # if no crontab exists, this crontab -l has an exit code of 1
         run('crontab -l > %s/crontab.tmp' % HOME)
@@ -107,66 +162,25 @@ def init_server():
     with settings(hide('stdout', 'stderr')):
         run('rm %s/crontab.tmp' % HOME)
 
-    # disable storing svn passwords
-    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        # run svn info once, so we create ~/.subversion/config
-        run('svn info')
-        output = run('cat %s' % SVN_CONFIG)
-    lines = output.split('\n')
-    new_lines = []
-    changed = False
-    for line in lines:
-        if 'store-passwords = no' in line:
-            changed = True
-            new_lines.append('store-passwords = no')
-        else:
-            new_lines.append(line)
-    if changed:
-        with settings(hide('running', 'stdout', 'stderr')):
-            run('echo -e "{content}" > {config}'.format(
-                content='\n'.join(new_lines), config=SVN_CONFIG))
 
-    # calculate latest tag
-    with settings(hide('running')):
-        tags = local('svn {flags} ls {auth} {svn}'.format(
-            auth=SVN_AUTH, flags=SVN_FLAGS, svn=SVN_PREFIX))
-    tags = [t.rstrip('/') for t in tags.split('\n')]
-    tags = [(pkg_resources.parse_version(t), t) for t in tags]
-    tags.sort()
-    latest_tag = tags[-1][1]
-
-    # bootstrap virtualenv
+def _set_environment_vars():
     with settings(hide('stdout', 'stderr')):
-        with cd(HOME):
-            run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
-        run('rm -rf /tmp/distribute*')
-        with cd(VENV):
-            run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
-            run('rm bin/activate')
-            run('rm bin/activate_this.py')
-            run('rm bin/pip')
-            # Only install PIL if it isn't there
-            with settings(hide('warnings'), show('stdout'), warn_only=True):
-                out = run('bin/python -c "from PIL import Image; print(Image.__version__)"')
-            if PIL_VERSION not in out:
-                run('bin/easy_install-2.6 %s' % PIL_LOCATION)
-                run('rm bin/pil*.py')
+        profile = run('cat %s/.bash_profile' % HOME)
+    profile_lines = profile.split('\n')
+    subdomain = env.host_string
+    domain_line = 'export INTRANETT_DOMAIN=%s.intranett.no' % subdomain
+    with settings(hide('stdout', 'stderr')):
+        front_ip = run('/sbin/ifconfig ethfe | head -n 2 | tail -n 1')
+    front_ip = front_ip.lstrip('inet addr:').split()[0]
+    front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
 
-    # is this already a checkout?
-    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        out = run('svn info %s' % VENV)
-    command = 'switch' if 'Revision' in out else 'co'
-    with settings(hide('stdout', 'stderr', 'running')):
-        run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
-            flags=SVN_FLAGS, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
-            tag=latest_tag, loc=VENV))
-
-    # buildout
-    with cd(VENV):
-        run('bin/python2.6 bootstrap.py -d')
-        with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-            run('mkdir downloads')
-        run('{x1}; {x2}; bin/buildout -N'.format(x1=front_line, x2=domain_line))
-
-    # XXX don't try to start anything for the hannosch user
-    run('crontab -r')
+    exports = [l for l in profile_lines if l.startswith('export INTRANETT_')]
+    if len(exports) < 2:
+        start, end = profile_lines[:2], profile_lines[2:]
+        new_file = start + [front_line] + [domain_line + '\n'] + end
+        with settings(hide('running', 'stdout', 'stderr')):
+            # run(domain_line)
+            # run(front_line)
+            run('echo -e "{content}" > {home}/.bash_profile'.format(
+                home=HOME, content='\n'.join(new_file)))
+    return dict(domain=domain_line, front=front_line)
