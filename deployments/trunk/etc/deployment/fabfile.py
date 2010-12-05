@@ -29,13 +29,13 @@ SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
 
 def svn_info():
     with cd(VENV):
-        sudo('pwd && svn info', user='jarn')
+        run('pwd && svn info')
 
 
 def dump_db():
     with cd(VENV):
-        sudo('rm var/snapshotbackups/*', user='jarn')
-        sudo('bin/snapshotbackup', user='jarn')
+        run('rm var/snapshotbackups/*')
+        run('bin/snapshotbackup')
 
 
 def download_last_dump():
@@ -46,6 +46,27 @@ def download_last_dump():
         get(e, os.path.join(os.getcwd(), 'var', 'snapshotbackups'))
 
 
+def update():
+    _prepare_update(newest=False)
+    with cd(VENV):
+        run('bin/supervisorctl stop varnish')
+        run('bin/supervisorctl stop zope:*')
+        run('bin/instance-debug upgrade')
+        run('bin/supervisorctl start zope:instance1')
+        run('bin/supervisorctl start zope:instance2')
+        run('bin/supervisorctl start varnish')
+
+
+def full_update():
+    _prepare_update()
+    with cd(VENV):
+        run('bin/supervisorctl shutdown')
+        run('bin/supervisord')
+        run('bin/supervisorctl stop varnish')
+        run('bin/instance-debug upgrade')
+        run('bin/supervisorctl start varnish')
+
+
 def init_server():
     envvars = _set_environment_vars()
     _set_cron_mailto()
@@ -54,23 +75,30 @@ def init_server():
 
     # switch / checkout svn
     command = 'switch' if _is_svn_checkout() else 'co'
-    latest_tag = _latest_svn_tag()
-    with settings(hide('stdout', 'stderr', 'running')):
-        run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
-            flags=SVN_FLAGS, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
-            tag=latest_tag, loc=VENV))
+    _update_svn(command=command)
+    _buildout(envvars=envvars)
+    _create_plone_site()
 
-    # buildout
+
+def _buildout(envvars, newest=True):
     domain = envvars['domain']
     front = envvars['front']
+    arg = '' if newest else '-N'
     with cd(VENV):
         run('bin/python2.6 bootstrap.py -d')
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
-        run('{x1}; {x2}; bin/buildout -N'.format(x1=front, x2=domain))
+        run('{x1}; {x2}; bin/buildout {arg}'.format(
+            x1=front, x2=domain, arg=arg))
+        run('chmod 700 var/blobstorage')
 
     # XXX don't try to start anything for the hannosch user
     run('crontab -r')
+
+
+def _create_plone_site():
+    # TODO
+    pass
 
 
 def _disable_svn_store_passwords():
@@ -107,6 +135,13 @@ def _latest_svn_tag():
     tags = [(pkg_resources.parse_version(t), t) for t in tags]
     tags.sort()
     return tags[-1][1]
+
+
+def _prepare_update(newest=True):
+    envvars = _set_environment_vars()
+    dump_db()
+    _update_svn()
+    _buildout(envvars=envvars, newest=newest)
 
 
 def _set_cron_mailto():
@@ -170,6 +205,14 @@ def _set_environment_vars():
             run('echo -e "{content}" > {home}/.bash_profile'.format(
                 home=HOME, content='\n'.join(new_file)))
     return dict(domain=domain_line, front=front_line)
+
+
+def _update_svn(command='switch'):
+    latest_tag = _latest_svn_tag()
+    with settings(hide('stdout', 'stderr', 'running')):
+        run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
+            flags=SVN_FLAGS, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
+            tag=latest_tag, loc=VENV))
 
 
 def _virtualenv():
