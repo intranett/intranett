@@ -52,10 +52,8 @@ def init_server():
     _disable_svn_store_passwords()
     _virtualenv()
 
-    # is this already a checkout?
-    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        out = run('svn info %s' % VENV)
-    command = 'switch' if 'Revision' in out else 'co'
+    # switch / checkout svn
+    command = 'switch' if _is_svn_checkout() else 'co'
     latest_tag = _latest_svn_tag()
     with settings(hide('stdout', 'stderr', 'running')):
         run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
@@ -73,24 +71,6 @@ def init_server():
 
     # XXX don't try to start anything for the hannosch user
     run('crontab -r')
-
-
-def _virtualenv():
-    with settings(hide('stdout', 'stderr')):
-        with cd(HOME):
-            run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
-        run('rm -rf /tmp/distribute*')
-        with cd(VENV):
-            run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
-            run('rm bin/activate')
-            run('rm bin/activate_this.py')
-            run('rm bin/pip')
-            # Only install PIL if it isn't there
-            with settings(hide('warnings'), show('stdout'), warn_only=True):
-                out = run('bin/python -c "from PIL import Image; print(Image.__version__)"')
-            if PIL_VERSION not in out:
-                run('bin/easy_install-2.6 %s' % PIL_LOCATION)
-                run('rm bin/pil*.py')
 
 
 def _disable_svn_store_passwords():
@@ -111,6 +91,12 @@ def _disable_svn_store_passwords():
         with settings(hide('running', 'stdout', 'stderr')):
             run('echo -e "{content}" > {config}'.format(
                 content='\n'.join(new_lines), config=SVN_CONFIG))
+
+
+def _is_svn_checkout():
+    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
+        out = run('svn info %s' % VENV)
+    return 'Revision' in out
 
 
 def _latest_svn_tag():
@@ -184,3 +170,21 @@ def _set_environment_vars():
             run('echo -e "{content}" > {home}/.bash_profile'.format(
                 home=HOME, content='\n'.join(new_file)))
     return dict(domain=domain_line, front=front_line)
+
+
+def _virtualenv():
+    with settings(hide('stdout', 'stderr')):
+        with cd(HOME):
+            run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
+        run('rm -rf /tmp/distribute*')
+        with cd(VENV):
+            run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
+            run('rm bin/activate')
+            run('rm bin/activate_this.py')
+            run('rm bin/pip')
+            # Only install PIL if it isn't there
+            with settings(hide('warnings'), show('stdout'), warn_only=True):
+                out = run('bin/python -c "from PIL import Image; print(Image.__version__)"')
+            if PIL_VERSION not in out:
+                run('bin/easy_install-2.6 %s' % PIL_LOCATION)
+                run('rm bin/pil*.py')
