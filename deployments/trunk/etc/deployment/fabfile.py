@@ -209,6 +209,7 @@ def _set_environment_vars():
 
 def _update_svn(command='switch'):
     latest_tag = _latest_svn_tag()
+    print('Switching to version: %s' % latest_tag)
     with settings(hide('stdout', 'stderr', 'running')):
         run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
             flags=SVN_FLAGS, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
