@@ -1,4 +1,4 @@
-from fabric.api import env, run
+from fabric.api import cd, env, run, sudo
 
 env.shell = "/bin/bash -c"
 
@@ -7,5 +7,5 @@ def touch():
     run('cd {home} && touch iwashere.txt'.format(home=home))
 
 def svn_info():
-    home = run('pwd')
-    run('cd {home} && svn info /srv/jarn'.format(home=home))
+    with cd('/srv/jarn'):
+        sudo('pwd && svn info', user='jarn')
