@@ -12,11 +12,18 @@ from fabric.api import sudo
 from pkg_resources import parse_version
 
 env.shell = "/bin/bash -c"
-HOME = '/srv/jarn'
 
+# XXX hosting@jarn.com
+CRON_MAILTO = 'hanno@jarn.com'
 DISTRIBUTE_VERSION = '0.6.14'
+# XXX /srv/jarn
+HOME = '/home/hannosch'
 PIL_VERSION = '1.1.7-jarn1'
 PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
+SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
+SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
+SVN_CONFIG = os.path.join(HOME, '.subversion', 'config')
+SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
 
 
 def svn_info():
@@ -39,8 +46,6 @@ def download_last_dump():
 
 
 def init_server():
-    # XXX
-    HOME = '/home/hannosch'
     # set up environment variables
     with settings(hide('stdout', 'stderr')):
         profile = run('cat %s/.bash_profile' % HOME)
@@ -69,8 +74,6 @@ def init_server():
         crontab = run('cat %s/crontab.tmp' % HOME)
     cron_lines = crontab.split('\n')
     mailto = [l for l in cron_lines if l.startswith('MAILTO')]
-    # XXX hosting@jarn.com
-    CRON_MAILTO = 'hanno@jarn.com'
     wrong_address = not CRON_MAILTO in mailto
     if not mailto or wrong_address:
         # add mailto right after the comments
@@ -102,11 +105,6 @@ def init_server():
             run('crontab %s/crontab.tmp' % HOME)
     with settings(hide('stdout', 'stderr')):
         run('rm %s/crontab.tmp' % HOME)
-
-    SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
-    SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
-    SVN_CONFIG = os.path.join(HOME, '.subversion', 'config')
-    SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
 
     # disable storing svn passwords
     with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
