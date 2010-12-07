@@ -1,0 +1,15 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  i18n_domain="intranett">
+
+  <!-- <genericsetup:upgradeStep
+      title="Upgrade intranett.policy from 1 to 2."
+      description=""
+      source="1"
+      destination="2"
+      handler="intranett.policy.upgrades.null_upgrade_step"
+      profile="intranett.policy:default"
+      /> -->
+
+</configure>
