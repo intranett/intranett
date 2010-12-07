@@ -1,10 +1,54 @@
 import logging
+import os
 import sys
 
 logger = logging.getLogger()
 
 
-def upgrade(app, args=None):
+def create_site(app, args):
+    # Display all messages on stderr
+    logger.setLevel(logging.INFO)
+    logger.handlers[0].setLevel(logging.INFO)
+
+    force = '--force' in args or '-f' in args
+    existing = 'Plone' in app.keys()
+
+    if existing:
+        if not force:
+            logger.error('Plone site already exists.')
+            sys.exit(1)
+        else:
+            del app['Plone']
+            app._p_jar.db().pack()
+            app._p_jar.db().cacheMinimize()
+            logger.info('Removed existing Plone site.')
+
+    from Testing import makerequest
+    root = makerequest.makerequest(app)
+    request = root.REQUEST
+
+    title = os.environ.get('INTRANETT_DOMAIN', 'intranett.no')
+    language = 'no'
+    lang_arg = [a for a in args if a.startswith('--language')]
+    if any(lang_arg):
+        language = lang_arg[0].split('=')[1].strip()
+
+    request.form = {
+        'extension_ids': ['intranett.policy:default'],
+        'form.submitted': True,
+        'title': title,
+        'language': language,
+    }
+    from intranett.policy.browser.admin import AddIntranettSite
+    addsite = AddIntranettSite(root, request)
+    addsite()
+    import transaction
+    transaction.get().note('Added new Plone site.')
+    transaction.get().commit()
+    logger.info('Added new Plone site.')
+
+
+def upgrade(app, args):
     # Display all messages on stderr
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)

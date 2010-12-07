@@ -25,8 +25,8 @@ class AddIntranettSite(AddPloneSite):
                 profile_id=_DEFAULT_PROFILE,
                 extension_ids=form.get('extension_ids', ()),
                 setup_content=False,
-                default_language='no',
+                default_language=form.get('language', 'no'),
                 )
-            self.request.response.redirect(site.absolute_url())
+            return self.request.response.redirect(site.absolute_url())
 
         return self.index()
