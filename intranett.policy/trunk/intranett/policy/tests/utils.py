@@ -30,8 +30,8 @@ def suppress_warnings(func):
     """
     def wrapped_func(*args, **kw):
         saved = sys.stderr
-        sys.stderr = StringIO()
         try:
+            sys.stderr = StringIO()
             return func(*args, **kw)
         finally:
             sys.stderr = saved
