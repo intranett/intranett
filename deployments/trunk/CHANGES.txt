@@ -4,6 +4,11 @@ Changelog
 0.9 - unreleased
 ----------------
 
+- Added HSTS header to enforce HTTPS connections. Details at
+  http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security.
+  Refs https://jira.jarn.com/browse/INTRANETT-135.
+  [hannosch]
+
 - Added basic `mr.awsome` config, provided stub fabfile and integrated SSH
   server and user management.
   [hannosch]
