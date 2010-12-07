@@ -1,3 +1,4 @@
+from Acquisition import aq_get
 from Acquisition import aq_parent
 from plone.app.testing import login
 from plone.app.testing import SITE_OWNER_NAME
@@ -29,3 +30,12 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
         for profile, steps in upgrades.items():
             self.assertEquals(len(steps), 0,
                               "Found unexpected upgrades: %s" % steps)
+
+    def test_one_to_two(self):
+        from intranett.policy.setuphandlers import enable_secure_cookies
+        portal = self.layer['portal']
+        acl = aq_get(portal, 'acl_users')
+        acl.session._updateProperty('secure', False)
+        # Run the step
+        enable_secure_cookies(portal)
+        self.assertEqual(acl.session.getProperty('secure'), True)

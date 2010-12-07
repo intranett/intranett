@@ -1,3 +1,4 @@
+from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
 
@@ -67,6 +68,12 @@ def setup_default_groups(site):
     gtool.removeGroups(['Administrators', 'Reviewers'])
 
 
+def enable_secure_cookies(context):
+    # context is either the site or the portal_setup tool
+    acl = aq_get(context, 'acl_users')
+    acl.session._updateProperty('secure', True)
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -79,3 +86,4 @@ def various(context):
     disable_collections(site)
     disable_portlets(site)
     setup_default_groups(site)
+    enable_secure_cookies(site)
