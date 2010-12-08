@@ -70,9 +70,14 @@ def full_update():
     _prepare_update()
     with cd(VENV):
         run('bin/supervisorctl shutdown')
+        time.sleep(5)
         run('bin/supervisord')
         run('bin/supervisorctl stop varnish')
+        run('bin/supervisorctl stop zope:*')
         run('bin/instance-debug upgrade')
+        run('bin/supervisorctl start zope:instance1')
+        run('bin/supervisorctl start zope:instance2')
+        time.sleep(10)
         run('bin/supervisorctl start varnish')
 
 
