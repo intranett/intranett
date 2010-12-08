@@ -10,7 +10,7 @@ Changelog
   [hannosch]
 
 - Added basic `mr.awsome` config, provided stub fabfile and integrated SSH
-  server and user management.
+  server management.
   [hannosch]
 
 - Updated distributions:
