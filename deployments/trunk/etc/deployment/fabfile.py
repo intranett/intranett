@@ -16,8 +16,7 @@ env.shell = "/bin/bash -c"
 BUILDOUT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
 
-# XXX hosting@jarn.com
-CRON_MAILTO = 'hanno@jarn.com'
+CRON_MAILTO = 'hosting@jarn.com'
 DISTRIBUTE_VERSION = '0.6.14'
 HOME = '/srv/jarn'
 VENV = '/srv/jarn'
