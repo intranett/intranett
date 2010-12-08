@@ -9,8 +9,9 @@ Changelog
   Refs https://jira.jarn.com/browse/INTRANETT-135.
   [hannosch]
 
-- Added basic `mr.awsome` config, provided stub fabfile and integrated SSH
-  server management.
+- Added `mr.awsome` config, integrated SSH server management and wrote fabfile
+  for most common operations like setting up a new server and updating existing
+  installations.
   [hannosch]
 
 - Updated distributions:
