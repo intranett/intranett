@@ -49,6 +49,10 @@ def download_last_dump():
         get(e, os.path.join(BUILDOUT_ROOT, 'var', 'snapshotbackups'))
 
 
+def reload_nginx():
+    run('sudo /etc/init.d/nginx reload')
+
+
 def update():
     _prepare_update(newest=False)
     with cd(VENV):
