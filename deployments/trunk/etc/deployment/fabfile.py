@@ -97,8 +97,11 @@ def _buildout(envvars, newest=True):
 
 
 def _create_plone_site():
-    # TODO
-    pass
+    title = env.server.config.get('title', '%s intranett' % env.host_string)
+    arg = ' --title="%s"' % title
+    with cd(VENV):
+        with settings(hide('warnings'), warn_only=True):
+            run('bin/instance-debug create_site%s' % arg)
 
 
 def _disable_svn_store_passwords():
