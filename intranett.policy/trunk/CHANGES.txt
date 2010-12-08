@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1 - unreleased
+1.1 - 2010-12-08
 ----------------
 
 - Added a new `create_site` zopectl command. It has a `--force` option to
