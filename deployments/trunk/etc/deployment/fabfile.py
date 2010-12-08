@@ -62,8 +62,9 @@ def update():
         run('bin/instance-debug upgrade')
         run('bin/supervisorctl start zope:instance1')
         run('bin/supervisorctl start zope:instance2')
-        time.sleep(10)
+        time.sleep(30)
         run('bin/supervisorctl start varnish')
+        _load_domain()
 
 
 def full_update():
@@ -77,8 +78,9 @@ def full_update():
         run('bin/instance-debug upgrade')
         run('bin/supervisorctl start zope:instance1')
         run('bin/supervisorctl start zope:instance2')
-        time.sleep(10)
+        time.sleep(30)
         run('bin/supervisorctl start varnish')
+        _load_domain()
 
 
 def init_server():
@@ -149,6 +151,12 @@ def _latest_svn_tag():
     tags = [(pkg_resources.parse_version(t), t) for t in tags]
     tags.sort()
     return tags[-1][1]
+
+
+def _load_domain():
+    with settings(hide('warnings'), warn_only=True):
+        local('wget --no-check-certificate -q -O /dev/null '
+            'https://%s.intranett.no' % env.host_string)
 
 
 def _prepare_update(newest=True):
