@@ -225,16 +225,21 @@ def _svn_get(command='switch'):
 def _virtualenv():
     with settings(hide('stdout', 'stderr')):
         with cd(HOME):
-            run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
+            with settings(hide('warnings'), show('stdout'), warn_only=True):
+                run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
         run('rm -rf /tmp/distribute*')
         with cd(VENV):
             run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
-            run('rm bin/activate')
-            run('rm bin/activate_this.py')
-            run('rm bin/pip')
+            with settings(hide('warnings', 'running'), warn_only=True):
+                run('rm bin/activate')
+                run('rm bin/activate_this.py')
+                run('rm bin/pip')
             # Only install PIL if it isn't there
-            with settings(hide('warnings'), show('stdout'), warn_only=True):
-                out = run('bin/python -c "from PIL import Image; print(Image.__version__)"')
+            with settings(hide('warnings', 'running'), show('stdout'), warn_only=True):
+                out = run('bin/python -c "from PIL import Image; '
+                    'print(\'PIL: %s\' % Image.__version__)"')
             if PIL_VERSION not in out:
-                run('bin/easy_install-2.6 %s' % PIL_LOCATION)
+                with settings(show('stdout')):
+                    run('bin/easy_install-2.6 %s' % PIL_LOCATION)
+            with settings(hide('warnings', 'running'), warn_only=True):
                 run('rm bin/pil*.py')
