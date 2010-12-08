@@ -1,4 +1,5 @@
 import os
+import os.path
 
 from fabric.api import cd
 from fabric.api import env
@@ -11,6 +12,8 @@ from fabric.api import show
 import pkg_resources
 
 env.shell = "/bin/bash -c"
+BUILDOUT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
 
 # XXX hosting@jarn.com
 CRON_MAILTO = 'hanno@jarn.com'
@@ -42,7 +45,7 @@ def download_last_dump():
                   warn_only=True):
         existing = run('ls -rt1 %s/var/snapshotbackups/*' % VENV)
     for e in existing.split('\n'):
-        get(e, os.path.join(os.getcwd(), 'var', 'snapshotbackups'))
+        get(e, os.path.join(BUILDOUT_ROOT, 'var', 'snapshotbackups'))
 
 
 def update():
