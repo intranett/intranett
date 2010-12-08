@@ -211,6 +211,8 @@ def _svn_get(command='switch'):
     latest_tag = _latest_svn_tag()
     print('Switching to version: %s' % latest_tag)
     with settings(hide('stdout', 'stderr', 'running')):
+        run('{exe} revert -R .'.format(exe=SVN_EXE))
+        run('{exe} cleanup'.format(exe=SVN_EXE))
         run('{exe} {command} {auth} {svn}/{tag} {loc}'.format(
             exe=SVN_EXE, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
             tag=latest_tag, loc=VENV))
