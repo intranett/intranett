@@ -15,9 +15,8 @@ env.shell = "/bin/bash -c"
 # XXX hosting@jarn.com
 CRON_MAILTO = 'hanno@jarn.com'
 DISTRIBUTE_VERSION = '0.6.14'
-# XXX /srv/jarn
-HOME = '/home/hannosch'
-VENV = '/home/hannosch/venv'
+HOME = '/srv/jarn'
+VENV = '/srv/jarn'
 PIL_VERSION = '1.1.7-jarn1'
 PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
@@ -91,9 +90,6 @@ def _buildout(envvars, newest=True):
         run('{x1}; {x2}; bin/buildout {arg}'.format(
             x1=front, x2=domain, arg=arg))
         run('chmod 700 var/blobstorage')
-
-    # XXX don't try to start anything for the hannosch user
-    run('crontab -r')
 
 
 def _create_plone_site():
