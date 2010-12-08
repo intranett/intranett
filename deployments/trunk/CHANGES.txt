@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9 - unreleased
+0.9 - 2010-12-08
 ----------------
 
 - Added HSTS header to enforce HTTPS connections. Details at
@@ -16,6 +16,7 @@ Changelog
 
 - Updated distributions:
   * Zope 2.12.14
+  * intranett.policy = 1.1
 
 0.8 - 2010-12-04
 ----------------
