@@ -1,5 +1,6 @@
 import os
 import os.path
+import time
 
 from fabric.api import cd
 from fabric.api import env
@@ -61,6 +62,7 @@ def update():
         run('bin/instance-debug upgrade')
         run('bin/supervisorctl start zope:instance1')
         run('bin/supervisorctl start zope:instance2')
+        time.sleep(10)
         run('bin/supervisorctl start varnish')
 
 
