@@ -24,6 +24,7 @@ PIL_VERSION = '1.1.7-jarn1'
 PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
 SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
+SVN_EXE = 'svn %s' % SVN_FLAGS
 SVN_CONFIG = os.path.join(HOME, '.subversion', 'config')
 SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
 
@@ -77,7 +78,7 @@ def init_server():
 
     # switch / checkout svn
     command = 'switch' if _is_svn_checkout() else 'co'
-    _update_svn(command=command)
+    _svn_get(command=command)
     _buildout(envvars=envvars)
     _create_plone_site()
 
@@ -128,8 +129,8 @@ def _is_svn_checkout():
 
 def _latest_svn_tag():
     with settings(hide('running')):
-        tags = local('svn {flags} ls {auth} {svn}'.format(
-            auth=SVN_AUTH, flags=SVN_FLAGS, svn=SVN_PREFIX))
+        tags = local('{exe} ls {auth} {svn}'.format(
+            exe=SVN_EXE, auth=SVN_AUTH, svn=SVN_PREFIX))
     tags = [t.rstrip('/') for t in tags.split('\n')]
     tags = [(pkg_resources.parse_version(t), t) for t in tags]
     tags.sort()
@@ -139,7 +140,7 @@ def _latest_svn_tag():
 def _prepare_update(newest=True):
     envvars = _set_environment_vars()
     dump_db()
-    _update_svn()
+    _svn_get()
     _buildout(envvars=envvars, newest=newest)
 
 
@@ -206,13 +207,15 @@ def _set_environment_vars():
     return dict(domain=domain_line, front=front_line)
 
 
-def _update_svn(command='switch'):
+def _svn_get(command='switch'):
     latest_tag = _latest_svn_tag()
     print('Switching to version: %s' % latest_tag)
     with settings(hide('stdout', 'stderr', 'running')):
-        run('svn {flags} {command} {auth} {svn}/{tag} {loc}'.format(
-            flags=SVN_FLAGS, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
+        run('{exe} {command} {auth} {svn}/{tag} {loc}'.format(
+            exe=SVN_EXE, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
             tag=latest_tag, loc=VENV))
+        if command == 'switch':
+            run('{exe} up {auth}'.format(exe=SVN_EXE, auth=SVN_AUTH))
 
 
 def _virtualenv():
