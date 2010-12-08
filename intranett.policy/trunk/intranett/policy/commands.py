@@ -28,6 +28,12 @@ def create_site(app, args):
     request = root.REQUEST
 
     title = os.environ.get('INTRANETT_DOMAIN', 'intranett.no')
+    title_arg = [a for a in args if a.startswith('--title')]
+    if any(title_arg):
+        targ = title_arg[0].split('=')[1].strip()
+        if targ:
+            title = targ
+
     language = 'no'
     lang_arg = [a for a in args if a.startswith('--language')]
     if any(lang_arg):

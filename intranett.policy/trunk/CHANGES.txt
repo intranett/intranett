@@ -5,7 +5,8 @@ Changelog
 ----------------
 
 - Added a new `create_site` zopectl command. It has a `--force` option to
-  overwrite an existing site.
+  overwrite an existing site. You can also specify the title via `--title=Site`
+  or `--title="Some intranett"`.
   [hannosch]
 
 1.0 - 2010-12-04
