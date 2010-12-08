@@ -19,7 +19,6 @@ def create_site(app, args):
             sys.exit(1)
         else:
             del app['Plone']
-            app._p_jar.db().pack()
             app._p_jar.db().cacheMinimize()
             logger.info('Removed existing Plone site.')
 
