@@ -236,6 +236,8 @@ def _svn_get(command='switch'):
         if switch:
             run('{exe} revert -R .'.format(exe=SVN_EXE))
             run('{exe} cleanup'.format(exe=SVN_EXE))
+        else:
+            run('rmdir %s/nginx-sites' % VENV)
         run('{exe} {command} {auth} {svn}/{tag} {loc}'.format(
             exe=SVN_EXE, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
             tag=latest_tag, loc=VENV))
