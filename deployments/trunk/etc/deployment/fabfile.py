@@ -92,7 +92,8 @@ def init_server():
     command = 'switch' if _is_svn_checkout() else 'co'
     _svn_get(command=command)
     _buildout(envvars=envvars)
-    _create_plone_site()
+    initial = command == 'co'
+    _create_plone_site(initial=initial)
 
 
 def _buildout(envvars, newest=True):
@@ -108,12 +109,17 @@ def _buildout(envvars, newest=True):
         run('chmod 700 var/blobstorage')
 
 
-def _create_plone_site():
+def _create_plone_site(initial=False):
     title = env.server.config.get('title', '%s intranett' % env.host_string)
     arg = ' --title="%s"' % title
     with cd(VENV):
         with settings(hide('warnings'), warn_only=True):
+            if initial:
+                run('bin/zeo start')
+                time.sleep(3)
             run('bin/instance-debug create_site%s' % arg)
+            if initial:
+                run('bin/zeo stop')
 
 
 def _disable_svn_store_passwords():
@@ -232,7 +238,7 @@ def _svn_get(command='switch'):
     switch = command == 'switch'
     latest_tag = _latest_svn_tag()
     print('Switching to version: %s' % latest_tag)
-    with settings(hide('stdout', 'stderr', 'running')):
+    with settings(hide('running')):
         if switch:
             run('{exe} revert -R .'.format(exe=SVN_EXE))
             run('{exe} cleanup'.format(exe=SVN_EXE))
