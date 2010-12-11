@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0 - unreleased
-----------------
+0.9.1 - 2010-12-11
+------------------
 
 - Added SSL certificate / key to our buildout and use our versions in the
   Nginx config, instead of relying on Gocept to put them into `/etc/ssl`.
