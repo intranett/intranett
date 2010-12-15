@@ -116,3 +116,10 @@ msgstr "Telefon"
 #: ./userdataschema.py:59
 msgid "label_portrait"
 msgstr "Portrett"
+
+#. Default: "Employees"
+#: actions/employee_listing
+msgid "Employees"
+msgstr "Ansatte"
+
+
