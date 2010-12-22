@@ -73,11 +73,9 @@ def download_last_dump():
     localdir = os.path.join(LIVEBACKUPS, env.host_string)
     snapshotdir = os.path.join(BUILDOUT_ROOT, 'var', 'snapshotbackups')
     with settings(hide('warnings'), warn_only=True):
-        try:
+        if not os.path.exists(localdir):
             os.makedirs(localdir)
-        except OSError:
-            print("%s directory exists, not creating" % localdir)
-        local('rm %s/*'%(localdir))
+        local('rm %s/*' % localdir)
         # If the snapshotdir is a file (which it should not be) or a symlink
         # we delete it and create a new symlink to the latest download.
         try:
