@@ -36,8 +36,8 @@
                 <dt i18n:translate="">
                     Error
                 </dt>
-                <dd i18n:translate="text_no_user_by_name">
-                    No user by that name.
+                <dd i18n:translate="">
+                    No user found by that name.
                 </dd>
             </dl>
             <div id="content">
@@ -89,7 +89,7 @@
                                 <b><span tal:omit-tag="" i18n:translate="label_department">Department</span>:</b>
                                 <a href=""
                                      tal:attributes="href string:${context/absolute_url}/employee-listing?department=${userinfo/department}"
-                                     tal:content="userinfo/department">Departent</a>
+                                     tal:content="userinfo/department">Department</a>
                             </li>
                             <li tal:condition="userinfo/location">
                                 <!-- Location  -->
@@ -131,11 +131,11 @@
                         </h1>
 
                         <h1 class="documentFirstHeading" tal:condition="not: userinfo/fullname" tal:content="username">
-                            Author ID
+                            Author id
                         </h1>
 
                         <div class="documentDescription" tal:content="structure userinfo/description">
-                            Author description.
+                            Author description
                         </div>
 
                         <tal:authorContent define="user_content view/user_content;
