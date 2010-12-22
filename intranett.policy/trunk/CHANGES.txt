@@ -4,6 +4,8 @@ Changelog
 1.2 - unreleased
 ----------------
 
+- Added i18n extraction and update scripts.
+  [hannosch]
 
 1.1 - 2010-12-08
 ----------------
