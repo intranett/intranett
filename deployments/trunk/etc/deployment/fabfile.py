@@ -18,6 +18,7 @@ import pkg_resources
 env.shell = "/bin/bash -c"
 BUILDOUT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
+LIVEBACKUPS = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups')
 
 CRON_MAILTO = 'hosting@jarn.com'
 DISTRIBUTE_VERSION = '0.6.14'
@@ -41,7 +42,9 @@ def restore_db():
     with cd(VENV):
         existing = run('ls -rt1 %s/var/snapshotbackups/*' % VENV)
         if len(existing.split('\n')) != 3:
-            print("There are not excactly 3 files in the snapshotbackups directory, please investigate"); sys.exit(1)
+            print("There are not excactly 3 files in the snapshotbackups "
+                  "directory, please investigate")
+            sys.exit(1)
         run('bin/supervisorctl stop zeo')
         run('bin/supervisorctl stop zope:*')
         run('bin/snapshotrestore')
@@ -59,44 +62,49 @@ def dump_db():
         # with settings(hide('warnings'), warn_only=True):
         #     run('rm var/snapshotbackups/*')
         run('bin/snapshotbackup')
-        run('tar czf var/snapshotbackups/%s-blobstorage.tgz var/blobstorage'%( datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")))
+        run('tar czf var/snapshotbackups/%s-blobstorage.tgz var/blobstorage' %
+            (datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")))
+
 
 def download_last_dump():
-    localdir = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups',env.host_string)
+    localdir = os.path.join(LIVEBACKUPS, env.host_string)
     snapshotdir = os.path.join(BUILDOUT_ROOT, 'var', 'snapshotbackups')
     with settings(hide('warnings'), warn_only=True):
         try:
             os.makedirs(localdir)
         except OSError:
-            print "%s directory exists, not creating"%localdir
+            print("%s directory exists, not creating" % localdir)
         local('rm %s/*'%(localdir))
-        ##If the snapshotdir is a file (which it should not be) or a symlink we delete it and create a new symlink to the latest download.
+        # If the snapshotdir is a file (which it should not be) or a symlink
+        # we delete it and create a new symlink to the latest download.
         try:
             os.remove(snapshotdir)
         except OSError:
-            print "%s is not a symlink, not removing"%snapshotdir
+            print("%s is not a symlink, not removing" % snapshotdir)
         try:
-            os.symlink(localdir,snapshotdir)
+            os.symlink(localdir, snapshotdir)
         except OSError:
-            print "%s allready exists, can't create symlink to %s" %(snapshotdir,localdir)
-            
+            print("%s already exists, can't create symlink to %s" %
+                (snapshotdir, localdir))
 
     with settings(hide('warnings', 'running', 'stdout', 'stderr'),
                   warn_only=True):
         existing = run('ls -rt1 %s/var/snapshotbackups/*' % VENV)
     for e in existing.split('\n'):
-        get(e,localdir)
+        get(e, localdir)
 
 
 def upload_last_dump():
-    localdir = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups',env.host_string)
+    localdir = os.path.join(LIVEBACKUPS, env.host_string)
     existing = local('ls -rt1 %s/*' % localdir)
     if len(existing.split('\n')) != 3:
-        print("There are not excactly 3 files in the local snapshotbackups directory, please investigate"); sys.exit(1)
+        print("There are not excactly 3 files in the local snapshotbackups "
+              "directory, please investigate")
+        sys.exit(1)
     with cd(VENV):
         with settings(hide('warnings'), warn_only=True):
             run('rm var/snapshotbackups/*')
-        put("%s/*"%localdir,"var/snapshotbackups/")
+        put("%s/*" % localdir, "var/snapshotbackups/")
 
 
 def reload_nginx():
@@ -315,7 +323,8 @@ def _virtualenv():
                 run('rm bin/activate_this.py')
                 run('rm bin/pip')
             # Only install PIL if it isn't there
-            with settings(hide('warnings', 'running'), show('stdout'), warn_only=True):
+            with settings(hide('warnings', 'running'), show('stdout'),
+                          warn_only=True):
                 out = run('bin/python -c "from PIL import Image; '
                     'print(\'PIL: %s\' % Image.__version__)"')
             if PIL_VERSION not in out:
