@@ -16,6 +16,11 @@ from fabric.api import show
 import pkg_resources
 
 env.shell = "/bin/bash -c"
+_staging = ['dev', 'demo']
+env.roledefs['staging'] = _staging
+_production = set(env.servers.keys()) - set(_staging)
+env.roledefs['production'] = list(_production)
+
 BUILDOUT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
 LIVEBACKUPS = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups')
