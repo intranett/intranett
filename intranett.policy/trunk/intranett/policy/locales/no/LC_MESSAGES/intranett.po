@@ -56,7 +56,7 @@ msgstr "En kort oversikt over hvem du er og hva du gjør. Vil vises for andre p�
 #: intranett.policy/intranett/policy/userdataschema.py:58
 #, fuzzy
 msgid "help_portrait"
-msgstr "For å legge til et nytt portrett, trykk \"Bla igjennom\" og velg et bilde av deg selv. Anbefalt størrelse er 75 bildepunkter i bredden, 100 bildepunkter i høyden."
+msgstr "For å legge til et nytt portrett, trykk \"Bla igjennom\" og velg et bilde av deg selv. Du får best resultat ved å bruke et kvadratisk bilde større enn 300 x 300 bildepunkter. Andre størrelser vil også virke."
 
 #. Default: "Advanced Search…"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:86
