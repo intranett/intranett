@@ -16,23 +16,28 @@
 
             <header>
                 <tal:departmentview condition="department_request">
-                    <h1 class="documentFirstHeading" tal:condition="department_request">
-                        <span tal:content="department_request" /> department
+                    <h1 class="documentFirstHeading"
+                        tal:condition="department_request"
+                        tal:content="department_request">
+                        department
                     </h1>
                     <div class="documentDescription">
                         <a href="" title="Show all employees"
-            tal:condition="department_request"
-            tal:attributes="href string:${context/absolute_url}/employee-listing">Show employees of all departments?</a>
+                           tal:condition="department_request"
+                           tal:attributes="href string:${context/absolute_url}/employee-listing">
+                           Show employees of all departments?
+                        </a>
                     </div>
                 </tal:departmentview>
-                <h1 class="documentFirstHeading" tal:condition="not:department_request" i18n:translate="header_employees">Employees</h1>
+                <h1 class="documentFirstHeading"
+                    tal:condition="not:department_request"
+                    i18n:translate="">Employees</h1>
             </header>
+
             <div id="content-core">
 
                 <div id="departments-wrapper" tal:condition="python:view.departments() and not department_request">
-                    <strong><span tal:omit-tag=""
-                                  i18n:translate=""
-                                  i18n:domain="intranett">Departments</span>:</strong>
+                    <strong i18n:translate="">Departments:</strong>
                     <ul id="departments-list" class="horrList">
                         <li tal:repeat="department view/departments"
                             tal:attributes="class python:department_request == department and 'selected' or 'plain'">
@@ -45,39 +50,52 @@
 
                 <div id="employee-listing-wrapper">
                     <tal:employee repeat="employee employees">
-                    <div class="tileItem visualIEFloatFix row"
-                         tal:define="department employee/department|nothing">
-                        <div class="cell width-5 position-0">
-                            <a href="#"
-                               tal:attributes="href string:$portal_url/@@user?name=${employee/username};
-                                               title employee/fullname">
-                                <img class="image-left" alt="" src=""
-                                     tal:condition="employee/thumbnail_url"
-                                     tal:attributes="src employee/thumbnail_url" />
-                                <img class="image-left" alt="" src=""
-                                     tal:condition="not:employee/thumbnail_url"
-                                     tal:attributes="src string:$portal_url/defaultUser.png" />
-                            </a>
-                        </div>
-                        <div class="cell width-11 position-5">
-                            <h2 class="tileHeadline">
-                                <span class="summary">
-                                    <a class="contenttype-document state-private url"
-                                       tal:content="employee/fullname | employee/username"
-                                       tal:attributes="href string:$portal_url/@@user?name=${employee/username};
-                                                       title employee/fullname">Test Page</a>
-                                </span>
-                            </h2>
-                            <div class="tileBody" i18n:domain="intranett">
-                                <tal:position condition="employee/position"><span tal:replace="employee/position" />,</tal:position>
-                                <tal:department condition="employee/department"><a href=""
-                                     tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
-                                     tal:content="employee/department">Department</a></tal:department>
-                                <tal:mobile condition="employee/mobile"><br /><span tal:omit-tag="" i18n:translate="label_mobile">Mobile phone</span>: <span tal:content="employee/mobile" /></tal:mobile>
-                                <tal:phone condition="employee/phone"><br/><span tal:omit-tag="" i18n:translate="label_phone">Phone</span>: <span tal:content="employee/phone" /></tal:phone>
+                        <div class="tileItem visualIEFloatFix row"
+                             tal:define="department employee/department|nothing">
+                            <div class="cell width-5 position-0">
+                                <a href="#"
+                                   tal:attributes="href string:$portal_url/@@user?name=${employee/username};
+                                                   title employee/fullname">
+                                    <img class="image-left" alt="" src=""
+                                         tal:condition="employee/thumbnail_url"
+                                         tal:attributes="src employee/thumbnail_url" />
+                                    <img class="image-left" alt="" src=""
+                                         tal:condition="not:employee/thumbnail_url"
+                                         tal:attributes="src string:$portal_url/defaultUser.png" />
+                                </a>
+                            </div>
+                            <div class="cell width-11 position-5">
+                                <h2 class="tileHeadline">
+                                    <span class="summary">
+                                        <a class="contenttype-document state-private url"
+                                           tal:content="employee/fullname | employee/username"
+                                           tal:attributes="href string:$portal_url/@@user?name=${employee/username};
+                                                           title employee/fullname">Test Page</a>
+                                    </span>
+                                </h2>
+                                <div class="tileBody" i18n:domain="intranett">
+                                    <tal:position condition="employee/position">
+                                        <span tal:replace="employee/position" />,
+                                    </tal:position>
+                                    <tal:department condition="employee/department"><a href=""
+                                         tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
+                                         tal:content="employee/department">Department</a>
+                                    </tal:department>
+                                    <tal:mobile condition="employee/mobile">
+                                        <br />
+                                        <span tal:omit-tag=""
+                                              i18n:translate="label_mobile">Mobile phone</span>:
+                                        <span tal:content="employee/mobile" />
+                                      </tal:mobile>
+                                    <tal:phone condition="employee/phone">
+                                        <br/>
+                                        <span tal:omit-tag=""
+                                              i18n:translate="label_phone">Phone</span>:
+                                        <span tal:content="employee/phone" />
+                                    </tal:phone>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </tal:employee>
                 </div>
             </div>

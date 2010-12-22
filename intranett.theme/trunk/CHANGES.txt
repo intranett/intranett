@@ -4,6 +4,9 @@ Changelog
 0.9 - unreleased
 ----------------
 
+- Cleaned up employee listing template and correct i18n tags.
+  [hannosch]
+
 - Correct the i18n domain of the employees tab action.
   [hannosch]
 
