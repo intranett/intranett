@@ -4,6 +4,9 @@ Changelog
 1.2 - unreleased
 ----------------
 
+- Updated Norwegian translation.
+  [hannosch]
+
 - Added i18n extraction and update scripts.
   [hannosch]
 

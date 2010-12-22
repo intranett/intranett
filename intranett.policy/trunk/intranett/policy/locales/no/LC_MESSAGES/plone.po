@@ -1,14 +1,14 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: intranett\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2010-12-22 09:49+0000\n"
-"PO-Revision-Date: 2010-12-22 10:00+0000\n"
-"Last-Translator: Jarn AS <info@jarn.com>\n"
-"Language-Team: Jarn AS <info@jarn.com>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
@@ -16,9 +16,9 @@ msgstr ""
 
 #: intranett.theme/intranett/theme/profiles/default/types/Plone_Site.xml
 msgid "Edit"
-msgstr ""
+msgstr "Redigér"
 
 #: intranett.theme/intranett/theme/profiles/default/actions.xml
 msgid "Employees"
-msgstr ""
+msgstr "Ansatte"
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-10-21 07:46+0000\n"
+"POT-Creation-Date: 2010-12-22 09:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,117 +9,125 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
 
-#: ./browser/templates/overview.pt:68
-msgid "Create a new intranet"
-msgstr "Opprett nytt intranett"
-
-#: ./browser/templates/addsite.pt:13
-msgid "Create an intranet"
-msgstr "Opprett nytt intranett"
-
-#: ./browser/templates/addsite.pt:90
+#: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:68
 msgid "Create intranet"
 msgstr "Opprett nytt intranett"
 
-#: ./browser/templates/overview.pt:43
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:44
+msgid "Departments"
+msgstr "Avdelinger"
+
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:43
 msgid "This site configuration is outdated and needs to be upgraded:"
-msgstr ""
+msgstr "Nettstedskonfigurasjonen trenger oppgradering:"
 
-#: ./browser/templates/overview.pt:53
-msgid "Upgrade&hellip;"
-msgstr "Oppgrader&hellip;"
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:53
+msgid "Upgrade…"
+msgstr "Oppgrader…"
 
-#: ./browser/templates/overview.pt:35
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:35
 msgid "View your intranet"
 msgstr "Se intranettet"
 
-#: ./browser/templates/overview.pt:26
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:26
 msgid "Your intranet is up and running."
-msgstr "Intranettet ditt er klart"
+msgstr "Intranettet ditt er klart."
 
-#: ./browser/templates/overview.pt:61
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:61
 msgid "Your intranett.no instance has not been added yet:"
 msgstr ""
 
-#. Default: "A short overview of who you are and what you do. Will be displayed on your author page, linked from the items you create."
-#: ./userdataschema.py:39
+#. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
+#: intranett.policy/intranett/policy/userdataschema.py:37
 msgid "help_biography"
 msgstr "En kort oversikt over hvem du er og hva du gjør. Vil vises for andre på profilsiden din."
 
-#. Default: "Your department in the company."
-#: ./userdataschema.py:47
-msgid "help_department"
-msgstr ""
-
-#. Default: "Your location - either city and country - or in a company setting, where your office is located."
-#: ./userdataschema.py:53
-msgid "help_location"
-msgstr "Sted (By, land, kontor etc.)"
-
-#. Default: "Your mobile phone number."
-#: ./userdataschema.py:33
-msgid "help_mobile"
-msgstr "Mobiltelefonnummer"
-
-#. Default: "Your company phone number."
-#: ./userdataschema.py:27
-msgid "help_phone"
-msgstr "Telefonnummer arbeid"
-
 #. Default: "To add or change the portrait: click the \"Browse\" button; select a picture of yourself. We recommend to upload a square image not smaller than 300px wide by 300px tall."
-#: ./userdataschema.py:60
+#: intranett.policy/intranett/policy/userdataschema.py:58
+#, fuzzy
 msgid "help_portrait"
-msgstr ""
+msgstr "For å legge til et nytt portrett, trykk \"Bla igjennom\" og velg et bilde av deg selv. Anbefalt størrelse er 75 bildepunkter i bredden, 100 bildepunkter i høyden."
+
+#. Default: "Advanced Search…"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:86
+msgid "label_advanced_search"
+msgstr "Avansert søk…"
 
 #. Default: "Biography"
-#: ./userdataschema.py:38
+#: intranett.policy/intranett/policy/userdataschema.py:36
 msgid "label_biography"
 msgstr "Beskrivelse"
 
 #. Default: "Delete Portrait"
-#: ./userdataschema.py:68
+#: intranett.policy/intranett/policy/userdataschema.py:66
 msgid "label_delete_portrait"
 msgstr "Slett portrett"
 
 #. Default: "Department"
-#: ./userdataschema.py:46
+#: intranett.policy/intranett/policy/userdataschema.py:48
+#: intranett.theme/intranett/theme/browser/templates/user.pt:89
 msgid "label_department"
 msgstr "Avdeling"
 
 #. Default: "E-mail"
-#: ./userdataschema.py:20
+#: intranett.policy/intranett/policy/userdataschema.py:20
+#: intranett.theme/intranett/theme/browser/templates/user.pt:103
 msgid "label_email"
 msgstr "E-post"
 
 #. Default: "Full Name"
-#: ./userdataschema.py:15
+#: intranett.policy/intranett/policy/userdataschema.py:15
 msgid "label_full_name"
 msgstr "Fullt navn"
 
 #. Default: "Location"
-#: ./userdataschema.py:52
+#: intranett.policy/intranett/policy/userdataschema.py:53
+#: intranett.theme/intranett/theme/browser/templates/user.pt:96
 msgid "label_location"
 msgstr "Sted"
 
 #. Default: "Mobile phone"
-#: ./userdataschema.py:32
+#: intranett.policy/intranett/policy/userdataschema.py:31
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:90
+#: intranett.theme/intranett/theme/browser/templates/user.pt:120
 msgid "label_mobile"
 msgstr "Mobiltelefon"
 
+#. Default: "No matching results found."
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:85
+msgid "label_no_results_found"
+msgstr "Ingen resultater samsvarer med søket."
+
 #. Default: "Phone"
-#: ./userdataschema.py:26
+#: intranett.policy/intranett/policy/userdataschema.py:26
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:91
+#: intranett.theme/intranett/theme/browser/templates/user.pt:112
 msgid "label_phone"
 msgstr "Telefon"
 
 #. Default: "Portrait"
-#: ./userdataschema.py:59
+#: intranett.policy/intranett/policy/userdataschema.py:57
 msgid "label_portrait"
 msgstr "Portrett"
 
-#. Default: "Employees"
-#: actions/employee_listing
-msgid "Employees"
-msgstr "Ansatte"
+#. Default: "Position"
+#: intranett.policy/intranett/policy/userdataschema.py:43
+msgid "label_position"
+msgstr "Stilling"
 
+#. Default: "Show all items"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:87
+msgid "label_show_all"
+msgstr "Vis alle…"
+
+#. Default: "LiveSearch &#8595;"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:84
+msgid "legend_livesearch"
+msgstr "Hurtigsøk &#8595;"
 

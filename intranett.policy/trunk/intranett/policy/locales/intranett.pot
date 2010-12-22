@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2010-12-22 09:36+0000\n"
+"POT-Creation-Date: 2010-12-22 09:49+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -14,24 +14,13 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:68
-msgid "Create a new intranet"
-msgstr ""
-
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
-msgid "Create an intranet"
-msgstr ""
-
-#: intranett.policy/intranett/policy/browser/templates/addsite.pt:90
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:68
 msgid "Create intranet"
 msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:44
 msgid "Departments"
-msgstr ""
-
-#: intranett.theme/intranett/theme/profiles/default/actions.xml
-msgid "Employees"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:43
@@ -85,7 +74,7 @@ msgstr ""
 msgid "label_department"
 msgstr ""
 
-#. Default: "Email"
+#. Default: "E-mail"
 #: intranett.policy/intranett/policy/userdataschema.py:20
 #: intranett.theme/intranett/theme/browser/templates/user.pt:103
 msgid "label_email"
