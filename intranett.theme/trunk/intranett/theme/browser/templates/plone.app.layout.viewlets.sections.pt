@@ -13,6 +13,6 @@
             ><a href=""
                tal:attributes="href tab/url;
                                title tab/description|nothing;">
-            <span tal:replace="tab/name">Tab Name</span>
+            <span tal:replace="tab/name" i18n:translate="">Tab Name</span>
             <span class="toolTipArrow" tal:condition="python:selected_tab==tid">&nbsp;</span></a></li></tal:tabs></ul></nav>
 </tal:sections>
