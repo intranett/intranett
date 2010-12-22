@@ -66,3 +66,12 @@ The Ruby 1.8 version available via `rb-haml` is too outdated for our purposes.
 To update all CSS files from their SCSS source files, call::
 
   sass --update src/intranett.theme/intranett/theme/skins/intranett_theme_styles:src/intranett.theme/intranett/theme/skins/intranett_theme_styles
+
+
+I18N
+----
+
+To update the translation files, do::
+
+  sh src/intranett.policy/intranett/policy/rebuild.sh
+  sh src/intranett.policy/intranett/policy/sync.sh
