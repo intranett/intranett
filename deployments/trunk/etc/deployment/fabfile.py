@@ -45,8 +45,9 @@ def restore_db():
             print("There are not excactly 3 files in the snapshotbackups "
                   "directory, please investigate")
             sys.exit(1)
-        run('bin/supervisorctl stop zeo')
+        run('bin/supervisorctl stop varnish')
         run('bin/supervisorctl stop zope:*')
+        run('bin/supervisorctl stop zeo')
         run('bin/snapshotrestore')
         with settings(hide('warnings'), warn_only=True):
             run('rm -r var/blobstorage/*')
@@ -54,6 +55,8 @@ def restore_db():
         run('bin/supervisorctl start zeo')
         run('bin/supervisorctl start zope:instance1')
         run('bin/supervisorctl start zope:instance2')
+        time.sleep(30)
+        run('bin/supervisorctl start varnish')
 
 
 def dump_db():
