@@ -37,8 +37,9 @@ def svn_info():
 
 def dump_db():
     with cd(VENV):
-        with settings(hide('warnings'), warn_only=True):
-            run('rm var/snapshotbackups/*')
+        # We should cleanup some old snapshots after a while
+        # with settings(hide('warnings'), warn_only=True):
+        #     run('rm var/snapshotbackups/*')
         run('bin/snapshotbackup')
         run('tar czf var/snapshotbackups/%s-blobstorage.tgz var/blobstorage'%( datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")))
         #the blobstprage snapshot is best extracted using 'tar --strip-components 1 -xzf *-blobstorage.tgz' to remove the trailing var/ directory
