@@ -1,6 +1,7 @@
 import os
 import os.path
 import time
+from datetime import datetime
 
 from fabric.api import cd
 from fabric.api import env
@@ -39,7 +40,8 @@ def dump_db():
         with settings(hide('warnings'), warn_only=True):
             run('rm var/snapshotbackups/*')
         run('bin/snapshotbackup')
-
+        run('tar czf var/snapshotbackups/%s-blobstorage.tgz var/blobstorage'%( datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")))
+        #the blobstprage snapshot is best extracted using 'tar --strip-components 1 -xzf *-blobstorage.tgz' to remove the trailing var/ directory
 
 def download_last_dump():
     with settings(hide('warnings', 'running', 'stdout', 'stderr'),
