@@ -38,4 +38,13 @@
       profile="intranett.theme:default"
       />
 
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.theme from version 3 to 4"
+      description="Correct i18n domain of the employees tab action"
+      source="3"
+      destination="4"
+      handler="intranett.theme.upgradehandlers.employees_action_i18n_domain"
+      profile="intranett.theme:default"
+      />
+
 </configure>

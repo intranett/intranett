@@ -64,3 +64,13 @@ class TestUpgrades(IntranettTestCase):
         ids = js.getResourcesDict().keys()
         self.assert_('html5.js' not in ids)
         self.assert_('selectivizr.js' in ids)
+
+    def test_three_to_four(self):
+        from ..upgradehandlers import employees_action_i18n_domain
+        portal = self.layer['portal']
+        atool = getToolByName(portal, 'portal_actions')
+        atool.portal_tabs['employee-listing'].i18n_domain = 'intranett'
+        # Run the step
+        employees_action_i18n_domain(portal)
+        action = atool.portal_tabs['employee-listing']
+        self.assertEqual(action.i18n_domain, '')

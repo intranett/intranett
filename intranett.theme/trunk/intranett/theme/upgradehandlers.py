@@ -25,3 +25,8 @@ def add_selectivizr_remove_html5_js(context):
     sel.setConditionalcomment('lt IE 9')
     js.moveResourceBefore('selectivizr.js', 'tiny_mce.js')
     js.cookResources()
+
+
+def employees_action_i18n_domain(context):
+    atool = getToolByName(context, 'portal_actions')
+    atool.portal_tabs['employee-listing'].i18n_domain = ''

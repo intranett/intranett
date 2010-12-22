@@ -51,6 +51,7 @@ class TestEmployeeListing(IntranettTestCase):
         tabs = at.portal_tabs
         self.assert_('employee-listing' in tabs.objectIds(),
                      '"employee-listing" action is not registered.')
+        self.assertEqual(tabs['employee-listing'].i18n_domain, '')
 
     def test_list_employees(self):
         portal = self.layer['portal']
