@@ -4,7 +4,7 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="intranett">
 <body>
 
     <metal:content fill-slot="content"
@@ -12,34 +12,23 @@
                                department_request python:request.get('department', None);
                                employees python:department_request and view.employees(department_request) or view.employees()">
 
-        <!-- <dl tal:condition="department_request"
-            class="portalMessage info visualClear">
-            <dt i18n:translate="">Info</dt>
-            <dd i18n:translate="number_of_employees_found" i18n:domain="intranett">
-                <tal:employees_number i18n:name="employees_number" content="python:len(employees)" />
-                <tal:employess_text>employees are found in</tal:employess_text>
-                <b tal:content="department_request" i18n:name="employees_department">Department</b>
-                department.
-            </dd>
-        </dl> -->
-        
         <article id="content">
-            
+
             <header>
                 <tal:departmentview condition="department_request">
                     <h1 class="documentFirstHeading" tal:condition="department_request">
                         <span tal:content="department_request" /> department
-                    </h1>                
+                    </h1>
                     <div class="documentDescription">
                         <a href="" title="Show all employees"
             tal:condition="department_request"
             tal:attributes="href string:${context/absolute_url}/employee-listing">Show employees of all departments?</a>
                     </div>
                 </tal:departmentview>
-                <h1 class="documentFirstHeading" tal:condition="not:department_request" i18n:translate="header_employees">Employees</h1>                
+                <h1 class="documentFirstHeading" tal:condition="not:department_request" i18n:translate="header_employees">Employees</h1>
             </header>
             <div id="content-core">
-                
+
                 <div id="departments-wrapper" tal:condition="python:view.departments() and not department_request">
                     <strong><span tal:omit-tag=""
                                   i18n:translate=""
@@ -53,7 +42,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div id="employee-listing-wrapper">
                     <tal:employee repeat="employee employees">
                     <div class="tileItem visualIEFloatFix row"
@@ -77,9 +66,6 @@
                                        tal:content="employee/fullname | employee/username"
                                        tal:attributes="href string:$portal_url/@@user?name=${employee/username};
                                                        title employee/fullname">Test Page</a>
-                                    <!-- <sup class="manageUser"
-                                         tal:condition="view/can_manage"><a href="" title=""
-                                       tal:attributes="href string:$portal_url/@@user-information?userid=${employee/username};">Edit</a></sup> -->
                                 </span>
                             </h2>
                             <div class="tileBody" i18n:domain="intranett">
