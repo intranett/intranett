@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9 - unreleased
+0.9 - 2010-12-22
 ----------------
 
 - Cleaned up employee listing template and correct i18n tags.
