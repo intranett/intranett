@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-12-22 09:49+0000\n"
+"POT-Creation-Date: 2010-12-22 10:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,9 +19,13 @@ msgstr ""
 msgid "Create intranet"
 msgstr "Opprett nytt intranett"
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:44
-msgid "Departments"
-msgstr "Avdelinger"
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:40
+msgid "Departments:"
+msgstr "Avdelinger:"
+
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:32
+msgid "Employees"
+msgstr "Ansatte"
 
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:43
 msgid "This site configuration is outdated and needs to be upgraded:"
@@ -94,7 +98,7 @@ msgstr "Sted"
 
 #. Default: "Mobile phone"
 #: intranett.policy/intranett/policy/userdataschema.py:31
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:90
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:86
 #: intranett.theme/intranett/theme/browser/templates/user.pt:120
 msgid "label_mobile"
 msgstr "Mobiltelefon"
@@ -106,7 +110,7 @@ msgstr "Ingen resultater samsvarer med søket."
 
 #. Default: "Phone"
 #: intranett.policy/intranett/policy/userdataschema.py:26
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:91
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:92
 #: intranett.theme/intranett/theme/browser/templates/user.pt:112
 msgid "label_phone"
 msgstr "Telefon"
