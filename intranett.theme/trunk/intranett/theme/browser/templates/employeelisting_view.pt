@@ -73,7 +73,7 @@
                                                            title employee/fullname">Test Page</a>
                                     </span>
                                 </h2>
-                                <div class="tileBody" i18n:domain="intranett">
+                                <div class="tileBody">
                                     <tal:position condition="employee/position">
                                         <span tal:replace="employee/position" />,
                                     </tal:position>
