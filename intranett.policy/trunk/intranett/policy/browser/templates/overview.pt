@@ -67,7 +67,7 @@
                       tal:attributes="action string:${context/absolute_url}/@@plone-addsite">
                     <input type="submit"
                            i18n:attributes="value;"
-                           value="Create a new intranet" />
+                           value="Create intranet" />
                 </form>
             </li>
         </ul>
