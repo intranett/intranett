@@ -1,0 +1,11 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="intranett">
+
+  <browser:resource
+      file="jarn-logo.jpg"
+      name="jarn-logo.jpg"
+      />
+
+</configure>
