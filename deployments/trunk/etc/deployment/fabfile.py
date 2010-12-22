@@ -1,3 +1,4 @@
+import sys
 import os
 import os.path
 import time
@@ -6,6 +7,7 @@ from datetime import datetime
 from fabric.api import cd
 from fabric.api import env
 from fabric.api import get
+from fabric.api import put
 from fabric.api import hide
 from fabric.api import local
 from fabric.api import run
@@ -35,6 +37,22 @@ def svn_info():
         run('pwd && svn info')
 
 
+def restore_db():
+    with cd(VENV):
+        existing = run('ls -rt1 %s/var/snapshotbackups/*' % VENV)
+        if len(existing.split('\n')) != 3:
+            print("There are not excactly 3 files in the snapshotbackups directory, please investigate"); sys.exit(1)
+        run('bin/supervisorctl stop zeo')
+        run('bin/supervisorctl stop zope:*')
+        run('bin/snapshotrestore')
+        with settings(hide('warnings'), warn_only=True):
+            run('rm -r var/blobstorage/*')
+        run('tar xzf var/snapshotbackups/*-blobstorage.tgz')
+        run('bin/supervisorctl start zeo')
+        run('bin/supervisorctl start zope:instance1')
+        run('bin/supervisorctl start zope:instance2')
+
+
 def dump_db():
     with cd(VENV):
         # We should cleanup some old snapshots after a while
@@ -42,14 +60,43 @@ def dump_db():
         #     run('rm var/snapshotbackups/*')
         run('bin/snapshotbackup')
         run('tar czf var/snapshotbackups/%s-blobstorage.tgz var/blobstorage'%( datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")))
-        #the blobstprage snapshot is best extracted using 'tar --strip-components 1 -xzf *-blobstorage.tgz' to remove the trailing var/ directory
 
 def download_last_dump():
+    localdir = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups',env.host_string)
+    snapshotdir = os.path.join(BUILDOUT_ROOT, 'var', 'snapshotbackups')
+    with settings(hide('warnings'), warn_only=True):
+        try:
+            os.makedirs(localdir)
+        except OSError:
+            print "%s directory exists, not creating"%localdir
+        local('rm %s/*'%(localdir))
+        ##If the snapshotdir is a file (which it should not be) or a symlink we delete it and create a new symlink to the latest download.
+        try:
+            os.remove(snapshotdir)
+        except OSError:
+            print "%s is not a symlink, not removing"%snapshotdir
+        try:
+            os.symlink(localdir,snapshotdir)
+        except OSError:
+            print "%s allready exists, can't create symlink to %s" %(snapshotdir,localdir)
+            
+
     with settings(hide('warnings', 'running', 'stdout', 'stderr'),
                   warn_only=True):
         existing = run('ls -rt1 %s/var/snapshotbackups/*' % VENV)
     for e in existing.split('\n'):
-        get(e, os.path.join(BUILDOUT_ROOT, 'var', 'snapshotbackups'))
+        get(e,localdir)
+
+
+def upload_last_dump():
+    localdir = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups',env.host_string)
+    existing = local('ls -rt1 %s/*' % localdir)
+    if len(existing.split('\n')) != 3:
+        print("There are not excactly 3 files in the local snapshotbackups directory, please investigate"); sys.exit(1)
+    with cd(VENV):
+        with settings(hide('warnings'), warn_only=True):
+            run('rm var/snapshotbackups/*')
+        put("%s/*"%localdir,"var/snapshotbackups/")
 
 
 def reload_nginx():
