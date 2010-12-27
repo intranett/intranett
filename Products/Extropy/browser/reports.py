@@ -295,10 +295,10 @@ class ColIterator:
 
     def rowheader(self):
         rh = self.data._rows[self.rows.pos-1]
-        if isinstance(rh, (list,tuple)):
-            return ','.join([str(r) for r in rh])
+        if not isinstance(rh, (list,tuple)):
+            return rh,
         else:
-            return str(rh)
+            return rh
 
     def __str__(self):
         return str(self.data._cols[self.pos-1])
@@ -433,5 +433,5 @@ class CSVView(TableView):
         else:
             out.append(','.join([rh.keyname for rh in data.getRowHeaders()[0]] + [str(x) for x in data.getColHeaders()]))
             for row in data.rows():
-                out.append(','.join([row.rowheader()] + [str(col) for col in row]))
+                out.append(','.join([str(r) for r in row.rowheader()] + [str(col) for col in row]))
         return '\n'.join(out)
