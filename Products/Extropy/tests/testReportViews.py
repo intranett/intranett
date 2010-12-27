@@ -22,6 +22,12 @@ class TestReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.tool = self.portal.extropy_timetracker_tool
         self.request = self.app.REQUEST
 
+    def testReportKeyUnicodeRendering(self):
+        key = ReportKey(2001)
+        unicode(key)
+        key = ReportKey('\xc3\x98ks')
+        unicode(key)
+
     def testInstantiateView(self):
         view = ReportView(self.portal, self.request)
         attributes = ('portal_membership', 'extropy_tracking_tool',

@@ -11,15 +11,16 @@ from Products.CMFCore import utils as cmf_utils
 # And the ability to print some data differently (month 12 is December)
 class ReportKey:
     def __init__(self, key, data=None):
-        self.keyname = key
+        self.keyname = str(key)
         if key == 'activity' and data is not None:
             self.activity(key, data)
         elif data is None:
-            self.key = self.keyname
+            self.key = key
         else:
             nodekey = data
-            for k in key.split('/'):
-                nodekey = getattr(nodekey, k)
+            if isinstance(key, basestring):
+                for k in key.split('/'):
+                    nodekey = getattr(nodekey, k)
             if callable(nodekey):
                 nodekey = nodekey()
             self.key = nodekey
@@ -67,6 +68,10 @@ class ReportKey:
         if not isinstance(self.key, basestring):
             return str(self.key)
         return self.key
+
+    def __unicode__(self):
+        return str(self).decode('utf-8')
+
 
 def iteratorFactory(key, parent=None):
     return ReportIterator(key, parent)
