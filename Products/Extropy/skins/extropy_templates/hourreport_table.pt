@@ -11,7 +11,7 @@
                   group_by request/group_by|string:getBudgetCategory:Creator;
                   group_by python:group_by and same_type(group_by,'') and group_by.split(':') or group_by;
                   query python:{};
-                  dummy python:[query.setdefault(x,request.get(x)) for x in ['review_state','portal_type','getBudgetCategory', 'local'] if request.has_key(x)];
+                  dummy python:[query.setdefault(x,request.get(x)) for x in ['review_state','portal_type','getBudgetCategory', 'local'] if request.get(x, None)];
                   results python:view.getReportData(start=start,end=end,username=username,group_by=group_by, **query)">
 
         <h1>Hour report</h1>
@@ -20,14 +20,38 @@
             This lists the hours registered
         </div>
 
-        <h2>Links</h2>
+        <a tal:define="csvquerystring python:'&amp;'.join(['%s=%s'%i for i in request.form.items()])"
+           tal:attributes="href string:${request/URL1}/hourreport_csv?${csvquerystring}">CSV export</a>
+
+        <h3>Input form</h3>
+        <form tal:attributes="action request/URL0">
+            Local search (this path and below) <input name="local:boolean" type="checkbox" tal:attributes="checked python:request.get('local', None) and 'checked'"> <br />
+            Start <input type="text" name="start" tal:attributes="value start"> (YYYY/MM/DD) <br/>
+            End <input type="text" name="end" tal:attributes="value end"> (YYYY/MM/DD) <br/>
+            Group by <input type="text" name="group_by" size="40" tal:attributes="value python:':'.join(group_by)"> <br/>
+            Group by is a list of fields separated by : (colon)<br />
+            Some available values for group by are activity (this extracts task/ticket numbers, and keywords like project mgmt, meeting, testing, release etc), <span tal:define="metadatafields context/extropy_timetracker_tool/schema;
+                                                                               blacklist python:['Description','ExpiresDate','getId','ModificationDate','review_state','EffectiveDate','portal_type','UID','created','getIcon','modified','CreationDate','Subject'];
+                                                                               metadatafields python:[f for f in metadatafields if f not in blacklist]"
+                                                                   tal:replace="python: ', '.join(metadatafields)">Schema</span> <br />
+            In addition, date fields can have operators, like start/year, start/week, start/day (DateTime interface).
+            Budget category 
+            <select name="getBudgetCategory">
+                <option value=""></option>
+                <option tal:repeat="category python:context.extropy_timetracker_tool.uniqueValuesFor('getBudgetCategory')"
+                        tal:attributes="value category;
+                                        selected python:request.get('getBudgetCategory',None) == category and 'selected' or None;"
+                        tal:content="category">Category</option>
+            </select> <br />
+            <input type="submit" value="Submit" />
+        </form>
+
+        <h3>Quick Links</h3>
         <a tal:attributes="href string:${request/URL0}?group_by=start/month:Creator&amp;getBudgetCategory=Billable">Month:Creator - Billable</a>
         <tal:years repeat="year python:range(2005, DateTime().year() + 1)">
           (<a tal:attributes="href string:${request/URL0}?group_by=start/month:Creator&amp;getBudgetCategory=Billable&amp;start=$year/01/01&amp;end=$year/12/31"
               tal:content="year">Year</a>)
         </tal:years>
-        <br/>
-        <a tal:attributes="href string:${request/URL0}?group_by=start/month:getBudgetCategory">Month:Budget category</a>
         <br/>
         <a tal:define="now python:DateTime();
                        thismonth python:DateTime('%s/%s/01'%(now.year(), now.month()));
@@ -45,7 +69,6 @@
                width="100%"
                metal:define-macro="reportnodenestedtable">
             <thead>
-                <td />
                 <th tal:repeat="col results/getTableHeaders">
                     <span tal:replace="col" />
                 </th>
