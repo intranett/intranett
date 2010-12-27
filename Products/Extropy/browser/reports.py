@@ -288,16 +288,20 @@ class ColIterator:
         return self.data._cols[self.pos-1]
 
     def value(self):
-        return self.data._data.get((self.data._rows[self.rows.pos-1], self.data._cols[self.pos-1]),0)
+        return self.data._data.get(self.data._rows[self.rows.pos-1] + (self.data._cols[self.pos-1],),0)
 
     def reset(self):
         self.pos = 0
 
     def rowheader(self):
-        return "%s" % self.data._rows[self.rows.pos-1]
+        rh = self.data._rows[self.rows.pos-1]
+        if isinstance(rh, (list,tuple)):
+            return ','.join([str(r) for r in rh])
+        else:
+            return str(rh)
 
     def __str__(self):
-        return '%s' % self.data._cols[self.pos-1]
+        return str(self.data._cols[self.pos-1])
 
 
 class RowIterator:
@@ -334,17 +338,17 @@ class TableData:
         data = {} # Keeping data itself
         cols = {} # Keeping col keys
         rows = {} # Keeping row keys
-        col,row = keys
+        rkeys,ckey = keys[:-1],keys[-1]
         for brain in brains:
             hours = brain.workedHours
-            colkey = ReportKey(col, brain)
-            rowkey = ReportKey(row, brain)
+            colkey = ReportKey(ckey, brain)
             cols[colkey] = 1
-            rows[rowkey] = 1
-            datakey = (rowkey, colkey)
+            rowkeys = tuple([ReportKey(row, brain) for row in rkeys])
+            rows[rowkeys] = 1
+            datakey = rowkeys + (colkey,)
             value = data.get(datakey, 0)
             value += hours
-            data[(rowkey, colkey)] = value
+            data[datakey] = value
         self._data = data
         self._cols = cols.keys()
         self._rows = rows.keys()
@@ -358,6 +362,13 @@ class TableData:
     def rows(self):
         return RowIterator(self)
 
+    # HTML helpers that should be in view or something
+    def getTableHeaders(self):
+        if len(self.getRowHeaders()) == 1:
+            return [str(x) for x in self.getColHeaders()]
+        else:
+            return [rh.keyname for rh in data.getRowHeaders()[0]] + [str(x) for x in data.getColHeaders()]
+
 
 class TableView(ReportView):
     """Hour report
@@ -369,9 +380,6 @@ class TableView(ReportView):
             group_by = ['Creator', 'getBudgetCategory']
         if isinstance(group_by, basestring):
             group_by = group_by.split(':')
-        # Only handle 2D data
-        if len(group_by) > 2:
-            group_by = group_by[:2]
 
         if not query.has_key('portal_type'):
             query['portal_type']='ExtropyHours'
@@ -423,8 +431,7 @@ class CSVView(TableView):
             for row in data.rows():
                 out.append(','.join([str(col) for col in row]))
         else:
-            out.append(','.join([data.getRowHeaders()[0].keyname] + [str(x) for x in data.getColHeaders()]))
+            out.append(','.join([rh.keyname for rh in data.getRowHeaders()[0]] + [str(x) for x in data.getColHeaders()]))
             for row in data.rows():
                 out.append(','.join([row.rowheader()] + [str(col) for col in row]))
-
         return '\n'.join(out)

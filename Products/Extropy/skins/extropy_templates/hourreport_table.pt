@@ -46,16 +46,18 @@
                metal:define-macro="reportnodenestedtable">
             <thead>
                 <td />
-                <th tal:repeat="col results/getColHeaders">
+                <th tal:repeat="col results/getTableHeaders">
                     <span tal:replace="col" />
                 </th>
             </thead>
             <tbody>
                 <tr tal:repeat="row results/rows">
-                    <th tal:content="row/rowheader">Row header</th>
+                    <td tal:repeat="rh row/rowheader">
+                        <span tal:replace="rh">Row header</span>
+                    </td>
 
                     <td tal:repeat="col row">
-                        <span tal:replace="col" />
+                        <span tal:replace="col">Value</span>
                     </td>
                 </tr>
             </tbody>

@@ -70,11 +70,38 @@ class TestReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         folder.hourglass.invokeFactory('ExtropyHours','test3', title='#456 more work', startDate='2002/02/01', endDate='2002/02/02')
         self.request.set('group_by', 'activity:getBudgetCategory')
         out = view()
-        self.failUnlessEqual(out, 'Project mgmt,456\n24.0,48.0')
+        self.failUnlessEqual(out, 'activity,Billable\n'\
+                                  'Project mgmt,24.0\n'\
+                                  '456,48.0')
 
         folder.hourglass.invokeFactory('ExtropyHours','test4', title='#457 even more work', startDate='2002/02/01', endDate='2002/02/02',budgetCategory='Administration')
         out = view()
-        self.failUnlessEqual(out, 'getBudgetCategory,Project mgmt,456,457\nAdministration,0,0,24.0\nBillable,24.0,48.0,0')
+        self.failUnlessEqual(out, 'activity,Administration,Billable\n'\
+                                  '457,24.0,0\n'\
+                                  'Project mgmt,0,24.0\n'\
+                                  '456,0,48.0')
+
+    def testGetReportMultiGrouping(self):
+        view = CSVView(self.portal, self.request)
+        self.folder.invokeFactory('Folder', 'extropy')
+        folder = self.folder.extropy
+        _createObjectByType('ExtropyHourGlass',folder, 'hourglass')
+        folder.hourglass.invokeFactory('ExtropyHours','test1', title='Project management', startDate='2001/01/01', endDate='2001/01/02')
+        folder.hourglass.invokeFactory('ExtropyHours','test2', title='#456 work', startDate='2002/01/01', endDate='2002/01/02')
+        folder.hourglass.invokeFactory('ExtropyHours','test3', title='#456 more work', startDate='2002/02/01', endDate='2002/02/02')
+        self.request.set('group_by', 'activity:getBudgetCategory:start/month')
+        out = view()
+        self.failUnlessEqual(out, 'activity,getBudgetCategory,January,February\n'\
+                                  'Project mgmt,Billable,24.0,0\n'\
+                                  '456,Billable,24.0,24.0')
+
+        folder.hourglass.invokeFactory('ExtropyHours','test4', title='#457 even more work', startDate='2002/02/01', endDate='2002/02/02',budgetCategory='Administration')
+        out = view()
+        self.failUnlessEqual(out, 
+                            'activity,getBudgetCategory,January,February\n'\
+                            'Project mgmt,Billable,24.0,0\n'\
+                            '457,Administration,0,24.0\n'\
+                            '456,Billable,24.0,24.0')
 
 
     def testIteratorFactory(self):
