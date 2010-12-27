@@ -367,7 +367,7 @@ class TableData:
         if len(self.getRowHeaders()) == 1:
             return [str(x) for x in self.getColHeaders()]
         else:
-            return [rh.keyname for rh in data.getRowHeaders()[0]] + [str(x) for x in data.getColHeaders()]
+            return [rh.keyname for rh in self.getRowHeaders()[0]] + [str(x) for x in self.getColHeaders()]
 
 
 class TableView(ReportView):
