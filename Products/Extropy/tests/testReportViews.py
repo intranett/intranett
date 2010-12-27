@@ -71,15 +71,17 @@ class TestReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.request.set('group_by', 'activity:getBudgetCategory')
         out = view()
         self.failUnlessEqual(out, 'activity,Billable\n'\
-                                  'Project mgmt,24.0\n'\
-                                  '456,48.0')
+                                  '456,48.0\n'\
+                                  'Project mgmt,24.0'
+                                  )
 
         folder.hourglass.invokeFactory('ExtropyHours','test4', title='#457 even more work', startDate='2002/02/01', endDate='2002/02/02',budgetCategory='Administration')
         out = view()
         self.failUnlessEqual(out, 'activity,Administration,Billable\n'\
+                                  '456,0,48.0\n'\
                                   '457,24.0,0\n'\
-                                  'Project mgmt,0,24.0\n'\
-                                  '456,0,48.0')
+                                  'Project mgmt,0,24.0'\
+                                  )
 
     def testGetReportMultiGrouping(self):
         view = CSVView(self.portal, self.request)
@@ -92,16 +94,18 @@ class TestReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.request.set('group_by', 'activity:getBudgetCategory:start/month')
         out = view()
         self.failUnlessEqual(out, 'activity,getBudgetCategory,January,February\n'\
-                                  'Project mgmt,Billable,24.0,0\n'\
-                                  '456,Billable,24.0,24.0')
+                                  '456,Billable,24.0,24.0\n'\
+                                  'Project mgmt,Billable,24.0,0'\
+                                  )
 
         folder.hourglass.invokeFactory('ExtropyHours','test4', title='#457 even more work', startDate='2002/02/01', endDate='2002/02/02',budgetCategory='Administration')
         out = view()
         self.failUnlessEqual(out, 
                             'activity,getBudgetCategory,January,February\n'\
-                            'Project mgmt,Billable,24.0,0\n'\
+                            '456,Billable,24.0,24.0\n'\
                             '457,Administration,0,24.0\n'\
-                            '456,Billable,24.0,24.0')
+                            'Project mgmt,Billable,24.0,0'
+                            )
 
 
     def testIteratorFactory(self):

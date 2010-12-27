@@ -351,7 +351,9 @@ class TableData:
             data[datakey] = value
         self._data = data
         self._cols = cols.keys()
+        self._cols.sort()
         self._rows = rows.keys()
+        self._rows.sort()
 
     def getColHeaders(self):
         return self._cols
