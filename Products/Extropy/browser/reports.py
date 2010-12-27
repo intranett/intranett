@@ -241,10 +241,10 @@ class ReportView(Five.BrowserView):
         if query.has_key('local'):
             query['path'] = '/'.join(self.context.getPhysicalPath())
 
-        if start is not None or end is not None:
-            if start is None:
+        if start or end:
+            if not start:
                 start = DateTime('2000/01/01')
-            if end is None:
+            if not end:
                 end = DateTime()
             query['start'] = {'query' : (start,end) ,
                               'range' : 'minmax'}
@@ -394,10 +394,10 @@ class TableView(ReportView):
         if query.has_key('local'):
             query['path'] = '/'.join(self.context.getPhysicalPath())
 
-        if start is not None or end is not None:
-            if start is None:
+        if start or end:
+            if not start:
                 start = DateTime('2000/01/01')
-            if end is None:
+            if not end:
                 end = DateTime()
             query['start'] = {'query' : (start,end) ,
                               'range' : 'minmax'}
