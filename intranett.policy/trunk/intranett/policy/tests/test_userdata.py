@@ -204,6 +204,18 @@ class TestUserPortraits(IntranettTestCase):
         mt.changeMemberPortrait(image_gif, id='')
 
 
+class TestImageCropping(IntranettTestCase):
+
+    def test_image_crop(self):
+        from intranett.policy.tools import crop_and_scale_image
+        from PIL import Image as PILImage
+        path = os.path.join(TEST_IMAGES, 'idiot.jpg')
+        old_image = open(path)
+        new_image_data, mimetype = crop_and_scale_image(old_image)
+        new_image = PILImage.open(new_image_data)
+        self.assertEqual(new_image.size, (100, 100))
+
+
 class TestUserSearch(IntranettTestCase):
 
     def test_type(self):

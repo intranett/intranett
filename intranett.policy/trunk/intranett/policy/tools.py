@@ -1,4 +1,8 @@
+from cStringIO import StringIO
+
 from OFS.Image import Image
+from PIL import Image as PILImage
+
 from App.class_init import InitializeClass
 from Acquisition import aq_base
 from AccessControl import ClassSecurityInfo
@@ -15,6 +19,56 @@ from Products.PlonePAS.utils import scale_image
 
 PORTRAIT_SIZE = (300, 300, )
 PORTRAIT_THUMBNAIL_SIZE = (100, 100, )
+
+
+def crop_and_scale_image(image_file,
+                         max_size=PORTRAIT_THUMBNAIL_SIZE,
+                         default_format='PNG'):
+    """Crop the image from the center so that the horizontal and vertical
+    dimensions are the same, then rescale.
+    """
+    size = (int(max_size[0]), int(max_size[1]))
+    image = PILImage.open(image_file)
+    format = image.format
+    mimetype = 'image/%s'%format.lower()
+    cur_size = image.size
+
+    # Preserve palletted mode.
+    original_mode = image.mode
+    if original_mode == '1':
+        image = image.convert('L')
+    elif original_mode == 'P':
+        image = image.convert('RGBA')
+
+    # Do we need cropping?
+    if cur_size[0] != cur_size[1]:
+        min_size = min(cur_size[0], cur_size[1])
+        max_size = max(cur_size[0], cur_size[1])
+
+        # Let's always do modulo 2 arithmetic to keep things simple;)
+        if (max_size - min_size) % 2 != 0:
+            max_size = max_size - 1
+
+        margin = (max_size - min_size) / 2
+        box = (0, 0, min_size, min_size)
+
+        if min_size == cur_size[1]:
+            box = (margin, 0, max_size - margin, min_size)
+        else:
+            box = (0, margin, min_size, max_size - margin)
+        image = image.crop(box)
+
+    # Now scale....
+    image.thumbnail(size, resample=PILImage.ANTIALIAS)
+
+    # Again go back to palleted mode if necessary.
+    if original_mode == 'P' and format in ('GIF', 'PNG'):
+        image = image.convert('P')
+
+    new_file = StringIO()
+    image.save(new_file, format, quality=88)
+    new_file.seek(0)
+    return new_file, mimetype
 
 
 def safe_transform(context, text, mt='text/x-html-safe'):
@@ -119,7 +173,7 @@ class MemberDataTool(BaseMemberDataTool):
         """
         id = u.getId()
         members = self._members
-        if not members.has_key(id):
+        if id not in members:
             base = aq_base(self)
             members[id] = MemberData(base, id)
         return members[id].__of__(self).__of__(u)
@@ -162,8 +216,7 @@ class MembershipTool(BaseMembershipTool):
             membertool._setPortrait(image, safe_id)
             # Now for thumbnails
             portrait.seek(0)
-            scaled, mimetype = scale_image(portrait,
-                                           max_size=PORTRAIT_THUMBNAIL_SIZE)
+            scaled, mimetype = crop_and_scale_image(portrait)
             image = Image(id=safe_id, file=scaled, title='')
             membertool._setPortrait(image, safe_id, thumbnail=True)
 
@@ -173,7 +226,7 @@ class MembershipTool(BaseMembershipTool):
         Modified to make it possible to return the thumbnail portrait.
         """
         safe_id = self._getSafeMemberId(id)
-        membertool   = getToolByName(self, 'portal_memberdata')
+        membertool = getToolByName(self, 'portal_memberdata')
 
         if not safe_id:
             safe_id = self.getAuthenticatedMember().getId()
@@ -191,4 +244,3 @@ class MembershipTool(BaseMembershipTool):
 def getUserFriendlyTypes(self, typesList=[]):
     friendlyTypes = self._old_getUserFriendlyTypes(typesList)
     return friendlyTypes + ['MemberData']
-

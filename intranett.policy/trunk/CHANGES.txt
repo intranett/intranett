@@ -4,6 +4,9 @@ Changelog
 1.3 - unreleased
 ----------------
 
+- Member portraits are now cropped in order to always result to a (100,100)
+  image.
+  [ggozad]
 
 1.2 - 2010-12-22
 ----------------
