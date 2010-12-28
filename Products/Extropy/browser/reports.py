@@ -273,10 +273,11 @@ class ReportView(Five.BrowserView):
 class ColIterator:
     __allow_access_to_unprotected_subobjects__ = 1
 
-    def __init__(self, tabledata, rowiterator):
+    def __init__(self, tabledata, rowiterator, pos):
         self.data = tabledata
         self.rows = rowiterator
-        self.pos=0
+        self.pos = 0
+        self.rowpos = pos
         self.upper = len(self.data._cols)
 
     def __iter__(self):
@@ -293,13 +294,13 @@ class ColIterator:
         return self.data._cols[self.pos-1]
 
     def value(self):
-        return self.data._data.get(self.data._rows[self.rows.pos-1] + (self.data._cols[self.pos-1],),0)
+        return self.data._data.get(self.data._rows[self.rowpos-1] + (self.data._cols[self.pos-1],),0)
 
     def reset(self):
         self.pos = 0
 
     def rowheader(self):
-        rh = self.data._rows[self.rows.pos-1]
+        rh = self.data._rows[self.rowpos-1]
         if not isinstance(rh, (list,tuple)):
             return rh,
         else:
@@ -324,7 +325,7 @@ class RowIterator:
     def next(self):
         if self.pos < self.upper:
             self.pos += 1
-            return ColIterator(self.data, self)
+            return ColIterator(self.data, self, self.pos)
         raise StopIteration, 'Reached upper bounds'
 
     def reset(self):
