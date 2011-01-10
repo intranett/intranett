@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=REQUEST=None,show_all=0,quote_logic=0,quote_logic_indexes=['SearchableText','Description','Title'],use_types_blacklist=False,show_inactive=False,use_navigation_root=False,start=None,rows=None
+##parameters=REQUEST=None,show_all=0,quote_logic=0,quote_logic_indexes=['SearchableText','Description','Title'],use_types_blacklist=False,show_inactive=False,use_navigation_root=False,b_start=None,b_size=None
 ##title=wraps the portal_catalog with a rules qualified query
 ##
 from ZODB.POSException import ConflictError
@@ -32,7 +32,7 @@ def quotequery(s):
         terms = s.split()
     except ConflictError:
         raise
-    except:
+    except Exception:
         return s
     tokens = ('OR', 'AND', 'NOT')
     s_tokens = ('OR', 'AND')
@@ -73,7 +73,7 @@ def rootAtNavigationRoot(query):
 
 # Avoid creating a session implicitly.
 for k in REQUEST.keys():
-    if k in ('SESSION',):
+    if k == 'SESSION':
         continue
     v = REQUEST.get(k)
     if v and k in indexes:
@@ -86,26 +86,26 @@ for k in REQUEST.keys():
     elif k.endswith('_usage'):
         key = k[:-6]
         param, value = v.split(':')
-        second_pass[key] = {param:value}
+        second_pass[key] = {param: value}
     elif k in ('sort_on', 'sort_order', 'sort_limit'):
         if k == 'sort_limit' and not same_type(v, 0):
             query[k] = int(v)
         else:
             query[k] = v
-    elif k in ('fq', 'fl', 'facet', 'start', 'rows') or k.startswith('facet.'):
+    elif k in ('fq', 'fl', 'facet', 'b_start', 'b_size') or k.startswith('facet.'):
         query[k] = v
 
 for k, v in second_pass.items():
     qs = query.get(k)
     if qs is None:
         continue
-    query[k] = q = {'query':qs}
+    query[k] = q = {'query': qs}
     q.update(v)
 
-if start is not None:
-    query['start'] = start
-if rows is not None:
-    query['rows'] = rows
+if b_start is not None:
+    query['b_start'] = b_start
+if b_size is not None:
+    query['b_size'] = b_size
 
 # doesn't normal call catalog unless some field has been queried
 # against. if you want to call the catalog _regardless_ of whether
