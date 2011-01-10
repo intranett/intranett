@@ -162,6 +162,8 @@ def init_server():
     # reload nginx so we pick up the new local/jarn.conf file and the buildout
     # local nginx-sites one
     reload_nginx()
+    with cd(VENV):
+        run('bin/supervisord')
 
 
 def _add_nginx_include():
