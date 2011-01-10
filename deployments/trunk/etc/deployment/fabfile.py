@@ -150,6 +150,7 @@ def init_server():
     envvars = _set_environment_vars()
     _set_cron_mailto()
     _disable_svn_store_passwords()
+    _add_nginx_include()
     _virtualenv()
 
     # switch / checkout svn
@@ -158,6 +159,16 @@ def init_server():
     _buildout(envvars=envvars)
     initial = command == 'co'
     _create_plone_site(initial=initial)
+    # reload nginx so we pick up the new local/jarn.conf file and the buildout
+    # local nginx-sites one
+    reload_nginx()
+
+
+def _add_nginx_include():
+    with cd('/etc/nginx/local'):
+        text = 'include /srv/jarn/nginx-sites/*.conf;\n'
+        run('echo -e "{text}" > jarn.conf'.format(text=text))
+        run('chmod 664 jarn.conf')
 
 
 def _buildout(envvars, newest=True):
