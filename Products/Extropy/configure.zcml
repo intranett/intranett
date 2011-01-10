@@ -16,9 +16,9 @@
 
   <!-- Uncomment this to enable Solr search again - but only after the
        actual search quality got better. -->
-  <!-- <utility component=".solr.solr_config" />
+  <utility component=".solr.solr_config" />
   <utility factory="collective.solr.manager.SolrConnectionManager" />
-  <utility factory="collective.solr.indexer.SolrIndexProcessor" name="solr" /> -->
+  <utility factory="collective.solr.indexer.SolrIndexProcessor" name="solr" />
 
   <cmf:registerDirectory
       name="skins"
