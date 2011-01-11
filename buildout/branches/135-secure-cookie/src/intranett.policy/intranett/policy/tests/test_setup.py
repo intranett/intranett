@@ -182,6 +182,11 @@ class TestSiteSetup(IntranettTestCase):
         self.assertNotEquals(mailhost.smtp_host, '')
         self.assertNotEquals(mailhost.smtp_port, '')
 
+    def test_secure_cookie(self):
+        portal = self.layer['portal']
+        acl = aq_get(portal, 'acl_users')
+        self.assertEquals(acl.session.getProperty('secure'), True)
+
 
 class TestAdmin(IntranettTestCase):
 

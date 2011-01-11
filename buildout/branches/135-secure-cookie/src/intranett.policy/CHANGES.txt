@@ -8,6 +8,10 @@ Changelog
   image.
   [ggozad]
 
+- Sent authentication cookies only over secure connections. This refs
+  https://jira.jarn.com/browse/INTRANETT-135.
+  [hannosch]
+
 1.2 - 2010-12-22
 ----------------
 
