@@ -1,0 +1,191 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+    <metal:block fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+</head>
+
+<body>
+
+<metal:main fill-slot="content">
+    <tal:main-macro metal:define-macro="main"
+                    tal:define="isAnon context/@@plone_portal_state/anonymous;
+                                raiseUnauthorized python:(not isAnon) or context.raiseUnauthorized();
+                                url_unquote_plus python:modules['Products.PythonScripts.standard'].url_unquote_plus;
+                                username view/username;
+                                mtool python:context.portal_membership;
+                                portrait python: mtool.getPersonalPortrait(username, thumbnail=False);
+                                portal_types context/portal_types;
+                                userinfo python: mtool.getMemberInfo(username);
+                                portal_url context/@@plone_portal_state/navigation_root_url;
+                                here_url context/@@plone_context_state/object_url;
+                                member context/@@plone_portal_state/member;
+                                portal context/@@plone_portal_state/portal;
+                                email_from_address portal/email_from_address">
+
+        <tal:noAuthor condition="not: userinfo">
+            <dl class="portalMessage error">
+                <dt i18n:translate="">
+                    Error
+                </dt>
+                <dd i18n:translate="">
+                    No user found by that name.
+                </dd>
+            </dl>
+            <div id="content">
+                &nbsp;
+            </div>
+        </tal:noAuthor>
+
+        <tal:haveAuthor condition="userinfo"
+            tal:define="isOwner python:member.getId()==username;
+                        isAnon context/@@plone_portal_state/anonymous;">
+
+            <div id="edit-bar" tal:condition="isOwner">
+                <h5 class="hiddenStructure">Views</h5>
+                <ul id="content-views"
+                    class="contentViews">
+                  <li class="selected">
+                    <a href=""
+                        tal:define="url_quote_plus python:modules['Products.PythonScripts.standard'].url_quote_plus;
+                                    memberurl python:url_quote_plus(member.getId())"
+                       tal:attributes="href string:${portal_url}/@@user?name=${memberurl}"
+                       i18n:translate="label_view">View</a>
+                  </li>
+                  <li>
+                    <a href=""
+                       tal:attributes="href string:${portal_url}/@@personal-information"
+                       i18n:translate="label_edit">Edit</a>
+                  </li>
+                </ul>
+                <div class="contentActions">&nbsp;</div>
+                 <!-- end simulated tabs -->
+            </div>
+
+            <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+                Portal status message
+            </div>
+
+            <div id="content">
+                <span class="visualClear"><!-- --></span>
+                <div id="row">
+                    <div class="cell width-6 position-0">
+                        <img src=""
+                             alt=""
+                             class="portraitPhoto image-left"
+                             tal:attributes="src portrait/absolute_url" />
+
+                        <ul class="visualClear" i18n:domain="intranett">
+                            <li tal:condition="userinfo/department">
+                                <!-- Department -->
+                                <b><span tal:omit-tag="" i18n:translate="label_department">Department</span>:</b>
+                                <a href=""
+                                     tal:attributes="href string:${context/absolute_url}/employee-listing?department=${userinfo/department}"
+                                     tal:content="userinfo/department">Department</a>
+                            </li>
+                            <li tal:condition="userinfo/location">
+                                <!-- Location  -->
+                                <b><span tal:omit-tag="" i18n:translate="label_location">Location</span>:</b>
+                                <span tal:replace="userinfo/location">
+                                    Some location
+                                </span>
+                            </li>
+                            <li tal:condition="userinfo/email">
+                                <!-- E-mail  -->
+                                <b><span tal:omit-tag="" i18n:translate="label_email">E-mail</span>:</b>
+                                <a href="" title=""
+                                   tal:attributes="href string:mailto:${userinfo/email}"
+                                   tal:content="userinfo/email">
+                                    joe@doe.com
+                                </a>
+                            </li>
+                            <li tal:condition="userinfo/phone">
+                                <!-- Phone -->
+                                <b><span tal:omit-tag="" i18n:translate="label_phone">Phone</span>:</b>
+                                <span tal:content="userinfo/phone"
+                                      tal:omit-tag="">
+                                    Phone
+                                </span>
+                            </li>
+                            <li tal:condition="userinfo/mobile">
+                                <!-- Mobile phone -->
+                                <b><span tal:omit-tag="" i18n:translate="label_mobile">Mobile phone</span>:</b>
+                                <span tal:content="userinfo/mobile"
+                                      tal:omit-tag="">
+                                    Mobile phone
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="cell width-10 position-6">
+                        <h1 class="documentFirstHeading" tal:condition="userinfo/fullname" tal:content="userinfo/fullname">
+                            Author name
+                        </h1>
+
+                        <h1 class="documentFirstHeading" tal:condition="not: userinfo/fullname" tal:content="username">
+                            Author id
+                        </h1>
+
+                        <div class="documentDescription" tal:content="structure userinfo/description">
+                            Author description
+                        </div>
+
+                        <tal:authorContent define="user_content view/user_content;
+                                                   toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
+                                           condition="user_content">
+
+                            <h2 i18n:translate="heading_author_content">
+                                Latest content created by this user
+                            </h2>
+
+                            <div metal:define-macro="user_content_listing">
+                            <table class="vertical listing"
+                                   summary="Lists content written by an author grouped by content type"
+                                   i18n:attributes="summary summary_author_content_list;">
+                                <tal:repeat repeat="item user_content">
+                                    <tr>
+                                        <th tal:content="python:toLocalizedTime(item.Date)"
+                                            style="white-space: nowrap">
+                                            Date
+                                        </th>
+                                        <td>
+                                            <a href="" tal:attributes="href item/getURL"
+                                               tal:content="item/pretty_title_or_id">title</a>
+                                        </td>
+                                    </tr>
+                                </tal:repeat>
+                            </table>
+                            </div>
+
+                            <p>
+                            <a href=""
+                               tal:attributes="href string:$here_url/search?Creator=${username}&amp;sort_on=created&amp;sort_order=reverse"
+                               i18n:translate="go_to_search_author_content">
+                                All content created by
+                                <span i18n:name="user" tal:omit-tag="" tal:content="python:userinfo['fullname'] or username"/>&hellip;
+                            </a>
+                            </p>
+
+                        </tal:authorContent>
+
+                    </div>
+                </div>
+
+            </div>
+
+            </tal:haveAuthor>
+
+    </tal:main-macro>
+
+</metal:main>
+
+</body>
+</html>

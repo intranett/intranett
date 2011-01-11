@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="plone">
+ <object name="portal_tabs" meta_type="CMF Action Category">
+  <object name="index_html" meta_type="CMF Action">
+   <property name="visible">False</property>
+  </object>
+  <object name="employee-listing" meta_type="CMF Action">
+   <property name="title" i18n:translate="">Employees</property>
+   <property name="description"></property>
+   <property name="url_expr">string:${globals_view/navigationRootUrl}/employee-listing</property>
+   <property name="icon_expr"></property>
+   <property name="available_expr"></property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+</object>
