@@ -4,6 +4,10 @@ Changelog
 1.0.1 - unreleased
 ------------------
 
+- Consolidate buildout configuration into one location and changes branch
+  concept to cover the entire buildout instead of individual distributions.
+  [hannosch]
+
 - Member portraits are now cropped in order to always result to a (100,100)
   image.
   [ggozad]
