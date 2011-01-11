@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<site>
- <property name="email_from_address" type="string">no-reply@intranett.no</property>
- <property name="email_from_name" type="string">intranett.no</property>
-</site>

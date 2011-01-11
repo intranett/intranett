@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<object name="portal_workflow">
- <object name="intranett_workflow" meta_type="Workflow"/>
- <bindings>
-  <default>
-   <bound-workflow workflow_id="intranett_workflow"/>
-  </default>
- </bindings>
-</object>
