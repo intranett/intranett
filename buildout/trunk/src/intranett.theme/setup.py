@@ -4,10 +4,7 @@ version = '2.0dev'
 
 setup(name='intranett.theme',
       version=version,
-      description="Basic theme providing base fonts, typography, \
-                   rhythm for intranett.no projects. Particular \
-                   projects' specific visual themes are going to \
-                   be built on top of this base theme.",
+      description="",
       long_description=open("README.txt").read(),
       classifiers=[
         "Framework :: Plone",
