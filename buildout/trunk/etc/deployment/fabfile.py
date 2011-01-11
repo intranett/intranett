@@ -35,7 +35,7 @@ SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
 SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
 SVN_EXE = 'svn %s' % SVN_FLAGS
 SVN_CONFIG = os.path.join(HOME, '.subversion', 'config')
-SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/deployments/tags'
+SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/buildout/tags'
 
 
 def svn_info():
@@ -178,10 +178,10 @@ def _buildout(envvars, newest=True):
     front = envvars['front']
     arg = '' if newest else '-N'
     with cd(VENV):
-        run('bin/python2.6 bootstrap.py -d')
+        run('bin/python2.6 bootstrap.py -dc production.cfg')
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
-        run('{x1}; {x2}; bin/buildout {arg}'.format(
+        run('{x1}; {x2}; bin/buildout -c production.cfg {arg}'.format(
             x1=front, x2=domain, arg=arg))
         run('chmod 700 var/blobstorage')
 
