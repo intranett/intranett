@@ -1,0 +1,3 @@
+#!/bin/sh
+export PERL5LIB=${munin-download:location}/opt/local/lib/perl5/site_perl
+${munin-download:perl} -I${munin-download:location}/opt/local/lib/perl5/site_perl -wT ${munin-download:location}/sbin/munin-node

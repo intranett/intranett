@@ -1,0 +1,39 @@
+#
+# Example config-file for munin-node
+#
+
+log_level 4
+log_file ${buildout:directory}/var/log/munin/munin-node.log
+pid_file ${buildout:directory}/var/run/munin/munin-node.pid
+
+user ${munin-build-conf:user}
+group ${munin-build-conf:group}
+
+# Regexps for files to ignore
+
+ignore_file ~$
+ignore_file \.bak$
+ignore_file %$
+ignore_file \.dpkg-(tmp|new|old|dist)$
+ignore_file \.rpm(save|new)$
+ignore_file \.pod$
+
+# Set this if the client doesn't report the correct hostname when
+# telnetting to localhost, port 4949
+#
+#host_name Crow
+
+# A list of addresses that are allowed to connect.  This must be a
+# regular expression, due to brain damage in Net::Server, which
+# doesn't understand CIDR-style network notation.  You may repeat
+# the allow line as many times as you'd like
+
+allow ^127\.0\.0\.1$
+allow ^83\.143\.87\.194$
+
+# Which address to bind to;
+host *
+# host 127.0.0.1
+
+# And which port
+port 14949
