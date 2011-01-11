@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name="portal_kss">
+ <kineticstylesheet id="++resource++plone.app.form.kss" enabled="0" />
+ <kineticstylesheet id="++resource++plone.app.z3cform" enabled="0" />
+ <kineticstylesheet id="++resource++tinymce.kss/tinymce.kss" expression="" />
+</object>
