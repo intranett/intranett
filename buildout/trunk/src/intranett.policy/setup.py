@@ -1,12 +1,11 @@
 from setuptools import setup, find_packages
 
-version = '1.3'
+version = '2.0dev'
 
 setup(name='intranett.policy',
       version=version,
       description="",
-      long_description=open("README.txt").read() + "\n" +
-                       open("CHANGES.txt").read(),
+      long_description=open("README.txt").read(),
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",

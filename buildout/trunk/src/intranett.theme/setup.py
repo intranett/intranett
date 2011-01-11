@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.0'
+version = '2.0dev'
 
 setup(name='intranett.theme',
       version=version,
@@ -8,8 +8,7 @@ setup(name='intranett.theme',
                    rhythm for intranett.no projects. Particular \
                    projects' specific visual themes are going to \
                    be built on top of this base theme.",
-      long_description=open("README.txt").read() + "\n" +
-                       open("CHANGES.txt").read(),
+      long_description=open("README.txt").read(),
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
