@@ -21,7 +21,7 @@ Working on a ticket
 -------------------
 
 If you work on a non-trivial story ticket, you should create a branch of this
-buildout. This buildout trunk should always be in a releasable state to the
+buildout. The Git master should always be in a releasable state to the
 production environment.
 
 As a convention we use the ticket number and a short word or two to describe
@@ -30,25 +30,26 @@ each ticket.
 For example, if you want to work on ticket #82, called ``Special view for the
 frontpage``, here's the steps you should take::
 
-  svn cp https://svn.jarn.com/jarn/intranett.no/buildout/trunk \
-         https://svn.jarn.com/jarn/intranett.no/buildout/branches/82-frontpage
-
-Switch to the new branch::
-
-  svn switch https://svn.jarn.com/jarn/intranett.no/buildout/branches/82-frontpage
+  git co -b hannosch/82-frontpage
 
 Edit the any config files you need to get new software (if any) and run::
 
   bin/buildout
 
 You are now working on your own branch and can pull in additional dependencies
-if you want to. Other people can work with you on the same ticket by using the
-same branch.
+if you want to. Push the branch to Github for other people to see it::
+
+  g push -u
+
+You only need to specify the `-u` the first time, to associate your local
+branch with the remote one. Other people will fork your branch and create their
+own. If you are working on a larger Epic consisting of multiple stories, use
+a branch with the prefix `shared` instead of your username to signal the nature
+of it.
 
 After the ticket is done, all tests are written, it's been tested TTW,
 upgrade notes or automatic steps are in place and quality assurance has been
-performed, you can merge your changes back to the trunk and integrate any
-required changes into the buildout files.
+performed, you can merge your changes back to master.
 
 
 Working with CSS
