@@ -272,7 +272,7 @@ def _load_domain():
 def _prepare_update(newest=True):
     envvars = _set_environment_vars()
     dump_db()
-    _svn_get()
+    _git_update()
     _buildout(envvars=envvars, newest=newest)
 
 
