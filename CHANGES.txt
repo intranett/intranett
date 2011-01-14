@@ -4,6 +4,9 @@ Changelog
 1.1 - unreleased
 ----------------
 
+- Adapted fabric scripts to Github code hosting.
+  [hannosch]
+
 - Consolidate buildout configuration into one location and change branch
   concept to cover the entire buildout instead of individual distributions.
   [hannosch]
