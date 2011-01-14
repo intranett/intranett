@@ -155,11 +155,11 @@ def init_server():
     _add_nginx_include()
     _virtualenv()
 
-    # switch / checkout svn
-    command = 'switch' if _is_svn_checkout() else 'co'
-    _svn_get(command=command)
+    # switch / clone git
+    is_git = _is_git_repository()
+    _git_update(is_git=is_git)
     _buildout(envvars=envvars)
-    initial = command == 'co'
+    initial = not is_git
     _create_plone_site(initial=initial)
     # reload nginx so we pick up the new local/jarn.conf file and the buildout
     # local nginx-sites one
