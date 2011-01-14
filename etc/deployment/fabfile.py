@@ -227,7 +227,7 @@ def _git_update(is_git=True):
     latest_tag = _latest_git_tag()
     print('Switching to version: %s' % latest_tag)
     with cd(VENV):
-        run('git checkout %s' % latest_tag)
+        run('git checkout --force %s' % latest_tag)
         run('git reset --hard HEAD')
 
 
