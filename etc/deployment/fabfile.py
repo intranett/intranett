@@ -151,6 +151,7 @@ def init_server():
     envvars = _set_environment_vars()
     _set_cron_mailto()
     _disable_svn_store_passwords()
+    _setup_ssh_keys()
     _add_nginx_include()
     _virtualenv()
 
@@ -310,6 +311,23 @@ def _set_environment_vars():
             run('echo -e "{content}" > {home}/.bash_profile'.format(
                 home=HOME, content='\n'.join(new_file)))
     return dict(domain=domain_line, front=front_line)
+
+
+def _setup_ssh_keys():
+    with cd(HOME):
+        with settings(hide('warnings'), warn_only=True):
+            run('[ ! -e .ssh ] && mkdir .ssh && chmod 711 .ssh')
+        ssh_dir = os.path.join(BUILDOUT_ROOT, 'etc', 'ssh')
+        put("%s/id*" % ssh_dir, ".ssh/")
+        run('chmod 600 .ssh/id_rsa')
+        run('chmod 644 .ssh/id_rsa.pub')
+        # add github to known hosts
+        hosts = run("[ -e {hosts} ] && cat {hosts} || echo ''".format(
+            hosts='.ssh/known_hosts'))
+        host_lines = hosts.split('\n')
+        github = any([l for l in host_lines if l.startswith('github.com')])
+        if not github:
+            put("%s/known_hosts" % ssh_dir, ".ssh/")
 
 
 def _svn_get(command='switch'):
