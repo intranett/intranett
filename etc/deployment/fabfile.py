@@ -32,12 +32,6 @@ VENV = '/srv/jarn'
 PIL_VERSION = '1.1.7-jarn1'
 PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 
-SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
-SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
-SVN_EXE = 'svn %s' % SVN_FLAGS
-SVN_CONFIG = os.path.join(HOME, '.subversion', 'config')
-SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/buildout/tags'
-
 
 def version_info():
     with cd(VENV):
@@ -254,16 +248,6 @@ def _latest_git_tag():
     return tags[-1][1]
 
 
-def _latest_svn_tag():
-    with settings(hide('running')):
-        tags = local('{exe} ls {auth} {svn}'.format(
-            exe=SVN_EXE, auth=SVN_AUTH, svn=SVN_PREFIX))
-    tags = [t.rstrip('/') for t in tags.split('\n')]
-    tags = [(pkg_resources.parse_version(t), t) for t in tags]
-    tags.sort()
-    return tags[-1][1]
-
-
 def _load_domain():
     with settings(hide('warnings'), warn_only=True):
         local('wget --no-check-certificate -q -O /dev/null '
@@ -355,24 +339,6 @@ def _setup_ssh_keys():
         github = any([l for l in host_lines if l.startswith('github.com')])
         if not github:
             put("%s/known_hosts" % ssh_dir, ".ssh/")
-
-
-def _svn_get(command='switch'):
-    switch = command == 'switch'
-    latest_tag = _latest_svn_tag()
-    print('Switching to version: %s' % latest_tag)
-    with settings(hide('running')):
-        if switch:
-            run('{exe} revert -R .'.format(exe=SVN_EXE))
-            run('{exe} cleanup'.format(exe=SVN_EXE))
-        else:
-            with settings(hide('warnings'), warn_only=True):
-                run('rmdir %s/nginx-sites' % VENV)
-        run('{exe} {command} {auth} {svn}/{tag} {loc}'.format(
-            exe=SVN_EXE, command=command, auth=SVN_AUTH, svn=SVN_PREFIX,
-            tag=latest_tag, loc=VENV))
-        if switch:
-            run('{exe} up {auth}'.format(exe=SVN_EXE, auth=SVN_AUTH))
 
 
 def _virtualenv():
