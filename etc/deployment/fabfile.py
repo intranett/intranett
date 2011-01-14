@@ -221,6 +221,22 @@ def _disable_svn_store_passwords():
                 content='\n'.join(new_lines), config=SVN_CONFIG))
 
 
+def _git_update(is_git=True):
+    if not is_git:
+        with cd(VENV):
+            run('git clone --no-checkout git@github.com:Jarn/intranett.git gittmp')
+            run('mv gittmp/.git/ .')
+            run('rmdir gittmp')
+            run('git reset --hard HEAD')
+
+    latest_tag = _latest_git_tag()
+    print('Switching to version: %s' % latest_tag)
+    with cd(VENV):
+        run('git fetch')
+        run('git checkout %s' % latest_tag)
+        run('git reset --hard HEAD')
+
+
 def _is_git_repository():
     out = ''
     with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
