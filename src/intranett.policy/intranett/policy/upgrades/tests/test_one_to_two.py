@@ -9,6 +9,8 @@ from intranett.policy.upgrades.tests.utils import ensure_no_addon_upgrades
 
 class TestFunctionalMigrations(FunctionalUpgradeTestCase):
 
+    level = 2
+
     def test_gs_diff(self):
         self.importFile(__file__, 'one.zexp')
         oldsite, result = self.migrate()
