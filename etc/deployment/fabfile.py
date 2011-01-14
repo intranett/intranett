@@ -31,6 +31,7 @@ HOME = '/srv/jarn'
 VENV = '/srv/jarn'
 PIL_VERSION = '1.1.7-jarn1'
 PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
+
 SVN_AUTH = '--username=intranett --password=BJrKt6JahD5mkl'
 SVN_FLAGS = '--trust-server-cert --non-interactive --no-auth-cache'
 SVN_EXE = 'svn %s' % SVN_FLAGS
@@ -38,9 +39,9 @@ SVN_CONFIG = os.path.join(HOME, '.subversion', 'config')
 SVN_PREFIX = 'https://svn.jarn.com/jarn/intranett.no/buildout/tags'
 
 
-def svn_info():
+def version_info():
     with cd(VENV):
-        run('pwd && svn info')
+        run('pwd && git branch -v')
 
 
 def restore_db():
