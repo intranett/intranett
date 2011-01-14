@@ -183,7 +183,7 @@ def _buildout(envvars, newest=True):
         run('bin/python2.6 bootstrap.py -dc production.cfg')
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
-        run('{x1}; {x2}; bin/buildout -c production.cfg {arg}'.format(
+        run('{x1}; {x2}; bin/buildout -c production.cfg -t 5 {arg}'.format(
             x1=front, x2=domain, arg=arg))
         run('chmod 700 var/blobstorage')
 
