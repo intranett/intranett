@@ -227,6 +227,14 @@ def _is_svn_checkout():
     return 'Revision' in out
 
 
+def _latest_git_tag():
+    output = run('git tag -l')
+    tags = [t.rstrip('/') for t in output.split('\n')]
+    tags = [(pkg_resources.parse_version(t), t) for t in tags]
+    tags.sort()
+    return tags[-1][1]
+
+
 def _latest_svn_tag():
     with settings(hide('running')):
         tags = local('{exe} ls {auth} {svn}'.format(
