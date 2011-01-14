@@ -227,6 +227,14 @@ def _is_svn_checkout():
     return 'Revision' in out
 
 
+def _is_git_repository():
+    out = ''
+    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
+        with cd(VENV):
+            out = run('git branch')
+    return 'master' in out
+
+
 def _latest_git_tag():
     output = run('git tag -l')
     tags = [t.rstrip('/') for t in output.split('\n')]
