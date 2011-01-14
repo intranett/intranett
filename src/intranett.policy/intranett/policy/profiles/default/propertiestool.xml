@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <object name="portal_properties">
+  <object name="clamav_properties">
+   <property name="clamav_connection" type="string">socket</property>
+   <property name="clamav_socket" type="string">/var/run/clamd</property>
+   <property name="clamav_timeout" type="int">60</property>
+  </object>
  <object name="site_properties">
   <property name="webstats_js" type="text">&lt;script type="text/javascript"&gt;
 var _gaq = _gaq || [];
