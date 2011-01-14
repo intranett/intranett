@@ -13,3 +13,4 @@ local.cfg
 .*
 *.pyc
 nginx-sites/jarn.conf
+src/*/*.egg-info
