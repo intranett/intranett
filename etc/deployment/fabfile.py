@@ -223,10 +223,10 @@ def _git_update(is_git=True):
             run('rmdir gittmp')
             run('git reset --hard HEAD')
 
+    run('git fetch')
     latest_tag = _latest_git_tag()
     print('Switching to version: %s' % latest_tag)
     with cd(VENV):
-        run('git fetch')
         run('git checkout %s' % latest_tag)
         run('git reset --hard HEAD')
 
