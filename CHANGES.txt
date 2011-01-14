@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0.1 - unreleased
-------------------
+1.1 - unreleased
+----------------
 
 - Consolidate buildout configuration into one location and change branch
   concept to cover the entire buildout instead of individual distributions.
