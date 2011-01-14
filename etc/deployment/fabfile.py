@@ -202,10 +202,11 @@ def _create_plone_site(initial=False):
 
 
 def _disable_svn_store_passwords():
+    svn_config = os.path.join(HOME, '.subversion', 'config')
     with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
         # run svn info once, so we create ~/.subversion/config
         run('svn info')
-        output = run('cat %s' % SVN_CONFIG)
+        output = run('cat %s' % svn_config)
     lines = output.split('\n')
     new_lines = []
     changed = False
@@ -218,7 +219,7 @@ def _disable_svn_store_passwords():
     if changed:
         with settings(hide('running', 'stdout', 'stderr')):
             run('echo -e "{content}" > {config}'.format(
-                content='\n'.join(new_lines), config=SVN_CONFIG))
+                content='\n'.join(new_lines), config=svn_config))
 
 
 def _git_update(is_git=True):
