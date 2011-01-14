@@ -12,3 +12,4 @@ var
 local.cfg
 .*
 *.pyc
+nginx-sites/jarn.conf
