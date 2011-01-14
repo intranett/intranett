@@ -221,12 +221,6 @@ def _disable_svn_store_passwords():
                 content='\n'.join(new_lines), config=SVN_CONFIG))
 
 
-def _is_svn_checkout():
-    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        out = run('svn info %s' % VENV)
-    return 'Revision' in out
-
-
 def _is_git_repository():
     out = ''
     with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
