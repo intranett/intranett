@@ -42,6 +42,14 @@ class TestSiteSetup(IntranettTestCase):
         ids = set([a['id'] for a in actions])
         self.assertEquals(ids, set(['accessibility']))
 
+    def test_clamav(self):
+        portal = self.layer['portal']
+        ptool = getToolByName(portal, 'portal_properties')
+        self.assertTrue('clamav_properties' in ptool)
+        clamav = ptool.clamav_properties
+        self.assertEqual(clamav.getProperty('clamav_connection'), 'socket')
+        self.assertEqual(clamav.getProperty('clamav_socket'), '/var/run/clamd')
+
     def test_css_resources(self):
         portal = self.layer['portal']
         css = getToolByName(portal, 'portal_css')

@@ -29,3 +29,13 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
         for profile, steps in upgrades.items():
             self.assertEquals(len(steps), 0,
                               "Found unexpected upgrades: %s" % steps)
+
+    def test_one(self):
+        from intranett.policy.upgrades.one import activate_clamav
+        portal = self.layer['portal']
+        ptool = getToolByName(portal, 'portal_properties')
+        clamav = ptool.clamav_properties
+        clamav._updateProperty('clamav_connection', 'net')
+        activate_clamav(portal)
+        self.assertEqual(clamav.getProperty('clamav_connection'), 'socket')
+        self.assertEqual(clamav.getProperty('clamav_socket'), '/var/run/clamd')
