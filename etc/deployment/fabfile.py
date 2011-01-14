@@ -224,10 +224,14 @@ def _git_update(is_git=True):
             run('git reset --hard HEAD')
 
     run('git fetch')
-    latest_tag = _latest_git_tag()
-    print('Switching to version: %s' % latest_tag)
+    tag = env.server.config.get('tag', None)
+    if tag is not None:
+        tag = 'origin/' + tag
+    else:
+        tag = _latest_git_tag()
+    print('Switching to version: %s' % tag)
     with cd(VENV):
-        run('git checkout -q --force %s' % latest_tag)
+        run('git checkout -q --force %s' % tag)
         run('git reset --hard HEAD')
 
 
