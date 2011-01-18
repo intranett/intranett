@@ -29,8 +29,7 @@ class TestClamAVValidator(IntranettFunctionalTestCase):
         control.filename = 'virus.txt'
         control.value = StringIO(EICAR)
         browser.getControl(name='form.button.save').click()
-
-        self.assertTrue('error while checking the file for viruses' in
+        self.assertTrue('Validation failed, file is virus-infected.' in
             browser.contents)
 
         # And let's see if a clean file passes...
@@ -40,4 +39,6 @@ class TestClamAVValidator(IntranettFunctionalTestCase):
         control.filename = 'nonvirus.txt'
         control.value = StringIO('Not a virus')
         browser.getControl(name='form.button.save').click()
+        self.assertFalse('Validation failed, file is virus-infected.' in
+            browser.contents)
         self.assertTrue('Changes saved' in browser.contents)
