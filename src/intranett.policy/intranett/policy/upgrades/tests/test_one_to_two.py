@@ -40,4 +40,5 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
         clamav._updateProperty('clamav_connection', 'net')
         activate_clamav(portal)
         self.assertEqual(clamav.getProperty('clamav_connection'), 'socket')
-        self.assertEqual(clamav.getProperty('clamav_socket'), '/var/run/clamd')
+        self.assertEqual(
+            clamav.getProperty('clamav_socket'), '/var/run/clamav/clamd')

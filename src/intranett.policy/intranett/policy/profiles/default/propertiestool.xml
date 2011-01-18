@@ -2,7 +2,7 @@
 <object name="portal_properties">
   <object name="clamav_properties">
    <property name="clamav_connection" type="string">socket</property>
-   <property name="clamav_socket" type="string">/var/run/clamd</property>
+   <property name="clamav_socket" type="string">/var/run/clamav/clamd</property>
    <property name="clamav_timeout" type="int">60</property>
   </object>
  <object name="site_properties">

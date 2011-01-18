@@ -48,7 +48,8 @@ class TestSiteSetup(IntranettTestCase):
         self.assertTrue('clamav_properties' in ptool)
         clamav = ptool.clamav_properties
         self.assertEqual(clamav.getProperty('clamav_connection'), 'socket')
-        self.assertEqual(clamav.getProperty('clamav_socket'), '/var/run/clamd')
+        self.assertEqual(
+            clamav.getProperty('clamav_socket'), '/var/run/clamav/clamd')
 
     def test_css_resources(self):
         portal = self.layer['portal']
