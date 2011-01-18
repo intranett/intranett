@@ -1,3 +1,4 @@
+import platform
 from StringIO import StringIO
 
 from collective.ATClamAV.testing import EICAR
@@ -13,7 +14,13 @@ class TestClamAVValidator(IntranettFunctionalTestCase):
 
     level = 2
 
-    def test_atvirusfile(self):
+    def test_atvirusfile(self): # pragma: no cover
+        # whee, evil skipping - we only want to run this on the actual
+        # production system, so we don't force developers to have clamd on
+        # their local machines
+        if 'gentoo' not in platform.uname()[2]:
+            return
+
         # Setup
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Manager'])
