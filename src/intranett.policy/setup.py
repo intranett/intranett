@@ -21,6 +21,7 @@ setup(name='intranett.policy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'collective.ATClamAV',
           'collective.monkeypatcher',
           'experimental.catalogqueryplan',
           'munin.zope',

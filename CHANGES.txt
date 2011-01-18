@@ -4,6 +4,10 @@ Changelog
 1.1.1 - unreleased
 ------------------
 
+- Whenever an user uploads a file to the intranet it is checked for viruses
+  and rejected if it contains one.
+  Closes https://jira.jarn.com/browse/INTRANETT-137.
+  [ggozad, hannosch]
 
 1.1 - 2010-01-14
 ----------------

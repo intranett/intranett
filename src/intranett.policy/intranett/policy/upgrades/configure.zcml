@@ -3,13 +3,13 @@
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
   i18n_domain="intranett">
 
-  <!-- <genericsetup:upgradeStep
+  <genericsetup:upgradeStep
       title="Upgrade intranett.policy from 1 to 2."
-      description=""
+      description="Activate collective.ATClamAV"
       source="1"
       destination="2"
-      handler="intranett.policy.upgrades.null_upgrade_step"
+      handler="intranett.policy.upgrades.one.activate_clamav"
       profile="intranett.policy:default"
-      /> -->
+      />
 
 </configure>
