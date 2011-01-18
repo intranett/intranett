@@ -41,4 +41,5 @@ class TestClamAVValidator(IntranettFunctionalTestCase):
         browser.getControl(name='form.button.save').click()
         self.assertFalse('Validation failed, file is virus-infected.' in
             browser.contents)
-        self.assertTrue('Changes saved' in browser.contents)
+        self.assertTrue(browser.url.endswith('/view'))
+        self.assertTrue('Not a virus' in browser.contents)
