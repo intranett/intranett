@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.1 - unreleased
+1.1.1 - 2011-01-19
 ------------------
 
 - Whenever an user uploads a file to the intranet it is checked for viruses
@@ -9,7 +9,7 @@ Changelog
   Closes https://jira.jarn.com/browse/INTRANETT-137.
   [ggozad, hannosch]
 
-1.1 - 2010-01-14
+1.1 - 2011-01-14
 ----------------
 
 - Adapted fabric scripts to Github code hosting.
