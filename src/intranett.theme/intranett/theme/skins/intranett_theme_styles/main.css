@@ -1798,12 +1798,11 @@ body > footer {
 #frontpage-highlight {
   margin: 0 0 22px; }
 
-.fpBlock .visualPadding {
-  padding: 1em;
-  border: 1px solid #ddd; }
-
 #frontpage-columns {
   margin: 0 0 22px; }
+  #frontpage-columns .fpBlock .visualPadding {
+    padding: 1em;
+    border: 1px solid #ddd; }
   #frontpage-columns .width-16 {
     width: 100%;
     margin-left: -100%; }
