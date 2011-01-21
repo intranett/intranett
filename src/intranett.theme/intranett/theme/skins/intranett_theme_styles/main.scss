@@ -557,9 +557,6 @@ dl.collapsible dd.collapsibleContent {
    clear: both;
    margin: 0.5em $base-size 0.5em 0;
 }
-body.template-employee-listing .tileItem .image-left {
-	margin-top: 0;
-}
 .image-right {
    float: right;
    clear: both;
@@ -1909,12 +1906,16 @@ ul#departments-list li:nth-child(1) a {
 #employee-listing-wrapper {
     margin-top: $larger-size;
        .tileItem {
-            float: left;
-            width: 50%;
+            float: right;
+            width: 49%;
         }
         .tileItem:nth-child(odd) {
-            clear: left;
+            clear: both;
+            float: left;
         }
+        .info {
+		    padding-left: 116px;
+		}
 }
 sup.manageUser {
     vertical-align: super;
@@ -1922,6 +1923,10 @@ sup.manageUser {
         a {
             color: $logored;
         }
+}
+body.template-employee-listing .tileItem .image-left {
+	margin-top: 0;
+	margin-right: 16px;
 }
 
 /* @end */

@@ -590,9 +590,6 @@ dl.collapsible dd.collapsibleContent {
   clear: both;
   margin: 0.5em 1em 0.5em 0; }
 
-body.template-employee-listing .tileItem .image-left {
-  margin-top: 0; }
-
 .image-right {
   float: right;
   clear: both;
@@ -1867,16 +1864,23 @@ ul#departments-list li:nth-child(1) a {
 #employee-listing-wrapper {
   margin-top: 1.25em; }
   #employee-listing-wrapper .tileItem {
-    float: left;
-    width: 50%; }
+    float: right;
+    width: 49%; }
   #employee-listing-wrapper .tileItem:nth-child(odd) {
-    clear: left; }
+    clear: both;
+    float: left; }
+  #employee-listing-wrapper .info {
+    padding-left: 116px; }
 
 sup.manageUser {
   vertical-align: super;
   font-size: small; }
   sup.manageUser a {
     color: #e3005a; }
+
+body.template-employee-listing .tileItem .image-left {
+  margin-top: 0;
+  margin-right: 16px; }
 
 /* @end */
 @media print {
