@@ -523,6 +523,19 @@ body > header nav li a .toolTipArrow {
   /* Opera 10.5, IE 9, Saf5, Chrome */
   background: transparent; }
 
+#viewlet-below-content .managePortletsFallback {
+  font-size: 0.76em;
+  background: none repeat scroll 0 0 #EEEEEE;
+  border: 1px solid #CCCCCC;
+  color: #222222;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.38em 0.76em;
+  position: relative;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(247, 247, 247, 0.7);
+  text-transform: uppercase; }
+
 .managePortletsFallback {
   margin: 1.25em 0;
   display: inline-block; }
@@ -1819,9 +1832,6 @@ body > footer {
     margin-left: -100%; }
   #frontpage-columns .width-5:nth-child(2) {
     margin-left: -622px; }
-
-#viewlet-below-content .managePortletsFallback {
-  display: none; }
 
 /* @group Edit frontpage */
 body.template-manage-frontpage .portlets-manager .portletAssignments {
