@@ -1501,7 +1501,7 @@ p.tileBody {
   border-style: solid solid solid none;
   border-width: 10px 15px 10px 0;
   margin-top: 2em;
-  left: 118px; }
+  left: 105px; }
 
 #reply-side-arrow .innerTooltipArrow {
   border-bottom-color: transparent;
@@ -1509,7 +1509,7 @@ p.tileBody {
   margin-left: 1px; }
 
 #commenting {
-  margin: 1em 0 3em 1em; }
+  margin: 1em 0 3em; }
 
 #commenting fieldset {
   padding: 1em;
@@ -1634,6 +1634,7 @@ small.commentDate {
 .portlet {
   margin-bottom: 1em; }
 
+.managedPortlet .portletHeader,
 .portlet .portletHeader {
   text-transform: uppercase;
   line-height: normal;
