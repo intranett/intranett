@@ -39,25 +39,6 @@
                 </span>
             </div>
         </div>
-        
-        <!-- <dl tal:repeat="phase state/projects">
-            <dt tal:define="customer_title phase/customer_title|nothing">
-                <a tal:attributes="href phase/url">
-                    <span tal:replace="phase/title" />
-                </a>
-                <tal:customer tal:condition="customer_title">
-                    /
-                    <span tal:replace="customer_title" />
-                </tal:customer>
-                [<span tal:replace="phase/project_manager" />]
-            </dt>
-            <dd>
-                <span tal:content="phase/status">[status]</span><br />
-                <tal:block tal:condition="phase/hours"><a tal:content="phase/hours" tal:attributes="title python:'%s - %s' % (phase['start'], phase['end']); href python:'%s/worklog?%s' % (phase['url'], ztu.make_query(period='week', person='all', group_by='person', start=phase['start']))">hours</a>h, <span tal:content="phase/persons">persons</span></tal:block>
-                <tal:block tal:condition="not:phase/hours">No hours spent last week</tal:block>
-            </dd>
-
-        </dl> -->
 
     </div>
 
