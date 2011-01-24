@@ -8,56 +8,61 @@ from Products.Extropy.browser.worklog import DateToPeriod, WorkLogView
 
 class ProjectsListing(BrowserView):
 
-    def projects(self):
-        etool = getToolByName(self.context, 'extropy_tracking_tool')
-        brains = etool.searchResults(meta_type=['ExtropyProject'], review_state=['active', 'closable'], sort_on='getId')
-        contracts = self.contracts()
-        brains = LazyCat((brains, contracts))
-        active = dict(title='Active projects', projects=[])
-        closable = dict(title='Finished projects waiting for invoicing', projects=[])
-        other = dict(title='Other', projects=[])
-        for state, projects in etool.dictifyBrains(brains, 'review_state').iteritems():
-            for project in projects:
-                project = project.getObject()
-                worklog = WorkLogView(project, self.request)
-                worklog.group_by = self.request.get("group_by", "person")
-                (worklog.start, worklog.end) = DateToPeriod(period=worklog.period, date=worklog.start-1)
-                activity = worklog.activity()
-                hours = sum([x['summary']['hours'] for x in activity])
-                persons = [x['title'] for x in activity]
-                title = project.Title()
-                customer_title = None
-                if project.portal_type == 'Contract':
-                    customer_title = aq_parent(project).Title()
-                data = dict(
-                    url=project.absolute_url(),
-                    title=title,
-                    customer_title=customer_title,
-                    project_manager=project.getProjectManager(),
-                    status=project.getProjectStatus(),
-                    hours=hours,
-                    start=worklog.start,
-                    end=worklog.end,
-                )
-                if len(persons) > 1:
-                    data['persons'] = "%s and %s" % (", ".join(persons[:-1]), persons[-1])
-                else:
-                    data['persons'] = "".join(persons)
-                if state == 'active':
-                    if 'Management Project' in project.Subject():
-                        continue
-                    else:
-                        active['projects'].append(data)
-                elif state == 'closable':
-                    closable['projects'].append(data)
-                else:
-                    other['projects'].append(data)
-
-        result = [active, closable]
-        return result
-
-    def contracts(self):
+    def customers(self):
         catalog = getToolByName(self.context, 'portal_catalog')
         path = self.context.getPhysicalPath()
-        query = {'portal_type': 'Contract', path: {'path': path}, }
-        return catalog(query)
+        query = {
+            'portal_type': 'Contract',
+            'review_state': 'active',
+            path: {'path': path},
+        }
+        contracts = catalog(query)
+        etool = getToolByName(self.context, 'extropy_tracking_tool')
+        projects = etool.searchResults(
+            meta_type=['ExtropyProject'],
+            review_state='active',
+        )
+        brains = LazyCat((contracts, projects))
+        # dict of {'title': [{title='', url='', }, ]}
+        result = {}
+        for b in brains:
+            contract = b.getObject()
+            if 'Management Project' in contract.Subject():
+                continue
+            if contract.portal_type == 'ExtropyProject':
+                customer = contract
+            else:
+                customer = aq_parent(contract)
+
+            worklog = WorkLogView(contract, self.request)
+            worklog.group_by = self.request.get("group_by", "person")
+            (worklog.start, worklog.end) = DateToPeriod(
+                period=worklog.period, date=worklog.start-1)
+            activity = worklog.activity()
+            hours = sum([x['summary']['hours'] for x in activity])
+            persons = [x['title'] for x in activity]
+            if len(persons) > 1:
+                persons = "%s and %s" % (", ".join(persons[:-1]), persons[-1])
+            else:
+                persons = "".join(persons)
+            customer_title = customer.Title()
+            if customer_title not in result:
+                result[customer_title] = []
+
+            result[customer_title].append({
+                'url': b.getURL(),
+                'title': b.Title,
+                'project_manager': contract.getProjectManager(),
+                'status': contract.getProjectStatus(),
+                'hours': hours,
+                'start': worklog.start,
+                'end': worklog.end,
+                'persons': persons,
+            })
+        flatten = []
+        def _key(value):
+            return value['title']
+        for k, v in result.items():
+            v.sort(key=_key)
+            flatten.append((k, v))
+        return sorted(flatten)

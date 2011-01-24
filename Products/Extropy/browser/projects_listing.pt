@@ -2,47 +2,51 @@
       xml:lang="en"
       lang="en"
       i18n:domain="extropy"
-      metal:use-macro="here/main_template/macros/master">
+      metal:use-macro="context/main_template/macros/master">
   <head>
   </head>
 <body>
 
 <div metal:fill-slot="content-core"
-     tal:define="etool nocall:here/extropy_tracking_tool;">
+     tal:define="etool nocall:context/extropy_tracking_tool;
+                 ztu modules/ZTUtils;
+                 customers view/customers">
 
-<div tal:define="projectsbystate view/projects;
-                 contracts view/contracts;
-                 ztu modules/ZTUtils;">
+    <tal:customers tal:repeat="customer customers">
+    <div tal:define="contracts python:customer[1]"
+         tal:condition="contracts">
 
-    <div tal:repeat="state projectsbystate">
+        <h3 tal:content="python:customer[0]">Title</h3>
 
-        <h2 tal:content="state/title">Title</h2>
-
-        <div class="tileItem visualIEFloatFix" tal:repeat="phase state/projects">
-            <h3 class="tileHeadline" tal:define="customer_title phase/customer_title|nothing">
-                <a class="summary" tal:attributes="href phase/url">
-                    <span tal:replace="phase/title" />
+        <div class="tileItem" tal:repeat="contract contracts">
+            <h4 class="tileHeadline">
+                <a class="summary"
+                   tal:attributes="href contract/url">
+                    <span tal:replace="contract/title" />
+                    [<span tal:replace="contract/project_manager" />]
                 </a>
-                <span class="discreet">
-                    <tal:customer tal:condition="customer_title">
-                        /
-                        <span tal:replace="customer_title" />
-                    </tal:customer>
-                    [<span tal:replace="phase/project_manager" />]
-                </span>
-            </h3>
+            </h4>
             <div class="tileBody">
                 <span class="description">
-                    <span tal:condition="phase/status|nothing"><tal:status content="phase/status">[status]</tal:status><br /></span>
-                    <tal:block tal:condition="phase/hours|nothing"><a tal:content="phase/hours" tal:attributes="title python:'%s - %s' % (phase['start'], phase['end']); href python:'%s/worklog?%s' % (phase['url'], ztu.make_query(period='week', person='all', group_by='person', start=phase['start']))">hours</a>h, <span tal:content="phase/persons">persons</span></tal:block>
-                    <tal:block tal:condition="not:phase/hours|nothing">No hours spent last week</tal:block>
+                    <span tal:define="status contract/status|nothing"
+                          tal:condition="status">
+                        <tal:status content="status">[status]</tal:status><br />
+                    </span>
+                    <span class="discreet">
+                    <tal:block tal:condition="contract/hours|nothing">
+                        <a tal:content="contract/hours" tal:attributes="title python:'%s - %s' % (contract['start'], contract['end']); href python:'%s/worklog?%s' % (contract['url'], ztu.make_query(period='week', person='all', group_by='person', start=contract['start']))">hours</a>h,
+                        <span tal:content="contract/persons">persons</span>
+                    </tal:block>
+                    <tal:block tal:condition="not:contract/hours|nothing">
+                        No hours spent last week
+                    </tal:block>
+                    </span>
                 </span>
             </div>
         </div>
 
     </div>
-
-</div>
+    </tal:customers>
 
 </div>
 
