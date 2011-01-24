@@ -24,8 +24,7 @@ class TestProject(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.failUnlessEqual(self.folder.project.getActivePhases(), [])
         self.folder.project.invokeFactory('ExtropyPhase','phase1', startDate=DateTime()-10, endDate=DateTime()+10)
         wftool = getToolByName(self.portal, 'portal_workflow')
-        wftool.doActionFor(self.folder.project.phase1, 'activate')
-        self.failUnlessEqual(len(self.folder.project.getActivePhases()),1)
+        self.failUnlessEqual(len(self.folder.project.getActivePhases()), 1)
         self.failUnlessEqual(self.folder.project.getActivePhases()[0].getId(), 'phase1')
 
         wftool.doActionFor(self.folder.project.phase1, 'close')
