@@ -1,23 +1,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       i18n:domain="plone"
-      metal:use-macro="here/main_template/macros/master"
+      metal:use-macro="context/main_template/macros/master"
       >
 <body>
 
 <metal:macro fill-slot="main">
 
-    <div metal:use-macro="here/base/macros/header">
-        This one is from Archetypes' base macros.
-    </div>
-
-    <fieldset class="collapsible" metal:use-macro="here/extropyproject_view/macros/trackingsummary">
+    <fieldset class="collapsible" metal:use-macro="context/extropyproject_view/macros/trackingsummary">
     </fieldset>
 
     <h2>All packages</h2>
 
     <dl>
-        <tal:phases tal:repeat="phase here/getPhases">
+        <tal:phases tal:repeat="phase context/getPhases">
             <dt style="clear:left; margin-top:2em">
                     <a tal:attributes="href phase/absolute_url"><span tal:content="phase/Title" /></a>
                     <span tal:content="structure phase/@@workflowactions">
