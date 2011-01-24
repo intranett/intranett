@@ -36,7 +36,6 @@ class Renderer(base.Renderer):
         self.portal_state = getMultiAdapter(
             (self.context, self.request), name=u'plone_portal_state')
         self.portal_url = self.portal_state.portal_url()
-        self.portal = self.portal_state.portal()
 
     @property
     def available(self):
@@ -44,21 +43,24 @@ class Renderer(base.Renderer):
 
     def totals(self):
         """Gets the content."""
-        etool = getToolByName(self, TIMETOOLNAME)
-        portal = self.portal
+        etool = getToolByName(self.context, TIMETOOLNAME)
+        membership = getToolByName(self.context, 'portal_membership')
+        portal = self.portal_state.portal()
         now = DateTime()
         startOfWeek = now.earliestTime() - (now.dow()-1)%7
         endOfWeek = (startOfWeek + 6).latestTime()
 
-        results = list(etool.getHours(node=portal, start=startOfWeek,
+        brains = list(etool.getHours(node=portal, start=startOfWeek,
                                       end=endOfWeek, REQUEST=None))
-        person = attrgetter('Creator')
-        results.sort(key=person)
-
-        totals = {}
-        for person, hours in groupby(results, person):
-            totals[person] = etool.countHours(hours)
-        return totals
+        results = []
+        creator = attrgetter('Creator')
+        brains.sort(key=creator)
+        for person, hours in groupby(brains, creator):
+            member = membership.getMemberInfo(person)
+            fullname = member.get('fullname', person)
+            results.append(((fullname, person), etool.countHours(hours)))
+        results.sort()
+        return results
 
 
 class AddForm(base.NullAddForm):
