@@ -90,6 +90,14 @@
         </div>
 
         <div class="field">
+            <label class="formQuestion"><span>Participants</span>:</label>
+            <br />
+            <metal:field use-macro="python:context.widget('participants', mode='view')">
+                Participants
+            </metal:field>
+        </div>
+
+        <div class="field">
             <label class="formQuestion"><span>Work types</span>:</label>
             <br />
             <metal:field use-macro="python:context.widget('work_types', mode='view')">

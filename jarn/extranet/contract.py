@@ -8,6 +8,8 @@ from Products.Archetypes.public import DateTimeField
 from Products.Archetypes.public import DisplayList
 from Products.Archetypes.public import FileField
 from Products.Archetypes.public import FileWidget
+from Products.Archetypes.public import LinesField
+from Products.Archetypes.public import MultiSelectionWidget
 from Products.Archetypes.public import Schema
 from Products.Archetypes.public import SelectionWidget
 from Products.Archetypes.public import StringField
@@ -56,6 +58,17 @@ ContractSchema = ATFolderSchema + Schema((
             label='Project Status',
             description='The current project status.',
             size='60',
+        ),
+    ),
+
+    LinesField(
+        name='participants',
+        vocabulary='getAvailableParticipants',
+        multiValued=True,
+        default=('all', ),
+        widget=MultiSelectionWidget(
+            label='Participants',
+            size=10,
         ),
     ),
 
@@ -121,6 +134,8 @@ class Contract(ATFolder):
     schema = ContractSchema
     security = ClassSecurityInfo()
 
+    participants = ('all', )
+
     security.declareProtected(VIEW_PERMISSION, 'getUniqueWork_types')
     def getUniqueWork_types(self):
         """"""
@@ -153,10 +168,24 @@ class Contract(ATFolder):
             return [self]
         return []
 
+    security.declareProtected(VIEW_PERMISSION, 'getAvailableParticipants')
+    def getAvailableParticipants(self):
+        """Lists the users."""
+        membertool = getToolByName(self, 'portal_membership')
+        result = []
+        for member in membertool.listMembers():
+            member_id = member.getId()
+            fullname = member.getProperty('fullname')
+            result.append((member_id, fullname and fullname or member_id))
+        def _key(value):
+            return value[1]
+        result.sort(key=_key)
+        return [('all', u'Everyone')] + result
+
     security.declarePrivate('getResponsiblePerson')
     def getResponsiblePerson(self):
         """fake responsible person for indexing"""
-        return ['all']
+        return self.getParticipants()
 
     security.declareProtected(VIEW_PERMISSION, 'getProjectTitle')
     def getProjectTitle(self):
