@@ -67,24 +67,6 @@
             </p>
         </div>
 
-        <tal:memos define="memos python:context.contentValues({'portal_type': 'Memo'})"
-                   metal:define-macro="memolisting"
-                   condition="memos">
-            <h2><img tal:replace="structure here/memo.png" /> Memos</h2>
-            <ul>
-                <li tal:repeat="memo python:memos[:5]">
-                    <a tal:define="date python:toLocalizedTime(memo.start())"
-                       tal:attributes="href memo/absolute_url;
-                                       title string:${memo/Subject}, $date"
-                       tal:content="memo/title_or_id">Memo</a><tal:sep condition="memo/Description">:</tal:sep>
-                    <tal:desc content="memo/Description" />
-                </li>
-            </ul>
-            <div style="text-align: right" tal:condition="python:len(memos) &gt; 5">
-                <a tal:attributes="href string:${here/absolute_url}/folder_listing?contentFilter.portal_type:record=Memo">Show all memos&hellip;</a>
-            </div>
-        </tal:memos>
-
         <h2>Open Packages</h2>
 
         <dl>
@@ -128,7 +110,7 @@
 
         <div class="visualClear"><!----></div>
 
-        <tal:content define="extropy_types python:('Memo', 'ExtropyPhase', 'ExtropyFeature', 'ExtropyTask');
+        <tal:content define="extropy_types python:('ExtropyPhase', 'ExtropyFeature', 'ExtropyTask');
                              types python:[t.getId() for t in context.allowedContentTypes()];
                              dummy python:[types.remove(t) for t in extropy_types if t in types];
                              contentFilter python:dict(portal_type=types)"

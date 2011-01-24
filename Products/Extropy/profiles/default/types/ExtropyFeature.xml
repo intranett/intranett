@@ -17,7 +17,6 @@
   <element value="Event"/>
   <element value="File"/>
   <element value="Image"/>
-  <element value="Memo"/>
  </property>
  <property name="allow_discussion">False</property>
  <alias from="(Default)" to="extropyfeature_view"/>

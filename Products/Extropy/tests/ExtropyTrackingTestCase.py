@@ -18,7 +18,6 @@ ZopeTestCase.installProduct('PortalTransforms', quiet=1)
 ZopeTestCase.installProduct('MimetypesRegistry', quiet=1)
 ZopeTestCase.installProduct('Extropy')
 ZopeTestCase.installProduct('Invoice')
-ZopeTestCase.installProduct('Memo')
 ZopeTestCase.installProduct('TinyMCE')
 
 from Products.PloneTestCase import PloneTestCase

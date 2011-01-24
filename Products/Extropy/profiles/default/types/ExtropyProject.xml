@@ -19,7 +19,6 @@
   <element value="File"/>
   <element value="Image"/>
   <element value="Invoice"/>
-  <element value="Memo"/>
  </property>
  <property name="allow_discussion">False</property>
  <alias from="(Default)" to="extropyproject_view"/>
