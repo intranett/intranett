@@ -15,7 +15,7 @@ solr_config.effective_steps = 900 # 15 minutes
 solr_config.index_timeout = 30.0
 solr_config.search_pattern = \
     '(Title:{value}^5 OR Description:{value}^2 OR SearchableText:{value} ' \
-    'OR SearchableText:{base_value})'
+    'OR SearchableText:({base_value}))'
 solr_config.search_timeout = 30.0
 solr_config.slow_query_threshold = 1000 # 1 second
 solr_config.max_results = 100
