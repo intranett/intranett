@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.2 - unreleased
+1.1.2 - 2011-01-26
 ------------------
 
 - Employee listing is fixed to not look too crammed with a column visible.
