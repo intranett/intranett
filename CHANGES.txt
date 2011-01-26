@@ -4,6 +4,26 @@ Changelog
 1.1.2 - unreleased
 ------------------
 
+- Employee listing is fixed to not look too crammed with a column visible.
+  References #153. Also wrapped the employees in micro formats.
+  [denys]
+
+- Revealed 'managePortletsFallback' link. Closes #147.
+  [denys]
+
+- Fixed the layout for when we have 2 columns or only the right one.
+  Closes #146.
+  [denys]
+
+- Removed left margin from comments to align the portrait's left border with
+  the rest of the content.
+  [denys]
+
+- Removed rotation from the profile picture.
+  [denys]
+
+- Fixed columns on the frontpage to have equal height.
+  [denys]
 
 1.1.1 - 2011-01-19
 ------------------
