@@ -23,10 +23,10 @@ doc_boost = 1
 
 # Penalize irc logs
 if 'irc log' in data.get('Title', '').lower():
-    doc_boost *= 0.5
+    return {'': 0.3}
 
-# Boost items higher up in the hierarchy, the root gets 2, level 10 or deeper
-# all get 1. For examaple /nordic/en/news-and-events gets 1.6
+# Boost items higher up in the hierarchy, the root gets 2, level 10 or
+# deeper all get 1. For examaple /site/folder/page gets 1.6
 depth = data.get('physicalDepth', 10)
 depth_boost = max(2.0 - (depth / 10.0), 1)
 doc_boost *= depth_boost
