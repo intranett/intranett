@@ -18,10 +18,6 @@
 
         <div class="visualClear"></div>
 
-        <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
-
-        <div class="visualClear"><!----></div>
-
         <div metal:use-macro="here/extropyproject_view/macros/contentlisting"></div>
 
     </metal:content-core>

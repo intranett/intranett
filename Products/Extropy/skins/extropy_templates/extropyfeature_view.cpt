@@ -48,8 +48,6 @@
             <a tal:replace="structure python:bar(URL=URL, worked=worked)"> </a>
         </div>
 
-        <div metal:use-macro="here/extropyproject_view/macros/memolisting"></div>
-
         <metal:field use-macro="python:context.widget('text', mode='view')">
             Body text
         </metal:field>
