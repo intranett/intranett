@@ -4,6 +4,9 @@ Changelog
 1.1.3 - unreleased
 ------------------
 
+- Provide intermediate certificates in the SSL config to avoid security
+  warning in Firefox. Closes #165.
+  [hannosch, baekholt]
 
 1.1.2 - 2011-01-26
 ------------------
