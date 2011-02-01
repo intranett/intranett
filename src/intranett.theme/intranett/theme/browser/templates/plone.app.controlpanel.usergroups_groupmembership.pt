@@ -3,12 +3,12 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      metal:use-macro="context/prefs_main_template/macros/master"
+      metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
 
 <body>
 
-<metal:main fill-slot="prefs_configlet_content"
+<metal:main fill-slot="content"
      tal:define="template_id string:@@usergroup-groupmembership;
                  errors python:request.get('errors', {});
                  portal_roles view/portal_roles;

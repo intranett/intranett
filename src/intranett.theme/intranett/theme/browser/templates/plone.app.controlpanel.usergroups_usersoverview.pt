@@ -8,7 +8,7 @@
 
 <body>
 
-<metal:main fill-slot="main"
+<metal:main fill-slot="content"
     tal:define="template_id string:@@usergroup-userprefs;
                 showAll python:request.get('showAll', '') and not view.newSearch and 'y';
                 Batch python:modules['Products.CMFPlone'].Batch;
