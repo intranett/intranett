@@ -1,3 +1,5 @@
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
 import transaction
 from zope.component import getSiteManager
@@ -173,7 +175,14 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
 
     def test_manage_frontpage(self):
         # Let's make sure we have edit-bar when we edit the frontpage
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        transaction.commit()
+
         browser = get_browser(self.layer['app'])
         browser.open('http://nohost/plone/@@manage-frontpage')
         self.assert_('<ul class="contentViews" id="content-views">'
                      in browser.contents)
+        # and we can add multiple portlet types
+        self.assertTrue('+/plone.portlet.static.Static' in browser.contents)
+        self.assertTrue('+/portlets.News' in browser.contents)
