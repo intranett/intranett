@@ -4,6 +4,10 @@ Changelog
 1.1.4 - unreleased
 ------------------
 
+- Added Site Administrator user role. Customized user/group management forms
+  and added user site action to access those. Refs #166.
+  [hannosch, ggozad]
+
 - It wasn't possible to assign portlets except for "static text" to the
   frontpage. Closes #164.
   [hannosch]

@@ -42,6 +42,15 @@ class TestSiteSetup(IntranettTestCase):
         ids = set([a['id'] for a in actions])
         self.assertEquals(ids, set(['accessibility']))
 
+    def test_manage_users_action(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Site Administrator'])
+        at = getToolByName(portal, 'portal_actions')
+        actions = at.listActionInfos(object=portal,
+                                     categories=('user', ))
+        ids = set([a['id'] for a in actions])
+        self.assertTrue('manage_users' in ids)
+
     def test_clamav(self):
         portal = self.layer['portal']
         ptool = getToolByName(portal, 'portal_properties')
