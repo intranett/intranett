@@ -8,11 +8,11 @@
     <metal:block fill-slot="top_slot"
                  tal:define="enable_border python:request.set('enable_border', 1);
                              disable_column_one python:request.set('disable_plone.leftcolumn',1);
-                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />    
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
     <metal:javascript fill-slot="javascript_head_slot" tal:omit-tag="">
         <link type="text/css" rel="kinetic-stylesheet"
             tal:attributes="href string:${context/absolute_url}/++resource++manage-portlets.kss"/>
-    </metal:javascript>    
+    </metal:javascript>
 </head>
 
 <body>
@@ -20,14 +20,14 @@
 
   <div id="edit-bar"
       tal:content="structure provider:plone.contentviews" />
-  
+
   <span id="contentTopLeft"></span>
   <span id="contentTopRight"></span>
-  
+
   <div metal:use-macro="context/global_statusmessage/macros/portal_message">
     Portal status message
-  </div>  
-  
+  </div>
+
   <article id="content">
       <header>
           <h1 class="documentFirstHeading"
@@ -45,7 +45,7 @@
             to move them up or down, delete or edit them. To add a new portlet,
             use the drop-down list at the top of the column.
           </p>
-      
+
           <div id="frontpage-highlight" class="row fpBlock">
               <div class="cell width-full position-0"><div class="visualPadding">
                   <tal:block replace="structure provider:frontpage.highlight" />
@@ -61,12 +61,12 @@
                   <div class="visualPadding">
                       <tal:block replace="structure provider:frontpage.portlets.central" />
                   </div>
-              </div>            
+              </div>
               <div class="cell width-5 fpBlock">
                   <div class="visualPadding">
                       <tal:block replace="structure provider:frontpage.portlets.right" />
                   </div>
-              </div>            
+              </div>
           </div>
           <div id="frontpage-bottom" class="row fpBlock">
               <div class="cell width-full position-0"><div class="visualPadding">
@@ -76,7 +76,7 @@
 
       </div>
   </article>
-  
+
 </metal:main>
 </body>
 </html>
