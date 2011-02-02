@@ -25,3 +25,12 @@ class TestUpgradeSteps(IntranettTestCase):
         disable_nonfolderish_sections(portal)
         self.assertTrue(
             site_properties.getProperty('disable_nonfolderish_sections'))
+
+    def test_activate_collective_flag(self):
+        from ..steps import activate_collective_flag
+        portal = self.layer['portal']
+        catalog = getToolByName(portal, 'portal_catalog')
+        catalog.delIndex('flaggedobject')
+        activate_collective_flag(portal)
+        self.assertTrue('flaggedobject' in catalog.indexes())
+

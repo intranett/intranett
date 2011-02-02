@@ -191,13 +191,6 @@ class TestSiteSetup(IntranettTestCase):
         self.assertNotEquals(mailhost.smtp_host, '')
         self.assertNotEquals(mailhost.smtp_port, '')
 
-    def test_collective_flag_installed(self):
-        portal = self.layer['portal']
-        qi = getToolByName(portal, 'portal_quickinstaller')
-        installed = qi.listInstalledProducts()
-        installed_ids = [product['id'] for product in installed]
-        self.assertTrue('collective.flag' in installed_ids, 'collective.flag not installed')
-
 
 class TestAdmin(IntranettTestCase):
 
