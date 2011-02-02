@@ -1,0 +1,5 @@
+<section id="company-board">
+    <div class="contentAlignment">
+        <tal:block replace="structure provider:frontpage.highlight" />
+    </div>
+</section>

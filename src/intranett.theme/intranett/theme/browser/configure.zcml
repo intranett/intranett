@@ -42,6 +42,24 @@
       layer=".interfaces.IThemeSpecific"
       />
 
+  <browser:viewletManager
+      name="intranett.abovecontent"
+      provides=".interfaces.IAboveContent"
+      permission="zope2.View"
+      class="plone.app.viewletmanager.manager.OrderedViewletManager"
+      layer=".interfaces.IThemeSpecific"
+      />
+
+  <!-- The frontpage company board -->
+  <browser:viewlet
+      name="intranett.frontpage.companyboard"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      manager=".interfaces.IAboveContent"
+      template="templates/frontpage_companyboard.pt"
+      permission="zope2.View"
+      layer=".interfaces.IThemeSpecific"
+      />
+
   <!-- The breadcrumbs -->
   <browser:viewlet
       name="plone.path_bar"
