@@ -8,7 +8,7 @@
       description="Activate collective.ATClamAV"
       source="1"
       destination="2"
-      handler="intranett.policy.upgrades.one.activate_clamav"
+      handler="intranett.policy.upgrades.steps.activate_clamav"
       profile="intranett.policy:default"
       />
 
