@@ -30,13 +30,4 @@
     provides="plone.indexer.interfaces.IIndexableObject"
     />
 
-  <monkey:patch
-    description="Makes MemberData findable via Plone's search"
-    class="Products.CMFPlone.PloneTool.PloneTool"
-    original="getUserFriendlyTypes"
-    preservedoc="True"
-    preserveOriginal="True"
-    replacement=".tools.getUserFriendlyTypes"
-    />
-
 </configure>
