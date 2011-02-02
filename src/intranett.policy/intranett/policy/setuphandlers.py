@@ -67,6 +67,13 @@ def setup_default_groups(site):
     gtool.removeGroups(['Administrators', 'Reviewers'])
 
 
+def setup_reject_anonymous(site):
+    from plone.app.controlpanel import security
+    # The iw.rejectanonymous package patches the SecurityControlPanelAdapter
+    # adding an extra property.
+    security.SecurityControlPanelAdapter(site).private_site = True
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -79,3 +86,4 @@ def various(context):
     disable_collections(site)
     disable_portlets(site)
     setup_default_groups(site)
+    setup_reject_anonymous(site)

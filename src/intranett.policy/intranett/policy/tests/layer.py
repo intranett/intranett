@@ -45,6 +45,7 @@ class IntranettLayer(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
         import intranett.policy
+        import iw.rejectanonymous
 
         xmlconfig.file("meta.zcml", intranett.policy,
                        context=configurationContext)
@@ -52,6 +53,10 @@ class IntranettLayer(PloneSandboxLayer):
                        context=configurationContext)
         xmlconfig.file("overrides.zcml", intranett.policy,
                        context=configurationContext)
+
+        # Need to explicitly load this because z3c.autoinclude is not run
+        xmlconfig.file('configure.zcml', iw.rejectanonymous,
+                        context=configurationContext)
 
         z2.installProduct(app, 'Products.PloneFormGen')
         z2.installProduct(app, 'intranett.theme')
