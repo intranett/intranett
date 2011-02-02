@@ -165,10 +165,10 @@
     <value>
       <element key="plone.resource">plone.app.caching.moderateCaching</element>
       <element key="plone.stableResource">plone.app.caching.strongCaching</element>
-      <element key="plone.content.itemView">plone.app.caching.noCaching</element>
+      <element key="plone.content.itemView">plone.app.caching.weakCaching</element>
       <element key="plone.content.feed">plone.app.caching.moderateCaching</element>
-      <element key="plone.content.folderView">plone.app.caching.noCaching</element>
-      <element key="plone.content.file">plone.app.caching.noCaching</element>
+      <element key="plone.content.folderView">plone.app.caching.weakCaching</element>
+      <element key="plone.content.file">plone.app.caching.moderateCaching</element>
     </value>
   </record>
 </registry>
