@@ -2,6 +2,36 @@
 /*global jQuery:false, document: false, window: false*/
 
 (function ($) {
+    $.fn.heightEqualizer = function (base_height) {
+        if ($(this).eq(0).hasClass('equalized')) {
+            return false;
+        }
+        if (base_height === 0) {
+            base_height = Math.max.apply(null, this.map(function () {
+                return $(this).height();
+            }).get());
+            this.height(base_height);
+            this.each(function () {
+                if ($(this).find('img').length === 0) {
+                    $(this).addClass('equalized');
+                }
+            });
+        }
+        else {
+            // if we pass base_height we make inner elements fill the
+            // whole height
+            $(this).each(function () {
+                var outerStuff, elemHeight;
+                outerStuff = $(this).outerHeight(true) - $(this).height();
+                elemHeight = base_height - outerStuff;
+                $(this).height(elemHeight);
+            });
+        }
+        return base_height;
+    };
+}(jQuery));
+
+(function ($) {
     $(function () {
         jQuery.fn.jBreadCrumb.defaults.endElementsToLeaveOpen = 2;
         jQuery.fn.jBreadCrumb.defaults.beginingElementsToLeaveOpen = 2;
@@ -9,40 +39,12 @@
         jQuery.fn.jBreadCrumb.defaults.previewWidth = 15;
         $('#portal-breadcrumbs').jBreadCrumb();
 
-        // Equal height for frontpage promo blocks
-        var heightEqualizer = function (elems, base_height) {
-            if (elems.eq(0).hasClass('equalized')) {
-                return false;
-            }
-            if (base_height === 0) {
-                base_height = Math.max.apply(null, elems.map(function () {
-                    return $(this).height();
-                }).get());
-                elems.height(base_height);
-                elems.each(function () {
-                    if ($(this).find('img').length === 0) {
-                        $(this).addClass('equalized');
-                    }
-                });
-            }
-            else {
-                // if we pass base_height we make inner elements fill the
-                // whole height
-                $(elems).each(function () {
-                    var outerStuff, elemHeight;
-                    outerStuff = $(this).outerHeight(true) - $(this).height();
-                    elemHeight = base_height - outerStuff;
-                    $(this).height(elemHeight);
-                });
-            }
-            return base_height;
-        };
-
         $('.photoAlbumEntryRow').each(function () {
-            heightEqualizer($(this).find('.photoAlbumEntry'), 0);
+            $(this).find('.photoAlbumEntry').heightEqualizer(0);
         });
 
-        heightEqualizer($('dl.portalMessage dt, dl.portalMessage dd'), 0);
+        $('dl.portalMessage dt, dl.portalMessage dd').heightEqualizer(0);
+        $('#frontpage-columns .fpBlock .visualPadding').heightEqualizer(0);
 
         $('#settings-toggle a').click(function (event) {
             event.stopPropagation();

@@ -482,6 +482,19 @@ body > header nav li a .toolTipArrow {
     @include border-radius(0px);
 	background: transparent;
 }
+#viewlet-below-content .managePortletsFallback {
+    font-size: $smaller-size;
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #CCCCCC;
+    color: #222222;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.38em 0.76em;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(247, 247, 247, 0.7);
+    text-transform: uppercase;
+}
 .managePortletsFallback {
 	margin: 1.25em 0;
 	display: inline-block;
@@ -543,9 +556,6 @@ dl.collapsible dd.collapsibleContent {
    float: left;
    clear: both;
    margin: 0.5em $base-size 0.5em 0;
-}
-body.template-employee-listing .tileItem .image-left {
-	margin-top: 0;
 }
 .image-right {
    float: right;
@@ -1507,7 +1517,7 @@ p.tileBody {
 	border-style:solid solid solid none;
 	border-width:10px 15px 10px 0;
 	margin-top: $largest-size;
-	left: 118px;
+	left: 105px;
 }
 #reply-side-arrow .innerTooltipArrow {
 	border-bottom-color: transparent;
@@ -1516,7 +1526,7 @@ p.tileBody {
 }
 
 #commenting {
-	margin: 1em 0 3em 1em;	
+	margin: 1em 0 3em;	
 }
 #commenting fieldset {
     padding: 1em;
@@ -1639,6 +1649,7 @@ small.commentDate {
 .portlet {
 	margin-bottom: $base-size;
 }
+.managedPortlet .portletHeader,
 .portlet .portletHeader {
     text-transform: uppercase;	
     line-height: normal;
@@ -1826,12 +1837,13 @@ body > footer {
 #frontpage-highlight {
 	margin: 0 0 22px;
 }
-.fpBlock .visualPadding {
-    padding: 1em;
-    border: 1px solid #ddd;
-}
 #frontpage-columns {
     margin: 0 0 22px;
+    
+	    .fpBlock .visualPadding {
+		    padding: 1em;
+		    border: 1px solid #ddd;
+		}
         .width-16 {
             width: 100%;
             margin-left: -100%;
@@ -1853,9 +1865,6 @@ body > footer {
         .width-5:nth-child(2) {
             margin-left: -622px;
         }        
-}
-#viewlet-below-content .managePortletsFallback {
-	display: none;
 }
 
 /* @group Edit frontpage */
@@ -1897,12 +1906,16 @@ ul#departments-list li:nth-child(1) a {
 #employee-listing-wrapper {
     margin-top: $larger-size;
        .tileItem {
-            float: left;
-            width: 50%;
+            float: right;
+            width: 49%;
         }
         .tileItem:nth-child(odd) {
-            clear: left;
+            clear: both;
+            float: left;
         }
+        .info {
+		    padding-left: 116px;
+		}
 }
 sup.manageUser {
     vertical-align: super;
@@ -1910,6 +1923,10 @@ sup.manageUser {
         a {
             color: $logored;
         }
+}
+body.template-employee-listing .tileItem .image-left {
+	margin-top: 0;
+	margin-right: 16px;
 }
 
 /* @end */

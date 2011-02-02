@@ -10,6 +10,7 @@
   <i18n:registerTranslations directory="locales" />
 
   <include package="Products.CMFPlone" />
+  <include package="collective.ATClamAV" />
   <include package="experimental.catalogqueryplan" />
   <include package="munin.zope" />
   <include package="plone.app.caching" />

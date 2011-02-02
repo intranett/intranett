@@ -50,27 +50,31 @@
 
                 <div id="employee-listing-wrapper">
                     <tal:employee repeat="employee employees">
-                        <div class="tileItem visualIEFloatFix row"
-                             tal:define="department employee/department|nothing">
-                            <div class="cell width-5 position-0">
-                                <a href="#"
-                                   tal:attributes="href string:$portal_url/@@user?name=${employee/username};
-                                                   title employee/fullname">
-                                    <img class="image-left" alt="" src=""
-                                         tal:condition="employee/thumbnail_url"
-                                         tal:attributes="src employee/thumbnail_url" />
-                                    <img class="image-left" alt="" src=""
-                                         tal:condition="not:employee/thumbnail_url"
-                                         tal:attributes="src string:$portal_url/defaultUser.png" />
-                                </a>
-                            </div>
-                            <div class="cell width-11 position-5">
+                        <div class="tileItem visualIEFloatFix vcard"
+                             tal:define="department employee/department|nothing;
+                                         portal context/@@plone_portal_state/portal;
+                                         normalizeString nocall:context/@@plone/normalizeString;
+                                         wtool portal/portal_workflow;
+                                         item_wf_state        employee/review_state|python: wtool.getInfoFor(employee, 'review_state', '');
+                                         item_wf_state_class  python:'state-' + normalizeString(item_wf_state);">
+                            <a href="#"
+                               tal:attributes="href string:$portal_url/@@user?name=${employee/username};
+                                               title employee/fullname">
+                                <img class="image-left photo" alt="" src=""
+                                     tal:condition="employee/thumbnail_url"
+                                     tal:attributes="src employee/thumbnail_url" />
+                                <img class="image-left photo" alt="" src=""
+                                     tal:condition="not:employee/thumbnail_url"
+                                     tal:attributes="src string:$portal_url/defaultUser.png" />
+                            </a>
+                            <div class="info">
                                 <h2 class="tileHeadline">
                                     <span class="summary">
-                                        <a class="contenttype-document state-private url"
+                                        <a class="state-private url fn"
                                            tal:content="employee/fullname | employee/username"
                                            tal:attributes="href string:$portal_url/@@user?name=${employee/username};
-                                                           title employee/fullname">Test Page</a>
+                                                           title employee/fullname;
+                                                           class string:$item_wf_state_class url fn">Test Page</a>
                                     </span>
                                 </h2>
                                 <div class="tileBody">
@@ -81,18 +85,18 @@
                                          tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
                                          tal:content="employee/department">Department</a>
                                     </tal:department>
-                                    <tal:mobile condition="employee/mobile">
-                                        <br />
+                                    <div class="tel" tal:condition="employee/mobile">
+                                        <span class="type hiddenStructure">Mobile</span>
                                         <span tal:omit-tag=""
                                               i18n:translate="label_mobile">Mobile phone</span>:
-                                        <span tal:content="employee/mobile" />
-                                      </tal:mobile>
-                                    <tal:phone condition="employee/phone">
-                                        <br/>
+                                        <span class="value" tal:content="employee/mobile" />
+                                    </div>
+                                    <div class="tel" tal:condition="employee/phone">
+                                        <span class="type hiddenStructure">Work</span>
                                         <span tal:omit-tag=""
                                               i18n:translate="label_phone">Phone</span>:
-                                        <span tal:content="employee/phone" />
-                                    </tal:phone>
+                                        <span class="value" tal:content="employee/phone" />
+                                    </div>
                                 </div>
                             </div>
                         </div>

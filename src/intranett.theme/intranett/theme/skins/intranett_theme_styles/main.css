@@ -31,7 +31,7 @@ body {
 select, input, textarea, button {
   font: 99% sans-serif; }
 
-/* normalize monospace sizing
+/* normalize monospace sizing 
  * en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
  */
 pre, code, kbd, samp {
@@ -210,7 +210,7 @@ input:invalid, textarea:invalid {
   background-color: #f0dddd; }
 
 /* These selection declarations have to be separate.
-   No text-shadow: twitter.com/miketaylr/status/12228805301
+   No text-shadow: twitter.com/miketaylr/status/12228805301 
    Also: hot pink. */
 ::-moz-selection {
   background: #39a3dd;
@@ -226,13 +226,13 @@ input:invalid, textarea:invalid {
 a:link {
   -webkit-tap-highlight-color: #39a3dd; }
 
-/* make buttons play nice in IE:
+/* make buttons play nice in IE:    
    www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
 button {
   width: auto;
   overflow: visible; }
 
-/* bicubic resizing for non-native sized IMG:
+/* bicubic resizing for non-native sized IMG: 
    code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
 .ie7 img {
   -ms-interpolation-mode: bicubic; }
@@ -512,7 +512,7 @@ body > header nav li a .toolTipArrow {
 /*#portal-column-content,
 #portal-column-one,
 #portal-column-two {
-  padding: 3.3em 0;
+	padding: 3.3em 0;
 }*/
 #portal-columns > aside {
   -moz-border-radius: 0px;
@@ -522,6 +522,19 @@ body > header nav li a .toolTipArrow {
   border-radius: 0px;
   /* Opera 10.5, IE 9, Saf5, Chrome */
   background: transparent; }
+
+#viewlet-below-content .managePortletsFallback {
+  font-size: 0.76em;
+  background: none repeat scroll 0 0 #EEEEEE;
+  border: 1px solid #CCCCCC;
+  color: #222222;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.38em 0.76em;
+  position: relative;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(247, 247, 247, 0.7);
+  text-transform: uppercase; }
 
 .managePortletsFallback {
   margin: 1.25em 0;
@@ -577,9 +590,6 @@ dl.collapsible dd.collapsibleContent {
   clear: both;
   margin: 0.5em 1em 0.5em 0; }
 
-body.template-employee-listing .tileItem .image-left {
-  margin-top: 0; }
-
 .image-right {
   float: right;
   clear: both;
@@ -607,14 +617,14 @@ dd.image-caption {
 /* @group Listings */
 /* @group Folder Listing */
 /*body.template-folder_listing #content-core dt {
-  margin-top: $larger-size;
+	margin-top: $larger-size;
 }*/
 /* @end */
 /*.tileItem:nth-child(odd) {
-  background: $lightgrey;
+	background: $lightgrey;
 }*/
 /*.tileItem .documentByLine {
-  margin-top: -2.5em;
+	margin-top: -2.5em;
 }*/
 /* @end */
 /* @group Document Actions */
@@ -677,7 +687,7 @@ dd.image-caption {
   width: 100%; }
 
 /*#contentviews-wrapper, .contentActions {
-  display: none;
+	display: none;
 }*/
 .contentViews li {
   display: inline; }
@@ -1501,7 +1511,7 @@ p.tileBody {
   border-style: solid solid solid none;
   border-width: 10px 15px 10px 0;
   margin-top: 2em;
-  left: 118px; }
+  left: 105px; }
 
 #reply-side-arrow .innerTooltipArrow {
   border-bottom-color: transparent;
@@ -1509,7 +1519,7 @@ p.tileBody {
   margin-left: 1px; }
 
 #commenting {
-  margin: 1em 0 3em 1em; }
+  margin: 1em 0 3em; }
 
 #commenting fieldset {
   padding: 1em;
@@ -1580,7 +1590,7 @@ small.commentDate {
   padding: 1em; }
 
 /*.discussion .comment:nth-child(odd) .commentWrapper {
-  background: $lightgrey;
+	background: $lightgrey;
 }*/
 .commentWrapper .commentBody {
   clear: none; }
@@ -1634,6 +1644,7 @@ small.commentDate {
 .portlet {
   margin-bottom: 1em; }
 
+.managedPortlet .portletHeader,
 .portlet .portletHeader {
   text-transform: uppercase;
   line-height: normal;
@@ -1678,9 +1689,9 @@ small.commentDate {
   text-transform: uppercase; }
 
 /*.portletAssignments .managedPortlet {
-  background: $lightgrey;
-  border-top: 1px solid #E6E6E6;
-  border-bottom: 1px solid #CCCCCC;
+	background: $lightgrey;
+	border-top: 1px solid #E6E6E6;
+	border-bottom: 1px solid #CCCCCC;
 }*/
 .portletAssignments .portletHeader {
   /*padding: 0.5em 0;*/ }
@@ -1798,12 +1809,11 @@ body > footer {
 #frontpage-highlight {
   margin: 0 0 22px; }
 
-.fpBlock .visualPadding {
-  padding: 1em;
-  border: 1px solid #ddd; }
-
 #frontpage-columns {
   margin: 0 0 22px; }
+  #frontpage-columns .fpBlock .visualPadding {
+    padding: 1em;
+    border: 1px solid #ddd; }
   #frontpage-columns .width-16 {
     width: 100%;
     margin-left: -100%; }
@@ -1819,9 +1829,6 @@ body > footer {
     margin-left: -100%; }
   #frontpage-columns .width-5:nth-child(2) {
     margin-left: -622px; }
-
-#viewlet-below-content .managePortletsFallback {
-  display: none; }
 
 /* @group Edit frontpage */
 body.template-manage-frontpage .portlets-manager .portletAssignments {
@@ -1857,16 +1864,23 @@ ul#departments-list li:nth-child(1) a {
 #employee-listing-wrapper {
   margin-top: 1.25em; }
   #employee-listing-wrapper .tileItem {
-    float: left;
-    width: 50%; }
+    float: right;
+    width: 49%; }
   #employee-listing-wrapper .tileItem:nth-child(odd) {
-    clear: left; }
+    clear: both;
+    float: left; }
+  #employee-listing-wrapper .info {
+    padding-left: 116px; }
 
 sup.manageUser {
   vertical-align: super;
   font-size: small; }
   sup.manageUser a {
     color: #e3005a; }
+
+body.template-employee-listing .tileItem .image-left {
+  margin-top: 0;
+  margin-right: 16px; }
 
 /* @end */
 @media print {
