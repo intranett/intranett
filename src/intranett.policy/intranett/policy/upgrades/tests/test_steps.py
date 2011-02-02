@@ -6,7 +6,7 @@ from intranett.policy.tests.base import IntranettTestCase
 class TestUpgradeSteps(IntranettTestCase):
 
     def test_activate_clamav(self):
-        from intranett.policy.upgrades.steps import activate_clamav
+        from ..steps import activate_clamav
         portal = self.layer['portal']
         ptool = getToolByName(portal, 'portal_properties')
         clamav = ptool.clamav_properties
