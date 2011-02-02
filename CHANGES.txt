@@ -4,6 +4,9 @@ Changelog
 1.1.4 - unreleased
 ------------------
 
+- Only show folderish items in the tabs/sections. Closes #144.
+  [hannosch]
+
 - It wasn't possible to assign portlets except for "static text" to the
   frontpage. Closes #164.
   [hannosch]
