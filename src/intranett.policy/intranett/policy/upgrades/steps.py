@@ -19,3 +19,7 @@ def activate_clamav(setup):
 def disable_nonfolderish_sections(context):
     ptool = getToolByName(context, 'portal_properties')
     ptool.site_properties.disable_nonfolderish_sections = True
+
+
+def activate_collective_flag(context):
+    loadMigrationProfile(context, 'profile-collective.flag:default')

@@ -11,6 +11,7 @@ class HiddenProfiles(object):
         return [
             u'borg.localrole:default',
             u'collective.ATClamAV:default',
+            u'collective.flag:default',
             u'plone.app.caching:default',
             u'plone.app.discussion:default',
             u'plone.app.iterate:plone.app.iterate',
@@ -30,6 +31,7 @@ class HiddenProducts(object):
     def getNonInstallableProducts(self):
         return [
             'collective.ATClamAV',
+            'collective.flag',
             'kupu',
             'plone.app.caching',
             'plone.app.discussion',
