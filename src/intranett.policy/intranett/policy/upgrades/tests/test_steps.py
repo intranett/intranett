@@ -34,3 +34,11 @@ class TestUpgradeSteps(IntranettTestCase):
         activate_collective_flag(portal)
         self.assertTrue('flaggedobject' in catalog.indexes())
 
+    def test_install_MemberData_type(self):
+        from ..steps import install_MemberData_type
+        portal = self.layer['portal']
+        types = getToolByName(portal, 'portal_types')
+        del types['MemberData']
+        install_MemberData_type(portal)
+        self.assertTrue('MemberData' in types)
+
