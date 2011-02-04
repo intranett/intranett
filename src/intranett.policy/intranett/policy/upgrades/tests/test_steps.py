@@ -35,11 +35,12 @@ class TestUpgradeSteps(IntranettTestCase):
         self.assertTrue('flaggedobject' in catalog.indexes())
 
     def test_activate_iw_rejectanonymous(self):
-        from ..steps import activate_iw_rejectanonymous
+        from intranett.policy.setuphandlers import setup_reject_anonymous
         from iw.rejectanonymous import IPrivateSite
         from zope.interface import noLongerProvides
         portal = self.layer['portal']
+        setup = getToolByName(portal, 'portal_setup')
         noLongerProvides(portal, IPrivateSite)
         self.assertFalse(IPrivateSite.providedBy(portal))
-        activate_iw_rejectanonymous(portal)
+        setup_reject_anonymous(setup)
         self.assertTrue(IPrivateSite.providedBy(portal))

@@ -1,4 +1,5 @@
 from Products.CMFCore.utils import getToolByName
+from zope.interface import alsoProvides
 from zope.component import queryUtility
 
 
@@ -68,10 +69,10 @@ def setup_default_groups(site):
 
 
 def setup_reject_anonymous(site):
-    from plone.app.controlpanel import security
-    # The iw.rejectanonymous package patches the SecurityControlPanelAdapter
-    # adding an extra property.
-    security.SecurityControlPanelAdapter(site).private_site = True
+    from iw.rejectanonymous import IPrivateSite
+    # Used both as a setup and upgrade handler
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    alsoProvides(portal, IPrivateSite)
 
 
 def various(context):

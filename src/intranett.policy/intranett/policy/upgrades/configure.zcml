@@ -32,10 +32,10 @@
 
   <genericsetup:upgradeStep
       title="Upgrade intranett.policy from 4 to 5."
-      description="Install iw.rejectanonymous"
+      description="Activate iw.rejectanonymous"
       source="4"
       destination="5"
-      handler="intranett.policy.upgrades.steps.activate_iw_rejectanonymous"
+      handler="intranett.policy.setuphandlers.setup_reject_anonymous"
       profile="intranett.policy:default"
       />
 

@@ -1,7 +1,5 @@
-from iw.rejectanonymous import IPrivateSite
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFCore.utils import getToolByName
-from zope.interface import alsoProvides
 
 
 def activate_clamav(setup):
@@ -25,8 +23,3 @@ def disable_nonfolderish_sections(context):
 
 def activate_collective_flag(context):
     loadMigrationProfile(context, 'profile-collective.flag:default')
-
-
-def activate_iw_rejectanonymous(context):
-    portal = getToolByName(context, 'portal_url').getPortalObject()
-    alsoProvides(portal, IPrivateSite)
