@@ -4,9 +4,11 @@ Changelog
 1.1.4 - unreleased
 ------------------
 
-- It wasn't possible to assign portlets except for "static text" to the
-  frontpage. Closes #164.
+- Only show folderish items in the tabs/sections. Closes #144.
   [hannosch]
+
+- Install collective.flag. Closes #173.
+  [tomster]
 
 1.1.3 - 2011-01-27
 ------------------

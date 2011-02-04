@@ -14,3 +14,12 @@ def activate_clamav(setup):
     par_id = ids.index('plone.app.registry')
     actions = actions[:par_id] + [clam] + actions[par_id:]
     cpanel._actions = tuple(actions)
+
+
+def disable_nonfolderish_sections(context):
+    ptool = getToolByName(context, 'portal_properties')
+    ptool.site_properties.disable_nonfolderish_sections = True
+
+
+def activate_collective_flag(context):
+    loadMigrationProfile(context, 'profile-collective.flag:default')

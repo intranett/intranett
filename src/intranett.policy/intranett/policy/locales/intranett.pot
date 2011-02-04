@@ -12,7 +12,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
+"Domain: intranett\n"
 
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:68

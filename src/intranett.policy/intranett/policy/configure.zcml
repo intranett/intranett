@@ -11,6 +11,7 @@
 
   <include package="Products.CMFPlone" />
   <include package="collective.ATClamAV" />
+  <include package="collective.flag" />
   <include package="experimental.catalogqueryplan" />
   <include package="iw.rejectanonymous" />
   <include package="munin.zope" />
