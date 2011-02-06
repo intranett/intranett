@@ -1,5 +1,6 @@
 from Acquisition import aq_get
 
+from intranett.policy.config import BASE_PROFILE
 from intranett.policy.config import POLICY_PROFILE
 from intranett.policy.config import THEME_PROFILE
 
@@ -27,12 +28,14 @@ def run_upgrade(setup, profile_id=POLICY_PROFILE):
 
 
 def run_all_upgrades(setup):
+    run_upgrade(setup, BASE_PROFILE)
     run_upgrade(setup, THEME_PROFILE)
     run_upgrade(setup)
 
+    base_updated = compare_profile_versions(setup, BASE_PROFILE)
     theme_updated = compare_profile_versions(setup, THEME_PROFILE)
     policy_updated = compare_profile_versions(setup, POLICY_PROFILE)
-    return theme_updated and policy_updated
+    return all([base_updated, theme_updated, policy_updated])
 
 
 def compare_profile_versions(setup, profile_id):
