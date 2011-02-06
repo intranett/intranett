@@ -44,3 +44,11 @@ class TestUpgradeSteps(IntranettTestCase):
         self.assertFalse(IPrivateSite.providedBy(portal))
         setup_reject_anonymous(setup)
         self.assertTrue(IPrivateSite.providedBy(portal))
+
+    def test_install_MemberData_type(self):
+        from ..steps import install_MemberData_type
+        portal = self.layer['portal']
+        types = getToolByName(portal, 'portal_types')
+        del types['MemberData']
+        install_MemberData_type(portal)
+        self.assertTrue('MemberData' in types)

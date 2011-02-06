@@ -4,6 +4,9 @@ Changelog
 1.1.4 - unreleased
 ------------------
 
+- Repair the advanced search form. Closes #159.
+  [mj, hannosch]
+
 - Protect all urls (like search forms) from being accessed by anonymous.
   Closes #139.
   [mj, hannosch]

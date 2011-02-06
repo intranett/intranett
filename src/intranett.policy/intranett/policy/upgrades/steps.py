@@ -23,3 +23,8 @@ def disable_nonfolderish_sections(context):
 
 def activate_collective_flag(context):
     loadMigrationProfile(context, 'profile-collective.flag:default')
+
+
+def install_MemberData_type(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default', 
+        steps=('typeinfo',))
