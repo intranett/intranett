@@ -4,6 +4,10 @@ Changelog
 1.1.4 - unreleased
 ------------------
 
+- Updated to Plone 4.0.3 and Zope 2.12.15 (incl. a security fix for acquiring
+  docstrings).
+  [hannosch]
+
 - Repair the advanced search form. Closes #159.
   [mj, hannosch]
 
