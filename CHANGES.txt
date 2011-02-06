@@ -4,6 +4,10 @@ Changelog
 1.1.4 - unreleased
 ------------------
 
+- Protect all urls (like search forms) from being accessed by anonymous.
+  Closes #139.
+  [mj, hannosch]
+
 - Only show folderish items in the tabs/sections. Closes #144.
   [hannosch]
 

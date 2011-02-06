@@ -1,4 +1,5 @@
 from Products.CMFCore.utils import getToolByName
+from zope.interface import alsoProvides
 from zope.component import queryUtility
 
 
@@ -67,6 +68,13 @@ def setup_default_groups(site):
     gtool.removeGroups(['Administrators', 'Reviewers'])
 
 
+def setup_reject_anonymous(site):
+    from iw.rejectanonymous import IPrivateSite
+    # Used both as a setup and upgrade handler
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    alsoProvides(portal, IPrivateSite)
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -79,3 +87,4 @@ def various(context):
     disable_collections(site)
     disable_portlets(site)
     setup_default_groups(site)
+    setup_reject_anonymous(site)
