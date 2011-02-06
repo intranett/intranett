@@ -224,6 +224,8 @@ def _git_update(is_git=True):
             run('git reset --hard HEAD')
 
     run('git fetch')
+    run('git remote prune origin')
+    run('git gc')
     tag = env.server.config.get('tag', None)
     if tag is not None:
         tag = 'origin/' + tag
