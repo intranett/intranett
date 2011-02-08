@@ -31,5 +31,6 @@ setup(name='Products.Extropy',
           'Products.Invoice',
           'Products.PloneFormGen',
           'Products.signalstack',
+          'Products.PloneHotfix20110720',
       ],
       )
