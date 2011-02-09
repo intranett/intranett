@@ -4,6 +4,9 @@ Changelog
 1.1.6 - unreleased
 ------------------
 
+- Fix caching and security of portraits. Closes #154.
+  [stefan, hannosch]
+
 - Improve and fix caching. Closes #172.
   [stefan, hannosch]
 
