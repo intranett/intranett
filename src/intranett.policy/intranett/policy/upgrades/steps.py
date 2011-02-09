@@ -37,7 +37,7 @@ def setup_reject_anonymous(context):
 
 
 @upgrade_to(6)
-def install_MemberData_type(context):
+def install_memberdata_type(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('typeinfo', ))
 

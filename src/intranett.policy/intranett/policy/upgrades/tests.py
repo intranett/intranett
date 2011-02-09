@@ -45,11 +45,11 @@ class TestUpgradeSteps(IntranettTestCase):
         steps.setup_reject_anonymous(setup)
         self.assertTrue(IPrivateSite.providedBy(portal))
 
-    def test_install_MemberData_type(self):
+    def test_install_memberdata_type(self):
         portal = self.layer['portal']
         types = getToolByName(portal, 'portal_types')
         del types['MemberData']
-        steps.install_MemberData_type(portal)
+        steps.install_memberdata_type(portal)
         self.assertTrue('MemberData' in types)
 
     def test_update_caching_config(self):
