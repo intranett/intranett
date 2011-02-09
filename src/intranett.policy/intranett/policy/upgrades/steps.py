@@ -35,6 +35,13 @@ def activate_collective_flag(context):
 UPGRADES.append((4, activate_collective_flag))
 
 
+def setup_reject_anonymous(context):
+    from intranett.policy import setuphandlers
+    setuphandlers.setup_reject_anonymous(context)
+
+UPGRADES.append((5, setup_reject_anonymous))
+
+
 def install_MemberData_type(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('typeinfo', ))

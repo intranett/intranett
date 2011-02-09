@@ -21,7 +21,6 @@
   <include package="intranett.theme" />
 
   <include package=".browser" />
-  <include package=".upgrades" />
   <include file="profile.zcml" />
 
   <adapter factory=".caching.EditBarCookie" name="editbar" />
