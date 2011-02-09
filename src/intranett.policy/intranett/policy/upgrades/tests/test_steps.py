@@ -52,3 +52,17 @@ class TestUpgradeSteps(IntranettTestCase):
         del types['MemberData']
         install_MemberData_type(portal)
         self.assertTrue('MemberData' in types)
+
+    def test_update_caching_config(self):
+        from ..steps import update_caching_config
+        portal = self.layer['portal']
+        registry = getToolByName(portal, 'portal_registry')
+        purge_key = 'plone.app.caching.interfaces.IPloneCacheSettings.' \
+            'purgedContentTypes'
+        etag_key = 'plone.app.caching.weakCaching.etags'
+        registry.records[purge_key].value = ('Document', )
+        registry.records[etag_key].value = ('userid', 'language', )
+        update_caching_config(portal)
+        self.assertEqual(registry.records[purge_key].value,
+            ('File', 'Image', 'News Item'))
+        self.assertTrue('editbar' in registry.records[etag_key].value)

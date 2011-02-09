@@ -35,7 +35,7 @@ def crop_and_scale_image(image_file,
 
     # Preserve palletted mode.
     original_mode = image.mode
-    if original_mode == '1':
+    if original_mode == '1': # pragma: no cover
         image = image.convert('L')
     elif original_mode == 'P':
         image = image.convert('RGBA')
@@ -54,7 +54,7 @@ def crop_and_scale_image(image_file,
 
         if min_size == cur_size[1]:
             box = (margin, 0, max_size - margin, min_size)
-        else:
+        else: # pragma: no cover
             box = (0, margin, min_size, max_size - margin)
         image = image.crop(box)
 

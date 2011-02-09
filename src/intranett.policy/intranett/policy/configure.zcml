@@ -23,6 +23,8 @@
   <include package=".upgrades" />
   <include file="profile.zcml" />
 
+  <adapter factory=".caching.EditBarCookie" name="editbar" />
+
   <adapter
     for=".tools.MemberData
          Products.CMFPlone.interfaces.IPloneCatalogTool"

@@ -48,4 +48,13 @@
       profile="intranett.policy:default"
       />
 
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.policy from 6 to 7."
+      description="Update caching configuration"
+      source="6"
+      destination="7"
+      handler="intranett.policy.upgrades.steps.update_caching_config"
+      profile="intranett.policy:default"
+      />
+
 </configure>
