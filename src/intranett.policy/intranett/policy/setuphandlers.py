@@ -1,11 +1,18 @@
 from Products.CMFCore.utils import getToolByName
-from zope.interface import alsoProvides
 from zope.component import queryUtility
+from zope.interface import alsoProvides
+
+from intranett.policy.config import POLICY_PROFILE
+
+
+def set_profile_version(site):
+    from .upgrades import last_upgrade_to
+    setup = getToolByName(site, 'portal_setup')
+    setup.setLastVersionForProfile(POLICY_PROFILE, last_upgrade_to())
 
 
 def setup_locale(site):
     site.setLanguage('no')
-
     tool = getToolByName(site, "portal_languages")
     tool.manage_setLanguageSettings('no',
         ['no'],
@@ -80,6 +87,7 @@ def various(context):
     if context.readDataFile('intranett-policy-various.txt') is None:
         return
     site = context.getSite()
+    set_profile_version(site)
     setup_locale(site)
     ensure_workflow(site)
     disable_contentrules(site)

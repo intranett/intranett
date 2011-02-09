@@ -17,9 +17,15 @@ def upgrade_to(dest):
     """
 
     def decorator(fun):
+        if dest in UPGRADES:
+            raise ValueError('Duplicate upgrade step registration.')
         UPGRADES[dest] = fun
         return fun
     return decorator
+
+
+def last_upgrade_to():
+    return unicode(max(UPGRADES.keys()))
 
 
 def register_upgrades():
@@ -34,7 +40,10 @@ def register_upgrades():
 
 
 def compare_profile_versions(setup, profile_id):
-    current = setup.getVersionForProfile(profile_id)
+    if profile_id == POLICY_PROFILE:
+        current = last_upgrade_to()
+    else:
+        current = setup.getVersionForProfile(profile_id)
     current = tuple(current.split('.'))
     last = setup.getLastVersionForProfile(profile_id)
     return current == last
