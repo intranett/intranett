@@ -1,6 +1,19 @@
+import os
+import os.path
+
 from setuptools import setup, find_packages
 
-version = '2.0dev'
+changes = os.path.join(os.pardir, os.pardir, 'CHANGES.txt')
+lines = []
+with open(changes, 'rU') as fd:
+    for line in fd:
+        if line.startswith('---'):
+            break
+        lines.append(line)
+
+version = lines[-1].split('-')[0].strip()
+if 'unreleased' in lines[-1]:
+    version += 'dev'
 
 setup(name='intranett.policy',
       version=version,

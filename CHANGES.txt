@@ -4,11 +4,13 @@ Changelog
 1.1.7 - unreleased
 ------------------
 
+- Add version number to footer and adjust text.
+  [hannosch]
 
 1.1.6 - 2011-02-09
 ------------------
 
-- Disabled Google Analytics. Closes #179.
+- Disable Google Analytics. Closes #179.
   [hannosch]
 
 - It wasn't possible to assign portlets except for "static text" to the
