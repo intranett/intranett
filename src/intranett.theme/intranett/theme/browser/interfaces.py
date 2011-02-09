@@ -1,4 +1,4 @@
-from plone.app.portlets.interfaces import IColumn
+from plone.portlets.interfaces import IPortletManager
 from plone.theme.interfaces import IDefaultPloneLayer
 from zope.viewlet.interfaces import IViewletManager
 
@@ -20,6 +20,6 @@ class ITopBar(IViewletManager):
     """
 
 
-class IFrontpagePortletManagers(IColumn):
+class IFrontpagePortletManagers(IPortletManager):
     """ General interface for portlet managers on the Frontpage View.
     """
