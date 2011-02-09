@@ -1,7 +1,6 @@
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFCore.utils import getToolByName
 
-from intranett.policy.tools import Portrait
 from intranett.policy.upgrades import upgrade_to
 
 
@@ -51,6 +50,7 @@ def update_caching_config(context):
 
 @upgrade_to(8)
 def migrate_portraits(context):
+    from intranett.policy.tools import Portrait
 
     def migrate_image(container, id):
         image = container[id]
