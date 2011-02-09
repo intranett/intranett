@@ -2,10 +2,10 @@ from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tools import Portrait
+from intranett.policy.upgrades import upgrade_to
 
-UPGRADES = []
 
-
+@upgrade_to(2)
 def activate_clamav(setup):
     loadMigrationProfile(setup, 'profile-collective.ATClamAV:default')
     loadMigrationProfile(setup, 'profile-intranett.policy:default',
@@ -19,41 +19,34 @@ def activate_clamav(setup):
     actions = actions[:par_id] + [clam] + actions[par_id:]
     cpanel._actions = tuple(actions)
 
-UPGRADES.append((2, activate_clamav))
 
-
+@upgrade_to(3)
 def disable_nonfolderish_sections(context):
     ptool = getToolByName(context, 'portal_properties')
     ptool.site_properties.disable_nonfolderish_sections = True
 
-UPGRADES.append((3, disable_nonfolderish_sections))
 
-
+@upgrade_to(4)
 def activate_collective_flag(context):
     loadMigrationProfile(context, 'profile-collective.flag:default')
 
-UPGRADES.append((4, activate_collective_flag))
 
-
+@upgrade_to(5)
 def setup_reject_anonymous(context):
     from intranett.policy import setuphandlers
     setuphandlers.setup_reject_anonymous(context)
 
-UPGRADES.append((5, setup_reject_anonymous))
 
-
+@upgrade_to(6)
 def install_MemberData_type(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('typeinfo', ))
 
-UPGRADES.append((6, install_MemberData_type))
 
-
+@upgrade_to(7)
 def update_caching_config(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('plone.app.registry', ))
-
-UPGRADES.append((7, update_caching_config))
 
 
 def migrate_image(container, id):
@@ -67,6 +60,7 @@ def migrate_image(container, id):
     container._setObject(id, portrait)
 
 
+@upgrade_to(8)
 def migrate_portraits(context):
     data = getToolByName(context, 'portal_memberdata')
     for k in data.portraits.keys():
@@ -74,12 +68,9 @@ def migrate_portraits(context):
     for k in data.thumbnails.keys():
         migrate_image(data.thumbnails, k)
 
-UPGRADES.append((8, migrate_portraits))
 
-
+@upgrade_to(9)
 def disable_webstats_js(context):
     ptool = getToolByName(context, 'portal_properties')
     sprops = ptool.site_properties
     sprops.webstats_js = ''
-
-UPGRADES.append((9, disable_webstats_js))
