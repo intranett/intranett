@@ -32,6 +32,13 @@ def register_upgrades():
         _registerUpgradeStep(step)
 
 
+def compare_profile_versions(setup, profile_id):
+    current = setup.getVersionForProfile(profile_id)
+    current = tuple(current.split('.'))
+    last = setup.getLastVersionForProfile(profile_id)
+    return current == last
+
+
 def run_upgrade(setup, profile_id=POLICY_PROFILE):
     request = aq_get(setup, 'REQUEST')
     request['profile_id'] = profile_id
@@ -58,10 +65,3 @@ def run_all_upgrades(setup):
     theme_updated = compare_profile_versions(setup, THEME_PROFILE)
     policy_updated = compare_profile_versions(setup, POLICY_PROFILE)
     return all([base_updated, theme_updated, policy_updated])
-
-
-def compare_profile_versions(setup, profile_id):
-    current = setup.getVersionForProfile(profile_id)
-    current = tuple(current.split('.'))
-    last = setup.getLastVersionForProfile(profile_id)
-    return current == last
