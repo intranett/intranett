@@ -57,4 +57,13 @@
       profile="intranett.policy:default"
       />
 
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.policy from 7 to 8."
+      description="Custom portrait class"
+      source="7"
+      destination="8"
+      handler="intranett.policy.upgrades.steps.migrate_portraits"
+      profile="intranett.policy:default"
+      />
+
 </configure>
