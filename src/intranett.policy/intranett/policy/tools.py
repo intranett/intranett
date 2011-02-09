@@ -83,6 +83,14 @@ def safe_transform(context, text, mt='text/x-html-safe'):
     return result
 
 
+class Portrait(Image):
+    """Custom Portrait class to be able to add specific cache headers.
+    """
+    security = ClassSecurityInfo()
+
+InitializeClass(Portrait)
+
+
 class MemberData(BaseMemberData):
     """This is a catalog-aware MemberData. We add functions to allow the
     catalog to index member data.
@@ -212,12 +220,12 @@ class MembershipTool(BaseMembershipTool):
         if portrait and portrait.filename:
             scaled, mimetype = scale_image(portrait,
                                            max_size=PORTRAIT_SIZE)
-            image = Image(id=safe_id, file=scaled, title='')
+            image = Portrait(id=safe_id, file=scaled, title='')
             membertool._setPortrait(image, safe_id)
             # Now for thumbnails
             portrait.seek(0)
             scaled, mimetype = crop_and_scale_image(portrait)
-            image = Image(id=safe_id, file=scaled, title='')
+            image = Portrait(id=safe_id, file=scaled, title='')
             membertool._setPortrait(image, safe_id, thumbnail=True)
 
     def getPersonalPortrait(self, id=None, thumbnail=True):
