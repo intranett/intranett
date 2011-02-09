@@ -9,6 +9,7 @@ etc/logrotate.conf
 etc/munin-node.conf
 etc/plugins/
 etc/supervisord.conf
+etc/varnish.vcl
 include
 lib
 nginx-sites/jarn.conf
