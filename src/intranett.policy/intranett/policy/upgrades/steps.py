@@ -5,12 +5,12 @@ from intranett.policy.upgrades import upgrade_to
 
 
 @upgrade_to(2)
-def activate_clamav(setup):
-    loadMigrationProfile(setup, 'profile-collective.ATClamAV:default')
-    loadMigrationProfile(setup, 'profile-intranett.policy:default',
+def activate_clamav(context):
+    loadMigrationProfile(context, 'profile-collective.ATClamAV:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('propertiestool', ))
     # Move new panel up, so it's at the some position as in a new site
-    cpanel = getToolByName(setup, 'portal_controlpanel')
+    cpanel = getToolByName(context, 'portal_controlpanel')
     actions = cpanel._cloneActions()
     ids = [a.getId() for a in actions]
     clam = actions.pop(ids.index('ClamAVSettings'))
