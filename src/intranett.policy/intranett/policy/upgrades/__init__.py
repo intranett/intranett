@@ -7,7 +7,7 @@ from intranett.policy.config import BASE_PROFILE
 from intranett.policy.config import POLICY_PROFILE
 from intranett.policy.config import THEME_PROFILE
 
-UPGRADES = []
+UPGRADES = {}
 
 
 def upgrade_to(dest):
@@ -17,7 +17,7 @@ def upgrade_to(dest):
     """
 
     def decorator(fun):
-        UPGRADES.append((dest, fun))
+        UPGRADES[dest] = fun
         return fun
     return decorator
 
@@ -27,10 +27,9 @@ def register_upgrades():
     # registrations already took place
     from intranett.policy.upgrades import steps
     steps # pyflakes, register steps during import
-    for dest, handler in UPGRADES:
-        step = UpgradeStep(u'Upgrade %s' % handler.__name__,
-            u'intranett.policy:default', str(dest - 1), str(dest), None,
-            handler, checker=None, sortkey=0)
+    for dest, handler in UPGRADES.items():
+        step = UpgradeStep(u'Upgrade %s' % handler.__name__, POLICY_PROFILE,
+            str(dest - 1), str(dest), None, handler, checker=None, sortkey=0)
         _registerUpgradeStep(step)
 
 
