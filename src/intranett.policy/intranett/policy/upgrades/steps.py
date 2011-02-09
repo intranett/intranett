@@ -54,3 +54,9 @@ def migrate_portraits(context):
         migrate_image(data.portraits, k)
     for k in data.thumbnails.keys():
         migrate_image(data.thumbnails, k)
+
+
+def disable_webstats_js(context):
+    ptool = getToolByName(context, 'portal_properties')
+    sprops = ptool.site_properties
+    sprops.webstats_js = ''
