@@ -1,0 +1,3 @@
+import patches
+
+patches.apply()

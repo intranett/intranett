@@ -64,7 +64,7 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <meta name="generator" content="Plone - http://plone.org" />
-    
+
     <!--  Mobile viewport optimized: j.mp/bplateviewport -->
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 
@@ -73,7 +73,7 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
       engine even if it's on an intranet. This has to be defined before any
       script/style tags.
     </tal:comment>
-    
+
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <![endif]-->
@@ -91,7 +91,7 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
         <!--[if IE]>
         <meta http-equiv="imagetoolbar" content="no" />
         <![endif]-->
-    
+
         <tal:comment replace="nothing"> A slot where you can insert elements in the header from a template </tal:comment>
         <metal:headslot define-slot="head_slot" />
 
@@ -115,27 +115,27 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
                     body_class python:plone_view.bodyClass(template, view);"
         tal:attributes="class body_class;
                         dir python: isRTL and 'rtl' or 'ltr'">
-        
+
         <header i18n:domain="plone">
-            <div tal:replace="structure provider:intranett.topbar" tal:condition="not:ajax_load" />            
+            <div tal:replace="structure provider:intranett.topbar" tal:condition="not:ajax_load" />
             <div class="contentAlignment">
                 <div tal:replace="structure provider:plone.portaltop" tal:condition="not:ajax_load" />
             </div>
             <span class="visualClear"><!-- --></span>
         </header>
-                        
-        <div id="portal-columns" class="row">            
-            <div class="contentAlignment">   
-                
-            <div id="viewlet-above-columns" tal:condition="not:ajax_load" tal:content="structure provider:intranett.abovecolumns" />                
-                             
-            <tal:comment replace="nothing"> Start of main content block </tal:comment>            
+
+        <div id="portal-columns" class="row">
+            <div class="contentAlignment">
+
+            <div id="viewlet-above-columns" tal:condition="not:ajax_load" tal:content="structure provider:intranett.abovecolumns" />
+
+            <tal:comment replace="nothing"> Start of main content block </tal:comment>
             <div class="cell width-10 position-4"
                  id="portal-column-content"
                  tal:attributes="class string:cell $content_width $conten_pos">
 
                 <div id="viewlet-above-content" tal:content="structure provider:plone.abovecontent" />
-                
+
                 <metal:block define-slot="content">
                   <div metal:define-macro="content"
                        tal:define="show_border context/@@plone/showEditableBorder"
@@ -161,7 +161,7 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
 
                           <metal:main define-macro="main">
                               <div tal:replace="structure provider:plone.abovecontenttitle" />
-                              
+
                               <header>
                                   <metal:title define-slot="content-title">
                                       <metal:comment tal:content="nothing">
@@ -216,37 +216,37 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
 
             </div>
             <tal:comment replace="nothing"> End of main content block </tal:comment>
-            
+
             <tal:notajax tal:condition="not:ajax_load">
                 <tal:comment replace="nothing"> Start of the left column </tal:comment>
                 <aside id="portal-column-one" class="cell width-4 position-0"
                        metal:define-slot="column_one_slot" tal:condition="sl">
                     <metal:portlets define-slot="portlets_one_slot">
                       <tal:block replace="structure provider:plone.leftcolumn" />
-                    </metal:portlets>         
+                    </metal:portlets>
                 </aside>
                 <tal:comment replace="nothing"> End of the left column </tal:comment>
             </tal:notajax>
-            
+
             <tal:notajax tal:condition="not:ajax_load">
                 <tal:comment replace="nothing"> Start of right column </tal:comment>
                 <aside id="portal-column-two" class="cell width-4 position-12"
                        metal:define-slot="column_two_slot"
-                       tal:condition="sr">        
+                       tal:condition="sr">
                    <metal:portlets define-slot="portlets_two_slot">
                      <tal:block replace="structure provider:plone.rightcolumn" />
-                   </metal:portlets>                       
+                   </metal:portlets>
                 </aside>
                 <tal:comment replace="nothing"> End of the right column </tal:comment>
             </tal:notajax>
             </div>
         </div>
-        
-        <tal:comment replace="nothing"> end column wrapper </tal:comment>        
-                        
+
+        <tal:comment replace="nothing"> end column wrapper </tal:comment>
+
         <footer i18n:domain="plone" tal:condition="not:ajax_load">
             <div class="contentAlignment"><div tal:replace="structure provider:plone.portalfooter" /></div>
-        </footer>                        
+        </footer>
 
         <div id="kss-spinner" tal:condition="not:ajax_load"><img tal:attributes="src string:${portal_url}/spinner.png" alt="" /></div>
 </body>

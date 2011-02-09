@@ -23,10 +23,46 @@
 
   <genericsetup:upgradeStep
       title="Upgrade intranett.policy from 3 to 4."
-      description="Install collective.flag"
+      description="Activate collective.flag"
       source="3"
       destination="4"
       handler="intranett.policy.upgrades.steps.activate_collective_flag"
+      profile="intranett.policy:default"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.policy from 4 to 5."
+      description="Activate iw.rejectanonymous"
+      source="4"
+      destination="5"
+      handler="intranett.policy.setuphandlers.setup_reject_anonymous"
+      profile="intranett.policy:default"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.policy from 5 to 6."
+      description="Install MemberData types profile"
+      source="5"
+      destination="6"
+      handler="intranett.policy.upgrades.steps.install_MemberData_type"
+      profile="intranett.policy:default"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.policy from 6 to 7."
+      description="Update caching configuration"
+      source="6"
+      destination="7"
+      handler="intranett.policy.upgrades.steps.update_caching_config"
+      profile="intranett.policy:default"
+      />
+
+  <genericsetup:upgradeStep
+      title="Upgrade intranett.policy from 7 to 8."
+      description="Custom portrait class"
+      source="7"
+      destination="8"
+      handler="intranett.policy.upgrades.steps.migrate_portraits"
       profile="intranett.policy:default"
       />
 

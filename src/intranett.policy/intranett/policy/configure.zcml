@@ -1,7 +1,7 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
   xmlns:five="http://namespaces.zope.org/five"
-  xmlns:monkey="http://namespaces.plone.org/monkey"
+  xmlns:cache="http://namespaces.zope.org/cache"
   xmlns:i18n="http://namespaces.zope.org/i18n"
   i18n_domain="intranett">
 
@@ -13,6 +13,7 @@
   <include package="collective.ATClamAV" />
   <include package="collective.flag" />
   <include package="experimental.catalogqueryplan" />
+  <include package="iw.rejectanonymous" />
   <include package="munin.zope" />
   <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
@@ -23,6 +24,8 @@
   <include package=".upgrades" />
   <include file="profile.zcml" />
 
+  <adapter factory=".caching.EditBarCookie" name="editbar" />
+
   <adapter
     for=".tools.MemberData
          Products.CMFPlone.interfaces.IPloneCatalogTool"
@@ -30,13 +33,9 @@
     provides="plone.indexer.interfaces.IIndexableObject"
     />
 
-  <monkey:patch
-    description="Makes MemberData findable via Plone's search"
-    class="Products.CMFPlone.PloneTool.PloneTool"
-    original="getUserFriendlyTypes"
-    preservedoc="True"
-    preserveOriginal="True"
-    replacement=".tools.getUserFriendlyTypes"
+  <cache:ruleset
+    for=".tools.Portrait"
+    ruleset="plone.content.file"
     />
 
 </configure>

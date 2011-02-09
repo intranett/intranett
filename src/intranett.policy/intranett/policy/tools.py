@@ -35,7 +35,7 @@ def crop_and_scale_image(image_file,
 
     # Preserve palletted mode.
     original_mode = image.mode
-    if original_mode == '1':
+    if original_mode == '1': # pragma: no cover
         image = image.convert('L')
     elif original_mode == 'P':
         image = image.convert('RGBA')
@@ -54,7 +54,7 @@ def crop_and_scale_image(image_file,
 
         if min_size == cur_size[1]:
             box = (margin, 0, max_size - margin, min_size)
-        else:
+        else: # pragma: no cover
             box = (0, margin, min_size, max_size - margin)
         image = image.crop(box)
 
@@ -81,6 +81,14 @@ def safe_transform(context, text, mt='text/x-html-safe'):
                                  context=context, mimetype='text/html')
     result = data.getData()
     return result
+
+
+class Portrait(Image):
+    """Custom Portrait class to be able to add specific cache headers.
+    """
+    security = ClassSecurityInfo()
+
+InitializeClass(Portrait)
 
 
 class MemberData(BaseMemberData):
@@ -212,12 +220,14 @@ class MembershipTool(BaseMembershipTool):
         if portrait and portrait.filename:
             scaled, mimetype = scale_image(portrait,
                                            max_size=PORTRAIT_SIZE)
-            image = Image(id=safe_id, file=scaled, title='')
+            image = Portrait(id=safe_id, file=scaled, title='')
+            image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
             membertool._setPortrait(image, safe_id)
             # Now for thumbnails
             portrait.seek(0)
             scaled, mimetype = crop_and_scale_image(portrait)
-            image = Image(id=safe_id, file=scaled, title='')
+            image = Portrait(id=safe_id, file=scaled, title='')
+            image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
             membertool._setPortrait(image, safe_id, thumbnail=True)
 
     def getPersonalPortrait(self, id=None, thumbnail=True):
@@ -238,9 +248,3 @@ class MembershipTool(BaseMembershipTool):
             portrait = getattr(portal, default_portrait, None)
 
         return portrait
-
-
-# Make sure MemberData can be found via Plone search
-def getUserFriendlyTypes(self, typesList=[]):
-    friendlyTypes = self._old_getUserFriendlyTypes(typesList)
-    return friendlyTypes + ['MemberData']

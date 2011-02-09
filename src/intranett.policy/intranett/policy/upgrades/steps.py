@@ -1,6 +1,8 @@
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFCore.utils import getToolByName
 
+from intranett.policy.tools import Portrait
+
 
 def activate_clamav(setup):
     loadMigrationProfile(setup, 'profile-collective.ATClamAV:default')
@@ -23,3 +25,32 @@ def disable_nonfolderish_sections(context):
 
 def activate_collective_flag(context):
     loadMigrationProfile(context, 'profile-collective.flag:default')
+
+
+def install_MemberData_type(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default', 
+        steps=('typeinfo',))
+
+
+def update_caching_config(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default', 
+        steps=('plone.app.registry',))
+
+
+def migrate_image(container, id):
+    image = container[id]
+    # handle both str and Pdata
+    data = str(image.data)
+    portrait = Portrait(id=id, file=data, title='')
+    portrait.manage_permission('View', ['Authenticated', 'Manager'],
+        acquire=False)
+    container._delObject(id)
+    container._setObject(id, portrait)
+
+
+def migrate_portraits(context):
+    data = getToolByName(context, 'portal_memberdata')
+    for k in data.portraits.keys():
+        migrate_image(data.portraits, k)
+    for k in data.thumbnails.keys():
+        migrate_image(data.thumbnails, k)
