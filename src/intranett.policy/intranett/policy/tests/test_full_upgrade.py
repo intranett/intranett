@@ -3,16 +3,36 @@ from os.path import abspath
 from os.path import dirname
 from os.path import join
 
+from Acquisition import aq_parent
+from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
+from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from Products.GenericSetup.context import TarballImportContext
 from zope.site.hooks import setSite
 
+from intranett.policy.config import POLICY_PROFILE
+from intranett.policy.config import THEME_PROFILE
+from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.utils import suppress_warnings
+from intranett.policy.upgrades import run_all_upgrades
 from intranett.policy.upgrades import run_upgrade
+
+
+def ensure_no_addon_upgrades(setup):
+    profiles = set(setup.listProfilesWithUpgrades())
+    # We don't care about the CMFDefault profile in Plone
+    profiles.remove(u"Products.CMFDefault:default")
+    # The iterate profile has a general reinstall profile in it, we ignore
+    # it since we don't use iterate
+    profiles.remove(u"plone.app.iterate:plone.app.iterate")
+    upgrades = {}
+    for profile in profiles:
+        upgrades[profile] = setup.listUpgrades(profile)
+    return upgrades
 
 
 class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
@@ -103,3 +123,63 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
                 remaining[n] = v # pragma: no cover
 
         return remaining
+
+
+class TestFullUpgrade(IntranettTestCase):
+
+    def test_list_steps(self):
+        portal = self.layer['portal']
+        setup = getToolByName(portal, "portal_setup")
+        upgrades = ensure_no_addon_upgrades(setup)
+        for profile, steps in upgrades.items():
+            self.assertEquals(len(steps), 0,
+                              "Found unexpected upgrades: %s" % steps)
+
+    def test_do_upgrades(self):
+        portal = self.layer['portal']
+        setup = getToolByName(portal, "portal_setup")
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+
+        setup.setLastVersionForProfile(POLICY_PROFILE, '1')
+        setup.setLastVersionForProfile(THEME_PROFILE, '1')
+
+        upgrades = setup.listUpgrades(THEME_PROFILE)
+        self.failUnless(len(upgrades) > 0)
+
+        all_finished = run_all_upgrades(setup)
+
+        # And we have reached our current profile versions
+        self.assertTrue(all_finished)
+
+        # There are no more upgrade steps available
+        upgrades = setup.listUpgrades(THEME_PROFILE)
+        self.failUnless(len(upgrades) == 0)
+
+        upgrades = setup.listUpgrades(POLICY_PROFILE)
+        self.failUnless(len(upgrades) == 0)
+
+
+class TestFunctionalMigrations(FunctionalUpgradeTestCase):
+
+    level = 2
+
+    def test_gs_diff(self):
+        self.importFile(__file__, 'one.zexp')
+        oldsite, result = self.migrate()
+
+        login(aq_parent(oldsite), SITE_OWNER_NAME)
+        diff = self.export()
+        remaining = self.parse_diff(diff)
+
+        self.assertEquals(set(remaining.keys()), set([]),
+                          "Unexpected diffs in:\n %s" % remaining.items())
+
+    def test_list_steps_for_addons(self):
+        self.importFile(__file__, 'one.zexp')
+        oldsite, result = self.migrate()
+
+        setup = getToolByName(oldsite, "portal_setup")
+        upgrades = ensure_no_addon_upgrades(setup)
+        for profile, steps in upgrades.items():
+            self.assertEquals(len(steps), 0,
+                              "Found unexpected upgrades: %s" % steps)
