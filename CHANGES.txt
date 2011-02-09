@@ -4,6 +4,9 @@ Changelog
 1.1.6 - unreleased
 ------------------
 
+- Disabled Google Analytics. Closes #179.
+  [hannosch]
+
 - It wasn't possible to assign portlets except for "static text" to the
   frontpage. Closes #164.
   [hannosch]
