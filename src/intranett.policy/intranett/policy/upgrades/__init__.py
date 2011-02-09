@@ -11,6 +11,10 @@ UPGRADES = []
 
 
 def upgrade_to(dest):
+    """Use this as a decorator for an upgrade step handler in the steps
+    module in this sub-package. The `dest` argument is an integer referring to
+    the profile version in `metadata.xml`.
+    """
 
     def decorator(fun):
         UPGRADES.append((dest, fun))
