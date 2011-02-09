@@ -32,11 +32,6 @@ def register_upgrades():
         _registerUpgradeStep(step)
 
 
-def null_upgrade_step(tool):
-    """This is a null upgrade, use it when nothing happens."""
-    pass # pragma: no cover
-
-
 def run_upgrade(setup, profile_id=POLICY_PROFILE):
     request = aq_get(setup, 'REQUEST')
     request['profile_id'] = profile_id
