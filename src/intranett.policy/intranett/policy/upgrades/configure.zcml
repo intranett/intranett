@@ -4,8 +4,7 @@
   i18n_domain="intranett">
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.policy from 1 to 2."
-      description="Activate collective.ATClamAV"
+      title="Upgrade"
       source="1"
       destination="2"
       handler="intranett.policy.upgrades.steps.activate_clamav"
@@ -13,8 +12,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.policy from 2 to 3."
-      description="Disable non-folderish sections"
+      title="Upgrade"
       source="2"
       destination="3"
       handler="intranett.policy.upgrades.steps.disable_nonfolderish_sections"
@@ -22,8 +20,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.policy from 3 to 4."
-      description="Activate collective.flag"
+      title="Upgrade"
       source="3"
       destination="4"
       handler="intranett.policy.upgrades.steps.activate_collective_flag"
@@ -31,8 +28,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.policy from 4 to 5."
-      description="Activate iw.rejectanonymous"
+      title="Upgrade"
       source="4"
       destination="5"
       handler="intranett.policy.setuphandlers.setup_reject_anonymous"
@@ -40,8 +36,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.policy from 5 to 6."
-      description="Install MemberData types profile"
+      title="Upgrade"
       source="5"
       destination="6"
       handler="intranett.policy.upgrades.steps.install_MemberData_type"
@@ -49,8 +44,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.policy from 6 to 7."
-      description="Update caching configuration"
+      title="Upgrade"
       source="6"
       destination="7"
       handler="intranett.policy.upgrades.steps.update_caching_config"
@@ -58,8 +52,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.policy from 7 to 8."
-      description="Custom portrait class"
+      title="Upgrade"
       source="7"
       destination="8"
       handler="intranett.policy.upgrades.steps.migrate_portraits"
@@ -67,8 +60,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.policy from 8 to 9."
-      description="Disable Google Analytics"
+      title="Upgrade"
       source="8"
       destination="9"
       handler="intranett.policy.upgrades.steps.disable_webstats_js"
