@@ -27,6 +27,8 @@ def upgrade_to(dest):
 
 
 def register_upgrades():
+    # Called from the initialize function of the package, so after ZCML
+    # registrations already took place
     from intranett.policy.upgrades import steps
     steps # pyflakes, register steps during import
     for dest, handler in UPGRADES:
