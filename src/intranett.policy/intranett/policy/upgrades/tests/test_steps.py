@@ -93,3 +93,12 @@ class TestUpgradeSteps(IntranettTestCase):
         self.assertTrue(TEST_USER_ID in mdt.thumbnails)
         self.assertTrue(isinstance(mdt.portraits[TEST_USER_ID], Portrait))
         self.assertTrue(isinstance(mdt.thumbnails[TEST_USER_ID], Portrait))
+
+    def test_disable_webstats_js(self):
+        from ..steps import disable_webstats_js
+        portal = self.layer['portal']
+        ptool = getToolByName(portal, 'portal_properties')
+        sprops = ptool.site_properties
+        sprops.webstats_js = '<script type="text/javascript" />'
+        disable_webstats_js(portal)
+        self.assertEqual(sprops.webstats_js, '')
