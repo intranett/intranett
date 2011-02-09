@@ -28,3 +28,8 @@ def activate_collective_flag(context):
 def install_MemberData_type(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default', 
         steps=('typeinfo',))
+
+
+def update_caching_config(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default', 
+        steps=('plone.app.registry',))
