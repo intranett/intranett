@@ -127,6 +127,11 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
 
 class TestFullUpgrade(IntranettTestCase):
 
+    def test_all_steps_taken(self):
+        from intranett.policy.upgrades import UPGRADES
+        numbers = UPGRADES.keys()
+        self.assertEqual(numbers, range(min(numbers), max(numbers) + 1))
+
     def test_list_steps(self):
         portal = self.layer['portal']
         setup = getToolByName(portal, "portal_setup")
