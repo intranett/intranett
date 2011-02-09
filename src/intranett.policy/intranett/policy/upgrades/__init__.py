@@ -1,8 +1,19 @@
 from Acquisition import aq_get
 
+from Products.GenericSetup.upgrade import _registerUpgradeStep
+from Products.GenericSetup.upgrade import UpgradeStep
+
 from intranett.policy.config import BASE_PROFILE
 from intranett.policy.config import POLICY_PROFILE
 from intranett.policy.config import THEME_PROFILE
+
+
+def register_upgrades():
+    from .steps import UPGRADES
+    for dest, handler in UPGRADES:
+        step = UpgradeStep(u'Upgrade', u'intranett.policy:default',
+            str(dest - 1), str(dest), None, handler, checker=None, sortkey=0)
+        _registerUpgradeStep(step)
 
 
 def null_upgrade_step(tool):

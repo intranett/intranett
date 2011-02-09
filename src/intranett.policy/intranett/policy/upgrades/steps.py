@@ -3,6 +3,8 @@ from Products.CMFCore.utils import getToolByName
 
 from intranett.policy.tools import Portrait
 
+UPGRADES = []
+
 
 def activate_clamav(setup):
     loadMigrationProfile(setup, 'profile-collective.ATClamAV:default')
@@ -17,24 +19,34 @@ def activate_clamav(setup):
     actions = actions[:par_id] + [clam] + actions[par_id:]
     cpanel._actions = tuple(actions)
 
+UPGRADES.append((2, activate_clamav))
+
 
 def disable_nonfolderish_sections(context):
     ptool = getToolByName(context, 'portal_properties')
     ptool.site_properties.disable_nonfolderish_sections = True
 
+UPGRADES.append((3, disable_nonfolderish_sections))
+
 
 def activate_collective_flag(context):
     loadMigrationProfile(context, 'profile-collective.flag:default')
 
+UPGRADES.append((4, activate_collective_flag))
+
 
 def install_MemberData_type(context):
-    loadMigrationProfile(context, 'profile-intranett.policy:default', 
-        steps=('typeinfo',))
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('typeinfo', ))
+
+UPGRADES.append((6, install_MemberData_type))
 
 
 def update_caching_config(context):
-    loadMigrationProfile(context, 'profile-intranett.policy:default', 
-        steps=('plone.app.registry',))
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('plone.app.registry', ))
+
+UPGRADES.append((7, update_caching_config))
 
 
 def migrate_image(container, id):
@@ -55,8 +67,12 @@ def migrate_portraits(context):
     for k in data.thumbnails.keys():
         migrate_image(data.thumbnails, k)
 
+UPGRADES.append((8, migrate_portraits))
+
 
 def disable_webstats_js(context):
     ptool = getToolByName(context, 'portal_properties')
     sprops = ptool.site_properties
     sprops.webstats_js = ''
+
+UPGRADES.append((9, disable_webstats_js))
