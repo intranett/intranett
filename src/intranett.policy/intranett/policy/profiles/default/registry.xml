@@ -43,6 +43,7 @@
       <default>
         <element>File</element>
         <element>Image</element>
+        <element>News Item</element>
       </default>
       <description>List content types which should be purged when modified</description>
       <title>Content types to purge</title>
@@ -53,6 +54,7 @@
     <value>
       <element>File</element>
       <element>Image</element>
+      <element>News Item</element>
     </value>
   </record>
   <record field="templateRulesetMapping" interface="plone.app.caching.interfaces.IPloneCacheSettings" name="plone.app.caching.interfaces.IPloneCacheSettings.templateRulesetMapping">
