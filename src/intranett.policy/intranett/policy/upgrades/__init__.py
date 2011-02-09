@@ -18,11 +18,7 @@ def upgrade_to(dest):
 
     def decorator(fun):
         UPGRADES.append((dest, fun))
-
-        def replacement(context):
-            return fun(context)
-
-        return replacement
+        return fun
     return decorator
 
 
