@@ -221,11 +221,13 @@ class MembershipTool(BaseMembershipTool):
             scaled, mimetype = scale_image(portrait,
                                            max_size=PORTRAIT_SIZE)
             image = Portrait(id=safe_id, file=scaled, title='')
+            image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
             membertool._setPortrait(image, safe_id)
             # Now for thumbnails
             portrait.seek(0)
             scaled, mimetype = crop_and_scale_image(portrait)
             image = Portrait(id=safe_id, file=scaled, title='')
+            image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
             membertool._setPortrait(image, safe_id, thumbnail=True)
 
     def getPersonalPortrait(self, id=None, thumbnail=True):
