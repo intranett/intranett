@@ -49,19 +49,19 @@ def update_caching_config(context):
         steps=('plone.app.registry', ))
 
 
-def migrate_image(container, id):
-    image = container[id]
-    # handle both str and Pdata
-    data = str(image.data)
-    portrait = Portrait(id=id, file=data, title='')
-    portrait.manage_permission('View', ['Authenticated', 'Manager'],
-        acquire=False)
-    container._delObject(id)
-    container._setObject(id, portrait)
-
-
 @upgrade_to(8)
 def migrate_portraits(context):
+
+    def migrate_image(container, id):
+        image = container[id]
+        # handle both str and Pdata
+        data = str(image.data)
+        portrait = Portrait(id=id, file=data, title='')
+        portrait.manage_permission('View', ['Authenticated', 'Manager'],
+            acquire=False)
+        container._delObject(id)
+        container._setObject(id, portrait)
+
     data = getToolByName(context, 'portal_memberdata')
     for k in data.portraits.keys():
         migrate_image(data.portraits, k)
