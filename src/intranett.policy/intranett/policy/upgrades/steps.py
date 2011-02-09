@@ -1,15 +1,16 @@
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFCore.utils import getToolByName
 
-from intranett.policy.tools import Portrait
+from intranett.policy.upgrades import upgrade_to
 
 
-def activate_clamav(setup):
-    loadMigrationProfile(setup, 'profile-collective.ATClamAV:default')
-    loadMigrationProfile(setup, 'profile-intranett.policy:default',
+@upgrade_to(2)
+def activate_clamav(context):
+    loadMigrationProfile(context, 'profile-collective.ATClamAV:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('propertiestool', ))
     # Move new panel up, so it's at the some position as in a new site
-    cpanel = getToolByName(setup, 'portal_controlpanel')
+    cpanel = getToolByName(context, 'portal_controlpanel')
     actions = cpanel._cloneActions()
     ids = [a.getId() for a in actions]
     clam = actions.pop(ids.index('ClamAVSettings'))
@@ -18,37 +19,49 @@ def activate_clamav(setup):
     cpanel._actions = tuple(actions)
 
 
+@upgrade_to(3)
 def disable_nonfolderish_sections(context):
     ptool = getToolByName(context, 'portal_properties')
     ptool.site_properties.disable_nonfolderish_sections = True
 
 
+@upgrade_to(4)
 def activate_collective_flag(context):
     loadMigrationProfile(context, 'profile-collective.flag:default')
 
 
-def install_MemberData_type(context):
-    loadMigrationProfile(context, 'profile-intranett.policy:default', 
-        steps=('typeinfo',))
+@upgrade_to(5)
+def setup_reject_anonymous(context):
+    from intranett.policy import setuphandlers
+    setuphandlers.setup_reject_anonymous(context)
 
 
+@upgrade_to(6)
+def install_memberdata_type(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('typeinfo', ))
+
+
+@upgrade_to(7)
 def update_caching_config(context):
-    loadMigrationProfile(context, 'profile-intranett.policy:default', 
-        steps=('plone.app.registry',))
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('plone.app.registry', ))
 
 
-def migrate_image(container, id):
-    image = container[id]
-    # handle both str and Pdata
-    data = str(image.data)
-    portrait = Portrait(id=id, file=data, title='')
-    portrait.manage_permission('View', ['Authenticated', 'Manager'],
-        acquire=False)
-    container._delObject(id)
-    container._setObject(id, portrait)
-
-
+@upgrade_to(8)
 def migrate_portraits(context):
+    from intranett.policy.tools import Portrait
+
+    def migrate_image(container, id):
+        image = container[id]
+        # handle both str and Pdata
+        data = str(image.data)
+        portrait = Portrait(id=id, file=data, title='')
+        portrait.manage_permission('View', ['Authenticated', 'Manager'],
+            acquire=False)
+        container._delObject(id)
+        container._setObject(id, portrait)
+
     data = getToolByName(context, 'portal_memberdata')
     for k in data.portraits.keys():
         migrate_image(data.portraits, k)
@@ -56,6 +69,7 @@ def migrate_portraits(context):
         migrate_image(data.thumbnails, k)
 
 
+@upgrade_to(9)
 def disable_webstats_js(context):
     ptool = getToolByName(context, 'portal_properties')
     sprops = ptool.site_properties

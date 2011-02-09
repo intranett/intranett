@@ -5,7 +5,7 @@
   xmlns:i18n="http://namespaces.zope.org/i18n"
   i18n_domain="intranett">
 
-  <five:registerPackage package="." />
+  <five:registerPackage package="." initialize=".initialize"/>
 
   <i18n:registerTranslations directory="locales" />
 
@@ -21,7 +21,6 @@
   <include package="intranett.theme" />
 
   <include package=".browser" />
-  <include package=".upgrades" />
   <include file="profile.zcml" />
 
   <adapter factory=".caching.EditBarCookie" name="editbar" />

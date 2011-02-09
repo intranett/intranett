@@ -71,3 +71,16 @@ To update the translation files, do::
 
   sh src/intranett.policy/intranett/policy/rebuild.sh
   sh src/intranett.policy/intranett/policy/sync.sh
+
+
+Upgrades
+--------
+
+Add a new upgrade handler at the bottom of the upgrades.steps module with a
+corresponding test inside upgrades.tests. Use the next integer available in
+the ``@upgrade_to(42)`` decorator. The upgrade handler is called with the
+`portal_setup` tool as the context. Inside the tests you need to first emulate
+the old state of the site, then call the upgrade handler and finally test your
+assertions.
+
+There's no other places involved - neither ZCML nor metadata.xml files.
