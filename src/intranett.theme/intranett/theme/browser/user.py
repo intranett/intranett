@@ -1,5 +1,6 @@
 from zope.publisher.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
+from zExceptions import NotFound
 
 from OFS.Traversable import _marker
 
@@ -23,6 +24,10 @@ class UserView(BrowserView):
 
     def getPhysicalPath(self):
         return self.context.getPhysicalPath() + ('user',)
+
+    def __call__(self):
+        # No template yet
+        raise NotFound
 
 
 class MemberDataView(BrowserView):

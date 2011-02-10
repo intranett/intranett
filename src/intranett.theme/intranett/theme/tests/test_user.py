@@ -50,6 +50,39 @@ class TestUserView(IntranettTestCase):
         user = view['test_user_2_']
         self.assertEqual(user, None)
 
+    def test_anonymous_user(self):
+        request = self.layer['request']
+        logout()
+        view = self._make_one(request)
+        user = view['test_user_1_']
+        self.failIf(user is None) # FIXME
+
+
+class TestFunctionalUserView(IntranettFunctionalTestCase):
+
+    def test_user_view(self):
+        browser = get_browser(self.layer['app'])
+        browser.handleErrors = True
+        portal = self.layer['portal']
+        try:
+            browser.open(portal.absolute_url() + '/user')
+        except urllib2.HTTPError, e:
+            self.assertEqual(e.getcode(), 404)
+            self.assertEqual('%s' % (e,), 'HTTP Error 404: Not Found')
+        else:
+            self.fail('HTTPError not raised')
+
+    def test_anonymous_user(self):
+        browser = get_browser(self.layer['app'], loggedIn=False)
+        browser.handleErrors = False
+        portal = self.layer['portal']
+        try:
+            browser.open(portal.absolute_url() + '/user')
+        except Unauthorized, e:
+            self.assertEqual('%s' % (e,), 'Anonymous rejected')
+        else:
+            self.fail('Unauthorized not raised')
+
 
 class TestMemberDataView(IntranettTestCase):
 
