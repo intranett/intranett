@@ -21,8 +21,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.theme from version 1 to 2"
-      description="Removes 'media' query for main.css stylesheet's registration."
+      title="Upgrade"
       source="1"
       destination="2"
       handler="intranett.theme.upgradehandlers.add_media_query_maincss"
@@ -30,8 +29,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.theme from version 2 to 3"
-      description="Change some JS file registrations."
+      title="Upgrade"
       source="2"
       destination="3"
       handler="intranett.theme.upgradehandlers.add_selectivizr_remove_html5_js"
@@ -39,8 +37,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Upgrade intranett.theme from version 3 to 4"
-      description="Correct i18n domain of the employees tab action"
+      title="Upgrade"
       source="3"
       destination="4"
       handler="intranett.theme.upgradehandlers.employees_action_i18n_domain"
