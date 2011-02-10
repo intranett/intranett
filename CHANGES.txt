@@ -7,6 +7,9 @@ Changelog
 - Add version number to footer and adjust text.
   [hannosch]
 
+- Fix lost Cache-Control header when beresp.cacheable is false.
+  [stefan]
+
 1.1.6 - 2011-02-09
 ------------------
 
