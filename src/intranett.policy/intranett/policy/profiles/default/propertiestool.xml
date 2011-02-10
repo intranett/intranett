@@ -8,5 +8,6 @@
  <object name="site_properties">
   <property name="disable_nonfolderish_sections"
     type="boolean">True</property>
+  <property name="icon_visibility" type="string">disabled</property>
  </object>
 </object>
