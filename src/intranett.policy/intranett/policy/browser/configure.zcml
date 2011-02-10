@@ -1,6 +1,7 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
   xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:cache="http://namespaces.zope.org/cache"
   i18n_domain="intranett">
 
   <browser:resource
@@ -9,5 +10,19 @@
       />
 
   <include package=".portlets" />
+
+  <!-- Employee listing -->
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="employee-listing"
+      class=".employeelisting.EmployeeListingView"
+      template="templates/employeelisting_view.pt"
+      permission="zope2.View"
+      />
+
+  <cache:ruleset
+      for=".employeelisting.EmployeeListingView"
+      ruleset="plone.content.folderView"
+      />
 
 </configure>

@@ -114,20 +114,6 @@
       template="templates/manage-frontpage.pt"
       />
 
-  <!-- Employee listing -->
-  <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="employee-listing"
-      class=".employeelisting.EmployeeListingView"
-      template="templates/employeelisting_view.pt"
-      permission="zope2.View"
-      />
-
-  <cache:ruleset
-      for=".employeelisting.EmployeeListingView"
-      ruleset="plone.content.folderView"
-      />
-
   <!-- User / author page -->
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
