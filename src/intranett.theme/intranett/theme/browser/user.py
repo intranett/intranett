@@ -4,12 +4,17 @@ from zope.publisher.browser import BrowserView
 
 class UserView(BrowserView):
 
-    def username(self):
-        return self.request.form.get('name', '')
+    def __getitem__(self, key):
+        return getToolByName(self.context, 'portal_membership').getMemberById(key)
+
+    restrictedTraverse = __getitem__
+
+
+class MemberDataDefaultView(BrowserView):
 
     def user_content(self):
         catalog = getToolByName(self.context, 'portal_catalog')
-        username = self.username()
+        username = self.context.getId()
         if not username:
             return []
         query = {

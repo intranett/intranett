@@ -301,6 +301,19 @@ class TestUserSearch(IntranettTestCase):
         member.setMemberProperties({'description': '<p>Kjære Python!</p>'})
         self.assertEquals(member.SearchableText().strip(), 'Kjære Python!')
 
+    def test_getObject(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': 'John Døe'})
+        catalog = getToolByName(portal, 'portal_catalog')
+        results = catalog.searchResults(Title='Døe')
+        self.assertEquals(len(results), 1)
+        brain = results[0]
+        obj = brain.getObject()
+        self.assertEqual(obj.Title(), 'John Døe')
+        self.assertEqual(obj.getPhysicalPath(), ('', 'plone', 'user', 'test_user_1_'))
+
 
 class TestFunctionalUserSearch(IntranettFunctionalTestCase):
 

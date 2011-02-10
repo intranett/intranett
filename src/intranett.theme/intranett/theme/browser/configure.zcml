@@ -121,6 +121,13 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="user"
       class=".user.UserView"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      for="intranett.policy.tools.MemberData"
+      name="memberdata_view"
+      class=".user.MemberDataDefaultView"
       template="templates/user.pt"
       permission="zope2.View"
       />

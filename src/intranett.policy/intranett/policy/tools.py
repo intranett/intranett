@@ -6,7 +6,9 @@ from PIL import Image as PILImage
 from App.class_init import InitializeClass
 from Acquisition import aq_base
 from AccessControl import ClassSecurityInfo
+from zope.interface import Interface
 from zope.component import getUtility
+from zope.component import getMultiAdapter
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
@@ -101,6 +103,9 @@ class MemberData(BaseMemberData):
     # This is to make Plone's search machinery happy
     meta_type = portal_type = 'MemberData'
 
+    def __browser_default__(self, request):
+        return (self, ('memberdata_view',))
+
     def notifyModified(self):
         super(MemberData, self).notifyModified()
         plone = getUtility(ISiteRoot)
@@ -114,7 +119,7 @@ class MemberData(BaseMemberData):
         # We use no cover pragma here as in the tests user_id is never unicode
         if isinstance(user_id, unicode): # pragma: no cover
             user_id = user_id.encode('utf-8')
-        return plone.getPhysicalPath() + ('author', user_id)
+        return plone.getPhysicalPath() + ('user', user_id)
 
     security.declareProtected(View, 'Type')
     def Type(self):
