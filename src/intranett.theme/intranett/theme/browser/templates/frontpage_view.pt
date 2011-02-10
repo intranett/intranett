@@ -76,9 +76,6 @@
                           <div class="visualClear"><!-- --></div>
                       </div>
 
-                      <footer>
-                          <div tal:replace="structure provider:plone.belowcontentbody" />
-                      </footer>
                   </article>
 
                   <span id="contentBottomLeft"></span>
