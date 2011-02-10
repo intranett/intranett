@@ -262,37 +262,37 @@ class TestUserSearch(IntranettTestCase):
         results = catalog.searchResults(Title='Døe')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
         self.assertEquals(john_brain.Title, 'John Døe')
         self.assertEquals(john_brain.Description, 'Øngønør, Tøst')
         results = catalog.searchResults(SearchableText='12345')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
         results = catalog.searchResults(SearchableText='67890')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
         results = catalog.searchResults(SearchableText='Øngønør')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
         results = catalog.searchResults(SearchableText='Tøst')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
         results = catalog.searchResults(SearchableText='Tønsberg')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
         results = catalog.searchResults(SearchableText='info@jarn.com')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
         results = catalog.searchResults(SearchableText='Kjære')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
 
     def test_safe_transform_searchable_text(self):
         portal = self.layer['portal']
@@ -301,7 +301,7 @@ class TestUserSearch(IntranettTestCase):
         member.setMemberProperties({'description': '<p>Kjære Python!</p>'})
         self.assertEquals(member.SearchableText().strip(), 'Kjære Python!')
 
-    def test_getObject(self):
+    def test_brain_getObject(self):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
@@ -313,6 +313,18 @@ class TestUserSearch(IntranettTestCase):
         obj = brain.getObject()
         self.assertEqual(obj.Title(), 'John Døe')
         self.assertEqual(obj.getPhysicalPath(), ('', 'plone', 'user', 'test_user_1_'))
+
+    def test_refreshCatalog_does_not_lose_memberdata(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': 'John Døe'})
+        catalog = getToolByName(portal, 'portal_catalog')
+        results = catalog.searchResults(Title='Døe')
+        self.assertEquals(len(results), 1)
+        catalog.refreshCatalog()
+        results = catalog.searchResults(Title='Døe')
+        self.assertEquals(len(results), 1)
 
 
 class TestFunctionalUserSearch(IntranettFunctionalTestCase):
