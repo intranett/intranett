@@ -6,9 +6,7 @@ from PIL import Image as PILImage
 from App.class_init import InitializeClass
 from Acquisition import aq_base
 from AccessControl import ClassSecurityInfo
-from zope.interface import Interface
 from zope.component import getUtility
-from zope.component import getMultiAdapter
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
@@ -106,17 +104,18 @@ class MemberData(BaseMemberData):
     def __browser_default__(self, request):
         return (self, ('memberdata_view',))
 
+    security.declarePrivate('notifyModified')
     def notifyModified(self):
         super(MemberData, self).notifyModified()
         plone = getUtility(ISiteRoot)
         ct = getToolByName(plone, 'portal_catalog')
         ct.reindexObject(self)
 
+    security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
         plone = getUtility(ISiteRoot)
         # Work around broken PAS which *might* return a unicode id.
         user_id = self.getId()
-        # We use no cover pragma here as in the tests user_id is never unicode
         if isinstance(user_id, unicode): # pragma: no cover
             user_id = user_id.encode('utf-8')
         return plone.getPhysicalPath() + ('user', user_id)
