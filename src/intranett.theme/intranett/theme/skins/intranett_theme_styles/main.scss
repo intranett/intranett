@@ -1867,6 +1867,36 @@ body > footer {
             margin-left: -622px;
         }        
 }
+body.template-frontpage_view {
+	#portal-columns {
+		padding-top: 0;
+	}
+	#edit-bar {
+		width: 97.917%;
+
+		#open-edit-bar {
+			border-color: #bbb;
+		}
+		#contentviews-wrapper .hiddenStructure {
+			margin-top: 0 !important;
+		}
+		.actionMenu .actionMenuHeader a {
+			color: #444;
+		}
+	}
+	#company-board {
+		background: #CCCCD6;
+		
+		#board-blocks {
+			width: 97.917%;	
+			padding: 2.6em 0;
+			margin-bottom: 1.25em;
+		}
+		.managePortletsLink {
+			display: none;
+		}
+	}
+}
 
 /* @group Edit frontpage */
 

@@ -1832,6 +1832,25 @@ body > footer {
   #frontpage-columns .width-5:nth-child(2) {
     margin-left: -622px; }
 
+body.template-frontpage_view #portal-columns {
+  padding-top: 0; }
+body.template-frontpage_view #edit-bar {
+  width: 97.917%; }
+  body.template-frontpage_view #edit-bar #open-edit-bar {
+    border-color: #bbb; }
+  body.template-frontpage_view #edit-bar #contentviews-wrapper .hiddenStructure {
+    margin-top: 0 !important; }
+  body.template-frontpage_view #edit-bar .actionMenu .actionMenuHeader a {
+    color: #444; }
+body.template-frontpage_view #company-board {
+  background: #CCCCD6; }
+  body.template-frontpage_view #company-board #board-blocks {
+    width: 97.917%;
+    padding: 2.6em 0;
+    margin-bottom: 1.25em; }
+  body.template-frontpage_view #company-board .managePortletsLink {
+    display: none; }
+
 /* @group Edit frontpage */
 body.template-manage-frontpage .portlets-manager .portletAssignments {
   display: none; }
