@@ -25,18 +25,18 @@
       permission="zope2.View"
       layer=".interfaces.IThemeSpecific"
       />
+      
+  <browser:viewletManager
+        name="intranett.abovecolumns"
+        provides=".interfaces.IAboveColumns"
+        permission="zope2.View"
+        class="plone.app.viewletmanager.manager.OrderedViewletManager"
+        layer=".interfaces.IThemeSpecific"
+        />
 
   <browser:viewletManager
       name="intranett.topbar"
       provides=".interfaces.ITopBar"
-      permission="zope2.View"
-      class="plone.app.viewletmanager.manager.OrderedViewletManager"
-      layer=".interfaces.IThemeSpecific"
-      />
-
-  <browser:viewletManager
-      name="intranett.abovecontent"
-      provides=".interfaces.IAboveContent"
       permission="zope2.View"
       class="plone.app.viewletmanager.manager.OrderedViewletManager"
       layer=".interfaces.IThemeSpecific"
