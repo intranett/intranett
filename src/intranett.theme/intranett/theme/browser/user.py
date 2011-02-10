@@ -27,9 +27,12 @@ class UserView(BrowserView):
 
 class MemberDataView(BrowserView):
 
+    def username(self):
+        return self.context.getId()
+
     def user_content(self):
         catalog = getToolByName(self.context, 'portal_catalog')
-        username = self.context.getId()
+        username = self.username()
         if not username:
             return []
         query = {
