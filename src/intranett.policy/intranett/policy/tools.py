@@ -111,11 +111,23 @@ class MemberData(BaseMemberData):
         ct = getToolByName(plone, 'portal_catalog')
         ct.reindexObject(self)
 
+    security.declarePublic('getUser')
+    def getUser(self):
+        plone = getUtility(ISiteRoot)
+        # XXX: Our acquisition context is fouled up.
+        # XXX: Work around by re-getting the user from PAS.
+        # XXX: Only works for users in Plone/acl_users.
+        uf = getToolByName(plone, 'acl_users')
+        user = uf.getUserById(self.id)
+        if user is None:
+            raise ValueError('Unknown user id: %s' % self.id)
+        return user
+
     security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
         plone = getUtility(ISiteRoot)
-        # Work around broken PAS which *might* return a unicode id.
         user_id = self.getId()
+        # PAS *might* have returned a unicode id
         if isinstance(user_id, unicode): # pragma: no cover
             user_id = user_id.encode('utf-8')
         return plone.getPhysicalPath() + ('user', user_id)
