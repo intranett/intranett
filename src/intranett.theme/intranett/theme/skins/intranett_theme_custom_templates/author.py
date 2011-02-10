@@ -8,7 +8,6 @@
 ##title=Redirect to the canonical author page
 
 from Products.CMFCore.utils import getToolByName
-from ZTUtils import make_query
 
 request = context.REQUEST
 portal_url = getToolByName(context, 'portal_url')()
@@ -19,8 +18,8 @@ if len(request.traverse_subpath) > 0:
 else:
     author = request.get('author', '')
 
-result = portal_url + '/@@user'
+result = portal_url + '/user'
 if author:
-    result = result + '?' + make_query(name=author)
+    result = result + '/' + author
 
 return request.response.redirect(result)

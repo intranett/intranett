@@ -10,15 +10,26 @@ class TestUserPage(IntranettTestCase):
         portal = self.layer['portal']
         return queryMultiAdapter((portal, request), Interface, 'user')
 
-    def test_no_username(self):
+    def test_getitem(self):
         request = self.layer['request']
         view = self._make_one(request)
-        self.assertEquals(view.username(), '')
-        self.assertEquals(len(view.user_content()), 0)
+        user = view['test_user_1_']
+        self.failIf(user is None)
 
-    def test_with_username(self):
+    def test_unrestrictedTraverse(self):
         request = self.layer['request']
-        request.form['name'] = 'no_user'
         view = self._make_one(request)
-        self.assertEquals(view.username(), 'no_user')
-        self.assertEquals(len(view.user_content()), 0)
+        user = view.unrestrictedTraverse('test_user_1_', None, False)
+        self.failIf(user is None)
+
+    def test_restrictedTraverse(self):
+        request = self.layer['request']
+        view = self._make_one(request)
+        user = view.restrictedTraverse('test_user_1_', None)
+        self.failIf(user is None)
+
+    def test_getPhysicalPath(self):
+        request = self.layer['request']
+        view = self._make_one(request)
+        path = view.getPhysicalPath()
+        self.assertEqual(path, ('', 'plone', 'user'))

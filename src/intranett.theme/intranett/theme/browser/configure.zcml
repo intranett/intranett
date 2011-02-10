@@ -127,7 +127,7 @@
   <browser:page
       for="intranett.policy.tools.MemberData"
       name="memberdata_view"
-      class=".user.MemberDataDefaultView"
+      class=".user.MemberDataView"
       template="templates/user.pt"
       permission="zope2.View"
       />
