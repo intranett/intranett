@@ -26,6 +26,10 @@ class UserView(BrowserView):
 
 
 class MemberDataView(BrowserView):
+    """This is the user page view.
+    """
+    # XXX: The context of this view has a messed up acquisition chain.
+    # XXX: Also see intranett.policy.tools.MemberData.
 
     def username(self):
         return self.context.getId()
