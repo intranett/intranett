@@ -384,3 +384,66 @@ class TestDashboard(IntranettTestCase):
             manager = category.get('member', {})
             self.assert_(manager == {}, 'Found unexpected portlets in '
                          'dashboard column %s: %s' % (i, manager.keys()))
+
+
+class TestMemberData(IntranettTestCase):
+
+    def _make_one(self, request):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': 'John Døe',
+                                    'position': 'Øngønør',
+                                    'department': 'Tøst'})
+        return member
+
+    def test_aq_chain(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        chain = member.aq_chain
+        self.assertEqual(chain[0].__class__.__name__, 'MemberData')
+        self.assertEqual(chain[1].__class__.__name__, 'PloneUser')
+        self.assertEqual(chain[2].__class__.__name__, 'PluggableAuthService')
+        self.assertEqual(chain[3].__class__.__name__, 'PloneSite')
+
+    def test_getUser(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        user = member.getUser()
+        chain = user.aq_chain
+        self.assertEqual(chain[0].__class__.__name__, 'PloneUser')
+        self.assertEqual(chain[1].__class__.__name__, 'PluggableAuthService')
+        self.assertEqual(chain[2].__class__.__name__, 'PloneSite')
+
+    def test_getPhysicalPath(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        self.assertEqual(member.getPhysicalPath(), ('', 'plone', 'user', 'test_user_1_'))
+
+    def test_notifyModified(self):
+        request = self.layer['request']
+        portal = self.layer['portal']
+        member = self._make_one(request)
+        catalog = getToolByName(portal, 'portal_catalog')
+        self.assertEqual(len(catalog(Title='Døe')), 1)
+        catalog.unindexObject(member)
+        self.assertEqual(len(catalog(Title='Døe')), 0)
+        member.notifyModified()
+        self.assertEqual(len(catalog(Title='Døe')), 1)
+
+    def test_types(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        self.assertEqual(member.Type(), 'MemberData')
+        self.assertEqual(member.portal_type, 'MemberData')
+        self.assertEqual(member.meta_type, 'MemberData')
+
+    def test_title(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        self.assertEqual(member.Title(), 'John Døe')
+
+    def test_description(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        self.assertEqual(member.Description(), 'Øngønør, Tøst')
