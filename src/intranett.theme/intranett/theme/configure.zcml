@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
@@ -12,6 +13,11 @@
   <cmf:registerDirectory name="intranett_theme_custom_templates"/>
   <cmf:registerDirectory name="intranett_theme_styles"/>
   <cmf:registerDirectory name="intranett_theme_javascripts"/>
+
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="jbot"
+      layer=".browser.interfaces.IThemeSpecific" />
 
   <genericsetup:registerProfile
       name="default"
