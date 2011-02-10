@@ -133,7 +133,7 @@
       />
 
   <cache:ruleset
-      for=".user.UserView"
+      for=".user.MemberDataView"
       ruleset="plone.content.folderView"
       />
 
