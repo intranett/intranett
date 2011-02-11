@@ -397,14 +397,30 @@ class TestMemberData(IntranettTestCase):
                                     'department': 'Tøst'})
         return member
 
-    def test_aq_chain(self):
+    def test_getAuthenticatedMember(self):
         request = self.layer['request']
-        member = self._make_one(request)
+        ignored = self._make_one(request)
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
         chain = member.aq_chain
         self.assertEqual(chain[0].__class__.__name__, 'MemberData')
         self.assertEqual(chain[1].__class__.__name__, 'PloneUser')
         self.assertEqual(chain[2].__class__.__name__, 'PluggableAuthService')
         self.assertEqual(chain[3].__class__.__name__, 'PloneSite')
+
+    def test_getMemberById(self):
+        request = self.layer['request']
+        ignored = self._make_one(request)
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        member = mt.getMemberById('test_user_1_')
+        chain = member.aq_chain
+        self.assertEqual(chain[0].__class__.__name__, 'MemberData')
+        self.assertEqual(chain[1].__class__.__name__, 'PloneUser')
+        self.assertEqual(chain[2].__class__.__name__, 'PluggableAuthService')
+        self.assertEqual(chain[3].__class__.__name__, 'MembershipTool')
+        self.assertEqual(chain[4].__class__.__name__, 'PloneSite')
 
     def test_getUser(self):
         request = self.layer['request']
