@@ -250,6 +250,10 @@ class MembershipTool(BaseMembershipTool):
             image = Portrait(id=safe_id, file=scaled, title='')
             image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
             membertool._setPortrait(image, safe_id, thumbnail=True)
+            # Reindex
+            memberdata = getToolByName(self, 'portal_membership').getMemberById(safe_id)
+            if memberdata is not None:
+                memberdata.notifyModified()
 
     def getPersonalPortrait(self, id=None, thumbnail=True):
         """Return a members personal portait.

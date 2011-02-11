@@ -6,6 +6,7 @@ from Acquisition import aq_get
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
+from zope.component import queryMultiAdapter
 
 from .utils import make_file_upload
 from intranett.policy.tests.base import get_browser
@@ -202,6 +203,17 @@ class TestUserPortraits(IntranettTestCase):
         path = os.path.join(TEST_IMAGES, 'test.gif')
         image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
         mt.changeMemberPortrait(image_gif, id='')
+
+    def test_change_portrait_recatalogs(self):
+        request = self.layer['request']
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        catalog = getToolByName(portal, 'portal_catalog')
+        before = catalog.getCounter()
+        mt.changeMemberPortrait(image_jpg)
+        self.assertEqual(catalog.getCounter(), before+1)
 
 
 class TestImageCropping(IntranettTestCase):
