@@ -102,6 +102,7 @@ class MemberData(BaseMemberData):
     # This is to make Plone's search machinery happy
     meta_type = portal_type = 'MemberData'
 
+    # The default view
     def __browser_default__(self, request):
         return (self, ('memberdata_view',))
 
