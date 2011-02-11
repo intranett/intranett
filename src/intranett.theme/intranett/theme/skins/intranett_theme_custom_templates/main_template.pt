@@ -248,7 +248,7 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
             <div class="contentAlignment"><div tal:replace="structure provider:plone.portalfooter" /></div>
         </footer>
 
-        <div id="kss-spinner" tal:condition="not:ajax_load"><img tal:attributes="src string:${portal_url}/spinner.png" alt="" /></div>
+        <div id="kss-spinner" tal:condition="not:ajax_load"><img tal:attributes="src string:${portal_url}/spinner.gif" alt="" /></div>
 </body>
 </html>
 </metal:page>

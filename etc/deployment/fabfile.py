@@ -233,6 +233,7 @@ def _git_update(is_git=True):
     with cd(VENV):
         run('git checkout -q --force %s' % tag)
         run('git reset --hard HEAD')
+        run('git clean -fd')
 
 
 def _is_git_repository():

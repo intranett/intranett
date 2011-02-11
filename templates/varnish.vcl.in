@@ -18,6 +18,7 @@ backend default {
 }
 
 acl purge {
+    "localhost";
     "127.0.0.1";
     "${varnish-config:backend-host}";
 }
@@ -45,7 +46,7 @@ sub vcl_recv {
 sub vcl_fetch {
     if (!beresp.cacheable) {
         set beresp.http.X-Varnish-Action = "FETCH (pass - not cacheable)";
-        set beresp.http.X-Propagate-Cache-Control = beresp.http.Cache-Control;
+        call save_cache_control_header;
         return(pass);
     }
     if (beresp.http.Set-Cookie) {
@@ -69,10 +70,7 @@ sub vcl_fetch {
 }
 
 sub vcl_deliver {
-    if (resp.http.X-Propagate-Cache-Control) {
-        set resp.http.Cache-Control = resp.http.X-Propagate-Cache-Control;
-        unset resp.http.X-Propagate-Cache-Control;
-    }
+    call restore_cache_control_header;
     call rewrite_age;
 }
 
@@ -117,3 +115,15 @@ sub rewrite_s_maxage {
     }
 }
 
+# Save the Cache-Control header
+sub save_cache_control_header {
+    set beresp.http.X-Propagate-Cache-Control = beresp.http.Cache-Control;
+}
+
+# Restore the Cache-Control header
+sub restore_cache_control_header {
+    if (resp.http.X-Propagate-Cache-Control) {
+        set resp.http.Cache-Control = resp.http.X-Propagate-Cache-Control;
+        unset resp.http.X-Propagate-Cache-Control;
+    }
+}
