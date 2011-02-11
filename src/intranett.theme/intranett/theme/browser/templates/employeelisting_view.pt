@@ -58,7 +58,7 @@
                                          item_wf_state        employee/review_state|python: wtool.getInfoFor(employee, 'review_state', '');
                                          item_wf_state_class  python:'state-' + normalizeString(item_wf_state);">
                             <a href="#"
-                               tal:attributes="href string:$portal_url/@@user?name=${employee/username};
+                               tal:attributes="href string:$portal_url/user/${employee/username};
                                                title employee/fullname">
                                 <img class="image-left photo" alt="" src=""
                                      tal:condition="employee/thumbnail_url"
@@ -72,7 +72,7 @@
                                     <span class="summary">
                                         <a class="state-private url fn"
                                            tal:content="employee/fullname | employee/username"
-                                           tal:attributes="href string:$portal_url/@@user?name=${employee/username};
+                                           tal:attributes="href string:$portal_url/user/${employee/username};
                                                            title employee/fullname;
                                                            class string:$item_wf_state_class url fn">Test Page</a>
                                     </span>
