@@ -77,8 +77,8 @@
                               <div id="viewlet-below-content" tal:condition="python:dashboardview.can_edit()">
                                   <a href="#" class="managePortletsFallback"
                                      i18n:domain="intranett"
-                                     i18n:translate="link_manage_dashboard_portlets"
-                                     tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Manage dashboard portlets</a>
+                                     i18n:translate="link_manage_personal_portlets"
+                                     tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Manage personal portlets</a>
                               </div>
                           </div>
                           <div class="visualClear"><!-- --></div>

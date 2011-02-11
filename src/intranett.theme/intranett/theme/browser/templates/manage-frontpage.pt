@@ -53,13 +53,13 @@
                   <article id="content" i18n:domain="intranett">
                       <div i18n:translate="info_manage_dashboard">
                           To edit your personal portlets click
-                          <em i18n:name="link_manage_dashboard_portlets">Manage dashboard portlets</em>
+                          <em i18n:name="link_manage_personal_portlets">Manage personal portlets</em>
                           button below.
                       </div>
                       <div id="viewlet-below-content">
                           <a href="#" class="managePortletsFallback"
-                             i18n:translate="link_manage_dashboard_portlets"
-                             tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Manage dashboard portlets</a>
+                             i18n:translate="link_manage_personal_portlets"
+                             tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Manage personal portlets</a>
                       </div>
                   </article>
 
