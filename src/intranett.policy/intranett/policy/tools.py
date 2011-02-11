@@ -114,16 +114,19 @@ class MemberData(BaseMemberData):
 
     security.declarePublic('getUser')
     def getUser(self):
-        try:
-            return super(MemberData, self).getUser()
-        except ConflictError:
-            raise
-        except:
+        from Acquisition import aq_base, aq_parent, aq_inner
+        bcontext = aq_base(aq_parent(self))
+        bcontainer = aq_base(aq_parent(aq_inner(self)))
+        if bcontext is bcontainer:
             # XXX: Our acquisition context is fouled up.
             # XXX: Work around by re-getting the user from PAS.
             plone = getUtility(ISiteRoot)
             mt = getToolByName(plone, 'portal_membership')
             return mt._huntUser(self.id, plone)
+        if not hasattr(bcontext, 'getUserName'):
+            raise ValueError("Cannot find user: %s" % self.id)
+        # Return the user object, which is our context.
+        return aq_parent(self)
 
     security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
