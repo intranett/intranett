@@ -215,6 +215,18 @@ class TestUserPortraits(IntranettTestCase):
         mt.changeMemberPortrait(image_jpg)
         self.assertEqual(catalog.getCounter(), before+1)
 
+    def test_delete_portrait_recatalogs(self):
+        request = self.layer['request']
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        catalog = getToolByName(portal, 'portal_catalog')
+        mt.changeMemberPortrait(image_jpg)
+        before = catalog.getCounter()
+        mt.deletePersonalPortrait()
+        self.assertEqual(catalog.getCounter(), before+1)
+
 
 class TestImageCropping(IntranettTestCase):
 
