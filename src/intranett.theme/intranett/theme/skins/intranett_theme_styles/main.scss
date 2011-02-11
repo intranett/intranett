@@ -486,7 +486,7 @@ body > header nav li a .toolTipArrow {
     font-size: $smaller-size;
     background: none repeat scroll 0 0 #EEEEEE;
     border: 1px solid #CCCCCC;
-    color: #222222;
+    color: #222222 !important;
     cursor: pointer;
     line-height: 1;
     padding: 0.38em 0.76em;
@@ -1651,7 +1651,8 @@ small.commentDate {
 	margin-bottom: $base-size;
 }
 .managedPortlet .portletHeader,
-.portlet .portletHeader {
+.portlet .portletHeader,
+#dashboard dl.portlet dt.portletHeader {
     text-transform: uppercase;	
     line-height: normal;
     background: $lightgrey;
@@ -1659,6 +1660,8 @@ small.commentDate {
     border-top: 1px solid #CCCCCC;    
     padding: 0.5em 0.63em;
     font-size: $smaller-size;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .portlet a {
 	border: none;
@@ -1867,7 +1870,8 @@ body > footer {
             margin-left: -622px;
         }        
 }
-body.template-frontpage_view {
+body.template-frontpage_view,
+body.template-manage-frontpage {
 	#portal-columns {
 		padding-top: 0;
 	
@@ -1875,7 +1879,6 @@ body.template-frontpage_view {
 			border-top: 1px solid #e7e7e7;
 			border-bottom: 1px solid #aaa;
 			background-color: #CCCCD6;
-			margin-bottom: 2.6em;
 			
 			#board-blocks {
 				width: 97.917%;	
@@ -1967,6 +1970,43 @@ body.template-employee-listing .tileItem .image-left {
 	margin-right: 16px;
 }
 
+/* @end */
+
+/* @group Dashboard */
+
+#dashboard-portlets1,
+#dashboard-portlets2,
+#dashboard-portlets3 {
+    float:left;
+    width:221px;
+    padding:2.6em 20px 0 0;
+}
+
+#dashboard-portlets4 {
+    float:left;
+    width:220px;
+    padding-top:2.6em;
+}
+#dashboard-actions ul,
+#dashboard-actions ul li {
+    list-style: none;
+}
+#dashboard-actions ul {
+    margin-left: 0;
+}
+
+#dashboard {
+    line-height: 1em;
+}
+
+#dashboard dd {
+    margin: 0;
+}
+
+
+#dashboard dl.portlet a:link {
+    border-bottom: none;
+}
 /* @end */
 
 @media print {

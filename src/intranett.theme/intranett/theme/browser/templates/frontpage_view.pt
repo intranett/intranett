@@ -56,13 +56,15 @@
                       <div id="content-core" tal:define="dashboardview nocall:context/@@dashboard">
                       
                           <div tal:condition="python:dashboardview.empty() and dashboardview.can_edit()"
+                               i18n:domain="intranett"
                                i18n:translate="info_empty_dashboard">
-                              Your dashboard is currently empty. Click the 
-                              <em>edit</em> tab to assign some personal 
-                              portlets.
+                              Your dashboard is currently empty.
+                              <a href="#" i18n:name="click_here"
+                                 tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Click here</a>
+                                 to assign some personal portlets.
                           </div>
                       
-                          <div id="dashboard">
+                          <div id="dashboard" tal:condition="python:not dashboardview.empty()">
                               <div class="visualClear"><!-- --></div>
                               <div id="dashboard-portlets1" 
                                 tal:content="structure provider:plone.dashboard1" />
@@ -72,6 +74,12 @@
                                 tal:content="structure provider:plone.dashboard3" />
                               <div id="dashboard-portlets4" 
                                 tal:content="structure provider:plone.dashboard4" />
+                              <div id="viewlet-below-content" tal:condition="python:dashboardview.can_edit()">
+                                  <a href="#" class="managePortletsFallback"
+                                     i18n:domain="intranett"
+                                     i18n:translate="link_manage_dashboard_portlets"
+                                     tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Manage dashboard portlets</a>
+                              </div>
                           </div>
                           <div class="visualClear"><!-- --></div>
                       </div>

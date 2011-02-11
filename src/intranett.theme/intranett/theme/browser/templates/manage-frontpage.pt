@@ -16,67 +16,64 @@
 </head>
 
 <body>
-<metal:main fill-slot="content" tal:define="ploneview context/@@plone">
+    
+    <div id="portal-columns" class="row" 
+         metal:fill-slot="columns"
+         tal:define="isAnon context/@@plone_portal_state/anonymous;
+                     raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
+                     highlight python:plone_view.have_portlets('frontpage.highlight', view);
+                     show_border context/@@plone/showEditableBorder;
+                     ploneview context/@@plone">
 
-  <div id="edit-bar"
-      tal:content="structure provider:plone.contentviews" />
-
-  <span id="contentTopLeft"></span>
-  <span id="contentTopRight"></span>
-
-  <div metal:use-macro="context/global_statusmessage/macros/portal_message">
-    Portal status message
-  </div>
-
-  <article id="content">
-      <header>
-          <h1 class="documentFirstHeading"
-              i18n:domain="intranett.theme"
-              i18n:translate="title_edit_frontpage">
-              Edit Frontpage
-          </h1>
-      </header>
-
-      <div id="content-core">
-
-          <p i18n:translate="description_manage_contextual_portlets">
-            The portlet columns will first display portlets
-            explicitly assigned in this context. Use the buttons on each portlet
-            to move them up or down, delete or edit them. To add a new portlet,
-            use the drop-down list at the top of the column.
-          </p>
-
-          <div id="frontpage-highlight" class="row fpBlock">
-              <div class="cell width-full position-0"><div class="visualPadding">
+      <section id="company-board"  tal:condition="not:ajax_load" >
+          <div class="contentAlignment">
+              <div id="edit-bar"
+                  tal:condition="show_border"
+                  tal:content="structure provider:plone.contentviews" />
+              <div id="board-blocks">
                   <tal:block replace="structure provider:frontpage.highlight" />
-              </div></div>
-          </div>
-          <div id="frontpage-columns" class="row">
-              <div class="cell width-5 fpBlock">
-                  <div class="visualPadding">
-                      <tal:block replace="structure provider:frontpage.portlets.left" />
-                  </div>
-              </div>
-              <div class="cell width-5 fpBlock">
-                  <div class="visualPadding">
-                      <tal:block replace="structure provider:frontpage.portlets.central" />
-                  </div>
-              </div>
-              <div class="cell width-5 fpBlock">
-                  <div class="visualPadding">
-                      <tal:block replace="structure provider:frontpage.portlets.right" />
-                  </div>
               </div>
           </div>
-          <div id="frontpage-bottom" class="row fpBlock">
-              <div class="cell width-full position-0"><div class="visualPadding">
-                  <tal:block replace="structure provider:frontpage.bottom" />
-              </div></div>
+      </section>
+
+      <div class="contentAlignment">
+
+          <div class="cell width-16 position-0"
+               id="portal-column-content">
+
+              <div>
+
+                  <span id="contentTopLeft"></span>
+                  <span id="contentTopRight"></span>
+
+                  <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+                    Portal status message
+                  </div>
+
+                  <article id="content" i18n:domain="intranett">
+                      <div i18n:translate="info_manage_dashboard">
+                          To edit your personal portlets click
+                          <em i18n:name="link_manage_dashboard_portlets">Manage dashboard portlets</em>
+                          button below.
+                      </div>
+                      <div id="viewlet-below-content">
+                          <a href="#" class="managePortletsFallback"
+                             i18n:translate="link_manage_dashboard_portlets"
+                             tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Manage dashboard portlets</a>
+                      </div>
+                  </article>
+
+                  <span id="contentBottomLeft"></span>
+                  <span id="contentBottomRight"></span>
+
+              </div>
+
           </div>
 
       </div>
-  </article>
 
-</metal:main>
+    </div>
+
+
 </body>
 </html>
