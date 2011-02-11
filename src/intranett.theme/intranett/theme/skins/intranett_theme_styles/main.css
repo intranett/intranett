@@ -379,7 +379,7 @@ body > header nav {
   width: 97.917%;
   position: relative;
   z-index: 1;
-  bottom: 0;
+  bottom: -1px;
   display: table; }
 
 body > header nav ul {
@@ -503,7 +503,7 @@ body > header nav li a .toolTipArrow {
 #portal-columns {
   padding: 2.6em 0;
   background: #fff;
-  border-top: 1px solid #E6E6E6;
+  border-top: 1px solid #999;
   border-bottom: 1px solid #E6E6E6; }
 
 #portal-column-content {
@@ -1834,22 +1834,28 @@ body > footer {
 
 body.template-frontpage_view #portal-columns {
   padding-top: 0; }
-body.template-frontpage_view #edit-bar {
-  width: 97.917%; }
-  body.template-frontpage_view #edit-bar #open-edit-bar {
-    border-color: #bbb; }
-  body.template-frontpage_view #edit-bar #contentviews-wrapper .hiddenStructure {
-    margin-top: 0 !important; }
-  body.template-frontpage_view #edit-bar .actionMenu .actionMenuHeader a {
-    color: #444; }
-body.template-frontpage_view #company-board {
-  background: #CCCCD6; }
-  body.template-frontpage_view #company-board #board-blocks {
-    width: 97.917%;
-    padding: 2.6em 0;
-    margin-bottom: 1.25em; }
-  body.template-frontpage_view #company-board .managePortletsLink {
-    display: none; }
+  body.template-frontpage_view #portal-columns #company-board {
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #aaa;
+    background-color: #CCCCD6;
+    margin-bottom: 2.6em; }
+    body.template-frontpage_view #portal-columns #company-board #board-blocks {
+      width: 97.917%;
+      padding: 2.6em 0;
+      margin-bottom: 1.25em; }
+    body.template-frontpage_view #portal-columns #company-board #edit-bar {
+      width: 97.917%; }
+      body.template-frontpage_view #portal-columns #company-board #edit-bar #open-edit-bar,
+      body.template-frontpage_view #portal-columns #company-board #edit-bar #close-edit-bar,
+      body.template-frontpage_view #portal-columns #company-board #edit-bar #content-views,
+      body.template-frontpage_view #portal-columns #company-board #edit-bar #content-views li a {
+        border-color: #bbb; }
+      body.template-frontpage_view #portal-columns #company-board #edit-bar #contentviews-wrapper .hiddenStructure {
+        margin-top: 0 !important; }
+      body.template-frontpage_view #portal-columns #company-board #edit-bar .actionMenu .actionMenuHeader a {
+        color: #444; }
+    body.template-frontpage_view #portal-columns #company-board .managePortletsLink {
+      display: none; }
 
 /* @group Edit frontpage */
 body.template-manage-frontpage .portlets-manager .portletAssignments {

@@ -334,7 +334,7 @@ body > header nav {
 	width: $width-full; 
 	position: relative;
 	z-index:1;
-	bottom: 0;
+	bottom: -1px;
 	display: table;
 }
 body > header nav ul {
@@ -467,7 +467,7 @@ body > header nav li a .toolTipArrow {
 #portal-columns {
 	padding: 2.6em 0;
     background: #fff;
-    border-top: 1px solid #E6E6E6;
+    border-top: 1px solid #999;
     border-bottom: 1px solid #E6E6E6;    
 }
 #portal-column-content {
@@ -1870,30 +1870,37 @@ body > footer {
 body.template-frontpage_view {
 	#portal-columns {
 		padding-top: 0;
-	}
-	#edit-bar {
-		width: 97.917%;
-
-		#open-edit-bar {
-			border-color: #bbb;
-		}
-		#contentviews-wrapper .hiddenStructure {
-			margin-top: 0 !important;
-		}
-		.actionMenu .actionMenuHeader a {
-			color: #444;
-		}
-	}
-	#company-board {
-		background: #CCCCD6;
+	
+		#company-board {
+			border-top: 1px solid #e7e7e7;
+			border-bottom: 1px solid #aaa;
+			background-color: #CCCCD6;
+			margin-bottom: 2.6em;
+			
+			#board-blocks {
+				width: 97.917%;	
+				padding: 2.6em 0;
+				margin-bottom: 1.25em;
+			}
+			#edit-bar {
+				width: 97.917%;
 		
-		#board-blocks {
-			width: 97.917%;	
-			padding: 2.6em 0;
-			margin-bottom: 1.25em;
-		}
-		.managePortletsLink {
-			display: none;
+				#open-edit-bar,
+				#close-edit-bar,
+				#content-views,
+				#content-views li a {
+					border-color: #bbb;
+				}
+				#contentviews-wrapper .hiddenStructure {
+					margin-top: 0 !important;
+				}
+				.actionMenu .actionMenuHeader a {
+					color: #444;
+				}
+			}
+			.managePortletsLink {
+				display: none;
+			}
 		}
 	}
 }
