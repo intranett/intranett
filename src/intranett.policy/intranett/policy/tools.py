@@ -116,12 +116,8 @@ class MemberData(BaseMemberData):
         plone = getUtility(ISiteRoot)
         # XXX: Our acquisition context is fouled up.
         # XXX: Work around by re-getting the user from PAS.
-        # XXX: Only works for users in Plone/acl_users.
-        uf = getToolByName(plone, 'acl_users')
-        user = uf.getUserById(self.id)
-        if user is None:
-            raise ValueError('Unknown user id: %s' % self.id)
-        return user
+        mt = getToolByName(plone, 'portal_membership')
+        return mt._huntUser(self.id, plone)
 
     security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
