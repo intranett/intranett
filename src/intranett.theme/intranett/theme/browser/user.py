@@ -1,6 +1,7 @@
 from zope.publisher.browser import BrowserView
-from Products.CMFCore.utils import getToolByName
 from zExceptions import NotFound
+from Products.CMFCore.utils import getToolByName
+from plone.memoize.view import memoize
 
 from OFS.Traversable import _marker
 
@@ -36,9 +37,11 @@ class MemberDataView(BrowserView):
     # XXX: The context of this view has a messed up acquisition chain.
     # XXX: Also see intranett.policy.tools.MemberData.
 
+    @memoize
     def username(self):
         return self.context.getId()
 
+    @memoize
     def user_content(self):
         catalog = getToolByName(self.context, 'portal_catalog')
         username = self.username()
