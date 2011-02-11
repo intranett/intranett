@@ -9,6 +9,7 @@
 
     <metal:content fill-slot="content"
                    tal:define="dummy view/update;
+                               portal_url context/@@plone_portal_state/navigation_root_url;
                                department_request python:request.get('department', None);
                                employees python:department_request and view.employees(department_request) or view.employees()">
 
@@ -24,7 +25,7 @@
                     <div class="documentDescription">
                         <a href="" title="Show all employees"
                            tal:condition="department_request"
-                           tal:attributes="href string:${context/absolute_url}/employee-listing">
+                           tal:attributes="href string:${portal_url}/employee-listing">
                            Show employees of all departments?
                         </a>
                     </div>
@@ -42,7 +43,7 @@
                         <li tal:repeat="department view/departments"
                             tal:attributes="class python:department_request == department and 'selected' or 'plain'">
                             <a href="" title=""
-                               tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
+                               tal:attributes="href string:${portal_url}/employee-listing?department=$department"
                                tal:content="department">IT Department</a>
                         </li>
                     </ul>
@@ -82,7 +83,7 @@
                                         <span tal:replace="employee/position" />,
                                     </tal:position>
                                     <tal:department condition="employee/department"><a href=""
-                                         tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
+                                         tal:attributes="href string:${portal_url}/employee-listing?department=$department"
                                          tal:content="employee/department">Department</a>
                                     </tal:department>
                                     <div class="tel" tal:condition="employee/mobile">
