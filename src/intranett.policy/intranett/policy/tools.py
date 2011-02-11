@@ -6,6 +6,7 @@ from PIL import Image as PILImage
 from App.class_init import InitializeClass
 from Acquisition import aq_base
 from AccessControl import ClassSecurityInfo
+from ZODB.POSException import ConflictError
 from zope.component import getUtility
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
@@ -113,11 +114,16 @@ class MemberData(BaseMemberData):
 
     security.declarePublic('getUser')
     def getUser(self):
-        plone = getUtility(ISiteRoot)
-        # XXX: Our acquisition context is fouled up.
-        # XXX: Work around by re-getting the user from PAS.
-        mt = getToolByName(plone, 'portal_membership')
-        return mt._huntUser(self.id, plone)
+        try:
+            return super(MemberData, self).getUser()
+        except ConflictError:
+            raise
+        except:
+            # XXX: Our acquisition context is fouled up.
+            # XXX: Work around by re-getting the user from PAS.
+            plone = getUtility(ISiteRoot)
+            mt = getToolByName(plone, 'portal_membership')
+            return mt._huntUser(self.id, plone)
 
     security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
@@ -189,7 +195,7 @@ class MemberDataTool(BaseMemberDataTool):
             self.thumbnails._delObject(member_id)
 
     def wrapUser(self, u):
-        """ Override wrapUser only to use our MemberData
+        """ Override wrapUser to use our MemberData
         """
         id = u.getId()
         members = self._members
