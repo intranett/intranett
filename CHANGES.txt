@@ -4,10 +4,16 @@ Changelog
 1.1.7 - unreleased
 ------------------
 
-- Add version number to footer and adjust text.
+- Fix KSS problems on login page. Closes #182.
+  [mj]
+
+- Fix unavailable spinner image. Closes #181.
+  [mj]
+
+- Add version number to footer and adjust text. Refs #79.
   [hannosch]
 
-- Fix lost Cache-Control header when `beresp.cacheable` is false.
+- Fix lost Cache-Control header when `beresp.cacheable` is false. Refs #172.
   [stefan]
 
 1.1.6 - 2011-02-09
