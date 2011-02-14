@@ -8,14 +8,12 @@ patches.apply()
 
 def initialize(context):
     from intranett.policy.plutonian import Configurator
-    config = Configurator()
-    config.scan('intranett.policy')
+    config = Configurator('intranett.policy')
+    config.scan()
+    config.register_profile()
 
     from intranett.policy.upgrades import register_upgrades
     register_upgrades()
-
-    from intranett.policy.profile import register_profile
-    register_profile()
 
     from AccessControl import allow_module
     allow_module('intranett.policy.config')
