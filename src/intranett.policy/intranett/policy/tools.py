@@ -17,6 +17,7 @@ from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataT
 from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
 from Products.PlonePAS.tools.membership import default_portrait
 from Products.PlonePAS.utils import scale_image
+from intranett.policy.config import MEMBERS_FOLDER_ID
 
 PORTRAIT_SIZE = (300, 300, )
 PORTRAIT_THUMBNAIL_SIZE = (100, 100, )
@@ -136,7 +137,7 @@ class MemberData(BaseMemberData):
         # PAS *might* have returned a unicode id
         if isinstance(user_id, unicode): # pragma: no cover
             user_id = user_id.encode('utf-8')
-        return plone.getPhysicalPath() + ('user', user_id)
+        return plone.getPhysicalPath() + (MEMBERS_FOLDER_ID, user_id)
 
     security.declareProtected(View, 'Type')
     def Type(self):

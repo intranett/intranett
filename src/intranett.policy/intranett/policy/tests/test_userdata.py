@@ -5,6 +5,7 @@ import transaction
 from Acquisition import aq_get
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import _createObjectByType
 from zope.component import queryUtility
 
 from .utils import make_file_upload
@@ -262,37 +263,37 @@ class TestUserSearch(IntranettTestCase):
         results = catalog.searchResults(Title='Døe')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/people/test_user_1_')
         self.assertEquals(john_brain.Title, 'John Døe')
         self.assertEquals(john_brain.Description, 'Øngønør, Tøst')
         results = catalog.searchResults(SearchableText='12345')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/people/test_user_1_')
         results = catalog.searchResults(SearchableText='67890')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/people/test_user_1_')
         results = catalog.searchResults(SearchableText='Øngønør')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/people/test_user_1_')
         results = catalog.searchResults(SearchableText='Tøst')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/people/test_user_1_')
         results = catalog.searchResults(SearchableText='Tønsberg')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/people/test_user_1_')
         results = catalog.searchResults(SearchableText='info@jarn.com')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/people/test_user_1_')
         results = catalog.searchResults(SearchableText='Kjære')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/user/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/people/test_user_1_')
 
     def test_safe_transform_searchable_text(self):
         portal = self.layer['portal']
@@ -312,7 +313,7 @@ class TestUserSearch(IntranettTestCase):
         brain = results[0]
         obj = brain.getObject()
         self.assertEqual(obj.Title(), 'John Døe')
-        self.assertEqual(obj.getPhysicalPath(), ('', 'plone', 'user', 'test_user_1_'))
+        self.assertEqual(obj.getPhysicalPath(), ('', 'plone', 'people', 'test_user_1_'))
 
     def test_refreshCatalog_does_not_lose_memberdata(self):
         portal = self.layer['portal']
@@ -434,7 +435,7 @@ class TestMemberData(IntranettTestCase):
     def test_getPhysicalPath(self):
         request = self.layer['request']
         member = self._make_one(request)
-        self.assertEqual(member.getPhysicalPath(), ('', 'plone', 'user', 'test_user_1_'))
+        self.assertEqual(member.getPhysicalPath(), ('', 'plone', 'people', 'test_user_1_'))
 
     def test_notifyModified(self):
         request = self.layer['request']
@@ -463,3 +464,45 @@ class TestMemberData(IntranettTestCase):
         request = self.layer['request']
         member = self._make_one(request)
         self.assertEqual(member.Description(), 'Øngønør, Tøst')
+
+
+class TestMembersFolder(IntranettTestCase):
+
+    def _make_one(self):
+        portal = self.layer['portal']
+        _createObjectByType('MembersFolder', portal, id='members', title='Members')
+        return portal['members']
+
+    def test_create(self):
+        folder = self._make_one()
+        self.assertEqual(folder.portal_type, 'MembersFolder')
+        self.assertEqual(folder.Title(), 'Members')
+
+    def test_get_member(self):
+        folder = self._make_one()
+        member = folder['test_user_1_']
+        self.assertEqual(member.getId(), 'test_user_1_')
+
+    def test_get_bad_member(self):
+        folder = self._make_one()
+        self.assertRaises(KeyError, folder.__getitem__, 'test_user_2_')
+
+    def test_traverse(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        member = folder.restrictedTraverse('test_user_1_')
+        self.assertEqual(member.getId(), 'test_user_1_')
+        self.assertEqual(member.getUserName(), 'test-user')
+
+    def test_bad_traverse(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        self.assertRaises(AttributeError, folder.restrictedTraverse, 'test_user_2_')
+
+    def test_path_traverse(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        member = portal.restrictedTraverse('/plone/members/test_user_1_')
+        self.assertEqual(member.getId(), 'test_user_1_')
+        self.assertEqual(member.getUserName(), 'test-user')
+
