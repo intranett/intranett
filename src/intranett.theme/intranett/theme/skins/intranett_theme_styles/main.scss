@@ -1,5 +1,11 @@
 @import "globals";
 
+/* SASS variables */
+$content-width: 944px;
+$text-shadow: 0 1px 0 rgba(247,247,247,0.9);
+$bold-web-font: LatoBold, Helvetica, Arial,sans-serif;
+$regular-web-font: LatoRegular, Helvetica, Arial,sans-serif;
+
 @mixin shadowed-portlet {
 	background-color: rgb(245,245,245);
     font-size: $smaller-size;
@@ -20,10 +26,11 @@
 	    padding: 0.5em 0.63em;
 	    margin-top: 0;
 	    margin-bottom: 0;
-	    font-size: 1em;
+	    font-size: 1.1em;
 	
 	    text-transform: uppercase;
-	    font-family: Helvetica,Arial,sans-serif;
+	    font-family: $bold-web-font;
+	    text-shadow: $text-shadow;
 	    
 	    a {
 			color: #444
@@ -38,10 +45,30 @@
 	}
 }
 
-/* SASS variables */
-$content-width: 944px;
-
 /* @group Basic */
+
+@font-face {
+    font-family: 'LatoBold';
+    src: url('++resource++fonts/Lato-Bold-webfont.eot?') format('eot'),
+         url('++resource++fonts/Lato-Bold-webfont.woff') format('woff'),
+         url('++resource++fonts/Lato-Bold-webfont.ttf') format('truetype'),
+         url('++resource++fonts/Lato-Bold-webfont.svg#webfontQibrf0WF') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'LatoRegular';
+    src: url('++resource++fonts/Lato-Regular-webfont.eot?') format('eot'),
+         url('++resource++fonts/Lato-Regular-webfont.woff') format('woff'),
+         url('++resource++fonts/Lato-Regular-webfont.ttf') format('truetype'),
+         url('++resource++fonts/Lato-Regular-webfont.svg#webfontHlqc3w9Z') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 
 html.kupu-html {
 	font-size: $base-size;
@@ -308,7 +335,6 @@ body > header h1 {
 }
 a#portal-logo {
 	display: block;
-	text-shadow:0px 2px 0px #fff;
 	color: #5E5E5E;
 	
 	img {
@@ -358,7 +384,7 @@ button.searchButton {
 	position: relative;
 	cursor: pointer;	
 	margin: 0;
-	text-shadow: 0 1px 0 rgba(247,247,247,0.9);
+	text-shadow: $text-shadow;
 }
 button.searchButton:hover {
 	color: #000;
@@ -385,6 +411,7 @@ body > header nav {
 	z-index:1;
 	bottom: -1px;
 	display: table;
+	font-family: $regular-web-font;
 }
 body > header nav ul {
 	/*margin: 1.69em 0 0;*/
@@ -541,7 +568,8 @@ body > header nav li a .toolTipArrow {
     padding: 0.38em 0.76em;
     position: relative;
     text-decoration: none;
-    text-shadow: 0 1px 0 rgba(247, 247, 247, 0.7);
+	text-shadow: $text-shadow;
+    font-family: $regular-web-font;
     text-transform: uppercase;
 }
 .managePortletsFallback {
@@ -764,7 +792,7 @@ dd.image-caption {
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr=#{$lightgrey}, EndColorStr='#e6e6e6')"; /* IE8 */	
 	border: 1px solid #ccc;
 	color:$fontcolor;
-	text-shadow:0 1px 0 #e7e7e7;
+	text-shadow: $text-shadow;
 	cursor: pointer;
 	outline: none;
 }
@@ -1146,7 +1174,8 @@ textarea#description {
 	padding:0.38em $smaller-size;
 	position:relative;
 	text-decoration:none;
-	text-shadow:0 1px 0 rgba(247, 247, 247, 0.7);
+	text-shadow: $text-shadow;
+	font-family: $regular-web-font;
 	text-transform:uppercase;
 }
 .standalone,
@@ -1158,7 +1187,7 @@ textarea#description {
 .documentEditable * .destructive {
     background: #ff8500;
 	border-color: #dd7300;
-	text-shadow:0 1px 0 rgba(255, 206, 153, 0.7);	
+	text-shadow: $text-shadow;
 	color: #552c00;
 }
 .formControls {
@@ -1711,6 +1740,8 @@ small.commentDate {
     padding: 0.5em 0.63em;
     margin-top: 0;
     margin-bottom: 0;
+    font-family: $bold-web-font;
+	text-shadow: $text-shadow;
 }
 .portlet a {
 	border: none;
@@ -1741,9 +1772,10 @@ small.commentDate {
 	padding: 0.35em 0 0.4em;
 }
 .portlet .portletFooter {
-	font-size: 0.63em;
+	font-size: 0.76em;
 	padding: 1em 0.63em;
 	text-transform: uppercase;
+	font-family: $bold-web-font;
 }
 /*.portletAssignments .managedPortlet {
 	background: $lightgrey;
@@ -1898,7 +1930,7 @@ body.template-manage-frontpage {
 			border-top: 1px solid #fff;
 			border-bottom: 1px solid #aaa;
 			background-color: #E0E0E0;
-			margin-bottom: 2em;
+			margin-bottom: 2em;			
 			
 			#board-blocks {
 				width: 97.917%;	

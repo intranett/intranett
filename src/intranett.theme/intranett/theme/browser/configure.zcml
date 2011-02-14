@@ -17,6 +17,12 @@
       directory="templates"
       layer=".interfaces.IThemeSpecific" />
 
+  <browser:resourceDirectory
+      name="fonts"
+      directory="fonts"
+      layer=".interfaces.IThemeSpecific"
+      />
+
   <!-- Render the document byline -->
   <browser:viewlet
       name="plone.belowcontenttitle.documentbyline"
