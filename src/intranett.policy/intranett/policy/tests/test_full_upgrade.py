@@ -13,7 +13,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.GenericSetup.context import TarballImportContext
 from zope.site.hooks import setSite
 
-from intranett.policy.config import POLICY_PROFILE
+from intranett.policy.config import config
 from intranett.policy.config import THEME_PROFILE
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
@@ -128,7 +128,6 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
 class TestFullUpgrade(IntranettTestCase):
 
     def test_all_steps_taken(self):
-        from intranett.policy.config import config
         numbers = sorted(config.upgrades)
         self.assertEqual(numbers, range(min(numbers), max(numbers) + 1))
 
@@ -145,7 +144,7 @@ class TestFullUpgrade(IntranettTestCase):
         setup = getToolByName(portal, "portal_setup")
         setRoles(portal, TEST_USER_ID, ['Manager'])
 
-        setup.setLastVersionForProfile(POLICY_PROFILE, '1')
+        setup.setLastVersionForProfile(config.policy_profile, '1')
         setup.setLastVersionForProfile(THEME_PROFILE, '1')
 
         upgrades = setup.listUpgrades(THEME_PROFILE)
@@ -160,7 +159,7 @@ class TestFullUpgrade(IntranettTestCase):
         upgrades = setup.listUpgrades(THEME_PROFILE)
         self.failUnless(len(upgrades) == 0)
 
-        upgrades = setup.listUpgrades(POLICY_PROFILE)
+        upgrades = setup.listUpgrades(config.policy_profile)
         self.failUnless(len(upgrades) == 0)
 
 

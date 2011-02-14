@@ -1,12 +1,11 @@
 from Acquisition import aq_get
 
 from intranett.policy.config import config
-from intranett.policy.config import POLICY_PROFILE
 from intranett.policy.config import THEME_PROFILE
 
 
 def compare_profile_versions(setup, profile_id):
-    if profile_id == POLICY_PROFILE:
+    if profile_id == config.policy_profile:
         current = config.last_upgrade_to()
     else:
         current = setup.getVersionForProfile(profile_id)
@@ -15,7 +14,7 @@ def compare_profile_versions(setup, profile_id):
     return current == last
 
 
-def run_upgrade(setup, profile_id=POLICY_PROFILE):
+def run_upgrade(setup, profile_id=config.policy_profile):
     request = aq_get(setup, 'REQUEST')
     request['profile_id'] = profile_id
 
@@ -39,5 +38,5 @@ def run_all_upgrades(setup):
 
     base_updated = compare_profile_versions(setup, u"Products.CMFPlone:plone")
     theme_updated = compare_profile_versions(setup, THEME_PROFILE)
-    policy_updated = compare_profile_versions(setup, POLICY_PROFILE)
+    policy_updated = compare_profile_versions(setup, config.policy_profile)
     return all([base_updated, theme_updated, policy_updated])
