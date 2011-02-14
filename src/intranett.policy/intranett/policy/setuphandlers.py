@@ -4,6 +4,7 @@ from zope.component import queryUtility
 from zope.interface import alsoProvides
 
 from intranett.policy.config import POLICY_PROFILE
+from intranett.policy.profile import import_step
 
 
 def set_profile_version(site):
@@ -87,6 +88,7 @@ def setup_reject_anonymous(site):
     alsoProvides(portal, IPrivateSite)
 
 
+@import_step()
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
