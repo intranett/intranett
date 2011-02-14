@@ -1,6 +1,0 @@
-<configure xmlns="http://namespaces.zope.org/zope">
-
-  <utility factory=".profile.HiddenProducts"
-           name="intranett.policy" />
-
-</configure>

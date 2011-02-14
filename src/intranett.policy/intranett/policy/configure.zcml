@@ -22,7 +22,8 @@
   <include package="intranett.theme" />
 
   <include package=".browser" />
-  <include file="profile.zcml" />
+
+  <utility factory=".profile.HiddenProducts" name="intranett.policy" />
 
   <include package="z3c.jbot" file="meta.zcml" />
   <browser:jbot
