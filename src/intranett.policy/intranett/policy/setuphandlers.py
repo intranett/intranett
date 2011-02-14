@@ -3,14 +3,14 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
 from zope.interface import alsoProvides
 
-from intranett.policy.config import POLICY_PROFILE
+from intranett.policy.config import config
 from intranett.policy.plutonian import import_step
 
 
 def set_profile_version(site):
-    from .upgrades import last_upgrade_to
     setup = getToolByName(site, 'portal_setup')
-    setup.setLastVersionForProfile(POLICY_PROFILE, last_upgrade_to())
+    setup.setLastVersionForProfile(
+        config.policy_profile, config.last_upgrade_to())
 
 
 def setup_locale(site):

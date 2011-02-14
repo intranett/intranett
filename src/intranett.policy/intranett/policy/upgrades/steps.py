@@ -3,7 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
 from zope.component import queryUtility
 
-from intranett.policy.upgrades import upgrade_to
+from intranett.policy.plutonian import upgrade_to
 
 
 @upgrade_to(2)

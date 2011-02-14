@@ -1,47 +1,14 @@
 from Acquisition import aq_get
 
-from Products.GenericSetup.upgrade import _registerUpgradeStep
-from Products.GenericSetup.upgrade import UpgradeStep
-
+from intranett.policy.config import config
 from intranett.policy.config import BASE_PROFILE
 from intranett.policy.config import POLICY_PROFILE
 from intranett.policy.config import THEME_PROFILE
 
-UPGRADES = {}
-
-
-def upgrade_to(dest):
-    """Use this as a decorator for an upgrade step handler in the steps
-    module in this sub-package. The `dest` argument is an integer referring to
-    the profile version in `metadata.xml`.
-    """
-
-    def decorator(fun):
-        if dest in UPGRADES: # pragma: no cover
-            raise ValueError('Duplicate upgrade step registration.')
-        UPGRADES[dest] = fun
-        return fun
-    return decorator
-
-
-def last_upgrade_to():
-    return unicode(max(UPGRADES.keys()))
-
-
-def register_upgrades():
-    # Called from the initialize function of the package, so after ZCML
-    # registrations already took place
-    from intranett.policy.upgrades import steps
-    steps # pyflakes, register steps during import
-    for dest, handler in UPGRADES.items():
-        step = UpgradeStep(u'Upgrade %s' % handler.__name__, POLICY_PROFILE,
-            str(dest - 1), str(dest), None, handler, checker=None, sortkey=0)
-        _registerUpgradeStep(step)
-
 
 def compare_profile_versions(setup, profile_id):
     if profile_id == POLICY_PROFILE:
-        current = last_upgrade_to()
+        current = config.last_upgrade_to()
     else:
         current = setup.getVersionForProfile(profile_id)
     current = tuple(current.split('.'))

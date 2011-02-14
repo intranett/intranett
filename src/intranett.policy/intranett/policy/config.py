@@ -1,8 +1,6 @@
-BASE_PROFILE = u"Products.CMFPlone:plone"
-POLICY_PROFILE = u"intranett.policy:default"
-THEME_PROFILE = u"intranett.theme:default"
+from intranett.policy.plutonian import Configurator
+config = Configurator('intranett.policy')
 
-from pkg_resources import get_distribution
-dist = get_distribution('intranett.policy')
-VERSION = dist.version
-del get_distribution
+BASE_PROFILE = u"Products.CMFPlone:plone"
+POLICY_PROFILE = config.policy_profile
+THEME_PROFILE = u"intranett.theme:default"

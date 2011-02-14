@@ -128,8 +128,8 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
 class TestFullUpgrade(IntranettTestCase):
 
     def test_all_steps_taken(self):
-        from intranett.policy.upgrades import UPGRADES
-        numbers = UPGRADES.keys()
+        from intranett.policy.config import config
+        numbers = sorted(config.upgrades)
         self.assertEqual(numbers, range(min(numbers), max(numbers) + 1))
 
     def test_list_steps(self):
