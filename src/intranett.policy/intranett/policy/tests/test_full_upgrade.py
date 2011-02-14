@@ -14,7 +14,6 @@ from Products.GenericSetup.context import TarballImportContext
 from zope.site.hooks import setSite
 
 from intranett.policy.config import config
-from intranett.policy.config import THEME_PROFILE
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.utils import suppress_warnings
@@ -145,9 +144,9 @@ class TestFullUpgrade(IntranettTestCase):
         setRoles(portal, TEST_USER_ID, ['Manager'])
 
         setup.setLastVersionForProfile(config.policy_profile, '1')
-        setup.setLastVersionForProfile(THEME_PROFILE, '1')
+        setup.setLastVersionForProfile(config.theme_profile, '1')
 
-        upgrades = setup.listUpgrades(THEME_PROFILE)
+        upgrades = setup.listUpgrades(config.theme_profile)
         self.failUnless(len(upgrades) > 0)
 
         all_finished = run_all_upgrades(setup)
@@ -156,7 +155,7 @@ class TestFullUpgrade(IntranettTestCase):
         self.assertTrue(all_finished)
 
         # There are no more upgrade steps available
-        upgrades = setup.listUpgrades(THEME_PROFILE)
+        upgrades = setup.listUpgrades(config.theme_profile)
         self.failUnless(len(upgrades) == 0)
 
         upgrades = setup.listUpgrades(config.policy_profile)

@@ -1,7 +1,6 @@
 from Acquisition import aq_get
 
 from intranett.policy.config import config
-from intranett.policy.config import THEME_PROFILE
 
 
 def compare_profile_versions(setup, profile_id):
@@ -33,10 +32,10 @@ def run_upgrade(setup, profile_id=config.policy_profile):
 
 def run_all_upgrades(setup):
     run_upgrade(setup, u"Products.CMFPlone:plone")
-    run_upgrade(setup, THEME_PROFILE)
+    run_upgrade(setup, config.theme_profile)
     run_upgrade(setup)
 
     base_updated = compare_profile_versions(setup, u"Products.CMFPlone:plone")
-    theme_updated = compare_profile_versions(setup, THEME_PROFILE)
+    theme_updated = compare_profile_versions(setup, config.theme_profile)
     policy_updated = compare_profile_versions(setup, config.policy_profile)
     return all([base_updated, theme_updated, policy_updated])

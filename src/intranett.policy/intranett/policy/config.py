@@ -1,4 +1,4 @@
 from intranett.policy.plutonian import Configurator
-config = Configurator('intranett.policy')
 
-THEME_PROFILE = u"intranett.theme:default"
+config = Configurator('intranett.policy')
+config.theme_profile = u"intranett.theme:default"
