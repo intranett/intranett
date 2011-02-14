@@ -13,5 +13,9 @@ def initialize(context):
     from intranett.policy.profile import register_profile
     register_profile()
 
+    from intranett.policy.profile import register_import_step
+    from intranett.policy.setuphandlers import various
+    register_import_step(various, depends=('toolset', 'workflow'))
+
     from AccessControl import allow_module
     allow_module('intranett.policy.config')
