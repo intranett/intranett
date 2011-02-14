@@ -8,6 +8,7 @@
 /* Other variables */
 /* not 100% in order to align right edge with the columns, positioned with the grid */
 /* @end */
+/* SASS variables */
 /* @group Basic */
 html.kupu-html {
   font-size: 1em; }
@@ -146,6 +147,20 @@ select, input, textarea {
   color: #444444;
   font-size: 0.76em;
   font-family: Helvetica, Arial, sans-serif; }
+
+/* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
+.clearfix:before, .clearfix:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  visibility: hidden; }
+
+.clearfix:after {
+  clear: both; }
+
+/* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+.clearfix {
+  zoom: 1; }
 
 /* @group From html5boilerplate.com */
 pre {
@@ -1643,8 +1658,10 @@ small.commentDate {
   font-size: .76em;
   text-align: center; }
 
-.portlet {
-  margin-bottom: 1em; }
+.portlet,
+.portletStaticText {
+  margin-bottom: 1em;
+  font-size: 0.76em; }
 
 .managedPortlet .portletHeader,
 .portlet .portletHeader {
@@ -1654,7 +1671,6 @@ small.commentDate {
   border-bottom: 1px solid #E6E6E6;
   border-top: 1px solid #CCCCCC;
   padding: 0.5em 0.63em;
-  font-size: 0.76em;
   margin-top: 0;
   margin-bottom: 0; }
 
@@ -1671,8 +1687,7 @@ small.commentDate {
   padding: 0; }
 
 .portlet .portletItem {
-  padding: 0.63em;
-  font-size: 0.76em; }
+  padding: 0.63em; }
 
 .portlet .portletItem p {
   text-indent: 0;
@@ -1810,30 +1825,6 @@ body > footer {
 /* @end */
 /* @end */
 /* @group Frontpage */
-#frontpage-highlight {
-  margin: 0 0 22px; }
-
-#frontpage-columns {
-  margin: 0 0 22px; }
-  #frontpage-columns .fpBlock .visualPadding {
-    padding: 1em;
-    border: 1px solid #ddd; }
-  #frontpage-columns .width-16 {
-    width: 100%;
-    margin-left: -100%; }
-  #frontpage-columns .width-8 {
-    width: 461px;
-    margin-left: -461px; }
-  #frontpage-columns .width-8:nth-child(1) {
-    margin-left: -100%; }
-  #frontpage-columns .width-5 {
-    width: 300px;
-    margin-left: -300px; }
-  #frontpage-columns .width-5:nth-child(1) {
-    margin-left: -100%; }
-  #frontpage-columns .width-5:nth-child(2) {
-    margin-left: -622px; }
-
 body.template-frontpage_view #portal-columns,
 body.template-manage-frontpage #portal-columns {
   padding-top: 0; }
@@ -1846,8 +1837,95 @@ body.template-manage-frontpage #portal-columns {
     body.template-frontpage_view #portal-columns #company-board #board-blocks,
     body.template-manage-frontpage #portal-columns #company-board #board-blocks {
       width: 97.917%;
-      padding: 2.6em 0;
+      padding: 31px 0;
       margin-bottom: 1.25em; }
+      body.template-frontpage_view #portal-columns #company-board #board-blocks > div,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks > div {
+        width: 622.667px; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks > div img.image-left,
+        body.template-frontpage_view #portal-columns #company-board #board-blocks > div img.image-right,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div img.image-left,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div img.image-right {
+          clear: none;
+          margin-top: 0; }
+      body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1),
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) {
+        float: left;
+        width: 622.667px;
+        margin-right: 19px; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) > div:nth-child(2),
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) > div:nth-child(2) {
+          float: left;
+          width: 301.333px;
+          margin-right: 19px; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) > div:nth-child(3),
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) > div:nth-child(3) {
+          float: right;
+          width: 301.333px; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:before,
+        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:after,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:before,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:after {
+          content: "\0020";
+          display: block;
+          height: 0;
+          visibility: hidden; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:after,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:after {
+          clear: both; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem {
+          zoom: 1; }
+      body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(2),
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(2) {
+        float: right;
+        width: 301.333px; }
+      body.template-frontpage_view #portal-columns #company-board #board-blocks .portlet,
+      body.template-frontpage_view #portal-columns #company-board #board-blocks .portletStaticText,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks .portlet,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletStaticText {
+        background-color: #f5f5f5;
+        font-size: 0.76em;
+        border: 2px solid #fff;
+        -moz-box-shadow: 0 1px 5px rgba(50, 50, 50, 0.4), 0 3px 20px rgba(50, 50, 50, 0.2);
+        -webkit-box-shadow: 0 1px 5px rgba(50, 50, 50, 0.4), 0 3px 20px rgba(50, 50, 50, 0.2);
+        box-shadow: 0 1px 5px rgba(50, 50, 50, 0.4), 0 3px 20px rgba(50, 50, 50, 0.2);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(250, 250, 250, 0.8)), to(#ebebeb));
+        background-image: -moz-linear-gradient(top, rgba(250, 250, 250, 0.8), #ebebeb);
+        margin-bottom: 20px; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks .portlet .portletHeader,
+        body.template-frontpage_view #portal-columns #company-board #board-blocks .portletStaticText .portletHeader,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks .portlet .portletHeader,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletStaticText .portletHeader {
+          text-transform: uppercase;
+          line-height: normal;
+          border-bottom: 1px solid #E6E6E6;
+          border-top: none;
+          padding: 0.5em 0.63em;
+          margin-top: 0;
+          margin-bottom: 0;
+          font-size: 1em;
+          text-transform: uppercase;
+          font-family: Helvetica,Arial,sans-serif; }
+          body.template-frontpage_view #portal-columns #company-board #board-blocks .portlet .portletHeader a,
+          body.template-frontpage_view #portal-columns #company-board #board-blocks .portletStaticText .portletHeader a,
+          body.template-manage-frontpage #portal-columns #company-board #board-blocks .portlet .portletHeader a,
+          body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletStaticText .portletHeader a {
+            color: #444; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks .portlet .portletHeader + dd.portletItem,
+        body.template-frontpage_view #portal-columns #company-board #board-blocks .portletStaticText .portletHeader + dd.portletItem,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks .portlet .portletHeader + dd.portletItem,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletStaticText .portletHeader + dd.portletItem {
+          border-top: 1px solid #fff; }
+        body.template-frontpage_view #portal-columns #company-board #board-blocks .portlet dd.even,
+        body.template-frontpage_view #portal-columns #company-board #board-blocks .portlet dd.odd,
+        body.template-frontpage_view #portal-columns #company-board #board-blocks .portletStaticText dd.even,
+        body.template-frontpage_view #portal-columns #company-board #board-blocks .portletStaticText dd.odd,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks .portlet dd.even,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks .portlet dd.odd,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletStaticText dd.even,
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletStaticText dd.odd {
+          background: transparent !important; }
     body.template-frontpage_view #portal-columns #company-board #edit-bar,
     body.template-manage-frontpage #portal-columns #company-board #edit-bar {
       width: 97.917%; }
@@ -1876,6 +1954,14 @@ body.template-manage-frontpage .portlets-manager .portletAssignments {
 
 body.template-manage-frontpage .portlets-manager .section + .portletAssignments {
   display: block; }
+
+.kssattr-viewname-manage-frontpage > div:nth-child(2) {
+  float: left;
+  width: 297.333px;
+  margin-right: 19px; }
+.kssattr-viewname-manage-frontpage > div:nth-child(3) {
+  float: right;
+  width: 297.333px; }
 
 /* @end */
 /* @end */
@@ -1933,6 +2019,7 @@ body.template-employee-listing .tileItem .image-left {
 
 #dashboard .portlet {
   background-color: #f5f5f5;
+  font-size: 0.76em;
   border: 2px solid #fff;
   -moz-box-shadow: 0 1px 5px rgba(50, 50, 50, 0.4), 0 3px 20px rgba(50, 50, 50, 0.2);
   -webkit-box-shadow: 0 1px 5px rgba(50, 50, 50, 0.4), 0 3px 20px rgba(50, 50, 50, 0.2);
@@ -1945,13 +2032,15 @@ body.template-employee-listing .tileItem .image-left {
     border-bottom: 1px solid #E6E6E6;
     border-top: none;
     padding: 0.5em 0.63em;
-    font-size: 0.76em;
     margin-top: 0;
     margin-bottom: 0;
+    font-size: 1em;
     text-transform: uppercase;
     font-family: Helvetica,Arial,sans-serif; }
     #dashboard .portlet .portletHeader a {
       color: #444; }
+  #dashboard .portlet .portletHeader + dd.portletItem {
+    border-top: 1px solid #fff; }
   #dashboard .portlet dd.even,
   #dashboard .portlet dd.odd {
     background: transparent !important; }

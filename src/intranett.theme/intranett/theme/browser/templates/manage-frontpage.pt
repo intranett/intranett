@@ -22,16 +22,22 @@
          tal:define="isAnon context/@@plone_portal_state/anonymous;
                      raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
                      highlight python:plone_view.have_portlets('frontpage.highlight', view);
+                     right python:plone_view.have_portlets('frontpage.right', view);                     
                      show_border context/@@plone/showEditableBorder;
                      ploneview context/@@plone">
 
-      <section id="company-board"  tal:condition="not:ajax_load" >
+      <section id="company-board" class="clearfix" tal:condition="not:ajax_load" >
           <div class="contentAlignment">
               <div id="edit-bar"
                   tal:condition="show_border"
                   tal:content="structure provider:plone.contentviews" />
               <div id="board-blocks">
-                  <tal:block replace="structure provider:frontpage.highlight" />
+                  <div>
+                      <tal:block replace="structure provider:frontpage.highlight" />
+                  </div>
+                  <div>
+                      <tal:block replace="structure provider:frontpage.portlets.right" />
+                  </div>
               </div>
           </div>
       </section>
