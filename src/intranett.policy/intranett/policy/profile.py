@@ -20,3 +20,12 @@ class HiddenProducts(object):
             'Products.kupu',
             'Products.Marshall',
         ]
+
+
+def register_profile(name='default'):
+    from Products.GenericSetup.interfaces import EXTENSION
+    from Products.GenericSetup.registry import _profile_registry
+    product = __package__
+    title = '%s:%s' % (product, name)
+    _profile_registry.registerProfile(name, title, description=u'',
+        path='profiles/%s' % name, product=product, profile_type=EXTENSION)

@@ -3,14 +3,6 @@
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
   i18n_domain="intranett">
 
-  <genericsetup:registerProfile
-      name="default"
-      title="intranett.no base configuration"
-      description=""
-      directory="profiles/default"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-
   <genericsetup:importStep
       name="intranett.policy.various"
       title="intranett.no: Various import steps"
