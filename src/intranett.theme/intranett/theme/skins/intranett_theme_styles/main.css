@@ -383,7 +383,8 @@ button.searchButton {
   position: relative;
   cursor: pointer;
   margin: 0;
-  text-shadow: 0 1px 0 rgba(247, 247, 247, 0.9); }
+  text-shadow: 0 1px 0 rgba(247, 247, 247, 0.9);
+  font-family: LatoRegular, Helvetica, Arial, sans-serif; }
 
 button.searchButton:hover {
   color: #000; }
@@ -1849,8 +1850,10 @@ body.template-manage-frontpage #portal-columns {
   body.template-manage-frontpage #portal-columns #company-board {
     border-top: 1px solid #fff;
     border-bottom: 1px solid #aaa;
+    margin-bottom: 2em;
     background-color: #E0E0E0;
-    margin-bottom: 2em; }
+    background: -moz-radial-gradient(center 45deg, circle closest-corner, white 0%, #e0e0e0 100%);
+    background: -webkit-gradient(radial, center center, 0, center center, 70, from(white), to(#e0e0e0)); }
     body.template-frontpage_view #portal-columns #company-board #board-blocks,
     body.template-manage-frontpage #portal-columns #company-board #board-blocks {
       width: 97.917%;
