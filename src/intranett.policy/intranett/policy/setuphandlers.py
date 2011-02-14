@@ -4,7 +4,7 @@ from zope.component import queryUtility
 from zope.interface import alsoProvides
 
 from intranett.policy.config import POLICY_PROFILE
-from intranett.policy.profile import import_step
+from intranett.policy.plutonian import import_step
 
 
 def set_profile_version(site):
