@@ -367,14 +367,14 @@ a#portal-logo:hover {
   vertical-align: middle; }
 
 .searchSection {
-  font-size: 0.76 2em;
+  font-size: 0.76em;
   text-align: left;
   color: #808080; }
 
 button.searchButton {
   border: none;
   background: transparent;
-  padding: 0.28em 0.76em;
+  padding: 0 0.76em;
   font-size: 0.76em;
   color: #666666;
   text-decoration: none;
