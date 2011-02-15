@@ -74,3 +74,9 @@ def disable_webstats_js(context):
     ptool = getToolByName(context, 'portal_properties')
     sprops = ptool.site_properties
     sprops.webstats_js = ''
+
+
+@upgrade_to(10)
+def install_highlight_portlets(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('portlets',))

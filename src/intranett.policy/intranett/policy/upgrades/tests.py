@@ -1,7 +1,9 @@
 import os
 
 from plone.app.testing import TEST_USER_ID
+from plone.portlets.interfaces import IPortletType
 from Products.CMFCore.utils import getToolByName
+from zope.component import getSiteManager
 
 from intranett.policy.upgrades import steps
 from intranett.policy.tests.base import IntranettTestCase
@@ -96,3 +98,16 @@ class TestUpgradeSteps(IntranettTestCase):
         sprops.webstats_js = '<script type="text/javascript" />'
         steps.disable_webstats_js(portal)
         self.assertEqual(sprops.webstats_js, '')
+
+    def test_highlight_portlets_available(self):
+        portal = self.layer['portal']
+        sm = getSiteManager()
+        sm.unregisterUtility(provided=IPortletType, name='intranett.policy.portlets.NewsHighlight')
+        sm.unregisterUtility(provided=IPortletType, name='intranett.policy.portlets.EventHighlight')
+        registeredPortletTypes = [r.name for r in sm.registeredUtilities() if r.provided == IPortletType]
+        self.assertFalse('intranett.policy.portlets.NewsHighlight' in registeredPortletTypes)
+        self.assertFalse('intranett.policy.portlets.EventHighlight' in registeredPortletTypes)
+        steps.install_highlight_portlets(portal)
+        registeredPortletTypes = [r.name for r in sm.registeredUtilities() if r.provided == IPortletType]
+        self.assertTrue('intranett.policy.portlets.NewsHighlight' in registeredPortletTypes)
+        self.assertTrue('intranett.policy.portlets.EventHighlight' in registeredPortletTypes)
