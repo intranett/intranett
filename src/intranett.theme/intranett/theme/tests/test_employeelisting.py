@@ -1,4 +1,5 @@
 import os.path
+import transaction
 
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -9,7 +10,6 @@ from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.utils import make_file_upload
-
 
 test_dir = os.path.dirname(tests.__file__)
 image_file = os.path.join(test_dir, 'images', 'test.jpg')
@@ -89,9 +89,25 @@ class TestFunctionalEmployeeListing(IntranettFunctionalTestCase):
         super(TestFunctionalEmployeeListing, self).setUp()
         portal = self.layer['portal']
         add_default_members(portal)
+        transaction.commit()
 
     def test_employee_listing_view(self):
         # As a normal user we can view the listing
         browser = get_browser(self.layer['app'])
         browser.open('http://nohost/plone/employee-listing')
         self.assert_(browser.url.endswith('employee-listing'))
+        self.failUnless('Barney Rubble' in browser.contents)
+        self.failUnless('http://nohost/plone/people/barney' in browser.contents)
+        self.failUnless('Fred Flintstone' in browser.contents)
+        self.failUnless('http://nohost/plone/people/fred' in browser.contents)
+
+    def test_members_folder_view(self):
+        # As a normal user we can view the listing
+        browser = get_browser(self.layer['app'])
+        browser.open('http://nohost/plone/people')
+        self.assert_(browser.url.endswith('people'))
+        self.failUnless('Barney Rubble' in browser.contents)
+        self.failUnless('http://nohost/plone/people/barney' in browser.contents)
+        self.failUnless('Fred Flintstone' in browser.contents)
+        self.failUnless('http://nohost/plone/people/fred' in browser.contents)
+

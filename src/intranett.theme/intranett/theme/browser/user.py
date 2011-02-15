@@ -1,34 +1,6 @@
 from zope.publisher.browser import BrowserView
-from zExceptions import NotFound
 from Products.CMFCore.utils import getToolByName
 from plone.memoize.view import memoize
-
-from OFS.Traversable import _marker
-
-
-class UserView(BrowserView):
-    """This view pretends to be traversable so the catalog
-    is able to reindex member data objects.
-    """
-
-    def __getitem__(self, key):
-        return getToolByName(self.context, 'portal_membership').getMemberById(key)
-
-    def unrestrictedTraverse(self, path, default=_marker, restricted=False):
-        user = self[path]
-        if user is None and default is not _marker:
-            return default
-        return user
-
-    def restrictedTraverse(self, path, default=_marker):
-        return self.unrestrictedTraverse(path, default)
-
-    def getPhysicalPath(self):
-        return self.context.getPhysicalPath() + ('user',)
-
-    def __call__(self):
-        # No template yet
-        raise NotFound
 
 
 class MemberDataView(BrowserView):
