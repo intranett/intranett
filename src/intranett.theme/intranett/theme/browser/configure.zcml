@@ -138,20 +138,12 @@
       ruleset="plone.content.folderView"
       />
 
-  <class class="intranett.policy.tools.MembershipTool">
-      <implements interface="Products.CMFPlone.interfaces.IHideFromBreadcrumbs" />
-  </class>
-
-  <class class="intranett.policy.tools.MemberDataTool">
-      <implements interface="Products.CMFPlone.interfaces.IHideFromBreadcrumbs" />
-  </class>
-
-  <class class="intranett.policy.tools.MemberData">
-      <implements interface="Products.CMFPlone.interfaces.IHideFromBreadcrumbs" />
-  </class>
-
-  <class class="intranett.policy.content.membersfolder.MembersFolder">
-      <implements interface="Products.CMFPlone.interfaces.IHideFromBreadcrumbs" />
-  </class>
+  <!-- User breadcrumbs -->
+  <browser:page
+      for="intranett.policy.tools.MemberData"
+      name="breadcrumbs_view"
+      class="Products.CMFPlone.browser.navigation.CatalogNavigationBreadcrumbs"
+      permission="zope2.View"
+      />
 
 </configure>
