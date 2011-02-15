@@ -1,7 +1,7 @@
 PROJECTNAME = 'intranett.policy'
 ADD_PERMISSIONS = {'MembersFolder': '%s: Add MembersFolder' % PROJECTNAME}
 MEMBERS_FOLDER_ID = 'people'
-MEMBERS_FOLDER_TITLE = 'People'
+MEMBERS_FOLDER_TITLE = 'Folk' # 'People'
 
 BASE_PROFILE = u"Products.CMFPlone:plone"
 POLICY_PROFILE = u"intranett.policy:default"
