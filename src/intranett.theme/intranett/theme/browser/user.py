@@ -10,17 +10,21 @@ class MemberDataView(BrowserView):
     # XXX: Also see intranett.policy.tools.MemberData.
 
     @memoize
-    def username(self):
+    def userid(self):
         return self.context.getId()
+
+    @memoize
+    def username(self):
+        return self.context.getUserName()
 
     @memoize
     def user_content(self):
         catalog = getToolByName(self.context, 'portal_catalog')
-        username = self.username()
-        if not username:
+        userid = self.userid()
+        if not userid:
             return []
         query = {
-            'Creator': username,
+            'Creator': userid,
             'sort_on': 'created',
             'sort_order': 'reverse',
             'sort_limit': 10,

@@ -43,15 +43,21 @@ class TestMemberDataView(IntranettTestCase):
         member = mt.getAuthenticatedMember()
         return queryMultiAdapter((member, request), Interface, 'memberdata_view')
 
+    def test_userid(self):
+        request = self.layer['request']
+        view = self._make_one(request)
+        self.assertEqual(view.userid(), 'test_user_1_')
+
     def test_username(self):
         request = self.layer['request']
         view = self._make_one(request)
-        self.assertEqual(view.username(), 'test_user_1_')
+        self.assertEqual(view.username(), 'test-user')
 
     def test_user_content(self):
         request = self.layer['request']
         view = self._make_one(request)
         self.assertEqual(len(view.user_content()), 1)
+        self.assertEqual(view.user_content()[0].getId, 'test-folder')
 
     def test_anonymous_user(self):
         request = self.layer['request']
