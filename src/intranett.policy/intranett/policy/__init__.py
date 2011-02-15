@@ -1,4 +1,7 @@
 import patches
+from zope.i18nmessageid import MessageFactory
+
+IntranettMessageFactory = MessageFactory('intranett.policy')
 
 patches.apply()
 
