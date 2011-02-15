@@ -6,6 +6,7 @@ from PIL import Image as PILImage
 from App.class_init import InitializeClass
 from Acquisition import aq_base
 from AccessControl import ClassSecurityInfo
+from AccessControl.requestmethod import postonly
 from ZODB.POSException import ConflictError
 from zope.component import getUtility
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
@@ -202,6 +203,18 @@ class MemberDataTool(BaseMemberDataTool):
         super(MemberDataTool, self)._deletePortrait(member_id)
         if member_id in self.thumbnails:
             self.thumbnails._delObject(member_id)
+
+    @postonly
+    def deleteMemberData(self, member_id, REQUEST=None):
+        """ Delete member data of specified member.
+        """
+        members = self._members
+        # Uncatalog
+        if members.has_key(member_id):
+            getToolByName(self, 'portal_catalog').unindexObject(members[member_id])
+        # Remove portrait
+        self._deletePortrait(member_id)
+        return super(MemberDataTool, self).deleteMemberData(member_id)
 
     def wrapUser(self, u):
         """ Override wrapUser to use our MemberData

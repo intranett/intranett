@@ -9,6 +9,7 @@ from Products.CMFPlone.utils import _createObjectByType
 from zope.component import queryUtility
 
 from .utils import make_file_upload
+from plone.app.testing import setRoles
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
@@ -213,6 +214,19 @@ class TestUserPortraits(IntranettTestCase):
         path = os.path.join(TEST_IMAGES, 'test.gif')
         image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
         mt.changeMemberPortrait(image_gif, id='')
+
+    def test_delete_member_purges_portrait(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mdt = getToolByName(portal, 'portal_memberdata')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        mt.changeMemberPortrait(image_jpg)
+        # Now delete the member
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        mt.deleteMembers([TEST_USER_ID])
+        self.failIf(TEST_USER_ID in mdt.portraits)
+        self.failIf(TEST_USER_ID in mdt.thumbnails)
 
 
 class TestImageCropping(IntranettTestCase):
@@ -500,6 +514,18 @@ class TestMemberData(IntranettTestCase):
         member = mt.getMemberById(u'måm')
         self.assertEqual(member.id, 'måm')
         self.failIf(isinstance(member.id, unicode))
+
+    def test_delete_member_uncatalogs(self):
+        request = self.layer['request']
+        portal = self.layer['portal']
+        member = self._make_one(request)
+        mt = getToolByName(portal, 'portal_membership')
+        catalog = getToolByName(portal, 'portal_catalog')
+        self.assertEqual(len(catalog(Title='Døe')), 1)
+        # Now delete the member
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        mt.deleteMembers([TEST_USER_ID])
+        self.assertEqual(len(catalog(Title='Døe')), 0)
 
 
 class TestMembersFolder(IntranettTestCase):
