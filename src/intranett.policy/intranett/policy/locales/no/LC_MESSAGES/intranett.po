@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-09 22:23+0000\n"
+"POT-Creation-Date: 2011-02-15 09:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Create intranet"
 msgstr "Opprett nytt intranett"
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:40
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:42
 msgid "Departments:"
 msgstr "Avdelinger:"
 
@@ -27,13 +27,17 @@ msgstr "Avdelinger:"
 msgid "Employee"
 msgstr "Ansatt"
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:32
-msgid "Employees"
-msgstr "Ansatte"
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:34
+msgid "People"
+msgstr "Folk"
 
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
 msgstr "Bygget med intranett.no"
+
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:26
+msgid "Show people from all departments"
+msgstr "Vis folk fra alle avdelinger"
 
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:43
 msgid "This site configuration is outdated and needs to be upgraded:"
@@ -91,13 +95,13 @@ msgstr "Slett portrett"
 
 #. Default: "Department"
 #: intranett.policy/intranett/policy/userdataschema.py:48
-#: intranett.theme/intranett/theme/browser/templates/user.pt:89
+#: intranett.theme/intranett/theme/browser/templates/user.pt:90
 msgid "label_department"
 msgstr "Avdeling"
 
 #. Default: "E-mail"
 #: intranett.policy/intranett/policy/userdataschema.py:20
-#: intranett.theme/intranett/theme/browser/templates/user.pt:103
+#: intranett.theme/intranett/theme/browser/templates/user.pt:104
 msgid "label_email"
 msgstr "E-post"
 
@@ -108,14 +112,14 @@ msgstr "Fullt navn"
 
 #. Default: "Location"
 #: intranett.policy/intranett/policy/userdataschema.py:53
-#: intranett.theme/intranett/theme/browser/templates/user.pt:96
+#: intranett.theme/intranett/theme/browser/templates/user.pt:97
 msgid "label_location"
 msgstr "Sted"
 
 #. Default: "Mobile phone"
 #: intranett.policy/intranett/policy/userdataschema.py:31
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:90
-#: intranett.theme/intranett/theme/browser/templates/user.pt:120
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:92
+#: intranett.theme/intranett/theme/browser/templates/user.pt:121
 msgid "label_mobile"
 msgstr "Mobiltelefon"
 
@@ -126,8 +130,8 @@ msgstr "Ingen resultater samsvarer med søket."
 
 #. Default: "Phone"
 #: intranett.policy/intranett/policy/userdataschema.py:26
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:96
-#: intranett.theme/intranett/theme/browser/templates/user.pt:112
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:98
+#: intranett.theme/intranett/theme/browser/templates/user.pt:113
 msgid "label_phone"
 msgstr "Telefon"
 

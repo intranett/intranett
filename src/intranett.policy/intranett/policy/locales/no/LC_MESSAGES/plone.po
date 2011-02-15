@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-12-22 10:49+0000\n"
+"POT-Creation-Date: 2011-02-15 09:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,6 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 
+#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
 #: intranett.theme/intranett/theme/profiles/default/types/Plone_Site.xml
 msgid "Edit"
 msgstr "Redigér"
@@ -21,4 +22,16 @@ msgstr "Redigér"
 #: intranett.theme/intranett/theme/profiles/default/actions.xml
 msgid "Employees"
 msgstr "Ansatte"
+
+#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
+msgid "Folder Listing"
+msgstr ""
+
+#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
+msgid "Members Folder"
+msgstr ""
+
+#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
+msgid "View"
+msgstr ""
 
