@@ -228,6 +228,7 @@ class MembershipTool(BaseMembershipTool):
         memberinfo['birth_date'] = member.getProperty('birth_date')
         memberinfo['description'] = safe_transform(
             self, member.getProperty('description') or '')
+        memberinfo['userid'] = member.getId()
         return memberinfo
 
     def changeMemberPortrait(self, portrait, id=None):

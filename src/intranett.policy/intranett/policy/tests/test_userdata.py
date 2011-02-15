@@ -78,6 +78,16 @@ class TestUserdataSchema(IntranettTestCase):
         self.assertEquals(info['email'], 'info@jarn.com')
         self.assertEquals(info['birth_date'], DateTime('23/11/2008'))
         self.assertEquals(info['description'], "<p>Kjære Python!</p>")
+
+    def test_userid_in_memberinfo(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        info = mt.getMemberInfo()
+        self.assertEquals(info['userid'], TEST_USER_ID)
+
+    def test_bad_memberinfo(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         info = mt.getMemberInfo(memberId='foo')
         self.failUnless(info is None)
 
