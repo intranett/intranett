@@ -15,4 +15,15 @@
     editview=".newshighlight.EditForm"
     />
 
+  <plone:portlet
+    name="intranett.policy.portlets.EventHighlight"
+    interface=".eventhighlight.IEventHighlight"
+    assignment=".eventhighlight.Assignment"
+    view_permission="zope2.View"
+    edit_permission="cmf.ManagePortal"
+    renderer=".eventhighlight.Renderer"
+    addview=".eventhighlight.AddForm"
+    editview=".eventhighlight.EditForm"
+    />
+
 </configure>

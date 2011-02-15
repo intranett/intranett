@@ -7,4 +7,10 @@
    description="Displays a news item among the latest ones."
    />
 
+ <portlet
+   addview="intranett.policy.portlets.EventHighlight"
+   title="Event Highlight"
+   description="Displays an upcoming event."
+   />
+
 </portlets>
