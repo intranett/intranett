@@ -7,6 +7,7 @@ from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 from zope.component import queryUtility
+from zope.component import queryMultiAdapter
 
 from .utils import make_file_upload
 from plone.app.testing import setRoles
@@ -214,6 +215,29 @@ class TestUserPortraits(IntranettTestCase):
         path = os.path.join(TEST_IMAGES, 'test.gif')
         image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
         mt.changeMemberPortrait(image_gif, id='')
+
+    def test_change_portrait_recatalogs(self):
+        request = self.layer['request']
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        catalog = getToolByName(portal, 'portal_catalog')
+        before = catalog.getCounter()
+        mt.changeMemberPortrait(image_jpg)
+        self.assertEqual(catalog.getCounter(), before+1)
+
+    def test_delete_portrait_recatalogs(self):
+        request = self.layer['request']
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        catalog = getToolByName(portal, 'portal_catalog')
+        mt.changeMemberPortrait(image_jpg)
+        before = catalog.getCounter()
+        mt.deletePersonalPortrait()
+        self.assertEqual(catalog.getCounter(), before+1)
 
     def test_delete_member_purges_portrait(self):
         portal = self.layer['portal']

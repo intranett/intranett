@@ -260,6 +260,7 @@ class MembershipTool(BaseMembershipTool):
             safe_id = self.getAuthenticatedMember().getId()
 
         membertool = getToolByName(self, 'portal_memberdata')
+        membership = getToolByName(self, 'portal_membership')
         if portrait and portrait.filename:
             scaled, mimetype = scale_image(portrait,
                                            max_size=PORTRAIT_SIZE)
@@ -272,6 +273,10 @@ class MembershipTool(BaseMembershipTool):
             image = Portrait(id=safe_id, file=scaled, title='')
             image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
             membertool._setPortrait(image, safe_id, thumbnail=True)
+            # Reindex
+            memberdata = membership.getMemberById(safe_id)
+            if memberdata is not None:
+                memberdata.notifyModified()
 
     def getPersonalPortrait(self, id=None, thumbnail=True):
         """Return a members personal portait.
@@ -291,3 +296,22 @@ class MembershipTool(BaseMembershipTool):
             portrait = getattr(portal, default_portrait, None)
 
         return portrait
+
+    def deletePersonalPortrait(self, id=None):
+        """deletes the Portait of a member.
+
+        Modified to reindex after deleting a portrait.
+        """
+        safe_id = self._getSafeMemberId(id)
+        membership = getToolByName(self, 'portal_membership')
+
+        if not safe_id:
+            safe_id = self.getAuthenticatedMember().getId()
+
+        super(MembershipTool, self).deletePersonalPortrait(safe_id)
+
+        # Reindex
+        memberdata = membership.getMemberById(safe_id)
+        if memberdata is not None:
+            memberdata.notifyModified()
+
