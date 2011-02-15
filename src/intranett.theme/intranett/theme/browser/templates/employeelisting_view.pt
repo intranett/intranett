@@ -27,13 +27,13 @@
                            tal:condition="department_request"
                            tal:attributes="href string:${portal_url}/people"
                            i18n:translate="">
-                           Show employees from all departments
+                           Show people from all departments
                         </a>
                     </div>
                 </tal:departmentview>
                 <h1 class="documentFirstHeading"
                     tal:condition="not:department_request"
-                    i18n:translate="">Employees</h1>
+                    i18n:translate="">People</h1>
             </header>
 
             <div id="content-core">
