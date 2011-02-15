@@ -358,6 +358,7 @@ a#portal-logo:hover {
 	padding: 0.38em 0.48em;	
 	margin: 0;	
 	border: none;
+	outline: none;
 }
 .inputLabelActive {
 	color: #808080;
@@ -386,6 +387,7 @@ button.searchButton {
 	margin: 0;
 	text-shadow: $text-shadow;
 	font-family: $regular-web-font;
+	outline: none;
 }
 button.searchButton:hover {
 	color: #000;

@@ -356,7 +356,8 @@ a#portal-logo:hover {
   font-size: 0.76em;
   padding: 0.38em 0.48em;
   margin: 0;
-  border: none; }
+  border: none;
+  outline: none; }
 
 .inputLabelActive {
   color: #808080; }
@@ -384,7 +385,8 @@ button.searchButton {
   cursor: pointer;
   margin: 0;
   text-shadow: 0 1px 0 rgba(247, 247, 247, 0.9);
-  font-family: LatoRegular, Helvetica, Arial, sans-serif; }
+  font-family: LatoRegular, Helvetica, Arial, sans-serif;
+  outline: none; }
 
 button.searchButton:hover {
   color: #000; }
