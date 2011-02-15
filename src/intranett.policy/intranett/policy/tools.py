@@ -114,6 +114,17 @@ class MemberData(BaseMemberData):
         ct = getToolByName(plone, 'portal_catalog')
         ct.reindexObject(self)
 
+    security.declarePublic('getId')
+    def getId(self):
+        id = super(MemberData, self).getId()
+        if isinstance(id, unicode):
+            id = id.encode('utf-8')
+        return id
+
+    security.declarePublic('getMemberId')
+    def getMemberId(self):
+        return self.getId()
+
     security.declarePublic('getUser')
     def getUser(self):
         from Acquisition import aq_base, aq_parent, aq_inner
@@ -133,11 +144,7 @@ class MemberData(BaseMemberData):
     security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
         plone = getUtility(ISiteRoot)
-        user_id = self.getId()
-        # PAS *might* have returned a unicode id
-        if isinstance(user_id, unicode): # pragma: no cover
-            user_id = user_id.encode('utf-8')
-        return plone.getPhysicalPath() + (MEMBERS_FOLDER_ID, user_id)
+        return plone.getPhysicalPath() + (MEMBERS_FOLDER_ID, self.getId())
 
     security.declareProtected(View, 'Type')
     def Type(self):

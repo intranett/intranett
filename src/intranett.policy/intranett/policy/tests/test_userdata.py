@@ -475,6 +475,24 @@ class TestMemberData(IntranettTestCase):
         member = self._make_one(request)
         self.assertEqual(member.Description(), 'Øngønør, Tøst')
 
+    def test_unicode_getId(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mt.addMember(u'måm', 'secret', ['Member'], [])
+        member = mt.getMemberById(u'måm')
+        self.assertEqual(member.getId(), 'måm')
+        self.failIf(isinstance(member.getId(), unicode))
+        self.assertEqual(member.getPhysicalPath(), ('', 'plone', 'people', 'måm'))
+
+    def test_unicode_getMemberId(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mt.addMember(u'måm', 'secret', ['Member'], [])
+        member = mt.getMemberById(u'måm')
+        self.assertEqual(member.getMemberId(), 'måm')
+        self.failIf(isinstance(member.getMemberId(), unicode))
+        self.assertEqual(member.getPhysicalPath(), ('', 'plone', 'people', 'måm'))
+
 
 class TestMembersFolder(IntranettTestCase):
 
