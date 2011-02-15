@@ -116,14 +116,11 @@ class MemberData(BaseMemberData):
 
     security.declarePublic('getId')
     def getId(self):
-        id = super(MemberData, self).getId()
-        if isinstance(id, unicode):
-            id = id.encode('utf-8')
-        return id
+        return self.id
 
     security.declarePublic('getMemberId')
     def getMemberId(self):
-        return self.getId()
+        return self.id
 
     security.declarePublic('getUser')
     def getUser(self):
@@ -144,7 +141,7 @@ class MemberData(BaseMemberData):
     security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
         plone = getUtility(ISiteRoot)
-        return plone.getPhysicalPath() + (MEMBERS_FOLDER_ID, self.getId())
+        return plone.getPhysicalPath() + (MEMBERS_FOLDER_ID, self.id)
 
     security.declareProtected(View, 'Type')
     def Type(self):
@@ -210,6 +207,8 @@ class MemberDataTool(BaseMemberDataTool):
         """ Override wrapUser to use our MemberData
         """
         id = u.getId()
+        if isinstance(id, unicode):
+            id = id.encode('utf-8')
         members = self._members
         if id not in members:
             base = aq_base(self)

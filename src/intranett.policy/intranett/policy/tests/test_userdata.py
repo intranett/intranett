@@ -493,6 +493,14 @@ class TestMemberData(IntranettTestCase):
         self.failIf(isinstance(member.getMemberId(), unicode))
         self.assertEqual(member.getPhysicalPath(), ('', 'plone', 'people', 'måm'))
 
+    def test_unicode_id(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mt.addMember(u'måm', 'secret', ['Member'], [])
+        member = mt.getMemberById(u'måm')
+        self.assertEqual(member.id, 'måm')
+        self.failIf(isinstance(member.id, unicode))
+
 
 class TestMembersFolder(IntranettTestCase):
 
