@@ -34,6 +34,20 @@ class TestFunctionalUserView(IntranettFunctionalTestCase):
         else:
             self.fail('Unauthorized not raised')
 
+    def test_author_redirects_to_people(self):
+        browser = get_browser(self.layer['app'])
+        browser.handleErrors = True
+        portal = self.layer['portal']
+        browser.open(portal.absolute_url() + '/author')
+        self.assertEqual(browser.url, 'http://nohost/plone/people')
+
+    def test_author_userid_redirects_to_people_userid(self):
+        browser = get_browser(self.layer['app'])
+        browser.handleErrors = True
+        portal = self.layer['portal']
+        browser.open(portal.absolute_url() + '/author/test_user_1_')
+        self.assertEqual(browser.url, 'http://nohost/plone/people/test_user_1_')
+
 
 class TestMemberDataView(IntranettTestCase):
 

@@ -8,6 +8,7 @@
 ##title=Redirect to the canonical author page
 
 from Products.CMFCore.utils import getToolByName
+from intranett.policy.config import MEMBERS_FOLDER_ID
 
 request = context.REQUEST
 portal_url = getToolByName(context, 'portal_url')()
@@ -18,7 +19,7 @@ if len(request.traverse_subpath) > 0:
 else:
     author = request.get('author', '')
 
-result = portal_url + '/user'
+result = portal_url + '/' + MEMBERS_FOLDER_ID
 if author:
     result = result + '/' + author
 
