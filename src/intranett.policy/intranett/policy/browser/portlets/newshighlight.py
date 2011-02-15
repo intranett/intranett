@@ -63,7 +63,7 @@ class Renderer(base.Renderer):
         catalog = getToolByName(context, 'portal_catalog')
         items = catalog(portal_type='News Item',
                         review_state='published',
-                        sort_on='modified',
+                        sort_on='effective',
                         sort_order='reverse',
                         sort_limit=2)[:2]
         return items

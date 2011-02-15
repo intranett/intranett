@@ -34,12 +34,12 @@ class TestNewsHighlightPortlet(IntranettTestCase):
 
         portal.invokeFactory('News Item', 'wedding',
                              title='A wedding')
-        portal['wedding'].setModificationDate(day_before_yesterday)
+        portal['wedding'].setEffectiveDate(day_before_yesterday)
         wt.doActionFor(portal['wedding'], 'publish')
 
         portal.invokeFactory('News Item', 'funeral',
                              title='A funeral')
-        portal['funeral'].setModificationDate(yesterday)
+        portal['funeral'].setEffectiveDate(yesterday)
         wt.doActionFor(portal['funeral'], 'publish')
 
         assignment = newshighlight.Assignment(
