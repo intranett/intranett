@@ -82,6 +82,14 @@ def setup_reject_anonymous(site):
     alsoProvides(portal, IPrivateSite)
 
 
+def setup_people_folder(site):
+    from Products.CMFPlone.utils import _createObjectByType
+    from intranett.policy.config import MEMBERS_FOLDER_ID, MEMBERS_FOLDER_TITLE
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID, title=MEMBERS_FOLDER_TITLE)
+    portal.portal_workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -96,3 +104,4 @@ def various(context):
     disable_portlets(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
+    setup_people_folder(site)

@@ -149,11 +149,13 @@ class TestSiteSetup(IntranettTestCase):
         self.assert_('portlets.Review' not in ids)
 
     def test_content(self):
-        # This content is only created in the tests
+        # The members folder is always present
+        expected = set(['people'])
+        # This content is only created in tests
         test_content = set(['test-folder'])
         portal = self.layer['portal']
         content = set(portal.contentIds())
-        self.assertEquals(content - test_content, set())
+        self.assertEquals(content - test_content, expected)
 
     def test_content_language(self):
         portal = self.layer['portal']
