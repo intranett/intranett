@@ -29,7 +29,7 @@ msgstr "Ansatt"
 
 #: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:34
 msgid "People"
-msgstr "Folk"
+msgstr "Personer"
 
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
@@ -37,7 +37,7 @@ msgstr "Bygget med intranett.no"
 
 #: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:26
 msgid "Show people from all departments"
-msgstr "Vis folk fra alle avdelinger"
+msgstr "Vis personer fra alle avdelinger"
 
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:43
 msgid "This site configuration is outdated and needs to be upgraded:"
