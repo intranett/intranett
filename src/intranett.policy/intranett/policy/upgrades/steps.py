@@ -74,3 +74,20 @@ def disable_webstats_js(context):
     ptool = getToolByName(context, 'portal_properties')
     sprops = ptool.site_properties
     sprops.webstats_js = ''
+
+
+@upgrade_to(10)
+def install_people_folder(context):
+    # Remove the employee-listing action
+    atool = getToolByName(context, 'portal_actions')
+    if 'employee-listing' in atool.portal_tabs:
+        atool.portal_tabs._delObject('employee-listing')
+    # Add the MembersFolder portal type
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('typeinfo', 'factorytool'))
+    # Add the people folder
+    from intranett.policy.config import MEMBERS_FOLDER_ID
+    from intranett.policy.setuphandlers import setup_people_folder
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    if MEMBERS_FOLDER_ID not in portal:
+        setup_people_folder(portal)
