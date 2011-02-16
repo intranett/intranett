@@ -13,4 +13,10 @@
    description="Displays an upcoming event."
    />
 
+ <portlet
+   addview="intranett.policy.portlets.ContentHighlight"
+   title="Content Highlight"
+   description="Displays a selected content item."
+   />
+
 </portlets>
