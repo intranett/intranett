@@ -58,6 +58,14 @@ def upgrade(app, args):
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
 
+    # Login as admin
+    from AccessControl.SecurityManagement import newSecurityManager
+    admin = root.acl_users.getUserById('admin')
+    if admin is None:
+        logger.error("No user called `admin` found in the database.")
+        sys.exit(1)
+    newSecurityManager(None, admin)
+
     # Make app.REQUEST available
     from Testing import makerequest
     root = makerequest.makerequest(app)
