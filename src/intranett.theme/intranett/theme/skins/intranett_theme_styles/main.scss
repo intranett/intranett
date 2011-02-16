@@ -6,6 +6,54 @@ $text-shadow: 0 1px 0 rgba(247,247,247,0.9);
 $bold-web-font: LatoBold, Helvetica, Arial,sans-serif;
 $regular-web-font: LatoRegular, Helvetica, Arial,sans-serif;
 
+@mixin pimp-company-board {
+	body > header nav ul {
+	    background-color: #313B41;
+	}
+	body.template-frontpage_view,
+	body.template-manage-frontpage {
+		#portal-columns {
+			#company-board {
+				background-color: #E0E0E0;
+				background: -moz-radial-gradient(center 45deg, ellipse closest-corner, #879FAF 0%, #364048 100%);
+				background: -webkit-gradient(radial, center center, 0, center center, 70, from(#879FAF), to(#364048));
+				background: -webkit-gradient(center 45deg, ellipse closest-corner, #879FAF 0%, #364048 100%);	
+				border-bottom: 10px solid #313B41;
+			    border-top: 10px solid #313B41;
+			    
+			    #board-blocks {
+					text-shadow: 0 1px 0 #89AC34;
+					
+					.portlet {
+						background: #A2C047 !important;
+						color: #fff;
+						
+						.portletHeader {
+							color: #4B601A;
+							background:#A2C047;
+							text-shadow: 0 1px 0 rgba(210, 231, 146, 0.9);
+							border-bottom: 1px solid #89AC34;
+							
+							a {
+								color: #4B601A;
+								text-shadow: 0 1px 0 rgba(210, 231, 146, 0.9);
+							}
+						}
+						.portletHeader + dd.portletItem {
+							border-top: 1px solid #D4E795;
+							font-family: Verdana;
+						}
+						a {
+							color: #4B601A;
+							text-shadow: none;
+						}
+					}
+				}
+			}		
+		}
+	}
+}
+
 @mixin shadowed-portlet {
 	background-color: rgb(245,245,245);
     font-size: $smaller-size;
@@ -1935,8 +1983,8 @@ body.template-manage-frontpage {
 			margin-bottom: 2em;	
 			
 			background-color: #E0E0E0;
-			background: -moz-radial-gradient(center 45deg, circle closest-corner, #fff 0%, #E0E0E0 100%);
-			background: -webkit-gradient(radial, center center, 0, center center, 70, from(#fff), to(#E0E0E0));		
+			/*background: -moz-radial-gradient(center 45deg, ellipse closest-corner, #879FAF 0%, #364048 100%);
+			background: -webkit-gradient(radial, center center, 0, center center, 70, from(#879FAF), to(#364048));*/		
 			
 			#board-blocks {
 				width: 97.917%;	
