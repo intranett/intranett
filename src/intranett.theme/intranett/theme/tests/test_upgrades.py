@@ -67,9 +67,13 @@ class TestUpgrades(IntranettTestCase):
 
     def test_three_to_four(self):
         from ..upgradehandlers import employees_action_i18n_domain
+        from Products.CMFCore.ActionInformation import Action
         portal = self.layer['portal']
         atool = getToolByName(portal, 'portal_actions')
-        atool.portal_tabs['employee-listing'].i18n_domain = 'intranett'
+        # Create the action we are going to modify
+        action = Action('employee-listing', i18n_domain='intranett')
+        atool.portal_tabs._setObject('employee-listing', action)
+        self.assertEqual(action.i18n_domain, 'intranett')
         # Run the step
         employees_action_i18n_domain(portal)
         action = atool.portal_tabs['employee-listing']

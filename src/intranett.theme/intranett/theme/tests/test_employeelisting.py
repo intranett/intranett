@@ -40,35 +40,37 @@ class TestEmployeeListing(IntranettTestCase):
 
     def test_view_exists(self):
         portal = self.layer['portal']
+        members = portal['people']
         try:
-            portal.unrestrictedTraverse('@@employee-listing')
+            members.unrestrictedTraverse('@@employee-listing')
         except AttributeError: # pragma: no cover
             self.fail("@@employee-listing doesn't exist.")
 
     def test_employeelisting_action(self):
         portal = self.layer['portal']
-        at = getToolByName(portal, 'portal_actions')
-        tabs = at.portal_tabs
-        self.assert_('employee-listing' in tabs.objectIds(),
-                     '"employee-listing" action is not registered.')
-        self.assertEqual(tabs['employee-listing'].i18n_domain, '')
+        atool = getToolByName(portal, 'portal_actions')
+        # There is no action anymore
+        self.failIf('employee-listing' in atool.portal_tabs.objectIds())
 
     def test_list_employees(self):
         portal = self.layer['portal']
-        view = portal.unrestrictedTraverse('@@employee-listing')
+        members = portal['people']
+        view = members.unrestrictedTraverse('@@employee-listing')
         view.update()
         self.assertEqual([x['fullname'] for x in view.employees()],
                          ['Barney Rubble', 'Fred Flintstone', 'Memb\xc3\xa5r'])
 
     def test_list_departments(self):
         portal = self.layer['portal']
-        view = portal.unrestrictedTraverse('@@employee-listing')
+        members = portal['people']
+        view = members.unrestrictedTraverse('@@employee-listing')
         view.update()
         self.assertEqual(view.departments(), ['Dept\xc3\xa5', 'Rock & Gravel'])
 
     def test_list_employees_by_department(self):
         portal = self.layer['portal']
-        view = portal.unrestrictedTraverse('@@employee-listing')
+        members = portal['people']
+        view = members.unrestrictedTraverse('@@employee-listing')
         view.update()
         rocks = [x['fullname'] for x in view.employees('Rock & Gravel')]
         self.assertEqual(rocks, ['Fred Flintstone', 'Memb\xc3\xa5r'])
@@ -77,7 +79,8 @@ class TestEmployeeListing(IntranettTestCase):
 
     def test_can_manage(self):
         portal = self.layer['portal']
-        view = portal.unrestrictedTraverse('@@employee-listing')
+        members = portal['people']
+        view = members.unrestrictedTraverse('@@employee-listing')
         self.assertFalse(view.can_manage())
         setRoles(portal, TEST_USER_ID, ['Manager'])
         self.assertTrue(view.can_manage())
@@ -94,7 +97,7 @@ class TestFunctionalEmployeeListing(IntranettFunctionalTestCase):
     def test_employee_listing_view(self):
         # As a normal user we can view the listing
         browser = get_browser(self.layer['app'])
-        browser.open('http://nohost/plone/employee-listing')
+        browser.open('http://nohost/plone/people/employee-listing')
         self.assert_(browser.url.endswith('employee-listing'))
         self.failUnless('Barney Rubble' in browser.contents)
         self.failUnless('http://nohost/plone/people/barney' in browser.contents)

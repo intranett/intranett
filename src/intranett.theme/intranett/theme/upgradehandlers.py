@@ -29,4 +29,5 @@ def add_selectivizr_remove_html5_js(context):
 
 def employees_action_i18n_domain(context):
     atool = getToolByName(context, 'portal_actions')
-    atool.portal_tabs['employee-listing'].i18n_domain = ''
+    if 'employee-listing' in atool.portal_tabs:
+        atool.portal_tabs['employee-listing'].i18n_domain = ''

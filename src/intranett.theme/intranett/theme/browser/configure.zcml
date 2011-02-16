@@ -104,14 +104,6 @@
 
   <!-- Employee listing -->
   <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="employee-listing"
-      class=".employeelisting.EmployeeListingView"
-      template="templates/employeelisting_view.pt"
-      permission="zope2.View"
-      />
-
-  <browser:page
       for="intranett.policy.content.membersfolder.MembersFolder"
       name="employee-listing"
       class=".employeelisting.EmployeeListingView"
