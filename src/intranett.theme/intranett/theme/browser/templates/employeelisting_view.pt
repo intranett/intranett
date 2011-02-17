@@ -14,6 +14,10 @@
                                employees python:view.employees(department_request);
                                people modules/intranett.policy.utils/getMembersFolderId">
 
+        <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+          Portal status message
+        </div>
+
         <article id="content">
 
             <header>
