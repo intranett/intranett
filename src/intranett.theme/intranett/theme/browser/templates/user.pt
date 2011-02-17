@@ -24,7 +24,6 @@
                                 userid view/userid;
                                 mtool python:context.portal_membership;
                                 portrait python: mtool.getPersonalPortrait(userid, thumbnail=False);
-                                portal_types context/portal_types;
                                 userinfo python: mtool.getMemberInfo(userid);
                                 portal_url context/@@plone_portal_state/navigation_root_url;
                                 here_url context/@@plone_context_state/object_url;

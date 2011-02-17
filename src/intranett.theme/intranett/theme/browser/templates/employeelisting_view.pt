@@ -10,8 +10,8 @@
     <metal:content fill-slot="content"
                    tal:define="dummy view/update;
                                portal_url context/@@plone_portal_state/navigation_root_url;
-                               department_request python:request.get('department', None);
-                               employees python:department_request and view.employees(department_request) or view.employees();
+                               department_request python:request.get('department', '');
+                               employees python:view.employees(department_request);
                                people modules/intranett.policy.utils/getMembersFolderId">
 
         <article id="content">
