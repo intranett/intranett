@@ -4,6 +4,9 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Update TinyMCE to get new Norwegian translations.
+  [MJ, hannosch]
+
 - Update `collective.ATClamAV` to 1.1 to allow local development to take place
   without a `clamd` setup. Closes #178.
   [hannosch, ggozad]
