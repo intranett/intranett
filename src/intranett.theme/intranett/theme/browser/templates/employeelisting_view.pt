@@ -13,6 +13,10 @@
                                department_request python:request.get('department', None);
                                employees python:department_request and view.employees(department_request) or view.employees()">
 
+        <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+          Portal status message
+        </div>
+
         <article id="content">
 
             <header>
