@@ -91,3 +91,7 @@ def install_people_folder(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
     if MEMBERS_FOLDER_ID not in portal:
         setup_people_folder(portal)
+    # Reindex member data
+    mt = getToolByName(context, 'portal_membership')
+    for member in mt.listMembers():
+        member.notifyModified()
