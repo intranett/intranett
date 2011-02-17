@@ -160,6 +160,20 @@ def init_server():
         run('bin/supervisord')
 
 
+def reset_server():
+    _prepare_update()
+    with cd(VENV):
+        run('bin/supervisorctl shutdown')
+        time.sleep(5)
+        run('rm var/filestorage/D*')
+        with settings(hide('warnings'), warn_only=True):
+            run('rm -r var/blobstorage/*')
+    _create_plone_site(initial=True)
+    reload_nginx()
+    with cd(VENV):
+        run('bin/supervisord')
+
+
 def _add_nginx_include():
     with cd('/etc/nginx/local'):
         text = 'include /srv/jarn/nginx-sites/*.conf;\n'
