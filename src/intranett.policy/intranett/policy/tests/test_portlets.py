@@ -11,6 +11,7 @@ from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.browser.portlets import eventhighlight
 from intranett.policy.browser.portlets import newshighlight
 from intranett.policy.browser.portlets import contenthighlight
+from intranett.policy.browser.sources import DocumentSourceBinder
 
 
 class TestNewsHighlightPortlet(IntranettTestCase):
@@ -128,7 +129,7 @@ class TestContentHighlightPortlet(IntranettTestCase):
         setRoles(portal, TEST_USER_ID, ['Contributor'])
         wt = getToolByName(portal, 'portal_workflow')
         portal.invokeFactory('Document', 'highlighted',
-                             title='A highlighted document',)
+                             title='A highlighted document')
         wt.doActionFor(portal['highlighted'], 'publish')
 
         uid = portal['highlighted'].UID()
@@ -144,3 +145,28 @@ class TestContentHighlightPortlet(IntranettTestCase):
         output = r.render()
         self.assertTrue('Highlighted' in output)
         self.assertTrue('A highlighted document' in output)
+
+    def test_document_source(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Contributor'])
+        wt = getToolByName(portal, 'portal_workflow')
+        portal.invokeFactory('Document', 'adoc',
+                             title='A document')
+        wt.doActionFor(portal['adoc'], 'publish')
+        uid = portal['adoc'].UID()
+        title = portal['adoc'].Title()
+
+        binder = DocumentSourceBinder()
+        query_source = binder(portal)
+        term = query_source.getTerm(uid)
+        self.assertEqual(term.value, uid)
+        self.assertEqual(term.token, title)
+        term = query_source.getTermByToken(title)
+        self.assertEqual(term.value, uid)
+        self.assertEqual(term.token, title)
+
+        search_result = query_source.search('a doc')
+        self.assertNotEqual(search_result, [])
+        term = search_result[0]
+        self.assertEqual(term.value, uid)
+        self.assertEqual(term.token, title)
