@@ -49,6 +49,7 @@ class Renderer(formlibbase.Renderer):
     def portletTitle(self):
         return self.data.portletTitle
 
+    @property
     @memoize
     def item(self):
         ct = getToolByName(self.context, 'portal_catalog')

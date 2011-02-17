@@ -10,6 +10,7 @@ from zope.component import getUtility, getMultiAdapter
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.browser.portlets import eventhighlight
 from intranett.policy.browser.portlets import newshighlight
+from intranett.policy.browser.portlets import contenthighlight
 
 
 class TestNewsHighlightPortlet(IntranettTestCase):
@@ -107,3 +108,39 @@ class TestEventHighlightPortlet(IntranettTestCase):
         output = r.render()
         self.assertTrue('Event' in output)
         self.assertTrue('A wedding' in output)
+
+
+class TestContentHighlightPortlet(IntranettTestCase):
+
+    def renderer(self, context=None, request=None, view=None, manager=None,
+                 assignment=None):
+        context = context or self.layer['portal']
+        request = request or context.REQUEST
+        view = view or context.restrictedTraverse('@@plone')
+        manager = manager or getUtility(
+            IPortletManager, name='plone.rightcolumn', context=context)
+        assignment = assignment or contenthighlight.Assignment()
+        return getMultiAdapter((context, request, view, manager, assignment),
+                               IPortletRenderer)
+
+    def test_highighted_content(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Contributor'])
+        wt = getToolByName(portal, 'portal_workflow')
+        portal.invokeFactory('Document', 'highlighted',
+                             title='A highlighted document',)
+        wt.doActionFor(portal['highlighted'], 'publish')
+
+        uid = portal['highlighted'].UID()
+        assignment = contenthighlight.Assignment(
+            portletTitle="Highlighted",
+            item=uid)
+        r = self.renderer(assignment=assignment)
+        r = r.__of__(portal)
+        r.update()
+        item = r.item
+
+        self.assertEqual(item.Title, 'A highlighted document')
+        output = r.render()
+        self.assertTrue('Highlighted' in output)
+        self.assertTrue('A highlighted document' in output)

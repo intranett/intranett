@@ -18,6 +18,7 @@
   <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
   <include package="Products.PloneFormGen" />
+  <include package="plone.formwidget.autocomplete" />
   <include package="intranett.theme" />
 
   <include package=".browser" />
