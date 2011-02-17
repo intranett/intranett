@@ -1646,6 +1646,9 @@ small.commentDate {
 	font-size: .76em;
 	text-align: center;
 }
+.template-frontpage_view #portal-column-content .managePortletsLink {
+  display: none;
+}
 .portlet {
 	margin-bottom: $base-size;
 }
