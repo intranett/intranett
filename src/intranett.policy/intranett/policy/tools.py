@@ -18,7 +18,7 @@ from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataT
 from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
 from Products.PlonePAS.tools.membership import default_portrait
 from Products.PlonePAS.utils import scale_image
-from intranett.policy.config import MEMBERS_FOLDER_ID
+from intranett.policy.utils import getMembersFolderId
 
 PORTRAIT_SIZE = (300, 300, )
 PORTRAIT_THUMBNAIL_SIZE = (100, 100, )
@@ -142,7 +142,7 @@ class MemberData(BaseMemberData):
     security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
         plone = getUtility(ISiteRoot)
-        return plone.getPhysicalPath() + (MEMBERS_FOLDER_ID, self.id)
+        return plone.getPhysicalPath() + (getMembersFolderId(), self.id)
 
     security.declareProtected(View, 'Type')
     def Type(self):

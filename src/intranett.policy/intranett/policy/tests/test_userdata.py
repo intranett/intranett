@@ -8,12 +8,14 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 from zope.component import queryUtility
 from zope.component import queryMultiAdapter
+from intranett.policy.utils import getMembersFolder
+from intranett.policy.utils import getMembersFolderId
 
-from .utils import make_file_upload
 from plone.app.testing import setRoles
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
+from intranett.policy.tests.utils import make_file_upload
 
 TEST_IMAGES = os.path.join(os.path.dirname(__file__), 'images')
 
@@ -556,6 +558,8 @@ class TestMembersFolder(IntranettTestCase):
 
     def _make_one(self):
         portal = self.layer['portal']
+        if 'people' in portal:
+            portal._delObject('people')
         _createObjectByType('MembersFolder', portal, id='members', title='Members')
         return portal['members']
 
@@ -574,14 +578,12 @@ class TestMembersFolder(IntranettTestCase):
         self.assertRaises(KeyError, folder.__getitem__, 'test_user_2_')
 
     def test_traverse(self):
-        portal = self.layer['portal']
         folder = self._make_one()
         member = folder.restrictedTraverse('test_user_1_')
         self.assertEqual(member.getId(), 'test_user_1_')
         self.assertEqual(member.getUserName(), 'test-user')
 
     def test_bad_traverse(self):
-        portal = self.layer['portal']
         folder = self._make_one()
         self.assertRaises(AttributeError, folder.restrictedTraverse, 'test_user_2_')
 
@@ -592,3 +594,19 @@ class TestMembersFolder(IntranettTestCase):
         self.assertEqual(member.getId(), 'test_user_1_')
         self.assertEqual(member.getUserName(), 'test-user')
 
+    def test_getMembersFolder(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        members = getMembersFolder()
+        self.failIfEqual(members, None)
+        self.assertEqual(members.getId(), 'members')
+        portal._delObject('members')
+        self.assertEqual(getMembersFolder(), None)
+
+    def test_getMembersFolderId(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        id = getMembersFolderId()
+        self.assertEqual(id, 'members')
+        portal._delObject('members')
+        self.assertEqual(getMembersFolderId(), '')

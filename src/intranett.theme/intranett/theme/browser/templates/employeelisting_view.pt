@@ -11,7 +11,8 @@
                    tal:define="dummy view/update;
                                portal_url context/@@plone_portal_state/navigation_root_url;
                                department_request python:request.get('department', None);
-                               employees python:department_request and view.employees(department_request) or view.employees()">
+                               employees python:department_request and view.employees(department_request) or view.employees();
+                               people modules/intranett.policy.utils/getMembersFolderId">
 
         <article id="content">
 
@@ -25,7 +26,7 @@
                     <div class="documentDescription">
                         <a href="" title="Show all employees"
                            tal:condition="department_request"
-                           tal:attributes="href string:${portal_url}/people"
+                           tal:attributes="href string:${portal_url}/$people"
                            i18n:translate="">
                            Show people from all departments
                         </a>
@@ -44,7 +45,7 @@
                         <li tal:repeat="department view/departments"
                             tal:attributes="class python:department_request == department and 'selected' or 'plain'">
                             <a href="" title=""
-                               tal:attributes="href string:${portal_url}/people?department=$department"
+                               tal:attributes="href string:${portal_url}/$people?department=$department"
                                tal:content="department">IT Department</a>
                         </li>
                     </ul>
@@ -60,7 +61,7 @@
                                          item_wf_state        employee/review_state|python: wtool.getInfoFor(employee, 'review_state', '');
                                          item_wf_state_class  python:'state-' + normalizeString(item_wf_state);">
                             <a href="#"
-                               tal:attributes="href string:$portal_url/people/${employee/userid};
+                               tal:attributes="href string:$portal_url/$people/${employee/userid};
                                                title employee/fullname">
                                 <img class="image-left photo" alt="" src=""
                                      tal:condition="employee/thumbnail_url"
@@ -74,7 +75,7 @@
                                     <span class="summary">
                                         <a class="state-private url fn"
                                            tal:content="employee/fullname | employee/username"
-                                           tal:attributes="href string:$portal_url/people/${employee/userid};
+                                           tal:attributes="href string:$portal_url/$people/${employee/userid};
                                                            title employee/fullname;
                                                            class string:$item_wf_state_class url fn">Test Page</a>
                                     </span>
@@ -84,7 +85,7 @@
                                         <span tal:replace="employee/position" />,
                                     </tal:position>
                                     <tal:department condition="employee/department"><a href=""
-                                         tal:attributes="href string:${portal_url}/people?department=$department"
+                                         tal:attributes="href string:${portal_url}/$people?department=$department"
                                          tal:content="employee/department">Department</a>
                                     </tal:department>
                                     <div class="tel" tal:condition="employee/mobile">
