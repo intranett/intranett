@@ -23,6 +23,8 @@
   <include package=".browser" />
   <include file="profile.zcml" />
 
+  <subscriber handler=".content.membersfolder.reindexMemberData" />
+
   <adapter factory=".caching.EditBarCookie" name="editbar" />
 
   <adapter

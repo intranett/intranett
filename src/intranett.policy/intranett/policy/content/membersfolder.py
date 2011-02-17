@@ -1,6 +1,10 @@
+from zope.component import adapter
+from zope.lifecycleevent import IObjectMovedEvent
+
 from Products.CMFCore.utils import getToolByName
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.folder import ATFolder
+
 from intranett.policy.config import PROJECTNAME
 
 
@@ -21,3 +25,10 @@ class MembersFolder(ATFolder):
 
 
 registerATCT(MembersFolder, PROJECTNAME)
+
+
+@adapter(MembersFolder, IObjectMovedEvent)
+def reindexMemberData(ob, event):
+    mt = getToolByName(ob, 'portal_membership')
+    for member in mt.listMembers():
+        member.notifyModified()
