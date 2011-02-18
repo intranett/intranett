@@ -19,7 +19,7 @@
     <tal:main-macro metal:define-macro="main"
                     tal:define="isAnon context/@@plone_portal_state/anonymous;
                                 raiseUnauthorized python:(not isAnon) or context.raiseUnauthorized();
-                                url_unquote_plus python:modules['Products.PythonScripts.standard'].url_unquote_plus;
+                                make_query nocall:modules/ZTUtils/make_query;
                                 username view/username;
                                 userid view/userid;
                                 mtool python:context.portal_membership;
@@ -88,7 +88,8 @@
                                 <!-- Department -->
                                 <b><span tal:omit-tag="" i18n:translate="label_department">Department</span>:</b>
                                 <a href=""
-                                     tal:attributes="href string:${portal_url}/people?department=${userinfo/department}"
+                                     tal:define="query python:make_query({'department': userinfo['department']})"
+                                     tal:attributes="href string:${portal_url}/people?$query"
                                      tal:content="userinfo/department">Department</a>
                             </li>
                             <li tal:condition="userinfo/location">

@@ -10,6 +10,7 @@
     <metal:content fill-slot="content"
                    tal:define="dummy view/update;
                                portal_url context/@@plone_portal_state/navigation_root_url;
+                               make_query nocall:modules/ZTUtils/make_query;
                                department_request python:request.get('department', '');
                                employees python:view.employees(department_request)">
 
@@ -49,7 +50,8 @@
                         <li tal:repeat="department view/departments"
                             tal:attributes="class python:department_request == department and 'selected' or 'plain'">
                             <a href="" title=""
-                               tal:attributes="href string:${portal_url}/people?department=$department"
+                               tal:define="query python:make_query({'department': department})"
+                               tal:attributes="href string:${portal_url}/people?$query"
                                tal:content="department">IT Department</a>
                         </li>
                     </ul>
@@ -89,7 +91,8 @@
                                         <span tal:replace="employee/position" />,
                                     </tal:position>
                                     <tal:department condition="employee/department"><a href=""
-                                         tal:attributes="href string:${portal_url}/people?department=$department"
+                                         tal:define="query python:make_query({'department': employee['department']})"
+                                         tal:attributes="href string:${portal_url}/people?$query"
                                          tal:content="employee/department">Department</a>
                                     </tal:department>
                                     <div class="tel" tal:condition="employee/mobile">
