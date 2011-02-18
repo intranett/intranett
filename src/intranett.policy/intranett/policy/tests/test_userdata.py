@@ -558,9 +558,11 @@ class TestMembersFolder(IntranettTestCase):
 
     def _make_one(self):
         portal = self.layer['portal']
+        # Remove the default members folder
         if 'people' in portal:
             portal._delObject('people')
         _createObjectByType('MembersFolder', portal, id='members', title='Members')
+        portal['members'].processForm() # Fire events
         return portal['members']
 
     def test_create(self):
@@ -594,6 +596,14 @@ class TestMembersFolder(IntranettTestCase):
         self.assertEqual(member.getId(), 'test_user_1_')
         self.assertEqual(member.getUserName(), 'test-user')
 
+    def test_getMembersFolderId(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        id = getMembersFolderId()
+        self.assertEqual(id, 'members')
+        portal._delObject('members')
+        self.assertEqual(getMembersFolderId(), '')
+
     def test_getMembersFolder(self):
         portal = self.layer['portal']
         folder = self._make_one()
@@ -603,10 +613,31 @@ class TestMembersFolder(IntranettTestCase):
         portal._delObject('members')
         self.assertEqual(getMembersFolder(), None)
 
-    def test_getMembersFolderId(self):
+    def test_rename_members_folder(self):
         portal = self.layer['portal']
         folder = self._make_one()
-        id = getMembersFolderId()
-        self.assertEqual(id, 'members')
+        self.assertEqual(getMembersFolderId(), 'members')
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        transaction.savepoint(True) # Acquire a _p_oid
+        portal.manage_renameObject('members', 'persons')
+        self.assertEqual(getMembersFolderId(), 'persons')
+
+    def test_override_members_folder(self):
+        # There should only ever be one members folder in real life
+        portal = self.layer['portal']
+        folder = self._make_one()
+        self.assertEqual(getMembersFolderId(), 'members')
+        _createObjectByType('MembersFolder', portal, id='persons', title='Persons')
+        portal['persons'].processForm() # Fire events
+        self.assertEqual(getMembersFolderId(), 'persons')
+
+    def test_delete_inactive_members_folder(self):
+        # There should only ever be one members folder in real life
+        portal = self.layer['portal']
+        folder = self._make_one()
+        _createObjectByType('MembersFolder', portal, id='persons', title='Persons')
+        portal['persons'].processForm() # Fire events
+        self.assertEqual(getMembersFolderId(), 'persons')
+        # Deleting members keeps persons active
         portal._delObject('members')
-        self.assertEqual(getMembersFolderId(), '')
+        self.assertEqual(getMembersFolderId(), 'persons')

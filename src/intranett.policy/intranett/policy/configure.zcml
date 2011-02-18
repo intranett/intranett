@@ -23,8 +23,6 @@
   <include package=".browser" />
   <include file="profile.zcml" />
 
-  <subscriber handler=".content.membersfolder.reindexMemberData" />
-
   <adapter factory=".caching.EditBarCookie" name="editbar" />
 
   <adapter
@@ -38,5 +36,9 @@
     for=".tools.Portrait"
     ruleset="plone.content.file"
     />
+
+  <subscriber handler=".content.membersfolder.registerMembersFolderId" />
+  <subscriber handler=".content.membersfolder.unregisterMembersFolderId" />
+  <subscriber handler=".content.membersfolder.updateMembersFolderId" />
 
 </configure>
