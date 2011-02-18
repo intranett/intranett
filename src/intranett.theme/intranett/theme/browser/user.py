@@ -1,6 +1,9 @@
+from urllib import quote
+
 from zope.publisher.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from plone.memoize.view import memoize
+from intranett.policy.utils import getMembersFolderId
 
 
 class MemberDataView(BrowserView):
@@ -30,3 +33,16 @@ class MemberDataView(BrowserView):
             'sort_limit': 10,
         }
         return catalog.searchResults(query)[:10]
+
+    @memoize
+    def employee_url(self, member_id):
+        return self.people_folder_url() + '/' + quote(member_id)
+
+    @memoize
+    def department_url(self, department):
+        return self.people_folder_url() + '?department=' + quote(department)
+
+    @memoize
+    def people_folder_url(self):
+        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+        return portal.absolute_url() + '/' + quote(getMembersFolderId())

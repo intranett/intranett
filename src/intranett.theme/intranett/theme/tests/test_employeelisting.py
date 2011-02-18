@@ -65,7 +65,8 @@ class TestEmployeeListing(IntranettTestCase):
         members = portal['people']
         view = members.unrestrictedTraverse('@@employee-listing')
         view.update()
-        self.assertEqual(view.departments(), ['Dept\xc3\xa5', 'Rock & Gravel'])
+        self.assertEqual([x['name'] for x in view.departments()],
+                         ['Dept\xc3\xa5', 'Rock & Gravel'])
 
     def test_list_employees_by_department(self):
         portal = self.layer['portal']
