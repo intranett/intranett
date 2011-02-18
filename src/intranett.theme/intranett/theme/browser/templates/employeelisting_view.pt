@@ -38,6 +38,7 @@
                 </tal:departmentview>
                 <h1 class="documentFirstHeading"
                     tal:condition="not:department_request"
+                    tal:content="context/Title"
                     i18n:translate="">People</h1>
             </header>
 
