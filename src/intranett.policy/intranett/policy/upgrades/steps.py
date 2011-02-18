@@ -91,3 +91,11 @@ def install_people_folder(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
     if getMembersFolder() is None:
         setup_people_folder(portal)
+
+
+@upgrade_to(11)
+def restrict_allowed_types(context):
+    # Import type restrictions for the Plone Site
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('typeinfo',))
+
