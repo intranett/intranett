@@ -67,11 +67,23 @@ class TestMemberDataView(IntranettTestCase):
         view = self._make_one(request)
         self.assertEqual(view.username(), 'test-user')
 
-    def test_user_content(self):
+    def test_userinfo(self):
         request = self.layer['request']
         view = self._make_one(request)
-        self.assertEqual(len(view.user_content()), 1)
-        self.assertEqual(view.user_content()[0].getId, 'test-folder')
+        self.assertEqual(view.userinfo()['username'], 'test-user')
+
+    def test_userportrait(self):
+        request = self.layer['request']
+        view = self._make_one(request)
+        portrait = view.userportrait()
+        self.assertEqual(portrait.getId(), 'defaultUser.gif')
+        self.assertEqual(portrait.absolute_url(), 'http://nohost/plone/defaultUser.gif')
+
+    def test_usercontent(self):
+        request = self.layer['request']
+        view = self._make_one(request)
+        self.assertEqual(len(view.usercontent()), 1)
+        self.assertEqual(view.usercontent()[0].getId, 'test-folder')
 
     def test_anonymous_user(self):
         request = self.layer['request']

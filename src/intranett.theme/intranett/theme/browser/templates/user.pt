@@ -21,9 +21,8 @@
                                 raiseUnauthorized python:(not isAnon) or context.raiseUnauthorized();
                                 username view/username;
                                 userid view/userid;
-                                mtool python:context.portal_membership;
-                                portrait python: mtool.getPersonalPortrait(userid, thumbnail=False);
-                                userinfo python: mtool.getMemberInfo(userid);
+                                userinfo view/userinfo;
+                                portrait view/userportrait;
                                 portal_url context/@@plone_portal_state/navigation_root_url;
                                 here_url context/@@plone_context_state/object_url;
                                 member context/@@plone_portal_state/member">
@@ -135,9 +134,9 @@
                             Author description
                         </div>
 
-                        <tal:authorContent define="user_content view/user_content;
+                        <tal:authorContent define="usercontent view/usercontent;
                                                    toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
-                                           condition="user_content">
+                                           condition="usercontent">
 
                             <h2 i18n:translate="heading_author_content">
                                 Latest content created by this user
@@ -147,7 +146,7 @@
                             <table class="vertical listing"
                                    summary="Lists content written by an author grouped by content type"
                                    i18n:attributes="summary summary_author_content_list;">
-                                <tal:repeat repeat="item user_content">
+                                <tal:repeat repeat="item usercontent">
                                     <tr>
                                         <th tal:content="python:toLocalizedTime(item.Date)"
                                             style="white-space: nowrap">

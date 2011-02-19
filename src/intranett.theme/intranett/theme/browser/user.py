@@ -21,7 +21,17 @@ class MemberDataView(BrowserView):
         return self.context.getUserName()
 
     @memoize
-    def user_content(self):
+    def userinfo(self):
+        mt = getToolByName(self.context, 'portal_membership')
+        return mt.getMemberInfo(self.userid())
+
+    @memoize
+    def userportrait(self):
+        mt = getToolByName(self.context, 'portal_membership')
+        return mt.getPersonalPortrait(self.userid(), thumbnail=False)
+
+    @memoize
+    def usercontent(self):
         catalog = getToolByName(self.context, 'portal_catalog')
         userid = self.userid()
         if not userid:
