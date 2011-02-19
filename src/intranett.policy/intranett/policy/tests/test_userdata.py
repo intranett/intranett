@@ -607,11 +607,12 @@ class TestMembersFolder(IntranettTestCase):
     def test_getMembersFolder(self):
         portal = self.layer['portal']
         folder = self._make_one()
-        members = getMembersFolder()
+        members = getMembersFolder(portal)
         self.failIfEqual(members, None)
         self.assertEqual(members.getId(), 'members')
+        self.assertEqual(members.absolute_url(), 'http://nohost/plone/members')
         portal._delObject('members')
-        self.assertEqual(getMembersFolder(), None)
+        self.assertEqual(getMembersFolder(portal), None)
 
     def test_rename_members_folder(self):
         portal = self.layer['portal']

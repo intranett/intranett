@@ -1,6 +1,5 @@
-from zope.component import getUtility
 from zope.component import queryUtility
-from Products.CMFCore.interfaces import ISiteRoot
+from Products.CMFCore.utils import getToolByName
 from intranett.policy.interfaces import IMembersFolderId
 
 
@@ -9,11 +8,11 @@ def getMembersFolderId():
     return queryUtility(IMembersFolderId, default='')
 
 
-def getMembersFolder():
+def getMembersFolder(context):
     """Helper function to retrieve the members folder."""
     id = getMembersFolderId()
     if id:
-        portal = getUtility(ISiteRoot)
+        portal = getToolByName(context, 'portal_url').getPortalObject()
         return portal.get(id)
 
 

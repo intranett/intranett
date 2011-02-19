@@ -86,10 +86,10 @@ def install_people_folder(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('typeinfo', 'factorytool'))
     # Add the people folder
-    from intranett.policy.utils import getMembersFolder
+    from intranett.policy.config import MEMBERS_FOLDER_ID
     from intranett.policy.setuphandlers import setup_people_folder
     portal = getToolByName(context, 'portal_url').getPortalObject()
-    if getMembersFolder() is None:
+    if MEMBERS_FOLDER_ID not in portal:
         setup_people_folder(portal)
 
 
