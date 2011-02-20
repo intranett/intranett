@@ -13,6 +13,7 @@ from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.permissions import View
+from Products.CMFPlone.utils import safe_hasattr
 from Products.PlonePAS.tools.membership import MembershipTool as BaseMembershipTool
 from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataTool
 from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
@@ -134,7 +135,7 @@ class MemberData(BaseMemberData):
             plone = getUtility(ISiteRoot)
             mt = getToolByName(plone, 'portal_membership')
             return mt._huntUser(self.id, plone)
-        if not hasattr(bcontext, 'getUserName'):
+        if not safe_hasattr(bcontext, 'getUserName'):
             raise ValueError("Cannot find user: %s" % self.id)
         # Return the user object, which is our context.
         return aq_parent(self)
