@@ -82,7 +82,7 @@ sub vcl_deliver {
 # Optimize the Accept-Encoding variant caching
 sub normalize_accept_encoding {
     if (req.http.Accept-Encoding) {
-        if (req.url ~ "\.(jpe?g|png|gif|swf|pdf|gz|tgz|bz2|tbz|zip)$" || req.url ~ "/image_[^/]*$") {
+        if (req.url ~ "\.(jpe?g|png|gif|swf|pdf|gz|tgz|bz2|tbz|zip|mp3|ogg|mp4|flv)$" || req.url ~ "/image_[^/]*$") {
             remove req.http.Accept-Encoding;
         } elsif (req.http.Accept-Encoding ~ "gzip") {
             set req.http.Accept-Encoding = "gzip";
