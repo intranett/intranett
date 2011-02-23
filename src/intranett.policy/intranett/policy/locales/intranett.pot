@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-02-23 10:41+0000\n"
+"POT-Creation-Date: 2011-02-23 11:10+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:66
+msgid "${click_here} to assign some personal portlets."
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:68
@@ -73,12 +77,7 @@ msgstr ""
 msgid "help_portrait"
 msgstr ""
 
-#. Default: "Your dashboard is currently empty. ${click_here} to assign some personal portlets."
-#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:67
-msgid "info_empty_dashboard"
-msgstr ""
-
-#. Default: "To edit your personal portlets click ${link_manage_personal_portlets} button below."
+#. Default: "To edit your personal portlets click the ${link_manage_personal_portlets} button below."
 #: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:62
 msgid "info_manage_dashboard"
 msgstr ""
@@ -161,8 +160,8 @@ msgid "legend_livesearch"
 msgstr ""
 
 #. Default: "Manage personal portlets"
-#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:83
-#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:66
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:82
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:62
 msgid "link_manage_personal_portlets"
 msgstr ""
 

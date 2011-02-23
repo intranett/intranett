@@ -58,7 +58,7 @@
 
                   <article id="content" i18n:domain="intranett">
                       <div i18n:translate="info_manage_dashboard">
-                          To edit your personal portlets click
+                          To edit your personal portlets click the
                           <em i18n:name="link_manage_personal_portlets"
                               i18n:translate="link_manage_personal_portlets">
                             Manage personal portlets</em>

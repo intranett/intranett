@@ -62,8 +62,7 @@
                       
                           <div tal:condition="python:dashboardview.empty() and dashboardview.can_edit()"
                                i18n:domain="intranett"
-                               i18n:translate="info_empty_dashboard">
-                              Your dashboard is currently empty.
+                               i18n:translate="">
                               <a href="#" i18n:name="click_here"
                                  tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Click here</a>
                                  to assign some personal portlets.
