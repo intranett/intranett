@@ -191,6 +191,12 @@ class TestSiteSetup(IntranettTestCase):
         self.assertNotEquals(mailhost.smtp_host, '')
         self.assertNotEquals(mailhost.smtp_port, '')
 
+    def test_private_site(self):
+        from plone.app.controlpanel import security
+        portal = self.layer['portal']
+        cp = security.SecurityControlPanelAdapter(portal)
+        self.assertEqual(cp.private_site, True)
+
 
 class TestAdmin(IntranettTestCase):
 

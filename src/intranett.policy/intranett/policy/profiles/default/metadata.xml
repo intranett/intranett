@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>4</version>
+  <!-- The version is determined based on the registered upgrade steps -->
+  <!-- <version>unknown</version> -->
   <dependencies>
     <dependency>profile-collective.ATClamAV:default</dependency>
     <dependency>profile-collective.flag:default</dependency>

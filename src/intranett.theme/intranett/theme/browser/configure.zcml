@@ -1,8 +1,10 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:cache="http://namespaces.zope.org/cache"
     i18n_domain="intranett">
 
+  <include package="plone.app.caching" />
   <include package="plone.app.contentmenu" />
 
   <interface
@@ -84,6 +86,11 @@
       permission="zope2.View"
       />
 
+  <cache:ruleset
+      for=".frontpage.FrontpageView"
+      ruleset="plone.content.folderView"
+      />
+
   <browser:menuItem
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       menu="plone_displayviews"
@@ -110,6 +117,11 @@
       permission="zope2.View"
       />
 
+  <cache:ruleset
+      for=".employeelisting.EmployeeListingView"
+      ruleset="plone.content.folderView"
+      />
+
   <!-- User / author page -->
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -117,6 +129,11 @@
       class=".user.UserView"
       template="templates/user.pt"
       permission="zope2.View"
+      />
+
+  <cache:ruleset
+      for=".user.UserView"
+      ruleset="plone.content.folderView"
       />
 
 </configure>
