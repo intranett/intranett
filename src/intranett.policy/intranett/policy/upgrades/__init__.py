@@ -17,7 +17,7 @@ def upgrade_to(dest):
     """
 
     def decorator(fun):
-        if dest in UPGRADES:
+        if dest in UPGRADES: # pragma: no cover
             raise ValueError('Duplicate upgrade step registration.')
         UPGRADES[dest] = fun
         return fun
