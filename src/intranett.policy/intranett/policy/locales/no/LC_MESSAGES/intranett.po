@@ -165,5 +165,5 @@ msgstr "Hurtigsøk &#8595;"
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:83
 #: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:66
 msgid "link_manage_personal_portlets"
-msgstr ""
+msgstr "Rediger personlige infobokser"
 
