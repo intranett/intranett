@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-09 22:23+0000\n"
+"POT-Creation-Date: 2011-02-23 10:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,6 +73,16 @@ msgstr "En kort oversikt over hvem du er og hva du gjør. Vil vises for andre p�
 #, fuzzy
 msgid "help_portrait"
 msgstr "For å legge til et nytt portrett, trykk \"Bla igjennom\" og velg et bilde av deg selv. Du får best resultat ved å bruke et kvadratisk bilde større enn 300 x 300 bildepunkter. Andre størrelser vil også virke."
+
+#. Default: "Your dashboard is currently empty. ${click_here} to assign some personal portlets."
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:67
+msgid "info_empty_dashboard"
+msgstr ""
+
+#. Default: "To edit your personal portlets click ${link_manage_personal_portlets} button below."
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:62
+msgid "info_manage_dashboard"
+msgstr ""
 
 #. Default: "Advanced Search…"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:86
@@ -150,4 +160,10 @@ msgstr "Vis alle…"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:84
 msgid "legend_livesearch"
 msgstr "Hurtigsøk &#8595;"
+
+#. Default: "Manage personal portlets"
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:83
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:66
+msgid "link_manage_personal_portlets"
+msgstr ""
 
