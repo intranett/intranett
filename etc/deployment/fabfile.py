@@ -242,7 +242,7 @@ def _git_update(is_git=True):
     if branch == 'latest-tag':
         tag = _latest_git_tag()
     else:
-        tag = branch
+        tag = 'origin/' + branch
     print('Switching to version: %s' % tag)
     with cd(VENV):
         run('git checkout -q --force %s' % tag)
