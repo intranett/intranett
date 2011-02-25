@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-25 10:13+0000\n"
+"POT-Creation-Date: 2011-02-25 13:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,9 +14,17 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: intranett\n"
 
-#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:65
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:62
 msgid "Assign personal portlets"
 msgstr "Legg til personlige infobokser"
+
+#: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:15
+msgid "Configure portlet"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:37
+msgid "Content Highlight"
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:68
@@ -35,9 +43,39 @@ msgstr "Ansatt"
 msgid "Employees"
 msgstr "Ansatte"
 
+#: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:32
+msgid "Event Highlight"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:24
+msgid "Item"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:66
+msgid "Modify portlet"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:45
+msgid "News Highlight"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:21
+#: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:21
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:27
+msgid "Portlet title"
+msgstr ""
+
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
 msgstr "Bygget med intranett.no"
+
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:17
+msgid "The most recently published news item"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:19
+msgid "The second-most recently published news item"
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:43
 msgid "This site configuration is outdated and needs to be upgraded:"
@@ -58,6 +96,10 @@ msgstr "Versjon: ${number}"
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:35
 msgid "View your intranet"
 msgstr "Se intranettet"
+
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:30
+msgid "Which item to display"
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:26
 msgid "Your intranet is up and running."
@@ -87,6 +129,11 @@ msgstr "Avansert søk…"
 #: intranett.policy/intranett/policy/userdataschema.py:36
 msgid "label_biography"
 msgstr "Beskrivelse"
+
+#. Default: "Cancel"
+#: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:51
+msgid "label_cancel"
+msgstr ""
 
 #. Default: "Delete Portrait"
 #: intranett.policy/intranett/policy/userdataschema.py:66
@@ -145,6 +192,11 @@ msgstr "Portrett"
 msgid "label_position"
 msgstr "Stilling"
 
+#. Default: "Save"
+#: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:40
+msgid "label_save"
+msgstr ""
+
 #. Default: "Show all items"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:87
 msgid "label_show_all"
@@ -156,8 +208,8 @@ msgid "legend_livesearch"
 msgstr "Hurtigsøk &#8595;"
 
 #. Default: "Manage personal portlets"
-#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:82
-#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:61
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:80
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:58
 msgid "link_manage_personal_portlets"
 msgstr "Rediger personlige infobokser"
 
