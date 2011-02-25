@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-02-09 22:23+0000\n"
+"POT-Creation-Date: 2011-02-25 10:13+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:65
+msgid "Assign personal portlets"
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:68
@@ -148,5 +152,11 @@ msgstr ""
 #. Default: "LiveSearch &#8595;"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:84
 msgid "legend_livesearch"
+msgstr ""
+
+#. Default: "Manage personal portlets"
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:82
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:61
+msgid "link_manage_personal_portlets"
 msgstr ""
 
