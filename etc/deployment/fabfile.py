@@ -238,11 +238,11 @@ def _git_update(is_git=True):
     run('git fetch')
     run('git remote prune origin')
     run('git gc')
-    tag = env.server.config.get('tag', None)
-    if tag is not None:
-        tag = 'origin/' + tag
-    else:
+    branch = env.server.config.get('branch', 'latest-tag')
+    if branch == 'latest-tag':
         tag = _latest_git_tag()
+    else:
+        tag = branch
     print('Switching to version: %s' % tag)
     with cd(VENV):
         run('git checkout -q --force %s' % tag)
