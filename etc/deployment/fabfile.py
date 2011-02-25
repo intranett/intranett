@@ -35,7 +35,8 @@ PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 
 def version_info():
     with cd(VENV):
-        run('pwd && git branch -v')
+        with settings(hide('running')):
+            run('git log -n 2 --pretty="%h %ci%n%s%n"')
 
 
 def restore_db():
