@@ -99,6 +99,25 @@ class TestUpgradeSteps(IntranettTestCase):
         steps.disable_webstats_js(portal)
         self.assertEqual(sprops.webstats_js, '')
 
+    def test_remove_unused_frontpage_portlets(self):
+        from plone.portlets.interfaces import IPortletManager
+        from plone.portlets.manager import PortletManager
+        portal = self.layer['portal']
+        sm = getSiteManager()
+        names = ('frontpage.portlets.left', 'frontpage.portlets.central',
+            'frontpage.bottom')
+        def create_pm(name):
+            sm.registerUtility(component=PortletManager(),
+                provided=IPortletManager, name=name)
+        for name in names:
+            create_pm(name)
+        steps.remove_unused_frontpage_portlets(portal)
+        registrations = [r.name for r in sm.registeredUtilities()
+                         if IPortletManager == r.provided]
+        self.assertFalse('frontpage.portlets.left' in registrations)
+        self.assertFalse('frontpage.portlets.central' in registrations)
+        self.assertFalse('frontpage.bottom' in registrations)
+
     def test_highlight_portlets_available(self):
         portal = self.layer['portal']
         sm = getSiteManager()

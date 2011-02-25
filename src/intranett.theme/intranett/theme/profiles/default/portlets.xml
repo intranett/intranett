@@ -10,19 +10,7 @@
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
     <portletmanager
-      name="frontpage.portlets.left"
-      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
-      />
-    <portletmanager
-      name="frontpage.portlets.central"
-      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
-      />
-    <portletmanager
       name="frontpage.portlets.right"
-      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
-      />
-    <portletmanager
-      name="frontpage.bottom"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
 
@@ -35,33 +23,6 @@
         <property name="header">Frontpage Highlight</property>
         <property name="text">Test frontpage highlight text</property>
         <property name="omit_border">True</property>
-    </assignment>
-
-    <assignment name="bottom"
-        category="context"
-        key="/"
-        manager="frontpage.bottom"
-        type="plone.portlet.static.Static"
-        visible="True">
-        <property name="header">Frontpage Bottom</property>
-        <property name="text">Test frontpage bottom text</property>
-        <property name="omit_border">True</property>
-    </assignment>
-
-    <assignment name="news"
-        category="context"
-        key="/"
-        manager="frontpage.portlets.left"
-        type="portlets.News"
-        visible="True">
-    </assignment>
-
-    <assignment name="events"
-        category="context"
-        key="/"
-        manager="frontpage.portlets.central"
-        type="portlets.Events"
-        visible="True">
     </assignment>
 
     <assignment name="fp_static_right"

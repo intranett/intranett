@@ -4,6 +4,16 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Implemented new frontpage combining a company and personal section.
+  Closes #170.
+  [denys, hannosch]
+
+- Update TinyMCE to get new Norwegian translations. Closes #168.
+  [MJ, hannosch]
+
+- Update `collective.ATClamAV` to 1.1 to allow local development to take place
+  without a `clamd` setup. Closes #178.
+  [hannosch, ggozad]
 
 1.1.8 - 2011-02-13
 ------------------

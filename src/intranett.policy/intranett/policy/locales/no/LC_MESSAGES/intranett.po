@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-09 22:23+0000\n"
+"POT-Creation-Date: 2011-02-25 10:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: intranett\n"
+
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:65
+msgid "Assign personal portlets"
+msgstr "Legg til personlige infobokser"
 
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:68
@@ -150,4 +154,10 @@ msgstr "Vis alle…"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:84
 msgid "legend_livesearch"
 msgstr "Hurtigsøk &#8595;"
+
+#. Default: "Manage personal portlets"
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:82
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:61
+msgid "link_manage_personal_portlets"
+msgstr "Rediger personlige infobokser"
 

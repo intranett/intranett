@@ -35,7 +35,8 @@ PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 
 def version_info():
     with cd(VENV):
-        run('pwd && git branch -v')
+        with settings(hide('running')):
+            run('git log -n 2 --pretty="%h %ci%n%s%n"')
 
 
 def restore_db():
@@ -160,6 +161,20 @@ def init_server():
         run('bin/supervisord')
 
 
+def reset_server():
+    _prepare_update()
+    with cd(VENV):
+        run('bin/supervisorctl shutdown')
+        time.sleep(5)
+        run('rm var/filestorage/D*')
+        with settings(hide('warnings'), warn_only=True):
+            run('rm -r var/blobstorage/*')
+    _create_plone_site(initial=True)
+    reload_nginx()
+    with cd(VENV):
+        run('bin/supervisord')
+
+
 def _add_nginx_include():
     with cd('/etc/nginx/local'):
         text = 'include /srv/jarn/nginx-sites/*.conf;\n'
@@ -224,11 +239,11 @@ def _git_update(is_git=True):
     run('git fetch')
     run('git remote prune origin')
     run('git gc')
-    tag = env.server.config.get('tag', None)
-    if tag is not None:
-        tag = 'origin/' + tag
-    else:
+    branch = env.server.config.get('branch', 'latest-tag')
+    if branch == 'latest-tag':
         tag = _latest_git_tag()
+    else:
+        tag = 'origin/' + branch
     print('Switching to version: %s' % tag)
     with cd(VENV):
         run('git checkout -q --force %s' % tag)

@@ -19,6 +19,12 @@
       directory="templates"
       layer=".interfaces.IThemeSpecific" />
 
+  <browser:resourceDirectory
+      name="fonts"
+      directory="fonts"
+      layer=".interfaces.IThemeSpecific"
+      />
+
   <!-- Render the document byline -->
   <browser:viewlet
       name="plone.belowcontenttitle.documentbyline"
@@ -27,14 +33,14 @@
       permission="zope2.View"
       layer=".interfaces.IThemeSpecific"
       />
-
+      
   <browser:viewletManager
-      name="intranett.abovecolumns"
-      provides=".interfaces.IAboveColumns"
-      permission="zope2.View"
-      class="plone.app.viewletmanager.manager.OrderedViewletManager"
-      layer=".interfaces.IThemeSpecific"
-      />
+        name="intranett.abovecolumns"
+        provides=".interfaces.IAboveColumns"
+        permission="zope2.View"
+        class="plone.app.viewletmanager.manager.OrderedViewletManager"
+        layer=".interfaces.IThemeSpecific"
+        />
 
   <browser:viewletManager
       name="intranett.topbar"
@@ -75,14 +81,8 @@
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="frontpage_view"
-      class=".frontpage.FrontpageView"
       template="templates/frontpage_view.pt"
       permission="zope2.View"
-      />
-
-  <cache:ruleset
-      for=".frontpage.FrontpageView"
-      ruleset="plone.content.folderView"
       />
 
   <browser:menuItem

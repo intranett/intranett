@@ -1,5 +1,6 @@
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFCore.utils import getToolByName
+from zope.component import getSiteManager
 
 from intranett.policy.upgrades import upgrade_to
 
@@ -77,6 +78,16 @@ def disable_webstats_js(context):
 
 
 @upgrade_to(10)
+def remove_unused_frontpage_portlets(context):
+    from plone.portlets.interfaces import IPortletManager
+    sm = getSiteManager()
+    names = ('frontpage.portlets.left', 'frontpage.portlets.central',
+        'frontpage.bottom')
+    for name in names:
+        sm.unregisterUtility(provided=IPortletManager, name=name)
+
+
+@upgrade_to(11)
 def install_highlight_portlets(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('portlets',))
