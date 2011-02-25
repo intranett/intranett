@@ -61,11 +61,11 @@
                       <div id="content-core" tal:define="dashboardview nocall:context/@@dashboard">
                       
                           <div tal:condition="python:dashboardview.empty() and dashboardview.can_edit()"
-                               i18n:domain="intranett"
-                               i18n:translate="">
-                              <a href="#" i18n:name="click_here"
-                                 tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Click here</a>
-                                 to assign some personal portlets.
+                               i18n:domain="intranett">
+                              <a href="#" i18n:translate=""
+                                 tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
+                                 Assign personal portlets
+                              </a>
                           </div>
                       
                           <div id="dashboard" tal:condition="python:not dashboardview.empty()">

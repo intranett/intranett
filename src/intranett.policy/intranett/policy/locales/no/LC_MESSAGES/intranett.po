@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-23 11:10+0000\n"
+"POT-Creation-Date: 2011-02-25 10:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,9 +14,9 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: intranett\n"
 
-#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:66
-msgid "${click_here} to assign some personal portlets."
-msgstr ""
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:65
+msgid "Assign personal portlets"
+msgstr "Legg til personlige infobokser"
 
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:68
@@ -77,11 +77,6 @@ msgstr "En kort oversikt over hvem du er og hva du gjør. Vil vises for andre p�
 #, fuzzy
 msgid "help_portrait"
 msgstr "For å legge til et nytt portrett, trykk \"Bla igjennom\" og velg et bilde av deg selv. Du får best resultat ved å bruke et kvadratisk bilde større enn 300 x 300 bildepunkter. Andre størrelser vil også virke."
-
-#. Default: "To edit your personal portlets click the ${link_manage_personal_portlets} button below."
-#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:62
-msgid "info_manage_dashboard"
-msgstr ""
 
 #. Default: "Advanced Search…"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:86
@@ -162,7 +157,7 @@ msgstr "Hurtigsøk &#8595;"
 
 #. Default: "Manage personal portlets"
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:82
-#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:62
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:61
 msgid "link_manage_personal_portlets"
 msgstr "Rediger personlige infobokser"
 
