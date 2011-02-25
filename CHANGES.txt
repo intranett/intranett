@@ -4,6 +4,10 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Implemented new frontpage combining a company and personal section.
+  Closes #170.
+  [denys, hannosch]
+
 - Update TinyMCE to get new Norwegian translations.
   [MJ, hannosch]
 
