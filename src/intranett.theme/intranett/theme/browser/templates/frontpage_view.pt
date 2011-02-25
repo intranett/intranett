@@ -11,7 +11,6 @@
                              disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
 </head>
 <body>
-
     <div id="portal-columns" class="row"
          metal:fill-slot="columns"
          tal:define="isAnon context/@@plone_portal_state/anonymous;
@@ -19,91 +18,83 @@
                      highlight python:plone_view.have_portlets('frontpage.highlight', view);
                      show_border context/@@plone/showEditableBorder">
 
-      <section id="company-board" class="clearfix" tal:condition="not:ajax_load" >
-          <div class="contentAlignment">
-              <div id="edit-bar"
-                  tal:condition="show_border"
-                  tal:content="structure provider:plone.contentviews" />
-              <div id="board-blocks">
-                  <div>
-                      <tal:block replace="structure provider:frontpage.highlight" />
-                  </div>
-                  <div>
-                      <tal:block replace="structure provider:frontpage.portlets.right" />
-                  </div>
-              </div>
-          </div>
-      </section>
+        <section id="company-board" class="clearfix" tal:condition="not:ajax_load" >
+            <div class="contentAlignment">
+                <div id="edit-bar"
+                    tal:condition="show_border"
+                    tal:content="structure provider:plone.contentviews" />
+                <div id="board-blocks">
+                    <div>
+                        <tal:block replace="structure provider:frontpage.highlight" />
+                    </div>
+                    <div>
+                        <tal:block replace="structure provider:frontpage.portlets.right" />
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div class="contentAlignment">
+        <div class="contentAlignment">
 
-          <div id="viewlet-above-columns"
-               tal:content="structure provider:intranett.abovecolumns" />
+            <div id="viewlet-above-columns"
+                 tal:content="structure provider:intranett.abovecolumns" />
 
-          <div class="cell width-16 position-0"
-               id="portal-column-content">
+            <div class="cell width-16 position-0"
+                 id="portal-column-content">
 
-              <div id="viewlet-above-content" tal:content="structure provider:plone.abovecontent" />
+                <div id="viewlet-above-content" tal:content="structure provider:plone.abovecontent" />
+                <div>
+                    <span id="contentTopLeft"></span>
+                    <span id="contentTopRight"></span>
 
+                    <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+                      Portal status message
+                    </div>
 
-              <div>
+                    <article id="content">
+                        <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-                  <span id="contentTopLeft"></span>
-                  <span id="contentTopRight"></span>
+                        <div id="content-core"
+                             tal:define="dashboardview nocall:context/@@dashboard">
 
-                  <div metal:use-macro="context/global_statusmessage/macros/portal_message">
-                    Portal status message
-                  </div>
+                            <div tal:condition="python:dashboardview.empty() and dashboardview.can_edit()"
+                                 i18n:domain="intranett">
+                                <a href="#" i18n:translate=""
+                                   class="managePortletsLink"
+                                   tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
+                                    Assign personal portlets
+                                </a>
+                            </div>
 
-                  <article id="content">
-                      <div tal:replace="structure provider:plone.abovecontenttitle" />
+                            <div id="dashboard" tal:condition="python:not dashboardview.empty()">
+                                <div class="visualClear"><!-- --></div>
+                                <div id="dashboard-portlets1"
+                                  tal:content="structure provider:plone.dashboard1" />
+                                <div id="dashboard-portlets2"
+                                  tal:content="structure provider:plone.dashboard2" />
+                                <div id="dashboard-portlets3"
+                                  tal:content="structure provider:plone.dashboard3" />
+                                <div id="dashboard-portlets4"
+                                  tal:content="structure provider:plone.dashboard4" />
+                                <div id="viewlet-below-content" tal:condition="python:dashboardview.can_edit()">
+                                    <a href="#" class="managePortletsLink"
+                                       i18n:domain="intranett"
+                                       i18n:translate="link_manage_personal_portlets"
+                                       tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
+                                        Manage personal portlets
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="visualClear"><!-- --></div>
+                        </div>
+                    </article>
 
-                      <div id="content-core" tal:define="dashboardview nocall:context/@@dashboard">
+                    <span id="contentBottomLeft"></span>
+                    <span id="contentBottomRight"></span>
 
-                          <div tal:condition="python:dashboardview.empty() and dashboardview.can_edit()"
-                               i18n:domain="intranett">
-                              <a href="#" i18n:translate="" class="managePortletsLink"
-                                 tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
-                                 Assign personal portlets
-                              </a>
-                          </div>
-
-                          <div id="dashboard" tal:condition="python:not dashboardview.empty()">
-                              <div class="visualClear"><!-- --></div>
-                              <div id="dashboard-portlets1"
-                                tal:content="structure provider:plone.dashboard1" />
-                              <div id="dashboard-portlets2"
-                                tal:content="structure provider:plone.dashboard2" />
-                              <div id="dashboard-portlets3"
-                                tal:content="structure provider:plone.dashboard3" />
-                              <div id="dashboard-portlets4"
-                                tal:content="structure provider:plone.dashboard4" />
-                              <div id="viewlet-below-content" tal:condition="python:dashboardview.can_edit()">
-                                  <a href="#" class="managePortletsLink"
-                                     i18n:domain="intranett"
-                                     i18n:translate="link_manage_personal_portlets"
-                                     tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
-                                      Manage personal portlets
-                                  </a>
-                              </div>
-                          </div>
-                          <div class="visualClear"><!-- --></div>
-                      </div>
-
-                  </article>
-
-                  <span id="contentBottomLeft"></span>
-                  <span id="contentBottomRight"></span>
-
-              </div>
-
-          </div>
-
-      </div>
-
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </body>
 </html>
-

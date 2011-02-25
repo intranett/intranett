@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
     <div id="portal-columns" class="row"
          metal:fill-slot="columns"
          tal:define="isAnon context/@@plone_portal_state/anonymous;
@@ -26,56 +25,49 @@
                      show_border context/@@plone/showEditableBorder;
                      ploneview context/@@plone">
 
-      <section id="company-board" class="clearfix" tal:condition="not:ajax_load" >
-          <div class="contentAlignment">
-              <div id="edit-bar"
-                  tal:condition="show_border"
-                  tal:content="structure provider:plone.contentviews" />
-              <div id="board-blocks">
-                  <div>
-                      <tal:block replace="structure provider:frontpage.highlight" />
-                  </div>
-                  <div>
-                      <tal:block replace="structure provider:frontpage.portlets.right" />
-                  </div>
-              </div>
-          </div>
-      </section>
+        <section id="company-board" class="clearfix" tal:condition="not:ajax_load" >
+            <div class="contentAlignment">
+                <div id="edit-bar"
+                    tal:condition="show_border"
+                    tal:content="structure provider:plone.contentviews" />
+                <div id="board-blocks">
+                    <div>
+                        <tal:block replace="structure provider:frontpage.highlight" />
+                    </div>
+                    <div>
+                        <tal:block replace="structure provider:frontpage.portlets.right" />
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div class="contentAlignment">
+        <div class="contentAlignment">
+            <div class="cell width-16 position-0"
+                 id="portal-column-content">
 
-          <div class="cell width-16 position-0"
-               id="portal-column-content">
+                <div>
+                    <span id="contentTopLeft"></span>
+                    <span id="contentTopRight"></span>
 
-              <div>
+                    <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+                        Portal status message
+                    </div>
 
-                  <span id="contentTopLeft"></span>
-                  <span id="contentTopRight"></span>
+                    <article id="content" i18n:domain="intranett">
+                        <div id="viewlet-below-content">
+                            <a href="#" class="managePortletsLink"
+                               i18n:translate="link_manage_personal_portlets"
+                               tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
+                                Manage personal portlets</a>
+                        </div>
+                    </article>
 
-                  <div metal:use-macro="context/global_statusmessage/macros/portal_message">
-                    Portal status message
-                  </div>
+                    <span id="contentBottomLeft"></span>
+                    <span id="contentBottomRight"></span>
 
-                  <article id="content" i18n:domain="intranett">
-                      <div id="viewlet-below-content">
-                          <a href="#" class="managePortletsLink"
-                             i18n:translate="link_manage_personal_portlets"
-                             tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
-                             Manage personal portlets</a>
-                      </div>
-                  </article>
-
-                  <span id="contentBottomLeft"></span>
-                  <span id="contentBottomRight"></span>
-
-              </div>
-
-          </div>
-
-      </div>
-
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </body>
 </html>
