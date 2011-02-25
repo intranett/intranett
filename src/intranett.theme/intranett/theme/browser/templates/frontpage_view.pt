@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <div id="portal-columns" class="row" 
+    <div id="portal-columns" class="row"
          metal:fill-slot="columns"
          tal:define="isAnon context/@@plone_portal_state/anonymous;
                      raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
@@ -36,7 +36,7 @@
       </section>
 
       <div class="contentAlignment">
-          
+
           <div id="viewlet-above-columns"
                tal:content="structure provider:intranett.abovecolumns" />
 
@@ -59,7 +59,7 @@
                       <div tal:replace="structure provider:plone.abovecontenttitle" />
 
                       <div id="content-core" tal:define="dashboardview nocall:context/@@dashboard">
-                      
+
                           <div tal:condition="python:dashboardview.empty() and dashboardview.can_edit()"
                                i18n:domain="intranett">
                               <a href="#" i18n:translate=""
@@ -67,16 +67,16 @@
                                  Assign personal portlets
                               </a>
                           </div>
-                      
+
                           <div id="dashboard" tal:condition="python:not dashboardview.empty()">
                               <div class="visualClear"><!-- --></div>
-                              <div id="dashboard-portlets1" 
+                              <div id="dashboard-portlets1"
                                 tal:content="structure provider:plone.dashboard1" />
-                              <div id="dashboard-portlets2" 
+                              <div id="dashboard-portlets2"
                                 tal:content="structure provider:plone.dashboard2" />
-                              <div id="dashboard-portlets3" 
+                              <div id="dashboard-portlets3"
                                 tal:content="structure provider:plone.dashboard3" />
-                              <div id="dashboard-portlets4" 
+                              <div id="dashboard-portlets4"
                                 tal:content="structure provider:plone.dashboard4" />
                               <div id="viewlet-below-content" tal:condition="python:dashboardview.can_edit()">
                                   <a href="#" class="managePortletsFallback"
@@ -100,7 +100,7 @@
       </div>
 
     </div>
-    
+
 
 </body>
 </html>

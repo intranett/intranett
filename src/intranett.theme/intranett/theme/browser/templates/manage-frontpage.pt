@@ -16,13 +16,13 @@
 </head>
 
 <body>
-    
-    <div id="portal-columns" class="row" 
+
+    <div id="portal-columns" class="row"
          metal:fill-slot="columns"
          tal:define="isAnon context/@@plone_portal_state/anonymous;
                      raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
                      highlight python:plone_view.have_portlets('frontpage.highlight', view);
-                     right python:plone_view.have_portlets('frontpage.right', view);                     
+                     right python:plone_view.have_portlets('frontpage.right', view);
                      show_border context/@@plone/showEditableBorder;
                      ploneview context/@@plone">
 
