@@ -62,7 +62,7 @@
 
                           <div tal:condition="python:dashboardview.empty() and dashboardview.can_edit()"
                                i18n:domain="intranett">
-                              <a href="#" i18n:translate=""
+                              <a href="#" i18n:translate="" class="managePortletsLink"
                                  tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
                                  Assign personal portlets
                               </a>
@@ -79,10 +79,12 @@
                               <div id="dashboard-portlets4"
                                 tal:content="structure provider:plone.dashboard4" />
                               <div id="viewlet-below-content" tal:condition="python:dashboardview.can_edit()">
-                                  <a href="#" class="managePortletsFallback"
+                                  <a href="#" class="managePortletsLink"
                                      i18n:domain="intranett"
                                      i18n:translate="link_manage_personal_portlets"
-                                     tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">Manage personal portlets</a>
+                                     tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
+                                      Manage personal portlets
+                                  </a>
                               </div>
                           </div>
                           <div class="visualClear"><!-- --></div>
