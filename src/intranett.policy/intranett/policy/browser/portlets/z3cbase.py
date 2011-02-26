@@ -53,7 +53,7 @@ class AddForm(form.AddForm):
     def handleCancel(self, action):
         nextURL = self.nextURL()
         if nextURL:
-            self.request.response.redirect(self.nextURL())
+            self.request.response.redirect(nextURL)
         return ''
 
 
@@ -105,5 +105,5 @@ class EditForm(form.EditForm):
     def handleCancel(self, action):
         nextURL = self.nextURL()
         if nextURL:
-            self.request.response.redirect(self.nextURL())
+            self.request.response.redirect(nextURL)
         return ''
