@@ -1,4 +1,3 @@
-from Acquisition import aq_inner
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
@@ -45,35 +44,29 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        return self.item is not None
+        return self.item() is not None
 
     @property
     def portletTitle(self):
         return self.data.portletTitle
 
     @memoize
-    def recentNewsItems(self):
-        context = aq_inner(self.context)
+    def item(self):
+        context = self.context
         catalog = getToolByName(context, 'portal_catalog')
         items = catalog(portal_type='News Item',
                         review_state='published',
                         sort_on='effective',
                         sort_order='reverse',
                         sort_limit=2)[:2]
-        return items
-
-    @property
-    def item(self):
-        latest = self.recentNewsItems()
-        if not latest:
+        if not items:
             return None
 
         source = self.data.source
         if source == 'last':
-            return latest[0]
-        elif source == 'before-last':
-            if len(latest)>1:
-                return latest[1]
+            return items[0]
+        elif source == 'before-last' and len(items) > 1:
+            return items[1]
         return None
 
 

@@ -40,13 +40,12 @@ class Renderer(formlibbase.Renderer):
 
     @property
     def available(self):
-        return self.item is not None
+        return self.item() is not None
 
     @property
     def portletTitle(self):
         return self.data.portletTitle
 
-    @property
     @memoize
     def item(self):
         ct = getToolByName(self.context, 'portal_catalog')

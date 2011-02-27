@@ -1,4 +1,3 @@
-from Acquisition import aq_inner
 from DateTime import DateTime
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
@@ -35,15 +34,15 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        return self.item is not None
+        return self.item() is not None
 
     @property
     def portletTitle(self):
         return self.data.portletTitle
 
     @memoize
-    def upcomingEvent(self):
-        context = aq_inner(self.context)
+    def item(self):
+        context = self.context
         catalog = getToolByName(context, 'portal_catalog')
         event = catalog(portal_type='Event',
                         review_state='published',
@@ -53,10 +52,6 @@ class Renderer(base.Renderer):
                         sort_limit=1)[:1]
         event = event and event[0] or None
         return event
-
-    @property
-    def item(self):
-        return self.upcomingEvent()
 
 
 class AddForm(base.AddForm):

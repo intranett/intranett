@@ -51,8 +51,7 @@ class TestNewsHighlightPortlet(IntranettTestCase):
         r = self.renderer(assignment=assignment)
         r = r.__of__(portal)
         r.update()
-        item = r.item
-        self.assertEqual(item.Title, 'A funeral')
+        self.assertEqual(r.item().Title, 'A funeral')
         output = r.render()
         self.assertTrue('News' in output)
         self.assertTrue('A funeral' in output)
@@ -63,8 +62,7 @@ class TestNewsHighlightPortlet(IntranettTestCase):
         r = self.renderer(assignment=assignment)
         r = r.__of__(portal)
         r.update()
-        item = r.item
-        self.assertEqual(item.Title, 'A wedding')
+        self.assertEqual(r.item().Title, 'A wedding')
         output = r.render()
         self.assertTrue('News' in output)
         self.assertTrue('A wedding' in output)
@@ -103,9 +101,8 @@ class TestEventHighlightPortlet(IntranettTestCase):
         r = self.renderer(assignment=assignment)
         r = r.__of__(portal)
         r.update()
-        item = r.item
 
-        self.assertEqual(item.Title, 'A wedding')
+        self.assertEqual(r.item().Title, 'A wedding')
         output = r.render()
         self.assertTrue('Event' in output)
         self.assertTrue('A wedding' in output)
@@ -139,9 +136,8 @@ class TestContentHighlightPortlet(IntranettTestCase):
         r = self.renderer(assignment=assignment)
         r = r.__of__(portal)
         r.update()
-        item = r.item
 
-        self.assertEqual(item.Title, 'A highlighted document')
+        self.assertEqual(r.item().Title, 'A highlighted document')
         output = r.render()
         self.assertTrue('Highlighted' in output)
         self.assertTrue('A highlighted document' in output)
