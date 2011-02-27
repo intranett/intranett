@@ -38,7 +38,7 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        return self.item
+        return self.item is not None
 
     @property
     def portletTitle(self):
@@ -54,7 +54,7 @@ class Renderer(base.Renderer):
                              'range': 'min'},
                         sort_on='start',
                         sort_limit=1)[:1]
-        event = event and event[0]
+        event = event and event[0] or None
         return event
 
     @property

@@ -43,7 +43,7 @@ class Renderer(formlibbase.Renderer):
 
     @property
     def available(self):
-        return self.item
+        return self.item is not None
 
     @property
     def portletTitle(self):
@@ -56,6 +56,7 @@ class Renderer(formlibbase.Renderer):
         results = ct.searchResults(UID=self.data.item)
         if results:
             return results[0]
+        return None
 
 
 class AddForm(z3cbase.AddForm):

@@ -51,7 +51,7 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        return self.item
+        return self.item is not None
 
     @property
     def portletTitle(self):
