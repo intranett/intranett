@@ -1,6 +1,27 @@
+import os
+import os.path
+import subprocess
+
 from setuptools import setup, find_packages
 
-version = '2.0dev'
+changes = os.path.join(os.pardir, os.pardir, 'CHANGES.txt')
+lines = []
+with open(changes, 'rU') as fd:
+    for line in fd:
+        if line.startswith('---'):
+            break
+        lines.append(line)
+
+version = lines[-1].split('-')[0].strip()
+if 'unreleased' in lines[-1]:
+    proc = subprocess.Popen(['git', 'log', '-n 1', '--pretty="%h %ci"'],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    proc.wait()
+    out = proc.stdout.read()
+    info = out.strip('\n"').split()
+    revision, date, time, tz = info
+    version += 'dev-' + revision + '-' + date
+
 
 setup(name='intranett.policy',
       version=version,
@@ -22,8 +43,9 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'collective.ATClamAV',
-          'collective.monkeypatcher',
+          'collective.flag',
           'experimental.catalogqueryplan',
+          'iw.rejectanonymous',
           'munin.zope',
           'PIL',
           'Plone',
@@ -33,6 +55,7 @@ setup(name='intranett.policy',
           'Products.CMFQuickInstallerTool',
           'Products.GenericSetup',
           'Products.PloneFormGen',
+          'Products.PloneHotfix20110720',
           'Products.PloneTestCase',
           'Products.signalstack',
           'unittest2',

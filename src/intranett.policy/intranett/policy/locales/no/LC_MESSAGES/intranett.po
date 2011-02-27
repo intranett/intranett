@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-12-22 10:49+0000\n"
+"POT-Creation-Date: 2011-02-27 15:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,10 +12,13 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
+"Domain: intranett\n"
+
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:62
+msgid "Assign personal portlets"
+msgstr "Legg til personlige infobokser"
 
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:68
 msgid "Create intranet"
 msgstr "Opprett nytt intranett"
 
@@ -23,29 +26,29 @@ msgstr "Opprett nytt intranett"
 msgid "Departments:"
 msgstr "Avdelinger:"
 
+#: intranett.policy/intranett/policy/profiles/default/types/MemberData.xml
+msgid "Employee"
+msgstr "Ansatt"
+
 #: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:32
 msgid "Employees"
 msgstr "Ansatte"
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:43
-msgid "This site configuration is outdated and needs to be upgraded:"
-msgstr "Nettstedskonfigurasjonen trenger oppgradering:"
+#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
+msgid "Powered by intranett.no"
+msgstr "Bygget med intranett.no"
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:53
-msgid "Upgrade…"
-msgstr "Oppgrader…"
+#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
+msgid "This site is powered by intranett.no"
+msgstr "Dette nettstedet er bygget med intranett.no"
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:35
+#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:14
+msgid "Version: ${number}"
+msgstr "Versjon: ${number}"
+
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:30
 msgid "View your intranet"
 msgstr "Se intranettet"
-
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:26
-msgid "Your intranet is up and running."
-msgstr "Intranettet ditt er klart."
-
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:61
-msgid "Your intranett.no instance has not been added yet:"
-msgstr ""
 
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
 #: intranett.policy/intranett/policy/userdataschema.py:37
@@ -98,7 +101,7 @@ msgstr "Sted"
 
 #. Default: "Mobile phone"
 #: intranett.policy/intranett/policy/userdataschema.py:31
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:86
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:90
 #: intranett.theme/intranett/theme/browser/templates/user.pt:120
 msgid "label_mobile"
 msgstr "Mobiltelefon"
@@ -110,7 +113,7 @@ msgstr "Ingen resultater samsvarer med søket."
 
 #. Default: "Phone"
 #: intranett.policy/intranett/policy/userdataschema.py:26
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:92
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:96
 #: intranett.theme/intranett/theme/browser/templates/user.pt:112
 msgid "label_phone"
 msgstr "Telefon"
@@ -134,4 +137,10 @@ msgstr "Vis alle…"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:84
 msgid "legend_livesearch"
 msgstr "Hurtigsøk &#8595;"
+
+#. Default: "Manage personal portlets"
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:80
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:58
+msgid "link_manage_personal_portlets"
+msgstr "Rediger personlige infobokser"
 

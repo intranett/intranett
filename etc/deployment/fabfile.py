@@ -2,6 +2,7 @@ import sys
 import os
 import os.path
 import time
+from ConfigParser import ConfigParser
 from datetime import datetime
 
 from fabric.api import cd
@@ -35,7 +36,8 @@ PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 
 def version_info():
     with cd(VENV):
-        run('pwd && git branch -v')
+        with settings(hide('running')):
+            run('git log -n 2 --pretty="%h %ci%n%s%n"')
 
 
 def restore_db():
@@ -122,7 +124,6 @@ def update():
         run('bin/supervisorctl start zope:instance2')
         time.sleep(30)
         run('bin/supervisorctl start varnish')
-        _load_domain()
 
 
 def full_update():
@@ -138,7 +139,6 @@ def full_update():
         run('bin/supervisorctl start zope:instance2')
         time.sleep(30)
         run('bin/supervisorctl start varnish')
-        _load_domain()
 
 
 def init_server():
@@ -157,6 +157,20 @@ def init_server():
     _create_plone_site(initial=initial)
     # reload nginx so we pick up the new local/jarn.conf file and the buildout
     # local nginx-sites one
+    reload_nginx()
+    with cd(VENV):
+        run('bin/supervisord')
+
+
+def reset_server():
+    _prepare_update()
+    with cd(VENV):
+        run('bin/supervisorctl shutdown')
+        time.sleep(5)
+        run('rm var/filestorage/D*')
+        with settings(hide('warnings'), warn_only=True):
+            run('rm -r var/blobstorage/*')
+    _create_plone_site(initial=True)
     reload_nginx()
     with cd(VENV):
         run('bin/supervisord')
@@ -184,12 +198,19 @@ def _buildout(envvars, newest=True):
 
 def _create_plone_site(initial=False):
     title = env.server.config.get('title', '%s intranett' % env.host_string)
+    language = env.server.config.get('language', 'no')
     with cd(VENV):
         with settings(hide('warnings'), warn_only=True):
             if initial:
                 run('bin/zeo start')
                 time.sleep(3)
-            run('bin/instance-debug create_site --title="%s"' % title)
+            cfg = os.path.join(BUILDOUT_ROOT, 'cfgs', 'credentials.cfg')
+            config = ConfigParser()
+            config.read(cfg)
+            value = config.get('credentials', 'zope-user')
+            password = value.split(':')[-1]
+            run('bin/instance-debug create_site --title="%s" --language=%s '
+                '--rootpassword=%s' % (title, language, password))
             if initial:
                 run('bin/zeo stop')
 
@@ -224,15 +245,18 @@ def _git_update(is_git=True):
             run('git reset --hard HEAD')
 
     run('git fetch')
-    tag = env.server.config.get('tag', None)
-    if tag is not None:
-        tag = 'origin/' + tag
-    else:
+    run('git remote prune origin')
+    run('git gc')
+    branch = env.server.config.get('branch', 'latest-tag')
+    if branch == 'latest-tag':
         tag = _latest_git_tag()
+    else:
+        tag = 'origin/' + branch
     print('Switching to version: %s' % tag)
     with cd(VENV):
         run('git checkout -q --force %s' % tag)
         run('git reset --hard HEAD')
+        run('git clean -fd')
 
 
 def _is_git_repository():
@@ -249,12 +273,6 @@ def _latest_git_tag():
     tags = [(pkg_resources.parse_version(t), t) for t in tags]
     tags.sort()
     return tags[-1][1]
-
-
-def _load_domain():
-    with settings(hide('warnings'), warn_only=True):
-        local('wget --no-check-certificate -q -O /dev/null '
-            'https://%s.intranett.no' % env.host_string)
 
 
 def _prepare_update(newest=True):

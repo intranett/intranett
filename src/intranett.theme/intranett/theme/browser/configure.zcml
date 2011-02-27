@@ -1,8 +1,10 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:cache="http://namespaces.zope.org/cache"
     i18n_domain="intranett">
 
+  <include package="plone.app.caching" />
   <include package="plone.app.contentmenu" />
 
   <interface
@@ -17,6 +19,12 @@
       directory="templates"
       layer=".interfaces.IThemeSpecific" />
 
+  <browser:resourceDirectory
+      name="fonts"
+      directory="fonts"
+      layer=".interfaces.IThemeSpecific"
+      />
+
   <!-- Render the document byline -->
   <browser:viewlet
       name="plone.belowcontenttitle.documentbyline"
@@ -25,14 +33,14 @@
       permission="zope2.View"
       layer=".interfaces.IThemeSpecific"
       />
-
+      
   <browser:viewletManager
-      name="intranett.abovecolumns"
-      provides=".interfaces.IAboveColumns"
-      permission="zope2.View"
-      class="plone.app.viewletmanager.manager.OrderedViewletManager"
-      layer=".interfaces.IThemeSpecific"
-      />
+        name="intranett.abovecolumns"
+        provides=".interfaces.IAboveColumns"
+        permission="zope2.View"
+        class="plone.app.viewletmanager.manager.OrderedViewletManager"
+        layer=".interfaces.IThemeSpecific"
+        />
 
   <browser:viewletManager
       name="intranett.topbar"
@@ -73,7 +81,6 @@
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="frontpage_view"
-      class=".frontpage.FrontpageView"
       template="templates/frontpage_view.pt"
       permission="zope2.View"
       />
@@ -104,6 +111,11 @@
       permission="zope2.View"
       />
 
+  <cache:ruleset
+      for=".employeelisting.EmployeeListingView"
+      ruleset="plone.content.folderView"
+      />
+
   <!-- User / author page -->
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -111,6 +123,11 @@
       class=".user.UserView"
       template="templates/user.pt"
       permission="zope2.View"
+      />
+
+  <cache:ruleset
+      for=".user.UserView"
+      ruleset="plone.content.folderView"
       />
 
 </configure>

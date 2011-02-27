@@ -12,14 +12,6 @@ from intranett.policy.tests.base import IntranettTestCase
 
 class TestSiteSetup(IntranettTestCase):
 
-    def test_installable_profiles(self):
-        from Products.CMFPlone.browser.admin import AddPloneSite
-        portal = self.layer['portal']
-        add = AddPloneSite(portal, portal.REQUEST)
-        profiles = add.profiles()['extensions']
-        ids = [p['id'] for p in profiles]
-        self.assertEquals(ids, [u'intranett.policy:default'])
-
     def test_installable_products(self):
         portal = self.layer['portal']
         qi = getToolByName(portal, 'portal_quickinstaller')
@@ -200,6 +192,12 @@ class TestSiteSetup(IntranettTestCase):
         self.assertNotEquals(mailhost.smtp_host, '')
         self.assertNotEquals(mailhost.smtp_port, '')
 
+    def test_private_site(self):
+        from plone.app.controlpanel import security
+        portal = self.layer['portal']
+        cp = security.SecurityControlPanelAdapter(portal)
+        self.assertEqual(cp.private_site, True)
+
 
 class TestAdmin(IntranettTestCase):
 
@@ -209,15 +207,6 @@ class TestAdmin(IntranettTestCase):
         overview = self.layer['app'].unrestrictedTraverse('@@plone-overview')
         result = overview()
         self.assert_('View your intranet' in result, result)
-
-    def test_addsite_profiles(self):
-        portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Manager'])
-        addsite = self.layer['app'].unrestrictedTraverse('@@plone-addsite')
-        extensions = addsite.profiles()['extensions']
-        self.assertEquals(len(extensions), 1)
-        profile = extensions[0]
-        self.assertEquals(profile['id'], u'intranett.policy:default')
 
     def test_addsite_call(self):
         portal = self.layer['portal']

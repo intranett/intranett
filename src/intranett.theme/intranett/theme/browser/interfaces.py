@@ -13,6 +13,11 @@ class IAboveColumns(IViewletManager):
     """
 
 
+class IAboveContent(IViewletManager):
+    """A viewlet manager that sits between content and portal header
+    """
+
+
 class ITopBar(IViewletManager):
     """A viewlet manager that sits on top of everything
        else in the site and is rendered as the bar across the

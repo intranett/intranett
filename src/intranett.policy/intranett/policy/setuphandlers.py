@@ -1,13 +1,26 @@
+from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
+from zope.interface import alsoProvides
+
+from intranett.policy.config import POLICY_PROFILE
+
+
+def set_profile_version(site):
+    from .upgrades import last_upgrade_to
+    setup = getToolByName(site, 'portal_setup')
+    setup.setLastVersionForProfile(POLICY_PROFILE, last_upgrade_to())
 
 
 def setup_locale(site):
-    site.setLanguage('no')
-
+    request = aq_get(site, 'REQUEST', None)
+    language = 'no'
+    if request is not None:
+        language = request.form.get('language', 'no')
+    site.setLanguage(language)
     tool = getToolByName(site, "portal_languages")
-    tool.manage_setLanguageSettings('no',
-        ['no'],
+    tool.manage_setLanguageSettings(language,
+        [language],
         setUseCombinedLanguageCodes=False,
         startNeutral=False)
 
@@ -67,11 +80,19 @@ def setup_default_groups(site):
     gtool.removeGroups(['Administrators', 'Reviewers'])
 
 
+def setup_reject_anonymous(site):
+    from iw.rejectanonymous import IPrivateSite
+    # Used both as a setup and upgrade handler
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    alsoProvides(portal, IPrivateSite)
+
+
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
         return
     site = context.getSite()
+    set_profile_version(site)
     setup_locale(site)
     ensure_workflow(site)
     disable_contentrules(site)
@@ -79,3 +100,4 @@ def various(context):
     disable_collections(site)
     disable_portlets(site)
     setup_default_groups(site)
+    setup_reject_anonymous(site)

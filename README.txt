@@ -30,7 +30,7 @@ each ticket.
 For example, if you want to work on ticket #82, called ``Special view for the
 frontpage``, here's the steps you should take::
 
-  git co -b hannosch/82-frontpage
+  git co -b 82-frontpage
 
 Edit the any config files you need to get new software (if any) and run::
 
@@ -42,14 +42,11 @@ if you want to. Push the branch to Github for other people to see it::
   g push -u
 
 You only need to specify the `-u` the first time, to associate your local
-branch with the remote one. Other people will fork your branch and create their
-own. If you are working on a larger Epic consisting of multiple stories, use
-a branch with the prefix `shared` instead of your username to signal the nature
-of it.
+branch with the remote one.
 
 After the ticket is done, all tests are written, it's been tested TTW,
 upgrade notes or automatic steps are in place and quality assurance has been
-performed, you can merge your changes back to master.
+performed, you can request the release manager to merge your branch to master.
 
 
 Working with CSS
@@ -74,3 +71,16 @@ To update the translation files, do::
 
   sh src/intranett.policy/intranett/policy/rebuild.sh
   sh src/intranett.policy/intranett/policy/sync.sh
+
+
+Upgrades
+--------
+
+Add a new upgrade handler at the bottom of the upgrades.steps module with a
+corresponding test inside upgrades.tests. Use the next integer available in
+the ``@upgrade_to(42)`` decorator. The upgrade handler is called with the
+`portal_setup` tool as the context. Inside the tests you need to first emulate
+the old state of the site, then call the upgrade handler and finally test your
+assertions.
+
+There's no other places involved - neither ZCML nor metadata.xml files.

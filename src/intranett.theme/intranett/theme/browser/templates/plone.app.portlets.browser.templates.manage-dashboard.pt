@@ -47,8 +47,8 @@
                          i18n:translate="heading_content_views">Content views</h5>
                     <ul id="content-views"
                         class="contentViews"><li><a href=""
-                           tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/dashboard"
-                           i18n:translate="label_dashboard">Dashboard</a></li><li class="selected"><a href=""
+                           tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}"
+                           i18n:translate="label_view">View</a></li><li class="selected"><a href=""
                            tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/@@manage-dashboard"
                            i18n:translate="label_edit">Edit</a></li></ul>
                 </div>
