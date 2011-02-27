@@ -39,7 +39,7 @@ def create_site(app, args):
         language = lang_arg[0].split('=')[1].strip()
 
     request.form = {
-        'extension_ids': ['intranett.policy:default'],
+        'extension_ids': ('intranett.policy:default', ),
         'form.submitted': True,
         'title': title,
         'language': language,
