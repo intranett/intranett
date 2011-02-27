@@ -203,8 +203,8 @@ def _create_plone_site(initial=False):
             if initial:
                 run('bin/zeo start')
                 time.sleep(3)
-            run('bin/instance-debug create_site --title="%s" --language=%s' %
-                (title, language))
+            run('bin/instance-debug create_site --title="%s" --language=%s '
+                '--rootpassword=wat1doc7du' % (title, language))
             if initial:
                 run('bin/zeo stop')
 
