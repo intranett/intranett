@@ -4,6 +4,9 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Add Zope admin user during `reset_server` Fabric command. Closes #188.
+  [hannosch]
+
 - Extend version information by Git revision and last commit date.
   [hannosch]
 
