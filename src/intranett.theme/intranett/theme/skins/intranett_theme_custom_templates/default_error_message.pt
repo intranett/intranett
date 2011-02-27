@@ -21,9 +21,7 @@
                  err_value options/error_value|nothing;
                  err_traceback options/error_traceback|nothing;
                  err_log_url options/error_log_url|nothing;
-                 err_log_id options/error_log_id|nothing;
-                 isAnon context/@@plone_portal_state/anonymous;
-                 toLocalizedTime nocall: context/@@plone/toLocalizedTime;">
+                 err_log_id options/error_log_id|nothing;">
 
         <metal:notfound tal:condition="python:err_type=='NotFound'">
 
@@ -55,18 +53,6 @@
                                tal:attributes="href string:${context/portal_url}/search">Search the site</a> for the page
                             you were trying to access, as it may have moved
                         </li>
-                        <li i18n:translate="description_site_error_mail_site_admin">
-                            If you are certain you have the correct web address but are encountering an error, please
-                            contact the <span i18n:name="site_admin">
-                            <a href="#"
-                               i18n:translate="label_site_admin"
-                               tal:attributes="href string:${context/portal_url}/contact-info">Site Administration</a></span>.
-                        </li>
-                        <li i18n:translate="site_error_site_map">
-                            View the
-                            <a href="#" i18n:name="site_map" i18n:translate="label_site_map"
-                               tal:attributes="href string:${context/portal_url}/sitemap">Site map</a>
-                        </li>
                         <li i18n:translate="site_error_link_home">
                             Go to the
                             <a href="#" i18n:name="home_page" i18n:translate="label_home_page"
@@ -96,16 +82,6 @@
                     <code i18n:name="entryid" tal:content="err_log_id">1174791474.310.489098092344</code>.
                     </p>
 
-                    <p tal:condition="not: isManager"
-                       i18n:translate="description_include_error_in_admin_message">
-                    If you need to report this to the
-                    <span i18n:name="site_admin">
-                    <a href="#"
-                       i18n:translate="label_site_admin"
-                       tal:attributes="href string:${context/portal_url}/contact-info">Site Administration</a></span>,
-                    please include this entry number in your message.
-                    </p>
-
                     <div tal:condition="isManager">
                        <p i18n:translate="description_site_admin_full_error">
                        Here is the full error message:
@@ -120,15 +96,6 @@
 
                 </tal:hasentry>
 
-                <tal:noentry condition="not:err_log_id">
-                    <p i18n:translate="description_site_error_mail_site_admin">
-                    If you are certain you have the correct web address but are encountering an error, please
-                    contact the <span i18n:name="site_admin">
-                    <a href="#"
-                       i18n:translate="label_site_admin"
-                       tal:attributes="href string:${context/portal_url}/contact-info">Site Administration</a></span>.
-                    </p>
-                </tal:noentry>
             </div>
 
         </metal:othererror>
