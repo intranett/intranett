@@ -4,6 +4,11 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Disabled the automatic suggestions on the 404 page. The error page is always
+  rendered as an anonymous user and the suggestions allowed to get at titles
+  and employee names. This closes #180.
+  [hannosch]
+
 - Added Site Administrator user role. Customized user/group management forms
   and added user site action to access those. Closes #166.
   [hannosch, ggozad]
