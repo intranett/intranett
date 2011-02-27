@@ -1,3 +1,4 @@
+from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
 from zope.interface import alsoProvides
@@ -12,10 +13,14 @@ def set_profile_version(site):
 
 
 def setup_locale(site):
-    site.setLanguage('no')
+    request = aq_get(site, 'REQUEST', None)
+    language = 'no'
+    if request is not None:
+        language = request.form.get('language', 'no')
+    site.setLanguage(language)
     tool = getToolByName(site, "portal_languages")
-    tool.manage_setLanguageSettings('no',
-        ['no'],
+    tool.manage_setLanguageSettings(language,
+        [language],
         setUseCombinedLanguageCodes=False,
         startNeutral=False)
 

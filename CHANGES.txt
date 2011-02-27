@@ -4,6 +4,13 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Allow creation of non-Norwegian sites. The site language can be configured
+  in the `aws.conf` per server and is passed as an argument to the
+  `create_site` command. TTW creation of sites has been removed in favor of the
+  command. Call it for example via: ``bin/instance create_site --language=en``.
+  This closes #124.
+  [hannosch]
+
 - Implemented new frontpage combining a company and personal section.
   Closes #170.
   [denys, hannosch]

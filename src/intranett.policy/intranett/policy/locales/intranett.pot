@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-02-25 10:13+0000\n"
+"POT-Creation-Date: 2011-02-27 15:24+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -14,12 +14,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:65
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:62
 msgid "Assign personal portlets"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:68
 msgid "Create intranet"
 msgstr ""
 
@@ -39,32 +38,16 @@ msgstr ""
 msgid "Powered by intranett.no"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:43
-msgid "This site configuration is outdated and needs to be upgraded:"
-msgstr ""
-
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
-msgstr ""
-
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:53
-msgid "Upgrade…"
 msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:14
 msgid "Version: ${number}"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:35
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:30
 msgid "View your intranet"
-msgstr ""
-
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:26
-msgid "Your intranet is up and running."
-msgstr ""
-
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:61
-msgid "Your intranett.no instance has not been added yet:"
 msgstr ""
 
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
@@ -155,8 +138,8 @@ msgid "legend_livesearch"
 msgstr ""
 
 #. Default: "Manage personal portlets"
-#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:82
-#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:61
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:80
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:58
 msgid "link_manage_personal_portlets"
 msgstr ""
 

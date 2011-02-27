@@ -197,12 +197,14 @@ def _buildout(envvars, newest=True):
 
 def _create_plone_site(initial=False):
     title = env.server.config.get('title', '%s intranett' % env.host_string)
+    language = env.server.config.get('language', 'no')
     with cd(VENV):
         with settings(hide('warnings'), warn_only=True):
             if initial:
                 run('bin/zeo start')
                 time.sleep(3)
-            run('bin/instance-debug create_site --title="%s"' % title)
+            run('bin/instance-debug create_site --title="%s" --language=%s' %
+                (title, language))
             if initial:
                 run('bin/zeo stop')
 

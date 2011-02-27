@@ -22,75 +22,10 @@
 
   <h1 i18n:translate="">Create intranet</h1>
 
-  <form action="#"
-        method="post"
-        tal:attributes="action string:${context/absolute_url}/@@plone-addsite"
-        tal:define="profiles view/profiles;
-                    base_profiles profiles/base;
-                    default_profile profiles/default;
-                    extension_profiles profiles/extensions;
-                    advanced request/advanced|nothing;">
+  <p>
+      To create a new site, on the command line call:
+      `bin/instance create_site`.
+  </p>
 
-      <div class="field" i18n:domain="plone">
-        <label for="title" i18n:translate="label_title">Title</label>
-
-        <div class="formHelp" i18n:translate="">
-          A short title for the site. This will be shown in the title of the
-          browser window on each page.
-        </div>
-
-        <input type="text" name="title" size="30" value="Site"
-               i18n:attributes="value text_default_site_title;" />
-      </div>
-
-      <tal:extensionprofiles condition="extension_profiles">
-        <fieldset id="add-on-list" i18n:domain="plone">
-          <legend i18n:translate="">
-            Add-ons
-          </legend>
-
-          <div class="formHelp" i18n:translate="">
-              Select any add-ons you want to activate immediately. You can
-              also activate add-ons after the site has been created using the
-              Add-ons control panel.
-          </div>
-
-          <dl id="extension_ids">
-            <tal:addons tal:repeat="info extension_profiles">
-              <tal:info tal:define="selected info/selected|nothing">
-                <tal:normal tal:condition="python: not selected or advanced">
-                  <dt>
-                    <input type="checkbox" name="extension_ids:list" value=""
-                           tal:attributes="value info/id;
-                                           id info/id;
-                                           checked info/selected|nothing;" />
-                    <label
-                        tal:attributes="for info/id"
-                        tal:content="info/title">
-                      profile title
-                    </label>
-                  </dt>
-                  <dd tal:content="info/description">
-                    profile description
-                  </dd>
-                </tal:normal>
-                <tal:hidden tal:condition="python: selected and not advanced">
-                  <input type="hidden" name="extension_ids:list" value=""
-                         tal:attributes="value info/id;
-                                         checked info/selected|nothing;" />
-                </tal:hidden>
-              </tal:info>
-            </tal:addons>
-          </dl>
-        </fieldset>
-      </tal:extensionprofiles>
-
-      <div class="formControls">
-        <input type="hidden" name="form.submitted:boolean" value="True" />
-        <input type="submit" name="submit" value="Create intranet"
-               i18n:attributes="value;" />
-      </div>
-
-  </form>
   </body>
 </html>
