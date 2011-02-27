@@ -4,6 +4,9 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Extend version information by Git revision and last commit date.
+  [hannosch]
+
 - Allow creation of non-Norwegian sites. The site language can be configured
   in the `aws.conf` per server and is passed as an argument to the
   `create_site` command. TTW creation of sites has been removed in favor of the
