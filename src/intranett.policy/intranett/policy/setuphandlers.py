@@ -12,10 +12,11 @@ def set_profile_version(site):
 
 
 def setup_locale(site):
-    site.setLanguage('no')
+    lang = site.Language()
+    site.setLanguage(lang)
     tool = getToolByName(site, "portal_languages")
-    tool.manage_setLanguageSettings('no',
-        ['no'],
+    tool.manage_setLanguageSettings(lang,
+        [lang],
         setUseCombinedLanguageCodes=False,
         startNeutral=False)
 
