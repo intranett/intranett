@@ -1,5 +1,4 @@
 from Acquisition import aq_inner
-
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
@@ -23,22 +22,17 @@ class INewsHighlight(IPortletDataProvider):
     """A portlet for displaying recent news items on the front page.
     """
 
-    portletTitle = schema.TextLine(
-        title = _(u"Portlet title"),
-        description = u"")
+    portletTitle = schema.TextLine(title=_(u"Portlet title"), description=u"")
 
     source = schema.Choice(title = _(u"Which item to display"),
-        vocabulary=SimpleVocabulary(news_vocab),
-        required=True, default=None)
+        vocabulary=SimpleVocabulary(news_vocab), required=True, default=None)
 
 
 class Assignment(base.Assignment):
 
     implements(INewsHighlight)
 
-    def __init__(self,
-                 portletTitle="",
-                 source=None):
+    def __init__(self, portletTitle="", source=None):
         self.portletTitle = portletTitle
         self.source = source
 

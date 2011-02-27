@@ -17,13 +17,10 @@ class IContentHighlight(IPortletDataProvider):
     """A portlet for displaying a selected content item on the front page.
     """
 
-    portletTitle = schema.TextLine(
-        title = _(u"Portlet title"),
-        description = u"")
+    portletTitle = schema.TextLine(title=_(u"Portlet title"), description=u"")
 
-    item = schema.Choice(title=_(u"Item"),
-                         source=DocumentSourceBinder(),
-                         required=True)
+    item = schema.Choice(title=_(u"Item"), source=DocumentSourceBinder(),
+        required=True)
 
 
 class Assignment(formlibbase.Assignment):

@@ -1,6 +1,5 @@
 from Acquisition import aq_inner
 from DateTime import DateTime
-
 from plone.app.portlets.portlets import base
 from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
@@ -17,9 +16,7 @@ class IEventHighlight(IPortletDataProvider):
     """A portlet for displaying recent news items on the front page.
     """
 
-    portletTitle = schema.TextLine(
-        title = _(u"Portlet title"),
-        description = u"")
+    portletTitle = schema.TextLine(title=_(u"Portlet title"), description=u"")
 
 
 class Assignment(base.Assignment):
