@@ -85,3 +85,14 @@ def remove_unused_frontpage_portlets(context):
         'frontpage.bottom')
     for name in names:
         sm.unregisterUtility(provided=IPortletManager, name=name)
+
+
+@upgrade_to(11)
+def add_site_administrator(context):
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    existing_roles = set(getattr(site, '__ac_roles__', []))
+    existing_roles.add('Site Administrator')
+    site.__ac_roles__ = tuple(existing_roles)
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', 'actions'))

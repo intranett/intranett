@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-02-27 15:24+0000\n"
+"POT-Creation-Date: 2011-02-27 19:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,9 +34,17 @@ msgstr "Ansatt"
 msgid "Employees"
 msgstr "Ansatte"
 
+#: intranett.policy/intranett/policy/profiles/default/actions.xml
+msgid "Manage users"
+msgstr "Administrér brukere"
+
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
 msgstr "Bygget med intranett.no"
+
+#: intranett.theme/intranett/theme/browser/templates/plone.app.controlpanel.usergroups_usersoverview.pt:108
+msgid "Site Administrator"
+msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"

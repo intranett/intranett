@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<rolemap>
+  <roles>
+    <role name="Site Administrator"/>
+  </roles>
+  <permissions>
+    <permission name="Manage users" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+    </permission>
+    <permission name="View Groups" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+    </permission>
+    <permission name="Add portal member" acquire="False">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+    </permission>
+    <permission name="Add Groups" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+    </permission>
+    <permission name="Manage Groups" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+    </permission>
+
+  </permissions>
+</rolemap>
