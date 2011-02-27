@@ -60,12 +60,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    """Portlet add form.
 
-    This is registered in configure.zcml. The form_fields variable tells
-    zope.formlib which fields to display. The create() method actually
-    constructs the assignment that is being added.
-    """
     form_fields = form.Fields(IEventHighlight)
 
     def create(self, data):

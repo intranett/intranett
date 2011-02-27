@@ -57,12 +57,7 @@ class Renderer(formlibbase.Renderer):
 
 
 class AddForm(z3cbase.AddForm):
-    """Portlet add form.
 
-    This is registered in configure.zcml. The form_fields variable tells
-    zope.formlib which fields to display. The create() method actually
-    constructs the assignment that is being added.
-    """
     fields = field.Fields(IContentHighlight)
     fields['item'].widgetFactory = AutocompleteFieldWidget
 
