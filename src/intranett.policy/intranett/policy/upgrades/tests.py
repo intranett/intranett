@@ -116,3 +116,12 @@ class TestUpgradeSteps(IntranettTestCase):
         self.assertFalse('frontpage.portlets.left' in registrations)
         self.assertFalse('frontpage.portlets.central' in registrations)
         self.assertFalse('frontpage.bottom' in registrations)
+
+    def test_add_site_administrator(self):
+        portal = self.layer['portal']
+        existing_roles = set(getattr(portal, '__ac_roles__', []))
+        existing_roles.remove('Site Administrator')
+        portal.__ac_roles__ = tuple(existing_roles)
+        steps.add_site_administrator(portal)
+        existing_roles = set(getattr(portal, '__ac_roles__', []))
+        self.assertIn('Site Administrator', existing_roles)
