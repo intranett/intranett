@@ -13,6 +13,15 @@ def create_site(app, args):
     force = '--force' in args or '-f' in args
     existing = 'Plone' in app.keys()
 
+    root_arg = [a for a in args if a.startswith('--rootpassword')]
+    if any(root_arg):
+        password = root_arg[0].split('=')[1].strip()
+        acl = app.acl_users
+        users = getattr(acl, 'users', None)
+        if not users:
+            # Non-PAS folder from a fresh database
+            app.acl_users._doAddUser('admin', password, ['Manager'], [])
+
     if existing:
         if not force:
             logger.error('Plone site already exists.')
