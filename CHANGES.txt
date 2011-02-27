@@ -5,8 +5,8 @@ Changelog
 ------------------
 
 - Added Site Administrator user role. Customized user/group management forms
-  and added user site action to access those. Refs #166.
-  [hannosch]
+  and added user site action to access those. Closes #166.
+  [hannosch, ggozad]
 
 - Add Zope admin user during `reset_server` Fabric command. Closes #188.
   [hannosch]
