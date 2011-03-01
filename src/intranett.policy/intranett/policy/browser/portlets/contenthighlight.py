@@ -17,9 +17,11 @@ class IContentHighlight(IPortletDataProvider):
     """A portlet for displaying a selected content item on the front page.
     """
 
-    portletTitle = schema.TextLine(title=_(u"Portlet title"), description=u"")
+    portletTitle = schema.TextLine(title=_(u"Portlet title"))
 
-    item = schema.Choice(title=_(u"Item"), source=DocumentSourceBinder(),
+    item = schema.Choice(title=_(u"Item"),
+        description=_(u"You can select the item to be highlighted by searching on its title."),
+        source=DocumentSourceBinder(),
         required=True)
 
 
