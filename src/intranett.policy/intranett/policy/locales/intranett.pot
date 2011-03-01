@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-02-25 13:46+0000\n"
+"POT-Creation-Date: 2011-03-01 14:52+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Configure portlet"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:37
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:36
 msgid "Content Highlight"
 msgstr ""
 
@@ -43,11 +43,11 @@ msgstr ""
 msgid "Employees"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:32
+#: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:28
 msgid "Event Highlight"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:24
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:22
 msgid "Item"
 msgstr ""
 
@@ -55,13 +55,13 @@ msgstr ""
 msgid "Modify portlet"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:45
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
 msgid "News Highlight"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:21
-#: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:21
-#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:27
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:20
+#: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:18
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:24
 msgid "Portlet title"
 msgstr ""
 
@@ -69,11 +69,11 @@ msgstr ""
 msgid "Powered by intranett.no"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:17
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
 msgid "The most recently published news item"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:19
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:17
 msgid "The second-most recently published news item"
 msgstr ""
 
@@ -97,8 +97,12 @@ msgstr ""
 msgid "View your intranet"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:30
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:26
 msgid "Which item to display"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
+msgid "You can select the item to be highlighted by searching on its title."
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/overview.pt:26
