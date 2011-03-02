@@ -27,7 +27,7 @@ class AddForm(form.AddForm):
         return self.request.get('referer', '')
 
     def nextURL(self):
-        referer = self.request.form.get('referer')
+        referer = self.referer()
         if referer:
             return referer
         else:
@@ -73,7 +73,7 @@ class EditForm(form.EditForm):
         return self.request.get('referer', '')
 
     def nextURL(self):
-        referer = self.request.form.get('referer')
+        referer = self.referer()
         if referer:
             return referer
         else:

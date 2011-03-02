@@ -6,9 +6,12 @@ from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletType
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+import transaction
 from zope.component import getUtility, getMultiAdapter
 
+from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.browser.portlets import eventhighlight
 from intranett.policy.browser.portlets import newshighlight
 from intranett.policy.browser.portlets import contenthighlight
@@ -257,3 +260,62 @@ class TestContentHighlightPortlet(IntranettTestCase):
         term = search_result[0]
         self.assertEqual(term.value, uid)
         self.assertEqual(term.token, title)
+
+        # Containment
+        self.assertTrue(uid in query_source)
+        # Length
+        self.assertEqual(len(query_source), 1)
+        # Iterator
+        self.assertTrue(len([x for x in query_source]), 1)
+
+
+class TestZ3cBase(IntranettFunctionalTestCase):
+
+    def test_add_edit_forms(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        wt = getToolByName(portal, 'portal_workflow')
+        portal.invokeFactory('Document', 'adoc',
+                             title='A document')
+        wt.doActionFor(portal['adoc'], 'publish')
+        title = portal['adoc'].Title()
+        transaction.commit()
+        browser = get_browser(self.layer['app'], loggedIn=True)
+        url = portal.absolute_url() + \
+            '/++contextportlets++plone.leftcolumn/+/' + \
+            'intranett.policy.portlets.ContentHighlight'
+        # Missing input
+        browser.open(url)
+        browser.getControl(name='form.buttons.add').click()
+        self.assertEqual(browser.url, url)
+        self.assertTrue('Required input is missing.' in browser.contents)
+        # Add
+        browser.getControl(name='form.widgets.portletTitle').value = 'A title'
+        browser.getControl(name="form.widgets.item.widgets.query").value = \
+            title
+        browser.getControl(name='form.buttons.add').click()
+        browser.getControl(name='form.widgets.item:list').value = [title]
+        browser.getControl(name='form.buttons.add').click()
+        self.assertEqual(browser.url, 'http://nohost/plone/@@manage-portlets')
+        # Cancel add
+        browser.open(url)
+        browser.getControl(name='form.buttons.cancel_add').click()
+        self.assertEqual(browser.url, 'http://nohost/plone/@@manage-portlets')
+
+        url = portal.absolute_url() + \
+            '/++contextportlets++plone.leftcolumn/' + \
+            'content-highlight/edit'
+        # Missing input
+        browser.open(url)
+        browser.getControl(name='form.widgets.portletTitle').value = ''
+        browser.getControl(name='form.buttons.apply').click()
+        self.assertEqual(browser.url, url)
+        self.assertTrue('Required input is missing.' in browser.contents)
+        # Edit
+        browser.getControl(name='form.widgets.portletTitle').value = 'Title 2'
+        browser.getControl(name='form.buttons.apply').click()
+        self.assertEqual(browser.url, 'http://nohost/plone/@@manage-portlets')
+        # Cancel edit
+        browser.open(url)
+        browser.getControl(name='form.buttons.cancel_add').click()
+        self.assertEqual(browser.url, 'http://nohost/plone/@@manage-portlets')
