@@ -71,7 +71,7 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
     def test_edit_frontpage(self):
         # As a Site Administrator we should be able to edit the frontpage
         portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Site Administrator'])
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
         transaction.commit()
 
         sm = getSecurityManager()
