@@ -311,7 +311,12 @@ class TestZ3cBase(IntranettFunctionalTestCase):
         browser.getControl(name='form.buttons.apply').click()
         self.assertEqual(browser.url, url)
         self.assertTrue('Required input is missing.' in browser.contents)
-        # Edit
+        # Edit without changes
+        browser.getControl(name='form.widgets.portletTitle').value = 'A title'
+        browser.getControl(name='form.buttons.apply').click()
+        self.assertEqual(browser.url, 'http://nohost/plone/@@manage-portlets')
+        # Edit with changes
+        browser.open(url)
         browser.getControl(name='form.widgets.portletTitle').value = 'Title 2'
         browser.getControl(name='form.buttons.apply').click()
         self.assertEqual(browser.url, 'http://nohost/plone/@@manage-portlets')
