@@ -4,6 +4,10 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Allow administrators to edit the frontpage and allow normal users to edit
+  their personal portlets. Closes #191.
+  [hannosch]
+
 - Disabled the automatic suggestions on the 404 page. The error page is always
   rendered as an anonymous user and the suggestions allowed to get at titles
   and employee names. This closes #180.
