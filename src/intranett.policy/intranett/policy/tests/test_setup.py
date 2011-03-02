@@ -36,7 +36,7 @@ class TestSiteSetup(IntranettTestCase):
 
     def test_manage_users_action(self):
         portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Site Administrator'])
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
         at = getToolByName(portal, 'portal_actions')
         actions = at.listActionInfos(object=portal,
                                      categories=('user', ))
