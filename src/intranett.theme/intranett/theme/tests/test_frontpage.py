@@ -1,3 +1,4 @@
+from AccessControl import getSecurityManager
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
@@ -72,6 +73,10 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Site Administrator'])
         transaction.commit()
+
+        sm = getSecurityManager()
+        self.assertEqual(sm.getUser().getId(), TEST_USER_ID)
+        self.assertTrue(sm.checkPermission('Portlets: Manage portlets', portal))
 
         browser = get_browser(self.layer['app'])
         browser.open('http://nohost/plone/')

@@ -24,6 +24,9 @@
       <role name="Site Administrator"/>
       <role name="Manager" />
     </permission>
-
+    <permission name="Portlets: Manage portlets" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+    </permission>
   </permissions>
 </rolemap>
