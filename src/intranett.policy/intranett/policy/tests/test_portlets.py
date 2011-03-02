@@ -291,8 +291,8 @@ class TestZ3cBase(IntranettFunctionalTestCase):
         self.assertTrue('Required input is missing.' in browser.contents)
         # Add
         browser.getControl(name='form.widgets.portletTitle').value = 'A title'
-        browser.getControl(name="form.widgets.item.widgets.query").value = \
-            title
+        browser.getControl(
+            name="form.widgets.item.widgets.query").value = title
         browser.getControl(name='form.buttons.add').click()
         browser.getControl(name='form.widgets.item:list').value = [title]
         browser.getControl(name='form.buttons.add').click()

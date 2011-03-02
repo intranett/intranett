@@ -23,19 +23,12 @@ class AddForm(form.AddForm):
         IPortletPermissionChecker(aq_parent(aq_inner(self.context)))()
         return super(AddForm, self).__call__()
 
-    def referer(self):
-        return self.request.get('referer', '')
-
     def nextURL(self):
-        referer = self.referer()
-        if referer:
-            return referer
-        else:
-            addview = aq_parent(aq_inner(self.context))
-            context = aq_parent(aq_inner(addview))
-            url = str(getMultiAdapter((context, self.request),
-                                      name=u"absolute_url"))
-            return url + '/@@manage-portlets'
+        addview = aq_parent(aq_inner(self.context))
+        context = aq_parent(aq_inner(addview))
+        url = str(getMultiAdapter((context, self.request),
+                                  name=u"absolute_url"))
+        return url + '/@@manage-portlets'
 
     @button.buttonAndHandler(_(u"label_save", default=u"Save"), name='add')
     def handleAdd(self, action):
@@ -69,19 +62,12 @@ class EditForm(form.EditForm):
         IPortletPermissionChecker(aq_parent(aq_inner(self.context)))()
         return super(EditForm, self).__call__()
 
-    def referer(self):
-        return self.request.get('referer', '')
-
     def nextURL(self):
-        referer = self.referer()
-        if referer:
-            return referer
-        else:
-            editview = aq_parent(aq_inner(self.context))
-            context = aq_parent(aq_inner(editview))
-            url = str(getMultiAdapter((context, self.request),
-                                      name=u"absolute_url"))
-            return url + '/@@manage-portlets'
+        editview = aq_parent(aq_inner(self.context))
+        context = aq_parent(aq_inner(editview))
+        url = str(getMultiAdapter((context, self.request),
+                                  name=u"absolute_url"))
+        return url + '/@@manage-portlets'
 
     @button.buttonAndHandler(_(u"label_save", default=u"Save"), name='apply')
     def handleSave(self, action):
