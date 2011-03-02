@@ -1,6 +1,7 @@
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
+from zope.component import queryUtility
 
 from intranett.policy.upgrades import upgrade_to
 
@@ -96,3 +97,16 @@ def add_site_administrator(context):
     site.__ac_roles__ = tuple(existing_roles)
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('rolemap', 'actions'))
+
+
+@upgrade_to(12)
+def allow_site_admin_to_edit_frontpage(context):
+    from plone.portlets.interfaces import IPortletType
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', ))
+    fti = getToolByName(context, 'portal_types')['Plone Site']
+    edit_action = [a for a in fti.listActions() if a.id == 'edit-frontpage']
+    edit_action[0].permissions = (u'Portlets: Manage portlets', )
+    coll_id = u'plone.portlet.collection.Collection'
+    coll = queryUtility(IPortletType, name=coll_id)
+    coll.for_ = []
