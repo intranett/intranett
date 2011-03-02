@@ -3,6 +3,7 @@ from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
+from plone.portlets.interfaces import IPortletType
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from zope.component import getUtility, getMultiAdapter
@@ -32,21 +33,46 @@ class TestNewsHighlightPortlet(IntranettTestCase):
         setRoles(portal, TEST_USER_ID, ['Contributor'])
         wt = getToolByName(portal, 'portal_workflow')
 
+        # No news items
+        assignment = newshighlight.Assignment(
+            portletTitle='News',
+            source='last')
+        r = self.renderer(assignment=assignment)
+        r = r.__of__(portal)
+        r.update()
+        self.assertEqual(r.item(), None)
+        output = r.render()
+        self.assertTrue('News' not in output)
+
         yesterday = DateTime() - 1
         day_before_yesterday = yesterday - 1
 
+        # One news item.
         portal.invokeFactory('News Item', 'wedding',
                              title='A wedding')
         portal['wedding'].setEffectiveDate(day_before_yesterday)
         wt.doActionFor(portal['wedding'], 'publish')
 
+        # We want the one before last, which does not exist.
+        assignment = newshighlight.Assignment(
+            portletTitle="News",
+            source='before-last')
+        r = self.renderer(assignment=assignment)
+        r = r.__of__(portal)
+        r.update()
+        self.assertEqual(r.item(), None)
+        output = r.render()
+        self.assertTrue('News' not in output)
+
+        # Two news items.
         portal.invokeFactory('News Item', 'funeral',
                              title='A funeral')
         portal['funeral'].setEffectiveDate(yesterday)
         wt.doActionFor(portal['funeral'], 'publish')
 
+        # Show the last
         assignment = newshighlight.Assignment(
-            portletTitle="News",
+            portletTitle='News',
             source='last')
         r = self.renderer(assignment=assignment)
         r = r.__of__(portal)
@@ -56,6 +82,7 @@ class TestNewsHighlightPortlet(IntranettTestCase):
         self.assertTrue('News' in output)
         self.assertTrue('A funeral' in output)
 
+        # Show the one before last.
         assignment = newshighlight.Assignment(
             portletTitle="News",
             source='before-last')
@@ -67,6 +94,19 @@ class TestNewsHighlightPortlet(IntranettTestCase):
         self.assertTrue('News' in output)
         self.assertTrue('A wedding' in output)
 
+    def test_invoke_add_view(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        portlet = getUtility(IPortletType,
+            name='intranett.policy.portlets.NewsHighlight')
+        mapping = portal.restrictedTraverse(
+            '++contextportlets++plone.rightcolumn')
+        addview = mapping.restrictedTraverse('+/' + portlet.addview)
+        addview.createAndAdd(
+            data={'portletTitle': 'News Highlight', 'source': 'last'})
+        self.assertEquals(len(mapping), 1)
+        self.failUnless(
+            isinstance(mapping.values()[0],newshighlight.Assignment))
 
 class TestEventHighlightPortlet(IntranettTestCase):
 
