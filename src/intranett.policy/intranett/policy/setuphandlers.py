@@ -62,7 +62,7 @@ def disable_portlets(site):
     from zope.component import getUtilitiesFor
 
     disabled = ['portlets.Calendar', 'portlets.Classic', 'portlets.Login',
-                'portlets.Review']
+                'portlets.Review', 'plone.portlet.collection.Collection']
 
     for info in getUtilitiesFor(IPortletType):
         if info[0] in disabled:
