@@ -29,8 +29,9 @@
       <role name="Manager" />
     </permission>
     <permission name="plone.portlet.static: Add static portlet" acquire="True">
-      <role name="Site Administrator"/>
       <role name="Manager" />
+      <role name="Member" />
+      <role name="Site Administrator"/>
     </permission>
   </permissions>
 </rolemap>

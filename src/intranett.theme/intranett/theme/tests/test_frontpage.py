@@ -68,6 +68,21 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
         self.assert_('template-login_form' in browser.contents)
         self.assert_('id="login_form"' in browser.contents)
 
+    def test_personal_frontpage(self):
+        # As a normal user, I should be able to assign personal portraits
+        portal = self.layer['portal']
+
+        sm = getSecurityManager()
+        self.assertEqual(sm.getUser().getId(), TEST_USER_ID)
+        self.assertTrue(sm.checkPermission(
+            'Portlets: Manage own portlets', portal))
+
+        browser = get_browser(self.layer['app'])
+        browser.handleErrors = False
+        browser.open('http://nohost/plone/@@manage-dashboard')
+        self.assertTrue('+/plone.portlet.static.Static' in browser.contents)
+        self.assertTrue('+/portlets.News' in browser.contents)
+
     def test_edit_frontpage(self):
         # As a Site Administrator we should be able to edit the frontpage
         portal = self.layer['portal']

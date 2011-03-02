@@ -110,3 +110,9 @@ def allow_site_admin_to_edit_frontpage(context):
     coll_id = u'plone.portlet.collection.Collection'
     coll = queryUtility(IPortletType, name=coll_id)
     coll.for_ = []
+
+
+@upgrade_to(13)
+def allow_member_to_edit_personal_portlets(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', ))
