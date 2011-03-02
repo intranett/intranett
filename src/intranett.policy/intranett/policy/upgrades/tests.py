@@ -3,6 +3,7 @@ import os
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
+from zope.component import queryUtility
 
 from intranett.policy.upgrades import steps
 from intranett.policy.tests.base import IntranettTestCase
@@ -125,3 +126,21 @@ class TestUpgradeSteps(IntranettTestCase):
         steps.add_site_administrator(portal)
         existing_roles = set(getattr(portal, '__ac_roles__', []))
         self.assertIn('Site Administrator', existing_roles)
+
+    def test_allow_site_admin_to_edit_frontpage(self):
+        from plone.portlets.interfaces import IPortletType
+        from plone.app.portlets.interfaces import IColumn
+        portal = self.layer['portal']
+        setattr(portal, '_Portlets__Manage_portlets_Permission', ['Manager'])
+        fti = getToolByName(portal, 'portal_types')['Plone Site']
+        edit_action = [a for a in fti.listActions() if a.id == 'edit-frontpage']
+        edit_action[0].permissions = ('Manage portal', )
+        coll_id = u'plone.portlet.collection.Collection'
+        coll = queryUtility(IPortletType, name=coll_id)
+        coll.for_ = [IColumn]
+        steps.allow_site_admin_to_edit_frontpage(portal)
+        perms = set(getattr(portal, '_Portlets__Manage_portlets_Permission'))
+        self.assertEqual(perms, set(['Manager', 'Site Administrator']))
+        self.assertEqual(edit_action[0].permissions,
+            (u'Portlets: Manage portlets', ))
+        self.assertEqual(coll.for_, [])

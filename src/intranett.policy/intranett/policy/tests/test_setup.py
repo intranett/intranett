@@ -36,7 +36,7 @@ class TestSiteSetup(IntranettTestCase):
 
     def test_manage_users_action(self):
         portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Site Administrator'])
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
         at = getToolByName(portal, 'portal_actions')
         actions = at.listActionInfos(object=portal,
                                      categories=('user', ))
@@ -148,6 +148,26 @@ class TestSiteSetup(IntranettTestCase):
         self.assert_('portlets.Classic' not in ids)
         self.assert_('portlets.Login' not in ids)
         self.assert_('portlets.Review' not in ids)
+
+    def test_siteadmin_portlets(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        from plone.app.portlets.browser import manage
+        request = self.layer['request']
+        view = manage.ManageContextualPortlets(portal, request)
+
+        from plone.portlets.interfaces import IPortletManager
+        highlight = queryUtility(IPortletManager, name='frontpage.highlight')
+        available = set([p.addview for p in highlight.getAddablePortletTypes()])
+
+        from plone.app.portlets.browser import editmanager
+        renderer = editmanager.EditPortletManagerRenderer(
+            portal, request, view, highlight)
+
+        addable = renderer.addable_portlets()
+        ids = set([a['addview'].split('/+/')[-1] for a in addable])
+        # A site admin should be able to add all available portlet types
+        self.assertEqual(ids, available)
 
     def test_content(self):
         # This content is only created in the tests
