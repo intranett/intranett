@@ -208,6 +208,31 @@ class TestContentHighlightPortlet(IntranettTestCase):
         self.assertTrue('Highlighted' in output)
         self.assertTrue('A highlighted document' in output)
 
+        # Let's use a non-existing item
+        assignment = contenthighlight.Assignment(
+            portletTitle="Highlighted",
+            item='i_do_not_exist')
+        r = self.renderer(assignment=assignment)
+        r = r.__of__(portal)
+        r.update()
+        self.assertEqual(r.item(), None)
+        output = r.render()
+        self.assertTrue('Highlighted' not in output)
+
+    def test_invoke_add_view(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        portlet = getUtility(IPortletType,
+            name='intranett.policy.portlets.ContentHighlight')
+        mapping = portal.restrictedTraverse(
+            '++contextportlets++plone.rightcolumn')
+        addview = mapping.restrictedTraverse('+/' + portlet.addview)
+        addview.createAndAdd(
+            data={'portletTitle': 'Content Highlight', 'item': 'xxx'})
+        self.assertEquals(len(mapping), 1)
+        self.failUnless(
+            isinstance(mapping.values()[0], contenthighlight.Assignment))
+
     def test_document_source(self):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Contributor'])
