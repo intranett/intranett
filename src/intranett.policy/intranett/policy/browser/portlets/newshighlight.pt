@@ -1,4 +1,6 @@
-<dl class="portlet portletSingleItem" i18n:domain="intranett">
+<dl class="portlet portletSingleItem" 
+    tal:condition="view/available"
+    i18n:domain="intranett">
 
     <dt class="portletHeader" tal:condition="view/portletTitle">
         <span class="portletTopLeft"></span>
