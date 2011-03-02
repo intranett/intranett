@@ -144,3 +144,11 @@ class TestUpgradeSteps(IntranettTestCase):
         self.assertEqual(edit_action[0].permissions,
             (u'Portlets: Manage portlets', ))
         self.assertEqual(coll.for_, [])
+
+    def test_allow_member_to_edit_personal_portlets(self):
+        portal = self.layer['portal']
+        perm_id = '_plone_portlet_static__Add_static_portlet_Permission'
+        setattr(portal, perm_id, ['Manager'])
+        steps.allow_member_to_edit_personal_portlets(portal)
+        self.assertEqual(set(getattr(portal, perm_id)),
+            set(['Manager', 'Member', 'Site Administrator']))
