@@ -27,10 +27,22 @@
                     tal:condition="show_border"
                     tal:content="structure provider:plone.contentviews" />
                 <div id="board-blocks">
-                    <div>
-                        <tal:block replace="structure provider:frontpage.highlight" />
+                    <div id="main-board">
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.prefix" />
+                        </div>
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.left" />
+                        </div>
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.right" />
+                        </div>
+                        <div>
+                            <span class="visualClear"><!-- --></span>
+                            <tal:block replace="structure provider:frontpage.main.suffix" />
+                        </div>
                     </div>
-                    <div>
+                    <div id="secondary-board">
                         <tal:block replace="structure provider:frontpage.portlets.right" />
                     </div>
                 </div>

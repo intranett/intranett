@@ -1872,36 +1872,22 @@ body.template-manage-frontpage #portal-columns {
         body.template-manage-frontpage #portal-columns #company-board #board-blocks > div img.image-right {
           clear: none;
           margin-top: 0; }
-      body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1),
-      body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) {
+      body.template-frontpage_view #portal-columns #company-board #board-blocks #main-board,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks #main-board {
         float: left;
         width: 622.667px;
         margin-right: 19px; }
-        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) > div:nth-child(2),
-        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) > div:nth-child(2) {
+        body.template-frontpage_view #portal-columns #company-board #board-blocks #main-board > div:nth-child(2),
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks #main-board > div:nth-child(2) {
           float: left;
           width: 301.333px;
           margin-right: 19px; }
-        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) > div:nth-child(3),
-        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) > div:nth-child(3) {
-          float: right;
+        body.template-frontpage_view #portal-columns #company-board #board-blocks #main-board > div:nth-child(3),
+        body.template-manage-frontpage #portal-columns #company-board #board-blocks #main-board > div:nth-child(3) {
+          float: left;
           width: 301.333px; }
-        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:before,
-        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:after,
-        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:before,
-        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:after {
-          content: "\0020";
-          display: block;
-          height: 0;
-          visibility: hidden; }
-        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:after,
-        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem:after {
-          clear: both; }
-        body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem,
-        body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(1) .portletItem {
-          zoom: 1; }
-      body.template-frontpage_view #portal-columns #company-board #board-blocks > div:nth-child(2),
-      body.template-manage-frontpage #portal-columns #company-board #board-blocks > div:nth-child(2) {
+      body.template-frontpage_view #portal-columns #company-board #board-blocks #secondary-board,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks #secondary-board {
         float: right;
         width: 301.333px; }
       body.template-frontpage_view #portal-columns #company-board #board-blocks .portlet,
@@ -1951,6 +1937,20 @@ body.template-manage-frontpage #portal-columns {
         body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletStaticText dd.even,
         body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletStaticText dd.odd {
           background: transparent !important; }
+      body.template-frontpage_view #portal-columns #company-board #board-blocks .portletItem:before,
+      body.template-frontpage_view #portal-columns #company-board #board-blocks .portletItem:after,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletItem:before,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletItem:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        visibility: hidden; }
+      body.template-frontpage_view #portal-columns #company-board #board-blocks .portletItem:after,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletItem:after {
+        clear: both; }
+      body.template-frontpage_view #portal-columns #company-board #board-blocks .portletItem,
+      body.template-manage-frontpage #portal-columns #company-board #board-blocks .portletItem {
+        zoom: 1; }
     body.template-frontpage_view #portal-columns #company-board #edit-bar,
     body.template-manage-frontpage #portal-columns #company-board #edit-bar {
       width: 97.917%; }

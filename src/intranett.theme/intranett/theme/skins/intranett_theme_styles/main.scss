@@ -2002,45 +2002,42 @@ body.template-manage-frontpage {
 						margin-top: 0;
 					}
 				}
-				> div:nth-child(1) {
+				#main-board {
 					float: left;
 					width: $double-portlet-width;
 					margin-right: 19px;
-					
 					> div:nth-child(2) {
 						float: left;
 						width: $single-portlet-width;
 						margin-right: 19px;
-					}
+					}				
 					> div:nth-child(3) {
-						float: right;
+						float: left;
 						width: $single-portlet-width;
 					}
-
-					.portletItem:before, 
-					.portletItem:after {
-						content: "\0020";
-						display: block;
-						height: 0;
-						visibility: hidden;
-					}
-					
-					.portletItem:after {
-						clear: both;
-					}
-					
-					.portletItem {
-						zoom: 1;
-					}
 				}
-				> div:nth-child(2) {
+				#secondary-board {
 					float: right;
 					width: $single-portlet-width;
 				}
+				
 				.portlet,
 				.portletStaticText {
 					@include shadowed-portlet;
 					margin-bottom: 20px;
+				}
+				.portletItem:before, 
+				.portletItem:after {
+					content: "\0020";
+					display: block;
+					height: 0;
+					visibility: hidden;
+				}
+				.portletItem:after {
+					clear: both;
+				}
+				.portletItem {
+					zoom: 1;
 				}
 			}
 			#edit-bar {
