@@ -2065,22 +2065,16 @@ body.template-manage-frontpage {
 
 /* @group Edit frontpage */
 
-body.template-manage-frontpage .portlets-manager .portletAssignments {
+/*body.template-manage-frontpage .portlets-manager .portletAssignments {
 	display: none;
 }
 body.template-manage-frontpage .portlets-manager .section+.portletAssignments {
 	display: block;
-}
-.kssattr-viewname-manage-frontpage {
-	> div:nth-child(2) {
-		float: left;
-		width: $single-portlet-width - 4px;
-		margin-right: 19px;
-	}
-	> div:nth-child(3) {
-		float: right;
-		width: $single-portlet-width - 4px;
-	}
+}*/
+#company-board .portlets-manager {
+	background: darken(#E0E0E0, 10%);
+	padding: 10px;
+	margin: 10px 0;
 }
 
 /* @end */

@@ -1974,19 +1974,16 @@ body.template-manage-frontpage #portal-columns {
       display: none; }
 
 /* @group Edit frontpage */
-body.template-manage-frontpage .portlets-manager .portletAssignments {
-  display: none; }
-
-body.template-manage-frontpage .portlets-manager .section + .portletAssignments {
-  display: block; }
-
-.kssattr-viewname-manage-frontpage > div:nth-child(2) {
-  float: left;
-  width: 297.333px;
-  margin-right: 19px; }
-.kssattr-viewname-manage-frontpage > div:nth-child(3) {
-  float: right;
-  width: 297.333px; }
+/*body.template-manage-frontpage .portlets-manager .portletAssignments {
+	display: none;
+}
+body.template-manage-frontpage .portlets-manager .section+.portletAssignments {
+	display: block;
+}*/
+#company-board .portlets-manager {
+  background: #c7c7c7;
+  padding: 10px;
+  margin: 10px 0; }
 
 /* @end */
 /* @end */
