@@ -1,5 +1,5 @@
 <div tal:condition="view/data/omit_border"
-     tal:attributes="class string:portletStaticText ${view/css_class}"
+     tal:attributes="class string:portletStaticText portletOmittedBorder ${view/css_class}"
      tal:content="structure view/transformed" />
 <dl tal:condition="not:view/data/omit_border"
     tal:attributes="class string:portlet portletStaticText ${view/css_class}"

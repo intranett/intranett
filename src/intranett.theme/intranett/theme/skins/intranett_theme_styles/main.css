@@ -1705,10 +1705,12 @@ small.commentDate {
   margin: 0;
   padding: 0; }
 
-.portlet .portletItem {
+.portlet .portletItem,
+.portletOmittedBorder {
   padding: 0.63em; }
 
-.portlet .portletItem p {
+.portlet .portletItem p,
+.portletOmittedBorder p {
   text-indent: 0;
   margin: 0.375em 0; }
 
