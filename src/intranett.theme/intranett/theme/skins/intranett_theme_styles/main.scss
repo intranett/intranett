@@ -2021,8 +2021,7 @@ body.template-manage-frontpage {
 					width: $single-portlet-width;
 				}
 				
-				.portlet,
-				.portletStaticText {
+				.portlet {
 					@include shadowed-portlet;
 					margin-bottom: 20px;
 				}
