@@ -5,10 +5,27 @@
 
     <!-- Columns (portlet managers) -->
 
+    <!-- frontpage.main — managers located in the main (LEFT) column of the
+    company board of the frontpage view-->
     <portletmanager
-      name="frontpage.highlight"
+      name="frontpage.main.prefix"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
+    <portletmanager
+      name="frontpage.main.left"
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />
+    <portletmanager
+      name="frontpage.main.right"
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />
+    <portletmanager
+      name="frontpage.main.suffix"
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />
+
+    <!-- frontpage.portlets.right is the manager located in the secondary
+    (RIGHT) column of the company board of the frontpage view -->
     <portletmanager
       name="frontpage.portlets.right"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
@@ -17,7 +34,7 @@
     <assignment name="highlight"
         category="context"
         key="/"
-        manager="frontpage.highlight"
+        manager="frontpage.main.prefix"
         type="plone.portlet.static.Static"
         visible="True">
         <property name="header">Frontpage Highlight</property>
