@@ -13,19 +13,19 @@ class DocumentSource(object):
     def __init__(self, context):
         self.context = context
 
-    @property
-    def documents(self):
-        """ XXX: Should be cached somehow.
-        """
+    def documents(self, text=None):
         sr = getUtility(ISiteRoot)
         catalog = getToolByName(sr, 'portal_catalog')
-        return catalog.unrestrictedSearchResults(portal_type="Document",
-            review_state='published')
+        query = {'portal_type': ['Document', 'Event', 'News Item', 'Link'],
+            'review_state': 'published', 'sort_limit': 10}
+        if text is not None:
+            query['Title'] = text
+        return catalog.unrestrictedSearchResults(query)
 
     @property
     def vocab(self):
         return SimpleVocabulary.fromItems(
-            [(doc.Title, doc.UID) for  doc in self.documents])
+            [(doc.Title, doc.UID) for doc in self.documents()])
 
     def __contains__(self, term):
         return self.vocab.__contains__(term)
@@ -43,10 +43,8 @@ class DocumentSource(object):
         return self.vocab.getTermByToken(value)
 
     def search(self, query_string):
-        q = query_string.lower()
         return [self.getTerm(doc.UID)
-                for doc in self.documents
-                if q in doc.Title.lower()]
+                for doc in self.documents(text=query_string.lower() + '*')]
 
 
 class DocumentSourceBinder(object):
