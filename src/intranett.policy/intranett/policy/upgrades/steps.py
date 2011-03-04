@@ -142,7 +142,7 @@ def allow_siteadmin_to_edit_content(context):
 @upgrade_to(17)
 def install_highlight_portlets(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('portlets',))
+        steps=('portlets', ))
     # Add CSS/JS
     prefix = '++resource++plone.formwidget.autocomplete/jquery.autocomplete'
     css = getToolByName(context, 'portal_css')
