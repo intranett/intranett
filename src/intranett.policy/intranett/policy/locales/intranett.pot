@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-02-15 09:42+0000\n"
+"POT-Creation-Date: 2011-03-04 19:07+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -14,12 +14,23 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:76
+msgid "Assign personal portlets"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:15
+msgid "Configure portlet"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:36
+msgid "Content Highlight"
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/templates/addsite.pt:13
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:68
 msgid "Create intranet"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:42
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:46
 msgid "Departments:"
 msgstr ""
 
@@ -27,44 +38,70 @@ msgstr ""
 msgid "Employee"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:34
-msgid "People"
+#: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:28
+msgid "Event Highlight"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:22
+msgid "Item"
+msgstr ""
+
+#: intranett.policy/intranett/policy/profiles/default/actions.xml
+msgid "Manage users"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:59
+msgid "Modify portlet"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
+msgid "News Highlight"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:20
+#: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:18
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:24
+msgid "Portlet title"
 msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:26
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:30
 msgid "Show people from all departments"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:43
-msgid "This site configuration is outdated and needs to be upgraded:"
+#: intranett.theme/intranett/theme/browser/templates/plone.app.controlpanel.usergroups_usersoverview.pt:108
+msgid "Site Administrator"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
+msgid "The most recently published news item"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:17
+msgid "The second-most recently published news item"
 msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:53
-msgid "Upgrade…"
-msgstr ""
-
 #: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:14
 msgid "Version: ${number}"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:35
+#: intranett.policy/intranett/policy/browser/templates/overview.pt:30
 msgid "View your intranet"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:26
-msgid "Your intranet is up and running."
+#: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:26
+msgid "Which item to display"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/overview.pt:61
-msgid "Your intranett.no instance has not been added yet:"
+#: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
+msgid "You can select the item to be highlighted by searching on its title."
 msgstr ""
 
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
@@ -87,6 +124,11 @@ msgstr ""
 msgid "label_biography"
 msgstr ""
 
+#. Default: "Cancel"
+#: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:44
+msgid "label_cancel"
+msgstr ""
+
 #. Default: "Delete Portrait"
 #: intranett.policy/intranett/policy/userdataschema.py:66
 msgid "label_delete_portrait"
@@ -94,13 +136,13 @@ msgstr ""
 
 #. Default: "Department"
 #: intranett.policy/intranett/policy/userdataschema.py:48
-#: intranett.theme/intranett/theme/browser/templates/user.pt:90
+#: intranett.theme/intranett/theme/browser/templates/user.pt:85
 msgid "label_department"
 msgstr ""
 
 #. Default: "E-mail"
 #: intranett.policy/intranett/policy/userdataschema.py:20
-#: intranett.theme/intranett/theme/browser/templates/user.pt:104
+#: intranett.theme/intranett/theme/browser/templates/user.pt:99
 msgid "label_email"
 msgstr ""
 
@@ -111,14 +153,14 @@ msgstr ""
 
 #. Default: "Location"
 #: intranett.policy/intranett/policy/userdataschema.py:53
-#: intranett.theme/intranett/theme/browser/templates/user.pt:97
+#: intranett.theme/intranett/theme/browser/templates/user.pt:92
 msgid "label_location"
 msgstr ""
 
 #. Default: "Mobile phone"
 #: intranett.policy/intranett/policy/userdataschema.py:31
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:92
-#: intranett.theme/intranett/theme/browser/templates/user.pt:121
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:95
+#: intranett.theme/intranett/theme/browser/templates/user.pt:116
 msgid "label_mobile"
 msgstr ""
 
@@ -129,8 +171,8 @@ msgstr ""
 
 #. Default: "Phone"
 #: intranett.policy/intranett/policy/userdataschema.py:26
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:98
-#: intranett.theme/intranett/theme/browser/templates/user.pt:113
+#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:101
+#: intranett.theme/intranett/theme/browser/templates/user.pt:108
 msgid "label_phone"
 msgstr ""
 
@@ -144,6 +186,11 @@ msgstr ""
 msgid "label_position"
 msgstr ""
 
+#. Default: "Save"
+#: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:33
+msgid "label_save"
+msgstr ""
+
 #. Default: "Show all items"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:87
 msgid "label_show_all"
@@ -152,5 +199,11 @@ msgstr ""
 #. Default: "LiveSearch &#8595;"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:84
 msgid "legend_livesearch"
+msgstr ""
+
+#. Default: "Manage personal portlets"
+#: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:94
+#: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:68
+msgid "link_manage_personal_portlets"
 msgstr ""
 

@@ -107,7 +107,8 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
 
   </head>
 
-  <body tal:define="isRTL portal_state/is_rtl;
+  <body metal:define-slot="body"
+        tal:define="isRTL portal_state/is_rtl;
                     sl python:plone_view.have_portlets('plone.leftcolumn', view);
                     sr python:plone_view.have_portlets('plone.rightcolumn', view);
                     conten_pos python:sl and 'position-4' or 'position-0';
@@ -124,7 +125,7 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
             <span class="visualClear"><!-- --></span>
         </header>
 
-        <div id="portal-columns" class="row">
+        <div id="portal-columns" class="row" metal:define-slot="columns">
             <div class="contentAlignment">
 
             <div id="viewlet-above-columns" tal:condition="not:ajax_load" tal:content="structure provider:intranett.abovecolumns" />

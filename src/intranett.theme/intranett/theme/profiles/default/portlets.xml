@@ -5,75 +5,31 @@
 
     <!-- Columns (portlet managers) -->
 
+    <!-- frontpage.main — managers located in the main (LEFT) column of the
+    company board of the frontpage view-->
     <portletmanager
-      name="frontpage.highlight"
+      name="frontpage.main.top"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
     <portletmanager
-      name="frontpage.portlets.left"
+      name="frontpage.main.left"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
     <portletmanager
-      name="frontpage.portlets.central"
+      name="frontpage.main.right"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
+    <portletmanager
+      name="frontpage.main.bottom"
+      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
+      />
+
+    <!-- frontpage.portlets.right is the manager located in the secondary
+    (RIGHT) column of the company board of the frontpage view -->
     <portletmanager
       name="frontpage.portlets.right"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
-    <portletmanager
-      name="frontpage.bottom"
-      type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
-      />
-
-    <assignment name="highlight"
-        category="context"
-        key="/"
-        manager="frontpage.highlight"
-        type="plone.portlet.static.Static"
-        visible="True">
-        <property name="header">Frontpage Highlight</property>
-        <property name="text">Test frontpage highlight text</property>
-        <property name="omit_border">True</property>
-    </assignment>
-
-    <assignment name="bottom"
-        category="context"
-        key="/"
-        manager="frontpage.bottom"
-        type="plone.portlet.static.Static"
-        visible="True">
-        <property name="header">Frontpage Bottom</property>
-        <property name="text">Test frontpage bottom text</property>
-        <property name="omit_border">True</property>
-    </assignment>
-
-    <assignment name="news"
-        category="context"
-        key="/"
-        manager="frontpage.portlets.left"
-        type="portlets.News"
-        visible="True">
-    </assignment>
-
-    <assignment name="events"
-        category="context"
-        key="/"
-        manager="frontpage.portlets.central"
-        type="portlets.Events"
-        visible="True">
-    </assignment>
-
-    <assignment name="fp_static_right"
-        category="context"
-        key="/"
-        manager="frontpage.portlets.right"
-        type="plone.portlet.static.Static"
-        visible="True">
-        <property name="header">Frontpage right column</property>
-        <property name="text">Test frontpage right text</property>
-        <property name="omit_border">True</property>
-    </assignment>
 
     <assignment name="navigation"
         category="context"

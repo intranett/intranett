@@ -11,54 +11,104 @@
                              disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
 </head>
 <body>
+    <div id="portal-columns" class="row"
+         metal:fill-slot="columns"
+         tal:define="isAnon context/@@plone_portal_state/anonymous;
+                     raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
+                     checkPermission nocall: context/portal_membership/checkPermission;
+                     can_edit_portlets python:checkPermission('Portlets: Manage portlets', context);
+                     dummy python:can_edit_portlets and request.set('enable_border', True) or None;
+                     show_border context/@@plone/showEditableBorder">
 
-    <metal:content fill-slot="body"
-                   tal:define="isAnon context/@@plone_portal_state/anonymous;
-                               raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
-                               highlight python:plone_view.have_portlets('frontpage.highlight', view);
-                               fp_left python:plone_view.have_portlets('frontpage.portlets.left', view);
-                               fp_central python:plone_view.have_portlets('frontpage.portlets.central', view);
-                               fp_right python:plone_view.have_portlets('frontpage.portlets.right', view);
-                               bottom python:plone_view.have_portlets('frontpage.bottom', view);
-                               columns_class view/columns_class">
-        <div id="frontpage-highlight" class="row fpBlock"
-             tal:condition="highlight">
-            <div class="cell width-full position-0"><div class="visualPadding">
-                <tal:block replace="structure provider:frontpage.highlight" />
-            </div></div>
-        </div>
-        <div id="frontpage-columns" class="row"
-             tal:condition="columns_class">
-            <div class="cell fpBlock"
-                 tal:attributes="class string:cell fpBlock $columns_class"
-                 tal:condition="fp_left">
-                <div class="visualPadding">
-                    <tal:block replace="structure provider:frontpage.portlets.left" />
+        <section id="company-board" class="clearfix" tal:condition="not:ajax_load" >
+            <div class="contentAlignment">
+                <div id="edit-bar"
+                    tal:condition="show_border"
+                    tal:content="structure provider:plone.contentviews" />
+                <div id="board-blocks">
+                    <div id="main-board">
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.top" />
+                        </div>
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.left" />
+                        </div>
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.right" />
+                        </div>
+                        <div>
+                            <span class="visualClear"><!-- --></span>
+                            <tal:block replace="structure provider:frontpage.main.bottom" />
+                        </div>
+                    </div>
+                    <div id="secondary-board">
+                        <tal:block replace="structure provider:frontpage.portlets.right" />
+                    </div>
                 </div>
             </div>
-            <div class="cell fpBlock"
-                 tal:attributes="class string:cell fpBlock $columns_class"            
-                 tal:condition="fp_central">
-                <div class="visualPadding">
-                    <tal:block replace="structure provider:frontpage.portlets.central" />
-                </div>
-            </div>
-            <div class="cell fpBlock"
-                 tal:attributes="class string:cell fpBlock $columns_class"
-                 tal:condition="fp_right">
-                <div class="visualPadding">
-                    <tal:block replace="structure provider:frontpage.portlets.right" />
-                </div>
-            </div>
-        </div>
-        <div id="frontpage-bottom" class="row fpBlock"
-             tal:condition="bottom">
-            <div class="cell width-full position-0"><div class="visualPadding">
-                <tal:block replace="structure provider:frontpage.bottom" />
-            </div></div>
-        </div>
-    </metal:content>
+        </section>
 
+        <div class="contentAlignment">
+
+            <div id="viewlet-above-columns"
+                 tal:content="structure provider:intranett.abovecolumns" />
+
+            <div class="cell width-16 position-0"
+                 id="portal-column-content">
+
+                <div id="viewlet-above-content" tal:content="structure provider:plone.abovecontent" />
+                <div>
+                    <span id="contentTopLeft"></span>
+                    <span id="contentTopRight"></span>
+
+                    <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+                      Portal status message
+                    </div>
+
+                    <article id="content">
+                        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+                        <div id="content-core"
+                             tal:define="dashboardview nocall:context/@@dashboard">
+
+                            <div tal:condition="python:dashboardview.empty() and dashboardview.can_edit()"
+                                 i18n:domain="intranett">
+                                <a href="#" i18n:translate=""
+                                   class="managePortletsLink"
+                                   tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
+                                    Assign personal portlets
+                                </a>
+                            </div>
+
+                            <div id="dashboard" tal:condition="python:not dashboardview.empty()">
+                                <div class="visualClear"><!-- --></div>
+                                <div id="dashboard-portlets1"
+                                  tal:content="structure provider:plone.dashboard1" />
+                                <div id="dashboard-portlets2"
+                                  tal:content="structure provider:plone.dashboard2" />
+                                <div id="dashboard-portlets3"
+                                  tal:content="structure provider:plone.dashboard3" />
+                                <div id="dashboard-portlets4"
+                                  tal:content="structure provider:plone.dashboard4" />
+                                <div id="viewlet-below-content" tal:condition="python:dashboardview.can_edit()">
+                                    <a href="#" class="managePortletsLink"
+                                       i18n:domain="intranett"
+                                       i18n:translate="link_manage_personal_portlets"
+                                       tal:attributes="href string:${context/absolute_url}/@@manage-dashboard">
+                                        Manage personal portlets
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="visualClear"><!-- --></div>
+                        </div>
+                    </article>
+
+                    <span id="contentBottomLeft"></span>
+                    <span id="contentBottomRight"></span>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
-

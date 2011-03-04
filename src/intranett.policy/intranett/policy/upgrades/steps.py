@@ -1,5 +1,7 @@
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFCore.utils import getToolByName
+from zope.component import getSiteManager
+from zope.component import queryUtility
 
 from intranett.policy.upgrades import upgrade_to
 
@@ -77,6 +79,87 @@ def disable_webstats_js(context):
 
 
 @upgrade_to(10)
+def remove_unused_frontpage_portlets(context):
+    from plone.portlets.interfaces import IPortletManager
+    sm = getSiteManager()
+    names = ('frontpage.portlets.left', 'frontpage.portlets.central',
+        'frontpage.bottom')
+    for name in names:
+        sm.unregisterUtility(provided=IPortletManager, name=name)
+
+
+@upgrade_to(11)
+def add_site_administrator(context):
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    existing_roles = set(getattr(site, '__ac_roles__', []))
+    existing_roles.add('Site Administrator')
+    site.__ac_roles__ = tuple(existing_roles)
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', 'actions'))
+
+
+@upgrade_to(12)
+def allow_site_admin_to_edit_frontpage(context):
+    from plone.portlets.interfaces import IPortletType
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', ))
+    fti = getToolByName(context, 'portal_types')['Plone Site']
+    edit_action = [a for a in fti.listActions() if a.id == 'edit-frontpage']
+    edit_action[0].permissions = (u'Portlets: Manage portlets', )
+    coll_id = u'plone.portlet.collection.Collection'
+    coll = queryUtility(IPortletType, name=coll_id)
+    coll.for_ = []
+
+
+@upgrade_to(13)
+def allow_member_to_edit_personal_portlets(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', ))
+
+
+@upgrade_to(14)
+def add_frontpage_cacherule(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('plone.app.registry', ))
+
+
+@upgrade_to(15)
+def change_frontpage_portlets(context):
+    from plone.portlets.interfaces import IPortletManager
+    sm = getSiteManager()
+    sm.unregisterUtility(provided=IPortletManager, name='frontpage.highlight')
+    loadMigrationProfile(context, 'profile-intranett.theme:default',
+        steps=('portlets', ))
+
+
+@upgrade_to(16)
+def allow_siteadmin_to_edit_content(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', 'workflow', ))
+
+
+@upgrade_to(17)
+def install_highlight_portlets(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('portlets', ))
+    # Add CSS/JS
+    prefix = '++resource++plone.formwidget.autocomplete/jquery.autocomplete'
+    css = getToolByName(context, 'portal_css')
+    ids = css.getResourcesDict().keys()
+    css_id = prefix + '.css'
+    if css_id not in ids:
+        css.registerStylesheet(css_id)
+        css.moveResourceAfter(css_id, 'RTL.css')
+    js = getToolByName(context, 'portal_javascripts')
+    ids = js.getResourcesDict().keys()
+    js_id = prefix + '.min.js'
+    if js_id not in ids:
+        js.registerScript(js_id)
+        js.moveResourceBefore(js_id, 'tiny_mce.js')
+
+
+@upgrade_to(18)
 def install_people_folder(context):
     # Remove the employee-listing action
     atool = getToolByName(context, 'portal_actions')

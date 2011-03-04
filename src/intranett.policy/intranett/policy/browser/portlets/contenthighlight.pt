@@ -1,0 +1,26 @@
+<dl class="portlet portletSingleItem"
+    tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
+    tal:condition="view/available"
+    i18n:domain="intranett">
+
+    <dt class="portletHeader" tal:condition="view/portletTitle">
+        <span class="portletTopLeft"></span>
+        <span tal:content="view/portletTitle">Title</span>
+        <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem odd" tal:define="item view/item">
+      <a href=""
+         class="tile"
+         tal:attributes="href item/getURL;
+                         title item/Description"
+         tal:content="item/Title">
+      </a>
+      <span class="portletItemDetails"
+            tal:content="item/Description">Description</span>
+    </dd>
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>

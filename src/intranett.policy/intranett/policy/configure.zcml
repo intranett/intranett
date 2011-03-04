@@ -1,5 +1,6 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
   xmlns:five="http://namespaces.zope.org/five"
   xmlns:cache="http://namespaces.zope.org/cache"
   xmlns:i18n="http://namespaces.zope.org/i18n"
@@ -17,6 +18,7 @@
   <include package="munin.zope" />
   <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
+  <include package="plone.formwidget.autocomplete" />
   <include package="Products.PloneFormGen" />
   <include package="intranett.theme" />
 
@@ -40,5 +42,14 @@
   <subscriber handler=".content.membersfolder.registerMembersFolderId" />
   <subscriber handler=".content.membersfolder.unregisterMembersFolderId" />
   <subscriber handler=".content.membersfolder.updateMembersFolderId" />
+
+  <!-- Members should be able to add portlets to their own dashboard -->
+  <browser:view
+    for="plone.app.portlets.interfaces.IUserPortletAssignmentMapping"
+    name="+"
+    class="plone.app.portlets.browser.adding.PortletAdding"
+    allowed_interface="plone.app.portlets.browser.interfaces.IPortletAdding"
+    permission="plone.app.portlets.ManageOwnPortlets"
+    />
 
 </configure>

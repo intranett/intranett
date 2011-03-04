@@ -16,6 +16,8 @@ nginx-sites/jarn.conf
 parts
 htmlcov
 src/*/*.egg-info
+src/collective.*
+src/Products.*
 var
 .*
 *.pyc

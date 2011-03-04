@@ -23,7 +23,8 @@ class AddIntranettSite(AddPloneSite):
                 context, 'Plone',
                 title=form.get('title', ''),
                 profile_id=_DEFAULT_PROFILE,
-                extension_ids=form.get('extension_ids', ()),
+                extension_ids=form.get('extension_ids',
+                    (u'intranett.policy:default',)),
                 setup_content=False,
                 default_language=form.get('language', 'no'),
                 )

@@ -17,6 +17,17 @@ You can view the coverage results in the htmlcov directory via::
 
   open htmlcov/index.html
 
+Site creation
+-------------
+
+To create a Plone site in the database call::
+
+  bin/instance create_site
+
+To overwrite an existing site, you can use::
+
+  bin/instance create_site --force
+
 Working on a ticket
 -------------------
 

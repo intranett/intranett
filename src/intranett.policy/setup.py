@@ -1,5 +1,6 @@
 import os
 import os.path
+import subprocess
 
 from setuptools import setup, find_packages
 
@@ -13,7 +14,14 @@ with open(changes, 'rU') as fd:
 
 version = lines[-1].split('-')[0].strip()
 if 'unreleased' in lines[-1]:
-    version += 'dev'
+    proc = subprocess.Popen(['git', 'log', '-n 1', '--pretty="%h %ci"'],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    proc.wait()
+    out = proc.stdout.read()
+    info = out.strip('\n"').split()
+    revision, date, time, tz = info
+    version += 'dev-' + revision + '-' + date
+
 
 setup(name='intranett.policy',
       version=version,
@@ -44,6 +52,7 @@ setup(name='intranett.policy',
           'plone.app.caching',
           'plone.app.discussion',
           'plone.app.testing',
+          'plone.formwidget.autocomplete',
           'Products.CMFQuickInstallerTool',
           'Products.GenericSetup',
           'Products.PloneFormGen',

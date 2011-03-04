@@ -1,13 +1,87 @@
 Changelog
 =========
 
-1.1.7 - unreleased
+1.2.0 - unreleased
 ------------------
 
-- Add version number to footer and adjust text.
+- Added frontpage content highlight portlet, that allows a user to select an
+  item to be shown in the portlet. Closes #186.
+  [ggozad, hannosch]
+
+- Added event and news highlight portlets, which allow a user to show the latest
+  or second latest item in the portlet. Closes #184 and #185.
+  [ggozad, hannosch]
+
+1.1.9 - 2011-03-04
+------------------
+
+- Allow administrators to create and edit content in the entire site.
+  Closes #192 and #193.
+  [ggozad, hannosch]
+
+- Split frontpage into more portlet managers.
+  [denys, ggozad, hannosch]
+
+- Fix caching of frontpage to no longer redirect to the login form.
+  Closes #195.
+  [ggozad, hannosch]
+
+- Allow administrators to edit the frontpage and allow normal users to edit
+  their personal portlets. Closes #191.
   [hannosch]
 
-- Fix lost Cache-Control header when beresp.cacheable is false.
+- Disabled the automatic suggestions on the 404 page. The error page is always
+  rendered as an anonymous user and the suggestions allowed to get at titles
+  and employee names. This closes #180.
+  [hannosch]
+
+- Added Site Administrator user role. Customized user/group management forms
+  and added user site action to access those. Closes #166.
+  [hannosch, ggozad]
+
+- Add Zope admin user during `reset_server` Fabric command. Closes #188.
+  [hannosch]
+
+- Extend version information by Git revision and last commit date.
+  [hannosch]
+
+- Allow creation of non-Norwegian sites. The site language can be configured
+  in the `aws.conf` per server and is passed as an argument to the
+  `create_site` command. TTW creation of sites has been removed in favor of the
+  command. Call it for example via: ``bin/instance create_site --language=en``.
+  This closes #124.
+  [hannosch]
+
+- Implemented new frontpage combining a company and personal section.
+  Closes #170.
+  [denys, hannosch]
+
+- Update TinyMCE to get new Norwegian translations. Closes #168.
+  [MJ, hannosch]
+
+- Update `collective.ATClamAV` to 1.1 to allow local development to take place
+  without a `clamd` setup. Closes #178.
+  [hannosch, ggozad]
+
+1.1.8 - 2011-02-13
+------------------
+
+- Fix production buildout configuration problem introduced in 1.1.7.
+  [hannosch]
+
+1.1.7 - 2011-02-13
+------------------
+
+- Fix KSS problems on login page. Closes #182.
+  [mj]
+
+- Fix unavailable spinner image. Closes #181.
+  [mj]
+
+- Add version number to footer and adjust text. Refs #79.
+  [hannosch]
+
+- Fix lost Cache-Control header when `beresp.cacheable` is false. Refs #172.
   [stefan]
 
 1.1.6 - 2011-02-09

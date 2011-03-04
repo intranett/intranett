@@ -181,6 +181,7 @@
   </record>
   <record field="operationMapping" interface="plone.caching.interfaces.ICacheSettings" name="plone.caching.interfaces.ICacheSettings.operationMapping">
     <value>
+      <element key="intranett.frontpage">plone.app.caching.noCaching</element>
       <element key="plone.resource">plone.app.caching.strongCaching</element>
       <element key="plone.stableResource">plone.app.caching.strongCaching</element>
       <element key="plone.content.itemView">plone.app.caching.weakCaching</element>
