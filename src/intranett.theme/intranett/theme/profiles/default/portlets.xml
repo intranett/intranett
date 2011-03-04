@@ -31,28 +31,6 @@
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
 
-    <assignment name="fp_static_top"
-        category="context"
-        key="/"
-        manager="frontpage.main.top"
-        type="plone.portlet.static.Static"
-        visible="True">
-        <property name="header">Frontpage Top</property>
-        <property name="text">Test frontpage top text</property>
-        <property name="omit_border">True</property>
-    </assignment>
-
-    <assignment name="fp_static_right"
-        category="context"
-        key="/"
-        manager="frontpage.portlets.right"
-        type="plone.portlet.static.Static"
-        visible="True">
-        <property name="header">Frontpage right column</property>
-        <property name="text">Test frontpage right text</property>
-        <property name="omit_border">True</property>
-    </assignment>
-
     <assignment name="navigation"
         category="context"
         key="/"
