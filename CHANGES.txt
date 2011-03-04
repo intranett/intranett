@@ -4,6 +4,9 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Split frontpage into more portlet managers.
+  [denys, ggozad, hannosch]
+
 - Allow administrators to edit the frontpage and allow normal users to edit
   their personal portlets. Closes #191.
   [hannosch]
