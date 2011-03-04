@@ -33,5 +33,138 @@
       <role name="Member" />
       <role name="Site Administrator"/>
     </permission>
+    <permission name="Add portal content" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="Add portal events" acquire="True">
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="Add portal folders" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="ATContentTypes: Add Document" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="ATContentTypes: Add Event" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="ATContentTypes: Add File" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="ATContentTypes: Add Folder" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="ATContentTypes: Add Image" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="ATContentTypes: Add Link" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="ATContentTypes: Add News Item" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="Change local roles" acquire="True">
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="Change portal events" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="Copy or Move" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="Delete objects" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Editor"/>
+    </permission>
+    <permission name="List folder contents" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Editor" />
+      <role name="Contributor" />
+    </permission>
+    <permission name="View" acquire="True">
+        <role name="Manager"/>
+        <role name="Site Administrator"/>
+        <role name="Reader" />
+        <role name="Editor" />
+        <role name="Contributor" />
+    </permission>
+    <permission name="Access contents information" acquire="True">
+        <role name="Site Administrator"/>
+        <role name="Reader" />
+        <role name="Editor" />
+        <role name="Contributor" />
+    </permission>
+    <permission name="Modify portal content" acquire="True">
+        <role name="Manager"/>
+        <role name="Site Administrator"/>
+        <role name="Editor" />
+        <role name="Owner" />
+    </permission>
+    <permission name="View management screens" acquire="True">
+        <role name="Manager"/>
+    </permission>
+    <permission name="PloneFormGen: Add Content" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+      <role name="Contributor" />
+    </permission>
+    <permission name="PloneFormGen: Add Data Savers" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+    </permission>
+    <permission name="PloneFormGen: Add Mailers" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+    </permission>
+    <permission name="PloneFormGen: Download Saved Input" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+    </permission>
+    <permission name="PloneFormGen: Edit Advanced Fields" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+    </permission>
+    <permission name="PloneFormGen: Edit Mail Addresses" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+    </permission>
   </permissions>
 </rolemap>
