@@ -1,4 +1,5 @@
 <dl class="portlet portletSingleItem" 
+    tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
     tal:condition="view/available"
     i18n:domain="intranett">
 
@@ -8,7 +9,14 @@
         <span class="portletTopRight"></span>
     </dt>
     <dd class="portletItem odd" tal:define="item view/item">
-        <span tal:content="item/Title">Content title</span>
+        <a href=""
+           class="tile"
+           tal:attributes="href item/getURL;
+                           title item/Description"
+           tal:content="item/Title">
+        </a>
+        <span class="portletItemDetails"
+              tal:content="python:toLocalizedTime(item.Date)">May 5</span>
     </dd>
     <dd class="portletFooter">
         <span class="portletBottomLeft"></span>
