@@ -84,8 +84,8 @@
                                 <!-- Department -->
                                 <b><span tal:omit-tag="" i18n:translate="label_department">Department</span>:</b>
                                 <a href=""
-                                     tal:attributes="href python:view.department_url(userinfo['department'])"
-                                     tal:content="userinfo/department">Department</a>
+                                   tal:attributes="href python:view.department_url(userinfo['department'])"
+                                   tal:content="userinfo/department">Department</a>
                             </li>
                             <li tal:condition="userinfo/location">
                                 <!-- Location  -->
