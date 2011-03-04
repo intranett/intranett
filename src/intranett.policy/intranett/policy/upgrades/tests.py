@@ -152,3 +152,13 @@ class TestUpgradeSteps(IntranettTestCase):
         steps.allow_member_to_edit_personal_portlets(portal)
         self.assertEqual(set(getattr(portal, perm_id)),
             set(['Manager', 'Member', 'Site Administrator']))
+
+    def test_add_frontpage_cacherule(self):
+        from plone.caching.interfaces import ICacheSettings
+        from plone.registry.interfaces import IRegistry
+        portal = self.layer['portal']
+        steps.add_frontpage_cacherule(portal)
+        registry = queryUtility(IRegistry)
+        settings = registry.forInterface(ICacheSettings)
+        value = settings.operationMapping['intranett.frontpage']
+        self.assertEqual(value, 'plone.app.caching.noCaching')

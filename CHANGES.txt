@@ -4,6 +4,10 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Fix caching of frontpage to no longer redirect to the login form.
+  Closes #195.
+  [ggozad, hannosch]
+
 - Allow administrators to edit the frontpage and allow normal users to edit
   their personal portlets. Closes #191.
   [hannosch]

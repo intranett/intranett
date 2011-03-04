@@ -116,3 +116,9 @@ def allow_site_admin_to_edit_frontpage(context):
 def allow_member_to_edit_personal_portlets(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('rolemap', ))
+
+
+@upgrade_to(14)
+def add_frontpage_cacherule(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('plone.app.registry', ))
