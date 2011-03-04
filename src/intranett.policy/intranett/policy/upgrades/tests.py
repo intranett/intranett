@@ -1,6 +1,8 @@
 import os
 
 from plone.app.testing import TEST_USER_ID
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.manager import PortletManager
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
 from zope.component import queryUtility
@@ -100,8 +102,6 @@ class TestUpgradeSteps(IntranettTestCase):
         self.assertEqual(sprops.webstats_js, '')
 
     def test_remove_unused_frontpage_portlets(self):
-        from plone.portlets.interfaces import IPortletManager
-        from plone.portlets.manager import PortletManager
         portal = self.layer['portal']
         sm = getSiteManager()
         names = ('frontpage.portlets.left', 'frontpage.portlets.central',
@@ -162,3 +162,14 @@ class TestUpgradeSteps(IntranettTestCase):
         settings = registry.forInterface(ICacheSettings)
         value = settings.operationMapping['intranett.frontpage']
         self.assertEqual(value, 'plone.app.caching.noCaching')
+
+    def test_change_frontpage_portlets(self):
+        portal = self.layer['portal']
+        sm = getSiteManager()
+        sm.registerUtility(component=PortletManager(),
+            provided=IPortletManager, name='frontpage.highlight')
+        steps.change_frontpage_portlets(portal)
+        registrations = [r.name for r in sm.registeredUtilities()
+                         if IPortletManager == r.provided]
+        self.assertFalse('frontpage.highlight' in registrations)
+        self.assertTrue('frontpage.main.top' in registrations)

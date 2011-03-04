@@ -122,3 +122,12 @@ def allow_member_to_edit_personal_portlets(context):
 def add_frontpage_cacherule(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('plone.app.registry', ))
+
+
+@upgrade_to(15)
+def change_frontpage_portlets(context):
+    from plone.portlets.interfaces import IPortletManager
+    sm = getSiteManager()
+    sm.unregisterUtility(provided=IPortletManager, name='frontpage.highlight')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('portlets', ))

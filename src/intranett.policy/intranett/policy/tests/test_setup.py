@@ -157,12 +157,12 @@ class TestSiteSetup(IntranettTestCase):
         view = manage.ManageContextualPortlets(portal, request)
 
         from plone.portlets.interfaces import IPortletManager
-        highlight = queryUtility(IPortletManager, name='frontpage.highlight')
-        available = set([p.addview for p in highlight.getAddablePortletTypes()])
+        left = queryUtility(IPortletManager, name='plone.leftcolumn')
+        available = set([p.addview for p in left.getAddablePortletTypes()])
 
         from plone.app.portlets.browser import editmanager
         renderer = editmanager.EditPortletManagerRenderer(
-            portal, request, view, highlight)
+            portal, request, view, left)
 
         addable = renderer.addable_portlets()
         ids = set([a['addview'].split('/+/')[-1] for a in addable])

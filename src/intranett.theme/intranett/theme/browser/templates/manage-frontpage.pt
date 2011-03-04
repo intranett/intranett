@@ -20,8 +20,6 @@
          metal:fill-slot="columns"
          tal:define="isAnon context/@@plone_portal_state/anonymous;
                      raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
-                     highlight python:plone_view.have_portlets('frontpage.highlight', view);
-                     right python:plone_view.have_portlets('frontpage.right', view);
                      show_border context/@@plone/showEditableBorder;
                      ploneview context/@@plone">
 
@@ -31,10 +29,22 @@
                     tal:condition="show_border"
                     tal:content="structure provider:plone.contentviews" />
                 <div id="board-blocks">
-                    <div>
-                        <tal:block replace="structure provider:frontpage.highlight" />
+                    <div id="main-board">
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.top" />
+                        </div>
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.left" />
+                        </div>
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.right" />
+                        </div>
+                        <div>
+                            <span class="visualClear"><!-- --></span>
+                            <tal:block replace="structure provider:frontpage.main.bottom" />
+                        </div>
                     </div>
-                    <div>
+                    <div id="secondary-board">
                         <tal:block replace="structure provider:frontpage.portlets.right" />
                     </div>
                 </div>

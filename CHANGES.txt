@@ -4,6 +4,9 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Split frontpage into more portlet managers.
+  [denys, ggozad, hannosch]
+
 - Fix caching of frontpage to no longer redirect to the login form.
   Closes #195.
   [ggozad, hannosch]

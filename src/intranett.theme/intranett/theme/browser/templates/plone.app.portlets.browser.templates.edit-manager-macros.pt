@@ -1,0 +1,79 @@
+<div metal:define-macro="portlet-add-form" class="section" i18n:domain="plone">
+
+    <form method="post" action="#"
+          tal:attributes="action view/context_url">
+        <input type="hidden" name="referer" tal:attributes="value view/referer" />
+
+        <label class="hiddenStructure"
+               i18n:translate="label_add_portlet">
+            Add portlet
+        </label>
+
+        <select name=":action" onchange="this.form.submit()">
+            <option tal:attributes="value python:request['ACTUAL_URL'].replace(view.context_url(), '')"
+                    i18n:translate="label_add_portlet_ellipsis">
+                Add portlet&hellip;
+            </option>
+            <tal:options repeat="portlet view/addable_portlets">
+                <option tal:attributes="value string:${portlet/addview}"
+                        tal:content="portlet/title"
+                        i18n:translate="" />
+            </tal:options>
+
+        </select>
+
+        <noscript>
+            <input class="standalone"
+                   type="submit"
+                   value="Add portlet"
+                   i18n:attributes="value label_add_portlet;"/>
+        </noscript>
+
+    </form>
+</div>
+
+<div metal:define-macro="current-portlets-list" class="portletAssignments"
+    i18n:domain="plone">
+
+    <h4 i18n:translate="heading_portlets_assigned_here" class="hiddenStructure">
+        Portlets assigned here
+    </h4>
+
+    <div tal:attributes="class string:kssattr-viewname-${view/__parent__/__name__}">
+        <tal:block repeat="portlet view/portlets">
+            <div tal:define="hiddenPortletClass python:not portlet['visible'] and 'blockedPortlet' or ''"
+                tal:attributes="class string:managedPortlet portlet kssattr-portlethash-${portlet/hash} ${hiddenPortletClass}">
+                <div class="portletHeader">
+                    <span class="managedPortletActions">
+                    <a href="#" class="up"
+                       title="Move up"
+                       i18n:attributes="title"
+                       tal:condition="not:repeat/portlet/start"
+                       tal:attributes="href string:${portlet/up_url}&amp;referer=${view/url_quote_referer}">&#9650;</a>
+                    <a href="#" class="down"
+                       title="Move down"
+                       i18n:attributes="title"
+                       tal:condition="not:repeat/portlet/end"
+                       tal:attributes="href string:${portlet/down_url}&amp;referer=${view/url_quote_referer}">&#9660;</a>
+                    <a href="#" class="toggle-visibility"
+                       tal:condition="not: portlet/visible"
+                       i18n:translate="label_show_item"
+                       tal:attributes="href string:${portlet/show_url}&amp;referer=${view/url_quote_referer}">Show</a>
+                    <a href="#" class="toggle-visibility"
+                       tal:condition="portlet/visible"
+                       i18n:translate="label_hide_item"
+                       tal:attributes="href string:${portlet/hide_url}&amp;referer=${view/url_quote_referer}">Hide</a>
+                    <a href="#" class="delete"
+                       title="Remove"
+                       i18n:attributes="title"
+                       tal:attributes="href string:${portlet/delete_url}&amp;referer=${view/url_quote_referer}">&times;</a>
+                    </span>
+                    <a tal:omit-tag="not:portlet/editview"
+                       tal:attributes="href string:${portlet/editview}?referer=${view/url_quote_referer}"
+                       tal:content="portlet/title" />
+                </div>
+            </div>
+        </tal:block>
+    </div>
+
+</div>
