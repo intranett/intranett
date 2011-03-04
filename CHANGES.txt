@@ -4,6 +4,10 @@ Changelog
 1.1.9 - unreleased
 ------------------
 
+- Allow administrators to create and edit content in the entire site.
+  Closes #192 and #193.
+  [ggozad, hannosch]
+
 - Split frontpage into more portlet managers.
   [denys, ggozad, hannosch]
 
