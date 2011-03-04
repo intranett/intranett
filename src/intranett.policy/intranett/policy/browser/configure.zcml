@@ -8,4 +8,6 @@
       name="jarn-logo.jpg"
       />
 
+  <include package=".portlets" />
+
 </configure>

@@ -1,0 +1,40 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
+  i18n_domain="intranett">
+
+  <plone:portlet
+    name="intranett.policy.portlets.NewsHighlight"
+    interface=".newshighlight.INewsHighlight"
+    assignment=".newshighlight.Assignment"
+    view_permission="zope2.View"
+    edit_permission="plone.app.portlets.ManagePortlets"
+    renderer=".newshighlight.Renderer"
+    addview=".newshighlight.AddForm"
+    editview=".newshighlight.EditForm"
+    />
+
+  <plone:portlet
+    name="intranett.policy.portlets.EventHighlight"
+    interface=".eventhighlight.IEventHighlight"
+    assignment=".eventhighlight.Assignment"
+    view_permission="zope2.View"
+    edit_permission="plone.app.portlets.ManagePortlets"
+    renderer=".eventhighlight.Renderer"
+    addview=".eventhighlight.AddForm"
+    editview=".eventhighlight.EditForm"
+    />
+
+  <plone:portlet
+    name="intranett.policy.portlets.ContentHighlight"
+    interface=".contenthighlight.IContentHighlight"
+    assignment=".contenthighlight.Assignment"
+    view_permission="zope2.View"
+    edit_permission="plone.app.portlets.ManagePortlets"
+    renderer=".contenthighlight.Renderer"
+    addview=".contenthighlight.AddForm"
+    editview=".contenthighlight.EditForm"
+    />
+
+</configure>

@@ -137,3 +137,23 @@ def change_frontpage_portlets(context):
 def allow_siteadmin_to_edit_content(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('rolemap', 'workflow', ))
+
+
+@upgrade_to(17)
+def install_highlight_portlets(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('portlets', ))
+    # Add CSS/JS
+    prefix = '++resource++plone.formwidget.autocomplete/jquery.autocomplete'
+    css = getToolByName(context, 'portal_css')
+    ids = css.getResourcesDict().keys()
+    css_id = prefix + '.css'
+    if css_id not in ids:
+        css.registerStylesheet(css_id)
+        css.moveResourceAfter(css_id, 'RTL.css')
+    js = getToolByName(context, 'portal_javascripts')
+    ids = js.getResourcesDict().keys()
+    js_id = prefix + '.min.js'
+    if js_id not in ids:
+        js.registerScript(js_id)
+        js.moveResourceBefore(js_id, 'tiny_mce.js')

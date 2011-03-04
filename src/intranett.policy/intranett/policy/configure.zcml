@@ -18,6 +18,7 @@
   <include package="munin.zope" />
   <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
+  <include package="plone.formwidget.autocomplete" />
   <include package="Products.PloneFormGen" />
   <include package="intranett.theme" />
 

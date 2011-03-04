@@ -2,6 +2,7 @@ import os
 
 from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletType
 from plone.portlets.manager import PortletManager
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
@@ -128,7 +129,6 @@ class TestUpgradeSteps(IntranettTestCase):
         self.assertIn('Site Administrator', existing_roles)
 
     def test_allow_site_admin_to_edit_frontpage(self):
-        from plone.portlets.interfaces import IPortletType
         from plone.app.portlets.interfaces import IColumn
         portal = self.layer['portal']
         setattr(portal, '_Portlets__Manage_portlets_Permission', ['Manager'])
@@ -181,3 +181,27 @@ class TestUpgradeSteps(IntranettTestCase):
         steps.allow_siteadmin_to_edit_content(portal)
         self.assertEqual(set(getattr(portal, perm_id)),
             set(['Manager', 'Contributor', 'Site Administrator', 'Owner']))
+
+    def test_highlight_portlets_available(self):
+        portal = self.layer['portal']
+        prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
+            'autocomplete'
+        css = getToolByName(portal, 'portal_css')
+        css.unregisterResource(prefix + '.css')
+        js = getToolByName(portal, 'portal_javascripts')
+        js.unregisterResource(prefix + '.min.js')
+        sm = getSiteManager()
+        sm.unregisterUtility(provided=IPortletType,
+            name='intranett.policy.portlets.NewsHighlight')
+        sm.unregisterUtility(provided=IPortletType,
+            name='intranett.policy.portlets.EventHighlight')
+        regs = [r.name for r in sm.registeredUtilities()
+            if r.provided == IPortletType]
+        # call the upgrade step
+        steps.install_highlight_portlets(portal)
+        regs = [r.name for r in sm.registeredUtilities()
+            if r.provided == IPortletType]
+        self.assertTrue('intranett.policy.portlets.NewsHighlight' in regs)
+        self.assertTrue('intranett.policy.portlets.EventHighlight' in regs)
+        self.assertTrue(prefix + '.css' in css.getResourcesDict().keys())
+        self.assertTrue(prefix + '.min.js' in js.getResourcesDict().keys())

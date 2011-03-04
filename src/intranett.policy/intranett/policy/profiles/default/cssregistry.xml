@@ -4,6 +4,8 @@
  <stylesheet id="member.css" authenticated="False" />
  <stylesheet id="RTL.css" enabled="0" />
 
+ <stylesheet id="++resource++plone.formwidget.autocomplete/jquery.autocomplete.css"
+   insert-after="RTL.css"/>
  <stylesheet id="++resource++plone.app.discussion.stylesheets/discussion.css"
    rendering="link" cacheable="True" cookable="True" />
 
