@@ -1,5 +1,6 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
   xmlns:five="http://namespaces.zope.org/five"
   xmlns:cache="http://namespaces.zope.org/cache"
   xmlns:i18n="http://namespaces.zope.org/i18n"
@@ -36,6 +37,15 @@
   <cache:ruleset
     for=".tools.Portrait"
     ruleset="plone.content.file"
+    />
+
+  <!-- Members should be able to add portlets to their own dashboard -->
+  <browser:view
+    for="plone.app.portlets.interfaces.IUserPortletAssignmentMapping"
+    name="+"
+    class="plone.app.portlets.browser.adding.PortletAdding"
+    allowed_interface="plone.app.portlets.browser.interfaces.IPortletAdding"
+    permission="plone.app.portlets.ManageOwnPortlets"
     />
 
 </configure>

@@ -1,8 +1,49 @@
 Changelog
 =========
 
-1.1.9 - unreleased
+1.2.0 - unreleased
 ------------------
+
+
+1.1.9 - 2011-03-04
+------------------
+
+- Allow administrators to create and edit content in the entire site.
+  Closes #192 and #193.
+  [ggozad, hannosch]
+
+- Split frontpage into more portlet managers.
+  [denys, ggozad, hannosch]
+
+- Fix caching of frontpage to no longer redirect to the login form.
+  Closes #195.
+  [ggozad, hannosch]
+
+- Allow administrators to edit the frontpage and allow normal users to edit
+  their personal portlets. Closes #191.
+  [hannosch]
+
+- Disabled the automatic suggestions on the 404 page. The error page is always
+  rendered as an anonymous user and the suggestions allowed to get at titles
+  and employee names. This closes #180.
+  [hannosch]
+
+- Added Site Administrator user role. Customized user/group management forms
+  and added user site action to access those. Closes #166.
+  [hannosch, ggozad]
+
+- Add Zope admin user during `reset_server` Fabric command. Closes #188.
+  [hannosch]
+
+- Extend version information by Git revision and last commit date.
+  [hannosch]
+
+- Allow creation of non-Norwegian sites. The site language can be configured
+  in the `aws.conf` per server and is passed as an argument to the
+  `create_site` command. TTW creation of sites has been removed in favor of the
+  command. Call it for example via: ``bin/instance create_site --language=en``.
+  This closes #124.
+  [hannosch]
 
 - Implemented new frontpage combining a company and personal section.
   Closes #170.

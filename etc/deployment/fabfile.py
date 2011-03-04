@@ -2,6 +2,7 @@ import sys
 import os
 import os.path
 import time
+from ConfigParser import ConfigParser
 from datetime import datetime
 
 from fabric.api import cd
@@ -197,12 +198,19 @@ def _buildout(envvars, newest=True):
 
 def _create_plone_site(initial=False):
     title = env.server.config.get('title', '%s intranett' % env.host_string)
+    language = env.server.config.get('language', 'no')
     with cd(VENV):
         with settings(hide('warnings'), warn_only=True):
             if initial:
                 run('bin/zeo start')
                 time.sleep(3)
-            run('bin/instance-debug create_site --title="%s"' % title)
+            cfg = os.path.join(BUILDOUT_ROOT, 'cfgs', 'credentials.cfg')
+            config = ConfigParser()
+            config.read(cfg)
+            value = config.get('credentials', 'zope-user')
+            password = value.split(':')[-1]
+            run('bin/instance-debug create_site --title="%s" --language=%s '
+                '--rootpassword=%s' % (title, language, password))
             if initial:
                 run('bin/zeo stop')
 

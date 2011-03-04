@@ -80,9 +80,21 @@
   <!-- Frontpage -->
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".frontpage.FrontPageView"
       name="frontpage_view"
       template="templates/frontpage_view.pt"
       permission="zope2.View"
+      />
+
+  <cache:rulesetType
+      name="intranett.frontpage"
+      title="Intranett frontpage "
+      description=""
+      />
+
+  <cache:ruleset
+      for=".frontpage.FrontPageView"
+      ruleset="intranett.frontpage"
       />
 
   <browser:menuItem

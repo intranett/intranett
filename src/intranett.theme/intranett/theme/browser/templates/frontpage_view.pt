@@ -15,7 +15,9 @@
          metal:fill-slot="columns"
          tal:define="isAnon context/@@plone_portal_state/anonymous;
                      raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
-                     highlight python:plone_view.have_portlets('frontpage.highlight', view);
+                     checkPermission nocall: context/portal_membership/checkPermission;
+                     can_edit_portlets python:checkPermission('Portlets: Manage portlets', context);
+                     dummy python:can_edit_portlets and request.set('enable_border', True) or None;
                      show_border context/@@plone/showEditableBorder">
 
         <section id="company-board" class="clearfix" tal:condition="not:ajax_load" >
@@ -24,10 +26,22 @@
                     tal:condition="show_border"
                     tal:content="structure provider:plone.contentviews" />
                 <div id="board-blocks">
-                    <div>
-                        <tal:block replace="structure provider:frontpage.highlight" />
+                    <div id="main-board">
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.top" />
+                        </div>
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.left" />
+                        </div>
+                        <div>
+                            <tal:block replace="structure provider:frontpage.main.right" />
+                        </div>
+                        <div>
+                            <span class="visualClear"><!-- --></span>
+                            <tal:block replace="structure provider:frontpage.main.bottom" />
+                        </div>
                     </div>
-                    <div>
+                    <div id="secondary-board">
                         <tal:block replace="structure provider:frontpage.portlets.right" />
                     </div>
                 </div>

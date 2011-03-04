@@ -20,9 +20,6 @@
     <depends name="workflow"/>
   </genericsetup:importStep>
 
-  <utility factory=".profile.HiddenProfiles"
-           name="intranett.policy" />
-
   <utility factory=".profile.HiddenProducts"
            name="intranett.policy" />
 

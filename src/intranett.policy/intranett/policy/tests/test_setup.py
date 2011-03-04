@@ -12,14 +12,6 @@ from intranett.policy.tests.base import IntranettTestCase
 
 class TestSiteSetup(IntranettTestCase):
 
-    def test_installable_profiles(self):
-        from Products.CMFPlone.browser.admin import AddPloneSite
-        portal = self.layer['portal']
-        add = AddPloneSite(portal, portal.REQUEST)
-        profiles = add.profiles()['extensions']
-        ids = [p['id'] for p in profiles]
-        self.assertEquals(ids, [u'intranett.policy:default'])
-
     def test_installable_products(self):
         portal = self.layer['portal']
         qi = getToolByName(portal, 'portal_quickinstaller')
@@ -41,6 +33,15 @@ class TestSiteSetup(IntranettTestCase):
                                      categories=('site_actions', ))
         ids = set([a['id'] for a in actions])
         self.assertEquals(ids, set(['accessibility']))
+
+    def test_manage_users_action(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        at = getToolByName(portal, 'portal_actions')
+        actions = at.listActionInfos(object=portal,
+                                     categories=('user', ))
+        ids = set([a['id'] for a in actions])
+        self.assertTrue('manage_users' in ids)
 
     def test_clamav(self):
         portal = self.layer['portal']
@@ -148,6 +149,26 @@ class TestSiteSetup(IntranettTestCase):
         self.assert_('portlets.Login' not in ids)
         self.assert_('portlets.Review' not in ids)
 
+    def test_siteadmin_portlets(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        from plone.app.portlets.browser import manage
+        request = self.layer['request']
+        view = manage.ManageContextualPortlets(portal, request)
+
+        from plone.portlets.interfaces import IPortletManager
+        left = queryUtility(IPortletManager, name='plone.leftcolumn')
+        available = set([p.addview for p in left.getAddablePortletTypes()])
+
+        from plone.app.portlets.browser import editmanager
+        renderer = editmanager.EditPortletManagerRenderer(
+            portal, request, view, left)
+
+        addable = renderer.addable_portlets()
+        ids = set([a['addview'].split('/+/')[-1] for a in addable])
+        # A site admin should be able to add all available portlet types
+        self.assertEqual(ids, available)
+
     def test_content(self):
         # This content is only created in the tests
         test_content = set(['test-folder'])
@@ -206,15 +227,6 @@ class TestAdmin(IntranettTestCase):
         overview = self.layer['app'].unrestrictedTraverse('@@plone-overview')
         result = overview()
         self.assert_('View your intranet' in result, result)
-
-    def test_addsite_profiles(self):
-        portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Manager'])
-        addsite = self.layer['app'].unrestrictedTraverse('@@plone-addsite')
-        extensions = addsite.profiles()['extensions']
-        self.assertEquals(len(extensions), 1)
-        profile = extensions[0]
-        self.assertEquals(profile['id'], u'intranett.policy:default')
 
     def test_addsite_call(self):
         portal = self.layer['portal']
