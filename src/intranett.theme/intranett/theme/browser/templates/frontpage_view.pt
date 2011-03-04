@@ -15,7 +15,6 @@
          metal:fill-slot="columns"
          tal:define="isAnon context/@@plone_portal_state/anonymous;
                      raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
-                     highlight python:plone_view.have_portlets('frontpage.highlight', view);
                      checkPermission nocall: context/portal_membership/checkPermission;
                      can_edit_portlets python:checkPermission('Portlets: Manage portlets', context);
                      dummy python:can_edit_portlets and request.set('enable_border', True) or None;
@@ -29,7 +28,7 @@
                 <div id="board-blocks">
                     <div id="main-board">
                         <div>
-                            <tal:block replace="structure provider:frontpage.main.prefix" />
+                            <tal:block replace="structure provider:frontpage.main.top" />
                         </div>
                         <div>
                             <tal:block replace="structure provider:frontpage.main.left" />
@@ -39,7 +38,7 @@
                         </div>
                         <div>
                             <span class="visualClear"><!-- --></span>
-                            <tal:block replace="structure provider:frontpage.main.suffix" />
+                            <tal:block replace="structure provider:frontpage.main.bottom" />
                         </div>
                     </div>
                     <div id="secondary-board">

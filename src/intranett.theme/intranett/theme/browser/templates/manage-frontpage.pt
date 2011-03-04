@@ -20,8 +20,6 @@
          metal:fill-slot="columns"
          tal:define="isAnon context/@@plone_portal_state/anonymous;
                      raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
-                     highlight python:plone_view.have_portlets('frontpage.highlight', view);
-                     right python:plone_view.have_portlets('frontpage.right', view);
                      show_border context/@@plone/showEditableBorder;
                      ploneview context/@@plone">
 
@@ -33,7 +31,7 @@
                 <div id="board-blocks">
                     <div id="main-board">
                         <div>
-                            <tal:block replace="structure provider:frontpage.main.prefix" />
+                            <tal:block replace="structure provider:frontpage.main.top" />
                         </div>
                         <div>
                             <tal:block replace="structure provider:frontpage.main.left" />
@@ -43,7 +41,7 @@
                         </div>
                         <div>
                             <span class="visualClear"><!-- --></span>
-                            <tal:block replace="structure provider:frontpage.main.suffix" />
+                            <tal:block replace="structure provider:frontpage.main.bottom" />
                         </div>
                     </div>
                     <div id="secondary-board">

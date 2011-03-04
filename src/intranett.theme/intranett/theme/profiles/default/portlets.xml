@@ -8,7 +8,7 @@
     <!-- frontpage.main — managers located in the main (LEFT) column of the
     company board of the frontpage view-->
     <portletmanager
-      name="frontpage.main.prefix"
+      name="frontpage.main.top"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
     <portletmanager
@@ -20,7 +20,7 @@
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
     <portletmanager
-      name="frontpage.main.suffix"
+      name="frontpage.main.bottom"
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
 
@@ -31,14 +31,14 @@
       type="intranett.theme.browser.interfaces.IFrontpagePortletManagers"
       />
 
-    <assignment name="highlight"
+    <assignment name="fp_static_top"
         category="context"
         key="/"
-        manager="frontpage.main.prefix"
+        manager="frontpage.main.top"
         type="plone.portlet.static.Static"
         visible="True">
-        <property name="header">Frontpage Highlight</property>
-        <property name="text">Test frontpage highlight text</property>
+        <property name="header">Frontpage Top</property>
+        <property name="text">Test frontpage top text</property>
         <property name="omit_border">True</property>
     </assignment>
 

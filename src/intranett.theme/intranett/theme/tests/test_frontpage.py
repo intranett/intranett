@@ -4,12 +4,10 @@ from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
 import transaction
 from zope.component import getSiteManager
-from zope.component import getUtility
 
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.base import IntranettTestCase
-from intranett.theme.browser.interfaces import IFrontpagePortletManagers
 
 
 class TestFrontpage(IntranettTestCase):
@@ -29,31 +27,11 @@ class TestFrontpage(IntranettTestCase):
         sm = getSiteManager()
         registrations = [r.name for r in sm.registeredUtilities()
                          if IPortletManager == r.provided]
-        self.assert_('frontpage.highlight' in registrations)
+        self.assert_('frontpage.main.top' in registrations)
+        self.assert_('frontpage.main.left' in registrations)
+        self.assert_('frontpage.main.right' in registrations)
+        self.assert_('frontpage.main.bottom' in registrations)
         self.assert_('frontpage.portlets.right' in registrations)
-
-    def testFrontpageInterfaces(self):
-        highlight = getUtility(IPortletManager, 'frontpage.highlight')
-        portlets_right = getUtility(IPortletManager,
-                                    'frontpage.portlets.right')
-
-        self.assertTrue(IFrontpagePortletManagers.providedBy(highlight))
-        self.assertTrue(IFrontpagePortletManagers.providedBy(portlets_right))
-
-    def test_static_portlet_in_highlight(self):
-        highlight = '++contextportlets++frontpage.highlight'
-        portal = self.layer['portal']
-        mapping = portal.restrictedTraverse(highlight)
-        self.assert_(u'highlight' in mapping.keys(),
-                     'Highlight static portlet is not registered for '
-                     'frontpage.highlight')
-
-    def test_static_in_frontpage_right(self):
-        portlets_right = '++contextportlets++frontpage.portlets.right'
-        portal = self.layer['portal']
-        mapping = portal.restrictedTraverse(portlets_right)
-        self.assert_(u'fp_static_right' in mapping.keys(),
-                     'FP static right is not registered for portlets.right')
 
 
 class TestFunctionalFrontpage(IntranettFunctionalTestCase):
