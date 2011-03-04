@@ -116,3 +116,12 @@ def allow_site_admin_to_edit_frontpage(context):
 def allow_member_to_edit_personal_portlets(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('rolemap', ))
+
+
+@upgrade_to(14)
+def change_frontpage_portlets(context):
+    from plone.portlets.interfaces import IPortletManager
+    sm = getSiteManager()
+    sm.unregisterUtility(provided=IPortletManager, name='frontpage.highlight')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('portlets', ))
