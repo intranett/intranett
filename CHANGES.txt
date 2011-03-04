@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.9 - unreleased
+1.1.9 - 2011-03-04
 ------------------
 
 - Allow administrators to create and edit content in the entire site.
