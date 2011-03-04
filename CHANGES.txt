@@ -8,6 +8,10 @@ Changelog
   item to be shown in the portlet. Closes #186.
   [ggozad, hannosch]
 
+- Added event and news highlight portlets, which allow a user to show the latest
+  or second latest item in the portlet. Closes #184 and #185.
+  [ggozad, hannosch]
+
 1.1.9 - 2011-03-04
 ------------------
 
