@@ -75,7 +75,7 @@ class TestWorkflowPermissions(IntranettTestCase):
 
     def test_no_anonymous_view_new_page(self):
         portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Manager'])
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
         portal.invokeFactory('Document', 'doc1')
         doc1 = portal.doc1
         logout()
@@ -83,7 +83,7 @@ class TestWorkflowPermissions(IntranettTestCase):
 
     def test_no_anonymous_view_new_folder(self):
         portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Manager'])
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
         portal.invokeFactory('Folder', 'folder1')
         folder1 = portal.folder1
         logout()
@@ -105,7 +105,7 @@ class TestWorkflowTransitions(IntranettTestCase):
         portal = self.layer['portal']
         addUser = aq_get(portal, 'acl_users').userFolderAddUser
         addUser('member', 'secret', ['Member'], [])
-        addUser('manager', 'secret', ['Manager'], [])
+        addUser('admin', 'secret', ['Member', 'Site Administrator'], [])
         addUser('editor', 'secret', ['Editor'], [])
         addUser('reader', 'secret', ['Reader'], [])
 
@@ -142,7 +142,7 @@ class TestWorkflowTransitions(IntranettTestCase):
                          'private')
 
         self.assertFalse(self._check_edit('member'))
-        self.assertTrue(self._check_edit('manager'))
+        self.assertTrue(self._check_edit('admin'))
         self.assertTrue(self._check_edit('editor'))
         self.assertFalse(self._check_edit('reader'))
         self.assertFalse(self._check_edit(None))
@@ -156,7 +156,7 @@ class TestWorkflowTransitions(IntranettTestCase):
                          'published')
 
         self.assertFalse(self._check_edit('member'))
-        self.assertTrue(self._check_edit('manager'))
+        self.assertTrue(self._check_edit('admin'))
         self.assertTrue(self._check_edit('editor'))
         self.assertFalse(self._check_edit('reader'))
         self.assertFalse(self._check_edit(None))
@@ -179,7 +179,7 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertEqual(wftool.getInfoFor(doc, 'review_state'), 'private')
 
         self.assertFalse(self._check_view('member'))
-        self.assertTrue(self._check_view('manager'))
+        self.assertTrue(self._check_view('admin'))
         self.assertTrue(self._check_view('editor'))
         self.assertTrue(self._check_view('reader'))
         self.assertFalse(self._check_view(None))
@@ -193,7 +193,7 @@ class TestWorkflowTransitions(IntranettTestCase):
                          'published')
 
         self.assertTrue(self._check_view('member'))
-        self.assertTrue(self._check_view('manager'))
+        self.assertTrue(self._check_view('admin'))
         self.assertTrue(self._check_view('editor'))
         self.assertTrue(self._check_view('reader'))
         self.assertFalse(self._check_view(None))
