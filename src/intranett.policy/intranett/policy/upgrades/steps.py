@@ -129,5 +129,5 @@ def change_frontpage_portlets(context):
     from plone.portlets.interfaces import IPortletManager
     sm = getSiteManager()
     sm.unregisterUtility(provided=IPortletManager, name='frontpage.highlight')
-    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    loadMigrationProfile(context, 'profile-intranett.theme:default',
         steps=('portlets', ))
