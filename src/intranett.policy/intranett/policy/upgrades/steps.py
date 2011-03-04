@@ -91,6 +91,10 @@ def install_people_folder(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
     if MEMBERS_FOLDER_ID not in portal:
         setup_people_folder(portal)
+    # Reindex member data
+    mt = getToolByName(context, 'portal_membership')
+    for member in mt.listMembers():
+        member.notifyModified()
 
 
 @upgrade_to(11)
@@ -98,4 +102,3 @@ def restrict_allowed_types(context):
     # Import type restrictions for the Plone Site
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('typeinfo',))
-
