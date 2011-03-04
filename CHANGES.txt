@@ -4,6 +4,9 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Added frontpage content highlight portlet, that allows a user to select an
+  item to be shown in the portlet. Closes #186.
+  [ggozad, hannosch]
 
 1.1.9 - 2011-03-04
 ------------------
