@@ -173,3 +173,11 @@ class TestUpgradeSteps(IntranettTestCase):
                          if IPortletManager == r.provided]
         self.assertFalse('frontpage.highlight' in registrations)
         self.assertTrue('frontpage.main.top' in registrations)
+
+    def test_allow_siteadmin_to_edit_content(self):
+        portal = self.layer['portal']
+        perm_id = '_ATContentTypes__Add_Folder_Permission'
+        setattr(portal, perm_id, ['Manager'])
+        steps.allow_siteadmin_to_edit_content(portal)
+        self.assertEqual(set(getattr(portal, perm_id)),
+            set(['Manager', 'Contributor', 'Site Administrator', 'Owner']))

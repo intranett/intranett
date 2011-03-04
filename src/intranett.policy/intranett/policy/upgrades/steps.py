@@ -131,3 +131,9 @@ def change_frontpage_portlets(context):
     sm.unregisterUtility(provided=IPortletManager, name='frontpage.highlight')
     loadMigrationProfile(context, 'profile-intranett.theme:default',
         steps=('portlets', ))
+
+
+@upgrade_to(16)
+def allow_siteadmin_to_edit_content(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', 'workflow', ))
