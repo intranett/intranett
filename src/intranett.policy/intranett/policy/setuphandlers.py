@@ -91,7 +91,8 @@ def setup_people_folder(site):
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import MEMBERS_FOLDER_ID, MEMBERS_FOLDER_TITLE
     portal = getToolByName(site, 'portal_url').getPortalObject()
-    _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID, title=MEMBERS_FOLDER_TITLE)
+    _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID,
+        title=MEMBERS_FOLDER_TITLE)
     portal[MEMBERS_FOLDER_ID].processForm() # Fire events
     workflow = getToolByName(site, 'portal_workflow')
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
