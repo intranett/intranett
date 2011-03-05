@@ -4,6 +4,8 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Update to Varnish 2.1.5 and HAProxy 1.4.11.
+  [hannosch]
 
 1.1.9 - 2011-03-04
 ------------------
