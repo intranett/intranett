@@ -14,14 +14,12 @@ from intranett.policy.tests.upgrade import UpgradeTests
 class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
     def before_7(self):
-        portal = self.layer['portal']
-        registry = getToolByName(portal, 'portal_registry')
+        registry = getToolByName(self.portal, 'portal_registry')
         etag_key = 'plone.app.caching.weakCaching.etags'
         self.assertFalse('editbar' in registry.records[etag_key].value)
 
     def after_7(self):
-        portal = self.layer['portal']
-        registry = getToolByName(portal, 'portal_registry')
+        registry = getToolByName(self.portal, 'portal_registry')
         purge_key = 'plone.app.caching.interfaces.IPloneCacheSettings.' \
             'purgedContentTypes'
         etag_key = 'plone.app.caching.weakCaching.etags'
@@ -33,13 +31,9 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         from OFS.Image import Image
         from intranett.policy.tests.test_userdata import TEST_IMAGES
         from intranett.policy.tests.utils import make_file_upload
-
-        portal = self.layer['portal']
-
-        mdt = getToolByName(portal, 'portal_memberdata')
+        mdt = getToolByName(self.portal, 'portal_memberdata')
         path = os.path.join(TEST_IMAGES, 'test.jpg')
         image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
-
         image = Image(id=TEST_USER_ID, file=image_jpg, title='')
         thumb = Image(id=TEST_USER_ID, file=image_jpg, title='')
         mdt._setPortrait(image, TEST_USER_ID)
@@ -47,16 +41,14 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
     def after_8(self):
         from intranett.policy.tools import Portrait
-        portal = self.layer['portal']
-        mdt = getToolByName(portal, 'portal_memberdata')
+        mdt = getToolByName(self.portal, 'portal_memberdata')
         self.assertTrue(TEST_USER_ID in mdt.portraits)
         self.assertTrue(TEST_USER_ID in mdt.thumbnails)
         self.assertTrue(isinstance(mdt.portraits[TEST_USER_ID], Portrait))
         self.assertTrue(isinstance(mdt.thumbnails[TEST_USER_ID], Portrait))
 
     def after_9(self):
-        portal = self.layer['portal']
-        ptool = getToolByName(portal, 'portal_properties')
+        ptool = getToolByName(self.portal, 'portal_properties')
         self.assertEqual(ptool.site_properties.webstats_js, '')
 
     def after_10(self):
@@ -68,8 +60,7 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertFalse('frontpage.bottom' in registrations)
 
     def after_11(self):
-        portal = self.layer['portal']
-        existing_roles = set(getattr(portal, '__ac_roles__', []))
+        existing_roles = set(getattr(self.portal, '__ac_roles__', []))
         self.assertIn('Site Administrator', existing_roles)
 
     def after_12(self):
@@ -85,9 +76,8 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertEqual(coll.for_, [])
 
     def after_13(self):
-        portal = self.layer['portal']
         perm_id = '_plone_portlet_static__Add_static_portlet_Permission'
-        self.assertEqual(set(getattr(portal, perm_id)),
+        self.assertEqual(set(getattr(self.portal, perm_id)),
             set(['Manager', 'Member', 'Site Administrator']))
 
     def after_14(self):
@@ -106,9 +96,8 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertTrue('frontpage.main.top' in registrations)
 
     def after_16(self):
-        portal = self.layer['portal']
         perm_id = '_ATContentTypes__Add_Folder_Permission'
-        self.assertEqual(set(getattr(portal, perm_id)),
+        self.assertEqual(set(getattr(self.portal, perm_id)),
             set(['Manager', 'Contributor', 'Site Administrator', 'Owner']))
 
     def after_17(self):
