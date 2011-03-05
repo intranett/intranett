@@ -76,10 +76,6 @@ class UpgradeTests(object):
             'viewlets.xml',
         ])
 
-        # XXX These actually do show us real problems
-        expected_diff.add('properties.xml')
-        expected_diff.add('actions.xml')
-
         remaining = {}
         for n, v in files.items():
             if n not in expected_diff:
