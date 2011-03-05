@@ -30,6 +30,7 @@ def ensure_no_upgrades(setup):
 
 class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
 
+    level = 2
     site_id = 'Plone'
     rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
 
@@ -69,10 +70,10 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
         oldsite = getattr(self.layer['app'], self.site_id)
         oldsite.setTitle('Plone site')
 
-        result = mig.upgrade(swallow_errors=False)
+        mig.upgrade(swallow_errors=False)
         config.run_all_upgrades(oldsite.portal_setup)
 
-        return (oldsite, result)
+        return oldsite
 
     def export(self):
         oldsite = getattr(self.layer['app'], self.site_id)
@@ -114,6 +115,24 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
 
         return remaining
 
+    def test_upgrades(self):
+        self.importFile(__file__, 'six.zexp')
+
+        oldsite = self.migrate()
+
+        setup = getToolByName(oldsite, "portal_setup")
+        upgrades = ensure_no_upgrades(setup)
+        for profile, steps in upgrades.items():
+            self.assertEquals(len(steps), 0,
+                              "Found unexpected upgrades: %s" % steps)
+
+        login(aq_parent(oldsite), SITE_OWNER_NAME)
+        diff = self.export()
+        remaining = self.parse_diff(diff)
+
+        self.assertEquals(set(remaining.keys()), set([]),
+                          "Unexpected diffs in:\n %s" % remaining.items())
+
 
 class TestFullUpgrade(IntranettTestCase):
 
@@ -138,29 +157,3 @@ class TestFullUpgrade(IntranettTestCase):
         # There are no more upgrade steps available
         upgrades = setup.listUpgrades(config.policy_profile)
         self.assertEqual(upgrades, [])
-
-
-class TestFunctionalMigrations(FunctionalUpgradeTestCase):
-
-    level = 2
-
-    def test_gs_diff(self):
-        self.importFile(__file__, 'six.zexp')
-        oldsite, result = self.migrate()
-
-        login(aq_parent(oldsite), SITE_OWNER_NAME)
-        diff = self.export()
-        remaining = self.parse_diff(diff)
-
-        self.assertEquals(set(remaining.keys()), set([]),
-                          "Unexpected diffs in:\n %s" % remaining.items())
-
-    def test_list_steps_for_addons(self):
-        self.importFile(__file__, 'six.zexp')
-        oldsite, result = self.migrate()
-
-        setup = getToolByName(oldsite, "portal_setup")
-        upgrades = ensure_no_upgrades(setup)
-        for profile, steps in upgrades.items():
-            self.assertEquals(len(steps), 0,
-                              "Found unexpected upgrades: %s" % steps)
