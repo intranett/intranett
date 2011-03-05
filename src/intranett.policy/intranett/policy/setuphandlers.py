@@ -1,10 +1,10 @@
 from Acquisition import aq_get
+from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
 from zope.interface import alsoProvides
 
 from intranett.policy.config import config
-from intranett.policy.plutonian import import_step
 
 
 def set_profile_version(site):

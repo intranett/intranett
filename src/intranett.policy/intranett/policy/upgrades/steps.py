@@ -1,9 +1,8 @@
 from plone.app.upgrade.utils import loadMigrationProfile
+from plutonian.gs import upgrade_to
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
 from zope.component import queryUtility
-
-from intranett.policy.plutonian import upgrade_to
 
 
 @upgrade_to(2)
