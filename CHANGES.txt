@@ -4,6 +4,9 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Update to Plone 4.0.4 and Zope 2.12.16.
+  [hannosch]
+
 - Update to Varnish 2.1.5 and HAProxy 1.4.11.
   [hannosch]
 
