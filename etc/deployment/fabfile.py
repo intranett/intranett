@@ -119,7 +119,7 @@ def update():
     with cd(VENV):
         run('bin/supervisorctl stop varnish')
         run('bin/supervisorctl stop zope:*')
-        run('bin/instance-debug upgrade')
+        run('bin/instance1 upgrade')
         run('bin/supervisorctl start zope:instance1')
         run('bin/supervisorctl start zope:instance2')
         time.sleep(30)
@@ -134,7 +134,7 @@ def full_update():
         run('bin/supervisord')
         run('bin/supervisorctl stop varnish')
         run('bin/supervisorctl stop zope:*')
-        run('bin/instance-debug upgrade')
+        run('bin/instance1 upgrade')
         run('bin/supervisorctl start zope:instance1')
         run('bin/supervisorctl start zope:instance2')
         time.sleep(30)
@@ -209,7 +209,7 @@ def _create_plone_site(initial=False):
             config.read(cfg)
             value = config.get('credentials', 'zope-user')
             password = value.split(':')[-1]
-            run('bin/instance-debug create_site --title="%s" --language=%s '
+            run('bin/instance1 create_site --title="%s" --language=%s '
                 '--rootpassword=%s' % (title, language, password))
             if initial:
                 run('bin/zeo stop')
