@@ -16,16 +16,8 @@ from zope.site.hooks import setSite
 from intranett.policy.config import config
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
+from intranett.policy.tests.utils import ensure_no_upgrades
 from intranett.policy.tests.utils import suppress_warnings
-
-
-def ensure_no_upgrades(setup):
-    profiles = set(setup.listProfilesWithUpgrades())
-    ignored = set(config.ignored_upgrade_profiles)
-    upgrades = {}
-    for profile in profiles - ignored:
-        upgrades[profile] = setup.listUpgrades(profile)
-    return upgrades
 
 
 class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
