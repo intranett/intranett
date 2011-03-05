@@ -43,7 +43,6 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'collective.ATClamAV',
-          'collective.flag',
           'experimental.catalogqueryplan',
           'iw.rejectanonymous',
           'munin.zope',

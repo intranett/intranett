@@ -36,9 +36,8 @@ class TestUpgradeSteps(IntranettTestCase):
     def test_activate_collective_flag(self):
         portal = self.layer['portal']
         catalog = getToolByName(portal, 'portal_catalog')
-        catalog.delIndex('flaggedobject')
         steps.activate_collective_flag(portal)
-        self.assertTrue('flaggedobject' in catalog.indexes())
+        self.assertFalse('flaggedobject' in catalog.indexes())
 
     def test_activate_iw_rejectanonymous(self):
         from iw.rejectanonymous import IPrivateSite
@@ -205,3 +204,14 @@ class TestUpgradeSteps(IntranettTestCase):
         self.assertTrue('intranett.policy.portlets.EventHighlight' in regs)
         self.assertTrue(prefix + '.css' in css.getResourcesDict().keys())
         self.assertTrue(prefix + '.min.js' in js.getResourcesDict().keys())
+
+    def test_deactivate_collective_flag(self):
+        from Products.PluginIndexes.FieldIndex.FieldIndex import FieldIndex
+        portal = self.layer['portal']
+        atct = getToolByName(portal, 'portal_atct')
+        atct.addIndex('flaggedobject')
+        catalog = getToolByName(portal, 'portal_catalog')
+        catalog._catalog.addIndex('flaggedobject', FieldIndex('flaggedobject'))
+        steps.deactivate_collective_flag(portal)
+        self.assertFalse('flaggedobject' in atct.getIndexes())
+        self.assertFalse('flaggedobject' in catalog.indexes())

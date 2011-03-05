@@ -4,6 +4,9 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Remove collective.flag as it's not been used after all.
+  [hannosch]
+
 - Update to ZODB 3.10.2.
   [hannosch]
 

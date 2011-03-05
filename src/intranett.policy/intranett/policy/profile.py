@@ -3,7 +3,7 @@ from zope.interface import implements
 from Products.CMFQuickInstallerTool.interfaces import INonInstallable as INonQ
 
 
-HIDDEN = ['collective.flag', 'collective.ATClamAV', 'plone.app.caching',
+HIDDEN = ['collective.ATClamAV', 'plone.app.caching',
     'plone.app.discussion', 'plone.app.openid', 'plone.app.registry',
     'plone.app.z3cform', 'plone.formwidget.autocomplete', 'plonetheme.classic',
     'Products.PloneFormGen', 'intranett.theme']

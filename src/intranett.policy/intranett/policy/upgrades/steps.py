@@ -29,7 +29,7 @@ def disable_nonfolderish_sections(context):
 
 @upgrade_to(4)
 def activate_collective_flag(context):
-    loadMigrationProfile(context, 'profile-collective.flag:default')
+    pass
 
 
 @upgrade_to(5)
@@ -157,3 +157,11 @@ def install_highlight_portlets(context):
     if js_id not in ids:
         js.registerScript(js_id)
         js.moveResourceBefore(js_id, 'tiny_mce.js')
+
+
+@upgrade_to(18)
+def deactivate_collective_flag(context):
+    catalog = getToolByName(context, 'portal_catalog')
+    catalog.delIndex('flaggedobject')
+    atct = getToolByName(context, 'portal_atct')
+    atct.removeIndex('flaggedobject')
