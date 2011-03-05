@@ -4,6 +4,9 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Update to ZODB 3.10.2.
+  [hannosch]
+
 - Update to Plone 4.0.4 and Zope 2.12.16.
   [hannosch]
 
