@@ -1,47 +1,8 @@
 from plone.app.upgrade.utils import loadMigrationProfile
+from plutonian.gs import upgrade_to
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
 from zope.component import queryUtility
-
-from intranett.policy.upgrades import upgrade_to
-
-
-@upgrade_to(2)
-def activate_clamav(context):
-    loadMigrationProfile(context, 'profile-collective.ATClamAV:default')
-    loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('propertiestool', ))
-    # Move new panel up, so it's at the some position as in a new site
-    cpanel = getToolByName(context, 'portal_controlpanel')
-    actions = cpanel._cloneActions()
-    ids = [a.getId() for a in actions]
-    clam = actions.pop(ids.index('ClamAVSettings'))
-    par_id = ids.index('plone.app.registry')
-    actions = actions[:par_id] + [clam] + actions[par_id:]
-    cpanel._actions = tuple(actions)
-
-
-@upgrade_to(3)
-def disable_nonfolderish_sections(context):
-    ptool = getToolByName(context, 'portal_properties')
-    ptool.site_properties.disable_nonfolderish_sections = True
-
-
-@upgrade_to(4)
-def activate_collective_flag(context):
-    pass
-
-
-@upgrade_to(5)
-def setup_reject_anonymous(context):
-    from intranett.policy import setuphandlers
-    setuphandlers.setup_reject_anonymous(context)
-
-
-@upgrade_to(6)
-def install_memberdata_type(context):
-    loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('typeinfo', ))
 
 
 @upgrade_to(7)

@@ -7,8 +7,9 @@ patches.apply()
 
 
 def initialize(context):
-    from intranett.policy.upgrades import register_upgrades
-    register_upgrades()
+    from intranett.policy.config import config
+    config.register_profile()
+    config.scan()
 
     from AccessControl import allow_module
     allow_module('intranett.policy.config')

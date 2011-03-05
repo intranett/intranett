@@ -26,28 +26,4 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-  <genericsetup:upgradeStep
-      title="Upgrade"
-      source="1"
-      destination="2"
-      handler="intranett.theme.upgradehandlers.add_media_query_maincss"
-      profile="intranett.theme:default"
-      />
-
-  <genericsetup:upgradeStep
-      title="Upgrade"
-      source="2"
-      destination="3"
-      handler="intranett.theme.upgradehandlers.add_selectivizr_remove_html5_js"
-      profile="intranett.theme:default"
-      />
-
-  <genericsetup:upgradeStep
-      title="Upgrade"
-      source="3"
-      destination="4"
-      handler="intranett.theme.upgradehandlers.employees_action_i18n_domain"
-      profile="intranett.theme:default"
-      />
-
 </configure>

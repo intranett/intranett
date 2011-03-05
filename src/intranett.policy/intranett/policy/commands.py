@@ -83,26 +83,19 @@ def upgrade(app, args):
     setup = site.portal_setup
 
     import transaction
-    from intranett.policy.upgrades import run_all_upgrades
+    from intranett.policy.config import config
 
     logger.info("Starting the upgrade.\n\n")
-    all_finished = run_all_upgrades(setup)
+    config.run_all_upgrades(setup)
     logger.info("Ran upgrade steps.")
 
-    if all_finished:
-        logger.info("Upgrade successful.")
+    # Recook resources, as some CSS/JS/KSS files might have changed.
+    # TODO: We could try to determine if this is needed in some way
+    site.portal_javascripts.cookResources()
+    site.portal_css.cookResources()
+    site.portal_kss.cookResources()
+    logger.info("Resources recooked.")
 
-        # Recook resources, as some CSS/JS/KSS files might have changed.
-        # TODO: We could try to determine if this is needed in some way
-        site.portal_javascripts.cookResources()
-        site.portal_css.cookResources()
-        site.portal_kss.cookResources()
-        logger.info("Resources recooked.")
-
-        transaction.get().note('Upgraded profiles and recooked resources.')
-        transaction.get().commit()
-        sys.exit(0)
-
-    transaction.get().abort()
-    logger.error("Upgrade didn't reach current versions - aborted.")
-    sys.exit(1)
+    transaction.get().note('Upgraded profiles and recooked resources.')
+    transaction.get().commit()
+    sys.exit(0)
