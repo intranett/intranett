@@ -3,6 +3,7 @@ from os.path import abspath
 from os.path import dirname
 from os.path import join
 
+from Acquisition import aq_get
 from Acquisition import aq_parent
 from plone.app.testing import login
 from plone.app.testing import logout
@@ -51,22 +52,6 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
         path = join(abspath(dirname(context)), 'data', name)
         self.layer['app']._importObjectFromFile(path, verify=0)
 
-    def migrate(self):
-        oldsite = getattr(self.layer['app'], self.site_id)
-        mig = oldsite.portal_migration
-        components = getattr(oldsite, '_components', None)
-        if components is not None:
-            setSite(oldsite)
-
-        # Adjust for some things changed by the testing infrastructure
-        oldsite = getattr(self.layer['app'], self.site_id)
-        oldsite.setTitle('Plone site')
-
-        mig.upgrade(swallow_errors=False)
-        config.run_all_upgrades(oldsite.portal_setup)
-
-        return oldsite
-
     def export(self):
         oldsite = getattr(self.layer['app'], self.site_id)
         setSite(oldsite)
@@ -109,10 +94,29 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
 
     def test_upgrades(self):
         self.importFile(__file__, 'six.zexp')
+        oldsite = getattr(self.layer['app'], self.site_id)
+        mig = oldsite.portal_migration
+        components = getattr(oldsite, '_components', None)
+        if components is not None:
+            setSite(oldsite)
 
-        oldsite = self.migrate()
+        # Adjust for some things changed by the testing infrastructure
+        oldsite = getattr(self.layer['app'], self.site_id)
+        oldsite.setTitle('Plone site')
 
+        mig.upgrade(swallow_errors=False)
         setup = getToolByName(oldsite, "portal_setup")
+        config.run_all_upgrades(setup, skip_policy=True)
+
+        # run the upgrade steps for the policy
+        request = aq_get(oldsite, 'REQUEST')
+        request['profile_id'] = config.policy_profile
+        upgrades = setup.listUpgrades(config.policy_profile)
+        for u in upgrades:
+            request.form['upgrades'] = [u['id']]
+            setup.manage_doUpgrades(request=request)
+
+        # test the end result
         upgrades = ensure_no_upgrades(setup)
         for profile, steps in upgrades.items():
             self.assertEquals(len(steps), 0,
