@@ -142,22 +142,14 @@ class TestFullUpgrade(IntranettTestCase):
         portal = self.layer['portal']
         setup = getToolByName(portal, "portal_setup")
         setRoles(portal, TEST_USER_ID, ['Manager'])
-
         setup.setLastVersionForProfile(config.policy_profile, '1')
         setup.setLastVersionForProfile(config.theme_profile, '1')
-
         upgrades = setup.listUpgrades(config.theme_profile)
         self.failUnless(len(upgrades) > 0)
-
-        all_finished = run_all_upgrades(setup)
-
-        # And we have reached our current profile versions
-        self.assertTrue(all_finished)
-
+        run_all_upgrades(setup)
         # There are no more upgrade steps available
         upgrades = setup.listUpgrades(config.theme_profile)
         self.failUnless(len(upgrades) == 0)
-
         upgrades = setup.listUpgrades(config.policy_profile)
         self.failUnless(len(upgrades) == 0)
 
