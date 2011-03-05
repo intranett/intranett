@@ -9,10 +9,10 @@ from zope.component import getSiteManager
 from zope.component import queryUtility
 
 from intranett.policy.upgrades import steps
-from intranett.policy.tests.base import IntranettTestCase
+from intranett.policy.tests.upgrade import FunctionalUpgradeTestCase
 
 
-class TestUpgradeSteps(IntranettTestCase):
+class TestUpgradeSteps(FunctionalUpgradeTestCase):
 
     def test_update_caching_config(self):
         portal = self.layer['portal']
