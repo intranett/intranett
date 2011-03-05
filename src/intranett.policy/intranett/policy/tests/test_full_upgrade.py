@@ -17,8 +17,6 @@ from intranett.policy.config import config
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.utils import suppress_warnings
-from intranett.policy.upgrades import run_all_upgrades
-from intranett.policy.upgrades import run_upgrade
 
 
 def ensure_no_addon_upgrades(setup):
@@ -76,10 +74,7 @@ class FunctionalUpgradeTestCase(IntranettFunctionalTestCase):
         oldsite.setTitle('Plone site')
 
         result = mig.upgrade(swallow_errors=False)
-
-        # Run the upgrades for theme and policy
-        run_upgrade(oldsite.portal_setup, u"intranett.theme:default")
-        run_upgrade(oldsite.portal_setup)
+        config.run_all_upgrades(oldsite.portal_setup)
 
         return (oldsite, result)
 
@@ -146,7 +141,7 @@ class TestFullUpgrade(IntranettTestCase):
         setup.setLastVersionForProfile(config.theme_profile, '1')
         upgrades = setup.listUpgrades(config.theme_profile)
         self.failUnless(len(upgrades) > 0)
-        run_all_upgrades(setup)
+        config.run_all_upgrades(setup)
         # There are no more upgrade steps available
         upgrades = setup.listUpgrades(config.theme_profile)
         self.failUnless(len(upgrades) == 0)

@@ -83,10 +83,10 @@ def upgrade(app, args):
     setup = site.portal_setup
 
     import transaction
-    from intranett.policy.upgrades import run_all_upgrades
+    from intranett.policy.config import config
 
     logger.info("Starting the upgrade.\n\n")
-    run_all_upgrades(setup)
+    config.run_all_upgrades(setup)
     logger.info("Ran upgrade steps.")
 
     # Recook resources, as some CSS/JS/KSS files might have changed.
