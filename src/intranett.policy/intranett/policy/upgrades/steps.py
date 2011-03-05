@@ -162,6 +162,7 @@ def install_highlight_portlets(context):
 @upgrade_to(18)
 def deactivate_collective_flag(context):
     catalog = getToolByName(context, 'portal_catalog')
-    catalog.delIndex('flaggedobject')
+    if 'flaggedobject' in catalog.indexes():
+        catalog.delIndex('flaggedobject')
     atct = getToolByName(context, 'portal_atct')
     atct.removeIndex('flaggedobject')
