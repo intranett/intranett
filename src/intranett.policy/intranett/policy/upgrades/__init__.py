@@ -31,7 +31,7 @@ def run_upgrade(setup, profile_id=config.policy_profile):
 
 
 def run_all_upgrades(setup):
-    run_upgrade(setup, u"Products.CMFPlone:plone")
+    run_upgrade(setup, setup.getBaselineContextID().lstrip('profile-'))
     run_upgrade(setup, config.theme_profile)
     run_upgrade(setup)
 
