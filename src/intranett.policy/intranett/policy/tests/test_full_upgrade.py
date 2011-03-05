@@ -21,13 +21,9 @@ from intranett.policy.tests.utils import suppress_warnings
 
 def ensure_no_addon_upgrades(setup):
     profiles = set(setup.listProfilesWithUpgrades())
-    # We don't care about the CMFDefault profile in Plone
-    profiles.remove(u"Products.CMFDefault:default")
-    # The iterate profile has a general reinstall profile in it, we ignore
-    # it since we don't use iterate
-    profiles.remove(u"plone.app.iterate:plone.app.iterate")
+    ignored = set(config.ignored_upgrade_profiles)
     upgrades = {}
-    for profile in profiles:
+    for profile in profiles - ignored:
         upgrades[profile] = setup.listUpgrades(profile)
     return upgrades
 
@@ -137,16 +133,11 @@ class TestFullUpgrade(IntranettTestCase):
         portal = self.layer['portal']
         setup = getToolByName(portal, "portal_setup")
         setRoles(portal, TEST_USER_ID, ['Manager'])
-        setup.setLastVersionForProfile(config.policy_profile, '1')
-        setup.setLastVersionForProfile(config.theme_profile, '1')
-        upgrades = setup.listUpgrades(config.theme_profile)
-        self.failUnless(len(upgrades) > 0)
+        setup.setLastVersionForProfile(config.policy_profile, '6')
         config.run_all_upgrades(setup)
         # There are no more upgrade steps available
-        upgrades = setup.listUpgrades(config.theme_profile)
-        self.failUnless(len(upgrades) == 0)
         upgrades = setup.listUpgrades(config.policy_profile)
-        self.failUnless(len(upgrades) == 0)
+        self.assertEqual(upgrades, [])
 
 
 class TestFunctionalMigrations(FunctionalUpgradeTestCase):
@@ -154,7 +145,7 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
     level = 2
 
     def test_gs_diff(self):
-        self.importFile(__file__, 'one.zexp')
+        self.importFile(__file__, 'six.zexp')
         oldsite, result = self.migrate()
 
         login(aq_parent(oldsite), SITE_OWNER_NAME)
@@ -165,7 +156,7 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
                           "Unexpected diffs in:\n %s" % remaining.items())
 
     def test_list_steps_for_addons(self):
-        self.importFile(__file__, 'one.zexp')
+        self.importFile(__file__, 'six.zexp')
         oldsite, result = self.migrate()
 
         setup = getToolByName(oldsite, "portal_setup")

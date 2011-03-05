@@ -14,48 +14,6 @@ from intranett.policy.tests.base import IntranettTestCase
 
 class TestUpgradeSteps(IntranettTestCase):
 
-    def test_activate_clamav(self):
-        portal = self.layer['portal']
-        ptool = getToolByName(portal, 'portal_properties')
-        clamav = ptool.clamav_properties
-        clamav._updateProperty('clamav_connection', 'net')
-        steps.activate_clamav(portal)
-        self.assertEqual(clamav.getProperty('clamav_connection'), 'socket')
-        self.assertEqual(
-            clamav.getProperty('clamav_socket'), '/var/run/clamav/clamd.sock')
-
-    def test_disable_folderish_sections(self):
-        portal = self.layer['portal']
-        ptool = getToolByName(portal, 'portal_properties')
-        site_properties = ptool.site_properties
-        site_properties.disable_nonfolderish_sections = False
-        steps.disable_nonfolderish_sections(portal)
-        self.assertTrue(
-            site_properties.getProperty('disable_nonfolderish_sections'))
-
-    def test_activate_collective_flag(self):
-        portal = self.layer['portal']
-        catalog = getToolByName(portal, 'portal_catalog')
-        steps.activate_collective_flag(portal)
-        self.assertFalse('flaggedobject' in catalog.indexes())
-
-    def test_activate_iw_rejectanonymous(self):
-        from iw.rejectanonymous import IPrivateSite
-        from zope.interface import noLongerProvides
-        portal = self.layer['portal']
-        setup = getToolByName(portal, 'portal_setup')
-        noLongerProvides(portal, IPrivateSite)
-        self.assertFalse(IPrivateSite.providedBy(portal))
-        steps.setup_reject_anonymous(setup)
-        self.assertTrue(IPrivateSite.providedBy(portal))
-
-    def test_install_memberdata_type(self):
-        portal = self.layer['portal']
-        types = getToolByName(portal, 'portal_types')
-        del types['MemberData']
-        steps.install_memberdata_type(portal)
-        self.assertTrue('MemberData' in types)
-
     def test_update_caching_config(self):
         portal = self.layer['portal']
         registry = getToolByName(portal, 'portal_registry')
