@@ -15,15 +15,18 @@ from intranett.policy.tests.upgrade import UpgradeTests
 
 class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
+    def before_7(self):
+        portal = self.layer['portal']
+        registry = getToolByName(portal, 'portal_registry')
+        etag_key = 'plone.app.caching.weakCaching.etags'
+        self.assertFalse('editbar' in registry.records[etag_key].value)
+
     def after_7(self):
         portal = self.layer['portal']
         registry = getToolByName(portal, 'portal_registry')
         purge_key = 'plone.app.caching.interfaces.IPloneCacheSettings.' \
             'purgedContentTypes'
         etag_key = 'plone.app.caching.weakCaching.etags'
-        registry.records[purge_key].value = ('Document', )
-        registry.records[etag_key].value = ('userid', 'language', )
-        steps.update_caching_config(portal)
         self.assertEqual(registry.records[purge_key].value,
             ('File', 'Image', 'News Item'))
         self.assertTrue('editbar' in registry.records[etag_key].value)
