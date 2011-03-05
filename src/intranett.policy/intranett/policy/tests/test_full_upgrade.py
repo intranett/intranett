@@ -19,7 +19,7 @@ from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.utils import suppress_warnings
 
 
-def ensure_no_addon_upgrades(setup):
+def ensure_no_upgrades(setup):
     profiles = set(setup.listProfilesWithUpgrades())
     ignored = set(config.ignored_upgrade_profiles)
     upgrades = {}
@@ -124,7 +124,7 @@ class TestFullUpgrade(IntranettTestCase):
     def test_list_steps(self):
         portal = self.layer['portal']
         setup = getToolByName(portal, "portal_setup")
-        upgrades = ensure_no_addon_upgrades(setup)
+        upgrades = ensure_no_upgrades(setup)
         for profile, steps in upgrades.items():
             self.assertEquals(len(steps), 0,
                               "Found unexpected upgrades: %s" % steps)
@@ -160,7 +160,7 @@ class TestFunctionalMigrations(FunctionalUpgradeTestCase):
         oldsite, result = self.migrate()
 
         setup = getToolByName(oldsite, "portal_setup")
-        upgrades = ensure_no_addon_upgrades(setup)
+        upgrades = ensure_no_upgrades(setup)
         for profile, steps in upgrades.items():
             self.assertEquals(len(steps), 0,
                               "Found unexpected upgrades: %s" % steps)
