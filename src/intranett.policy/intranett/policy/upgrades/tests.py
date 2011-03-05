@@ -9,12 +9,13 @@ from zope.component import getSiteManager
 from zope.component import queryUtility
 
 from intranett.policy.upgrades import steps
-from intranett.policy.tests.upgrade import FunctionalUpgradeTestCase
+from intranett.policy.tests.base import IntranettFunctionalTestCase
+from intranett.policy.tests.upgrade import UpgradeTests
 
 
-class TestUpgradeSteps(FunctionalUpgradeTestCase):
+class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
-    def test_update_caching_config(self):
+    def after_7(self):
         portal = self.layer['portal']
         registry = getToolByName(portal, 'portal_registry')
         purge_key = 'plone.app.caching.interfaces.IPloneCacheSettings.' \
@@ -27,7 +28,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
             ('File', 'Image', 'News Item'))
         self.assertTrue('editbar' in registry.records[etag_key].value)
 
-    def test_migrate_portraits(self):
+    def after_8(self):
         from OFS.Image import Image
         from intranett.policy.tests.test_userdata import TEST_IMAGES
         from intranett.policy.tests.utils import make_file_upload
@@ -51,7 +52,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         self.assertTrue(isinstance(mdt.portraits[TEST_USER_ID], Portrait))
         self.assertTrue(isinstance(mdt.thumbnails[TEST_USER_ID], Portrait))
 
-    def test_disable_webstats_js(self):
+    def after_9(self):
         portal = self.layer['portal']
         ptool = getToolByName(portal, 'portal_properties')
         sprops = ptool.site_properties
@@ -59,7 +60,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         steps.disable_webstats_js(portal)
         self.assertEqual(sprops.webstats_js, '')
 
-    def test_remove_unused_frontpage_portlets(self):
+    def after_10(self):
         portal = self.layer['portal']
         sm = getSiteManager()
         names = ('frontpage.portlets.left', 'frontpage.portlets.central',
@@ -76,7 +77,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         self.assertFalse('frontpage.portlets.central' in registrations)
         self.assertFalse('frontpage.bottom' in registrations)
 
-    def test_add_site_administrator(self):
+    def after_11(self):
         portal = self.layer['portal']
         existing_roles = set(getattr(portal, '__ac_roles__', []))
         existing_roles.remove('Site Administrator')
@@ -85,7 +86,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         existing_roles = set(getattr(portal, '__ac_roles__', []))
         self.assertIn('Site Administrator', existing_roles)
 
-    def test_allow_site_admin_to_edit_frontpage(self):
+    def after_12(self):
         from plone.app.portlets.interfaces import IColumn
         portal = self.layer['portal']
         setattr(portal, '_Portlets__Manage_portlets_Permission', ['Manager'])
@@ -102,7 +103,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
             (u'Portlets: Manage portlets', ))
         self.assertEqual(coll.for_, [])
 
-    def test_allow_member_to_edit_personal_portlets(self):
+    def after_13(self):
         portal = self.layer['portal']
         perm_id = '_plone_portlet_static__Add_static_portlet_Permission'
         setattr(portal, perm_id, ['Manager'])
@@ -110,7 +111,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         self.assertEqual(set(getattr(portal, perm_id)),
             set(['Manager', 'Member', 'Site Administrator']))
 
-    def test_add_frontpage_cacherule(self):
+    def after_14(self):
         from plone.caching.interfaces import ICacheSettings
         from plone.registry.interfaces import IRegistry
         portal = self.layer['portal']
@@ -120,7 +121,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         value = settings.operationMapping['intranett.frontpage']
         self.assertEqual(value, 'plone.app.caching.noCaching')
 
-    def test_change_frontpage_portlets(self):
+    def after_15(self):
         portal = self.layer['portal']
         sm = getSiteManager()
         sm.registerUtility(component=PortletManager(),
@@ -131,7 +132,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         self.assertFalse('frontpage.highlight' in registrations)
         self.assertTrue('frontpage.main.top' in registrations)
 
-    def test_allow_siteadmin_to_edit_content(self):
+    def after_16(self):
         portal = self.layer['portal']
         perm_id = '_ATContentTypes__Add_Folder_Permission'
         setattr(portal, perm_id, ['Manager'])
@@ -139,7 +140,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         self.assertEqual(set(getattr(portal, perm_id)),
             set(['Manager', 'Contributor', 'Site Administrator', 'Owner']))
 
-    def test_highlight_portlets_available(self):
+    def after_17(self):
         portal = self.layer['portal']
         prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
             'autocomplete'
@@ -163,7 +164,7 @@ class TestUpgradeSteps(FunctionalUpgradeTestCase):
         self.assertTrue(prefix + '.css' in css.getResourcesDict().keys())
         self.assertTrue(prefix + '.min.js' in js.getResourcesDict().keys())
 
-    def test_deactivate_collective_flag(self):
+    def after_18(self):
         from Products.PluginIndexes.FieldIndex.FieldIndex import FieldIndex
         portal = self.layer['portal']
         atct = getToolByName(portal, 'portal_atct')
