@@ -120,3 +120,6 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         catalog = getToolByName(portal, 'portal_catalog')
         self.assertFalse('flaggedobject' in atct.getIndexes())
         self.assertFalse('flaggedobject' in catalog.indexes())
+
+    def after_19(self):
+        pass

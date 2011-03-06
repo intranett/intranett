@@ -127,3 +127,22 @@ def deactivate_collective_flag(context):
         catalog.delIndex('flaggedobject')
     atct = getToolByName(context, 'portal_atct')
     atct.removeIndex('flaggedobject')
+
+
+@upgrade_to(19)
+def update_discussion_10(context):
+    loadMigrationProfile(context, 'profile-plone.app.discussion:default',
+        steps=('rolemap', ))
+    loadMigrationProfile(context, 'profile-plone.app.discussion:default',
+        steps=('actions', ))
+    actions = getToolByName(context, 'portal_actions')
+    user_category = actions.user
+    review = user_category['review-comments']
+    review.visible = False
+    pos = user_category.getObjectPosition('manage_users')
+    user_category.moveObjectToPosition('review-comments', pos)
+    aitool = getToolByName(context, 'portal_actionicons')
+    aitool.removeActionIcon('controlpanel', 'discussion')
+    control = getToolByName(context, 'portal_controlpanel')
+    disc = [a for a in control.listActions() if a.id == 'discussion'][0]
+    disc.category = 'Plone'
