@@ -129,7 +129,6 @@ class UpgradeTests(object):
         remaining = self.parse_diff(diff)
 
         def _print(values):
-            print("Unexpected diffs in:")
             for v in values:
                 pprint(v.split('\n'))
         self.assertEqual(set(remaining.keys()), set([]),
