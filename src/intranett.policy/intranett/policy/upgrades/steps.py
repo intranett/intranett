@@ -132,9 +132,7 @@ def deactivate_collective_flag(context):
 @upgrade_to(19)
 def update_discussion_10(context):
     loadMigrationProfile(context, 'profile-plone.app.discussion:default',
-        steps=('rolemap', ))
-    loadMigrationProfile(context, 'profile-plone.app.discussion:default',
-        steps=('actions', ))
+        steps=('actions', 'plone.app.registry', 'rolemap', ))
     actions = getToolByName(context, 'portal_actions')
     user_category = actions.user
     review = user_category['review-comments']
