@@ -62,9 +62,9 @@
                          tal:attributes="src portrait_url;
                                          alt reply/Creator" />
                 </div>
-                
+
                 <div class="commentWrapper">
-                    
+
                     <div class="documentByLine" i18n:domain="plone.app.discussion">
                         <a href=""
                            tal:condition="has_author_link"
@@ -77,48 +77,48 @@
                         <span tal:condition="not: reply/Creator">Anonymous</span>
                         <!-- <tal:posted i18n:translate="label_says">says:</tal:posted> -->
                     </div>
-                    
+
                     <div class="commentBody">
                         <span tal:replace="structure python:view.cook(reply.getText())" />
                     </div>
-                
+
                     <div class="commentActions">
-                        
+
                         <ul>
-                            <li><small class="commentDate" 
+                            <li><small class="commentDate"
                                      tal:content="python:view.format_time(reply.modification_date)">
                                      8/23/2001 12:40:44 PM
-                            </small></li><li 
+                            </small></li><li
                             tal:condition="canReview"><form name="delete"
                                       action=""
                                       method="post"
-                                      tal:attributes="action string:${reply/absolute_url}/@@moderate-delete-comment"><input 
+                                      tal:attributes="action string:${reply/absolute_url}/@@moderate-delete-comment"><input
                                       name="form.button.DeleteComment"
                                            class="hiddenStructure"
                                            type="submit"
                                            value="Delete"
                                            i18n:attributes="value label_delete;"
-                                           /><small 
-                                      class="deleteComment"><a 
-                                      href="" title="Delete" 
+                                           /><small
+                                      class="deleteComment"><a
+                                      href="" title="Delete"
                                            class="form.button.DeleteComment"
                                            tal:attributes="href string:${reply/absolute_url}/@@moderate-delete-comment"
                                            i18n:attributes="title label_delete"
-                                           i18n:translate="label_delete">Delete</a></small></form></li><li 
+                                           i18n:translate="label_delete">Delete</a></small></form></li><li
                             tal:condition="canReview"
-                                tal:repeat="action reply_dict/actions|nothing"><form 
+                                tal:repeat="action reply_dict/actions|nothing"><form
                                       name=""
                                       action=""
                                       method="get"
                                       tal:attributes="action string:${reply/absolute_url}/@@moderate-publish-comment;
-                                                      name action/id"><input 
-                                    type="hidden" name="workflow_action" tal:attributes="value action/id" /><input 
+                                                      name action/id"><input
+                                    type="hidden" name="workflow_action" tal:attributes="value action/id" /><input
                                     name="form.button.PublishComment"
                                            class="hiddenStructure"
                                            type="submit"
                                            tal:attributes="value action/title"
                                            i18n:attributes="value"
-                                           /><small><a 
+                                           /><small><a
                                     href="" title="" class="form.button.PublishComment"
                                            tal:attributes="href string:${reply/absolute_url}/@@moderate-publish-comment;
                                                            title action/title"
@@ -126,13 +126,13 @@
                                            i18n:translate="">Publish</a></small></form>
                             </li>
                         </ul>
-                        
+
                         <span class="visualClear"><!-- --></span>
-                        
-                    </div>                     
+
+                    </div>
 
                 </div>
-            
+
                 <span class="visualClear"><!-- --></span>
             </div>
 
@@ -152,7 +152,7 @@
     </div>
 
     <div id="commenting" class="reply" tal:condition="python:isDiscussionAllowed and (isAnon and isAnonymousDiscussionAllowed or userHasReplyPermission)">
-        
+
         <span id="reply-side-arrow">
             <span class="toolTipArrow" style="display: block;">&nbsp;</span>
             <span class="toolTipArrow innerTooltipArrow" style="display: block;">&nbsp;</span>
