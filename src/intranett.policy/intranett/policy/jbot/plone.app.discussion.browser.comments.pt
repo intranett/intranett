@@ -26,12 +26,12 @@
     <div class="discussion"
          tal:attributes="class python: showCommenterImage and 'discussion showCommenterImage' or 'discussion';"
          tal:condition="has_replies">
-         
-         <span id="commenting-top-arrow">
-             <span class="toolTipArrow" style="display: block;">&nbsp;</span>
-             <span class="toolTipArrow innerTooltipArrow" style="display: block;">&nbsp;</span>
-         </span>
-         
+
+        <span id="commenting-top-arrow">
+            <span class="toolTipArrow" style="display: block;">&nbsp;</span>
+            <span class="toolTipArrow innerTooltipArrow" style="display: block;">&nbsp;</span>
+        </span>
+
         <tal:getreplies repeat="reply_dict replies">
 
             <div class="comment"
