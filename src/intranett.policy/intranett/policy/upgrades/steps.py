@@ -140,7 +140,9 @@ def update_discussion_10(context):
     pos = user_category.getObjectPosition('manage_users')
     user_category.moveObjectToPosition('review-comments', pos)
     aitool = getToolByName(context, 'portal_actionicons')
-    aitool.removeActionIcon('controlpanel', 'discussion')
+    ids = [a._action_id for a in aitool.listActionIcons()]
+    if 'discussion' in ids:
+        aitool.removeActionIcon('controlpanel', 'discussion')
     control = getToolByName(context, 'portal_controlpanel')
     disc = [a for a in control.listActions() if a.id == 'discussion'][0]
     disc.category = 'Plone'
