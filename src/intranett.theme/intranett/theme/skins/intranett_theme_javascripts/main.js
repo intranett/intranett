@@ -63,14 +63,6 @@
             });
             return false;
         });
-        // $("table.listing tr").hover(
-        //     function () {
-        //         $(this).addClass("visualHighlight");
-        //     },
-        //     function () {
-        //         $(this).removeClass("visualHighlight");
-        //     }
-        // );
         $('#form-buttons-comment').addClass('allowMultiSubmit');
         $("a[class='form.button.DeleteComment']").live('click', function () {
             var trigger, form, data, form_url;
