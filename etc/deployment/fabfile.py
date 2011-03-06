@@ -127,9 +127,10 @@ def update():
 
 
 def full_update():
-    _prepare_update()
     with cd(VENV):
         run('bin/supervisorctl shutdown')
+    _prepare_update()
+    with cd(VENV):
         time.sleep(5)
         run('bin/supervisord')
         run('bin/supervisorctl stop varnish')
