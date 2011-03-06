@@ -92,12 +92,12 @@
             });
             return false;
         });
-        $('#commenting form#form').submit(function () {
+        $('#commenting form').submit(function () {
             var button, data, form_url;
-            button = $('#commenting form#form .formControls input.submitting');
+            button = $('#commenting form #form-buttons-comment');
             $(button).attr('disabled', 'disabled');
 
-            data = $('#commenting form#form').serialize() + '&' + $(button).attr('name') + '=' + $(button).attr('value');
+            data = $('#commenting form').serialize() + '&' + $(button).attr('name') + '=' + $(button).attr('value');
             form_url = $(this).attr('action');
             $(this).get(0).reset();
             $.ajax({
