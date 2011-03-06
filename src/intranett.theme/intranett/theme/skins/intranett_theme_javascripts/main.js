@@ -92,29 +92,6 @@
             });
             return false;
         });
-        $("a[class='form.button.PublishComment']").live('click', function () {
-            var trigger, form, data, form_url;
-            trigger = this;
-            form = $(this).parents('form');
-            data = $(form).serialize();
-            form_url = $(form).attr('action');
-            $.ajax({
-                type: 'GET',
-                url: form_url,
-                data: 'workflow_action=publish',
-                context: trigger,
-                success: function (msg) {
-                    // fade out row
-                    $(this).parents('li').fadeOut('normal', function () {
-                        $(this).parents('li').remove();
-                    });
-                },
-                error: function (msg) {
-                    return true;
-                }
-            });
-            return false;
-        });
         $('#commenting form#form').submit(function () {
             var button, data, form_url;
             button = $('#commenting form#form .formControls input.submitting');
