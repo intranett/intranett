@@ -120,3 +120,10 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         catalog = getToolByName(portal, 'portal_catalog')
         self.assertFalse('flaggedobject' in atct.getIndexes())
         self.assertFalse('flaggedobject' in catalog.indexes())
+
+    def after_19(self):
+        from plone.app.discussion.interfaces import IDiscussionSettings
+        from plone.registry.interfaces import IRegistry
+        registry = queryUtility(IRegistry)
+        settings = registry.forInterface(IDiscussionSettings)
+        self.assertEqual(settings.user_notification_enabled, False)

@@ -4,6 +4,9 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Update to plone.app.discussion 1.0.
+  [hannosch]
+
 - Externalize the plutonian helpers into their own distribution and rewrite
   the upgrade tests to run against a real database - inspired by bestform.
   [hannosch]

@@ -63,14 +63,6 @@
             });
             return false;
         });
-        // $("table.listing tr").hover(
-        //     function () {
-        //         $(this).addClass("visualHighlight");
-        //     },
-        //     function () {
-        //         $(this).removeClass("visualHighlight");
-        //     }
-        // );
         $('#form-buttons-comment').addClass('allowMultiSubmit');
         $("a[class='form.button.DeleteComment']").live('click', function () {
             var trigger, form, data, form_url;
@@ -100,35 +92,12 @@
             });
             return false;
         });
-        $("a[class='form.button.PublishComment']").live('click', function () {
-            var trigger, form, data, form_url;
-            trigger = this;
-            form = $(this).parents('form');
-            data = $(form).serialize();
-            form_url = $(form).attr('action');
-            $.ajax({
-                type: 'GET',
-                url: form_url,
-                data: 'workflow_action=publish',
-                context: trigger,
-                success: function (msg) {
-                    // fade out row
-                    $(this).parents('li').fadeOut('normal', function () {
-                        $(this).parents('li').remove();
-                    });
-                },
-                error: function (msg) {
-                    return true;
-                }
-            });
-            return false;
-        });
-        $('#commenting form#form').submit(function () {
+        $('#commenting form').submit(function () {
             var button, data, form_url;
-            button = $('#commenting form#form .formControls input.submitting');
+            button = $('#commenting form #form-buttons-comment');
             $(button).attr('disabled', 'disabled');
 
-            data = $('#commenting form#form').serialize() + '&' + $(button).attr('name') + '=' + $(button).attr('value');
+            data = $('#commenting form').serialize() + '&' + $(button).attr('name') + '=' + $(button).attr('value');
             form_url = $(this).attr('action');
             $(this).get(0).reset();
             $.ajax({

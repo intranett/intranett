@@ -2,6 +2,7 @@ import re
 from os.path import abspath
 from os.path import dirname
 from os.path import join
+from pprint import pprint
 
 from plone.app.testing import login
 from plone.app.testing import logout
@@ -127,5 +128,8 @@ class UpgradeTests(object):
         diff = self.export()
         remaining = self.parse_diff(diff)
 
-        self.assertEquals(set(remaining.keys()), set([]),
-                          "Unexpected diffs in:\n %s" % remaining.items())
+        def _print(values):
+            for v in values:
+                pprint(v.split('\n'))
+        self.assertEqual(set(remaining.keys()), set([]),
+            _print(remaining.values()))
