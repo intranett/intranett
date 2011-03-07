@@ -187,13 +187,14 @@ def _add_nginx_include():
 def _buildout(envvars, newest=True):
     domain = envvars['domain']
     front = envvars['front']
+    buildout_config = env.server.config.get('buildout', 'production.cfg')
     arg = '' if newest else '-N'
     with cd(VENV):
-        run('bin/python2.6 bootstrap.py -dc production.cfg')
+        run('bin/python2.6 bootstrap.py -dc %s'%(buildout_config))
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
-        run('{x1}; {x2}; bin/buildout -c production.cfg -t 5 {arg}'.format(
-            x1=front, x2=domain, arg=arg))
+        run('{x1}; {x2}; bin/buildout -c {buildout} -t 5 {arg}'.format(
+            x1=front, x2=domain, buildout=buildout_config, arg=arg))
         run('chmod 700 var/blobstorage')
 
 
