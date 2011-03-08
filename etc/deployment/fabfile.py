@@ -328,6 +328,8 @@ def _set_environment_vars():
     with settings(hide('stdout', 'stderr')):
         profile = run('cat %s/.bash_profile' % HOME)
     profile_lines = profile.split('\n')
+    plone_id = env.server.config.get('ploneid', 'Plone')
+    ploneid_line = 'export INTRANETT_PLONE_ID=%s' % plone_id
     subdomain = env.host_string
     domain_line = 'export INTRANETT_DOMAIN=%s.intranett.no' % subdomain
     with settings(hide('stdout', 'stderr')):
@@ -336,15 +338,15 @@ def _set_environment_vars():
     front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
 
     exports = [l for l in profile_lines if l.startswith('export INTRANETT_')]
-    if len(exports) < 2:
+    if len(exports) < 3:
         start, end = profile_lines[:2], profile_lines[2:]
-        new_file = start + [front_line] + [domain_line + '\n'] + end
+        new_file = start + [ploneid_line] + [front_line] + [domain_line + '\n'] + end
         with settings(hide('running', 'stdout', 'stderr')):
             # run(domain_line)
             # run(front_line)
             run('echo -e "{content}" > {home}/.bash_profile'.format(
                 home=HOME, content='\n'.join(new_file)))
-    return dict(domain=domain_line, front=front_line)
+    return dict(domain=domain_line, front=front_line, ploneid=plone_id)
 
 
 def _setup_ssh_keys():
