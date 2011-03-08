@@ -338,7 +338,7 @@ def _set_environment_vars():
     front_ip = front_ip.lstrip('inet addr:').split()[0]
     front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
 
-    profile_lines = [l for l in profile_lines not if l.startswith('export INTRANETT_')]
+    profile_lines = [l for l in profile_lines if not l.startswith('export INTRANETT_')]
     start, end = profile_lines[:2], profile_lines[2:]
     new_file = start + [ploneid_line] + [front_line] + [domain_line + '\n'] + end
     with settings(hide('running', 'stdout', 'stderr')):
