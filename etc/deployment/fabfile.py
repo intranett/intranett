@@ -195,7 +195,7 @@ def _buildout(envvars, newest=True):
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
         run('{x1}; {x2}; {x3}; bin/buildout -c {buildout} -t 5 {arg}'.format(
-            x1=front, x2=domain,x3=ploneid, buildout=buildout_config, arg=arg))
+            x1=front, x2=domai      n,x3=ploneid, buildout=buildout_config, arg=arg))
         run('chmod 700 var/blobstorage')
 
 
@@ -347,7 +347,7 @@ def _set_environment_vars():
             # run(front_line)
             run('echo -e "{content}" > {home}/.bash_profile'.format(
                 home=HOME, content='\n'.join(new_file)))
-    return dict(domain=domain_line, front=front_line, ploneid=plone_id)
+    return dict(domain=domain_line, front=front_line, ploneid=ploneid_line)
 
 
 def _setup_ssh_keys():
