@@ -66,13 +66,13 @@ def upgrade(app, args):
     # Display all messages on stderr
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
-
+    site_id = os.environ.get('INTRANETT_PLONE_ID','Plone')
     # Make app.REQUEST available
     from Testing import makerequest
     root = makerequest.makerequest(app)
-    site = root.get('Plone', None)
+    site = root.get(site_id, None)
     if site is None:
-        logger.error("No site called `Plone` found in the database.")
+        logger.error("No site called `%s` found in the database."%site_id)
         sys.exit(1)
 
     # Set up local site manager
