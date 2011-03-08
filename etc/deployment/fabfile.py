@@ -340,7 +340,7 @@ def _set_environment_vars():
 
     profile_lines = [l for l in profile_lines if not l.startswith('export INTRANETT_')]
     start, end = profile_lines[:2], profile_lines[2:]
-    new_file = start + [ploneid_line] + [front_line] + [domain_line + '\n'] + end
+    new_file = start + [ploneid_line] + [front_line] + [domain_line ] + end
     with settings(hide('running', 'stdout', 'stderr')):
         # run(domain_line)
         # run(front_line)
