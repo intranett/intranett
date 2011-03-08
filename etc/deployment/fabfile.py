@@ -339,6 +339,7 @@ def _set_environment_vars():
     front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
 
     exports = [l for l in profile_lines if l.startswith('export INTRANETT_')]
+    profile_lines = [l for l in profile_lines not if l.startswith('export INTRANETT_')]
     if len(exports) < 3:
         start, end = profile_lines[:2], profile_lines[2:]
         new_file = start + [ploneid_line] + [front_line] + [domain_line + '\n'] + end
