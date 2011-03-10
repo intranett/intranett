@@ -68,13 +68,17 @@ def upgrade(app, args):
     # Display all messages on stderr
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
-    site_id = os.environ.get('INTRANETT_PLONE_ID', 'Plone')
     # Make app.REQUEST available
     from Testing import makerequest
     root = makerequest.makerequest(app)
-    site = root.get(site_id, None)
+
+    from Products.CMFPlone.Portal import PloneSite
+    site_ids = [p.getId() for p in root.values() if isinstance(p, PloneSite)]
+    site_id = site_ids[0]
+
+    site = root.get(site_ids[0], None)
     if site is None:
-        logger.error("No site called `%s` found in the database."%site_id)
+        logger.error("No site called `%s` found in the database."% site_id)
         sys.exit(1)
 
     # Set up local site manager
