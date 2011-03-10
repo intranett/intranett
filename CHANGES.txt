@@ -4,6 +4,10 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Add `server_name` to Nginx config for port 80 to generate properly named
+  log files for Gocept's awstats support.
+  [hannosch]
+
 - Update to plone.app.discussion 1.0.
   [hannosch]
 
