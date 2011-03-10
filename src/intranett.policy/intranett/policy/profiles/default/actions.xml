@@ -16,13 +16,13 @@
   </object>
  </object>
  <object name="site_actions">
-  <object name="sitemap">
+  <object name="sitemap" meta_type="CMF Action">
    <property name="visible">False</property>
   </object>
-  <object name="contact">
+  <object name="contact" meta_type="CMF Action">
    <property name="visible">False</property>
   </object>
-  <object name="plone_setup">
+  <object name="plone_setup" meta_type="CMF Action">
    <property name="visible">False</property>
   </object>
  </object>

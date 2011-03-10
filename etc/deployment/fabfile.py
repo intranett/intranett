@@ -187,13 +187,15 @@ def _add_nginx_include():
 def _buildout(envvars, newest=True):
     domain = envvars['domain']
     front = envvars['front']
+    ploneid = envvars['ploneid']
+    buildout_config = env.server.config.get('buildout', 'production.cfg')
     arg = '' if newest else '-N'
     with cd(VENV):
-        run('bin/python2.6 bootstrap.py -dc production.cfg')
+        run('bin/python2.6 bootstrap.py -dc %s'%(buildout_config))
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
-        run('{x1}; {x2}; bin/buildout -c production.cfg -t 5 {arg}'.format(
-            x1=front, x2=domain, arg=arg))
+        run('{x1}; {x2}; {x3}; bin/buildout -c {buildout} -t 5 {arg}'.format(
+            x1=front, x2=domain,x3=ploneid, buildout=buildout_config, arg=arg))
         run('chmod 700 var/blobstorage')
 
 
@@ -327,6 +329,8 @@ def _set_environment_vars():
     with settings(hide('stdout', 'stderr')):
         profile = run('cat %s/.bash_profile' % HOME)
     profile_lines = profile.split('\n')
+    plone_id = env.server.config.get('ploneid', 'Plone')
+    ploneid_line = 'export INTRANETT_PLONE_ID=%s' % plone_id
     subdomain = env.host_string
     domain_line = 'export INTRANETT_DOMAIN=%s.intranett.no' % subdomain
     with settings(hide('stdout', 'stderr')):
@@ -334,16 +338,15 @@ def _set_environment_vars():
     front_ip = front_ip.lstrip('inet addr:').split()[0]
     front_line = 'export INTRANETT_ZOPE_IP=%s' % front_ip
 
-    exports = [l for l in profile_lines if l.startswith('export INTRANETT_')]
-    if len(exports) < 2:
-        start, end = profile_lines[:2], profile_lines[2:]
-        new_file = start + [front_line] + [domain_line + '\n'] + end
-        with settings(hide('running', 'stdout', 'stderr')):
-            # run(domain_line)
-            # run(front_line)
-            run('echo -e "{content}" > {home}/.bash_profile'.format(
-                home=HOME, content='\n'.join(new_file)))
-    return dict(domain=domain_line, front=front_line)
+    profile_lines = [l for l in profile_lines if not l.startswith('export INTRANETT_')]
+    start, end = profile_lines[:2], profile_lines[2:]
+    new_file = start + [ploneid_line] + [front_line] + [domain_line ] + end
+    with settings(hide('running', 'stdout', 'stderr')):
+        # run(domain_line)
+        # run(front_line)
+        run('echo -e "{content}" > {home}/.bash_profile'.format(
+            home=HOME, content='\n'.join(new_file)))
+    return dict(domain=domain_line, front=front_line, ploneid=ploneid_line)
 
 
 def _setup_ssh_keys():
