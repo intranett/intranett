@@ -11,7 +11,8 @@ def create_site(app, args):
     logger.handlers[0].setLevel(logging.INFO)
 
     force = '--force' in args or '-f' in args
-    existing = 'Plone' in app.keys()
+    from Products.CMFPlone.Portal import PloneSite
+    existing = [p.getId() for p in app.values() if isinstance(p, PloneSite)]
 
     root_arg = [a for a in args if a.startswith('--rootpassword')]
     if any(root_arg):
@@ -22,12 +23,13 @@ def create_site(app, args):
             # Non-PAS folder from a fresh database
             app.acl_users._doAddUser('admin', password, ['Manager'], [])
 
-    if existing:
+    if any(existing):
         if not force:
             logger.error('Plone site already exists.')
             sys.exit(1)
         else:
-            del app['Plone']
+            for id_ in existing:
+                del app[id_]
             app._p_jar.db().cacheMinimize()
             logger.info('Removed existing Plone site.')
 
@@ -66,7 +68,7 @@ def upgrade(app, args):
     # Display all messages on stderr
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
-    site_id = os.environ.get('INTRANETT_PLONE_ID','Plone')
+    site_id = os.environ.get('INTRANETT_PLONE_ID', 'Plone')
     # Make app.REQUEST available
     from Testing import makerequest
     root = makerequest.makerequest(app)
