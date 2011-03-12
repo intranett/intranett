@@ -4,6 +4,9 @@ Changelog
 1.1.10 - unreleased
 -------------------
 
+- Update to Munin 1.4.5.
+  [hannosch]
+
 - Add `server_name` to Nginx config for port 80 to generate properly named
   log files for Gocept's awstats support.
   [hannosch]
