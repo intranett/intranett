@@ -29,7 +29,7 @@ ignore_file \.pod$
 # the allow line as many times as you'd like
 
 allow ^127\.0\.0\.1$
-allow ^83\.143\.87\.194$
+allow ^188\.94\.218\.140$
 
 # Which address to bind to;
 host *
