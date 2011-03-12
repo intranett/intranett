@@ -4,6 +4,9 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Update to Munin 1.4.5.
+  [hannosch]
+
 - Add the option to specify a different buildout config file for a server.
   [martior, hannosch]
 
