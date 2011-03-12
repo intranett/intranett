@@ -2,6 +2,10 @@
   xmlns="http://namespaces.zope.org/zope"
   i18n_domain="intranett">
 
+  <!-- Don't expose the debug_threads browser page, we only need the
+       signal hook via SIGUSR1 -->
+  <exclude package="z3c.deadlockdebugger" />
+
   <include package="Products.CMFPlone" file="meta.zcml" />
 
 </configure>

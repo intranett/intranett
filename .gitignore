@@ -19,6 +19,7 @@ src/*/*.egg-info
 src/collective.*
 src/plutonian
 src/Products.*
+src/jarn.*
 var
 .*
 *.pyc
