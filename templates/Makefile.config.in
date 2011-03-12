@@ -18,7 +18,7 @@
 # the base of the Munin installation.
 # 
 DESTDIR    = ${munin-download:location}
-PREFIX     = $(DESTDIR)/opt/munin
+PREFIX     = $(DESTDIR)
 
 # Where Munin keeps its configurations (server.conf, client.conf, ++)
 CONFDIR    = ${buildout:directory}/etc
