@@ -63,9 +63,6 @@ def restore_db():
 
 def dump_db():
     with cd(VENV):
-        # We should cleanup some old snapshots after a while
-        # with settings(hide('warnings'), warn_only=True):
-        #     run('rm var/snapshotbackups/*')
         run('bin/snapshotbackup')
         run('tar -cf - var/blobstorage | gzip --fast '
             'var/snapshotbackups/%s-blobstorage.tgz' %
