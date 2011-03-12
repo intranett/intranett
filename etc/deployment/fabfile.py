@@ -67,7 +67,8 @@ def dump_db():
         # with settings(hide('warnings'), warn_only=True):
         #     run('rm var/snapshotbackups/*')
         run('bin/snapshotbackup')
-        run('tar czf var/snapshotbackups/%s-blobstorage.tgz var/blobstorage' %
+        run('tar -cf - var/blobstorage | gzip --fast '
+            'var/snapshotbackups/%s-blobstorage.tgz' %
             (datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")))
 
 
