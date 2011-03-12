@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1.10 - unreleased
+-------------------
+
+- Add `server_name` to Nginx config for port 80 to generate properly named
+  log files for Gocept's awstats support.
+  [hannosch]
+
 1.1.9 - 2011-03-04
 ------------------
 
