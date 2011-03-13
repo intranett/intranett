@@ -7,9 +7,6 @@
 
   <i18n:registerTranslations directory="locales"/>
 
-  <include package="experimental.catalogqueryplan" />
-  <include package="munin.zope" />
-
   <include package=".browser" />
   <include package=".portlets" />
 
