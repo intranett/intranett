@@ -34,6 +34,13 @@ Changelog
   or second latest item in the portlet. Closes #184 and #185.
   [ggozad, hannosch]
 
+1.1.11 - unreleased
+-------------------
+
+- Avoid caching temporary redirects, which could cause weird results during the
+  default cache time of two minutes.
+  [hannosch]
+
 1.1.10 - 2011-03-12
 -------------------
 
