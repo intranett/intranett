@@ -1,0 +1,7 @@
+<span tal:define="data view/data"
+      tal:content="data/title"
+      tal:attributes="class string:state-${data/state}"
+      i18n:translate=""
+      i18n:domain="plone">
+    Workflow state
+</span>

@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="extropy">
+
+  <include package=".browser" />
+
+  <cmf:registerDirectory
+      name="skins"
+      directory="skins"
+      recursive="True"
+      />
+
+  <genericsetup:registerProfile
+    name="default"
+    title="Invoice"
+    directory="profiles/default"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+</configure>

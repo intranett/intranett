@@ -1,0 +1,36 @@
+<dl class="portlet portletHourslastweek"
+    i18n:domain="plone"
+    tal:define="portal_url context/portal_url;">
+
+  <dt class="portletHeader">
+      <span class="portletTopLeft"></span>
+       Hours this week
+      <span class="portletTopRight"></span>
+  </dt>
+  <dd class="portletItem">
+
+    <table style="width:90%">
+        <tr tal:repeat="obj python:view.totals()">
+            <td tal:define="person python:obj[0][1];
+                            fullname python:obj[0][0];
+                            start python:context.ZopeTime().earliestTime()-6;">
+                <a tal:attributes="href string:${portal_url}/weeklyplan_report?user=${person}"
+                   tal:define="name fullname|person;
+                               name python:len(name) > 18 and name[:17] + '&amp;hellip;;' or name"
+                   tal:content="structure name"></a></td>
+            <td style="text-align:right;"><span tal:content="python:obj[1]"/><span class="discreet">h</span></td>
+        </tr>
+    </table>
+  </dd>
+
+  <dd class="portletFooter">
+      <a href="#"
+         class="tile"
+         tal:attributes="href string:${portal_url}/@@timesheet">
+          Register hours&hellip;
+      </a>
+      <span class="portletBottomLeft"></span>
+      <span class="portletBottomRight"></span>
+  </dd>
+
+</dl>

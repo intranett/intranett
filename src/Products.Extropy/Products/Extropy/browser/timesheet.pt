@@ -1,0 +1,258 @@
+<metal:page define-macro="master">
+<tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    tal:define="portal_state context/@@plone_portal_state;
+        context_state context/@@plone_context_state;
+        plone_view context/@@plone;
+        lang portal_state/language;
+        view nocall:view | nocall: plone_view;
+        dummy python: plone_view.mark_view(view);
+        portal_url portal_state/portal_url;
+        checkPermission nocall: context/portal_membership/checkPermission;
+        site_properties context/portal_properties/site_properties;
+        ajax_load request/ajax_load | nothing"
+    tal:attributes="lang lang;">
+
+    <metal:cache use-macro="context/global_cache_settings/macros/cacheheaders">
+        Get the global cache headers located in global_cache_settings.
+    </metal:cache>
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <metal:baseslot define-slot="base">
+        <base tal:attributes="href plone_view/renderBase" />
+    </metal:baseslot>
+
+    <div tal:replace="structure provider:plone.htmlhead" />
+    <link tal:replace="structure provider:plone.htmlhead.links" />
+
+    <metal:block tal:define="dummy python:request.set('disable_border', 1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn', 1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn', 1);" />
+
+    <metal:topslot define-slot="top_slot" />
+    <metal:headslot define-slot="head_slot" />
+
+    <style type="text/css">
+        table.listing {
+            margin: 0;
+        }
+    </style>
+
+    <metal:styleslot define-slot="style_slot" />
+    <metal:javascriptslot define-slot="javascript_head_slot" />
+
+  </head>
+
+<body tal:define="body_class python:plone_view.bodyClass(template, view);
+                  sunburst_view python:context.restrictedTraverse('@@sunburstview')"
+      tal:attributes="class body_class;">
+
+<!-- <div id="visual-portal-wrapper"> -->
+<div id="portal-columns" class="row">
+<div class="contentAlignment">    
+    <div id="portal-column-content" class="cell width-16 position-0">
+
+      <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+       Status message
+      </div>
+
+      <article id="content"
+           tal:define="isAnon context/@@plone_portal_state/anonymous;
+                       raiseUnauthorized python:isAnon and context.raiseUnauthorized() or None;
+                       timefmt python: '%h.%d %H:%M';
+                       startend view/startend;
+                       start startend/start;
+                       end startend/end;
+                       tool view/timetool;
+                       etool view/extropytool;
+                       username user/getUserName;
+                       hours python:view.hours(start, end, username);
+                       sumhours hours/sumhours;
+                       gaps hours/gaps;
+                       context_url string:${context/absolute_url}/@@timesheet;">
+
+          <div id="content-core">
+              <p class="image-right">
+                <a href="/" tal:attributes="href portal_url">
+                  Back to Jarn intranet
+                </a>
+              </p>
+
+              <form method="get"
+                    class="enableUnloadProtection"
+                    tal:define="last_task request/last_task | nothing;"
+                    tal:attributes="action string:${context_url}">
+
+                  <fieldset>
+                    <legend>Filter</legend>
+                    <div class="field"
+                         tal:define="ztu modules/ZTUtils;
+                                     ltask last_task | string:'';">
+                        <label for="date:string">Date:</label>
+                        <input type="text" size="10" name="date:string"
+                               tal:attributes="value python:start.Date()" />&nbsp;
+                        <a tal:define="yesterday python:start-1;
+                                       qs python:ztu.make_query(date=yesterday.Date(), last_task=ltask)"
+                           tal:attributes="href string:${context_url}?${qs}">&larr; previous day</a> |
+                        <a tal:define="qs python:ztu.make_query(last_task=ltask)"
+                           tal:attributes="href string:${context_url}?${qs}">today</a> |
+                        <a tal:define="tomorrow python:start+1;
+                                       qs python:ztu.make_query(date=tomorrow.Date(), last_task=ltask)"
+                           tal:attributes="href string:${context_url}?${qs}">next day &rarr;</a>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <legend>New entry</legend>
+                    
+                    <div class="field">
+                        <table class="grid listing nosort">
+                           <thead>
+                              <tr>
+                                  <th>Task</th>
+                                  <th>Title</th>
+                                  <th>Start</th>
+                                  <th>End</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                               <tr>
+                                   <td>
+                                       <select name="hours.task:records:string"
+                                               style="width: 20em">
+                                          <option value="">-</option>
+                                          <tal:projects tal:repeat="customer python:view.groupedtasks(username)">
+                                              <optgroup tal:attributes="label python:customer[0]">
+                                                  <tal:tasks tal:repeat="contract python:customer[1]">
+                                                      <option tal:define="value contract/value;
+                                                                          title contract/Title"
+                                                              tal:attributes="value value;
+                                                                              label title;
+                                                                              selected python: last_task==value"
+                                                              tal:content="title">contract title</option>
+                                                  </tal:tasks>
+                                              </optgroup>
+                                          </tal:projects>
+                                       </select>
+                                   </td>
+                                   <td>
+                                      <input name="hours.title:records:string"
+                                             type="text"
+                                             value=""
+                                             size="20"
+                                             tal:attributes="value request/title | nothing" />
+                                   </td>
+                                   <td tal:define="tasks python:len(gaps)!=0;
+                                                   last python:tasks and gaps[-1] or False;
+                                                   lastended python: last and last.end.strftime('%H:%M') or '09:00'">
+                                      <input name="hours.start:records:string"
+                                             type="text"
+                                             value=""
+                                             size="5"
+                                             tal:attributes="value request/start | lastended" />
+                                   </td>
+                                   <td>
+                                      <input name="hours.end:records:string"
+                                             type="text"
+                                             value=""
+                                             size="5"
+                                             tal:attributes="value request/end | nothing" />
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td colspan="4">
+                                      Summary (in restructured text)<br />
+                                      <textarea name="hours.summary:records:text"
+                                                rows="5"
+                                                style="width:100%;"
+                                                tal:content="request/summary | nothing"
+                                                tal:attributes="rows request/rows | default"
+                                      ></textarea>
+                                   </td>
+                               </tr>
+                          </tbody>
+                        </table>
+                    </div>
+
+                    <div class="formControls">
+                        <input type="submit" name="form.submitted" value="Submit" />
+                    </div>
+
+                  </fieldset>
+              </form>
+              
+              <h3>
+                  Worked hours on
+                  <span tal:replace="start/Day" />
+                  <span tal:replace="start/Date" />
+              </h3>
+              
+              <table class="listing nosort">
+                  <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Hours</th>
+                        <th>Category</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tal:gaps tal:repeat="gap gaps">
+                      <tal:vars define="is_gap python:isinstance(gap, dict);
+                                        was_gap last_gap | nothing;
+                                        global last_gap is_gap;">
+                      <tr class="gap"
+                          tal:condition="python: is_gap and not was_gap">
+                          <td>-- Gap! --</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                      <tr tal:condition="not: is_gap">
+                          <td tal:define="project gap/getProjectTitle | nothing;
+                                          obj gap/getObject;
+                                          worktype obj/hourWorktype|nothing;">
+                              <a tal:attributes="href gap/getURL">
+                                  <span tal:content="python:gap.Title or '...unknown...'"/>
+                                  <tal:worktype tal:condition="worktype">
+                                      — <span tal:content="worktype" />
+                                  </tal:worktype>
+                              </a>
+                              <span class="discreet" tal:content="project" />
+                          </td>
+                          <td tal:content="python:gap.start.strftime('%H:%M')">10:00</td>
+                          <td tal:content="python:gap.end.strftime('%H:%M')">11:00</td>
+                          <td tal:content="gap/workedHours"></td>
+                          <td>
+                              <span tal:attributes="class string:budget-category-${gap/getBudgetCategory/lower}"
+                                    tal:content="gap/getBudgetCategory"></span>
+                          </td>
+                      </tr>
+                      </tal:vars>
+                  </tal:gaps>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <th colspan="3" style="text-align:right">Sum</th>
+                          <td tal:content="sumhours"></td>
+                          <td>&nbsp;</td>
+                      </tr>
+                  </tfoot>
+              </table>
+              
+          </div>
+      </article>
+
+    </div>
+</div>
+</div>
+<!-- </div> -->
+
+</body>
+</html>
+</metal:page>

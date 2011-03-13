@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<object name="ExtropyTaskHistory" meta_type="Factory-based Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">Task History Entry</property>
+ <property
+    name="description">A comment, change or similar to the containing task.</property>
+ <property name="content_icon">document_icon.gif</property>
+ <property name="content_meta_type">ExtropyTaskHistory</property>
+ <property name="product">Extropy</property>
+ <property name="factory">addExtropyTaskHistory</property>
+ <property name="immediate_view">base_edit</property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">False</property>
+ <alias from="(Default)" to="base_view"/>
+ <alias from="view" to="(Default)"/>
+ <alias from="edit" to="base_edit"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    url_expr="string:${object_url}/base_view" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    url_expr="string:${object_url}/base_edit" visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+</object>

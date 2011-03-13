@@ -1,0 +1,119 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+<body>
+
+<div metal:fill-slot="main" tal:define="etool nocall:here/extropy_tracking_tool;
+                        states python:test((not request.has_key('review_state')) or request.get('review_state', None) == 'AllOpenStates',
+                                        etool.getOpenStates(),
+                                        request.get('review_state'));
+                                        activities python:etool.trackingQuery(context, meta_type='ExtropyActivity',  REQUEST=request);">
+
+    <h1>activities in <span tal:content="here/Title"></span></h1>
+    
+    <div tal:condition="not: activities">
+        <p><strong i18n:translate="description_no_results_found">No results were found.</strong></p>
+    </div>
+    
+    <dl class="collapsible NOTcollapsedOnLoad">
+        <dt class="collapsibleHeader">
+            Filter Results
+        </dt>
+        <dd class="collapsibleContent">
+
+            <form name="filter_form"
+                  action="."
+                  method="get"
+                  tal:attributes="action string:${here/absolute_url}/${template/getId}" >
+
+                <input type="hidden" name="form.submitted" value="1" />
+
+                <div tal:define="mtool nocall:context/portal_membership;">
+                    <label>Responsible</label>
+                    <div>
+                        <select name="getResponsiblePerson">
+                            <tal:options repeat="participant python:etool.uniqueValuesFor('getResponsiblePerson')">
+                            <option tal:attributes="value participant;
+                            selected python:test(request.get('getResponsiblePerson',None) == participant,'selected','')"
+                                    tal:define="author python:participant and mtool.getMemberInfo(participant);
+                                                name author/fullname|participant"
+                                    tal:content="python:name or 'All'">limi</option>
+                            </tal:options>
+                        </select>
+                    </div>
+                </div>
+                <div>     
+                    <label>State</label>
+                    <div>
+                        <select name="review_state">
+                            <option value="" tal:attributes="selected python:request.get('review_state',None)==''">All</option>
+                            <option value="AllOpenStates" tal:attributes="selected python:not request.has_key('review_state') or request.get('review_state')=='AllOpenStates'">All 'open'</option>
+                            <option tal:repeat="state python:etool.uniqueValuesFor('review_state')" 
+                                tal:attributes="value state;
+                                                selected python:request.get('review_state','') == state "
+                                tal:content="python:state" /> 
+                        </select> (Refactor: this one needs to ask the workflowtool about states, not the catalog)
+                    </div>
+                </div>
+
+                <div>
+                    <input type="submit" value="Filter activities" />
+                </div>
+
+            </form>
+        </dd>
+    </dl>
+
+    <table metal:define-macro="extropy_activities_listing" class="listing" id="sortable" style="width :100%; clear: both" tal:condition="activities">
+
+        <script type="text/javascript">
+            WorkflowActions.subscribe(function(action) { action.element.up().previous().className = 'state-' + action.state; })
+        </script>
+
+        <thead>  
+            <tr>
+                <th colspan="8">activities</th>
+            </tr>
+            <tr>
+                <th>activity</th>
+                <th>State</th>
+                <th>Progress</th>
+                <th>Participants</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tal:activity tal:repeat="activity activities">
+            <tr tal:define="oddrow repeat/activity/odd"
+                tal:attributes="class python:test(oddrow, 'even', 'odd')">
+        
+                <td tal:attributes="class string:state-${activity/review_state}">
+                    <a href="" 
+                       tal:content="python:activity.Title or activity.getId" 
+                       tal:attributes="href activity/getURL">activity title</a>
+                </td>
+                <td tal:content="structure activity/@@workflowactions">Completed?</td>
+    
+                <td>
+                    <div tal:define="worked activity/getWorkedHours;
+                                     URL activity/absolute_url;
+                                     bar nocall:context/@@smallprogressbar">
+                        <p tal:replace="structure python:bar(worked, URL)"/>
+                    </div>
+                </td>
+                <td>
+                    <span tal:repeat="person activity/getResponsiblePerson"><span tal:content="person"></span><span tal:condition="not:repeat/person/end">,</span></span>
+                </td>
+            </tr>
+            </tal:activity>
+        </tbody>
+    </table>
+
+
+</div>
+
+</body>
+</html>
