@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.6'
+version = '2.0dev'
 
 setup(name='Products.Invoice',
       version=version,
