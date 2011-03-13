@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="extropy_feature_workflow"
+             title="Feature Workflow [Extropy]"
+             state_variable="review_state"
+             initial_state="open">
+ <permission>Access contents information</permission>
+ <permission>Change portal events</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <state state_id="closed" title="Closed">
+  <exit-transition transition_id="start"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="completed" title="All tasks complete">
+  <exit-transition transition_id="close"/>
+  <exit-transition transition_id="discard"/>
+  <exit-transition transition_id="start_testing"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="discarded" title="Discarded">
+  <exit-transition transition_id="empty_close"/>
+  <exit-transition transition_id="start"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="open" title="Active">
+  <exit-transition transition_id="empty_close"/>
+  <exit-transition transition_id="taskscomplete"/>
+  <exit-transition transition_id="discard"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="planned" title="Planned">
+  <exit-transition transition_id="discard"/>
+  <exit-transition transition_id="empty_close"/>
+  <exit-transition transition_id="start"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="prospective" title="Prospective">
+  <exit-transition transition_id="discard"/>
+  <exit-transition transition_id="empty_close"/>
+  <exit-transition transition_id="start"/>
+  <exit-transition transition_id="planning_complete"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="taskscomplete" title="All tasks complete">
+  <exit-transition transition_id="close"/>
+  <exit-transition transition_id="discard"/>
+  <exit-transition transition_id="reopen"/>
+  <exit-transition transition_id="start_testing"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Participant</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="testing" title="Testing">
+  <exit-transition transition_id="close"/>
+  <exit-transition transition_id="discard"/>
+  <permission-map name="Access contents information"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+ </state>
+ <transition transition_id="close" title="Close"
+             new_state="closed" trigger="USER"
+             before_script="" after_script="">
+  <action url="" category="workflow">Close</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="complete"
+             title="All tasks complete"
+             new_state="completed" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/content_publish_form"
+          category="workflow">All tasks complete</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="discard" title="Discard"
+             new_state="discarded" trigger="USER"
+             before_script=""
+             after_script="">
+  <action url="%(content_url)s/content_reject_form"
+          category="workflow">Discard</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="empty_close" title="Close"
+             new_state="closed" trigger="USER"
+             before_script="" after_script="">
+  <action url="" category="workflow">Close</action>
+  <guard>
+   <guard-expression>python:not test(getattr(here, 'data_record_id_', None), getattr(here, 'children', None), here.listFolderContents(contentFilter=dict(Type='Task')))</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="planning_complete"
+             title="Planning Complete" new_state="planned"
+             trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow">Planning complete</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="reopen"
+             title="Reopen deliverable when a new task is added"
+             new_state="open" trigger="USER"
+             before_script="" after_script="">
+  <description>Triggered by an event handler</description>
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="start" title="Start work"
+             new_state="open" trigger="USER"
+             before_script="" after_script="">
+  <action url="" category="workflow">Start work</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="start_testing"
+             title="Start testing" new_state="testing"
+             trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow">Start testing</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="taskscomplete"
+             title="All tasks complete"
+             new_state="taskscomplete" trigger="USER"
+             before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending"
+          category="global">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>

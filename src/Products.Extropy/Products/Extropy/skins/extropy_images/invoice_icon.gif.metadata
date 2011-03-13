@@ -1,0 +1,3 @@
+[default]
+title=Invoice
+cache=HTTPCache

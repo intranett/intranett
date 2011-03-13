@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+  <body>
+
+    <div metal:fill-slot="main">
+
+      <h1>Invoices listed by state</h1>
+
+      <p>Be aware that this template doesn't discern different currencies, and will ( in its current state) happily add different currencies as if they were the same. This is not considered an important issue, as most invoices in a project will be of the same currency </p>
+
+      <table class="listing" style="width:90%" tal:repeat="state view/getStates">
+        
+        <tr><th colspan="4" tal:content="state"></th></tr>
+         
+        <tr>
+            <th style="width:25%">invoice#</th>
+            <th style="width:25%">Due date</th>
+            <th style="width:25%">description</th>
+            <th style="width:25%">amount</th>
+
+        </tr>
+        <tr tal:repeat="invoice python:view.getInvoicesByState()[state]['invoices']">
+            <td><a tal:attributes="href invoice/absolute_url" tal:content="invoice/Title"></a></td>            
+            <td>
+              <span tal:omit-tag="python:invoice.end() > context.ZopeTime()" style="color:red">
+                <span
+                    tal:content="python:context.toLocalizedTime(invoice.end())">May 5
+                </span>   
+              </span>    
+                
+                
+            </td>
+            <td tal:content="invoice/Description"></td>
+            <td style="text-align:right" >
+                <span tal:content="invoice/getCurrency"></span>
+                <span tal:content="invoice/getTotal"></span>
+            </td>
+        </tr>
+
+      </table>
+    
+    </div>
+  </body>
+</html>

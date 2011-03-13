@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      i18n:domain="extropy"
+      metal:use-macro="here/main_template/macros/master">
+  <head>
+  </head>
+  <body>
+    <div metal:fill-slot="main"
+          tal:define="catalog nocall:here/extropy_tracking_tool;
+                    etool nocall:here/extropy_timetracker_tool;
+                    global total python:0">
+
+        <h2>Open packages and contracts</h2>
+
+        <table class="listing">
+            <thead>
+                <th>Project / Customer</th>
+                <th>Package / Contract</th>
+                <th>Billable hours</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tal:loop tal:repeat="item python:catalog(portal_type=['ExtropyPhase', 'Contract'], review_state=['active', 'prospective', 'closable'])">
+                    <tr tal:define="obj item/getObject"
+                        tal:condition="python:obj.getBudgetCategory()=='Billable'">
+
+                        <td tal:content="item/getProjectTitle"></td>
+
+                        <td>
+                            <a tal:content="item/Title"
+                               tal:attributes="href string:${item/getURL}/timereport" />
+                        </td>
+
+                        <td style="text-align:right">
+                            <span tal:define="subtotal python:etool.countIntervalHours(obj, getBudgetCategory='Billable', review_state='entered');
+                                              global total python:total+subtotal;"
+                                  tal:content="python:int(subtotal)" />
+                        </td>
+                    <td tal:content="item/review_state"></td>
+
+                    </tr>
+                </tal:loop>
+            </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="2"><strong>Total</strong></th>
+
+                    <th><strong tal:content="total" /></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+
+    </div>
+  </body>
+</html>

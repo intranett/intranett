@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="extropy">
+
+  <i18n:registerTranslations directory="locales"/>
+
+  <include package="experimental.catalogqueryplan" />
+  <include package="munin.zope" />
+
+  <include package=".browser" />
+  <include package=".portlets" />
+
+  <cmf:registerDirectory
+      name="skins"
+      directory="skins"
+      recursive="True"
+      />
+
+  <genericsetup:registerProfile
+    name="extropy"
+    title="Extropy"
+    directory="profiles/default"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+</configure>
