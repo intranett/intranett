@@ -146,3 +146,15 @@ def update_discussion_10(context):
     control = getToolByName(context, 'portal_controlpanel')
     disc = [a for a in control.listActions() if a.id == 'discussion'][0]
     disc.category = 'Plone'
+
+
+@upgrade_to(20)
+def update_clamav_settings(context):
+    ptool = getToolByName(context, 'portal_properties')
+    clamav = ptool.clamav_properties
+    clamav.clamav_connection = 'net'
+    clamav.clamav_host = 'jarn11.gocept.net'
+    clamav.clamav_port = '3310'
+    clamav.clamav_timeout = 120
+    # return to default
+    clamav.clamav_socket = '/var/run/clamd'

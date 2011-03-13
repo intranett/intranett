@@ -127,3 +127,13 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         registry = queryUtility(IRegistry)
         settings = registry.forInterface(IDiscussionSettings)
         self.assertEqual(settings.user_notification_enabled, False)
+
+    def after_20(self):
+        portal = self.layer['portal']
+        ptool = getToolByName(portal, 'portal_properties')
+        clamav = ptool.clamav_properties
+        self.assertEqual(clamav.getProperty('clamav_connection'), 'net')
+        self.assertEqual(
+            clamav.getProperty('clamav_host'), 'jarn11.gocept.net')
+        self.assertEqual(
+            clamav.getProperty('clamav_port'), '3310')
