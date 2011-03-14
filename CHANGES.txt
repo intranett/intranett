@@ -4,6 +4,10 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Use the fastest gzip compression on blob storage snapshots, as there's not
+  much that can be compressed in binary data. Closes #197.
+  [martior, hannosch]
+
 - Add the option to specify a different buildout config file for a server.
   [martior, hannosch]
 
