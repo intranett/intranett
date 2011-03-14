@@ -64,7 +64,8 @@ def restore_db():
 def dump_db():
     with cd(VENV):
         run('bin/snapshotbackup')
-        run('tar czf var/snapshotbackups/%s-blobstorage.tgz var/blobstorage' %
+        run('tar c var/blobstorage/ | gzip --fast > '
+            'var/snapshotbackups/%s-blobstorage.tgz' %
             (datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")))
 
 
