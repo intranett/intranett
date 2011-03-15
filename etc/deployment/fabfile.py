@@ -140,6 +140,12 @@ def full_update():
         run('bin/supervisorctl start varnish')
 
 
+def update_varnish():
+    _prepare_update(newest=False)
+    with cd(VENV):
+        run('bin/supervisorctl restart varnish')
+
+
 def init_server():
     envvars = _set_environment_vars()
     _set_cron_mailto()
