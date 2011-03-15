@@ -45,7 +45,7 @@ Changelog
   or second latest item in the portlet. Closes #184 and #185.
   [ggozad, hannosch]
 
-1.1.11 - unreleased
+1.1.11 - 2011-03-15
 -------------------
 
 - Avoid caching temporary redirects, which could cause weird results during the
