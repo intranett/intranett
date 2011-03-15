@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.0 - unreleased
+1.2.0 - 2011-03-15
 ------------------
 
 - Update to collective.ATClamAV = 1.2 to fix network socket problems.
