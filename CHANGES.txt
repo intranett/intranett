@@ -34,7 +34,7 @@ Changelog
 - Update to Plone 4.0.4 and Zope 2.12.16.
   [hannosch]
 
-- Update to Varnish 2.1.5 and HAProxy 1.4.11.
+- Update to Varnish 2.1.5 and HAProxy 1.4.13.
   [hannosch]
 
 - Added frontpage content highlight portlet, that allows a user to select an
