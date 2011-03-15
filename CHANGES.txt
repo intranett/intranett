@@ -4,6 +4,9 @@ Changelog
 1.2.0 - unreleased
 ------------------
 
+- Update to collective.ATClamAV = 1.2 to fix network sockets problems.
+  [hannosch]
+
 - Change the antivirus checks to run on the central jarn11 server instead of
   locally on each server.
   [hannosch]
