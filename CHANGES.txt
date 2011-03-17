@@ -4,6 +4,9 @@ Changelog
 1.2.1 - unreleased
 ------------------
 
+- Added memory monitoring to Zope instances. If a Zope instance exceeds to use
+  250mb of RSS memory, it will be restarted. This is checked every minute.
+  [hannosch]
 
 1.2.0 - 2011-03-15
 ------------------
