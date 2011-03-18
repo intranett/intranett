@@ -140,6 +140,11 @@ def full_update():
         run('bin/supervisorctl start varnish')
 
 
+def update_nginx():
+    _prepare_update(newest=False)
+    reload_nginx()
+
+
 def update_varnish():
     _prepare_update(newest=False)
     with cd(VENV):
