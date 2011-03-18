@@ -4,6 +4,10 @@ Changelog
 1.2.1 - unreleased
 ------------------
 
+- Enable click-jacking protection by preventing the site to be loaded inside
+  a frame.
+  [hannosch]
+
 - Enable SSL session cache to support SSL session resumption. SSL sessions can
   be reused for up to 10 minutes.
   [hannosch]
