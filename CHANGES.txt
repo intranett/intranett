@@ -4,6 +4,9 @@ Changelog
 1.2.1 - unreleased
 ------------------
 
+- Add missing mime types and enable gzip compression for web fonts.
+  [hannosch]
+
 - Enable click-jacking protection by preventing the site to be loaded inside
   a frame.
   [hannosch]
