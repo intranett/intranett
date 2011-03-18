@@ -128,7 +128,7 @@ class UpgradeTests(object):
         diff = self.export()
         remaining = self.parse_diff(diff)
 
-        def _print(values):
+        def _print(values): # pragma: no cover
             for v in values:
                 pprint(v.split('\n'))
         self.assertEqual(set(remaining.keys()), set([]),
