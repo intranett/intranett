@@ -161,7 +161,7 @@ def update_clamav_settings(context):
 
 
 @upgrade_to(21)
-def install_people_folder(context):
+def install_users_folder(context):
     # Remove the employee-listing action
     atool = getToolByName(context, 'portal_actions')
     if 'employee-listing' in atool.portal_tabs:
@@ -169,12 +169,12 @@ def install_people_folder(context):
     # Add the MembersFolder portal type
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('typeinfo', 'factorytool'))
-    # Add the people folder
+    # Add the users folder
     from intranett.policy.config import MEMBERS_FOLDER_ID
-    from intranett.policy.setuphandlers import setup_people_folder
+    from intranett.policy.setuphandlers import setup_members_folder
     portal = getToolByName(context, 'portal_url').getPortalObject()
     if MEMBERS_FOLDER_ID not in portal:
-        setup_people_folder(portal)
+        setup_members_folder(portal)
     # Reindex member data
     mt = getToolByName(context, 'portal_membership')
     for member in mt.listMembers():

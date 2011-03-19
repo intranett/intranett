@@ -29,15 +29,15 @@
                     <div class="documentDescription">
                         <a href="" title="Show all employees"
                            tal:condition="department_request"
-                           tal:attributes="href view/people_folder_url"
+                           tal:attributes="href view/users_folder_url"
                            i18n:translate="">
-                           Show people from all departments
+                           Show employees from all departments
                         </a>
                     </div>
                 </tal:departmentview>
                 <h1 class="documentFirstHeading"
                     tal:condition="not:department_request"
-                    tal:content="context/Title">People</h1>
+                    tal:content="context/Title">Employees</h1>
             </header>
 
             <div id="content-core">

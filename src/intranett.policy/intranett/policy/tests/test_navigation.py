@@ -18,7 +18,7 @@ class TestNavigation(IntranettTestCase):
     def test_default(self):
         tabs = self._make_one()
         self.assert_(len(tabs) == 2)
-        self.assertEquals(tabs[0]['id'], 'people')
+        self.assertEquals(tabs[0]['id'], 'users')
         self.assertEquals(tabs[1]['id'], 'test-folder')
 
     def test_published_folders(self):

@@ -46,13 +46,13 @@ class MemberDataView(BrowserView):
 
     @memoize
     def employee_url(self, member_id):
-        return self.people_folder_url() + '/' + quote(member_id)
+        return self.users_folder_url() + '/' + quote(member_id)
 
     @memoize
     def department_url(self, department):
-        return self.people_folder_url() + '?department=' + quote(department)
+        return self.users_folder_url() + '?department=' + quote(department)
 
     @memoize
-    def people_folder_url(self):
+    def users_folder_url(self):
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         return portal.absolute_url() + '/' + quote(getMembersFolderId())

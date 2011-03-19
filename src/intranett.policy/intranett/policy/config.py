@@ -1,7 +1,6 @@
 PROJECTNAME = 'intranett.policy'
-ADD_PERMISSIONS = {'MembersFolder': 'intranett.policy: Add MembersFolder'}
-MEMBERS_FOLDER_ID = 'people'
-MEMBERS_FOLDER_TITLE = 'Personer' # 'People'
+ADD_PERMISSIONS = {'MembersFolder': '%s: Add MembersFolder' % PROJECTNAME}
+MEMBERS_FOLDER_ID = 'users'
 
 from plutonian import Configurator
 

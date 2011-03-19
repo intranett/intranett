@@ -89,7 +89,7 @@ def setup_reject_anonymous(site):
     alsoProvides(portal, IPrivateSite)
 
 
-def setup_people_folder(site):
+def setup_members_folder(site):
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import MEMBERS_FOLDER_ID
     fti = getToolByName(site, 'portal_types')['MembersFolder']
@@ -117,4 +117,4 @@ def various(context):
     disable_portlets(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
-    setup_people_folder(site)
+    setup_members_folder(site)

@@ -38,41 +38,38 @@ class TestEmployeeListing(IntranettTestCase):
         portal = self.layer['portal']
         add_default_members(portal)
 
-    def test_view_exists(self):
+    def _make_one(self):
+        from intranett.policy.config import MEMBERS_FOLDER_ID
         portal = self.layer['portal']
-        members = portal['people']
+        members = portal[MEMBERS_FOLDER_ID]
+        view = members.unrestrictedTraverse('@@employee-listing')
+        view.update()
+        return view
+
+    def test_view_exists(self):
         try:
-            members.unrestrictedTraverse('@@employee-listing')
+            self._make_one()
         except AttributeError: # pragma: no cover
-            self.fail("@@employee-listing doesn't exist.")
+            self.assertFalse("@@employee-listing doesn't exist.")
 
     def test_employeelisting_action(self):
         portal = self.layer['portal']
         atool = getToolByName(portal, 'portal_actions')
         # There is no action anymore
-        self.failIf('employee-listing' in atool.portal_tabs.objectIds())
+        self.assertFalse('employee-listing' in atool.portal_tabs.objectIds())
 
     def test_list_employees(self):
-        portal = self.layer['portal']
-        members = portal['people']
-        view = members.unrestrictedTraverse('@@employee-listing')
-        view.update()
+        view = self._make_one()
         self.assertEqual([x['fullname'] for x in view.employees()],
                          ['Barney Rubble', 'Fred Flintstone', 'Memb\xc3\xa5r'])
 
     def test_list_departments(self):
-        portal = self.layer['portal']
-        members = portal['people']
-        view = members.unrestrictedTraverse('@@employee-listing')
-        view.update()
+        view = self._make_one()
         self.assertEqual([x['name'] for x in view.departments()],
                          ['Dept\xc3\xa5', 'Rock & Gravel'])
 
     def test_list_employees_by_department(self):
-        portal = self.layer['portal']
-        members = portal['people']
-        view = members.unrestrictedTraverse('@@employee-listing')
-        view.update()
+        view = self._make_one()
         rocks = [x['fullname'] for x in view.employees('Rock & Gravel')]
         self.assertEqual(rocks, ['Fred Flintstone', 'Memb\xc3\xa5r'])
         accounting = [x['fullname'] for x in view.employees('Dept\xc3\xa5')]
@@ -80,8 +77,7 @@ class TestEmployeeListing(IntranettTestCase):
 
     def test_can_manage(self):
         portal = self.layer['portal']
-        members = portal['people']
-        view = members.unrestrictedTraverse('@@employee-listing')
+        view = self._make_one()
         self.assertFalse(view.can_manage())
         setRoles(portal, TEST_USER_ID, ['Manager'])
         self.assertTrue(view.can_manage())
@@ -98,20 +94,19 @@ class TestFunctionalEmployeeListing(IntranettFunctionalTestCase):
     def test_employee_listing_view(self):
         # As a normal user we can view the listing
         browser = get_browser(self.layer['app'])
-        browser.open('http://nohost/plone/people/employee-listing')
+        browser.open('http://nohost/plone/users/employee-listing')
         self.assert_(browser.url.endswith('employee-listing'))
         self.failUnless('Barney Rubble' in browser.contents)
-        self.failUnless('http://nohost/plone/people/barney' in browser.contents)
+        self.failUnless('http://nohost/plone/users/barney' in browser.contents)
         self.failUnless('Fred Flintstone' in browser.contents)
-        self.failUnless('http://nohost/plone/people/fred' in browser.contents)
+        self.failUnless('http://nohost/plone/users/fred' in browser.contents)
 
     def test_members_folder_view(self):
         # As a normal user we can view the listing
         browser = get_browser(self.layer['app'])
-        browser.open('http://nohost/plone/people')
-        self.assert_(browser.url.endswith('people'))
+        browser.open('http://nohost/plone/users')
+        self.assert_(browser.url.endswith('users'))
         self.failUnless('Barney Rubble' in browser.contents)
-        self.failUnless('http://nohost/plone/people/barney' in browser.contents)
+        self.failUnless('http://nohost/plone/users/barney' in browser.contents)
         self.failUnless('Fred Flintstone' in browser.contents)
-        self.failUnless('http://nohost/plone/people/fred' in browser.contents)
-
+        self.failUnless('http://nohost/plone/users/fred' in browser.contents)
