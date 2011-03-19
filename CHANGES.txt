@@ -4,6 +4,9 @@ Changelog
 1.2.1 - unreleased
 ------------------
 
+- Optimize Gzip compression settings for HTML content.
+  [hannosch]
+
 - Sent authentication cookies only over secure connections. Closes #135.
   [hannosch]
 
