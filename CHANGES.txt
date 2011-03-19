@@ -4,8 +4,7 @@ Changelog
 1.2.1 - unreleased
 ------------------
 
-- Sent authentication cookies only over secure connections. This refs
-  https://jira.jarn.com/browse/INTRANETT-135.
+- Sent authentication cookies only over secure connections. Closes #135.
   [hannosch]
 
 - Respect the `types_not_searched` filter on the user profile. Closes #123.
