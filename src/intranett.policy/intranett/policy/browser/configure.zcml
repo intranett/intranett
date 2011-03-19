@@ -25,4 +25,26 @@
       ruleset="plone.content.folderView"
       />
 
+  <!-- User / author page -->
+  <browser:page
+      for="intranett.policy.tools.MemberData"
+      name="memberdata_view"
+      class=".user.MemberDataView"
+      template="templates/user.pt"
+      permission="zope2.View"
+      />
+
+  <cache:ruleset
+      for=".user.MemberDataView"
+      ruleset="plone.content.folderView"
+      />
+
+  <!-- User breadcrumbs -->
+  <browser:page
+      for="intranett.policy.tools.MemberData"
+      name="breadcrumbs_view"
+      class="Products.CMFPlone.browser.navigation.CatalogNavigationBreadcrumbs"
+      permission="zope2.View"
+      />
+
 </configure>
