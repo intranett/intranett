@@ -36,8 +36,11 @@ class MemberDataView(BrowserView):
         userid = self.userid()
         if not userid: # pragma: no cover
             return []
+        utils = getToolByName(self.context, 'plone_utils')
+        search_types = utils.getUserFriendlyTypes()
         query = {
             'Creator': userid,
+            'portal_type': search_types,
             'sort_on': 'created',
             'sort_order': 'reverse',
             'sort_limit': 10,

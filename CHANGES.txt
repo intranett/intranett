@@ -4,6 +4,9 @@ Changelog
 1.2.1 - unreleased
 ------------------
 
+- Respect the `types_not_searched` filter on the user profile. Closes #123.
+  [hannosch]
+
 - Add missing mime types and enable gzip compression for web fonts.
   [hannosch]
 
