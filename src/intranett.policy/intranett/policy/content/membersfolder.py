@@ -1,17 +1,16 @@
-from zope.interface import implements
-from zope.component import adapter
-from zope.component import getUtility
-from zope.component import getSiteManager
-from zope.lifecycleevent import IObjectMovedEvent
-from zope.lifecycleevent import IObjectAddedEvent
-from zope.lifecycleevent import IObjectRemovedEvent
-
 from OFS.interfaces import IObjectWillBeRemovedEvent
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.interfaces import IObjectInitializedEvent
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.folder import ATFolder
+from Products.CMFCore.interfaces import ISiteRoot
+from Products.CMFCore.utils import getToolByName
+from zope.component import adapter
+from zope.component import getUtility
+from zope.component import getSiteManager
+from zope.interface import implements
+from zope.lifecycleevent import IObjectMovedEvent
+from zope.lifecycleevent import IObjectAddedEvent
+from zope.lifecycleevent import IObjectRemovedEvent
 
 from intranett.policy.config import PROJECTNAME
 from intranett.policy.interfaces import IMembersFolder

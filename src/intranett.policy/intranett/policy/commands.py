@@ -78,7 +78,7 @@ def upgrade(app, args):
 
     site = root.get(site_ids[0], None)
     if site is None:
-        logger.error("No site called `%s` found in the database."% site_id)
+        logger.error("No site called `%s` found in the database." % site_id)
         sys.exit(1)
 
     # Login as admin

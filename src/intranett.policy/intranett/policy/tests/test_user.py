@@ -21,7 +21,8 @@ class TestFunctionalUserView(IntranettFunctionalTestCase):
         browser.handleErrors = False
         portal = self.layer['portal']
         browser.open(portal.absolute_url() + '/users')
-        self.failUnless('href="http://nohost/plone/users/test_user_1_"' in browser.contents)
+        self.assertTrue('href="http://nohost/plone/users/test_user_1_"' in
+            browser.contents)
 
     def test_anonymous_user(self):
         browser = get_browser(self.layer['app'], loggedIn=False)
@@ -55,7 +56,8 @@ class TestMemberDataView(IntranettTestCase):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
-        return queryMultiAdapter((member, request), Interface, 'memberdata_view')
+        return queryMultiAdapter((member, request), Interface,
+            'memberdata_view')
 
     def test_userid(self):
         request = self.layer['request']
@@ -77,7 +79,8 @@ class TestMemberDataView(IntranettTestCase):
         view = self._make_one(request)
         portrait = view.userportrait()
         self.assertEqual(portrait.getId(), 'defaultUser.gif')
-        self.assertEqual(portrait.absolute_url(), 'http://nohost/plone/defaultUser.gif')
+        self.assertEqual(portrait.absolute_url(),
+            'http://nohost/plone/defaultUser.gif')
 
     def test_usercontent(self):
         request = self.layer['request']
@@ -100,9 +103,11 @@ class TestFunctionalMemberDataView(IntranettFunctionalTestCase):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
-        member.setMemberProperties({'fullname': 'Bob Døe', 'email': 'info@jarn.com'})
+        member.setMemberProperties(
+            {'fullname': 'Bob Døe', 'email': 'info@jarn.com'})
         transaction.commit()
-        browser.open(portal.absolute_url() + '/users/test_user_1_/memberdata_view')
+        browser.open(portal.absolute_url() +
+            '/users/test_user_1_/memberdata_view')
         self.failUnless('Bob Døe' in browser.contents)
         self.failUnless('info@jarn.com' in browser.contents)
 
@@ -112,7 +117,8 @@ class TestFunctionalMemberDataView(IntranettFunctionalTestCase):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
-        member.setMemberProperties({'fullname': 'Bob Døe', 'email': 'info@jarn.com'})
+        member.setMemberProperties(
+            {'fullname': 'Bob Døe', 'email': 'info@jarn.com'})
         transaction.commit()
         browser.open(portal.absolute_url() + '/users/test_user_1_')
         self.failUnless('Bob Døe' in browser.contents)
@@ -126,7 +132,7 @@ class TestFunctionalMemberDataView(IntranettFunctionalTestCase):
             browser.open(portal.absolute_url() + '/users/test_user_2_')
         except urllib2.HTTPError, e:
             self.assertEqual(e.getcode(), 404)
-            self.assertEqual('%s' % (e,), 'HTTP Error 404: Not Found')
+            self.assertEqual('%s' % (e, ), 'HTTP Error 404: Not Found')
         else:
             self.fail('HTTPError not raised')
 
@@ -137,6 +143,6 @@ class TestFunctionalMemberDataView(IntranettFunctionalTestCase):
         try:
             browser.open(portal.absolute_url() + '/users/test_user_1_')
         except Unauthorized, e:
-            self.assertEqual('%s' % (e,), 'Anonymous rejected')
+            self.assertEqual('%s' % (e, ), 'Anonymous rejected')
         else:
             self.fail('Unauthorized not raised')

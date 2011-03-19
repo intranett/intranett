@@ -75,4 +75,3 @@ class EmployeeListingView(BrowserView):
     def users_folder_url(self):
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         return portal.absolute_url() + '/' + quote(getMembersFolderId())
-

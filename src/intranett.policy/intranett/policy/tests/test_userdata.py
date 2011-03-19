@@ -225,7 +225,7 @@ class TestUserPortraits(IntranettTestCase):
         catalog = getToolByName(portal, 'portal_catalog')
         before = catalog.getCounter()
         mt.changeMemberPortrait(image_jpg)
-        self.assertEqual(catalog.getCounter(), before+1)
+        self.assertEqual(catalog.getCounter(), before + 1)
 
     def test_delete_portrait_recatalogs(self):
         portal = self.layer['portal']
@@ -236,7 +236,7 @@ class TestUserPortraits(IntranettTestCase):
         mt.changeMemberPortrait(image_jpg)
         before = catalog.getCounter()
         mt.deletePersonalPortrait()
-        self.assertEqual(catalog.getCounter(), before+1)
+        self.assertEqual(catalog.getCounter(), before + 1)
 
     def test_delete_member_purges_portrait(self):
         portal = self.layer['portal']

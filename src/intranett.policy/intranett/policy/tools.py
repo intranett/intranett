@@ -1,24 +1,27 @@
 from cStringIO import StringIO
 
-from OFS.Image import Image
-from PIL import Image as PILImage
-
 from App.class_init import InitializeClass
 from Acquisition import aq_base
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
 from AccessControl.requestmethod import postonly
-from ZODB.POSException import ConflictError
-from zope.component import getUtility
+from OFS.Image import Image
+from PIL import Image as PILImage
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.permissions import View
 from Products.CMFPlone.utils import safe_hasattr
-from Products.PlonePAS.tools.membership import MembershipTool as BaseMembershipTool
-from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataTool
+from Products.PlonePAS.tools.membership import MembershipTool as \
+    BaseMembershipTool
+from Products.PlonePAS.tools.memberdata import MemberDataTool as \
+    BaseMemberDataTool
 from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
 from Products.PlonePAS.tools.membership import default_portrait
 from Products.PlonePAS.utils import scale_image
+from zope.component import getUtility
+
 from intranett.policy.utils import getMembersFolderId
 
 PORTRAIT_SIZE = (300, 300, )
@@ -34,7 +37,7 @@ def crop_and_scale_image(image_file,
     size = (int(max_size[0]), int(max_size[1]))
     image = PILImage.open(image_file)
     format = image.format
-    mimetype = 'image/%s'%format.lower()
+    mimetype = 'image/%s' % format.lower()
     cur_size = image.size
 
     # Preserve palletted mode.
@@ -107,7 +110,7 @@ class MemberData(BaseMemberData):
 
     # The default view
     def __browser_default__(self, request):
-        return (self, ('memberdata_view',))
+        return (self, ('memberdata_view', ))
 
     security.declarePrivate('notifyModified')
     def notifyModified(self):
@@ -126,7 +129,6 @@ class MemberData(BaseMemberData):
 
     security.declarePublic('getUser')
     def getUser(self):
-        from Acquisition import aq_base, aq_parent, aq_inner
         bcontext = aq_base(aq_parent(self))
         bcontainer = aq_base(aq_parent(aq_inner(self)))
         if bcontext is bcontainer:
@@ -211,8 +213,9 @@ class MemberDataTool(BaseMemberDataTool):
         """
         members = self._members
         # Uncatalog
-        if members.has_key(member_id):
-            getToolByName(self, 'portal_catalog').unindexObject(members[member_id])
+        if member_id in members:
+            catalog = getToolByName(self, 'portal_catalog')
+            catalog.unindexObject(members[member_id])
         # Remove portrait
         self._deletePortrait(member_id)
         return super(MemberDataTool, self).deleteMemberData(member_id)
@@ -266,13 +269,15 @@ class MembershipTool(BaseMembershipTool):
             scaled, mimetype = scale_image(portrait,
                                            max_size=PORTRAIT_SIZE)
             image = Portrait(id=safe_id, file=scaled, title='')
-            image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
+            image.manage_permission('View', ['Authenticated', 'Manager'],
+                acquire=False)
             membertool._setPortrait(image, safe_id)
             # Now for thumbnails
             portrait.seek(0)
             scaled, mimetype = crop_and_scale_image(portrait)
             image = Portrait(id=safe_id, file=scaled, title='')
-            image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
+            image.manage_permission('View', ['Authenticated', 'Manager'],
+                acquire=False)
             membertool._setPortrait(image, safe_id, thumbnail=True)
             # Reindex
             memberdata = membership.getMemberById(safe_id)
@@ -315,4 +320,3 @@ class MembershipTool(BaseMembershipTool):
         memberdata = membership.getMemberById(safe_id)
         if memberdata is not None:
             memberdata.notifyModified()
-
