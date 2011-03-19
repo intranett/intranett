@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-03-04 19:07+0000\n"
+"POT-Creation-Date: 2011-03-19 16:45+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,13 +30,17 @@ msgstr ""
 msgid "Create intranet"
 msgstr "Opprett nytt intranett"
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:46
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:46
 msgid "Departments:"
 msgstr "Avdelinger:"
 
 #: intranett.policy/intranett/policy/profiles/default/types/MemberData.xml
 msgid "Employee"
 msgstr "Ansatt"
+
+#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
+msgid "Employees"
+msgstr "Ansatte"
 
 #: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:28
 msgid "Event Highlight"
@@ -64,15 +68,15 @@ msgstr ""
 msgid "Portlet title"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
+#: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
 msgstr "Bygget med intranett.no"
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:30
-msgid "Show people from all departments"
-msgstr "Vis personer fra alle avdelinger"
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
+msgid "Show employees from all departments"
+msgstr "Vis ansatte fra alle avdelinger"
 
-#: intranett.theme/intranett/theme/browser/templates/plone.app.controlpanel.usergroups_usersoverview.pt:108
+#: intranett.policy/intranett/policy/jbot/plone.app.controlpanel.usergroups_usersoverview.pt:108
 msgid "Site Administrator"
 msgstr "Administrator"
 
@@ -84,11 +88,11 @@ msgstr ""
 msgid "The second-most recently published news item"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
+#: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
 msgstr "Dette nettstedet er bygget med intranett.no"
 
-#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:14
+#: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14
 msgid "Version: ${number}"
 msgstr "Versjon: ${number}"
 
@@ -136,14 +140,14 @@ msgid "label_delete_portrait"
 msgstr "Slett portrett"
 
 #. Default: "Department"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:85
 #: intranett.policy/intranett/policy/userdataschema.py:48
-#: intranett.theme/intranett/theme/browser/templates/user.pt:85
 msgid "label_department"
 msgstr "Avdeling"
 
 #. Default: "E-mail"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:99
 #: intranett.policy/intranett/policy/userdataschema.py:20
-#: intranett.theme/intranett/theme/browser/templates/user.pt:99
 msgid "label_email"
 msgstr "E-post"
 
@@ -153,15 +157,15 @@ msgid "label_full_name"
 msgstr "Fullt navn"
 
 #. Default: "Location"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:92
 #: intranett.policy/intranett/policy/userdataschema.py:53
-#: intranett.theme/intranett/theme/browser/templates/user.pt:92
 msgid "label_location"
 msgstr "Sted"
 
 #. Default: "Mobile phone"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:116
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:95
 #: intranett.policy/intranett/policy/userdataschema.py:31
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:95
-#: intranett.theme/intranett/theme/browser/templates/user.pt:116
 msgid "label_mobile"
 msgstr "Mobiltelefon"
 
@@ -171,9 +175,9 @@ msgid "label_no_results_found"
 msgstr "Ingen resultater samsvarer med søket."
 
 #. Default: "Phone"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:108
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:101
 #: intranett.policy/intranett/policy/userdataschema.py:26
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:101
-#: intranett.theme/intranett/theme/browser/templates/user.pt:108
 msgid "label_phone"
 msgstr "Telefon"
 

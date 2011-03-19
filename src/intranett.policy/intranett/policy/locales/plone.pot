@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-03-04 19:07+0000\n"
+"POT-Creation-Date: 2011-03-19 16:45+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -14,20 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
-#: intranett.theme/intranett/theme/profiles/default/types/Plone_Site.xml
+#: intranett.policy/intranett/policy/profiles/default/types/Plone_Site.xml
 msgid "Edit"
-msgstr ""
-
-#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
-msgid "Folder Listing"
-msgstr ""
-
-#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
-msgid "Members Folder"
-msgstr ""
-
-#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
-msgid "View"
 msgstr ""
 
