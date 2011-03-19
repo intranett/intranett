@@ -78,9 +78,9 @@ class TestMemberDataView(IntranettTestCase):
         request = self.layer['request']
         view = self._make_one(request)
         portrait = view.userportrait()
-        self.assertEqual(portrait.getId(), 'defaultUser.gif')
+        self.assertEqual(portrait.getId(), 'defaultUser.png')
         self.assertEqual(portrait.absolute_url(),
-            'http://nohost/plone/defaultUser.gif')
+            'http://nohost/plone/defaultUser.png')
 
     def test_usercontent(self):
         request = self.layer['request']
