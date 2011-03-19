@@ -143,6 +143,3 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         atool = getToolByName(portal, 'portal_actions')
         self.assertFalse('employee-listing' in atool.portal_tabs)
         self.assertTrue('users' in portal)
-        catalog = getToolByName(portal, 'portal_catalog')
-        brains = catalog(dict(portal_type='MemberData'))
-        self.assertEqual(len(brains), 1)
