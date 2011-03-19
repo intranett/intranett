@@ -13,7 +13,7 @@
 
   <!-- Employee listing -->
   <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      for="intranett.policy.content.membersfolder.MembersFolder"
       name="employee-listing"
       class=".employeelisting.EmployeeListingView"
       template="templates/employeelisting_view.pt"
