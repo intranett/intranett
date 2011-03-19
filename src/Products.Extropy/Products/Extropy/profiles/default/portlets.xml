@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<portlets
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="plone">
+ 
+ <!-- Portlet type registrations -->
+ 
+   <portlet
+     addview="Extropy.portlets.Hourslastweek"
+     title="Worked hours last week"
+     description="A portlet"
+     i18n:attributes="title title_hourlsastweek_portlet;
+                      description description_hourlsastweek_portlet"
+     />
+
+   <portlet
+     addview="Extropy.portlets.MyResponsibilities"
+     title="My Responsibilities"
+     description="A portlet"
+     i18n:attributes="title title_myresponsibilities_portlet;
+                      description description_myresponsibilities_portlet"
+     />
+
+     <portlet
+       addview="Extropy.portlets.workedhoursthisweekPortlet"
+       title="Worked hours this week"
+       description="A portlet"
+       i18n:attributes="title title_workedhoursthisweek_portlet;
+                        description description_workedhoursthisweek_portlet"
+       />
+
+</portlets>

@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
@@ -13,38 +14,16 @@
   <cmf:registerDirectory name="intranett_theme_styles"/>
   <cmf:registerDirectory name="intranett_theme_javascripts"/>
 
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="jbot"
+      layer=".browser.interfaces.IThemeSpecific" />
+
   <genericsetup:registerProfile
       name="default"
       title="Intranett.no base theme"
       directory="profiles/default"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-
-  <genericsetup:upgradeStep
-      title="Upgrade intranett.theme from version 1 to 2"
-      description="Removes 'media' query for main.css stylesheet's registration."
-      source="1"
-      destination="2"
-      handler="intranett.theme.upgradehandlers.add_media_query_maincss"
-      profile="intranett.theme:default"
-      />
-
-  <genericsetup:upgradeStep
-      title="Upgrade intranett.theme from version 2 to 3"
-      description="Change some JS file registrations."
-      source="2"
-      destination="3"
-      handler="intranett.theme.upgradehandlers.add_selectivizr_remove_html5_js"
-      profile="intranett.theme:default"
-      />
-
-  <genericsetup:upgradeStep
-      title="Upgrade intranett.theme from version 3 to 4"
-      description="Correct i18n domain of the employees tab action"
-      source="3"
-      destination="4"
-      handler="intranett.theme.upgradehandlers.employees_action_i18n_domain"
-      profile="intranett.theme:default"
       />
 
 </configure>

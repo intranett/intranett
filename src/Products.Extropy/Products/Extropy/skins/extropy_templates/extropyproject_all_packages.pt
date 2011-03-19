@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      i18n:domain="plone"
+      metal:use-macro="context/main_template/macros/master"
+      >
+<body>
+
+<metal:macro fill-slot="main">
+
+    <fieldset class="collapsible" metal:use-macro="context/extropyproject_view/macros/trackingsummary">
+    </fieldset>
+
+    <h2>All packages</h2>
+
+    <dl>
+        <tal:phases tal:repeat="phase context/getPhases">
+            <dt style="clear:left; margin-top:2em">
+                    <a tal:attributes="href phase/absolute_url"><span tal:content="phase/Title" /></a>
+                    <span tal:content="structure phase/@@workflowactions">
+                        [workflowstate]</span>
+                    - <span tal:define="d phase/start"
+                            tal:condition="d"
+                            tal:content="d/Date"> [from] </span>
+                    - <span tal:define="d phase/end"
+                            tal:condition="d"
+                            tal:content="d/Date">[to] </span>
+                <p class="discreet">
+                    <a tal:attributes="href string:${phase/absolute_url}/list_activities"><b
+                       tal:content="python:len(phase.getActivities(review_state=phase.getOpenWorkflowStates()))">XX</b>
+                       open activities</a>
+                </p>
+                <tal:progressbar define="worked phase/getWorkedTime;
+                                         URL phase/absolute_url;
+                                         bar nocall:context/@@smallprogressbar">
+                    <a tal:replace="structure python:bar(URL=URL, worked=worked)"></a>
+                    <span class="discreet"><span tal:content="worked">X</span> hours worked</span>
+                </tal:progressbar>
+            </dt>
+            <dd style="clear: left">
+                <span tal:replace="structure phase/Description | phase/getText"></span>
+            </dd>
+        </tal:phases>
+    </dl>
+
+</metal:macro>
+
+<metal:removelisting define-macro="folderlisting" />
+
+</body>
+</html>

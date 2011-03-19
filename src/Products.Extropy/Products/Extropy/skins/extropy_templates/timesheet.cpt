@@ -1,0 +1,108 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+     tal:define="DateTime modules/DateTime;
+                 datestring request/date | python:DateTime.DateTime().Date();
+                 date python:DateTime.DateTime(datestring);
+                 start python:DateTime.DateTime( '%s %s' %(datestring , request.get('start', '07:00')));
+                 end python:DateTime.DateTime('%s %s' % (datestring , request.get('end', '23:59')));
+                 tool nocall:here/extropy_timetracker_tool;
+                 etool nocall:here/extropy_tracking_tool;
+                 hours python:tool.getHours(context, start=start, end=end, Creator=user.getUserName());
+                 gaps python:tool.fillGaps(hours, start=start, end=end);
+                 sumhours python:tool.countHours(hours);
+                 timefmt python:'%h.%d %H:%M';
+                 tasks python:etool.trackingQuery(context, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature', 'Contract'] , getResponsiblePerson=[user.getUserName(), 'all'], review_state=etool.getOpenStates());
+                 groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').items()">
+    
+    <form method="get" 
+          class="enableUnloadProtection"
+          tal:attributes="action string:${here/absolute_url}/${template/id}">
+
+
+<h1>Worked hours on <span tal:replace="start/Day" /> <span tal:replace="start/Date"></span></h1>
+
+<p class="discreet">The timesheet selectors will list open tasks and deliverables you are responsible for.
+</p>
+
+<p class="discreet">Right now it only lists open tasks and activities. In the future it will list closed objects that you closed this week as well
+</p>
+
+    <fieldset>
+      <legend>start end filter</legend>
+        Date:<input type="text" size="10" name="date:string" tal:attributes="value python:start.Date()" />
+        From:<input type="text" size="5" name="start:string" tal:attributes="value python:start.strftime('%H:%M')" />
+        To:<input type="text" size="5" name="end:string" tal:attributes="value python:end.strftime('%H:%M')" />
+        <br/>
+      <a tal:define="yesterday python:start-1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${yesterday/Date}">&larr; previous day</a> | 
+      <a tal:define="tomorrow python:start+1" tal:attributes="href string:${here/absolute_url}/${template/id}?date=${tomorrow/Date}">next day &rarr;</a>
+
+    </fieldset>
+
+    <fieldset>
+      <legend>Worked hours on <span tal:replace="start/Day" /> <span tal:replace="start/Date"></span><br />
+      </legend>
+      <table class="listing nosort">
+         <thead>
+            <tr>
+                <th>Task</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Hours</th>
+                <th>Category</th>
+            </tr>
+         </thead>
+         <tfoot>
+            <tr>
+                <th colspan="3" style="text-align:right">Sum</th>
+                <td tal:content="sumhours"></td>
+            </tr>
+         </tfoot>
+         <tbody>
+         <tal:gaps tal:repeat="gap gaps">
+             <tr tal:condition="python:same_type(gap,{})">
+                 <td>
+                     <select name="hours.task:records:string">
+                        <option value="">-</option>
+                        <optgroup tal:repeat="proj groupedtasks"
+                                  tal:attributes="label python:proj[0]">
+                                  <option tal:repeat="task python:proj[1]" tal:attributes="value task/UID; label python:task.Title[:30]" tal:content="python:task.Title[:40]">add batching to blogpostings-template</option>
+                        </optgroup>
+                     </select>
+                 </td>
+                 <td>
+                    <input  name="hours.start:records:string" type="text" value="10:00" size="5" tal:attributes="value gap/start" />
+                 </td>
+                 <td>
+                    <input  name="hours.end:records:string" type="text" value="10:00" size="5" tal:attributes="value gap/end" />
+                 </td>
+                 <td></td>
+                 <td></td>
+             </tr>
+             <tr tal:condition="python:not same_type(gap,{})">
+                 <td><a tal:attributes="href gap/getURL; title gap/Description" tal:content="python:gap.Title or '...unknown...'"></a> <span class="discreet" tal:content="gap/getProjectTitle | nothing"></span></td>  
+                 <td tal:content="python:gap.start.strftime('%H:%M')">10:00</td>  
+                 <td tal:content="python:gap.end.strftime('%H:%M')">11:00</td>  
+                 <td tal:content="gap/workedHours"></td>
+                 <td><span tal:attributes="class string:budget-category-${gap/getBudgetCategory/lower}" tal:content="gap/getBudgetCategory"></span></td>
+             </tr>
+        </tal:gaps>
+        </tbody>
+      </table>
+
+      <input type="submit" name="form.submitted" value="Submit" />
+
+    </fieldset>
+    </form>
+
+</div>
+
+</body>
+</html>

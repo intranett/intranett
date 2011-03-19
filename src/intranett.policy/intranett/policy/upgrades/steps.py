@@ -1,47 +1,8 @@
 from plone.app.upgrade.utils import loadMigrationProfile
+from plutonian.gs import upgrade_to
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
 from zope.component import queryUtility
-
-from intranett.policy.upgrades import upgrade_to
-
-
-@upgrade_to(2)
-def activate_clamav(context):
-    loadMigrationProfile(context, 'profile-collective.ATClamAV:default')
-    loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('propertiestool', ))
-    # Move new panel up, so it's at the some position as in a new site
-    cpanel = getToolByName(context, 'portal_controlpanel')
-    actions = cpanel._cloneActions()
-    ids = [a.getId() for a in actions]
-    clam = actions.pop(ids.index('ClamAVSettings'))
-    par_id = ids.index('plone.app.registry')
-    actions = actions[:par_id] + [clam] + actions[par_id:]
-    cpanel._actions = tuple(actions)
-
-
-@upgrade_to(3)
-def disable_nonfolderish_sections(context):
-    ptool = getToolByName(context, 'portal_properties')
-    ptool.site_properties.disable_nonfolderish_sections = True
-
-
-@upgrade_to(4)
-def activate_collective_flag(context):
-    loadMigrationProfile(context, 'profile-collective.flag:default')
-
-
-@upgrade_to(5)
-def setup_reject_anonymous(context):
-    from intranett.policy import setuphandlers
-    setuphandlers.setup_reject_anonymous(context)
-
-
-@upgrade_to(6)
-def install_memberdata_type(context):
-    loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('typeinfo', ))
 
 
 @upgrade_to(7)
@@ -160,6 +121,46 @@ def install_highlight_portlets(context):
 
 
 @upgrade_to(18)
+def deactivate_collective_flag(context):
+    catalog = getToolByName(context, 'portal_catalog')
+    if 'flaggedobject' in catalog.indexes():
+        catalog.delIndex('flaggedobject')
+    atct = getToolByName(context, 'portal_atct')
+    atct.removeIndex('flaggedobject')
+
+
+@upgrade_to(19)
+def update_discussion_10(context):
+    loadMigrationProfile(context, 'profile-plone.app.discussion:default',
+        steps=('actions', 'plone.app.registry', 'rolemap', ))
+    actions = getToolByName(context, 'portal_actions')
+    user_category = actions.user
+    review = user_category['review-comments']
+    review.visible = False
+    pos = user_category.getObjectPosition('manage_users')
+    user_category.moveObjectToPosition('review-comments', pos)
+    aitool = getToolByName(context, 'portal_actionicons')
+    ids = [a._action_id for a in aitool.listActionIcons()]
+    if 'discussion' in ids:
+        aitool.removeActionIcon('controlpanel', 'discussion')
+    control = getToolByName(context, 'portal_controlpanel')
+    disc = [a for a in control.listActions() if a.id == 'discussion'][0]
+    disc.category = 'Plone'
+
+
+@upgrade_to(20)
+def update_clamav_settings(context):
+    ptool = getToolByName(context, 'portal_properties')
+    clamav = ptool.clamav_properties
+    clamav.clamav_connection = 'net'
+    clamav.clamav_host = 'jarn11.gocept.net'
+    clamav.clamav_port = '3310'
+    clamav.clamav_timeout = 120
+    # return to default
+    clamav.clamav_socket = '/var/run/clamd'
+
+
+@upgrade_to(21)
 def install_people_folder(context):
     # Remove the employee-listing action
     atool = getToolByName(context, 'portal_actions')

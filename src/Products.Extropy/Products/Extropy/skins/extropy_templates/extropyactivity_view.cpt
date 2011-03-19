@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="extropy">
+<body>
+
+<metal:content-core fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
+
+        <div tal:define="worked here/getWorkedHours;
+                         URL here/absolute_url;
+                         bar nocall:context/@@progressbar;
+                         ">
+            <p tal:replace="structure python:bar(worked, URL)"/>
+        </div>
+
+        <p style="text-align: right">
+            <a tal:attributes="href string:${here/absolute_url}/add_work_hours">
+            <img tal:replace="structure here/hour_icon.gif" />Register work hours</a>
+        </p>
+
+        <table class="vertical listing" style="width: 38%; float: right;margin: 1em 0.5em">
+            <tbody>
+                 <tr>
+                    <th>
+                        Participants
+                    </th>
+                    <td tal:define="mtool nocall:context/portal_membership;">
+                         <span tal:content="python: ','.join(here.getParticipants())"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

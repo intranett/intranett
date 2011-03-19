@@ -3,6 +3,8 @@ import sys
 from StringIO import StringIO
 from ZPublisher.HTTPRequest import FileUpload
 
+from intranett.policy.config import config
+
 
 class DummyFieldStorage(object):
     """Minimal FieldStorage implementation."""
@@ -11,6 +13,15 @@ class DummyFieldStorage(object):
         self.file = data
         self.filename = filename
         self.headers = headers
+
+
+def ensure_no_upgrades(setup):
+    profiles = set(setup.listProfilesWithUpgrades())
+    ignored = set(config.ignored_upgrade_profiles)
+    upgrades = {}
+    for profile in profiles - ignored:
+        upgrades[profile] = setup.listUpgrades(profile)
+    return upgrades
 
 
 def make_file_upload(data, content_type=None, filename=None):

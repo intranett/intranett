@@ -1,8 +1,8 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
   xmlns:browser="http://namespaces.zope.org/browser"
-  xmlns:five="http://namespaces.zope.org/five"
   xmlns:cache="http://namespaces.zope.org/cache"
+  xmlns:five="http://namespaces.zope.org/five"
   xmlns:i18n="http://namespaces.zope.org/i18n"
   i18n_domain="intranett">
 
@@ -12,7 +12,6 @@
 
   <include package="Products.CMFPlone" />
   <include package="collective.ATClamAV" />
-  <include package="collective.flag" />
   <include package="experimental.catalogqueryplan" />
   <include package="iw.rejectanonymous" />
   <include package="munin.zope" />
@@ -23,7 +22,13 @@
   <include package="intranett.theme" />
 
   <include package=".browser" />
-  <include file="profile.zcml" />
+
+  <utility factory=".profile.HiddenProducts" name="intranett.policy" />
+
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="jbot"
+      layer="intranett.theme.browser.interfaces.IThemeSpecific" />
 
   <adapter factory=".caching.EditBarCookie" name="editbar" />
 

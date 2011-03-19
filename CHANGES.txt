@@ -1,8 +1,59 @@
 Changelog
 =========
 
-1.2.0 - unreleased
+1.2.1 - unreleased
 ------------------
+
+- Add missing mime types and enable gzip compression for web fonts.
+  [hannosch]
+
+- Enable click-jacking protection by preventing the site to be loaded inside
+  a frame.
+  [hannosch]
+
+- Enable SSL session cache to support SSL session resumption. SSL sessions can
+  be reused for up to 10 minutes.
+  [hannosch]
+
+- Added memory monitoring to Zope instances. If a Zope instance exceeds to use
+  250mb of RSS memory, it will be restarted. This is checked every minute.
+  [hannosch]
+
+1.2.0 - 2011-03-15
+------------------
+
+- Update to collective.ATClamAV = 1.2 to fix network socket problems.
+  [hannosch]
+
+- Change the antivirus checks to run on the central jarn11 server instead of
+  locally on each server.
+  [hannosch]
+
+- Use the fastest gzip compression on blob storage snapshots, as there's not
+  much that can be compressed in binary data. Closes #197.
+  [martior, hannosch]
+
+- Add the option to specify a different buildout config file for a server.
+  [martior, hannosch]
+
+- Update to plone.app.discussion 1.0.
+  [hannosch]
+
+- Externalize the plutonian helpers into their own distribution and rewrite
+  the upgrade tests to run against a real database - inspired by bestform.
+  [hannosch]
+
+- Remove collective.flag as it's not been used after all.
+  [hannosch]
+
+- Update to ZODB 3.10.2.
+  [hannosch]
+
+- Update to Plone 4.0.4 and Zope 2.12.16.
+  [hannosch]
+
+- Update to Varnish 2.1.5 and HAProxy 1.4.13.
+  [hannosch]
 
 - Added frontpage content highlight portlet, that allows a user to select an
   item to be shown in the portlet. Closes #186.
@@ -11,6 +62,23 @@ Changelog
 - Added event and news highlight portlets, which allow a user to show the latest
   or second latest item in the portlet. Closes #184 and #185.
   [ggozad, hannosch]
+
+1.1.11 - 2011-03-15
+-------------------
+
+- Avoid caching temporary redirects, which could cause weird results during the
+  default cache time of two minutes.
+  [hannosch]
+
+1.1.10 - 2011-03-12
+-------------------
+
+- Update to Munin 1.4.5.
+  [hannosch]
+
+- Add `server_name` to Nginx config for port 80 to generate properly named
+  log files for Gocept's awstats support.
+  [hannosch]
 
 1.1.9 - 2011-03-04
 ------------------

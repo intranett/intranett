@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+ <object name="navtree_properties" meta_type="Plone Property Sheet">
+  <property name="metaTypesNotToList" type="lines" purge="False">
+   <element value="ExtropyTask"/>
+   <element value="ExtropyFeature"/>
+   <element value="ExtropyPhase"/>
+   <element value="ExtropyActivity"/>
+   <element value="ExtropyHourGlass"/>
+   <element value="ExtropyHours"/>
+   <element value="ExtropyBug"/>
+   <element value="ExtropyTaskHistory"/>
+  </property>
+ </object>
+ <object name="site_properties" meta_type="Plone Property Sheet">
+  <property name="use_folder_tabs" type="lines" purge="False">
+   <element value="ExtropyPhase"/>
+   <element value="ExtropyHourGlass"/>
+   <element value="ExtropyJar"/>
+   <element value="ExtropyActivity"/>
+   <element value="ExtropyProject"/>
+   <element value="ExtropyBug"/>
+   <element value="ExtropyFeature"/>
+  </property>
+  <property name="typesLinkToFolderContentsInFC" type="lines" purge="False">
+   <element value="ExtropyJar"/>
+   <element value="ExtropyHourGlass"/>
+   <element value="ExtropyPhase"/>
+   <element value="ExtropyActivity"/>
+   <element value="Large Plone Folder"/>
+   <element value="Folder"/>
+   <element value="ExtropyBug"/>
+   <element value="ExtropyProject"/>
+   <element value="ExtropyFeature"/>
+  </property>
+  <property name="enable_link_integrity_checks" type="boolean">False</property>
+  <property name="enable_inline_editing" type="boolean">False</property>
+ </object>
+</object>

@@ -1,0 +1,130 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<body metal:fill-slot="main"
+      tal:define="view context/@@hourreporttable_view;
+                  start request/start|nothing;
+                  end request/end|nothing;
+                  username request/username|nothing;
+                  group_by request/group_by|python:['getBudgetCategory','Creator'];
+                  group_by python:group_by and same_type(group_by,'') and group_by.split(':') or group_by;
+                  query python:{};
+                  dummy python:[query.setdefault(x,request.get(x)) for x in ['review_state','portal_type','getBudgetCategory', 'local'] if request.get(x, None)];
+                  results python:view.getReportData(start=start,end=end,username=username,group_by=group_by, **query)">
+
+        <h1>Hour report</h1>
+
+        <div class="documentDescription">
+            This lists the hours registered
+        </div>
+
+        <a tal:define="csvquerystring python:'&amp;'.join(['%s=%s'%i for i in request.form.items()])"
+           tal:attributes="href string:${request/URL1}/hourreport_csv?${csvquerystring}">CSV export</a>
+
+         <form tal:attributes="action request/URL0">
+             <fieldset>
+                <legend>Input form</legend>
+                <div class="field">
+                    <label for="local">Local search</label>
+                    <input name="local:boolean" type="checkbox" tal:attributes="checked python:request.get('local', None) and 'checked'" />
+                    <div class="formHelp">
+                         Search this path and below.
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="start">Start</label>
+                    <input type="text" name="start" tal:attributes="value start" />
+                    <span class="formHelp">(YYYY/MM/DD)</span>
+                </div>
+                <div class="field">
+                    <label for="end">End</label>
+                    <input type="text" name="end" tal:attributes="value end" />
+                    <span class="formHelp">(YYYY/MM/DD)</span>
+                </div>
+                <div class="field">
+                    <label for="getBudgetCategory">Budget category</label>
+                    <select name="getBudgetCategory">
+                        <option value=""></option>
+                        <option tal:repeat="category python:context.extropy_timetracker_tool.uniqueValuesFor('getBudgetCategory')"
+                                tal:attributes="value category;
+                                                selected python:request.get('getBudgetCategory',None) == category and 'selected' or None;"
+                                tal:content="category">Category</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="group_by">Group by</label>
+                    <div class="formHelp">
+                        Group by is a list of fields separated by &ldquo;:&rdquo; (colon)<br />
+                        Some available values for group by are 
+                        <ul>
+                            <li>activity (this extracts task/ticket numbers, and keywords like project mgmt, meeting, testing, release etc)</li>
+                            <tal:block define="metadatafields context/extropy_timetracker_tool/schema;
+                                                                                               blacklist python:['Description','ExpiresDate','getId','ModificationDate','review_state','EffectiveDate','portal_type','UID','created','getIcon','modified','CreationDate','Subject'];
+                                                                                               metadatafields python:[f for f in metadatafields if f not in blacklist]"
+                                       repeat="metadatafield metadatafields">
+                                <li tal:content="metadatafield">Schema</li>
+                            </tal:block>
+                        </ul>
+                        In addition, date fields can have operators, like start/year, start/week, start/day (DateTime interface).
+                    </div>
+                    <input type="text" name="group_by" size="40" tal:attributes="value python:':'.join(group_by)" />
+                </div>
+             </fieldset>
+             <div class="visualClear"><!-- --></div>
+             <div class="formControls">
+                <input type="submit" class="context" value="Submit" />
+             </div>
+         </form>
+
+        <h3>Quick Links</h3>
+        <ul>
+            <li>
+                <a tal:attributes="href string:${request/URL0}?group_by=start/month:Creator&amp;getBudgetCategory=Billable">Month:Creator - Billable</a>
+                <tal:years repeat="year python:range(2005, DateTime().year() + 1)">
+                  (<a tal:attributes="href string:${request/URL0}?group_by=start/month:Creator&amp;getBudgetCategory=Billable&amp;start=$year/01/01&amp;end=$year/12/31"
+                      tal:content="year">Year</a>)
+                </tal:years>
+            </li>
+            <li>
+                <a tal:define="now python:DateTime();
+                               thismonth python:DateTime('%s/%s/01'%(now.year(), now.month()));
+                               lastmonth python:DateTime('%s/%s/01'%((thismonth-1).year(), (thismonth-1).month()));"
+                   tal:attributes="href string:${request/URL0}?start=${lastmonth/Date}&amp;end=${thismonth/Date}&amp;group_by=Creator:getBudgetCategory">Creator:Budget category - last month</a>
+            </li>
+            <li><a tal:define="now python:DateTime();
+                           thismonth python:DateTime('%s/%s/01'%(now.year(), now.month()));"
+               tal:attributes="href string:${request/URL0}?start=${thismonth/Date}&amp;group_by=Creator:getBudgetCategory">Creator:Budget category - this month</a></li>
+        </ul>
+
+        <h2>Statistics</h2>
+
+        <table class="listing"
+               width="100%"
+               metal:define-macro="reportnodenestedtable">
+            <thead>
+                <th tal:repeat="col results/getTableHeaders">
+                    <span tal:replace="col" />
+                </th>
+            </thead>
+            <tbody>
+                <metal:rows tal:repeat="row results/rows">
+                    <tr tal:define="odd repeat/row/odd;"
+                        tal:attributes="class python:odd and 'even' or 'odd'">
+                        <td tal:repeat="rh row/rowheader">
+                            <span tal:replace="rh">Row header</span>
+                        </td>
+
+                        <td tal:repeat="col row">
+                            <span tal:replace="col">Value</span>
+                        </td>
+                    </tr>
+                </metal:rows>
+            </tbody>
+        </table>
+
+
+</body>
+</html>
+

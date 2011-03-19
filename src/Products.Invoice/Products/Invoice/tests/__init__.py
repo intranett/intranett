@@ -1,0 +1,2 @@
+"""Invoice tests package
+"""

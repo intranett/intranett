@@ -1,0 +1,10 @@
+[default]
+title = Fast Timesheet
+
+[validators]
+validators..form_add =
+validators..cancel =
+
+[actions]
+action.success = traverse_to:string:process_timesheet_fast
+action.failure = traverse_to_action:string:timesheet_fast

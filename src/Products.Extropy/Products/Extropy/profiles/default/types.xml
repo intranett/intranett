@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="portal_types" meta_type="Plone Types Tool">
+ <property
+    name="title">Controls the available content types in your portal</property>
+ <object name="ExtropyActivity" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyBug" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyFeature" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyHourGlass" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyHours" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyJar" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyPhase" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyProject" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyTask" meta_type="Factory-based Type Information"/>
+ <object name="ExtropyTaskHistory" meta_type="Factory-based Type Information"/>
+ <object name="Plone Site"
+    meta_type="Factory-based Type Information with dynamic views"/>
+</object>

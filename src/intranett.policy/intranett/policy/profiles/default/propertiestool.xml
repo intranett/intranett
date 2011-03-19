@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 <object name="portal_properties">
   <object name="clamav_properties">
-   <property name="clamav_connection" type="string">socket</property>
-   <property name="clamav_socket" type="string">/var/run/clamav/clamd.sock</property>
-   <property name="clamav_timeout" type="int">60</property>
+   <property name="clamav_connection" type="string">net</property>
+   <property name="clamav_host" type="string" purge="False">jarn11.gocept.net</property>
+   <property name="clamav_port" type="string">3310</property>
+   <property name="clamav_timeout" type="int">120</property>
   </object>
  <object name="site_properties">
   <property name="disable_nonfolderish_sections"
     type="boolean">True</property>
+  <property name="icon_visibility" type="string">disabled</property>
  </object>
 </object>

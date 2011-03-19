@@ -1,0 +1,147 @@
+<tal:block tal:define="userHasReplyPermission view/can_reply;
+                       isDiscussionAllowed view/is_discussion_allowed;
+                       isAnonymousDiscussionAllowed view/anonymous_discussion_allowed;
+                       isAnon view/is_anonymous;
+                       canReview view/can_review;
+                       replies python:view.get_replies(canReview);
+                       has_replies python:view.has_replies(canReview);
+                       showCommenterImage view/show_commenter_image;
+                       errors options/state/getErrors|nothing;
+                       wtool context/@@plone_tools/workflow;"
+           tal:condition="python:isDiscussionAllowed or has_replies"
+           i18n:domain="plone">
+
+    <div class="reply"
+         tal:condition="python:isAnon and not isAnonymousDiscussionAllowed">
+        <form tal:attributes="action view/login_action">
+            <input class="standalone"
+                   style="margin-bottom: 1.25em;"
+                   type="submit"
+                   value="Log in to add comments"
+                   i18n:attributes="value label_login_to_add_comments;"
+                   />
+        </form>
+    </div>
+
+    <div class="discussion"
+         tal:attributes="class python: showCommenterImage and 'discussion showCommenterImage' or 'discussion';"
+         tal:condition="has_replies">
+
+        <span id="commenting-top-arrow">
+            <span class="toolTipArrow" style="display: block;">&nbsp;</span>
+            <span class="toolTipArrow innerTooltipArrow" style="display: block;">&nbsp;</span>
+        </span>
+
+        <tal:getreplies repeat="reply_dict replies">
+
+            <div class="comment"
+                 tal:define="reply reply_dict/comment;
+                             depth reply_dict/depth|python:0;
+                             author_home_url python:view.get_commenter_home_url(username=reply.author_username);
+                             has_author_link python:author_home_url and not isAnon;
+                             portrait_url python:view.get_commenter_portrait(reply.author_username);
+                             review_state python:wtool.getInfoFor(reply, 'review_state');"
+                 tal:attributes="class python:'comment replyTreeLevel'+str(depth)+' state-'+str(review_state);
+                                 style string:margin-left: ${depth}em;
+                                 id string:${reply/getId}"
+                 tal:condition="python:canReview or review_state == 'published'">
+
+                <div class="commentImage" tal:condition="showCommenterImage">
+                    <a href="" tal:condition="has_author_link"
+                               tal:attributes="href author_home_url">
+                         <img src="defaultUser.gif"
+                              alt=""
+                              width="100"
+                              tal:attributes="src portrait_url;
+                                              alt reply/Creator" />
+                    </a>
+                    <img src="defaultUser.gif"
+                         alt=""
+                         width="100"
+                         tal:condition="not: has_author_link"
+                         tal:attributes="src portrait_url;
+                                         alt reply/Creator" />
+                </div>
+
+                <div class="commentWrapper">
+
+                    <div class="documentByLine" i18n:domain="plone.app.discussion">
+                        <a href=""
+                           tal:condition="has_author_link"
+                           tal:content="reply/Creator"
+                           tal:attributes="href author_home_url">
+                            Poster Name
+                        </a>
+                        <span tal:condition="not: has_author_link"
+                              tal:replace="reply/Creator" />
+                        <span tal:condition="not: reply/Creator">Anonymous</span>
+                    </div>
+
+                    <div class="commentBody">
+                        <span tal:replace="structure python:view.cook(reply.getText())" />
+                    </div>
+
+                    <div class="commentActions">
+
+                        <ul>
+                            <li><small class="commentDate"
+                                     tal:content="python:view.format_time(reply.modification_date)">
+                                     8/23/2001 12:40:44 PM
+                            </small></li><li
+                                tal:condition="canReview"><form name="delete"
+                                      action=""
+                                      method="post"
+                                      tal:attributes="action string:${reply/absolute_url}/@@moderate-delete-comment"><input
+                                      name="form.button.DeleteComment"
+                                           class="hiddenStructure"
+                                           type="submit"
+                                           value="Delete"
+                                           i18n:attributes="value label_delete;"
+                                           /><small
+                                      class="deleteComment"><a
+                                      href="" title="Delete"
+                                           class="form.button.DeleteComment"
+                                           tal:attributes="href string:${reply/absolute_url}/@@moderate-delete-comment"
+                                           i18n:attributes="title label_delete"
+                                           i18n:translate="label_delete">Delete</a></small></form>
+                            </li>
+                        </ul>
+
+                        <span class="visualClear"><!-- --></span>
+
+                    </div>
+
+                </div>
+
+                <span class="visualClear"><!-- --></span>
+            </div>
+
+        </tal:getreplies>
+    </div>
+
+    <div id="commenting" class="reply" tal:condition="python:isDiscussionAllowed and (isAnon and isAnonymousDiscussionAllowed or userHasReplyPermission)">
+
+        <span id="reply-side-arrow">
+            <span class="toolTipArrow" style="display: block;">&nbsp;</span>
+            <span class="toolTipArrow innerTooltipArrow" style="display: block;">&nbsp;</span>
+        </span>
+
+        <div class="commentImage" tal:define="member context/@@plone_portal_state/member;
+                                              portrait python:context.portal_membership.getPersonalPortrait(member.getId());">
+            <img src="defaultUser.gif"
+                 alt=""
+                 width="100"
+                 tal:condition="portrait"
+                 tal:attributes="src portrait/absolute_url" />
+        </div>
+
+        <fieldset>
+
+            <legend i18n:translate="label_add_comment">Add comment</legend>
+
+            <div tal:replace="structure view/form/render" />
+
+        </fieldset>
+    </div>
+
+</tal:block>

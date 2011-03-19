@@ -1,0 +1,3 @@
+[actions]
+action.success=redirect_to:object/aq_parent/aq_parent/absolute_url
+

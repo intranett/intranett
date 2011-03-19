@@ -1,0 +1,11 @@
+[default]
+title = Support view
+
+[validators]
+validators = validate_base
+validators..form_add =
+validators..cancel =
+
+[actions]
+action.success = traverse_to:string:content_edit
+action.failure = traverse_to_action:string:view

@@ -11,7 +11,8 @@ def create_site(app, args):
     logger.handlers[0].setLevel(logging.INFO)
 
     force = '--force' in args or '-f' in args
-    existing = 'Plone' in app.keys()
+    from Products.CMFPlone.Portal import PloneSite
+    existing = [p.getId() for p in app.values() if isinstance(p, PloneSite)]
 
     root_arg = [a for a in args if a.startswith('--rootpassword')]
     if any(root_arg):
@@ -22,12 +23,13 @@ def create_site(app, args):
             # Non-PAS folder from a fresh database
             app.acl_users._doAddUser('admin', password, ['Manager'], [])
 
-    if existing:
+    if any(existing):
         if not force:
             logger.error('Plone site already exists.')
             sys.exit(1)
         else:
-            del app['Plone']
+            for id_ in existing:
+                del app[id_]
             app._p_jar.db().cacheMinimize()
             logger.info('Removed existing Plone site.')
 
@@ -66,13 +68,17 @@ def upgrade(app, args):
     # Display all messages on stderr
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
-
     # Make app.REQUEST available
     from Testing import makerequest
     root = makerequest.makerequest(app)
-    site = root.get('Plone', None)
+
+    from Products.CMFPlone.Portal import PloneSite
+    site_ids = [p.getId() for p in root.values() if isinstance(p, PloneSite)]
+    site_id = site_ids[0]
+
+    site = root.get(site_ids[0], None)
     if site is None:
-        logger.error("No site called `Plone` found in the database.")
+        logger.error("No site called `%s` found in the database."% site_id)
         sys.exit(1)
 
     # Login as admin
@@ -91,26 +97,19 @@ def upgrade(app, args):
     setup = site.portal_setup
 
     import transaction
-    from intranett.policy.upgrades import run_all_upgrades
+    from intranett.policy.config import config
 
     logger.info("Starting the upgrade.\n\n")
-    all_finished = run_all_upgrades(setup)
+    config.run_all_upgrades(setup)
     logger.info("Ran upgrade steps.")
 
-    if all_finished:
-        logger.info("Upgrade successful.")
+    # Recook resources, as some CSS/JS/KSS files might have changed.
+    # TODO: We could try to determine if this is needed in some way
+    site.portal_javascripts.cookResources()
+    site.portal_css.cookResources()
+    site.portal_kss.cookResources()
+    logger.info("Resources recooked.")
 
-        # Recook resources, as some CSS/JS/KSS files might have changed.
-        # TODO: We could try to determine if this is needed in some way
-        site.portal_javascripts.cookResources()
-        site.portal_css.cookResources()
-        site.portal_kss.cookResources()
-        logger.info("Resources recooked.")
-
-        transaction.get().note('Upgraded profiles and recooked resources.')
-        transaction.get().commit()
-        sys.exit(0)
-
-    transaction.get().abort()
-    logger.error("Upgrade didn't reach current versions - aborted.")
-    sys.exit(1)
+    transaction.get().note('Upgraded profiles and recooked resources.')
+    transaction.get().commit()
+    sys.exit(0)

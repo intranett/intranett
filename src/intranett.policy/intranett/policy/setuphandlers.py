@@ -1,15 +1,16 @@
 from Acquisition import aq_get
+from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
 from zope.interface import alsoProvides
 
-from intranett.policy.config import POLICY_PROFILE
+from intranett.policy.config import config
 
 
 def set_profile_version(site):
-    from .upgrades import last_upgrade_to
     setup = getToolByName(site, 'portal_setup')
-    setup.setLastVersionForProfile(POLICY_PROFILE, last_upgrade_to())
+    setup.setLastVersionForProfile(
+        config.policy_profile, config.last_upgrade_to())
 
 
 def setup_locale(site):
@@ -98,6 +99,7 @@ def setup_people_folder(site):
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
 
 
+@import_step()
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
