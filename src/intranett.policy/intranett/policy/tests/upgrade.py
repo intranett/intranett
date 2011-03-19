@@ -6,7 +6,6 @@ from pprint import pprint
 
 from plone.app.testing import login
 from plone.app.testing import logout
-from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
@@ -25,8 +24,9 @@ class UpgradeTests(object):
     rediff = re.compile("([a-zA-z/_]*\.xml)\\n[=]*\\n(.*)", re.DOTALL)
 
     def setUp(self):
+        app = self.layer['app']
+        login(app, SITE_OWNER_NAME)
         portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Manager'])
         setSite(portal)
 
         # Clean out some test setup artifacts
