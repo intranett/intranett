@@ -18,8 +18,8 @@ class TestNavigation(IntranettTestCase):
     def test_default(self):
         tabs = self._make_one()
         self.assert_(len(tabs) == 2)
-        self.assertEquals(tabs[0]['id'], 'users')
-        self.assertEquals(tabs[1]['id'], 'test-folder')
+        self.assertEquals(tabs[0]['id'], 'test-folder')
+        self.assertEquals(tabs[1]['id'], 'users')
 
     def test_published_folders(self):
         portal = self.layer['portal']
@@ -33,5 +33,5 @@ class TestNavigation(IntranettTestCase):
 
         tabs = self._make_one()
         self.assert_(len(tabs) == 4)
-        self.assertEquals(tabs[2]['id'], 'f1')
-        self.assertEquals(tabs[3]['id'], 'f2')
+        self.assertEquals(tabs[1]['id'], 'f1')
+        self.assertEquals(tabs[2]['id'], 'f2')

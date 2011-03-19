@@ -63,7 +63,7 @@ def updateMembersFolderId(ob, event):
         return
     if IObjectRemovedEvent.providedBy(event):
         return
-    if ob != event.object:
+    if ob != event.object: # pragma: no cover
         return
     # The members folder has been renamed
     registerMembersFolderId(ob, event)
