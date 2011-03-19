@@ -238,7 +238,10 @@ class TestAdmin(IntranettTestCase):
         self.assert_('Create intranet' in result, result)
 
     def test_addsite_create(self):
+        from plone.app.testing import login
+        from plone.app.testing import SITE_OWNER_NAME
         app = self.layer['app']
+        login(app, SITE_OWNER_NAME)
         request = self.layer['request']
         request.form['form.submitted'] = True
         addsite = queryMultiAdapter((app, request), Interface, 'plone-addsite')
