@@ -13,9 +13,9 @@ from Products.Archetypes.interfaces import IObjectInitializedEvent
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.folder import ATFolder
 
+from intranett.policy.config import PROJECTNAME
 from intranett.policy.interfaces import IMembersFolder
 from intranett.policy.interfaces import IMembersFolderId
-from intranett.policy.config import PROJECTNAME
 
 
 class MembersFolder(ATFolder):
