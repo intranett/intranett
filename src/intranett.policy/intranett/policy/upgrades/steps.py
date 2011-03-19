@@ -179,6 +179,3 @@ def install_users_folder(context):
     mt = getToolByName(context, 'portal_membership')
     for member in mt.listMembers():
         member.notifyModified()
-    # Import type restrictions for the Plone Site
-    loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('typeinfo',))
