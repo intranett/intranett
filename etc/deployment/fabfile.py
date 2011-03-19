@@ -122,6 +122,7 @@ def update():
         run('bin/supervisorctl start zope:instance2')
         time.sleep(30)
         run('bin/supervisorctl start varnish')
+        run('bin/supervisorctl status')
 
 
 def full_update():
@@ -138,6 +139,7 @@ def full_update():
         run('bin/supervisorctl start zope:instance2')
         time.sleep(30)
         run('bin/supervisorctl start varnish')
+        run('bin/supervisorctl status')
 
 
 def update_nginx():
