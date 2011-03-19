@@ -10,5 +10,8 @@
   <property name="disable_nonfolderish_sections"
     type="boolean">True</property>
   <property name="icon_visibility" type="string">disabled</property>
+  <property name="types_not_searched" purge="False">
+   <element value="MembersFolder"/>
+  </property>
  </object>
 </object>

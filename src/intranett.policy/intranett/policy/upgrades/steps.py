@@ -168,7 +168,7 @@ def install_users_folder(context):
         atool.portal_tabs._delObject('employee-listing')
     # Add the MembersFolder portal type
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('typeinfo', 'factorytool'))
+        steps=('typeinfo', 'factorytool', 'propertiestool'))
     # Add the users folder
     from intranett.policy.config import MEMBERS_FOLDER_ID
     from intranett.policy.setuphandlers import setup_members_folder
