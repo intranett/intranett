@@ -220,6 +220,11 @@ class TestSiteSetup(IntranettTestCase):
         cp = security.SecurityControlPanelAdapter(portal)
         self.assertEqual(cp.private_site, True)
 
+    def test_secure_cookie(self):
+        portal = self.layer['portal']
+        acl = aq_get(portal, 'acl_users')
+        self.assertEquals(acl.session.getProperty('secure'), True)
+
 
 class TestAdmin(IntranettTestCase):
 

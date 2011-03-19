@@ -1,3 +1,4 @@
+from Acquisition import aq_get
 from plone.app.upgrade.utils import loadMigrationProfile
 from plutonian.gs import upgrade_to
 from Products.CMFCore.utils import getToolByName
@@ -184,3 +185,9 @@ def install_users_folder(context):
     mt = getToolByName(context, 'portal_membership')
     for member in mt.listMembers():
         member.notifyModified()
+
+
+@upgrade_to(22)
+def enable_secure_cookies(context):
+    acl = aq_get(context, 'acl_users')
+    acl.session._updateProperty('secure', True)

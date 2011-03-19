@@ -1,5 +1,6 @@
 import os
 
+from Acquisition import aq_get
 from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletType
@@ -143,3 +144,8 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         atool = getToolByName(portal, 'portal_actions')
         self.assertFalse('employee-listing' in atool.portal_tabs)
         self.assertTrue('users' in portal)
+
+    def after_22(self):
+        portal = self.layer['portal']
+        acl = aq_get(portal, 'acl_users')
+        self.assertEqual(acl.session.getProperty('secure'), True)

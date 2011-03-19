@@ -102,6 +102,11 @@ def setup_members_folder(site):
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
 
 
+def enable_secure_cookies(context):
+    acl = aq_get(context, 'acl_users')
+    acl.session._updateProperty('secure', True)
+
+
 @import_step()
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
@@ -118,3 +123,4 @@ def various(context):
     setup_default_groups(site)
     setup_reject_anonymous(site)
     setup_members_folder(site)
+    enable_secure_cookies(site)
