@@ -290,11 +290,10 @@ class MembershipTool(BaseMembershipTool):
         Modified to make it possible to return the thumbnail portrait.
         """
         safe_id = self._getSafeMemberId(id)
-        membertool = getToolByName(self, 'portal_memberdata')
-
         if not safe_id:
             safe_id = self.getAuthenticatedMember().getId()
 
+        membertool = getToolByName(self, 'portal_memberdata')
         portrait = membertool._getPortrait(safe_id, thumbnail=thumbnail)
 
         if portrait is None:
@@ -309,6 +308,9 @@ class MembershipTool(BaseMembershipTool):
         Modified to reindex after deleting a portrait.
         """
         safe_id = self._getSafeMemberId(id)
+        if not safe_id: # pragma: no cover
+            safe_id = self.getAuthenticatedMember().getId()
+
         membership = getToolByName(self, 'portal_membership')
         super(MembershipTool, self).deletePersonalPortrait(safe_id)
 
