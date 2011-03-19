@@ -5,21 +5,21 @@ IntranettMessageFactory = MessageFactory('intranett')
 
 patches.apply()
 
-# Register content
-import content.membersfolder
-
 
 def initialize(context):
-    from intranett.policy.config import config
-    config.register_profile()
-    config.scan()
+    from intranett.policy import config
+    config.config.register_profile()
+    config.config.scan()
 
     from AccessControl import allow_module
     allow_module('intranett.policy.config')
 
     from Products.Archetypes import atapi
     from Products.CMFCore import utils
-    from intranett.policy import config
+
+    # Register content
+    from intranett.policy.content import membersfolder
+    membersfolder # pyflakes
 
     content_types, constructors, ftis = atapi.process_types(
         atapi.listTypes(config.PROJECTNAME),
