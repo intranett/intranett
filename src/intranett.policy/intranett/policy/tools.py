@@ -260,6 +260,9 @@ class MembershipTool(BaseMembershipTool):
         Modified from CMFPlone version to URL-quote the member id.
         """
         safe_id = self._getSafeMemberId(id)
+        if not safe_id:
+            safe_id = self.getAuthenticatedMember().getId()
+
         membertool = getToolByName(self, 'portal_memberdata')
         membership = getToolByName(self, 'portal_membership')
         if portrait and portrait.filename:
@@ -288,6 +291,10 @@ class MembershipTool(BaseMembershipTool):
         """
         safe_id = self._getSafeMemberId(id)
         membertool = getToolByName(self, 'portal_memberdata')
+
+        if not safe_id:
+            safe_id = self.getAuthenticatedMember().getId()
+
         portrait = membertool._getPortrait(safe_id, thumbnail=thumbnail)
 
         if portrait is None:
