@@ -114,23 +114,6 @@
       template="templates/manage-frontpage.pt"
       />
 
-<<<<<<< HEAD
-  <!-- Employee listing -->
-  <browser:page
-      for="intranett.policy.content.membersfolder.MembersFolder"
-      name="employee-listing"
-      class=".employeelisting.EmployeeListingView"
-      template="templates/employeelisting_view.pt"
-      permission="zope2.View"
-      />
-
-  <cache:ruleset
-      for=".employeelisting.EmployeeListingView"
-      ruleset="plone.content.folderView"
-      />
-
-=======
->>>>>>> master
   <!-- User / author page -->
   <browser:page
       for="intranett.policy.tools.MemberData"
