@@ -137,7 +137,7 @@ class MemberData(BaseMemberData):
             plone = getUtility(ISiteRoot)
             mt = getToolByName(plone, 'portal_membership')
             return mt._huntUser(self.id, plone)
-        if not safe_hasattr(bcontext, 'getUserName'):
+        if not safe_hasattr(bcontext, 'getUserName'): # pragma: no cover
             raise ValueError("Cannot find user: %s" % self.id)
         # Return the user object, which is our context.
         return aq_parent(self)

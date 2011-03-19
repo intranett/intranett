@@ -34,7 +34,7 @@ class MemberDataView(BrowserView):
     def usercontent(self):
         catalog = getToolByName(self.context, 'portal_catalog')
         userid = self.userid()
-        if not userid:
+        if not userid: # pragma: no cover
             return []
         query = {
             'Creator': userid,

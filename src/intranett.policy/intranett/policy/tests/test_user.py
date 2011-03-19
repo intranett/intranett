@@ -33,7 +33,7 @@ class TestFunctionalUserView(IntranettFunctionalTestCase):
         except Unauthorized:
             pass
         else:
-            self.fail('Unauthorized not raised')
+            self.fail('Unauthorized not raised') # pragma: no cover
 
     def test_author_redirects_to_users(self):
         browser = get_browser(self.layer['app'])
@@ -103,8 +103,8 @@ class TestFunctionalMemberDataView(IntranettFunctionalTestCase):
         portal = self.layer['portal']
         mt = getToolByName(portal, 'portal_membership')
         member = mt.getAuthenticatedMember()
-        member.setMemberProperties(
-            {'fullname': 'Bob Døe', 'email': 'info@jarn.com'})
+        member.setMemberProperties({'fullname': 'Bob Døe',
+            'email': 'info@jarn.com', 'department': 'it'})
         transaction.commit()
         browser.open(portal.absolute_url() +
             '/users/test_user_1_/memberdata_view')
@@ -134,7 +134,7 @@ class TestFunctionalMemberDataView(IntranettFunctionalTestCase):
             self.assertEqual(e.getcode(), 404)
             self.assertEqual('%s' % (e, ), 'HTTP Error 404: Not Found')
         else:
-            self.fail('HTTPError not raised')
+            self.fail('HTTPError not raised') # pragma: no cover
 
     def test_anonymous_user(self):
         browser = get_browser(self.layer['app'], loggedIn=False)
@@ -145,4 +145,4 @@ class TestFunctionalMemberDataView(IntranettFunctionalTestCase):
         except Unauthorized, e:
             self.assertEqual('%s' % (e, ), 'Anonymous rejected')
         else:
-            self.fail('Unauthorized not raised')
+            self.fail('Unauthorized not raised') # pragma: no cover
