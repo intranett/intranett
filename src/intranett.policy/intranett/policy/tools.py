@@ -310,10 +310,6 @@ class MembershipTool(BaseMembershipTool):
         """
         safe_id = self._getSafeMemberId(id)
         membership = getToolByName(self, 'portal_membership')
-
-        if not safe_id:
-            safe_id = self.getAuthenticatedMember().getId()
-
         super(MembershipTool, self).deletePersonalPortrait(safe_id)
 
         # Reindex
