@@ -137,3 +137,12 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
             clamav.getProperty('clamav_host'), 'jarn11.gocept.net')
         self.assertEqual(
             clamav.getProperty('clamav_port'), '3310')
+
+    def after_21(self):
+        portal = self.layer['portal']
+        atool = getToolByName(portal, 'portal_actions')
+        self.assertFalse('employee-listing' in atool.portal_tabs)
+        self.assertTrue('users' in portal)
+        catalog = getToolByName(portal, 'portal_catalog')
+        brains = catalog(dict(portal_type='MemberData'))
+        self.assertEqual(len(brains), 1)

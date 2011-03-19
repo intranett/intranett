@@ -175,6 +175,11 @@ def install_users_folder(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
     if MEMBERS_FOLDER_ID not in portal:
         setup_members_folder(portal)
+    # Remove orphaned member data records
+    catalog = getToolByName(context, 'portal_catalog')
+    brains = catalog(dict(portal_type='MemberData'))
+    for brain in brains:
+        catalog.uncatalog_object(brain.getPath())
     # Reindex member data
     mt = getToolByName(context, 'portal_membership')
     for member in mt.listMembers():
