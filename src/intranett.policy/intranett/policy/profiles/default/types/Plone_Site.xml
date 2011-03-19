@@ -1,6 +1,20 @@
 <?xml version="1.0"?>
 <object name="Plone Site"
+   meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+  <element value="Document"/>
+  <element value="Event"/>
+  <element value="File"/>
+  <element value="Folder"/>
+  <element value="Image"/>
+  <element value="Link"/>
+  <element value="News Item"/>
+  <element value="Topic"/>
+  <element value="FormFolder"/>
+  <element value="MembersFolder"/>
+ </property>
  <property name="default_view">frontpage_view</property>
  <property name="view_methods" purge="False">
   <element value="frontpage_view" />

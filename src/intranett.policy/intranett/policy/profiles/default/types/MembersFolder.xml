@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<object name="MembersFolder"
+   meta_type="Factory-based Type Information with dynamic views"
+   i18n:domain="intranett" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">Employees</property>
+ <property name="description"></property>
+ <property name="icon_expr"></property>
+ <property name="content_meta_type">MembersFolder</property>
+ <property name="product">intranett.policy</property>
+ <property name="factory">addMembersFolder</property>
+ <property name="immediate_view">@@users-listing</property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">@@users-listing</property>
+ <property name="view_methods">
+  <element value="@@users-listing"/>
+ </property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="view" to="(selected layout)"/>
+</object>

@@ -78,8 +78,16 @@ def upgrade(app, args):
 
     site = root.get(site_ids[0], None)
     if site is None:
-        logger.error("No site called `%s` found in the database."% site_id)
+        logger.error("No site called `%s` found in the database." % site_id)
         sys.exit(1)
+
+    # Login as admin
+    from AccessControl.SecurityManagement import newSecurityManager
+    admin = root.acl_users.getUserById('admin')
+    if admin is None:
+        logger.error("No user called `admin` found in the database.")
+        sys.exit(1)
+    newSecurityManager(None, admin)
 
     # Set up local site manager
     from zope.site.hooks import setHooks

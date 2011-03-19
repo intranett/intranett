@@ -23,7 +23,7 @@ class INewsHighlight(IPortletDataProvider):
 
     portletTitle = schema.TextLine(title=_(u"Portlet title"), description=u"")
 
-    source = schema.Choice(title = _(u"Which item to display"),
+    source = schema.Choice(title=_(u"Which item to display"),
         vocabulary=SimpleVocabulary(news_vocab), required=True, default=None)
 
 

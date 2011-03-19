@@ -158,3 +158,29 @@ def update_clamav_settings(context):
     clamav.clamav_timeout = 120
     # return to default
     clamav.clamav_socket = '/var/run/clamd'
+
+
+@upgrade_to(21)
+def install_users_folder(context):
+    # Remove the employee-listing action
+    atool = getToolByName(context, 'portal_actions')
+    if 'employee-listing' in atool.portal_tabs:
+        atool.portal_tabs._delObject('employee-listing')
+    # Add the MembersFolder portal type
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('typeinfo', 'factorytool', 'propertiestool'))
+    # Add the users folder
+    from intranett.policy.config import MEMBERS_FOLDER_ID
+    from intranett.policy.setuphandlers import setup_members_folder
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    if MEMBERS_FOLDER_ID not in portal:
+        setup_members_folder(portal)
+    # Remove orphaned member data records
+    catalog = getToolByName(context, 'portal_catalog')
+    brains = catalog(dict(portal_type='MemberData'))
+    for brain in brains:
+        catalog.uncatalog_object(brain.getPath())
+    # Reindex member data
+    mt = getToolByName(context, 'portal_membership')
+    for member in mt.listMembers():
+        member.notifyModified()

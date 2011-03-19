@@ -49,13 +49,13 @@
                 <div class="commentImage" tal:condition="showCommenterImage">
                     <a href="" tal:condition="has_author_link"
                                tal:attributes="href author_home_url">
-                         <img src="defaultUser.gif"
+                         <img src="defaultUser.png"
                               alt=""
                               width="100"
                               tal:attributes="src portrait_url;
                                               alt reply/Creator" />
                     </a>
-                    <img src="defaultUser.gif"
+                    <img src="defaultUser.png"
                          alt=""
                          width="100"
                          tal:condition="not: has_author_link"
@@ -128,7 +128,7 @@
 
         <div class="commentImage" tal:define="member context/@@plone_portal_state/member;
                                               portrait python:context.portal_membership.getPersonalPortrait(member.getId());">
-            <img src="defaultUser.gif"
+            <img src="defaultUser.png"
                  alt=""
                  width="100"
                  tal:condition="portrait"

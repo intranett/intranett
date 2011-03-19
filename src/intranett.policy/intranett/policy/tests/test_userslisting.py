@@ -1,4 +1,5 @@
 import os.path
+import transaction
 
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -9,7 +10,6 @@ from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.utils import make_file_upload
-
 
 test_dir = os.path.dirname(tests.__file__)
 image_file = os.path.join(test_dir, 'images', 'test.jpg')
@@ -31,67 +31,80 @@ def add_default_members(portal):
              position='Head Accountant', department='Dept\xc3\xa5'))
 
 
-class TestEmployeeListing(IntranettTestCase):
+class TestUsersListing(IntranettTestCase):
 
     def setUp(self):
-        super(TestEmployeeListing, self).setUp()
+        super(TestUsersListing, self).setUp()
         portal = self.layer['portal']
         add_default_members(portal)
 
-    def test_view_exists(self):
+    def _make_one(self):
+        from intranett.policy.config import MEMBERS_FOLDER_ID
         portal = self.layer['portal']
-        try:
-            portal.unrestrictedTraverse('@@employee-listing')
-        except AttributeError: # pragma: no cover
-            self.fail("@@employee-listing doesn't exist.")
-
-    def test_employeelisting_action(self):
-        portal = self.layer['portal']
-        at = getToolByName(portal, 'portal_actions')
-        tabs = at.portal_tabs
-        self.assert_('employee-listing' in tabs.objectIds(),
-                     '"employee-listing" action is not registered.')
-        self.assertEqual(tabs['employee-listing'].i18n_domain, '')
-
-    def test_list_employees(self):
-        portal = self.layer['portal']
-        view = portal.unrestrictedTraverse('@@employee-listing')
+        members = portal[MEMBERS_FOLDER_ID]
+        view = members.unrestrictedTraverse('@@users-listing')
         view.update()
-        self.assertEqual([x['fullname'] for x in view.employees()],
+        return view
+
+    def test_view_exists(self):
+        try:
+            self._make_one()
+        except AttributeError: # pragma: no cover
+            self.assertFalse("@@users-listing doesn't exist.")
+
+    def test_userslisting_action(self):
+        portal = self.layer['portal']
+        atool = getToolByName(portal, 'portal_actions')
+        # There is no action anymore
+        self.assertFalse('users-listing' in atool.portal_tabs.objectIds())
+
+    def test_list_users(self):
+        view = self._make_one()
+        self.assertEqual([x['fullname'] for x in view.users()],
                          ['Barney Rubble', 'Fred Flintstone', 'Memb\xc3\xa5r'])
 
     def test_list_departments(self):
-        portal = self.layer['portal']
-        view = portal.unrestrictedTraverse('@@employee-listing')
-        view.update()
-        self.assertEqual(view.departments(), ['Dept\xc3\xa5', 'Rock & Gravel'])
+        view = self._make_one()
+        self.assertEqual([x['name'] for x in view.departments()],
+                         ['Dept\xc3\xa5', 'Rock & Gravel'])
 
-    def test_list_employees_by_department(self):
-        portal = self.layer['portal']
-        view = portal.unrestrictedTraverse('@@employee-listing')
-        view.update()
-        rocks = [x['fullname'] for x in view.employees('Rock & Gravel')]
+    def test_list_users_by_department(self):
+        view = self._make_one()
+        rocks = [x['fullname'] for x in view.users('Rock & Gravel')]
         self.assertEqual(rocks, ['Fred Flintstone', 'Memb\xc3\xa5r'])
-        accounting = [x['fullname'] for x in view.employees('Dept\xc3\xa5')]
+        accounting = [x['fullname'] for x in view.users('Dept\xc3\xa5')]
         self.assertEqual(accounting, ['Barney Rubble'])
 
     def test_can_manage(self):
         portal = self.layer['portal']
-        view = portal.unrestrictedTraverse('@@employee-listing')
+        view = self._make_one()
         self.assertFalse(view.can_manage())
         setRoles(portal, TEST_USER_ID, ['Manager'])
         self.assertTrue(view.can_manage())
 
 
-class TestFunctionalEmployeeListing(IntranettFunctionalTestCase):
+class TestFunctionalUsersListing(IntranettFunctionalTestCase):
 
     def setUp(self):
-        super(TestFunctionalEmployeeListing, self).setUp()
+        super(TestFunctionalUsersListing, self).setUp()
         portal = self.layer['portal']
         add_default_members(portal)
+        transaction.commit()
 
-    def test_employee_listing_view(self):
+    def test_users_listing_view(self):
         # As a normal user we can view the listing
         browser = get_browser(self.layer['app'])
-        browser.open('http://nohost/plone/employee-listing')
-        self.assert_(browser.url.endswith('employee-listing'))
+        browser.open('http://nohost/plone/users/')
+        self.failUnless('Barney Rubble' in browser.contents)
+        self.failUnless('http://nohost/plone/users/barney' in browser.contents)
+        self.failUnless('Fred Flintstone' in browser.contents)
+        self.failUnless('http://nohost/plone/users/fred' in browser.contents)
+
+    def test_members_folder_view(self):
+        # As a normal user we can view the listing
+        browser = get_browser(self.layer['app'])
+        browser.open('http://nohost/plone/users/')
+        self.failUnless('Barney Rubble' in browser.contents)
+        self.failUnless('http://nohost/plone/users/barney' in browser.contents)
+        self.failUnless('Fred Flintstone' in browser.contents)
+        self.failUnless('http://nohost/plone/users/fred' in browser.contents)

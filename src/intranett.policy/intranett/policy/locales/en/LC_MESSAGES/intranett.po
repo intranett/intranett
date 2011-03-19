@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-03-04 15:19+0000\n"
+"POT-Creation-Date: 2011-03-19 16:45+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Create intranet"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:40
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:46
 msgid "Departments:"
 msgstr ""
 
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Employee"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:32
+#: intranett.policy/intranett/policy/profiles/default/types/MembersFolder.xml
 msgid "Employees"
 msgstr ""
 
@@ -68,11 +68,15 @@ msgstr ""
 msgid "Portlet title"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
+#: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/plone.app.controlpanel.usergroups_usersoverview.pt:108
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
+msgid "Show employees from all departments"
+msgstr ""
+
+#: intranett.policy/intranett/policy/jbot/plone.app.controlpanel.usergroups_usersoverview.pt:108
 msgid "Site Administrator"
 msgstr "Administrator"
 
@@ -84,11 +88,11 @@ msgstr ""
 msgid "The second-most recently published news item"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:7
+#: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
 msgstr ""
 
-#: intranett.theme/intranett/theme/browser/templates/plone.app.layout.viewlets.colophon.pt:14
+#: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14
 msgid "Version: ${number}"
 msgstr ""
 
@@ -135,14 +139,14 @@ msgid "label_delete_portrait"
 msgstr ""
 
 #. Default: "Department"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:85
 #: intranett.policy/intranett/policy/userdataschema.py:48
-#: intranett.theme/intranett/theme/browser/templates/user.pt:89
 msgid "label_department"
 msgstr ""
 
 #. Default: "E-mail"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:99
 #: intranett.policy/intranett/policy/userdataschema.py:20
-#: intranett.theme/intranett/theme/browser/templates/user.pt:103
 msgid "label_email"
 msgstr ""
 
@@ -152,15 +156,15 @@ msgid "label_full_name"
 msgstr ""
 
 #. Default: "Location"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:92
 #: intranett.policy/intranett/policy/userdataschema.py:53
-#: intranett.theme/intranett/theme/browser/templates/user.pt:96
 msgid "label_location"
 msgstr ""
 
 #. Default: "Mobile phone"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:116
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:95
 #: intranett.policy/intranett/policy/userdataschema.py:31
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:90
-#: intranett.theme/intranett/theme/browser/templates/user.pt:120
 msgid "label_mobile"
 msgstr ""
 
@@ -170,9 +174,9 @@ msgid "label_no_results_found"
 msgstr ""
 
 #. Default: "Phone"
+#: intranett.policy/intranett/policy/browser/templates/user.pt:108
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:101
 #: intranett.policy/intranett/policy/userdataschema.py:26
-#: intranett.theme/intranett/theme/browser/templates/employeelisting_view.pt:96
-#: intranett.theme/intranett/theme/browser/templates/user.pt:112
 msgid "label_phone"
 msgstr ""
 

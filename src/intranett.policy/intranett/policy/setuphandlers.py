@@ -2,6 +2,7 @@ from Acquisition import aq_get
 from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryUtility
+from zope.i18n import translate
 from zope.interface import alsoProvides
 
 from intranett.policy.config import config
@@ -88,6 +89,19 @@ def setup_reject_anonymous(site):
     alsoProvides(portal, IPrivateSite)
 
 
+def setup_members_folder(site):
+    from Products.CMFPlone.utils import _createObjectByType
+    from intranett.policy.config import MEMBERS_FOLDER_ID
+    fti = getToolByName(site, 'portal_types')['MembersFolder']
+    title = translate(fti.Title(), target_language=site.Language())
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID,
+        title=title)
+    portal[MEMBERS_FOLDER_ID].processForm() # Fire events
+    workflow = getToolByName(site, 'portal_workflow')
+    workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
+
+
 @import_step()
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
@@ -103,3 +117,4 @@ def various(context):
     disable_portlets(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
+    setup_members_folder(site)

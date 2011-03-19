@@ -157,11 +157,11 @@ class TestEventHighlightPortlet(IntranettTestCase):
         in_a_month = tomorrow + 30
         portal.invokeFactory('Event', 'wedding',
                              title='A wedding',
-                             startDate=tomorrow, endDate=tomorrow+1)
+                             startDate=tomorrow, endDate=tomorrow + 1)
         wt.doActionFor(portal['wedding'], 'publish')
         portal.invokeFactory('Event', 'funeral',
                              title='A funeral',
-                             startDate=in_a_month, endDate=in_a_month+1)
+                             startDate=in_a_month, endDate=in_a_month + 1)
         wt.doActionFor(portal['funeral'], 'publish')
 
         assignment = eventhighlight.Assignment(

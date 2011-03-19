@@ -7,8 +7,9 @@
 ##parameters=
 ##title=Redirect to the canonical author page
 
+from Products.PythonScripts.standard import url_quote
 from Products.CMFCore.utils import getToolByName
-from ZTUtils import make_query
+from intranett.policy.utils import getMembersFolderId
 
 request = context.REQUEST
 portal_url = getToolByName(context, 'portal_url')()
@@ -19,8 +20,8 @@ if len(request.traverse_subpath) > 0:
 else:
     author = request.get('author', '')
 
-result = portal_url + '/@@user'
+result = portal_url + '/' + url_quote(getMembersFolderId())
 if author:
-    result = result + '?' + make_query(name=author)
+    result = result + '/' + url_quote(author)
 
 return request.response.redirect(result)

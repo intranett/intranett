@@ -19,17 +19,13 @@
     <tal:main-macro metal:define-macro="main"
                     tal:define="isAnon context/@@plone_portal_state/anonymous;
                                 raiseUnauthorized python:(not isAnon) or context.raiseUnauthorized();
-                                url_unquote_plus python:modules['Products.PythonScripts.standard'].url_unquote_plus;
                                 username view/username;
-                                mtool python:context.portal_membership;
-                                portrait python: mtool.getPersonalPortrait(username, thumbnail=False);
-                                portal_types context/portal_types;
-                                userinfo python: mtool.getMemberInfo(username);
+                                userid view/userid;
+                                userinfo view/userinfo;
+                                portrait view/userportrait;
                                 portal_url context/@@plone_portal_state/navigation_root_url;
                                 here_url context/@@plone_context_state/object_url;
-                                member context/@@plone_portal_state/member;
-                                portal context/@@plone_portal_state/portal;
-                                email_from_address portal/email_from_address">
+                                member context/@@plone_portal_state/member">
 
         <tal:noAuthor condition="not: userinfo">
             <dl class="portalMessage error">
@@ -46,8 +42,8 @@
         </tal:noAuthor>
 
         <tal:haveAuthor condition="userinfo"
-            tal:define="isOwner python:member.getId()==username;
-                        isAnon context/@@plone_portal_state/anonymous;">
+            tal:define="isOwner python:member.getId()==userid;
+                        isAnon context/@@plone_portal_state/anonymous">
 
             <div id="edit-bar" tal:condition="isOwner">
                 <h5 class="hiddenStructure">Views</h5>
@@ -55,9 +51,7 @@
                     class="contentViews">
                   <li class="selected">
                     <a href=""
-                        tal:define="url_quote_plus python:modules['Products.PythonScripts.standard'].url_quote_plus;
-                                    memberurl python:url_quote_plus(member.getId())"
-                       tal:attributes="href string:${portal_url}/@@user?name=${memberurl}"
+                       tal:attributes="href python:view.user_url(userid)"
                        i18n:translate="label_view">View</a>
                   </li>
                   <li>
@@ -81,15 +75,17 @@
                         <img src=""
                              alt=""
                              class="portraitPhoto image-left"
-                             tal:attributes="src portrait/absolute_url" />
+                             tal:attributes="src portrait/absolute_url;
+                                             width portrait/width;
+                                             height portrait/height" />
 
                         <ul class="visualClear" i18n:domain="intranett">
                             <li tal:condition="userinfo/department">
                                 <!-- Department -->
                                 <b><span tal:omit-tag="" i18n:translate="label_department">Department</span>:</b>
                                 <a href=""
-                                     tal:attributes="href string:${context/absolute_url}/employee-listing?department=${userinfo/department}"
-                                     tal:content="userinfo/department">Department</a>
+                                   tal:attributes="href python:view.department_url(userinfo['department'])"
+                                   tal:content="userinfo/department">Department</a>
                             </li>
                             <li tal:condition="userinfo/location">
                                 <!-- Location  -->
@@ -138,9 +134,9 @@
                             Author description
                         </div>
 
-                        <tal:authorContent define="user_content view/user_content;
+                        <tal:authorContent define="usercontent view/usercontent;
                                                    toLocalizedTime nocall: context/@@plone/toLocalizedTime;"
-                                           condition="user_content">
+                                           condition="usercontent">
 
                             <h2 i18n:translate="heading_author_content">
                                 Latest content created by this user
@@ -150,7 +146,7 @@
                             <table class="vertical listing"
                                    summary="Lists content written by an author grouped by content type"
                                    i18n:attributes="summary summary_author_content_list;">
-                                <tal:repeat repeat="item user_content">
+                                <tal:repeat repeat="item usercontent">
                                     <tr>
                                         <th tal:content="python:toLocalizedTime(item.Date)"
                                             style="white-space: nowrap">
@@ -167,7 +163,7 @@
 
                             <p>
                             <a href=""
-                               tal:attributes="href string:$here_url/search?Creator=${username}&amp;sort_on=created&amp;sort_order=reverse"
+                               tal:attributes="href string:$here_url/search?Creator=${userid}&amp;sort_on=created&amp;sort_order=reverse"
                                i18n:translate="go_to_search_author_content">
                                 All content created by
                                 <span i18n:name="user" tal:omit-tag="" tal:content="python:userinfo['fullname'] or username"/>&hellip;

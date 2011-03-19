@@ -39,6 +39,7 @@ def make_file_upload(data, content_type=None, filename=None):
 def suppress_warnings(func):
     """Decorator suppressing stderr output.
     """
+
     def wrapped_func(*args, **kw):
         saved = sys.stderr
         try:

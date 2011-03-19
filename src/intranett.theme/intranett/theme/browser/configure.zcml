@@ -114,18 +114,4 @@
       template="templates/manage-frontpage.pt"
       />
 
-  <!-- User / author page -->
-  <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="user"
-      class=".user.UserView"
-      template="templates/user.pt"
-      permission="zope2.View"
-      />
-
-  <cache:ruleset
-      for=".user.UserView"
-      ruleset="plone.content.folderView"
-      />
-
 </configure>

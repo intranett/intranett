@@ -11,18 +11,40 @@
 
   <include package=".portlets" />
 
-  <!-- Employee listing -->
+  <!-- Users listing -->
   <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="employee-listing"
-      class=".employeelisting.EmployeeListingView"
-      template="templates/employeelisting_view.pt"
+      for="intranett.policy.content.membersfolder.MembersFolder"
+      name="users-listing"
+      class=".userslisting.UsersListingView"
+      template="templates/userslisting_view.pt"
       permission="zope2.View"
       />
 
   <cache:ruleset
-      for=".employeelisting.EmployeeListingView"
+      for=".userslisting.UsersListingView"
       ruleset="plone.content.folderView"
+      />
+
+  <!-- User / author page -->
+  <browser:page
+      for="intranett.policy.tools.MemberData"
+      name="memberdata_view"
+      class=".user.MemberDataView"
+      template="templates/user.pt"
+      permission="zope2.View"
+      />
+
+  <cache:ruleset
+      for=".user.MemberDataView"
+      ruleset="plone.content.folderView"
+      />
+
+  <!-- User breadcrumbs -->
+  <browser:page
+      for="intranett.policy.tools.MemberData"
+      name="breadcrumbs_view"
+      class="Products.CMFPlone.browser.navigation.CatalogNavigationBreadcrumbs"
+      permission="zope2.View"
       />
 
 </configure>

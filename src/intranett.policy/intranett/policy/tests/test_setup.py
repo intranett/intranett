@@ -170,11 +170,13 @@ class TestSiteSetup(IntranettTestCase):
         self.assertEqual(ids, available)
 
     def test_content(self):
-        # This content is only created in the tests
+        # The members folder is always present
+        expected = set(['users'])
+        # This content is only created in tests
         test_content = set(['test-folder'])
         portal = self.layer['portal']
         content = set(portal.contentIds())
-        self.assertEquals(content - test_content, set())
+        self.assertEquals(content - test_content, expected)
 
     def test_content_language(self):
         portal = self.layer['portal']
@@ -236,7 +238,10 @@ class TestAdmin(IntranettTestCase):
         self.assert_('Create intranet' in result, result)
 
     def test_addsite_create(self):
+        from plone.app.testing import login
+        from plone.app.testing import SITE_OWNER_NAME
         app = self.layer['app']
+        login(app, SITE_OWNER_NAME)
         request = self.layer['request']
         request.form['form.submitted'] = True
         addsite = queryMultiAdapter((app, request), Interface, 'plone-addsite')

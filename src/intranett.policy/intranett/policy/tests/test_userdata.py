@@ -5,12 +5,16 @@ import transaction
 from Acquisition import aq_get
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import _createObjectByType
 from zope.component import queryUtility
+from intranett.policy.utils import getMembersFolder
+from intranett.policy.utils import getMembersFolderId
 
-from .utils import make_file_upload
+from plone.app.testing import setRoles
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
+from intranett.policy.tests.utils import make_file_upload
 
 TEST_IMAGES = os.path.join(os.path.dirname(__file__), 'images')
 
@@ -77,6 +81,16 @@ class TestUserdataSchema(IntranettTestCase):
         self.assertEquals(info['email'], 'info@jarn.com')
         self.assertEquals(info['birth_date'], DateTime('23/11/2008'))
         self.assertEquals(info['description'], "<p>Kjære Python!</p>")
+
+    def test_userid_in_memberinfo(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        info = mt.getMemberInfo()
+        self.assertEquals(info['userid'], TEST_USER_ID)
+
+    def test_bad_memberinfo(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
         info = mt.getMemberInfo(memberId='foo')
         self.failUnless(info is None)
 
@@ -203,6 +217,40 @@ class TestUserPortraits(IntranettTestCase):
         image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
         mt.changeMemberPortrait(image_gif, id='')
 
+    def test_change_portrait_recatalogs(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        catalog = getToolByName(portal, 'portal_catalog')
+        before = catalog.getCounter()
+        mt.changeMemberPortrait(image_jpg)
+        self.assertEqual(catalog.getCounter(), before + 1)
+
+    def test_delete_portrait_recatalogs(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        catalog = getToolByName(portal, 'portal_catalog')
+        mt.changeMemberPortrait(image_jpg)
+        before = catalog.getCounter()
+        mt.deletePersonalPortrait()
+        self.assertEqual(catalog.getCounter(), before + 1)
+
+    def test_delete_member_purges_portrait(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mdt = getToolByName(portal, 'portal_memberdata')
+        path = os.path.join(TEST_IMAGES, 'test.jpg')
+        image_jpg = make_file_upload(path, 'image/jpeg', 'myportrait.jpg')
+        mt.changeMemberPortrait(image_jpg)
+        # Now delete the member
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        mt.deleteMembers([TEST_USER_ID])
+        self.failIf(TEST_USER_ID in mdt.portraits)
+        self.failIf(TEST_USER_ID in mdt.thumbnails)
+
 
 class TestImageCropping(IntranettTestCase):
 
@@ -262,37 +310,37 @@ class TestUserSearch(IntranettTestCase):
         results = catalog.searchResults(Title='Døe')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/users/test_user_1_')
         self.assertEquals(john_brain.Title, 'John Døe')
         self.assertEquals(john_brain.Description, 'Øngønør, Tøst')
         results = catalog.searchResults(SearchableText='12345')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/users/test_user_1_')
         results = catalog.searchResults(SearchableText='67890')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/users/test_user_1_')
         results = catalog.searchResults(SearchableText='Øngønør')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/users/test_user_1_')
         results = catalog.searchResults(SearchableText='Tøst')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/users/test_user_1_')
         results = catalog.searchResults(SearchableText='Tønsberg')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/users/test_user_1_')
         results = catalog.searchResults(SearchableText='info@jarn.com')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/users/test_user_1_')
         results = catalog.searchResults(SearchableText='Kjære')
         self.assertEquals(len(results), 1)
         john_brain = results[0]
-        self.assertEquals(john_brain.getPath(), '/plone/author/test_user_1_')
+        self.assertEquals(john_brain.getPath(), '/plone/users/test_user_1_')
 
     def test_safe_transform_searchable_text(self):
         portal = self.layer['portal']
@@ -300,6 +348,32 @@ class TestUserSearch(IntranettTestCase):
         member = mt.getAuthenticatedMember()
         member.setMemberProperties({'description': '<p>Kjære Python!</p>'})
         self.assertEquals(member.SearchableText().strip(), 'Kjære Python!')
+
+    def test_brain_getObject(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': 'John Døe'})
+        catalog = getToolByName(portal, 'portal_catalog')
+        results = catalog.searchResults(Title='Døe')
+        self.assertEquals(len(results), 1)
+        brain = results[0]
+        obj = brain.getObject()
+        self.assertEqual(obj.Title(), 'John Døe')
+        self.assertEqual(obj.getPhysicalPath(),
+            ('', 'plone', 'users', 'test_user_1_'))
+
+    def test_refreshCatalog_does_not_lose_memberdata(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': 'John Døe'})
+        catalog = getToolByName(portal, 'portal_catalog')
+        results = catalog.searchResults(Title='Døe')
+        self.assertEquals(len(results), 1)
+        catalog.refreshCatalog()
+        results = catalog.searchResults(Title='Døe')
+        self.assertEquals(len(results), 1)
 
 
 class TestFunctionalUserSearch(IntranettFunctionalTestCase):
@@ -359,3 +433,206 @@ class TestDashboard(IntranettTestCase):
             manager = category.get('member', {})
             self.assert_(manager == {}, 'Found unexpected portlets in '
                          'dashboard column %s: %s' % (i, manager.keys()))
+
+
+class TestMemberData(IntranettTestCase):
+
+    def _make_one(self, request):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        member.setMemberProperties({'fullname': 'John Døe',
+                                    'position': 'Øngønør',
+                                    'department': 'Tøst'})
+        return member
+
+    def test_getAuthenticatedMember(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        chain = member.aq_chain
+        self.assertEqual(chain[0].__class__.__name__, 'MemberData')
+        self.assertEqual(chain[1].__class__.__name__, 'PloneUser')
+        self.assertEqual(chain[2].__class__.__name__, 'PluggableAuthService')
+        self.assertEqual(chain[3].__class__.__name__, 'PloneSite')
+
+    def test_getMemberById(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        chain = member.aq_chain
+        self.assertEqual(chain[0].__class__.__name__, 'MemberData')
+        self.assertEqual(chain[1].__class__.__name__, 'PloneUser')
+        self.assertEqual(chain[2].__class__.__name__, 'PluggableAuthService')
+        self.assertEqual(chain[3].__class__.__name__, 'PloneSite')
+
+    def test_getUser(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        user = member.getUser()
+        chain = user.aq_chain
+        self.assertEqual(chain[0].__class__.__name__, 'PloneUser')
+        self.assertEqual(chain[1].__class__.__name__, 'PluggableAuthService')
+        self.assertEqual(chain[2].__class__.__name__, 'PloneSite')
+
+    def test_getPhysicalPath(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        self.assertEqual(member.getPhysicalPath(),
+            ('', 'plone', 'users', 'test_user_1_'))
+
+    def test_notifyModified(self):
+        request = self.layer['request']
+        portal = self.layer['portal']
+        member = self._make_one(request)
+        catalog = getToolByName(portal, 'portal_catalog')
+        self.assertEqual(len(catalog(Title='Døe')), 1)
+        catalog.unindexObject(member)
+        self.assertEqual(len(catalog(Title='Døe')), 0)
+        member.notifyModified()
+        self.assertEqual(len(catalog(Title='Døe')), 1)
+
+    def test_types(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        self.assertEqual(member.Type(), 'MemberData')
+        self.assertEqual(member.portal_type, 'MemberData')
+        self.assertEqual(member.meta_type, 'MemberData')
+
+    def test_title(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        self.assertEqual(member.Title(), 'John Døe')
+
+    def test_description(self):
+        request = self.layer['request']
+        member = self._make_one(request)
+        self.assertEqual(member.Description(), 'Øngønør, Tøst')
+
+    def test_unicode_getId(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mt.addMember(u'måm', 'secret', ['Member'], [])
+        member = mt.getMemberById(u'måm')
+        self.assertEqual(member.getId(), 'måm')
+        self.failIf(isinstance(member.getId(), unicode))
+        self.assertEqual(member.getPhysicalPath(),
+            ('', 'plone', 'users', 'måm'))
+
+    def test_unicode_getMemberId(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mt.addMember(u'måm', 'secret', ['Member'], [])
+        member = mt.getMemberById(u'måm')
+        self.assertEqual(member.getMemberId(), 'måm')
+        self.failIf(isinstance(member.getMemberId(), unicode))
+        self.assertEqual(member.getPhysicalPath(),
+            ('', 'plone', 'users', 'måm'))
+
+    def test_unicode_id(self):
+        portal = self.layer['portal']
+        mt = getToolByName(portal, 'portal_membership')
+        mt.addMember(u'måm', 'secret', ['Member'], [])
+        member = mt.getMemberById(u'måm')
+        self.assertEqual(member.id, 'måm')
+        self.failIf(isinstance(member.id, unicode))
+
+    def test_delete_member_uncatalogs(self):
+        request = self.layer['request']
+        portal = self.layer['portal']
+        member = self._make_one(request)
+        member # pyflakes
+        mt = getToolByName(portal, 'portal_membership')
+        catalog = getToolByName(portal, 'portal_catalog')
+        self.assertEqual(len(catalog(dict(Title='Døe'))), 1)
+        # Now delete the member
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        mt.deleteMembers([TEST_USER_ID])
+        self.assertEqual(len(catalog(dict(Title='Døe'))), 0)
+
+
+class TestMembersFolder(IntranettTestCase):
+
+    def _make_one(self):
+        portal = self.layer['portal']
+        # Remove the default members folder
+        if 'users' in portal:
+            portal._delObject('users')
+        _createObjectByType('MembersFolder', portal, id='members', title='Members')
+        portal['members'].processForm() # Fire events
+        return portal['members']
+
+    def test_create(self):
+        folder = self._make_one()
+        self.assertEqual(folder.portal_type, 'MembersFolder')
+        self.assertEqual(folder.Title(), 'Members')
+
+    def test_get_member(self):
+        folder = self._make_one()
+        member = folder['test_user_1_']
+        self.assertEqual(member.getId(), 'test_user_1_')
+
+    def test_get_bad_member(self):
+        folder = self._make_one()
+        self.assertRaises(KeyError, folder.__getitem__, 'test_user_2_')
+
+    def test_traverse(self):
+        folder = self._make_one()
+        member = folder.restrictedTraverse('test_user_1_')
+        self.assertEqual(member.getId(), 'test_user_1_')
+        self.assertEqual(member.getUserName(), 'test-user')
+
+    def test_bad_traverse(self):
+        folder = self._make_one()
+        self.assertRaises(AttributeError, folder.restrictedTraverse, 'test_user_2_')
+
+    def test_path_traverse(self):
+        folder = self._make_one()
+        member = folder.restrictedTraverse('test_user_1_')
+        self.assertEqual(member.getId(), 'test_user_1_')
+        self.assertEqual(member.getUserName(), 'test-user')
+
+    def test_getMembersFolderId(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        id = getMembersFolderId()
+        self.assertEqual(id, folder.getId())
+        portal._delObject('members')
+        self.assertEqual(getMembersFolderId(), '')
+
+    def test_getMembersFolder(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        members = getMembersFolder(portal)
+        self.failIfEqual(members, None)
+        self.assertEqual(members.getId(), folder.getId())
+        self.assertEqual(members.absolute_url(), 'http://nohost/plone/members')
+        portal._delObject('members')
+        self.assertEqual(getMembersFolder(portal), None)
+
+    def test_rename_members_folder(self):
+        portal = self.layer['portal']
+        folder = self._make_one()
+        self.assertEqual(getMembersFolderId(), folder.getId())
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        transaction.savepoint(True) # Acquire a _p_oid
+        portal.manage_renameObject('members', 'persons')
+        self.assertEqual(getMembersFolderId(), 'persons')
+
+    def test_override_members_folder(self):
+        # There should only ever be one members folder in real life
+        portal = self.layer['portal']
+        folder = self._make_one()
+        self.assertEqual(getMembersFolderId(), folder.getId())
+        _createObjectByType('MembersFolder', portal, id='persons', title='Persons')
+        portal['persons'].processForm() # Fire events
+        self.assertEqual(getMembersFolderId(), 'persons')
+
+    def test_delete_inactive_members_folder(self):
+        # There should only ever be one members folder in real life
+        portal = self.layer['portal']
+        folder = self._make_one()
+        _createObjectByType('MembersFolder', portal, id='persons', title='Persons')
+        portal['persons'].processForm() # Fire events
+        self.assertEqual(getMembersFolderId(), 'persons')
+        # Deleting members keeps persons active
+        portal._delObject(folder.getId())
+        self.assertEqual(getMembersFolderId(), 'persons')

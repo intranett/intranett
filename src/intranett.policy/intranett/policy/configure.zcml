@@ -44,6 +44,10 @@
     ruleset="plone.content.file"
     />
 
+  <subscriber handler=".content.membersfolder.registerMembersFolderId" />
+  <subscriber handler=".content.membersfolder.unregisterMembersFolderId" />
+  <subscriber handler=".content.membersfolder.updateMembersFolderId" />
+
   <!-- Members should be able to add portlets to their own dashboard -->
   <browser:view
     for="plone.app.portlets.interfaces.IUserPortletAssignmentMapping"

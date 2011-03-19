@@ -9,8 +9,13 @@
 
     <metal:content fill-slot="content"
                    tal:define="dummy view/update;
-                               department_request python:request.get('department', None);
-                               employees python:department_request and view.employees(department_request) or view.employees()">
+                               portal_url context/@@plone_portal_state/navigation_root_url;
+                               department_request python:request.get('department', '');
+                               users python:view.users(department_request)">
+
+        <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+          Portal status message
+        </div>
 
         <article id="content">
 
@@ -24,14 +29,15 @@
                     <div class="documentDescription">
                         <a href="" title="Show all employees"
                            tal:condition="department_request"
-                           tal:attributes="href string:${context/absolute_url}/employee-listing">
-                           Show employees of all departments?
+                           tal:attributes="href view/users_folder_url"
+                           i18n:translate="">
+                           Show employees from all departments
                         </a>
                     </div>
                 </tal:departmentview>
                 <h1 class="documentFirstHeading"
                     tal:condition="not:department_request"
-                    i18n:translate="">Employees</h1>
+                    tal:content="context/Title">Employees</h1>
             </header>
 
             <div id="content-core">
@@ -40,67 +46,66 @@
                     <strong i18n:translate="">Departments:</strong>
                     <ul id="departments-list" class="horrList">
                         <li tal:repeat="department view/departments"
-                            tal:attributes="class python:department_request == department and 'selected' or 'plain'">
+                            tal:attributes="class python:department_request == department['name'] and 'selected' or 'plain'">
                             <a href="" title=""
-                               tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
-                               tal:content="department">IT Department</a>
+                               tal:attributes="href department/url"
+                               tal:content="department/name">IT Department</a>
                         </li>
                     </ul>
                 </div>
 
                 <div id="employee-listing-wrapper">
-                    <tal:employee repeat="employee employees">
+                    <tal:user repeat="user users">
                         <div class="tileItem visualIEFloatFix vcard"
-                             tal:define="department employee/department|nothing;
-                                         portal context/@@plone_portal_state/portal;
-                                         normalizeString nocall:context/@@plone/normalizeString;
-                                         wtool portal/portal_workflow;
-                                         item_wf_state        employee/review_state|python: wtool.getInfoFor(employee, 'review_state', '');
-                                         item_wf_state_class  python:'state-' + normalizeString(item_wf_state);">
+                             tal:define="normalizeString nocall:context/@@plone/normalizeString;
+                                         item_wf_state user/review_state;
+                                         item_wf_state_class python:'state-' + normalizeString(item_wf_state);">
                             <a href="#"
-                               tal:attributes="href string:$portal_url/@@user?name=${employee/username};
-                                               title employee/fullname">
+                               tal:attributes="href user/url;
+                                               title user/fullname">
                                 <img class="image-left photo" alt="" src=""
-                                     tal:condition="employee/thumbnail_url"
-                                     tal:attributes="src employee/thumbnail_url" />
+                                     tal:condition="user/thumbnail_url"
+                                     tal:attributes="src user/thumbnail_url" 
+                                     width="100" height="100" />
                                 <img class="image-left photo" alt="" src=""
-                                     tal:condition="not:employee/thumbnail_url"
-                                     tal:attributes="src string:$portal_url/defaultUser.png" />
+                                     tal:condition="not:user/thumbnail_url"
+                                     tal:attributes="src string:$portal_url/defaultUser.png"
+                                     width="100" height="100" />
                             </a>
                             <div class="info">
                                 <h2 class="tileHeadline">
                                     <span class="summary">
                                         <a class="state-private url fn"
-                                           tal:content="employee/fullname | employee/username"
-                                           tal:attributes="href string:$portal_url/@@user?name=${employee/username};
-                                                           title employee/fullname;
+                                           tal:content="user/fullname | user/username"
+                                           tal:attributes="href user/url;
+                                                           title user/fullname;
                                                            class string:$item_wf_state_class url fn">Test Page</a>
                                     </span>
                                 </h2>
                                 <div class="tileBody">
-                                    <tal:position condition="employee/position">
-                                        <span tal:replace="employee/position" />,
+                                    <tal:position condition="user/position">
+                                        <span tal:replace="user/position" />,
                                     </tal:position>
-                                    <tal:department condition="employee/department"><a href=""
-                                         tal:attributes="href string:${context/absolute_url}/employee-listing?department=$department"
-                                         tal:content="employee/department">Department</a>
+                                    <tal:department condition="user/department"><a href=""
+                                         tal:attributes="href user/department_url"
+                                         tal:content="user/department">Department</a>
                                     </tal:department>
-                                    <div class="tel" tal:condition="employee/mobile">
+                                    <div class="tel" tal:condition="user/mobile">
                                         <span class="type hiddenStructure">Mobile</span>
                                         <span tal:omit-tag=""
                                               i18n:translate="label_mobile">Mobile phone</span>:
-                                        <span class="value" tal:content="employee/mobile" />
+                                        <span class="value" tal:content="user/mobile" />
                                     </div>
-                                    <div class="tel" tal:condition="employee/phone">
+                                    <div class="tel" tal:condition="user/phone">
                                         <span class="type hiddenStructure">Work</span>
                                         <span tal:omit-tag=""
                                               i18n:translate="label_phone">Phone</span>:
-                                        <span class="value" tal:content="employee/phone" />
+                                        <span class="value" tal:content="user/phone" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </tal:employee>
+                    </tal:user>
                 </div>
             </div>
         </article>

@@ -1,21 +1,28 @@
 from cStringIO import StringIO
 
-from OFS.Image import Image
-from PIL import Image as PILImage
-
 from App.class_init import InitializeClass
 from Acquisition import aq_base
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
-from zope.component import getUtility
+from AccessControl.requestmethod import postonly
+from OFS.Image import Image
+from PIL import Image as PILImage
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.permissions import View
-from Products.PlonePAS.tools.membership import MembershipTool as BaseMembershipTool
-from Products.PlonePAS.tools.memberdata import MemberDataTool as BaseMemberDataTool
+from Products.CMFPlone.utils import safe_hasattr
+from Products.PlonePAS.tools.membership import MembershipTool as \
+    BaseMembershipTool
+from Products.PlonePAS.tools.memberdata import MemberDataTool as \
+    BaseMemberDataTool
 from Products.PlonePAS.tools.memberdata import MemberData as BaseMemberData
 from Products.PlonePAS.tools.membership import default_portrait
 from Products.PlonePAS.utils import scale_image
+from zope.component import getUtility
+
+from intranett.policy.utils import getMembersFolderId
 
 PORTRAIT_SIZE = (300, 300, )
 PORTRAIT_THUMBNAIL_SIZE = (100, 100, )
@@ -30,7 +37,7 @@ def crop_and_scale_image(image_file,
     size = (int(max_size[0]), int(max_size[1]))
     image = PILImage.open(image_file)
     format = image.format
-    mimetype = 'image/%s'%format.lower()
+    mimetype = 'image/%s' % format.lower()
     cur_size = image.size
 
     # Preserve palletted mode.
@@ -101,20 +108,44 @@ class MemberData(BaseMemberData):
     # This is to make Plone's search machinery happy
     meta_type = portal_type = 'MemberData'
 
+    # The default view
+    def __browser_default__(self, request):
+        return (self, ('memberdata_view', ))
+
+    security.declarePrivate('notifyModified')
     def notifyModified(self):
         super(MemberData, self).notifyModified()
         plone = getUtility(ISiteRoot)
         ct = getToolByName(plone, 'portal_catalog')
         ct.reindexObject(self)
 
+    security.declarePublic('getId')
+    def getId(self):
+        return self.id
+
+    security.declarePublic('getMemberId')
+    def getMemberId(self):
+        return self.id
+
+    security.declarePublic('getUser')
+    def getUser(self):
+        bcontext = aq_base(aq_parent(self))
+        bcontainer = aq_base(aq_parent(aq_inner(self)))
+        if bcontext is bcontainer:
+            # XXX: Our acquisition context is fouled up.
+            # XXX: Work around by re-getting the user from PAS.
+            plone = getUtility(ISiteRoot)
+            mt = getToolByName(plone, 'portal_membership')
+            return mt._huntUser(self.id, plone)
+        if not safe_hasattr(bcontext, 'getUserName'): # pragma: no cover
+            raise ValueError("Cannot find user: %s" % self.id)
+        # Return the user object, which is our context.
+        return aq_parent(self)
+
+    security.declarePublic('getPhysicalPath')
     def getPhysicalPath(self):
         plone = getUtility(ISiteRoot)
-        # Work around broken PAS which *might* return a unicode id.
-        user_id = self.getId()
-        # We use no cover pragma here as in the tests user_id is never unicode
-        if isinstance(user_id, unicode): # pragma: no cover
-            user_id = user_id.encode('utf-8')
-        return plone.getPhysicalPath() + ('author', user_id)
+        return plone.getPhysicalPath() + (getMembersFolderId(), self.id)
 
     security.declareProtected(View, 'Type')
     def Type(self):
@@ -176,10 +207,25 @@ class MemberDataTool(BaseMemberDataTool):
         if member_id in self.thumbnails:
             self.thumbnails._delObject(member_id)
 
+    @postonly
+    def deleteMemberData(self, member_id, REQUEST=None):
+        """ Delete member data of specified member.
+        """
+        members = self._members
+        # Uncatalog
+        if member_id in members:
+            catalog = getToolByName(self, 'portal_catalog')
+            catalog.unindexObject(members[member_id])
+        # Remove portrait
+        self._deletePortrait(member_id)
+        return super(MemberDataTool, self).deleteMemberData(member_id)
+
     def wrapUser(self, u):
-        """ Override wrapUser only to use our MemberData
+        """ Override wrapUser to use our MemberData
         """
         id = u.getId()
+        if isinstance(id, unicode):
+            id = id.encode('utf-8')
         members = self._members
         if id not in members:
             base = aq_base(self)
@@ -205,6 +251,7 @@ class MembershipTool(BaseMembershipTool):
         memberinfo['birth_date'] = member.getProperty('birth_date')
         memberinfo['description'] = safe_transform(
             self, member.getProperty('description') or '')
+        memberinfo['userid'] = member.getId()
         return memberinfo
 
     def changeMemberPortrait(self, portrait, id=None):
@@ -217,18 +264,25 @@ class MembershipTool(BaseMembershipTool):
             safe_id = self.getAuthenticatedMember().getId()
 
         membertool = getToolByName(self, 'portal_memberdata')
+        membership = getToolByName(self, 'portal_membership')
         if portrait and portrait.filename:
             scaled, mimetype = scale_image(portrait,
                                            max_size=PORTRAIT_SIZE)
             image = Portrait(id=safe_id, file=scaled, title='')
-            image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
+            image.manage_permission('View', ['Authenticated', 'Manager'],
+                acquire=False)
             membertool._setPortrait(image, safe_id)
             # Now for thumbnails
             portrait.seek(0)
             scaled, mimetype = crop_and_scale_image(portrait)
             image = Portrait(id=safe_id, file=scaled, title='')
-            image.manage_permission('View', ['Authenticated', 'Manager'], acquire=False)
+            image.manage_permission('View', ['Authenticated', 'Manager'],
+                acquire=False)
             membertool._setPortrait(image, safe_id, thumbnail=True)
+            # Reindex
+            memberdata = membership.getMemberById(safe_id)
+            if memberdata is not None:
+                memberdata.notifyModified()
 
     def getPersonalPortrait(self, id=None, thumbnail=True):
         """Return a members personal portait.
@@ -236,11 +290,10 @@ class MembershipTool(BaseMembershipTool):
         Modified to make it possible to return the thumbnail portrait.
         """
         safe_id = self._getSafeMemberId(id)
-        membertool = getToolByName(self, 'portal_memberdata')
-
         if not safe_id:
             safe_id = self.getAuthenticatedMember().getId()
 
+        membertool = getToolByName(self, 'portal_memberdata')
         portrait = membertool._getPortrait(safe_id, thumbnail=thumbnail)
 
         if portrait is None:
@@ -248,3 +301,20 @@ class MembershipTool(BaseMembershipTool):
             portrait = getattr(portal, default_portrait, None)
 
         return portrait
+
+    def deletePersonalPortrait(self, id=None):
+        """deletes the Portait of a member.
+
+        Modified to reindex after deleting a portrait.
+        """
+        safe_id = self._getSafeMemberId(id)
+        if not safe_id: # pragma: no cover
+            safe_id = self.getAuthenticatedMember().getId()
+
+        membership = getToolByName(self, 'portal_membership')
+        super(MembershipTool, self).deletePersonalPortrait(safe_id)
+
+        # Reindex
+        memberdata = membership.getMemberById(safe_id)
+        if memberdata is not None:
+            memberdata.notifyModified()
