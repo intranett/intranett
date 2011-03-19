@@ -7,6 +7,11 @@ Changelog
 - Respect the `types_not_searched` filter on the user profile. Closes #123.
   [hannosch]
 
+- Resolve remaining problems with the employee listing and search, including
+  catalog inconsistencies (#101, #104), Unicode problems (#103) and missing
+  breadcrumbs (#116, #117, #118).
+  [stefan, hannosch]
+
 - Add missing mime types and enable gzip compression for web fonts.
   [hannosch]
 
