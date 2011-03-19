@@ -9,8 +9,8 @@ from plone.memoize.view import memoize
 from intranett.policy.utils import getMembersFolderId
 
 
-class EmployeeListingView(BrowserView):
-    """Employee listing"""
+class UsersListingView(BrowserView):
+    """Users listing"""
 
     def update(self):
         mt = getToolByName(self.context, 'portal_membership')
@@ -19,7 +19,7 @@ class EmployeeListingView(BrowserView):
         self.department_info = {}
         for member_id in mt.listMemberIds():
             info = mt.getMemberInfo(member_id)
-            info['url'] = self.employee_url(member_id)
+            info['url'] = self.user_url(member_id)
             info['portrait_url'] = ''
             info['thumbnail_url'] = ''
             info['department_url'] = ''
@@ -46,7 +46,7 @@ class EmployeeListingView(BrowserView):
     def departments(self):
         return self.department_info
 
-    def employees(self, department=''):
+    def users(self, department=''):
         if department:
             return [info
                     for info in self.member_info
@@ -64,7 +64,7 @@ class EmployeeListingView(BrowserView):
         return md.absolute_url() + '/thumbnails/' + quote(member_id)
 
     @memoize
-    def employee_url(self, member_id):
+    def user_url(self, member_id):
         return self.users_folder_url() + '/' + quote(member_id)
 
     @memoize

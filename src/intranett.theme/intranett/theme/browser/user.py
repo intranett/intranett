@@ -45,7 +45,7 @@ class MemberDataView(BrowserView):
         return catalog.searchResults(query)[:10]
 
     @memoize
-    def employee_url(self, member_id):
+    def user_url(self, member_id):
         return self.users_folder_url() + '/' + quote(member_id)
 
     @memoize

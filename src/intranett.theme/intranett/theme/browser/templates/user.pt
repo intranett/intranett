@@ -51,7 +51,7 @@
                     class="contentViews">
                   <li class="selected">
                     <a href=""
-                       tal:attributes="href python:view.employee_url(userid)"
+                       tal:attributes="href python:view.user_url(userid)"
                        i18n:translate="label_view">View</a>
                   </li>
                   <li>

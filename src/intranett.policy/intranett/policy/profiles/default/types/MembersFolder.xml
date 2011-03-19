@@ -8,14 +8,14 @@
  <property name="content_meta_type">MembersFolder</property>
  <property name="product">intranett.policy</property>
  <property name="factory">addMembersFolder</property>
- <property name="immediate_view">@@employee-listing</property>
+ <property name="immediate_view">@@users-listing</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types"/>
  <property name="allow_discussion">False</property>
- <property name="default_view">@@employee-listing</property>
+ <property name="default_view">@@users-listing</property>
  <property name="view_methods">
-  <element value="@@employee-listing"/>
+  <element value="@@users-listing"/>
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="view" to="(selected layout)"/>

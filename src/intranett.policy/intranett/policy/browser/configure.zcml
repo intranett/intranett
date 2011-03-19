@@ -11,17 +11,17 @@
 
   <include package=".portlets" />
 
-  <!-- Employee listing -->
+  <!-- Users listing -->
   <browser:page
       for="intranett.policy.content.membersfolder.MembersFolder"
-      name="employee-listing"
-      class=".employeelisting.EmployeeListingView"
-      template="templates/employeelisting_view.pt"
+      name="users-listing"
+      class=".userslisting.UsersListingView"
+      template="templates/userslisting_view.pt"
       permission="zope2.View"
       />
 
   <cache:ruleset
-      for=".employeelisting.EmployeeListingView"
+      for=".userslisting.UsersListingView"
       ruleset="plone.content.folderView"
       />
 
