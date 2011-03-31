@@ -3,7 +3,7 @@ import os
 import sys
 import imaplib
 import email
-import time 
+import time
 logger = logging.getLogger()
 
 
@@ -11,11 +11,11 @@ def create_site(app, args):
     # Display all messages on stderr
     logger.setLevel(logging.INFO)
     logger.handlers[0].setLevel(logging.INFO)
-    
+
     force = '--force' in args or '-f' in args
     from Products.CMFPlone.Portal import PloneSite
     existing = [p.getId() for p in app.values() if isinstance(p, PloneSite)]
-    
+
     root_arg = [a for a in args if a.startswith('--rootpassword')]
     if any(root_arg):
         password = root_arg[0].split('=')[1].strip()
@@ -24,7 +24,7 @@ def create_site(app, args):
         if not users:
             # Non-PAS folder from a fresh database
             app.acl_users._doAddUser('admin', password, ['Manager'], [])
-    
+
     if any(existing):
         if not force:
             logger.error('Plone site already exists.')
@@ -34,23 +34,23 @@ def create_site(app, args):
                 del app[id_]
             app._p_jar.db().cacheMinimize()
             logger.info('Removed existing Plone site.')
-    
+
     from Testing import makerequest
     root = makerequest.makerequest(app)
     request = root.REQUEST
-    
+
     title = os.environ.get('INTRANETT_DOMAIN', 'intranett.no')
     title_arg = [a for a in args if a.startswith('--title')]
     if any(title_arg):
         targ = title_arg[0].split('=')[1].strip()
         if targ:
             title = targ
-    
+
     language = 'no'
     lang_arg = [a for a in args if a.startswith('--language')]
     if any(lang_arg):
         language = lang_arg[0].split('=')[1].strip()
-    
+
     request.form = {
         'extension_ids': ('intranett.policy:default', ),
         'form.submitted': True,
@@ -73,16 +73,16 @@ def upgrade(app, args):
     # Make app.REQUEST available
     from Testing import makerequest
     root = makerequest.makerequest(app)
-    
+
     from Products.CMFPlone.Portal import PloneSite
     site_ids = [p.getId() for p in root.values() if isinstance(p, PloneSite)]
     site_id = site_ids[0]
-    
+
     site = root.get(site_ids[0], None)
     if site is None:
         logger.error("No site called `%s` found in the database." % site_id)
         sys.exit(1)
-    
+
     # Login as admin
     from AccessControl.SecurityManagement import newSecurityManager
     admin = root.acl_users.getUserById('admin')
@@ -90,28 +90,28 @@ def upgrade(app, args):
         logger.error("No user called `admin` found in the database.")
         sys.exit(1)
     newSecurityManager(None, admin)
-    
+
     # Set up local site manager
     from zope.site.hooks import setHooks
     from zope.site.hooks import setSite
     setHooks()
     setSite(site)
     setup = site.portal_setup
-    
+
     import transaction
     from intranett.policy.config import config
-    
+
     logger.info("Starting the upgrade.\n\n")
     config.run_all_upgrades(setup)
     logger.info("Ran upgrade steps.")
-    
+
     # Recook resources, as some CSS/JS/KSS files might have changed.
     # TODO: We could try to determine if this is needed in some way
     site.portal_javascripts.cookResources()
     site.portal_css.cookResources()
     site.portal_kss.cookResources()
     logger.info("Resources recooked.")
-    
+
     transaction.get().note('Upgraded profiles and recooked resources.')
     transaction.get().commit()
     sys.exit(0)
@@ -159,11 +159,11 @@ def walk_parts(msgnum,msg,folder,date=None,count=0,addr=None):
         if not data:
             print "Could not decode attachment %s for %s" % (part.get_content_type(), filename)
             continue
-		
+
         if type(data) is type(msg):
             count = walk_parts(msgnum,data,folder, addr=addr, date=date, count=count )
             continue
-		
+
         idx = folder.invokeFactory("File",id=filename)
         f = folder[idx].getFile()
         f.setFilename(filename)
@@ -184,16 +184,16 @@ def download_email(app,args):
     # Make app.REQUEST available
     from Testing import makerequest
     root = makerequest.makerequest(app)
-    
+
     from Products.CMFPlone.Portal import PloneSite
     site_ids = [p.getId() for p in root.values() if isinstance(p, PloneSite)]
     site_id = site_ids[0]
-    
+
     site = root.get(site_ids[0], None)
     if site is None:
         logger.error("No site called `%s` found in the database." % site_id)
         sys.exit(1)
-    
+
     # Login as admin
     from AccessControl.SecurityManagement import newSecurityManager
     admin = root.acl_users.getUserById('admin')
@@ -201,7 +201,7 @@ def download_email(app,args):
         logger.error("No user called `admin` found in the database.")
         sys.exit(1)
     newSecurityManager(None, admin)
-    
+
     # Set up local site manager
     from zope.site.hooks import setHooks
     from zope.site.hooks import setSite
