@@ -4,6 +4,9 @@ Changelog
 1.2.1 - unreleased
 ------------------
 
+- Added new rapidssl certificate.
+  [martior]
+
 - Optimize Gzip compression settings for HTML content.
   [hannosch]
 
