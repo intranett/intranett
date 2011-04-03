@@ -140,6 +140,7 @@ def full_update():
         time.sleep(30)
         run('bin/supervisorctl start varnish')
         run('bin/supervisorctl status')
+    reload_nginx()
 
 
 def update_nginx():
