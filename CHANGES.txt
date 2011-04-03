@@ -4,6 +4,8 @@ Changelog
 1.2.2 - unreleased
 ------------------
 
+- Correct buildout's `allow-hosts` restriction.
+  [hannosch]
 
 1.2.1 - 2011-04-03
 ------------------
