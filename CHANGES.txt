@@ -4,6 +4,8 @@ Changelog
 1.2.3 - unreleased
 ------------------
 
+- Don't rely on dist.plone.org.
+  [hannosch]
 
 1.2.2 - 2011-04-03
 ------------------
