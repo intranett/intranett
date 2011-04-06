@@ -36,8 +36,7 @@ def create_site(app, args):
             app.acl_users._doAddUser('admin', options.rootpassword,
                 ['Manager'], [])
 
-    from Products.CMFPlone.Portal import PloneSite
-    existing = [p.getId() for p in app.values() if isinstance(p, PloneSite)]
+    existing = app.objectIds('Plone Site')
     if existing:
         if not options.force:
             logger.error('Plone site already exists. '
@@ -46,8 +45,8 @@ def create_site(app, args):
         else:
             for id_ in existing:
                 del app[id_]
+                logger.info('Removed existing Plone site %r.' % id_)
             app._p_jar.db().cacheMinimize()
-            logger.info('Removed existing Plone site.')
 
     from Testing import makerequest
     root = makerequest.makerequest(app)
@@ -87,13 +86,10 @@ def upgrade(app, args):
     from Testing import makerequest
     root = makerequest.makerequest(app)
 
-    from Products.CMFPlone.Portal import PloneSite
-    site_ids = [p.getId() for p in root.values() if isinstance(p, PloneSite)]
-    site_id = site_ids[0]
-
-    site = root.get(site_ids[0], None)
+    existing = app.objectValues('Plone Site')
+    site = existing and existing[0] or None
     if site is None:
-        logger.error("No site called `%s` found in the database." % site_id)
+        logger.error("No Plone site found in the database.")
         sys.exit(1)
 
     # Login as admin
@@ -198,13 +194,10 @@ def download_email(app,args):
     from Testing import makerequest
     root = makerequest.makerequest(app)
 
-    from Products.CMFPlone.Portal import PloneSite
-    site_ids = [p.getId() for p in root.values() if isinstance(p, PloneSite)]
-    site_id = site_ids[0]
-
-    site = root.get(site_ids[0], None)
+    existing = app.objectValues('Plone Site')
+    site = existing and existing[0] or None
     if site is None:
-        logger.error("No site called `%s` found in the database." % site_id)
+        logger.error("No Plone site found in the database.")
         sys.exit(1)
 
     # Login as admin
