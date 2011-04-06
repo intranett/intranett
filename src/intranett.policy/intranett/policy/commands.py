@@ -4,6 +4,9 @@ import sys
 import imaplib
 import email
 import time
+from optparse import OptionParser
+
+
 logger = logging.getLogger()
 
 
@@ -12,22 +15,33 @@ def create_site(app, args):
     logger.setLevel(logging.INFO)
     logger.handlers[0].setLevel(logging.INFO)
 
-    force = '--force' in args or '-f' in args
-    from Products.CMFPlone.Portal import PloneSite
-    existing = [p.getId() for p in app.values() if isinstance(p, PloneSite)]
+    parser = OptionParser()
+    parser.add_option('-f', '--force', action='store_true', default=False,
+        help='Force creation of a site when one already exists.')
+    parser.add_option('-r', '--rootpassword', default=None,
+        help='Create a admin user in the Zope root with the given password.')
+    parser.add_option('-t', '--title',
+        default=os.environ.get('INTRANETT_DOMAIN', 'intranett.no'),
+        help='The title for the new site. The default can also be set with '
+            'the INTRANETT_DOMAIN environment variable. [default: "%default"]')
+    parser.add_option('-l', '--language', default='no',
+        help='The language used in the new site. [default: "%default"]')
+    (options, args) = parser.parse_args(args=args)
 
-    root_arg = [a for a in args if a.startswith('--rootpassword')]
-    if any(root_arg):
-        password = root_arg[0].split('=')[1].strip()
+    if options.rootpassword:
         acl = app.acl_users
         users = getattr(acl, 'users', None)
         if not users:
             # Non-PAS folder from a fresh database
-            app.acl_users._doAddUser('admin', password, ['Manager'], [])
+            app.acl_users._doAddUser('admin', options.rootpassword,
+                ['Manager'], [])
 
-    if any(existing):
-        if not force:
-            logger.error('Plone site already exists.')
+    from Products.CMFPlone.Portal import PloneSite
+    existing = [p.getId() for p in app.values() if isinstance(p, PloneSite)]
+    if existing:
+        if not options.force:
+            logger.error('Plone site already exists. '
+                'Use --force to replace it.')
             sys.exit(1)
         else:
             for id_ in existing:
@@ -43,29 +57,18 @@ def create_site(app, args):
     from AccessControl.SecurityManagement import newSecurityManager
     admin = root.acl_users.getUserById('admin')
     if admin is None:
-        logger.error("No user called `admin` found in the database.")
+        logger.error("No user called `admin` found in the database. "
+            "Use --rootpassword to create one.")
         sys.exit(1)
 
     admin = admin.__of__(root.acl_users)
     newSecurityManager(None, admin)
 
-    title = os.environ.get('INTRANETT_DOMAIN', 'intranett.no')
-    title_arg = [a for a in args if a.startswith('--title')]
-    if any(title_arg):
-        targ = title_arg[0].split('=')[1].strip()
-        if targ:
-            title = targ
-
-    language = 'no'
-    lang_arg = [a for a in args if a.startswith('--language')]
-    if any(lang_arg):
-        language = lang_arg[0].split('=')[1].strip()
-
     request.form = {
         'extension_ids': ('intranett.policy:default', ),
         'form.submitted': True,
-        'title': title,
-        'language': language,
+        'title': options.title,
+        'language': options.language,
     }
     from intranett.policy.browser.admin import AddIntranettSite
     addsite = AddIntranettSite(root, request)
