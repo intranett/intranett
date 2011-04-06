@@ -39,6 +39,14 @@ def create_site(app, args):
     root = makerequest.makerequest(app)
     request = root.REQUEST
 
+    # Login as admin
+    from AccessControl.SecurityManagement import newSecurityManager
+    admin = root.acl_users.getUserById('admin')
+    if admin is None:
+        logger.error("No user called `admin` found in the database.")
+        sys.exit(1)
+    newSecurityManager(None, admin)
+
     title = os.environ.get('INTRANETT_DOMAIN', 'intranett.no')
     title_arg = [a for a in args if a.startswith('--title')]
     if any(title_arg):
