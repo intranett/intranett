@@ -45,6 +45,8 @@ def create_site(app, args):
     if admin is None:
         logger.error("No user called `admin` found in the database.")
         sys.exit(1)
+
+    admin = admin.__of__(root.acl_users)
     newSecurityManager(None, admin)
 
     title = os.environ.get('INTRANETT_DOMAIN', 'intranett.no')
