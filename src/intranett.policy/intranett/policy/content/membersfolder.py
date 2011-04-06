@@ -5,8 +5,8 @@ from Products.ATContentTypes.content.folder import ATFolder
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from zope.component import adapter
-from zope.component import getUtility
 from zope.component import getSiteManager
+from zope.component import queryUtility
 from zope.interface import implements
 from zope.lifecycleevent import IObjectMovedEvent
 from zope.lifecycleevent import IObjectAddedEvent
@@ -39,7 +39,7 @@ registerATCT(MembersFolder, PROJECTNAME)
 
 @adapter(IMembersFolder, IObjectInitializedEvent)
 def registerMembersFolderId(ob, event):
-    portal = getUtility(ISiteRoot)
+    portal = queryUtility(ISiteRoot)
     sm = getSiteManager(portal)
     sm.unregisterUtility(ob.id, IMembersFolderId)
     sm.registerUtility(ob.id, IMembersFolderId)
@@ -52,9 +52,10 @@ def registerMembersFolderId(ob, event):
 
 @adapter(IMembersFolder, IObjectWillBeRemovedEvent)
 def unregisterMembersFolderId(ob, event):
-    portal = getUtility(ISiteRoot)
-    sm = getSiteManager(portal)
-    sm.unregisterUtility(ob.id, IMembersFolderId)
+    portal = queryUtility(ISiteRoot)
+    if portal is not None:
+        sm = getSiteManager(portal)
+        sm.unregisterUtility(ob.id, IMembersFolderId)
 
 
 @adapter(IMembersFolder, IObjectMovedEvent)
