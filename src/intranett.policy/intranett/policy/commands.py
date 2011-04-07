@@ -16,6 +16,36 @@ from zope.site.hooks import setSite
 logger = logging.getLogger()
 
 
+def _setup(app, site=None):
+    """Set up our environment.
+
+    Create a request, log in as admin and set the traversal hooks on the site.
+
+    """
+    root = makerequest.makerequest(app)
+
+    # Login as admin
+    admin = root.acl_users.getUserById('admin')
+    if admin is None:
+        logger.error("No user called `admin` found in the database. "
+            "Use --rootpassword to create one.")
+        sys.exit(1)
+
+    # Wrap the admin in the right context; from inside the site if we have one
+    if site is not None:
+        admin = admin.__of__(site.acl_users)
+    else:
+        admin = admin.__of__(root.acl_users)
+    newSecurityManager(None, admin)
+
+    # Set up local site manager
+    if site is not None:
+        setHooks()
+        setSite(site)
+
+    return root
+
+
 def create_site(app, args):
     # Display all messages on stderr
     logger.setLevel(logging.INFO)
@@ -54,19 +84,9 @@ def create_site(app, args):
                 logger.info('Removed existing Plone site %r.' % id_)
             app._p_jar.db().cacheMinimize()
 
-    root = makerequest.makerequest(app)
+    root = _setup(app)
+
     request = root.REQUEST
-
-    # Login as admin
-    admin = root.acl_users.getUserById('admin')
-    if admin is None:
-        logger.error("No user called `admin` found in the database. "
-            "Use --rootpassword to create one.")
-        sys.exit(1)
-
-    admin = admin.__of__(root.acl_users)
-    newSecurityManager(None, admin)
-
     request.form = {
         'extension_ids': ('intranett.policy:default', ),
         'form.submitted': True,
@@ -85,8 +105,6 @@ def upgrade(app, args):
     # Display all messages on stderr
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
-    # Make app.REQUEST available
-    root = makerequest.makerequest(app)
 
     existing = app.objectValues('Plone Site')
     site = existing and existing[0] or None
@@ -94,21 +112,12 @@ def upgrade(app, args):
         logger.error("No Plone site found in the database.")
         sys.exit(1)
 
-    # Login as admin
-    admin = root.acl_users.getUserById('admin')
-    if admin is None:
-        logger.error("No user called `admin` found in the database.")
-        sys.exit(1)
-    newSecurityManager(None, admin)
-
-    # Set up local site manager
-    setHooks()
-    setSite(site)
-    setup = site.portal_setup
+    _setup(app, site)
 
     from intranett.policy.config import config
 
     logger.info("Starting the upgrade.\n\n")
+    setup = site.portal_setup
     config.run_all_upgrades(setup)
     logger.info("Ran upgrade steps.")
 
@@ -188,8 +197,6 @@ def walk_parts(msgnum,msg,folder,date=None,count=0,addr=None):
 def download_email(app,args):
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
-    # Make app.REQUEST available
-    root = makerequest.makerequest(app)
 
     existing = app.objectValues('Plone Site')
     site = existing and existing[0] or None
@@ -197,16 +204,8 @@ def download_email(app,args):
         logger.error("No Plone site found in the database.")
         sys.exit(1)
 
-    # Login as admin
-    admin = root.acl_users.getUserById('admin')
-    if admin is None:
-        logger.error("No user called `admin` found in the database.")
-        sys.exit(1)
-    newSecurityManager(None, admin)
+    _setup(app, site)
 
-    # Set up local site manager
-    setHooks()
-    setSite(site)
     if not "dropbox" in site.keys():
         print "no dropbox"
         return
