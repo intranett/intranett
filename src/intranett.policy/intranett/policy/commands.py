@@ -6,6 +6,12 @@ import email
 import time
 from optparse import OptionParser
 
+import transaction
+from AccessControl.SecurityManagement import newSecurityManager
+from Testing import makerequest
+from zope.site.hooks import setHooks
+from zope.site.hooks import setSite
+
 
 logger = logging.getLogger()
 
@@ -48,12 +54,10 @@ def create_site(app, args):
                 logger.info('Removed existing Plone site %r.' % id_)
             app._p_jar.db().cacheMinimize()
 
-    from Testing import makerequest
     root = makerequest.makerequest(app)
     request = root.REQUEST
 
     # Login as admin
-    from AccessControl.SecurityManagement import newSecurityManager
     admin = root.acl_users.getUserById('admin')
     if admin is None:
         logger.error("No user called `admin` found in the database. "
@@ -72,7 +76,6 @@ def create_site(app, args):
     from intranett.policy.browser.admin import AddIntranettSite
     addsite = AddIntranettSite(root, request)
     addsite()
-    import transaction
     transaction.get().note('Added new Plone site.')
     transaction.get().commit()
     logger.info('Added new Plone site.')
@@ -83,7 +86,6 @@ def upgrade(app, args):
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
     # Make app.REQUEST available
-    from Testing import makerequest
     root = makerequest.makerequest(app)
 
     existing = app.objectValues('Plone Site')
@@ -93,7 +95,6 @@ def upgrade(app, args):
         sys.exit(1)
 
     # Login as admin
-    from AccessControl.SecurityManagement import newSecurityManager
     admin = root.acl_users.getUserById('admin')
     if admin is None:
         logger.error("No user called `admin` found in the database.")
@@ -101,13 +102,10 @@ def upgrade(app, args):
     newSecurityManager(None, admin)
 
     # Set up local site manager
-    from zope.site.hooks import setHooks
-    from zope.site.hooks import setSite
     setHooks()
     setSite(site)
     setup = site.portal_setup
 
-    import transaction
     from intranett.policy.config import config
 
     logger.info("Starting the upgrade.\n\n")
@@ -191,7 +189,6 @@ def download_email(app,args):
     logger.setLevel(logging.DEBUG)
     logger.handlers[0].setLevel(logging.DEBUG)
     # Make app.REQUEST available
-    from Testing import makerequest
     root = makerequest.makerequest(app)
 
     existing = app.objectValues('Plone Site')
@@ -201,7 +198,6 @@ def download_email(app,args):
         sys.exit(1)
 
     # Login as admin
-    from AccessControl.SecurityManagement import newSecurityManager
     admin = root.acl_users.getUserById('admin')
     if admin is None:
         logger.error("No user called `admin` found in the database.")
@@ -209,8 +205,6 @@ def download_email(app,args):
     newSecurityManager(None, admin)
 
     # Set up local site manager
-    from zope.site.hooks import setHooks
-    from zope.site.hooks import setSite
     setHooks()
     setSite(site)
     if not "dropbox" in site.keys():
@@ -223,7 +217,6 @@ def download_email(app,args):
     imap.login("printer@jarn.com","54+Ov@RG")
     imap.select("INBOX")
     typ, data = imap.search(None, '(TO "jarn-intranett@intranett.no")')
-    import transaction
     for num in data[0].split():
         typ, data = imap.fetch(num, '(RFC822)')
         walk_parts(num,email.message_from_string(data[0][1]),dropbox)
