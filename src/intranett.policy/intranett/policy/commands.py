@@ -8,7 +8,6 @@ from optparse import OptionParser
 
 import transaction
 from AccessControl.SecurityManagement import newSecurityManager
-from Testing import makerequest
 from zope.site.hooks import setHooks
 from zope.site.hooks import setSite
 
@@ -22,6 +21,7 @@ def _setup(app, site=None):
     Create a request, log in as admin and set the traversal hooks on the site.
 
     """
+    from Testing import makerequest # Do not import this at the module level!
     root = makerequest.makerequest(app)
 
     # Login as admin
