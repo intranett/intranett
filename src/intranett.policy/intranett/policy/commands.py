@@ -158,11 +158,11 @@ def walk_parts(msgnum,msg,folder,date=None,count=0,addr=None):
         else:
             attachment,filename = None,None
             for key,val in dtypes:
-				key = key.lower()
-				if key == 'filename':
-					filename = val
-				if key == 'attachment':
-					attachment = 1
+                key = key.lower()
+                if key == 'filename':
+                    filename = val
+                if key == 'attachment':
+                    attachment = 1
             if not attachment:
                 continue
             print filename
@@ -192,7 +192,7 @@ def walk_parts(msgnum,msg,folder,date=None,count=0,addr=None):
         blobfile.close()
         count += 1
         print count
-	return count
+    return count
 
 def download_email(app,args):
     logger.setLevel(logging.DEBUG)
