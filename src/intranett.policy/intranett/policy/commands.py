@@ -22,10 +22,10 @@ def _setup(app, site=None):
 
     """
     from Testing import makerequest # Do not import this at the module level!
-    root = makerequest.makerequest(app)
+    app = makerequest.makerequest(app)
 
     # Login as admin
-    admin = root.acl_users.getUserById('admin')
+    admin = app.acl_users.getUserById('admin')
     if admin is None:
         logger.error("No user called `admin` found in the database. "
             "Use --rootpassword to create one.")
@@ -34,8 +34,9 @@ def _setup(app, site=None):
     # Wrap the admin in the right context; from inside the site if we have one
     if site is not None:
         admin = admin.__of__(site.acl_users)
+        site = app[site.getId()]
     else:
-        admin = admin.__of__(root.acl_users)
+        admin = admin.__of__(app.acl_users)
     newSecurityManager(None, admin)
 
     # Set up local site manager
@@ -43,7 +44,7 @@ def _setup(app, site=None):
         setHooks()
         setSite(site)
 
-    return root
+    return (app, site)
 
 
 def create_site(app, args):
@@ -84,9 +85,9 @@ def create_site(app, args):
                 logger.info('Removed existing Plone site %r.' % id_)
             app._p_jar.db().cacheMinimize()
 
-    root = _setup(app)
+    app, _ = _setup(app)
 
-    request = root.REQUEST
+    request = app.REQUEST
     request.form = {
         'extension_ids': ('intranett.policy:default', ),
         'form.submitted': True,
@@ -94,7 +95,7 @@ def create_site(app, args):
         'language': options.language,
     }
     from intranett.policy.browser.admin import AddIntranettSite
-    addsite = AddIntranettSite(root, request)
+    addsite = AddIntranettSite(app, request)
     addsite()
     transaction.get().note('Added new Plone site.')
     transaction.get().commit()
@@ -112,7 +113,7 @@ def upgrade(app, args):
         logger.error("No Plone site found in the database.")
         sys.exit(1)
 
-    _setup(app, site)
+    _, site = _setup(app, site)
 
     from intranett.policy.config import config
 
@@ -204,7 +205,7 @@ def download_email(app,args):
         logger.error("No Plone site found in the database.")
         sys.exit(1)
 
-    _setup(app, site)
+    _, site = _setup(app, site)
 
     if not "dropbox" in site.keys():
         print "no dropbox"
