@@ -4,6 +4,9 @@ Changelog
 1.2.3 - unreleased
 ------------------
 
+- Update to HAProxy 1.4.15.
+  [hannosch]
+
 - Don't rely on dist.plone.org.
   [hannosch]
 
