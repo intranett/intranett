@@ -4,6 +4,9 @@ Changelog
 1.2.3 - unreleased
 ------------------
 
+- Don't redirect to an error page if no Zope backend is available. Closes #198.
+  [hannosch]
+
 - Update to HAProxy 1.4.15.
   [hannosch]
 
