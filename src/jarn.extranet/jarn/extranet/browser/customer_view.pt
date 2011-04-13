@@ -11,7 +11,7 @@
     <metal:content-core define-macro="content-core">
 
         <div style="float:right">
-            <img tal:replace="structure here/getLogo" />
+            <img tal:replace="structure python:context.getLogo().tag()" />
         </div>
 
         <div>
