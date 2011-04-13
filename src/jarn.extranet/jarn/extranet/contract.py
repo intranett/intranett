@@ -176,6 +176,8 @@ class Contract(ATFolder):
         for member in membertool.listMembers():
             member_id = member.getId()
             fullname = member.getProperty('fullname')
+            if not isinstance(fullname, unicode):
+                fullname = unicode(fullname, 'utf-8', 'ignore')
             result.append((member_id, fullname and fullname or member_id))
         def _key(value):
             return value[1]
