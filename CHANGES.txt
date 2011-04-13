@@ -4,6 +4,10 @@ Changelog
 1.2.3 - unreleased
 ------------------
 
+- Add caching headers to under_construction image on error pages and specify
+  image dimensions.
+  [hannosch]
+
 - Don't redirect to an error page if no Zope backend is available. Closes #198.
   [hannosch]
 
