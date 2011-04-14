@@ -1,9 +1,6 @@
 import logging
 import os
 import sys
-import imaplib
-import email
-import time
 from optparse import OptionParser
 
 import transaction
@@ -132,94 +129,3 @@ def upgrade(app, args):
     transaction.get().note('Upgraded profiles and recooked resources.')
     transaction.get().commit()
     sys.exit(0)
-
-
-def walk_parts(msgnum,msg,folder,date=None,count=0,addr=None):
-    if date==None:
-        date = msg['Date'] or 'Thu, 18 Sep 2006 12:02:27 +1000'
-        date = time.strftime('%Y_%m_%d.%T', email.Utils.parsedate(date))
-    if addr==None:
-        addr = email.Utils.parseaddr(msg['From'])[1]
-    for part in msg.walk():
-        if part.is_multipart():
-            continue
-        dtypes = part.get_params(None, 'Content-Disposition')
-        if not dtypes:
-            if part.get_content_type() == 'text/plain':
-                continue
-            ctypes = part.get_params()
-            if not ctypes:
-                continue
-            for key,val in ctypes:
-                if key.lower() == 'name':
-                    filename = val
-                    break
-            else:
-                continue
-        else:
-            attachment,filename = None,None
-            for key,val in dtypes:
-                key = key.lower()
-                if key == 'filename':
-                    filename = val
-                if key == 'attachment':
-                    attachment = 1
-            if not attachment:
-                continue
-            print filename
-        try:
-            data = part.get_payload(decode=1)
-        except:
-            typ, val = sys.exc_info()[:2]
-            print "Message %s attachment decode error: %s for %s ``%s''" % (msgnum, str(val), part.get_content_type(), filename)
-            continue
-        if not data:
-            print "Could not decode attachment %s for %s" % (part.get_content_type(), filename)
-            continue
-
-        if type(data) is type(msg):
-            count = walk_parts(msgnum,data,folder, addr=addr, date=date, count=count )
-            continue
-
-        idx = folder.invokeFactory("File",id=filename)
-        f = folder[idx].getFile()
-        f.setFilename(filename)
-        f.setTitle(filename)
-        f.setContentType(part.get_content_type())
-        f.setDescription("Recieved on email on %s from %s"%(date,addr))
-        blob = f.getBlob()
-        blobfile = blob.open("w")
-        blobfile.writelines(data)
-        blobfile.close()
-        count += 1
-        print count
-    return count
-
-def download_email(app,args):
-    logger.setLevel(logging.DEBUG)
-    logger.handlers[0].setLevel(logging.DEBUG)
-
-    existing = app.objectValues('Plone Site')
-    site = existing and existing[0] or None
-    if site is None:
-        logger.error("No Plone site found in the database.")
-        sys.exit(1)
-
-    _, site = _setup(app, site)
-
-    if not "dropbox" in site.keys():
-        print "no dropbox"
-        return
-    dropbox = site["dropbox"]
-    if not dropbox.portal_type=="Folder":
-        return
-    imap = imaplib.IMAP4_SSL("imap.gmail.com")
-    imap.login("printer@jarn.com","54+Ov@RG")
-    imap.select("INBOX")
-    typ, data = imap.search(None, '(TO "jarn-intranett@intranett.no")')
-    for num in data[0].split():
-        typ, data = imap.fetch(num, '(RFC822)')
-        walk_parts(num,email.message_from_string(data[0][1]),dropbox)
-        imap.store(num, "+FLAGS.SILENT", '(\\Deleted)')
-        transaction.get().note('Downloaded attachements from emails.')
-        transaction.get().commit()
