@@ -14,6 +14,9 @@ Changelog
 - Update to HAProxy 1.4.15.
   [hannosch]
 
+- Sanitize and unbreak create_site and upgrade scripts.
+  [MJ, hannosch]
+
 - Don't rely on dist.plone.org.
   [hannosch]
 
