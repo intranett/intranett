@@ -143,6 +143,12 @@ def full_update():
     reload_nginx()
 
 
+def update_haproxy():
+    _prepare_update(newest=False)
+    with cd(VENV):
+        run('bin/supervisorctl restart haproxy')
+
+
 def update_nginx():
     _prepare_update(newest=False)
     reload_nginx()
