@@ -144,18 +144,18 @@ def full_update():
 
 
 def update_haproxy():
-    _prepare_update(newest=False)
+    _prepare_update(newest=False, backup=False)
     with cd(VENV):
         run('bin/supervisorctl restart haproxy')
 
 
 def update_nginx():
-    _prepare_update(newest=False)
+    _prepare_update(newest=False, backup=False)
     reload_nginx()
 
 
 def update_varnish():
-    _prepare_update(newest=False)
+    _prepare_update(newest=False, backup=False)
     with cd(VENV):
         run('bin/supervisorctl restart varnish')
 
@@ -296,9 +296,10 @@ def _latest_git_tag():
     return tags[-1][1]
 
 
-def _prepare_update(newest=True):
+def _prepare_update(newest=True, backup=True):
     envvars = _set_environment_vars()
-    dump_db()
+    if backup:
+        dump_db()
     _git_update()
     _buildout(envvars=envvars, newest=newest)
 
