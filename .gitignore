@@ -6,8 +6,6 @@ downloads
 eggs
 etc/haproxy.cfg
 etc/logrotate.conf
-etc/munin-node.conf
-etc/plugins/
 etc/supervisord.conf
 etc/varnish.vcl
 include
