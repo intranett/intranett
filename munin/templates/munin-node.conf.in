@@ -1,7 +1,3 @@
-#
-# Example config-file for munin-node
-#
-
 log_level 4
 log_file ${buildout:directory}/var/log/munin/munin-node.log
 pid_file ${buildout:directory}/var/run/munin/munin-node.pid
@@ -17,11 +13,6 @@ ignore_file %$
 ignore_file \.dpkg-(tmp|new|old|dist)$
 ignore_file \.rpm(save|new)$
 ignore_file \.pod$
-
-# Set this if the client doesn't report the correct hostname when
-# telnetting to localhost, port 4949
-#
-#host_name Crow
 
 # A list of addresses that are allowed to connect.  This must be a
 # regular expression, due to brain damage in Net::Server, which
