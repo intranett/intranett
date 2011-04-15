@@ -130,6 +130,7 @@ def full_update():
     with cd(VENV):
         run('bin/supervisorctl shutdown')
     _prepare_update()
+    update_munin(git_update=False)
     with cd(VENV):
         time.sleep(5)
         run('bin/supervisord')
@@ -150,9 +151,10 @@ def update_haproxy():
         run('bin/supervisorctl restart haproxy')
 
 
-def update_munin():
+def update_munin(git_update=True):
     envvars = _set_environment_vars()
-    _git_update()
+    if git_update:
+        _git_update()
     with cd(MUNIN_HOME):
         with settings(hide('warnings'), warn_only=True):
             run('bin/supervisorctl shutdown')
