@@ -237,8 +237,6 @@ def _buildout_munin(envvars):
     ploneid = envvars['ploneid']
     with cd(MUNIN_HOME):
         run('../bin/python2.6 ../bootstrap.py -d')
-        with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-            run('mkdir downloads')
         run('{x1}; {x2}; {x3}; bin/buildout -t 5'.format(
             x1=front, x2=domain,x3=ploneid))
 
