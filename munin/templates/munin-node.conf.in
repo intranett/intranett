@@ -1,6 +1,6 @@
 log_level 4
-log_file ${buildout:directory}/var/log/munin/munin-node.log
-pid_file ${buildout:directory}/var/run/munin/munin-node.pid
+log_file ${buildout:directory}/var/log/munin-node.log
+pid_file ${buildout:directory}/var/munin-node.pid
 
 user ${munin-build-conf:user}
 group ${munin-build-conf:group}
