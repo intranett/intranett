@@ -192,9 +192,11 @@ def init_server():
     # local nginx-sites one
     reload_nginx()
     with cd(VENV):
-        run('bin/supervisord')
+        with settings(hide('warnings'), warn_only=True):
+            run('bin/supervisord')
     with cd(MUNIN_HOME):
-        run('bin/supervisord')
+        with settings(hide('warnings'), warn_only=True):
+            run('bin/supervisord')
 
 
 def reset_server():
