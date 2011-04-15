@@ -64,7 +64,7 @@ LOGDIR     = ${buildout:directory}/var/log/munin
 
 # Location of PID files and other statefiles. On the server, must be
 # writable by the user "munin".
-STATEDIR   = ${buildout:directory}/var/run/munin
+STATEDIR   = ${buildout:directory}/var
 
 # The perl interpreter to use
 PERL       := ${munin-download:perl}
