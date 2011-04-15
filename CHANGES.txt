@@ -4,7 +4,7 @@ Changelog
 1.2.4 - unreleased
 ------------------
 
-- Split out munin into its own buildout.
+- Split out munin into its own buildout. Closes #201.
   [hannosch]
 
 1.2.3 - 2011-04-14
