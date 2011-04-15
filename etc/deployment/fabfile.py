@@ -154,7 +154,8 @@ def update_munin():
     envvars = _set_environment_vars()
     _git_update()
     with cd(MUNIN_HOME):
-        run('bin/supervisorctl shutdown')
+        with settings(hide('warnings'), warn_only=True):
+            run('bin/supervisorctl shutdown')
         _buildout_munin(envvars=envvars)
         run('bin/supervisord')
 
@@ -235,7 +236,7 @@ def _buildout_munin(envvars):
     front = envvars['front']
     ploneid = envvars['ploneid']
     with cd(MUNIN_HOME):
-        run('bin/python2.6 bootstrap.py -d')
+        run('../bin/python2.6 ../bootstrap.py -d')
         with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
             run('mkdir downloads')
         run('{x1}; {x2}; {x3}; bin/buildout -t 5'.format(
