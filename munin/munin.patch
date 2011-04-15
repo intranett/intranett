@@ -1,9 +1,10 @@
-Index: /node/sbin/munin-node
-===================================================================
---- /node/sbin/munin-node (revision 3516)
-+++ /node/sbin/munin-node (revision 3929)
-@@ -100,5 +100,4 @@
+--- munin-node	2010-04-23 19:17:34.000000000 +0200
++++ munin-node	2011-04-15 13:49:53.000000000 +0200
+@@ -99,7 +99,6 @@
+     Munin::Node::Server->run(
         syslog_ident => 'munin-node',
         conf_file    => $conffile,
 -       pid_file     => "$Munin::Common::Defaults::MUNIN_STATEDIR/munin-node.pid"
      );
+ 
+     return 0;
