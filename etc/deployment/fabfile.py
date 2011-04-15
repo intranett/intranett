@@ -30,6 +30,7 @@ CRON_MAILTO = 'hosting@jarn.com'
 DISTRIBUTE_VERSION = '0.6.14'
 HOME = '/srv/jarn'
 VENV = '/srv/jarn'
+MUNIN_HOME = '/srv/jarn/munin'
 PIL_VERSION = '1.1.7-jarn1'
 PIL_LOCATION = 'http://dist.jarn.com/public/PIL-%s.zip' % PIL_VERSION
 
@@ -129,6 +130,7 @@ def full_update():
     with cd(VENV):
         run('bin/supervisorctl shutdown')
     _prepare_update()
+    update_munin(git_update=False)
     with cd(VENV):
         time.sleep(5)
         run('bin/supervisord')
@@ -147,6 +149,17 @@ def update_haproxy():
     _prepare_update(newest=False, backup=False)
     with cd(VENV):
         run('bin/supervisorctl restart haproxy')
+
+
+def update_munin(git_update=True):
+    envvars = _set_environment_vars()
+    with cd(MUNIN_HOME):
+        with settings(hide('warnings'), warn_only=True):
+            run('bin/supervisorctl shutdown')
+        if git_update:
+            _git_update()
+        _buildout_munin(envvars=envvars)
+        run('bin/supervisord')
 
 
 def update_nginx():
@@ -172,13 +185,18 @@ def init_server():
     is_git = _is_git_repository()
     _git_update(is_git=is_git)
     _buildout(envvars=envvars)
+    _buildout_munin(envvars=envvars)
     initial = not is_git
     _create_plone_site(initial=initial)
     # reload nginx so we pick up the new local/jarn.conf file and the buildout
     # local nginx-sites one
     reload_nginx()
     with cd(VENV):
-        run('bin/supervisord')
+        with settings(hide('warnings'), warn_only=True):
+            run('bin/supervisord')
+    with cd(MUNIN_HOME):
+        with settings(hide('warnings'), warn_only=True):
+            run('bin/supervisord')
 
 
 def reset_server():
@@ -215,6 +233,16 @@ def _buildout(envvars, newest=True):
         run('{x1}; {x2}; {x3}; bin/buildout -c {buildout} -t 5 {arg}'.format(
             x1=front, x2=domain,x3=ploneid, buildout=buildout_config, arg=arg))
         run('chmod 700 var/blobstorage')
+
+
+def _buildout_munin(envvars):
+    domain = envvars['domain']
+    front = envvars['front']
+    ploneid = envvars['ploneid']
+    with cd(MUNIN_HOME):
+        run('../bin/python2.6 ../bootstrap.py -d')
+        run('{x1}; {x2}; {x3}; bin/buildout -t 5'.format(
+            x1=front, x2=domain,x3=ploneid))
 
 
 def _create_plone_site(initial=False):

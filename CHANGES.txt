@@ -4,6 +4,8 @@ Changelog
 1.2.4 - unreleased
 ------------------
 
+- Split out munin into its own buildout.
+  [hannosch]
 
 1.2.3 - 2011-04-14
 ------------------

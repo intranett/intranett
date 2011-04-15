@@ -6,8 +6,6 @@ downloads
 eggs
 etc/haproxy.cfg
 etc/logrotate.conf
-etc/munin-node.conf
-etc/plugins/
 etc/supervisord.conf
 etc/varnish.vcl
 include
@@ -15,6 +13,9 @@ lib
 nginx-sites/jarn.conf
 parts
 htmlcov
+munin/etc/munin-node.conf
+munin/etc/plugins
+munin/etc/supervisord.conf
 src/*/*.egg-info
 src/collective.*
 src/plone.*
