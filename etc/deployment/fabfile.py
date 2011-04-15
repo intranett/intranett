@@ -153,11 +153,11 @@ def update_haproxy():
 
 def update_munin(git_update=True):
     envvars = _set_environment_vars()
-    if git_update:
-        _git_update()
     with cd(MUNIN_HOME):
         with settings(hide('warnings'), warn_only=True):
             run('bin/supervisorctl shutdown')
+        if git_update:
+            _git_update()
         _buildout_munin(envvars=envvars)
         run('bin/supervisord')
 
