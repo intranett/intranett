@@ -1,0 +1,9 @@
+Index: /node/sbin/munin-node
+===================================================================
+--- /node/sbin/munin-node (revision 3516)
++++ /node/sbin/munin-node (revision 3929)
+@@ -100,5 +100,4 @@
+        syslog_ident => 'munin-node',
+        conf_file    => $conffile,
+-       pid_file     => "$Munin::Common::Defaults::MUNIN_STATEDIR/munin-node.pid"
+     );
