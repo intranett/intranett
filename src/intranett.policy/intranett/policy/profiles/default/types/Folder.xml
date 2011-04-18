@@ -2,7 +2,10 @@
 <object name="Folder"
    meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="view_methods" purge="False">
-  <element value="folder_summary_view" remove="True"/>
+ <property name="view_methods" purge="True">
+  <element value="folder_full_view"/>
+  <element value="folder_tabular_view"/>
+  <element value="atct_album_view"/>
+  <element value="folder_listing"/>
  </property>
 </object>
