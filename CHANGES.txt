@@ -4,6 +4,9 @@ Changelog
 1.2.4 - unreleased
 ------------------
 
+- Update to Plone 4.0.5.
+  [hannosch]
+
 - Split out munin into its own buildout. Closes #201.
   [hannosch]
 
