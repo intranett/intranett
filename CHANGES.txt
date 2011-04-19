@@ -4,6 +4,10 @@ Changelog
 1.2.4 - unreleased
 ------------------
 
+- Change Varnish `default_ttl` to zero (from two minutes) to avoid caching
+  responses without cache control headers.
+  [hannosch]
+
 - Update to Plone 4.0.5.
   [hannosch]
 
