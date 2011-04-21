@@ -160,6 +160,7 @@ def update_munin(git_update=True):
             _git_update()
         _buildout_munin(envvars=envvars)
         run('bin/supervisord')
+        time.sleep(3)
         run('bin/supervisorctl status')
 
 
