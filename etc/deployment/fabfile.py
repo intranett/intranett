@@ -27,7 +27,7 @@ BUILDOUT_ROOT = os.path.abspath(
 LIVEBACKUPS = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups')
 
 CRON_MAILTO = 'hosting@jarn.com'
-DISTRIBUTE_VERSION = '0.6.14'
+DISTRIBUTE_VERSION = '0.6.15'
 HOME = '/srv/jarn'
 VENV = '/srv/jarn'
 MUNIN_HOME = '/srv/jarn/munin'
