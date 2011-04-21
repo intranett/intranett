@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.4 - unreleased
+1.2.4 - 2011-04-21
 ------------------
 
 - Change Varnish `default_ttl` to zero (from two minutes) to avoid caching
