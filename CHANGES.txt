@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Specify image dimensions for the edit-bar images.
+  [hannosch]
+
 - Increase cache max age for static assets to one week to follow `page speed`
   best practices.
   [hannosch]
