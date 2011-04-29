@@ -191,3 +191,9 @@ def install_users_folder(context):
 def enable_secure_cookies(context):
     acl = aq_get(context, 'acl_users')
     acl.session._updateProperty('secure', True)
+
+
+@upgrade_to(23)
+def update_strong_caching_maxage(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('plone.app.registry', ))

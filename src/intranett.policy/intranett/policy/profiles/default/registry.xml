@@ -58,7 +58,7 @@
     <value>False</value>
   </record>
   <record name="plone.app.caching.strongCaching.maxage">
-    <value>86400</value>
+    <value>604800</value>
   </record>
   <record name="plone.app.caching.strongCaching.ramCache">
     <value>False</value>

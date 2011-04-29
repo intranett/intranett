@@ -149,3 +149,9 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         portal = self.layer['portal']
         acl = aq_get(portal, 'acl_users')
         self.assertEqual(acl.session.getProperty('secure'), True)
+
+    def after_23(self):
+        from plone.registry.interfaces import IRegistry
+        registry = queryUtility(IRegistry)
+        key = 'plone.app.caching.strongCaching.maxage'
+        self.assertTrue(registry.get(key) >= 604800)

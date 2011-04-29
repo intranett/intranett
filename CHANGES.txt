@@ -4,6 +4,10 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Increase cache max age for static assets to one week to follow `page speed`
+  best practices.
+  [hannosch]
+
 - Optimize all image data sizes.
   [hannosch]
 
