@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Optimize all image data sizes.
+  [hannosch]
+
 - Update to distribute = 0.6.15.
   [hannosch]
 
