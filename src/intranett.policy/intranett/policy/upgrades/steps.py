@@ -197,3 +197,9 @@ def enable_secure_cookies(context):
 def update_strong_caching_maxage(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('plone.app.registry', ))
+
+
+@upgrade_to(24)
+def update_strong_caching_maxage2(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('plone.app.registry', ))

@@ -155,3 +155,9 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         registry = queryUtility(IRegistry)
         key = 'plone.app.caching.strongCaching.maxage'
         self.assertTrue(registry.get(key) >= 604800)
+
+    def after_24(self):
+        from plone.registry.interfaces import IRegistry
+        registry = queryUtility(IRegistry)
+        key = 'plone.app.caching.strongCaching.plone.resource.maxage'
+        self.assertTrue(registry.get(key) >= 604800)
