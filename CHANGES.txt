@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Hide the `change note` field and the `upload file` link in text fields.
+  [hannosch]
+
 - Reduce height of description field from five to three rows.
   [hannosch]
 

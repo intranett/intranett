@@ -1256,6 +1256,9 @@ form#periodform {
 div div.kupu-panels {
 	font-size: $smaller-size;
 }
+#cmfeditions_version_comment_block, .fieldUploadFile {
+	display: none;
+}
 
 /* @group Calendar styles */
 

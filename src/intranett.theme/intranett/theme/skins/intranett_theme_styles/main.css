@@ -1185,6 +1185,9 @@ form#periodform {
 div div.kupu-panels {
   font-size: 0.76em; }
 
+#cmfeditions_version_comment_block, .fieldUploadFile {
+  display: none; }
+
 /* @group Calendar styles */
 /* The main calendar widget.  DIV containing a table. */
 .calendar {
