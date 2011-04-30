@@ -13,7 +13,7 @@ Changelog
 - Reduce height of description field from five to three rows.
   [hannosch]
 
-- Hide the `Edit without visual editor` link.
+- Hide the `Edit without visual editor` link from text fields.
   [hannosch]
 
 - Specify image dimensions for the edit-bar images.
