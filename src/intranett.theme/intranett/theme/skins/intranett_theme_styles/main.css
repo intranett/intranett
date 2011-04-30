@@ -1131,7 +1131,9 @@ textarea#description {
   color: #000;
   padding: 2px;
   font-size: 1em;
-  line-height: 1.25; }
+  line-height: 1.25;
+  height: 3.5em; }
+
 .suppressVisualEditor {
   display: none; }
 

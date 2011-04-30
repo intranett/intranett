@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Reduce height of description field from five to three rows.
+  [hannosch]
+
 - Hide the `Edit without visual editor` link.
   [hannosch]
 
