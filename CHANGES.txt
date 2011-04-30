@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Increase the default height of text fields from 20 to about 40 lines.
+  [hannosch]
+
 - Hide the `change note` field and the `upload file` link in text fields.
   [hannosch]
 

@@ -1208,6 +1208,9 @@ textarea#description {
 .suppressVisualEditor {
 	display: none;
 }
+textarea.mce_editable {
+	height: 45em;
+}
 .fieldRequired {
 	color: #f44;
 	font-size:$smaller-size;
