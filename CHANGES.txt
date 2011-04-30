@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Hide the `Edit without visual editor` link.
+  [hannosch]
+
 - Specify image dimensions for the edit-bar images.
   [hannosch]
 

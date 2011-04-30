@@ -1204,6 +1204,9 @@ textarea#description {
     font-size: $base-size;
     line-height: 1.25;
 }
+.suppressVisualEditor {
+	display: none;
+}
 .fieldRequired {
 	color: #f44;
 	font-size:$smaller-size;

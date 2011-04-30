@@ -1132,6 +1132,8 @@ textarea#description {
   padding: 2px;
   font-size: 1em;
   line-height: 1.25; }
+.suppressVisualEditor {
+  display: none; }
 
 .fieldRequired {
   color: #f44;
