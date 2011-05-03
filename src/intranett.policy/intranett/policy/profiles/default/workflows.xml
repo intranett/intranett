@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <object name="portal_workflow">
  <object name="intranett_workflow" meta_type="Workflow"/>
+ <object name="workspace_workflow" meta_type="Subtractive Workflow"/>
  <bindings>
   <default>
    <bound-workflow workflow_id="intranett_workflow"/>
+   <bound-workflow workflow_id="workspace_workflow"/>
   </default>
  </bindings>
 </object>

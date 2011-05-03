@@ -43,6 +43,7 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'collective.ATClamAV',
+          'collective.subtractiveworkflow',
           'experimental.catalogqueryplan',
           'iw.rejectanonymous',
           'munin.zope',
@@ -64,6 +65,7 @@ setup(name='intranett.policy',
           'zope.interface',
           'z3c.unconfigure',
           'intranett.theme',
+          'teamrubber.theoracle',
       ],
       entry_points="""
       [zopectl.command]

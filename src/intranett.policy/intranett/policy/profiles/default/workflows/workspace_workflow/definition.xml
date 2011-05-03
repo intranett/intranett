@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="workspace_workflow" 
+  title="Subtractive Workflow Definition" description="" 
+  state_variable="workspace_visibility" initial_state="public" 
+  manager_bypass="False">
+  
+
+  <permission>Access contents information</permission>
+  <permission>View</permission>
+
+  
+  <state state_id="private" title="">
+    <exit-transition transition_id="unprotect"/>
+    <permission-map name="Access contents information" acquired="False">
+      <permission-role>Member</permission-role>
+    </permission-map>
+    <permission-map name="View" acquired="False">
+      <permission-role>Member</permission-role>
+    </permission-map>
+  </state>
+  
+  <state state_id="public" title="">
+    <exit-transition transition_id="autoprotect"/>
+    <exit-transition transition_id="protect"/>
+  </state>
+  
+  
+  <transition transition_id="autoprotect" title="" new_state="private" trigger="AUTOMATIC" before_script="" after_script="">
+    <guard>
+      <guard-expression>python:container.getWorkspaceState()=='private' if getattr(container, 'getWorkspaceState', None) is not None else False</guard-expression>
+    </guard>
+  </transition>
+  
+  <transition transition_id="protect" title="" new_state="private" trigger="USER" before_script="" after_script="">
+    <guard>
+  </guard>
+  </transition>
+  
+  <transition transition_id="unprotect" title="" new_state="public" trigger="USER" before_script="" after_script="">
+    <guard>
+  </guard>
+  </transition>
+
+</dc-workflow>

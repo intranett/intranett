@@ -14,6 +14,7 @@
   <element value="Topic"/>
   <element value="FormFolder"/>
   <element value="MembersFolder"/>
+  <element value="TeamWorkspace"/>
  </property>
  <property name="default_view">frontpage_view</property>
  <property name="view_methods" purge="False">

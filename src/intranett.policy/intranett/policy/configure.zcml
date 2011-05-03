@@ -22,6 +22,8 @@
   <include package="intranett.theme" />
 
   <include package=".browser" />
+  <include package="collective.subtractiveworkflow" />
+  <include package="teamrubber.theoracle" />
 
   <utility factory=".profile.HiddenProducts" name="intranett.policy" />
 
@@ -38,6 +40,15 @@
     factory="plone.indexer.wrapper.IndexableObjectWrapper"
     provides="plone.indexer.interfaces.IIndexableObject"
     />
+
+  <adapter
+      factory = "intranett.policy.content.TeamWorkspace.WorkspaceMembershipRoles"
+      />
+
+  <subscriber
+      handler=".content.TeamWorkspace.transitionChildren"
+      for="intranett.policy.interfaces.ITeamWorkspace 
+           Products.CMFCore.interfaces.IActionSucceededEvent" />
 
   <cache:ruleset
     for=".tools.Portrait"
