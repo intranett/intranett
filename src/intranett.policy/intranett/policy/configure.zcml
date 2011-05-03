@@ -50,6 +50,11 @@
       for="intranett.policy.interfaces.ITeamWorkspace 
            Products.CMFCore.interfaces.IActionSucceededEvent" />
 
+  <subscriber
+      handler=".content.TeamWorkspace.triggerAutomaticTransitions"
+      for="* 
+           zope.container.interfaces.IObjectMovedEvent" />
+
   <cache:ruleset
     for=".tools.Portrait"
     ruleset="plone.content.file"

@@ -10,6 +10,8 @@
 
   
   <state state_id="private" title="">
+    <exit-transition transition_id="noop"/>
+    <exit-transition transition_id="autounprotect"/>
     <exit-transition transition_id="unprotect"/>
     <permission-map name="Access contents information" acquired="False">
       <permission-role>Member</permission-role>
@@ -20,6 +22,7 @@
   </state>
   
   <state state_id="public" title="">
+    <exit-transition transition_id="noop"/>
     <exit-transition transition_id="autoprotect"/>
     <exit-transition transition_id="protect"/>
     <permission-map name="Access contents information" acquired="False">
@@ -31,9 +34,20 @@
   </state>
   
   
+  <transition transition_id="noop" title="" new_state="" trigger="USER" before_script="" after_script="">
+    <guard>
+  </guard>
+  </transition>
+  
   <transition transition_id="autoprotect" title="" new_state="private" trigger="AUTOMATIC" before_script="" after_script="">
     <guard>
       <guard-expression>python:here.getWorkspaceState()=='private' if getattr(here, 'getWorkspaceState', None) is not None else False</guard-expression>
+    </guard>
+  </transition>
+  
+  <transition transition_id="autounprotect" title="" new_state="public" trigger="AUTOMATIC" before_script="" after_script="">
+    <guard>
+      <guard-expression>python:here.getWorkspaceState()=='published' if getattr(here, 'getWorkspaceState', None) is not None else True</guard-expression>
     </guard>
   </transition>
   

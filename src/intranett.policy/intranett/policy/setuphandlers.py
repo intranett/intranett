@@ -33,9 +33,12 @@ def setup_locale(site):
 def ensure_workflow(site):
     # Force the default content into the correct workflow
     from plone.app.workflow.remap import remap_workflow
-    remap_workflow(site,
-                   type_ids=('Document', 'Folder', 'Topic'),
-                   chain=('intranett_workflow', ))
+    # No longer needed, we think.  Leaving here for a bit just in case.
+    # Matthew and Stefan.
+    # 
+    #remap_workflow(site,
+    #               type_ids=('Document', 'Folder', 'Topic'),
+    #s               chain=('intranett_workflow', 'workspace_workflow'))
 
 
 def disable_contentrules(site):

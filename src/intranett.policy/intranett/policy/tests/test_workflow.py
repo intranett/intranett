@@ -50,7 +50,7 @@ class TestWorkflowSetup(IntranettTestCase):
         }
         for type_ in set(ttool.keys()) - no_workflow:
             wf = wftool.getChainForPortalType(type_)
-            expected = workflows.get(type_, ('intranett_workflow', ))
+            expected = workflows.get(type_, ('intranett_workflow', 'workspace_workflow'))
             self.assertEquals(wf, expected,
                               'Found workflow %s for type %s, expected '
                               '%s, ' % (wf, type_, expected))
