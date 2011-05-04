@@ -211,13 +211,14 @@ class TestWorkspaces(IntranettFunctionalTestCase):
         
         acl_users = getToolByName(portal, 'acl_users')
         acl_users.userFolderAddUser('member1', 'secret', ['Member'], [])
+        portal.portal_membership.getMemberById("member1").setMemberProperties({"fullname": "Max Mustermann", })
         workspace.members = ('member1', )
         transaction.commit()
                 
         browser = get_browser(self.layer['app'], loggedIn=True)
         browser.handleErrors = False
         browser.open(workspace.absolute_url())
-        self.assertTrue("member1" in browser.contents)
+        self.assertTrue("Max Mustermann" in browser.contents)
 
     def test_members_can_add_content_in_workspace(self):
         portal = self.layer['portal']
@@ -256,13 +257,14 @@ class TestWorkspaces(IntranettFunctionalTestCase):
         
         acl_users = getToolByName(portal, 'acl_users')
         acl_users.userFolderAddUser('member1', 'secret', ['Member'], [])
+        portal.portal_membership.getMemberById("member1").setMemberProperties({"fullname": "Max Mustermann", })
         workspace.members = ('member1', )
         transaction.commit()
                 
         browser = get_browser(self.layer['app'], loggedIn=True)
         browser.handleErrors = False
         browser.open(doc.absolute_url())
-        self.assertTrue("member1" in browser.contents)
+        self.assertTrue("Max Mustermann" in browser.contents)
         
     def test_non_members_can_see_public_workspace_content(self):
         portal = self.layer['portal']
@@ -290,6 +292,7 @@ class TestWorkspaces(IntranettFunctionalTestCase):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
+        wt.doActionFor(folder, "publish")
     
         workspace_id = folder.invokeFactory('TeamWorkspace', 'wibblewobblewoo', title="wibblewobblewoo")
         workspace = folder[workspace_id]
@@ -302,14 +305,14 @@ class TestWorkspaces(IntranettFunctionalTestCase):
         auth = 'Basic %s:%s' % ('nonmember', 'secret')
         browser.addHeader('Authorization', auth)
         browser.handleErrors = False
-        browser.open(portal.absolute_url())
+        browser.open(folder.absolute_url())
         self.assertFalse("wibblewobblewoo" in browser.contents)
         
         # We then make it public
         wt.doActionFor(workspace, 'publish')
         transaction.commit()
         
-        browser.open(portal.absolute_url())
+        browser.open(folder.absolute_url())
         self.assertTrue("wibblewobblewoo" in browser.contents)
             
     def test_publishing_content_in_private_space_doesnt_reveal_it(self):

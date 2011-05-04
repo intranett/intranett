@@ -1,10 +1,7 @@
-from DateTime import DateTime
 from plone.app.portlets.portlets import base
-from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope import schema
 from zope.formlib import form
 from zope.interface import implements
 
@@ -28,11 +25,22 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        return hasattr(self.context, 'getWorkspacestate')
+        return hasattr(self.context, 'getWorkspaceState')
 
     @property
     def portletTitle(self):
         return _("Workspace Info")
+    
+    def update(self):
+        if not self.available:
+            return
+        wf = getToolByName(self.context, 'portal_workflow')
+        self.state = wf.getInfoFor(self.context, "workspace_visibility")
+        self.title = self.context.getWorkspace().Title()
+        members = self.context.members
+        members = map(self.context.portal_membership.getMemberById, members)
+        self.members = tuple(member.getProperty("fullname") for member in members)
+
 
 
 class AddForm(base.AddForm):

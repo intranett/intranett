@@ -34,6 +34,10 @@ class TeamWorkspace(ATFolder):
 
     members = atapi.ATFieldProperty("members")
 
+    def getWorkspace(self):
+        """Return the closest workspace"""
+        return self
+
     def getWorkspaceState(self):
         """Return if the workspace is private or public"""
         return self.portal_workflow.getInfoFor(self, "review_state")
