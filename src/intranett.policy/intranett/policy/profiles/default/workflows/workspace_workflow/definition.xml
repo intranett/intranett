@@ -19,12 +19,6 @@
     <permission-map name="View" acquired="False">
       <permission-role>Member</permission-role>
     </permission-map>
-    <permission-map name="Access contents information" acquired="False">
-      <permission-role>Owner</permission-role>
-    </permission-map>
-    <permission-map name="View" acquired="False">
-      <permission-role>Owner</permission-role>
-    </permission-map>
   </state>
   
   <state state_id="public" title="">

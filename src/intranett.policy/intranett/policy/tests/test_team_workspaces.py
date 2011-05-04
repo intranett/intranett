@@ -1,6 +1,8 @@
+from zope.lifecycleevent import ObjectCreatedEvent
 from Products.CMFCore.utils import getToolByName
 import transaction
 from zExceptions import Unauthorized
+import zope.event
 
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettFunctionalTestCase
@@ -12,6 +14,7 @@ class TestDualWorkflow(IntranettFunctionalTestCase):
         self.folder = portal['test-folder']
         workspace_id = self.folder.invokeFactory('TeamWorkspace', 'workspace')
         self.workspace = self.folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(self.workspace))
         self.wf = portal.portal_workflow
     
     def test_new_workspace_private_and_protected(self):
@@ -168,26 +171,28 @@ class TestWorkspaces(IntranettFunctionalTestCase):
 
         folder.invokeFactory('TeamWorkspace', 'workspace')
 
-    def test_workspace_owner_can_view_workspace(self):
+    def test_workspace_creator_can_view_workspace(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
 
         workspace_id = folder.invokeFactory('TeamWorkspace', 'workspace')
         workspace = folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(workspace))
         wt.doActionFor(workspace, 'publish')
         transaction.commit()
                 
         browser = get_browser(self.layer['app'], loggedIn=True)
         browser.open(workspace.absolute_url())
     
-    def test_workspace_owner_can_add_members(self):
+    def test_workspace_creator_can_add_members(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
     
         workspace_id = folder.invokeFactory('TeamWorkspace', 'workspace', title="Workspace", description="ws")
         workspace = folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(workspace))
         wt.doActionFor(workspace, 'publish')
         acl_users = getToolByName(portal, 'acl_users')
         acl_users.userFolderAddUser('member1', 'secret', ['Member'], [])
@@ -207,6 +212,7 @@ class TestWorkspaces(IntranettFunctionalTestCase):
     
         workspace_id = folder.invokeFactory('TeamWorkspace', 'workspace')
         workspace = folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(workspace))
         wt.doActionFor(workspace, 'publish')
         
         acl_users = getToolByName(portal, 'acl_users')
@@ -251,6 +257,7 @@ class TestWorkspaces(IntranettFunctionalTestCase):
     
         workspace_id = folder.invokeFactory('TeamWorkspace', 'workspace')
         workspace = folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(workspace))
         doc_id = workspace.invokeFactory("Document", "contact")
         doc = workspace[doc_id]
         wt.doActionFor(workspace, 'publish')
@@ -273,6 +280,7 @@ class TestWorkspaces(IntranettFunctionalTestCase):
     
         workspace_id = folder.invokeFactory('TeamWorkspace', 'workspace')
         workspace = folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(workspace))
         document_id = workspace.invokeFactory("Document", "qwertyuiop")
         document = workspace[document_id]
         wt.doActionFor(workspace, 'publish')
@@ -296,6 +304,7 @@ class TestWorkspaces(IntranettFunctionalTestCase):
     
         workspace_id = folder.invokeFactory('TeamWorkspace', 'wibblewobblewoo', title="wibblewobblewoo")
         workspace = folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(workspace))
         
         acl_users = getToolByName(portal, 'acl_users')
         acl_users.userFolderAddUser('nonmember', 'secret', ['Member'], [])
@@ -322,6 +331,7 @@ class TestWorkspaces(IntranettFunctionalTestCase):
     
         workspace_id = folder.invokeFactory('TeamWorkspace', 'workspace')
         workspace = folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(workspace))
         document_id = workspace.invokeFactory("Document", "qwertyuiop")
         document = workspace[document_id]
         wt.doActionFor(document, 'publish')

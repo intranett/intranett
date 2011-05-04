@@ -1,3 +1,4 @@
+from AccessControl import getSecurityManager
 from borg.localrole.interfaces import ILocalRoleProvider
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content.base import registerATCT
@@ -105,3 +106,7 @@ def transitionObjectsByPaths(context, workflow_action, paths):
             subobject_paths = ["%s/%s" % (path, id) for id in o]
             transitionObjectsByPaths(context, workflow_action, subobject_paths)
     return
+
+def addCreatorToMembers(context, action):
+    creator = getSecurityManager().getUser().getUserId()
+    context.members = (creator, )

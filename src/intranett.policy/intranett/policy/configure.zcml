@@ -55,6 +55,11 @@
       for="Products.ATContentTypes.interfaces.IATContentType
            zope.container.interfaces.IObjectMovedEvent" />
 
+  <subscriber
+      handler=".content.TeamWorkspace.addCreatorToMembers"
+      for="intranett.policy.interfaces.ITeamWorkspace 
+           zope.lifecycleevent.ObjectCreatedEvent" />
+
   <cache:ruleset
     for=".tools.Portrait"
     ruleset="plone.content.file"

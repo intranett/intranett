@@ -311,7 +311,7 @@ class TestContentHighlightPortlet(IntranettTestCase):
         r.update()
 
         self.assertEqual(r.state, 'private')
-        self.assertEqual(r.members, ())
+        self.assertEqual(r.members, ('', )) # only the admin
 
     def test_public_space(self):
         portal = self.layer['portal']
@@ -328,7 +328,7 @@ class TestContentHighlightPortlet(IntranettTestCase):
         r.update()
 
         self.assertEqual(r.state, 'public')
-        self.assertEqual(r.members, ())
+        self.assertEqual(r.members, ("", )) # only the admin
 
     def test_member_fullname_shown(self):
         portal = self.layer['portal']
@@ -346,7 +346,7 @@ class TestContentHighlightPortlet(IntranettTestCase):
         r.update()
 
         self.assertEqual(r.state, 'public')
-        self.assertEqual(r.members, ("", )) # test_user_1_ has no name
+        self.assertEqual(r.members, ("", )) # admin and test_user_1_ have no name
 
     def test_outside_workspace_no_portlet_rendered(self):
         portal = self.layer['portal']
