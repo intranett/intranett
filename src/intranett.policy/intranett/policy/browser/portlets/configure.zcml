@@ -37,4 +37,16 @@
     editview=".contenthighlight.EditForm"
     />
 
+  <plone:portlet
+    name="intranett.policy.portlets.WorkspaceInfo"
+    interface=".workspaceinfo.IWorkspaceInfo"
+    assignment=".workspaceinfo.Assignment"
+    view_permission="zope2.View"
+    edit_permission="plone.app.portlets.ManagePortlets"
+    renderer=".workspaceinfo.Renderer"
+    addview=".workspaceinfo.AddForm"
+    editview=".workspaceinfo.EditForm"
+    />
+
+
 </configure>

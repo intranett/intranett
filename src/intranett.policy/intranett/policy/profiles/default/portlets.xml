@@ -19,6 +19,12 @@
    description="Displays a selected content item."
    />
 
+ <portlet
+   addview="intranett.policy.portlets.WorkspaceInfo"
+   title="Workspace Information"
+   description="Displays details for the current workspace."
+   />
+
   <assignment name="navigation"
       category="context"
       key="/"

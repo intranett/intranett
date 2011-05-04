@@ -149,3 +149,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         portal = self.layer['portal']
         acl = aq_get(portal, 'acl_users')
         self.assertEqual(acl.session.getProperty('secure'), True)
+
+    def after_23(self):
+        portal = self.layer['portal']
+        self.assertIn('TeamWorkspace', portal.portal_types)
+        self.assertIn('workspace_workflow', portal.portal_workflow)
+        self.assertEqual(('intranett_workflow', 'workspace_workflow'), portal.portal_workflow.getDefaultChain())
+        self.assertEqual(('intranett_workflow', 'workspace_workflow'), portal.portal_workflow.getChainForPortalType("Document"))
+        

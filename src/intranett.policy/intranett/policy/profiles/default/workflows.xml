@@ -7,5 +7,14 @@
    <bound-workflow workflow_id="intranett_workflow"/>
    <bound-workflow workflow_id="workspace_workflow"/>
   </default>
+  <type type_id="Document">
+   <bound-workflow workflow_id="(Default)" />
+  </type>
+  <type type_id="Folder">
+   <bound-workflow workflow_id="(Default)" />
+  </type>
+  <type type_id="Topic">
+   <bound-workflow workflow_id="(Default)" />
+  </type>
  </bindings>
 </object>
