@@ -24,19 +24,20 @@ WorkspaceSchema = ATFolder.schema.copy() + atapi.Schema((
     ),
 ))
 
+
 class TeamWorkspace(ATFolder):
     """A workspace for groups of members"""
 
     implements(ITeamWorkspace)
     schema = WorkspaceSchema
     meta_type = "TeamWorkspace"
-    
+
     members = atapi.ATFieldProperty("members")
-    
+
     def getWorkspaceState(self):
         """Return if the workspace is private or public"""
         return self.portal_workflow.getInfoFor(self, "review_state")
-    
+
 
 registerATCT(TeamWorkspace, PROJECTNAME)
 
@@ -58,15 +59,19 @@ class WorkspaceMembershipRoles(object):
     def getAllRoles(self):
         return [(member, self.getRoles(member)) for member in self.context.members]
 
+
 def triggerAutomaticTransitions(context, action):
+    if IObjectAddedEvent.providedBy(action):
+        return
     if IObjectRemovedEvent.providedBy(action):
         return
-    
+
     wf = getattr(context, 'portal_workflow', None)
     try:
         wf.doActionFor(context, "noop")
     except (WorkflowException, AttributeError):
         pass
+
 
 def transitionChildren(context, action):
     if action.action == "publish":
@@ -77,7 +82,7 @@ def transitionChildren(context, action):
         return None
     context.REQUEST.method= "POST"
     transitionObjectsByPaths(context, subaction, ["/".join(context.getPhysicalPath())])
-    
+
 
 def transitionObjectsByPaths(context, workflow_action, paths):
     portal = getToolByName(context, 'portal_url').getPortalObject()
@@ -89,7 +94,7 @@ def transitionObjectsByPaths(context, workflow_action, paths):
                 o.portal_workflow.doActionFor(o, workflow_action)
             except WorkflowException:
                 # We might be beaten to the punch by automatic transitions
-                # but as long as the tests pass we know we're not missing 
+                # but as long as the tests pass we know we're not missing
                 # things here
                 pass
         if getattr(o, 'isPrincipiaFolderish', None):

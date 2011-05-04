@@ -137,20 +137,28 @@ class TestDualWorkflow(IntranettFunctionalTestCase):
         transaction.savepoint(True)
         self.workspace.manage_renameObject('doc', 'doc1')
         self.assertEqual(getInfoFor(self.workspace['doc1'], 'workspace_visibility'), 'public')
-            
 
     def test_content_cutpasted_from_private_workspace_to_outside_is_unprotected(self):
         getInfoFor = self.wf.getInfoFor
-        self.wf.doActionFor(self.workspace, "publish")
         doc_id = self.workspace.invokeFactory("Document", "doc")
         transaction.savepoint(True)
 
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'workspace_visibility'), 'private')
         cb = self.workspace.manage_cutObjects('doc')
         self.folder.manage_pasteObjects(cb)        
-
         self.assertEqual(getInfoFor(self.folder[doc_id], 'workspace_visibility'), 'public')
-            
+
+    def test_content_cutpasted_from_public_workspace_to_outside_is_unprotected(self):
+        getInfoFor = self.wf.getInfoFor
+        self.wf.doActionFor(self.workspace, "publish")
+        doc_id = self.workspace.invokeFactory("Document", "doc")
+        transaction.savepoint(True)
+
+        self.assertEqual(getInfoFor(self.workspace[doc_id], 'workspace_visibility'), 'public')
+        cb = self.workspace.manage_cutObjects('doc')
+        self.folder.manage_pasteObjects(cb)        
+        self.assertEqual(getInfoFor(self.folder[doc_id], 'workspace_visibility'), 'public')
+
 
 class TestWorkspaces(IntranettFunctionalTestCase):
 
