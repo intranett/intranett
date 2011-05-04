@@ -52,7 +52,7 @@
 
   <subscriber
       handler=".content.TeamWorkspace.triggerAutomaticTransitions"
-      for="* 
+      for="Products.ATContentTypes.interfaces.IATContentType
            zope.container.interfaces.IObjectMovedEvent" />
 
   <cache:ruleset
