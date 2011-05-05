@@ -347,3 +347,27 @@ class TestWorkspaces(IntranettFunctionalTestCase):
         with self.assertRaises(Unauthorized):
             browser.open(document.absolute_url())
     
+    def test_owner_of_content_in_workspace_cannot_see_it_when_not_a_member(self):
+        portal = self.layer['portal']
+        folder = portal['test-folder']
+        wt = getToolByName(portal, 'portal_workflow')
+        
+        workspace_id = folder.invokeFactory('TeamWorkspace', 'workspace')
+        workspace = folder[workspace_id]
+        zope.event.notify(ObjectCreatedEvent(workspace))
+        document_id = workspace.invokeFactory("Document", "qwertyuiop")
+        document = workspace[document_id]
+        wt.doActionFor(document, 'publish')
+        
+        acl_users = getToolByName(portal, 'acl_users')
+        acl_users.userFolderAddUser('nonmember', 'secret', ['Member'], [])
+        document.manage_setLocalRoles('nonmember', ["Owner"])
+        transaction.commit()
+        
+        browser = get_browser(self.layer['app'], loggedIn=False)
+        auth = 'Basic %s:%s' % ('nonmember', 'secret')
+        browser.addHeader('Authorization', auth)
+        browser.handleErrors = False
+        with self.assertRaises(Unauthorized):
+            browser.open(document.absolute_url())
+    
