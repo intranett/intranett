@@ -5,6 +5,8 @@ from zope.component import getUtility
 from zope.interface import implements
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary
+from plone.principalsource.source import PrincipalSource
+from plone.principalsource.source import PrincipalSourceBinder
 
 
 class DocumentSource(object):
@@ -52,3 +54,49 @@ class DocumentSourceBinder(object):
 
     def __call__(self, context):
         return DocumentSource(context)
+
+
+class WorkspaceMemberSource(PrincipalSource):
+    implements(IQuerySource)
+
+    def __init__(self, context, users=True, groups=True, search_name=True):
+        super(WorkspaceMemberSource, self).__init__(context, users, groups, search_name)
+        self.root_users = self.context.getPhysicalRoot().acl_users
+
+    def _searchPrincipals(self, *args, **kw):
+        return (self.root_users.searchPrincipals(*args, **kw) +
+                self.acl_users.searchPrincipals(*args, **kw))
+
+    def _searchUsers(self, *args, **kw):
+        return (self.root_users.searchUsers(*args, **kw) +
+                self.acl_users.searchUsers(*args, **kw))
+
+    def _searchGroups(self, *args, **kw):
+        return (self.root_users.searchGroups(*args, **kw) +
+                self.acl_users.searchGroups(*args, **kw))
+
+    @property
+    def _search(self):
+        if self.users and self.groups:
+            return self._searchPrincipals
+        elif self.users:
+            return self._searchUsers
+        elif self.groups:
+            return self._searchGroups
+
+    def __iter__(self):
+        seen = set()
+        for result in self._search():
+            if result['id'] not in seen:
+                seen.add(result['id'])
+                yield self._term_for_result(result)
+
+
+class WorkspaceMemberSourceBinder(PrincipalSourceBinder):
+    implements(IContextSourceBinder)
+
+    def __call__(self, context):
+        return WorkspaceMemberSource(context, self.users, self.groups)
+
+
+WorkspaceMemberVocabularyFactory = WorkspaceMemberSourceBinder(groups=False)

@@ -55,4 +55,10 @@
       permission="zope2.View"
       />
 
+  <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component=".sources.WorkspaceMemberVocabularyFactory"
+      name="intranett.policy.WorkspaceMemberVocabulary"
+      />
+
 </configure>
