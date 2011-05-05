@@ -250,7 +250,7 @@ class TestContentHighlightPortlet(IntranettTestCase):
             data={'portletTitle': 'Content Highlight', 'item': 'xxx'})
         self.assertEquals(len(mapping), 1+initial)
         assignment_types = set(assignment.__class__ for assignment in mapping.values())
-        self.assertIn(newshighlight.Assignment, assignment_types)
+        self.assertIn(contenthighlight.Assignment, assignment_types)
 
     def test_document_source(self):
         portal = self.layer['portal']
@@ -285,7 +285,7 @@ class TestContentHighlightPortlet(IntranettTestCase):
         self.assertTrue(len([x for x in query_source]), 1)
     
 
-class TestContentHighlightPortlet(IntranettTestCase):
+class TestWorkspaceStatePortlet(IntranettTestCase):
 
     def renderer(self, context=None, request=None, view=None, manager=None,
                  assignment=None):
