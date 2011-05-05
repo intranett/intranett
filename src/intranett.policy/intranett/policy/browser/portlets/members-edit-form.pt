@@ -1,0 +1,5 @@
+<tal:main-macro metal:define-macro="main">
+  <div id="skel-contents">
+    <span tal:replace="structure view/contents" />
+  </div>
+</tal:main-macro>

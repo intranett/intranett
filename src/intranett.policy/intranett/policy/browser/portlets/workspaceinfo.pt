@@ -21,7 +21,9 @@
     <ul>
       <li tal:repeat="member python:view.members" tal:content="member" />
     </ul>
-    
+
+    <div tal:content="structure python:view.membersform.render()"></div>
+
     </dd>
     <dd class="portletFooter">
         <span class="portletBottomLeft"></span>

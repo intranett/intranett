@@ -47,4 +47,12 @@
       permission="zope2.View"
       />
 
+  <!-- Workspace members -->
+  <browser:page
+      for="intranett.policy.content.TeamWorkspace.TeamWorkspace"
+      name="members-edit"
+      class=".portlets.workspaceinfo.WSMemberForm"
+      permission="zope2.View"
+      />
+
 </configure>
