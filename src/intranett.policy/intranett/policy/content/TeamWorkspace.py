@@ -107,6 +107,8 @@ def transitionObjectsByPaths(context, workflow_action, paths):
             transitionObjectsByPaths(context, workflow_action, subobject_paths)
     return
 
+
 def addCreatorToMembers(context, action):
-    creator = getSecurityManager().getUser().getUserId()
+    creator = getSecurityManager().getUser().getId()
     context.members = (creator, )
+
