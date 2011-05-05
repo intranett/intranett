@@ -15,9 +15,11 @@
     <exit-transition transition_id="unprotect"/>
     <permission-map name="Access contents information" acquired="False">
       <permission-role>Member</permission-role>
+      <permission-role>Owner</permission-role>
     </permission-map>
     <permission-map name="View" acquired="False">
       <permission-role>Member</permission-role>
+      <permission-role>Owner</permission-role>
     </permission-map>
   </state>
   
