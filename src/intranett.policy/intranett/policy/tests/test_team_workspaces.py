@@ -201,7 +201,7 @@ class TestWorkspaces(IntranettFunctionalTestCase):
         browser = get_browser(self.layer['app'], loggedIn=True)
         browser.handleErrors = False
         browser.open(workspace.absolute_url()+"/edit")
-        browser.getControl(name="members:lines").value = "member1"
+        browser.getControl(name="members:list").value = ["member1"]
         browser.getControl("Lagre").click()
         self.assertIn("member1", workspace.members)
     
