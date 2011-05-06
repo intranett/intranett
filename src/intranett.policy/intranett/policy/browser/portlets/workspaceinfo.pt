@@ -14,7 +14,7 @@
           All intranet users can see this workspace. Only members can edit content.
       </span>
       <span class="portletItemDetails" tal:condition="python:view.state=='private'" i18n:translate="public_workspace_access">
-          Only members of this workspace can see it.
+          Only members of this workspace can see it or edit content.
       </span>
     
     <span i18n:translate="members_are">Members are:</span>
