@@ -1,13 +1,9 @@
 from plone.app.portlets.portlets import base
-from plone.formwidget.autocomplete import AutocompleteFieldWidget
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from z3c.form import button, field, form
 from zope.formlib import form as formlibform
-from zope.interface import Interface
 from zope.interface import implements
-import zope.schema
 
 from intranett.policy import IntranettMessageFactory as _
 
@@ -57,55 +53,3 @@ class AddForm(base.AddForm):
 class EditForm(base.EditForm):
 
     form_fields = formlibform.Fields(IWorkspaceInfo)
-
-
-class IWSMemberForm(Interface):
-
-    username = zope.schema.Choice(
-        title=_(u"Add user"),
-        vocabulary='intranett.policy.WorkspaceMemberVocabulary')
-
-
-class WSMemberForm(form.EditForm):
-    """An edit form for the workspace.
-    """
-    fields = field.Fields(IWSMemberForm)
-    fields['username'].widgetFactory = AutocompleteFieldWidget
-
-    ignoreContext = True
-    label = _(u"Add workspace member")
-
-    def applyChanges(self, data):
-        ws = self.context.getWorkspace()
-        members = ws.members
-        if data['username'] not in members:
-            members += (data['username'],)
-            ws.members = members
-            return True
-        else:
-            return False
-
-    def nextURL(self):
-        ws = self.context.getWorkspace()
-        return ws.absolute_url() + '/@@members-edit'
-
-    @button.buttonAndHandler(_(u"label_save", default=u"Save"), name='apply')
-    def handleSave(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-        changes = self.applyChanges(data)
-        if changes:
-            self.status = "Changes saved"
-        else:
-            self.status = "No changes"
-
-        self.request.response.redirect(self.nextURL())
-        return ''
-
-    @button.buttonAndHandler(_(u"label_cancel", default=u"Cancel"), name='cancel_add')
-    def handleCancel(self, action):
-        self.request.response.redirect(self.nextURL())
-        return ''
-
