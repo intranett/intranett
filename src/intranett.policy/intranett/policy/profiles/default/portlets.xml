@@ -42,7 +42,7 @@
   <assignment name="workspaceinfo"
       category="context"
       key="/"
-      manager="plone.rightcolumn"
+      manager="plone.leftcolumn"
       type="intranett.policy.portlets.WorkspaceInfo"
       visible="True">
   </assignment>
