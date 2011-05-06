@@ -17,10 +17,13 @@ WorkspaceSchema = ATFolder.schema.copy() + atapi.Schema((
     atapi.LinesField(
         'members',
         required=False,
+        multiValued=True,
+        vocabulary_factory='intranett.policy.WorkspaceMemberVocabulary',
         storage=atapi.AnnotationStorage(),
-        widget=atapi.LinesWidget(
+        widget=atapi.MultiSelectionWidget(
             label=_(u"Members"),
-            description=_(u"Users who have access to the workspace")
+            description=_(u"Users who have access to the workspace"),
+            format='checkbox',
         ),
     ),
 ))
