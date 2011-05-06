@@ -56,40 +56,51 @@ class DocumentSourceBinder(object):
         return DocumentSource(context)
 
 
+class PASFacade(object):
+    """Query both Plone site and root user folder"""
+
+    def __init__(self, plone_users):
+        self.plone_users = plone_users
+
+    @property
+    def root_users(self):
+        return self.plone_users.getPhysicalRoot().acl_users
+
+    def getUserById(self, id):
+        user = self.root_users.getUserById(id)
+        if user is None:
+            user = self.plone_users.getUserById(id)
+        return user
+
+    def getGroupById(self, id):
+        group = self.root_users.getGroupById(id)
+        if group is None:
+            group = self.plone_users.getGroupById(id)
+        return group
+
+    def searchPrincipals(self, *args, **kw):
+        return (self.root_users.searchPrincipals(*args, **kw) +
+                self.plone_users.searchPrincipals(*args, **kw))
+
+    def searchUsers(self, *args, **kw):
+        return (self.root_users.searchUsers(*args, **kw) +
+                self.plone_users.searchUsers(*args, **kw))
+
+    def searchGroups(self, *args, **kw):
+        return (self.root_users.searchGroups(*args, **kw) +
+                self.plone_users.searchGroups(*args, **kw))
+
+
 class WorkspaceMemberSource(PrincipalSource):
     implements(IQuerySource)
 
-    def __init__(self, context, users=True, groups=True, search_name=True):
-        super(WorkspaceMemberSource, self).__init__(context, users, groups, search_name)
-        self.root_users = self.context.getPhysicalRoot().acl_users
-
-    def _searchPrincipals(self, *args, **kw):
-        return (self.root_users.searchPrincipals(*args, **kw) +
-                self.acl_users.searchPrincipals(*args, **kw))
-
-    def _searchUsers(self, *args, **kw):
-        return (self.root_users.searchUsers(*args, **kw) +
-                self.acl_users.searchUsers(*args, **kw))
-
-    def _searchGroups(self, *args, **kw):
-        return (self.root_users.searchGroups(*args, **kw) +
-                self.acl_users.searchGroups(*args, **kw))
-
-    @property
-    def _search(self):
-        if self.users and self.groups:
-            return self._searchPrincipals
-        elif self.users:
-            return self._searchUsers
-        elif self.groups:
-            return self._searchGroups
-
-    def __iter__(self):
-        seen = set()
-        for result in self._search():
-            if result['id'] not in seen:
-                seen.add(result['id'])
-                yield self._term_for_result(result)
+    @apply
+    def acl_users():
+        def get(self):
+            return getattr(self, '_pas', None)
+        def set(self, value):
+            self._pas = None if value is None else PASFacade(value)
+        return property(get, set)
 
 
 class WorkspaceMemberSourceBinder(PrincipalSourceBinder):
