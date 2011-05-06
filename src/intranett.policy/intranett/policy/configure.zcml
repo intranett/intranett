@@ -41,25 +41,6 @@
     provides="plone.indexer.interfaces.IIndexableObject"
     />
 
-  <adapter
-      factory = "intranett.policy.content.TeamWorkspace.WorkspaceMembershipRoles"
-      />
-
-  <subscriber
-      handler=".content.TeamWorkspace.transitionChildren"
-      for="intranett.policy.interfaces.ITeamWorkspace 
-           Products.CMFCore.interfaces.IActionSucceededEvent" />
-
-  <subscriber
-      handler=".content.TeamWorkspace.triggerAutomaticTransitions"
-      for="Products.ATContentTypes.interfaces.IATContentType
-           zope.container.interfaces.IObjectMovedEvent" />
-
-  <subscriber
-      handler=".content.TeamWorkspace.addCreatorToMembers"
-      for="intranett.policy.interfaces.ITeamWorkspace 
-           zope.lifecycleevent.ObjectCreatedEvent" />
-
   <cache:ruleset
     for=".tools.Portrait"
     ruleset="plone.content.file"
@@ -77,5 +58,25 @@
     allowed_interface="plone.app.portlets.browser.interfaces.IPortletAdding"
     permission="plone.app.portlets.ManageOwnPortlets"
     />
+
+  <!-- Team Workspaces -->
+  <adapter
+      factory = "intranett.policy.content.workspace.WorkspaceMembershipRoles"
+      />
+
+  <subscriber
+      handler=".content.workspace.transitionChildren"
+      for="intranett.policy.interfaces.ITeamWorkspace 
+           Products.CMFCore.interfaces.IActionSucceededEvent" />
+
+  <subscriber
+      handler=".content.workspace.triggerAutomaticTransitions"
+      for="Products.ATContentTypes.interfaces.IATContentType
+           zope.container.interfaces.IObjectMovedEvent" />
+
+  <subscriber
+      handler=".content.workspace.addCreatorToMembers"
+      for="intranett.policy.interfaces.ITeamWorkspace 
+           zope.lifecycleevent.ObjectCreatedEvent" />
 
 </configure>
