@@ -25,7 +25,8 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        return getattr(self.context, 'getWorkspace', None) is not None
+        return (getattr(self.context, 'getWorkspace', None) is not None and
+                'portal_factory' not in self.request.URL)
 
     @property
     def portletTitle(self):
