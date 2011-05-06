@@ -10,7 +10,6 @@ from zope.interface import Interface
 from zope.interface import implements
 import zope.schema
 
-from intranett.policy.browser.sources import WorkspaceMemberVocabularyFactory
 from intranett.policy import IntranettMessageFactory as _
 
 
@@ -67,7 +66,7 @@ class IWSMemberForm(Interface):
 
     username = zope.schema.Choice(
         title=_(u"Add user"),
-        source=WorkspaceMemberVocabularyFactory)
+        vocabulary='intranett.policy.WorkspaceMemberVocabulary')
 
 
 class WSMemberForm(form.EditForm):
