@@ -31,4 +31,9 @@
    <property name="visible">False</property>
   </object>
  </object>
+ <object name="object" meta_type="CMF Action Category">
+  <object name="local_roles" meta_type="CMF Action">
+   <property name="available_expr">python:getattr(object, 'getWorkspace', None) is None</property>
+  </object>
+ </object>
 </object>

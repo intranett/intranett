@@ -195,4 +195,4 @@ def enable_secure_cookies(context):
 @upgrade_to(23)
 def installWorkspaceType(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('typeinfo', 'workflow', 'portlets'))
+        steps=('actions', 'typeinfo', 'workflow', 'portlets'))

@@ -156,4 +156,5 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertIn('workspace_workflow', portal.portal_workflow)
         self.assertEqual(('intranett_workflow', 'workspace_workflow'), portal.portal_workflow.getDefaultChain())
         self.assertEqual(('intranett_workflow', 'workspace_workflow'), portal.portal_workflow.getChainForPortalType("Document"))
-        
+        action = portal.portal_actions.object.local_roles
+        self.assertEqual(action.getProperty('available_expr'), "python:getattr(object, 'getWorkspace', None) is None")

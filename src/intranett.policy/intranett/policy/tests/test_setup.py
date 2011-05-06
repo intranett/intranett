@@ -225,6 +225,12 @@ class TestSiteSetup(IntranettTestCase):
         acl = aq_get(portal, 'acl_users')
         self.assertEquals(acl.session.getProperty('secure'), True)
 
+    def test_sharing_action_condition(self):
+        portal = self.layer['portal']
+        action = portal.portal_actions.object.local_roles
+        self.assertEqual(action.getProperty('available_expr'),
+            "python:getattr(object, 'getWorkspace', None) is None")
+
 
 class TestAdmin(IntranettTestCase):
 
