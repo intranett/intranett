@@ -1,7 +1,6 @@
 from plone.app.portlets.portlets import base
 from plone.formwidget.autocomplete import AutocompleteFieldWidget
 from plone.portlets.interfaces import IPortletDataProvider
-from plone.z3cform.layout import FormWrapper
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.form import button, field, form
@@ -45,8 +44,6 @@ class Renderer(base.Renderer):
         members = self.context.members
         members = map(self.context.portal_membership.getMemberById, members)
         self.members = tuple(member.getProperty("fullname") or member.getId() for member in members)
-        self.membersform = WSMemberFormWrapper(self.context, self.request)
-        self.membersform.update()
 
 
 class AddForm(base.AddForm):
@@ -111,10 +108,4 @@ class WSMemberForm(form.EditForm):
     def handleCancel(self, action):
         self.request.response.redirect(self.nextURL())
         return ''
-
-
-class WSMemberFormWrapper(FormWrapper):
-
-    form = WSMemberForm
-    index = ViewPageTemplateFile('members-edit-form.pt')
 
