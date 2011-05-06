@@ -2,7 +2,6 @@ from plone.app.portlets.portlets import base
 from plone.formwidget.autocomplete import AutocompleteFieldWidget
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.z3cform.layout import FormWrapper
-from plone.principalsource.source import UsersVocabularyFactory
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.form import button, field, form
@@ -11,6 +10,7 @@ from zope.interface import Interface
 from zope.interface import implements
 import zope.schema
 
+from intranett.policy.browser.sources import WorkspaceMemberVocabularyFactory
 from intranett.policy import IntranettMessageFactory as _
 
 
@@ -67,7 +67,7 @@ class IWSMemberForm(Interface):
 
     username = zope.schema.Choice(
         title=_(u"Add user"),
-        source=UsersVocabularyFactory)
+        source=WorkspaceMemberVocabularyFactory)
 
 
 class WSMemberForm(form.EditForm):
@@ -108,10 +108,10 @@ class WSMemberForm(form.EditForm):
         self.request.response.redirect(self.nextURL())
         return ''
 
-    #@button.buttonAndHandler(_(u"label_cancel", default=u"Cancel"), name='cancel_add')
-    #def handleCancel(self, action):
-    #    self.request.response.redirect(self.nextURL())
-    #    return ''
+    @button.buttonAndHandler(_(u"label_cancel", default=u"Cancel"), name='cancel_add')
+    def handleCancel(self, action):
+        self.request.response.redirect(self.nextURL())
+        return ''
 
 
 class WSMemberFormWrapper(FormWrapper):
