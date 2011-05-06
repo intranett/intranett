@@ -31,7 +31,7 @@ class Renderer(base.Renderer):
     def portletTitle(self):
         return _("Workspace Info")
 
-   def update(self):
+    def update(self):
         if not self.available:
             return
         wf = getToolByName(self.context, 'portal_workflow')
