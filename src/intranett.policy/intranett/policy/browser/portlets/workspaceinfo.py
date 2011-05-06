@@ -25,20 +25,22 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        return hasattr(self.context, 'getWorkspaceState')
+        return getattr(self.context, 'getWorkspace', None) is not None
 
     @property
     def portletTitle(self):
         return _("Workspace Info")
 
-    def update(self):
+   def update(self):
         if not self.available:
             return
         wf = getToolByName(self.context, 'portal_workflow')
-        self.state = wf.getInfoFor(self.context, "workspace_visibility")
-        self.title = self.context.Title()
-        members = self.context.members
-        members = map(self.context.portal_membership.getMemberById, members)
+        mt = getToolByName(self.context, 'portal_membership')
+        ws = self.context.getWorkspace()
+        self.state = wf.getInfoFor(ws, "workspace_visibility")
+        self.title = ws.Title()
+        members = ws.members
+        members = map(mt.getMemberById, members)
         self.members = tuple(member.getProperty("fullname") or member.getId() for member in members)
 
 
