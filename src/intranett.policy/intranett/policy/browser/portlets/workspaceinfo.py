@@ -40,9 +40,9 @@ class Renderer(base.Renderer):
         ws = self.context.getWorkspace()
         self.state = wf.getInfoFor(ws, "workspace_visibility")
         self.title = ws.Title()
-        members = ws.members
-        members = map(mt.getMemberById, members)
-        self.members = tuple(member.getProperty("fullname") or member.getId() for member in members)
+        members = sorted(ws.members)
+        members = (mt.getMemberById(x) for x in members)
+        self.members = tuple(x.getProperty("fullname") or x.getId() for x in members)
 
 
 class AddForm(base.AddForm):
