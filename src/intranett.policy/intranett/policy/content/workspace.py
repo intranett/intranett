@@ -95,7 +95,6 @@ def transitionChildren(context, action):
         subaction = "protect"
     else:
         return None
-    context.REQUEST.method= "POST"
     transitionObjectsByPaths(context, subaction, ["/".join(context.getPhysicalPath())])
 
 
@@ -115,5 +114,20 @@ def transitionObjectsByPaths(context, workflow_action, paths):
         if getattr(o, 'isPrincipiaFolderish', None):
             subobject_paths = ["%s/%s" % (path, id) for id in o]
             transitionObjectsByPaths(context, workflow_action, subobject_paths)
-    return
+
+
+def reindexChildren(context, action):
+    reindexObjectsByPaths(context, ["/".join(context.getPhysicalPath())])
+
+
+def reindexObjectsByPaths(context, paths):
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    traverse = portal.restrictedTraverse
+    for path in paths:
+        o = traverse(path, None)
+        if o is not None:
+            o.reindexObjectSecurity()
+        if getattr(o, 'isPrincipiaFolderish', None):
+            subobject_paths = ["%s/%s" % (path, id) for id in o]
+            reindexObjectsByPaths(context, subobject_paths)
 
