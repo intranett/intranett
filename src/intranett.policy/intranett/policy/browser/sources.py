@@ -60,11 +60,8 @@ class PASFacade(object):
     """Query both Plone site and root user folder"""
 
     def __init__(self, plone_users):
+        self.root_users = plone_users.getPhysicalRoot().acl_users
         self.plone_users = plone_users
-
-    @property
-    def root_users(self):
-        return self.plone_users.getPhysicalRoot().acl_users
 
     def getUserById(self, id):
         user = self.root_users.getUserById(id)
