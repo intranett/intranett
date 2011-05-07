@@ -68,6 +68,13 @@ class WorkspaceMembershipRoles(object):
         return [(member, self.getRoles(member)) for member in self.context.members]
 
 
+def addCreatorToMembers(context, action):
+    """Make sure the current user cannot remove himself."""
+    user = getSecurityManager().getUser().getId()
+    if user not in context.members:
+        context.members = (user,) + context.members
+
+
 def triggerAutomaticTransitions(context, action):
     if IObjectAddedEvent.providedBy(action):
         return
@@ -109,9 +116,4 @@ def transitionObjectsByPaths(context, workflow_action, paths):
             subobject_paths = ["%s/%s" % (path, id) for id in o]
             transitionObjectsByPaths(context, workflow_action, subobject_paths)
     return
-
-
-def addCreatorToMembers(context, action):
-    creator = getSecurityManager().getUser().getId()
-    context.members = (creator, )
 

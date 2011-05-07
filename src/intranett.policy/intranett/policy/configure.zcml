@@ -61,12 +61,12 @@
 
   <!-- Team Workspaces -->
   <adapter
-      factory = "intranett.policy.content.workspace.WorkspaceMembershipRoles"
+      factory = ".content.workspace.WorkspaceMembershipRoles"
       />
 
   <subscriber
       handler=".content.workspace.transitionChildren"
-      for="intranett.policy.interfaces.ITeamWorkspace 
+      for="intranett.policy.interfaces.ITeamWorkspace
            Products.CMFCore.interfaces.IActionSucceededEvent" />
 
   <subscriber
@@ -76,7 +76,12 @@
 
   <subscriber
       handler=".content.workspace.addCreatorToMembers"
-      for="intranett.policy.interfaces.ITeamWorkspace 
-           zope.lifecycleevent.ObjectCreatedEvent" />
+      for="intranett.policy.interfaces.ITeamWorkspace
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent" />
+
+  <subscriber
+      handler=".content.workspace.addCreatorToMembers"
+      for="intranett.policy.interfaces.ITeamWorkspace
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent" />
 
 </configure>
