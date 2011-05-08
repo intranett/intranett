@@ -35,7 +35,10 @@ class Renderer(base.Renderer):
     def update(self):
         if not self.available:
             return
-        self.workspaces = ()
+        ct = getToolByName(self.context, 'portal_catalog')
+        user_id = getSecurityManager().getUser().getId()
+        self.workspaces = ({'title':x.Title, 'url':x.getURL()} for x in
+            ct(portal_type="TeamWorkspace", workspaceMembers=(user_id,)))
 
 
 class AddForm(base.AddForm):

@@ -13,7 +13,9 @@
       <span class="portletItemDetails">
     
         <ul>
-          <li tal:repeat="workspace python:view.workspaces" tal:content="workspace" />
+          <li tal:repeat="workspace view/workspaces">
+            <a tal:attributes="href workspace/url" tal:content="workspace/title">Workspace 1</a>
+          </li>
         </ul>
 
       </span>
