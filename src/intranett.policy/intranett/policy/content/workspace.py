@@ -1,13 +1,16 @@
+from AccessControl import ClassSecurityInfo
 from AccessControl import getSecurityManager
 from borg.localrole.interfaces import ILocalRoleProvider
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.folder import ATFolder
+from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowTool import WorkflowException
 from zope.component import adapts
 from zope.container.interfaces import IObjectRemovedEvent, IObjectAddedEvent
 from zope.interface import implements
+from plone.indexer.decorator import indexer
 
 from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import PROJECTNAME
@@ -35,19 +38,37 @@ class TeamWorkspace(ATFolder):
     implements(ITeamWorkspace)
     schema = WorkspaceSchema
     meta_type = "TeamWorkspace"
+    security = ClassSecurityInfo()
 
     members = atapi.ATFieldProperty("members")
 
+    security.declareProtected(ModifyPortalContent, 'setMembers')
+    def setMembers(self, value):
+        """Make sure the current user is always included."""
+        user_id = getSecurityManager().getUser().getId()
+        value = list(value)
+        if user_id not in value:
+            value.append(user_id)
+        value.sort()
+        self.Schema().getField('members').set(self, tuple(value))
+
+    security.declareProtected(View, 'getWorkspace')
     def getWorkspace(self):
         """Return the closest workspace"""
         return self
 
+    security.declareProtected(View, 'getWorkspaceState')
     def getWorkspaceState(self):
         """Return if the workspace is private or public"""
         return self.portal_workflow.getInfoFor(self, "review_state")
 
 
 registerATCT(TeamWorkspace, PROJECTNAME)
+
+
+@indexer(ITeamWorkspace)
+def workspaceMembers(context):
+    return context.members
 
 
 class WorkspaceMembershipRoles(object):
@@ -60,19 +81,12 @@ class WorkspaceMembershipRoles(object):
 
     def getRoles(self, principal_id):
         if principal_id in self.context.members:
-            return ['Member', 'Editor', 'Contributor']
+            return ['Editor', 'Contributor']
         else:
             return []
 
     def getAllRoles(self):
         return [(member, self.getRoles(member)) for member in self.context.members]
-
-
-def addCreatorToMembers(context, action):
-    """Make sure the current user cannot remove himself."""
-    user = getSecurityManager().getUser().getId()
-    if user not in context.members:
-        context.members = (user,) + context.members
 
 
 def triggerAutomaticTransitions(context, action):

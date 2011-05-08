@@ -61,7 +61,12 @@
 
   <!-- Team Workspaces -->
   <adapter
-      factory = ".content.workspace.WorkspaceMembershipRoles"
+      factory=".content.workspace.workspaceMembers"
+      name="workspaceMembers"
+      />
+
+  <adapter
+      factory=".content.workspace.WorkspaceMembershipRoles"
       />
 
   <subscriber
@@ -73,16 +78,6 @@
       handler=".content.workspace.triggerAutomaticTransitions"
       for="Products.ATContentTypes.interfaces.IATContentType
            zope.container.interfaces.IObjectMovedEvent" />
-
-  <subscriber
-      handler=".content.workspace.addCreatorToMembers"
-      for="intranett.policy.interfaces.ITeamWorkspace
-           zope.lifecycleevent.interfaces.IObjectCreatedEvent" />
-
-  <subscriber
-      handler=".content.workspace.addCreatorToMembers"
-      for="intranett.policy.interfaces.ITeamWorkspace
-           zope.lifecycleevent.interfaces.IObjectModifiedEvent" />
 
   <subscriber
       handler=".content.workspace.reindexChildren"

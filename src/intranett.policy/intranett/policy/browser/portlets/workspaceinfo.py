@@ -40,8 +40,7 @@ class Renderer(base.Renderer):
         ws = self.context.getWorkspace()
         self.state = wf.getInfoFor(ws, "workspace_visibility")
         self.title = ws.Title()
-        members = sorted(ws.members)
-        members = (mt.getMemberById(x) for x in members)
+        members = (mt.getMemberById(x) for x in ws.members)
         self.members = tuple(x.getProperty("fullname") or x.getId() for x in members)
 
 
