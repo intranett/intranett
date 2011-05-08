@@ -61,7 +61,12 @@
 
   <!-- Team Workspaces -->
   <adapter
-      factory = ".content.workspace.WorkspaceMembershipRoles"
+      factory=".content.workspace.workspaceMembers"
+      name="workspaceMembers"
+      />
+
+  <adapter
+      factory=".content.workspace.WorkspaceMembershipRoles"
       />
 
   <subscriber

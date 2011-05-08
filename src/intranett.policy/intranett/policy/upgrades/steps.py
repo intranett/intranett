@@ -192,8 +192,9 @@ def enable_secure_cookies(context):
     acl = aq_get(context, 'acl_users')
     acl.session._updateProperty('secure', True)
 
+
 @upgrade_to(23)
 def installWorkspaceType(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('actions', 'typeinfo', 'factorytool', 'workflow', 'portlets'))
+        steps=('actions', 'typeinfo', 'factorytool', 'workflow', 'portlets', 'catalog'))
 

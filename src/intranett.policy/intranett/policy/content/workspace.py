@@ -8,6 +8,7 @@ from Products.CMFCore.WorkflowTool import WorkflowException
 from zope.component import adapts
 from zope.container.interfaces import IObjectRemovedEvent, IObjectAddedEvent
 from zope.interface import implements
+from plone.indexer.decorator import indexer
 
 from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import PROJECTNAME
@@ -48,6 +49,11 @@ class TeamWorkspace(ATFolder):
 
 
 registerATCT(TeamWorkspace, PROJECTNAME)
+
+
+@indexer(ITeamWorkspace)
+def workspaceMembers(context):
+    return context.members
 
 
 class WorkspaceMembershipRoles(object):
