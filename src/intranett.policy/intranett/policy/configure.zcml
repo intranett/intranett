@@ -80,16 +80,6 @@
            zope.container.interfaces.IObjectMovedEvent" />
 
   <subscriber
-      handler=".content.workspace.addCreatorToMembers"
-      for="intranett.policy.interfaces.ITeamWorkspace
-           zope.lifecycleevent.interfaces.IObjectCreatedEvent" />
-
-  <subscriber
-      handler=".content.workspace.addCreatorToMembers"
-      for="intranett.policy.interfaces.ITeamWorkspace
-           zope.lifecycleevent.interfaces.IObjectModifiedEvent" />
-
-  <subscriber
       handler=".content.workspace.reindexChildren"
       for="intranett.policy.interfaces.ITeamWorkspace
            Products.Archetypes.interfaces.IObjectEditedEvent" />

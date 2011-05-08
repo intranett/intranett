@@ -39,6 +39,13 @@ class TeamWorkspace(ATFolder):
 
     members = atapi.ATFieldProperty("members")
 
+    def setMembers(self, value):
+        """Make sure the current user is always included."""
+        user_id = getSecurityManager().getUser().getId()
+        if user_id not in value:
+            value = (user_id,) + tuple(value)
+        self.Schema().getField('members').set(self, value)
+
     def getWorkspace(self):
         """Return the closest workspace"""
         return self
@@ -72,13 +79,6 @@ class WorkspaceMembershipRoles(object):
 
     def getAllRoles(self):
         return [(member, self.getRoles(member)) for member in self.context.members]
-
-
-def addCreatorToMembers(context, action):
-    """Make sure the current user cannot remove himself."""
-    user = getSecurityManager().getUser().getId()
-    if user not in context.members:
-        context.members = (user,) + context.members
 
 
 def triggerAutomaticTransitions(context, action):
