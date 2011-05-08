@@ -46,9 +46,11 @@ class TeamWorkspace(ATFolder):
     def setMembers(self, value):
         """Make sure the current user is always included."""
         user_id = getSecurityManager().getUser().getId()
+        value = list(value)
         if user_id not in value:
-            value = (user_id,) + tuple(value)
-        self.Schema().getField('members').set(self, value)
+            value.append(user_id)
+        value.sort()
+        self.Schema().getField('members').set(self, tuple(value))
 
     security.declareProtected(View, 'getWorkspace')
     def getWorkspace(self):
