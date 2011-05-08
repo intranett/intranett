@@ -81,7 +81,7 @@ class WorkspaceMembershipRoles(object):
 
     def getRoles(self, principal_id):
         if principal_id in self.context.members:
-            return ['Member', 'Editor', 'Contributor']
+            return ['Editor', 'Contributor']
         else:
             return []
 
