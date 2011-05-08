@@ -1,8 +1,10 @@
+from AccessControl import ClassSecurityInfo
 from AccessControl import getSecurityManager
 from borg.localrole.interfaces import ILocalRoleProvider
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.folder import ATFolder
+from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowTool import WorkflowException
 from zope.component import adapts
@@ -36,9 +38,11 @@ class TeamWorkspace(ATFolder):
     implements(ITeamWorkspace)
     schema = WorkspaceSchema
     meta_type = "TeamWorkspace"
+    security = ClassSecurityInfo()
 
     members = atapi.ATFieldProperty("members")
 
+    security.declareProtected(ModifyPortalContent, 'setMembers')
     def setMembers(self, value):
         """Make sure the current user is always included."""
         user_id = getSecurityManager().getUser().getId()
@@ -46,10 +50,12 @@ class TeamWorkspace(ATFolder):
             value = (user_id,) + tuple(value)
         self.Schema().getField('members').set(self, value)
 
+    security.declareProtected(View, 'getWorkspace')
     def getWorkspace(self):
         """Return the closest workspace"""
         return self
 
+    security.declareProtected(View, 'getWorkspaceState')
     def getWorkspaceState(self):
         """Return if the workspace is private or public"""
         return self.portal_workflow.getInfoFor(self, "review_state")
