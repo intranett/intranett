@@ -53,7 +53,7 @@
     interface=".myworkspaces.IMyWorkspaces"
     assignment=".myworkspaces.Assignment"
     view_permission="zope2.View"
-    edit_permission="plone.app.portlets.ManagePortlets"
+    edit_permission="plone.app.portlets.ManageOwnPortlets"
     renderer=".myworkspaces.Renderer"
     addview=".myworkspaces.AddForm"
     editview=".myworkspaces.EditForm"
