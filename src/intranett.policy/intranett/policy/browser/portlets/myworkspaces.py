@@ -37,8 +37,8 @@ class Renderer(base.Renderer):
             return
         ct = getToolByName(self.context, 'portal_catalog')
         user_id = getSecurityManager().getUser().getId()
-        self.workspaces = ({'title':x.Title, 'url':x.getURL()} for x in
-            ct(portal_type="TeamWorkspace", workspaceMembers=(user_id,)))
+        brains = ct(portal_type="TeamWorkspace", workspaceMembers=(user_id,), sort_on='sortable_title')
+        self.workspaces = ({'title':x.Title, 'url':x.getURL()} for x in brains)
 
 
 class AddForm(base.AddForm):
