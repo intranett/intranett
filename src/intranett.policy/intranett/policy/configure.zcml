@@ -15,6 +15,7 @@
   <include package="experimental.catalogqueryplan" />
   <include package="iw.rejectanonymous" />
   <include package="munin.zope" />
+  <include package="plone.principalsource" />
   <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
   <include package="plone.formwidget.autocomplete" />

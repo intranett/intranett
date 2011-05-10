@@ -7,9 +7,10 @@ from Products.ATContentTypes.content.folder import ATFolder
 from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowTool import WorkflowException
-from zope.component import adapts
-from zope.container.interfaces import IObjectRemovedEvent, IObjectAddedEvent
 from zope.interface import implements
+from zope.component import getUtility, adapts
+from zope.schema.interfaces import IVocabularyFactory
+from zope.container.interfaces import IObjectRemovedEvent, IObjectAddedEvent
 from plone.indexer.decorator import indexer
 
 from intranett.policy import IntranettMessageFactory as _
@@ -21,7 +22,7 @@ WorkspaceSchema = ATFolder.schema.copy() + atapi.Schema((
         'members',
         required=False,
         multiValued=True,
-        vocabulary_factory='intranett.policy.WorkspaceMemberVocabulary',
+        vocabulary='getMembersVocabulary',
         storage=atapi.AnnotationStorage(),
         widget=atapi.MultiSelectionWidget(
             label=_(u"Members"),
@@ -42,15 +43,32 @@ class TeamWorkspace(ATFolder):
 
     members = atapi.ATFieldProperty("members")
 
+    security.declarePrivate('membersource')
+    @property
+    def membersource(self):
+        return getUtility(IVocabularyFactory, name="plone.principalsource.Users")(self)
+
+    security.declarePrivate('getMembersVocabulary')
+    def getMembersVocabulary(self):
+        """Return user_id -> fullname DisplayList."""
+        # We cannot use 'vocabulary_factory' on the field as this would
+        # result in a login -> fullname DisplayList.
+        return atapi.DisplayList((t.token, t.title) for t in self.membersource)
+
     security.declareProtected(ModifyPortalContent, 'setMembers')
     def setMembers(self, value):
         """Make sure the current user is always included."""
         user_id = getSecurityManager().getUser().getId()
         value = list(value)
         if user_id not in value:
-            value.append(user_id)
+            try:
+                self.membersource.getTermByToken(user_id)
+            except LookupError:
+                pass
+            else:
+                value.append(user_id)
         value.sort()
-        self.Schema().getField('members').set(self, tuple(value))
+        self.Schema().getField('members').set(self, value)
 
     security.declareProtected(View, 'getWorkspace')
     def getWorkspace(self):
