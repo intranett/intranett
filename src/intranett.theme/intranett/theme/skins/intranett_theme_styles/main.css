@@ -1131,7 +1131,14 @@ textarea#description {
   color: #000;
   padding: 2px;
   font-size: 1em;
-  line-height: 1.25; }
+  line-height: 1.25;
+  height: 3.5em; }
+
+.suppressVisualEditor {
+  display: none; }
+
+textarea.mce_editable {
+  height: 45em; }
 
 .fieldRequired {
   color: #f44;
@@ -1180,6 +1187,9 @@ form#periodform {
 
 div div.kupu-panels {
   font-size: 0.76em; }
+
+#cmfeditions_version_comment_block, .fieldUploadFile {
+  display: none; }
 
 /* @group Calendar styles */
 /* The main calendar widget.  DIV containing a table. */

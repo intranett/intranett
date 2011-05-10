@@ -36,11 +36,13 @@
                  tal:define="editbar_opened python:request.get('editbar_opened', 0)">
                 <a href="#"
                    tal:attributes="style python:editbar_opened and 'display: none' or None"
-                   id="open-edit-bar" title="Edit" i18n:attributes="title" i18n:translate=""><img src="" alt=""
-                    tal:attributes="src string:${context/portal_url}/cogweel.png" /><span>Edit</span></a>
+                   id="open-edit-bar" title="Edit" i18n:attributes="title" i18n:translate=""
+                   ><img src="" alt="" width="19" height="11"
+                         tal:attributes="src string:${context/portal_url}/cogweel.png"
+                    /><span>Edit</span></a>
 
                 <a href="#"
-                   id="close-edit-bar" title="Close edit bar" i18n:attributes="title" i18n:translate="">&times;<span>Close Edit bar</span></a>    
+                   id="close-edit-bar" title="Close edit bar" i18n:attributes="title" i18n:translate="">&times;<span>Close Edit bar</span></a>
             </div>
             <div id="contentviews-wrapper">
                 <h5 class="hiddenStructure">Views</h5>

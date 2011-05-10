@@ -72,5 +72,4 @@ setup(name='intranett.policy',
       [zopectl.command]
       create_site = intranett.policy.commands:create_site
       upgrade = intranett.policy.commands:upgrade
-      download_email = intranett.policy.commands:download_email
       """)

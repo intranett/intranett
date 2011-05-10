@@ -194,7 +194,18 @@ def enable_secure_cookies(context):
 
 
 @upgrade_to(23)
+def update_strong_caching_maxage(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('plone.app.registry', ))
+
+
+@upgrade_to(24)
+def update_strong_caching_maxage2(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('plone.app.registry', ))
+
+
+@upgrade_to(25)
 def installWorkspaceType(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('actions', 'typeinfo', 'factorytool', 'workflow', 'portlets', 'catalog'))
-

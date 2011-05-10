@@ -151,6 +151,18 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertEqual(acl.session.getProperty('secure'), True)
 
     def after_23(self):
+        from plone.registry.interfaces import IRegistry
+        registry = queryUtility(IRegistry)
+        key = 'plone.app.caching.strongCaching.maxage'
+        self.assertTrue(registry.get(key) >= 604800)
+
+    def after_24(self):
+        from plone.registry.interfaces import IRegistry
+        registry = queryUtility(IRegistry)
+        key = 'plone.app.caching.strongCaching.plone.resource.maxage'
+        self.assertTrue(registry.get(key) >= 604800)
+
+    def after_25(self):
         portal = self.layer['portal']
         self.assertIn('TeamWorkspace', portal.portal_types)
         self.assertIn('TeamWorkspace', portal.portal_factory.getFactoryTypes())
@@ -160,4 +172,3 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
         action = portal.portal_actions.object.local_roles
         self.assertEqual(action.getProperty('available_expr'), "python:getattr(object, 'getWorkspace', None) is None")
-

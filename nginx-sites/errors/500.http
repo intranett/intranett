@@ -1,0 +1,50 @@
+HTTP/1.0 500 Server Error
+Cache-Control: no-cache
+Connection: close
+Content-Type: text/html
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <title>Maintenance in progress</title>
+  <style type="text/css">
+      body {
+          font-family: "Lucida Grande",Verdana,Lucida,Helvetica,Arial,sans-serif;
+      }
+      #view-wrapper {
+          font-size: 1.1em;
+          color: #333;
+          width: 42em;
+            padding: 2em 0;
+          margin: 5em auto;
+      }
+      #under-construction-image {
+          float: left;
+          margin: 0 1em 1em 0;
+      }
+      #view-wrapper p {
+      }
+      #text-wrapper {
+          margin-top: 3.5em;
+      }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="view-wrapper">
+      <img id="under-construction-image" border="0" alt="Photo by iStockphoto/Gary Alvis"
+           src="/under_construction.jpg" width="329" height="279" />
+      <div id="text-wrapper">
+        <h1>Maintenance<br /> in progress</h1>
+        <p>we apologize for the inconvenience</p>
+      </div>
+  </div>
+
+</body>
+</html>

@@ -1192,17 +1192,24 @@ div.formHelp {
 	color: #ff4725;
 }
 input#title {
-	width: 99%;	
-	font-size:$large-size;
-	font-family: $serif;	
+    width: 99%;	
+    font-size:$large-size;
+    font-family: $serif;
 }
 textarea#description {
-    width: 99%;
-    font-family: $sans-serif;
-    color: #000;   
-    padding: 2px; 
-    font-size: $base-size;
-    line-height: 1.25;
+	width: 99%;
+	font-family: $sans-serif;
+	color: #000;
+	padding: 2px;
+	font-size: $base-size;
+	line-height: 1.25;
+	height: 3.5em;
+}
+.suppressVisualEditor {
+	display: none;
+}
+textarea.mce_editable {
+	height: 45em;
 }
 .fieldRequired {
 	color: #f44;
@@ -1251,6 +1258,9 @@ form#periodform {
 }
 div div.kupu-panels {
 	font-size: $smaller-size;
+}
+#cmfeditions_version_comment_block, .fieldUploadFile {
+	display: none;
 }
 
 /* @group Calendar styles */
