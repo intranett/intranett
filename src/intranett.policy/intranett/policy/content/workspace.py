@@ -48,6 +48,15 @@ class TeamWorkspace(ATFolder):
     def membersource(self):
         return getUtility(IVocabularyFactory, name="plone.principalsource.Users")(self)
 
+    security.declarePrivate('userInMemberSource')
+    def userInMemberSource(self, user_id):
+        """Return true if user_id is in member source."""
+        try:
+            self.membersource.getTermByToken(user_id)
+        except LookupError:
+            return False
+        return True
+
     security.declarePrivate('getMembersVocabulary')
     def getMembersVocabulary(self):
         """Return user_id -> fullname DisplayList."""
@@ -60,13 +69,8 @@ class TeamWorkspace(ATFolder):
         """Make sure the current user is always included."""
         user_id = getSecurityManager().getUser().getId()
         value = list(value)
-        if user_id not in value:
-            try:
-                self.membersource.getTermByToken(user_id)
-            except LookupError:
-                pass
-            else:
-                value.append(user_id)
+        if user_id not in value and self.userInMemberSource(user_id):
+            value.append(user_id)
         value.sort()
         self.Schema().getField('members').set(self, value)
 
