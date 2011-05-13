@@ -66,7 +66,6 @@ setup(name='intranett.policy',
           'zope.interface',
           'z3c.unconfigure',
           'intranett.theme',
-          'teamrubber.theoracle',
       ],
       entry_points="""
       [zopectl.command]

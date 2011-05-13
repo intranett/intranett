@@ -24,7 +24,6 @@
 
   <include package=".browser" />
   <include package="collective.subtractiveworkflow" />
-  <include package="teamrubber.theoracle" />
 
   <utility factory=".profile.HiddenProducts" name="intranett.policy" />
 
