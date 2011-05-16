@@ -112,6 +112,15 @@ def enable_secure_cookies(context):
     acl.session._updateProperty('secure', True)
 
 
+def ignore_link_integrity_exceptions(site):
+    error_log = aq_get(site, 'error_log')
+    props = error_log.getProperties()
+    exceptions = props['ignored_exceptions']
+    exceptions = exceptions + ('LinkIntegrityNotificationException', )
+    error_log.setProperties(props['keep_entries'],
+        ignored_exceptions=tuple(sorted(set(exceptions))))
+
+
 @import_step()
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
@@ -129,3 +138,5 @@ def various(context):
     setup_reject_anonymous(site)
     setup_members_folder(site)
     enable_secure_cookies(site)
+    ignore_link_integrity_exceptions(site)
+

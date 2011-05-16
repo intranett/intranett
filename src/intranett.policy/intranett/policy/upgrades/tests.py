@@ -166,3 +166,9 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         portal = self.layer['portal']
         users = portal.users
         self.assertNotEqual(users.Title(), portal.Title())
+
+    def after_26(self):
+        portal = self.layer['portal']
+        error_log = aq_get(portal, 'error_log')
+        exceptions = error_log.getProperties()['ignored_exceptions']
+        self.assertTrue('LinkIntegrityNotificationException' in exceptions)

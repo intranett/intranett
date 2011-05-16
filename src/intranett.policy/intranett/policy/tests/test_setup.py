@@ -225,6 +225,12 @@ class TestSiteSetup(IntranettTestCase):
         acl = aq_get(portal, 'acl_users')
         self.assertEquals(acl.session.getProperty('secure'), True)
 
+    def test_error_log(self):
+        portal = self.layer['portal']
+        error_log = aq_get(portal, 'error_log')
+        exceptions = error_log.getProperties()['ignored_exceptions']
+        self.assertTrue('LinkIntegrityNotificationException' in exceptions)
+
 
 class TestAdmin(IntranettTestCase):
 

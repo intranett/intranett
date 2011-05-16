@@ -215,3 +215,10 @@ def update_users_folder_title(context):
         title = translate(fti.Title(), target_language=site.Language())
         site['users'].setTitle(title)
         site['users'].reindexObject()
+
+
+@upgrade_to(26)
+def ignore_linkintegrity_exceptions(context):
+    from intranett.policy.setuphandlers import ignore_link_integrity_exceptions
+    site = getToolByName(context, 'portal_url').getPortalObject()
+    ignore_link_integrity_exceptions(site)

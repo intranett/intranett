@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Don't send error log mails for link integrity exceptions. Closes #194.
+  [hannosch]
+
 - Reduce the height of text fields for the static text portlet.
   [hannosch]
 
