@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-03-19 16:45+0000\n"
+"POT-Creation-Date: 2011-05-16 09:46+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,6 +79,10 @@ msgstr ""
 #: intranett.policy/intranett/policy/jbot/plone.app.controlpanel.usergroups_usersoverview.pt:108
 msgid "Site Administrator"
 msgstr "Administrator"
+
+#: intranett.policy/intranett/policy/profiles/default/actions.xml
+msgid "Support"
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
 msgid "The most recently published news item"
