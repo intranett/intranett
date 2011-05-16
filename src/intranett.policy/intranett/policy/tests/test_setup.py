@@ -32,7 +32,7 @@ class TestSiteSetup(IntranettTestCase):
         actions = at.listActionInfos(object=portal,
                                      categories=('site_actions', ))
         ids = set([a['id'] for a in actions])
-        self.assertEquals(ids, set(['accessibility']))
+        self.assertEquals(ids, set(['accessibility', 'support']))
 
     def test_manage_users_action(self):
         portal = self.layer['portal']
