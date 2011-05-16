@@ -4,6 +4,10 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Added a simple ZODB cache pre-warmer, to improve the first load experience
+  for customers after software updates. Closes #200.
+  [hannosch]
+
 - Enabled `link-by-uid` for TinyMCE. Closes #206.
   [hannosch]
 
