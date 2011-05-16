@@ -33,6 +33,7 @@
       layer="intranett.theme.browser.interfaces.IThemeSpecific" />
 
   <adapter factory=".caching.EditBarCookie" name="editbar" />
+  <adapter factory=".caching.WorkspaceState" name="workspace" />
 
   <adapter
     for=".tools.MemberData

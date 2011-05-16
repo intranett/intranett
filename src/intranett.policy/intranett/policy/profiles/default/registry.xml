@@ -84,6 +84,7 @@
       <element>locked</element>
       <element>resourceRegistries</element>
       <element>editbar</element>
+      <element>workspace</element>
     </value>
   </record>
   <record name="plone.app.caching.weakCaching.lastModified">
@@ -111,6 +112,7 @@
       <element>locked</element>
       <element>resourceRegistries</element>
       <element>editbar</element>
+      <element>workspace</element>
     </value>
   </record>
   <record name="plone.app.caching.weakCaching.plone.content.folderView.lastModified">

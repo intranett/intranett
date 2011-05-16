@@ -208,4 +208,6 @@ def update_strong_caching_maxage2(context):
 @upgrade_to(25)
 def installWorkspaceType(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('actions', 'typeinfo', 'factorytool', 'workflow', 'portlets', 'catalog'))
+        steps=('actions', 'typeinfo', 'factorytool', 'workflow', 'portlets',
+               'catalog', 'plone.app.registry'))
+
