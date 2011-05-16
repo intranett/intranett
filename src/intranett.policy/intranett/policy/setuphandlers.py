@@ -121,6 +121,13 @@ def ignore_link_integrity_exceptions(site):
         ignored_exceptions=tuple(sorted(set(exceptions))))
 
 
+def enable_link_by_uid(site):
+    from Products.TinyMCE.setuphandlers import install_mimetype_and_transforms
+    tiny = getToolByName(site, 'portal_tinymce')
+    tiny.link_using_uids = True
+    install_mimetype_and_transforms(site)
+
+
 @import_step()
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
@@ -139,4 +146,4 @@ def various(context):
     setup_members_folder(site)
     enable_secure_cookies(site)
     ignore_link_integrity_exceptions(site)
-
+    enable_link_by_uid(site)

@@ -179,3 +179,8 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertTrue('support' in atool.site_actions)
         ids = atool.site_actions.keys()
         self.assertLessEqual(ids.index('accessibility'), ids.index('support'))
+
+    def after_28(self):
+        portal = self.layer['portal']
+        tiny = getToolByName(portal, 'portal_tinymce')
+        self.assertTrue(tiny.link_using_uids, True)

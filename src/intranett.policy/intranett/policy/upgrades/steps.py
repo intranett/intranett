@@ -228,3 +228,10 @@ def ignore_linkintegrity_exceptions(context):
 def add_help_site_action(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('actions', ))
+
+
+@upgrade_to(28)
+def enable_link_by_uid(context):
+    from intranett.policy.setuphandlers import enable_link_by_uid
+    site = getToolByName(context, 'portal_url').getPortalObject()
+    enable_link_by_uid(site)
