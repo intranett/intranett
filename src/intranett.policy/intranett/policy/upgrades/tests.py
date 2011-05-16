@@ -161,3 +161,8 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         registry = queryUtility(IRegistry)
         key = 'plone.app.caching.strongCaching.plone.resource.maxage'
         self.assertTrue(registry.get(key) >= 604800)
+
+    def after_25(self):
+        portal = self.layer['portal']
+        users = portal.users
+        self.assertNotEqual(users.Title(), portal.Title())

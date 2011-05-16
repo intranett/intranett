@@ -4,6 +4,10 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Fix the title of the employee listing, which accidentally got overridden by
+  the site title. Closes #211.
+  [hannosch]
+
 - Update to munin.zope = 1.2.
   [ggozad]
 

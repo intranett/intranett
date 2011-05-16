@@ -4,6 +4,7 @@ from plutonian.gs import upgrade_to
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
 from zope.component import queryUtility
+from zope.i18n import translate
 
 
 @upgrade_to(7)
@@ -203,3 +204,14 @@ def update_strong_caching_maxage(context):
 def update_strong_caching_maxage2(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('plone.app.registry', ))
+
+
+@upgrade_to(25)
+def update_users_folder_title(context):
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    fti = getToolByName(site, 'portal_types')['MembersFolder']
+    if 'users' in site:
+        title = translate(fti.Title(), target_language=site.Language())
+        site['users'].setTitle(title)
+        site['users'].reindexObject()
