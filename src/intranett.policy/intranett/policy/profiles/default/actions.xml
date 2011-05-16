@@ -5,7 +5,8 @@
   <object name="review-comments">
    <property name="visible">False</property>
   </object>
-  <object name="manage_users" meta_type="CMF Action" i18n:domain="intranett" insert-before="logout">
+  <object name="manage_users" meta_type="CMF Action" i18n:domain="intranett"
+          insert-before="logout">
    <property name="title" i18n:translate="">Manage users</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:$portal_url/@@usergroup-userprefs</property>
@@ -16,27 +17,27 @@
   </object>
  </object>
  <object name="site_actions">
-     <object name="support" meta_type="CMF Action" i18n:domain="intranett">
-      <property name="title" i18n:translate="">Support</property>
-      <property name="description" i18n:translate=""></property>
-      <property name="url_expr">string:http://hjelp.intranett.no</property>
-      <property name="link_target"></property>
-      <property name="icon_expr"></property>
-      <property name="available_expr"></property>
-      <property name="permissions">
-       <element value="View"/>
-      </property>
-      <property name="visible">True</property>
-     </object>
-     
-  <object name="sitemap" meta_type="CMF Action">
-   <property name="visible">False</property>
-  </object>
+   <object name="sitemap" meta_type="CMF Action">
+    <property name="visible">False</property>
+   </object>
   <object name="contact" meta_type="CMF Action">
    <property name="visible">False</property>
   </object>
   <object name="plone_setup" meta_type="CMF Action">
    <property name="visible">False</property>
+  </object>
+  <object name="support" meta_type="CMF Action" i18n:domain="intranett"
+          insert-after="plone_setup">
+   <property name="title" i18n:translate="">Support</property>
+   <property name="description"></property>
+   <property name="url_expr">string:http://hjelp.intranett.no</property>
+   <property name="link_target"></property>
+   <property name="icon_expr"></property>
+   <property name="available_expr"></property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
   </object>
  </object>
  <object name="portal_tabs" meta_type="CMF Action Category">

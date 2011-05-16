@@ -172,3 +172,10 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         error_log = aq_get(portal, 'error_log')
         exceptions = error_log.getProperties()['ignored_exceptions']
         self.assertTrue('LinkIntegrityNotificationException' in exceptions)
+
+    def after_27(self):
+        portal = self.layer['portal']
+        atool = getToolByName(portal, 'portal_actions')
+        self.assertTrue('support' in atool.site_actions)
+        ids = atool.site_actions.keys()
+        self.assertLessEqual(ids.index('accessibility'), ids.index('support'))

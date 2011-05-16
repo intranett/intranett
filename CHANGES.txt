@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Added a site action link to `hjelp.intranett.no`.
+  [martior, hannosch]
+
 - Don't send error log mails for link integrity exceptions. Closes #194.
   [hannosch]
 

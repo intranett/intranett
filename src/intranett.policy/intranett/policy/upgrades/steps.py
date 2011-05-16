@@ -222,3 +222,9 @@ def ignore_linkintegrity_exceptions(context):
     from intranett.policy.setuphandlers import ignore_link_integrity_exceptions
     site = getToolByName(context, 'portal_url').getPortalObject()
     ignore_link_integrity_exceptions(site)
+
+
+@upgrade_to(27)
+def add_help_site_action(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('actions', ))
