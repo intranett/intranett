@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Update to munin.zope = 1.2.
+  [ggozad]
+
 - Increase the default height of text fields from 20 to about 40 lines.
   [hannosch]
 
