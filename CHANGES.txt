@@ -4,7 +4,7 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
-- Enabled `link-by-uid` for TinyMCE.
+- Enabled `link-by-uid` for TinyMCE. Closes #206.
   [hannosch]
 
 - Added a site action link to `hjelp.intranett.no`.
