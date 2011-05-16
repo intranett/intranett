@@ -4,6 +4,9 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Reduce the height of text fields for the static text portlet.
+  [hannosch]
+
 - Fix the title of the employee listing, which accidentally got overridden by
   the site title. Closes #211.
   [hannosch]
