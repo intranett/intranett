@@ -10,10 +10,10 @@
     </dt>
     <dd class="portletItem odd">
       
-      <span class="portletItemDetails" tal:condition="python:view.state=='public'" i18n:translate="public_workspace_access">
+      <span class="portletItemDetails" tal:condition="python:view.state=='published'" i18n:translate="public_workspace_access">
           All intranet users can see this workspace. Only members can edit content.
       </span>
-      <span class="portletItemDetails" tal:condition="python:view.state=='private'" i18n:translate="public_workspace_access">
+      <span class="portletItemDetails" tal:condition="python:view.state=='private'" i18n:translate="private_workspace_access">
           Only members of this workspace can see it or edit content.
       </span>
     

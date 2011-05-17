@@ -35,10 +35,9 @@ class Renderer(base.Renderer):
     def update(self):
         if not self.available:
             return
-        wf = getToolByName(self.context, 'portal_workflow')
         mt = getToolByName(self.context, 'portal_membership')
         ws = self.context.getWorkspace()
-        self.state = wf.getInfoFor(ws, "workspace_visibility")
+        self.state = ws.getWorkspaceState()
         self.title = ws.Title()
         members = (mt.getMemberById(x) for x in ws.members)
         self.members = tuple(x.getProperty("fullname") or x.getId() for x in members)

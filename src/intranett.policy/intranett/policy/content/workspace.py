@@ -112,6 +112,7 @@ class WorkspaceMembershipRoles(object):
 
 
 def triggerAutomaticTransitions(context, action):
+    """Transition objects when they have been moved."""
     if IObjectAddedEvent.providedBy(action):
         return
     if IObjectRemovedEvent.providedBy(action):
@@ -119,19 +120,15 @@ def triggerAutomaticTransitions(context, action):
 
     wf = getattr(context, 'portal_workflow', None)
     try:
-        wf.doActionFor(context, "noop")
+        wf.doActionFor(context, "auto")
     except (WorkflowException, AttributeError):
         pass
 
 
 def transitionChildren(context, action):
-    if action.action == "publish":
-        subaction = "unprotect"
-    elif action.action == "hide":
-        subaction = "protect"
-    else:
-        return None
-    transitionObjectsByPaths(context, subaction, ["/".join(context.getPhysicalPath())])
+    """Transition children when the workspace state has changed."""
+    if action.action in ('publish' 'hide'):
+        transitionObjectsByPaths(context, 'auto', ['/'.join(context.getPhysicalPath())])
 
 
 def transitionObjectsByPaths(context, workflow_action, paths):
@@ -153,6 +150,7 @@ def transitionObjectsByPaths(context, workflow_action, paths):
 
 
 def reindexChildren(context, action):
+    """Reindex children when the workspace membership has changed."""
     reindexObjectsByPaths(context, ["/".join(context.getPhysicalPath())])
 
 
