@@ -327,7 +327,7 @@ class TestWorkspaceStatePortlet(IntranettTestCase):
         r = r.__of__(workspace)
         r.update()
 
-        self.assertEqual(r.state, 'public')
+        self.assertEqual(r.state, 'published')
         self.assertEqual(r.members, ('test_user_1_', ))
 
     def test_member_fullname_shown(self):
@@ -345,7 +345,7 @@ class TestWorkspaceStatePortlet(IntranettTestCase):
         r = r.__of__(workspace)
         r.update()
 
-        self.assertEqual(r.state, 'public')
+        self.assertEqual(r.state, 'published')
         self.assertEqual(r.members, ('test_user_1_', ))
 
     def test_outside_workspace_no_portlet_rendered(self):
