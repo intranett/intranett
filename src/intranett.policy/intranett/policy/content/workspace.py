@@ -111,23 +111,44 @@ class WorkspaceMembershipRoles(object):
         return [(member, self.getRoles(member)) for member in self.context.members]
 
 
+def fixupOwnerPermissions(context, action):
+    """Owner role should not have permissions inside a workspace."""
+    if getattr(context, 'getWorkspaceState', None) is not None:
+        if action.action in ('auto',):
+            for perm in ('View', 'Access contents information',
+                         'Modify portal content', 'Change portal events'):
+                try:
+                    roles = context.rolesOfPermission(perm)
+                except ValueError:
+                    pass # Invalid permission!?
+                else:
+                    roles = [x['name'] for x in roles if x['selected']]
+                    if 'Owner' in roles:
+                        roles.remove('Owner')
+                        context.manage_permission(perm, roles, acquire=0)
+
+
 def triggerAutomaticTransitions(context, action):
     """Transition objects when they have been moved."""
     if IObjectAddedEvent.providedBy(action):
         return
     if IObjectRemovedEvent.providedBy(action):
         return
-
     wf = getattr(context, 'portal_workflow', None)
-    try:
-        wf.doActionFor(context, "auto")
-    except (WorkflowException, AttributeError):
-        pass
+
+    # If an object is moved out of a workspace, make it private
+    if getattr(action.oldParent, 'getWorkspaceState', None) is not None and \
+       getattr(action.newParent, 'getWorkspaceState', None) is None:
+        wf.doActionFor(context, "hide")
+        return
+
+    # In all other cases the automatic transitions do the right thing
+    wf.doActionFor(context, "auto")
 
 
 def transitionChildren(context, action):
     """Transition children when the workspace state has changed."""
-    if action.action in ('publish' 'hide'):
+    if action.action in ('publish', 'hide'):
         transitionObjectsByPaths(context, 'auto', ['/'.join(context.getPhysicalPath())])
 
 

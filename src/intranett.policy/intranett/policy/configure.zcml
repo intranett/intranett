@@ -76,13 +76,18 @@
            Products.CMFCore.interfaces.IActionSucceededEvent" />
 
   <subscriber
+      handler=".content.workspace.reindexChildren"
+      for="intranett.policy.interfaces.ITeamWorkspace
+           Products.Archetypes.interfaces.IObjectEditedEvent" />
+
+  <subscriber
       handler=".content.workspace.triggerAutomaticTransitions"
       for="Products.ATContentTypes.interfaces.IATContentType
            zope.container.interfaces.IObjectMovedEvent" />
 
   <subscriber
-      handler=".content.workspace.reindexChildren"
-      for="intranett.policy.interfaces.ITeamWorkspace
-           Products.Archetypes.interfaces.IObjectEditedEvent" />
+      handler=".content.workspace.fixupOwnerPermissions"
+      for="Products.ATContentTypes.interfaces.IATContentType
+           Products.CMFCore.interfaces.IActionSucceededEvent" />
 
 </configure>
