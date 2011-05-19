@@ -5,6 +5,7 @@
  <permission>Modify portal content</permission>
  <permission>View</permission>
  <state state_id="private" title="Private">
+  <exit-transition transition_id="auto"/>
   <exit-transition transition_id="autoprotect"/>
   <exit-transition transition_id="autopublish"/>
   <exit-transition transition_id="publish"/>
@@ -40,6 +41,7 @@
  <state state_id="protected" title="Protected">
   <exit-transition transition_id="auto"/>
   <exit-transition transition_id="autopublish"/>
+  <exit-transition transition_id="hide"/>
   <permission-map name="Access contents information" acquired="True">
    <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
