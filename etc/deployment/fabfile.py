@@ -62,9 +62,12 @@ def restore_db():
         run('bin/supervisorctl start varnish')
 
 
-def dump_db():
+def dump_db(snapshot=True):
     with cd(VENV):
-        run('bin/snapshotbackup')
+        if snapshot:
+            run('bin/snapshotbackup')
+        else:
+            run('bin/backup')
         run('tar c var/blobstorage/ | gzip --fast > '
             'var/snapshotbackups/%s-blobstorage.tgz' %
             (datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S")))
@@ -329,7 +332,7 @@ def _latest_git_tag():
 def _prepare_update(newest=True, backup=True):
     envvars = _set_environment_vars()
     if backup:
-        dump_db()
+        dump_db(snapshot=False)
     _git_update()
     _buildout(envvars=envvars, newest=newest)
 
