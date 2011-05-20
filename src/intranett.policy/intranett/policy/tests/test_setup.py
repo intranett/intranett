@@ -240,7 +240,8 @@ class TestSiteSetup(IntranettTestCase):
         policies = transform_utility.listPolicies()
         policies = [(mimetype, required) for (mimetype, required) in policies
             if mimetype == "text/x-html-safe"]
-        self.assertEqual(policies[0][1], ('html_to_tinymce_output_html', ))
+        self.assertEqual(policies[0][1],
+            ('html_to_plone_outputfilters_html', ))
 
 
 class TestAdmin(IntranettTestCase):

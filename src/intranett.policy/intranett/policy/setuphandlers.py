@@ -79,7 +79,7 @@ def setup_default_groups(site):
     gtool = getToolByName(site, 'portal_groups')
     # We could add more groups like this:
     # gtool.addGroup('Users', title='Users', roles=['Member'])
-    gtool.removeGroups(['Administrators', 'Reviewers'])
+    gtool.removeGroups(['Administrators', 'Reviewers', 'Site Administrators'])
 
 
 def setup_reject_anonymous(site):
