@@ -18,7 +18,7 @@
                 <th>Project / Customer</th>
                 <th>Package / Contract</th>
                 <th>Billable hours</th>
-                <th></th>
+                <th>Status</th>
             </thead>
             <tbody>
                 <tal:loop tal:repeat="item python:catalog(portal_type=['ExtropyPhase', 'Contract'], review_state=['active', 'prospective', 'closable'], sort_on='getProjectTitle')">
