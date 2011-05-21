@@ -1,6 +1,6 @@
 <tal:comment replace="nothing">
   This script is used by Tom Lazar. Ask him before changing anything here.
-<tal:comment/>
+</tal:comment>
 <pre tal:define="portal_properties context/portal_properties;
                  object_title string:Timesheet;
                  putils context/plone_utils;
