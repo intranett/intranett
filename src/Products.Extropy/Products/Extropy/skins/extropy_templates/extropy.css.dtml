@@ -1,3 +1,7 @@
+body.template-projects_listing .documentByLine {
+    display: none;
+}
+
 option[disabled] {
     color: grey;
 }
