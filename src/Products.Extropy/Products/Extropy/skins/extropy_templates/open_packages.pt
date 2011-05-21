@@ -37,7 +37,7 @@
                         <td style="text-align:right">
                             <span tal:define="subtotal python:etool.countIntervalHours(obj, getBudgetCategory='Billable', review_state='entered');
                                               global total python:total+subtotal;"
-                                  tal:content="python:int(subtotal)" />
+                                  tal:content="python: '%.1f' % subtotal" />
                         </td>
                     <td tal:content="item/review_state"></td>
 
