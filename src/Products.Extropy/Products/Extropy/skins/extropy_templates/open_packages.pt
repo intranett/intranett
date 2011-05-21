@@ -21,7 +21,7 @@
                 <th></th>
             </thead>
             <tbody>
-                <tal:loop tal:repeat="item python:catalog(portal_type=['ExtropyPhase', 'Contract'], review_state=['active', 'prospective', 'closable'])">
+                <tal:loop tal:repeat="item python:catalog(portal_type=['ExtropyPhase', 'Contract'], review_state=['active', 'prospective', 'closable'], sort_on='getProjectTitle')">
                     <tr tal:define="obj item/getObject"
                         tal:condition="python:obj.getBudgetCategory()=='Billable'">
 
