@@ -11,12 +11,12 @@
                     etool nocall:here/extropy_timetracker_tool;
                     global total python:0">
 
-        <h2>Open packages and contracts</h2>
+        <h2>Open contracts</h2>
 
         <table class="listing">
             <thead>
-                <th>Project / Customer</th>
-                <th>Package / Contract</th>
+                <th>Customer</th>
+                <th>Contract</th>
                 <th>Billable hours</th>
                 <th>Status</th>
             </thead>
