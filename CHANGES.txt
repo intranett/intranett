@@ -4,6 +4,10 @@ Changelog
 1.2.5 - unreleased
 ------------------
 
+- Get new plone.cachepurging to avoid lingering threads on shutdown which
+  prevented the Jenkins from running.
+  [hannosch]
+
 - Added a simple ZODB cache pre-warmer, to improve the first load experience
   for customers after software updates. Closes #200.
   [hannosch]
