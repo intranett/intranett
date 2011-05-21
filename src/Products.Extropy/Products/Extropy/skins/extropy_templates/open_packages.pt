@@ -2,18 +2,27 @@
       xml:lang="en"
       lang="en"
       i18n:domain="extropy"
-      metal:use-macro="here/main_template/macros/master">
+      metal:use-macro="context/main_template/macros/master">
   <head>
   </head>
   <body>
-    <div metal:fill-slot="main"
+    <metal:content metal:fill-slot="content"
           tal:define="catalog nocall:here/extropy_tracking_tool;
-                    etool nocall:here/extropy_timetracker_tool;
-                    global total python:0">
+                      etool nocall:here/extropy_timetracker_tool;
+                      global total python:0">
 
-        <h2>Open contracts</h2>
+      <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+        Portal status message
+      </div>
 
-        <table class="listing">
+      <article id="content">
+
+        <header>
+          <h1 class="documentFirstHeading">Open contracts</h1>
+        </header>
+
+        <div id="content-core">
+          <table class="listing">
             <thead>
                 <th>Customer</th>
                 <th>Contract</th>
@@ -52,10 +61,10 @@
                     <th></th>
                 </tr>
             </tfoot>
+          </table>
+        </div>
 
-        </table>
-
-
-    </div>
+      </article>
+    </metal:content>
   </body>
 </html>
