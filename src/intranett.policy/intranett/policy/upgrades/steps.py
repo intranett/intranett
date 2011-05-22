@@ -275,8 +275,7 @@ def cleanup_plone41(context):
         skins.selections[key] = new
     # UID index only supports string criteria
     portal_atct = getToolByName(context, 'portal_atct')
-    portal_atct.topic_indexes['UID'].criteria = \
-        ('ATSimpleStringCriterion', )
+    portal_atct.topic_indexes['UID'].criteria = ('ATSimpleStringCriterion', )
     # CSS
     css = getToolByName(context, 'portal_css')
     css.moveResourceAfter(
