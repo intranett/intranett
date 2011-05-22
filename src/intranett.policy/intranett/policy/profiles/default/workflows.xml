@@ -5,5 +5,6 @@
   <default>
    <bound-workflow workflow_id="intranett_workflow"/>
   </default>
+  <type type_id="Discussion Item"/>
  </bindings>
 </object>

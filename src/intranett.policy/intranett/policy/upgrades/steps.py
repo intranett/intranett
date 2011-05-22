@@ -294,3 +294,11 @@ def cleanup_plone41(context):
     from plone.app.upgrade.v41.alphas import update_controlpanel_permissions
     update_role_mappings(context)
     update_controlpanel_permissions(context)
+    # handle security
+    loadMigrationProfile(context, 'profile-Products.CMFPlone:plone',
+        steps=('rolemap', 'workflow', ))
+    loadMigrationProfile(context, 'profile-plone.app.discussion:default',
+        steps=('workflow', ))
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', 'workflow', ))
+    update_role_mappings(context)
