@@ -235,3 +235,32 @@ def enable_link_by_uid(context):
     from intranett.policy.setuphandlers import enable_link_by_uid
     site = getToolByName(context, 'portal_url').getPortalObject()
     enable_link_by_uid(site)
+
+
+@upgrade_to(29)
+def cleanup_plone41(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('languagetool', ))
+    # unregister persistent steps
+    registry = context.getImportStepRegistry()
+    for step in ('mimetypes-registry-various', 'plonepas'):
+        if step in registry._registered:
+            registry.unregisterStep(step)
+    context._p_changed = True
+    # remove `Site Administrators` group
+    gtool = getToolByName(context, 'portal_groups')
+    gtool.removeGroups(['Site Administrators'])
+    # reorder new external_login properties
+    ptool = getToolByName(context, 'portal_properties')
+    sprops = ptool.site_properties
+    sprops._setProperty('external_login_iframe', False, type='boolean')
+    _properties = []
+    use_folder_tabs = None
+    for p in sprops._properties:
+        if p['id'] == 'use_folder_tabs':
+            use_folder_tabs = p
+        else:
+            _properties.append(p)
+    _properties.append(use_folder_tabs)
+    sprops._properties = tuple(_properties)
+    sprops._p_changed = True
