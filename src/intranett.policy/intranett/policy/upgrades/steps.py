@@ -287,3 +287,6 @@ def cleanup_plone41(context):
         '++resource++plone.app.jquerytools.overlays.css')
     res = css.getResource('++resource++plone.app.jquerytools.overlays.css')
     res.setEnabled(False)
+    # actions
+    actions = getToolByName(context, 'portal_actions')
+    del actions.user['plone_setup']
