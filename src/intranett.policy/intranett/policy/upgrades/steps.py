@@ -253,7 +253,9 @@ def cleanup_plone41(context):
     context._p_changed = True
     # remove `Site Administrators` group
     gtool = getToolByName(context, 'portal_groups')
-    gtool.removeGroups(['Site Administrators'])
+    ids = gtool.getGroupIds()
+    if 'Site Administrators' in ids:
+        gtool.removeGroups(['Site Administrators'])
     # reorder new external_login properties
     ptool = getToolByName(context, 'portal_properties')
     sprops = ptool.site_properties
