@@ -239,6 +239,8 @@ def enable_link_by_uid(context):
 
 @upgrade_to(29)
 def cleanup_plone41(context):
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('languagetool', ))
     loadMigrationProfile(context, 'profile-plone.app.jquerytools:default',
@@ -301,4 +303,13 @@ def cleanup_plone41(context):
         steps=('workflow', ))
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('rolemap', 'workflow', ))
+    from intranett.policy.setuphandlers import disallow_sendto
+    from intranett.policy.setuphandlers import restrict_siteadmin
+    disallow_sendto(site)
+    restrict_siteadmin(site)
     update_role_mappings(context)
+    # handle kupu
+    perm_id = 'FTP access'
+    site.manage_permission(perm_id, roles=['Manager'], acquire=1)
+    delattr(site, '_Kupu__Manage_libraries_Permission')
+    delattr(site, '_Kupu__Query_libraries_Permission')

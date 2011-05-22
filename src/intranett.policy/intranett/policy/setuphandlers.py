@@ -129,6 +129,11 @@ def enable_link_by_uid(site):
     install_mimetype_and_transforms(site)
 
 
+def restrict_siteadmin(site):
+    perm_id = 'FTP access'
+    site.manage_permission(perm_id, roles=['Manager'], acquire=1)
+
+
 @import_step()
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
@@ -148,3 +153,4 @@ def various(context):
     enable_secure_cookies(site)
     ignore_link_integrity_exceptions(site)
     enable_link_by_uid(site)
+    restrict_siteadmin(site)

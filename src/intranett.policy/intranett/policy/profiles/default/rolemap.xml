@@ -75,22 +75,37 @@
       <role name="Site Administrator"/>
       <role name="Manager" />
     </permission>
-    <permission name="Allow sendto" acquire="False">
+    <permission name="Add portal events" acquire="True">
       <role name="Manager"/>
-      <role name="Member"/>
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="CMFEditions: Access previous versions" acquire="True">
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="CMFEditions: Apply version control" acquire="True">
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="CMFEditions: Checkout to location" acquire="True">
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="CMFEditions: Revert to previous versions" acquire="True">
+      <role name="Site Administrator"/>
+    </permission>
+    <permission name="CMFEditions: Save new version" acquire="True">
       <role name="Site Administrator"/>
     </permission>
     <permission name="Content rules: Manage rules" acquire="False">
       <role name="Manager"/>
+    </permission>
+    <permission name="Copy or Move" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
     </permission>
     <permission name="Delete objects" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>
       <role name="Editor"/>
-    </permission>
-    <permission name="FTP access" acquire="True">
-      <role name="Manager"/>
     </permission>
     <permission name="List folder contents" acquire="True">
       <role name="Manager"/>
@@ -99,16 +114,23 @@
       <role name="Editor" />
       <role name="Contributor" />
     </permission>
+    <permission name="List portal members" acquire="True">
+      <role name="Manager"/>
+      <role name="Member"/>
+      <role name="Site Administrator"/>
+    </permission>
     <permission name="List undoable changes" acquire="True">
       <role name="Manager"/>
       <role name="Member"/>
     </permission>
-    <permission name="Mail forgotten password" acquire="True">
-      <role name="Manager"/>
-    </permission>
     <permission name="Manage Groups" acquire="True">
       <role name="Site Administrator"/>
       <role name="Manager" />
+    </permission>
+    <permission name="Manage properties" acquire="True">
+      <role name="Editor"/>
+      <role name="Manager"/>
+      <role name="Owner"/>
     </permission>
     <permission name="Manage users" acquire="True">
       <role name="Site Administrator"/>
