@@ -259,7 +259,9 @@ def cleanup_plone41(context):
     # reorder new external_login properties
     ptool = getToolByName(context, 'portal_properties')
     sprops = ptool.site_properties
-    sprops._setProperty('external_login_iframe', False, type='boolean')
+    ids = sprops.propertyIds()
+    if 'external_login_iframe' not in ids:
+        sprops._setProperty('external_login_iframe', False, type='boolean')
     _properties = []
     use_folder_tabs = None
     for p in sprops._properties:
@@ -292,7 +294,8 @@ def cleanup_plone41(context):
     res.setEnabled(False)
     # actions
     actions = getToolByName(context, 'portal_actions')
-    del actions.user['plone_setup']
+    if 'plone_setup' in actions.user:
+        del actions.user['plone_setup']
     # XXX these can go once p.a.upgrade 1.1rc2+ is released
     from plone.app.upgrade.v41.alphas import update_role_mappings
     from plone.app.upgrade.v41.alphas import update_controlpanel_permissions
@@ -310,8 +313,11 @@ def cleanup_plone41(context):
     disallow_sendto(site)
     restrict_siteadmin(site)
     update_role_mappings(context)
-    # handle kupu
     perm_id = 'FTP access'
     site.manage_permission(perm_id, roles=['Manager'], acquire=1)
-    delattr(site, '_Kupu__Manage_libraries_Permission')
-    delattr(site, '_Kupu__Query_libraries_Permission')
+    # handle kupu
+    try:
+        delattr(site, '_Kupu__Manage_libraries_Permission')
+        delattr(site, '_Kupu__Query_libraries_Permission')
+    except AttributeError:
+        pass
