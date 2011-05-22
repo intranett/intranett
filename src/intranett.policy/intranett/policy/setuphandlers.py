@@ -122,7 +122,8 @@ def ignore_link_integrity_exceptions(site):
 
 
 def enable_link_by_uid(site):
-    from Products.TinyMCE.setuphandlers import install_mimetype_and_transforms
+    from plone.outputfilters.setuphandlers import \
+        install_mimetype_and_transforms
     tiny = getToolByName(site, 'portal_tinymce')
     tiny.link_using_uids = True
     install_mimetype_and_transforms(site)
