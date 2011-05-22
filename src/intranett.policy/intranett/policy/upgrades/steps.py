@@ -290,3 +290,8 @@ def cleanup_plone41(context):
     # actions
     actions = getToolByName(context, 'portal_actions')
     del actions.user['plone_setup']
+    # XXX these can go once p.a.upgrade 1.1rc2+ is released
+    from plone.app.upgrade.v41.alphas import update_role_mappings
+    from plone.app.upgrade.v41.alphas import update_controlpanel_permissions
+    update_role_mappings(context)
+    update_controlpanel_permissions(context)
