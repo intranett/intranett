@@ -264,3 +264,10 @@ def cleanup_plone41(context):
     _properties.append(use_folder_tabs)
     sprops._properties = tuple(_properties)
     sprops._p_changed = True
+    # take care of skin layers
+    skins = getToolByName(context, 'portal_skins')
+    for key, value in skins.selections.items():
+        new = value.replace('LanguageTool,', '')
+        new = new.replace('PloneFormGen,tinymce,referencebrowser,',
+            'PloneFormGen,referencebrowser,tinymce,LanguageTool,')
+        skins.selections[key] = new
