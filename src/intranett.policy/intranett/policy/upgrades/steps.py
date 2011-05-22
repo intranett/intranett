@@ -241,6 +241,8 @@ def enable_link_by_uid(context):
 def cleanup_plone41(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('languagetool', ))
+    loadMigrationProfile(context, 'profile-plone.app.jquerytools:default',
+        steps=('cssregistry', 'jsregistry', ))
     # unregister persistent steps
     registry = context.getImportStepRegistry()
     for step in ('mimetypes-registry-various', 'plonepas'):
@@ -271,3 +273,17 @@ def cleanup_plone41(context):
         new = new.replace('PloneFormGen,tinymce,referencebrowser,',
             'PloneFormGen,referencebrowser,tinymce,LanguageTool,')
         skins.selections[key] = new
+    # UID index only supports string criteria
+    portal_atct = getToolByName(context, 'portal_atct')
+    portal_atct.topic_indexes['UID'].criteria = \
+        ('ATSimpleStringCriterion', )
+    # CSS
+    css = getToolByName(context, 'portal_css')
+    css.moveResourceAfter(
+        '++resource++plone.app.discussion.stylesheets/discussion.css',
+        '++resource++plone.formwidget.autocomplete/jquery.autocomplete.css')
+    css.moveResourceAfter(
+        '++resource++plone.app.jquerytools.dateinput.css',
+        '++resource++plone.app.jquerytools.overlays.css')
+    res = css.getResource('++resource++plone.app.jquerytools.overlays.css')
+    res.setEnabled(False)
