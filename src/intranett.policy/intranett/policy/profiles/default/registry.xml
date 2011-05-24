@@ -80,7 +80,7 @@
     <value>
       <element>userid</element>
       <element>language</element>
-      <element>lastModified</element>
+      <element>catalogCounter</element>
       <element>locked</element>
       <element>resourceRegistries</element>
       <element>editbar</element>
@@ -96,22 +96,6 @@
       <title>Only cache for anonymous users</title>
     </field>
     <value>False</value>
-  </record>
-  <record name="plone.app.caching.weakCaching.plone.content.folderView.etags">
-    <field type="plone.registry.field.Tuple">
-      <description>A list of ETag component names to include</description>
-      <required>False</required>
-      <title>ETags</title>
-      <value_type type="plone.registry.field.ASCIILine" />
-    </field>
-    <value>
-      <element>userid</element>
-      <element>language</element>
-      <element>catalogCounter</element>
-      <element>locked</element>
-      <element>resourceRegistries</element>
-      <element>editbar</element>
-    </value>
   </record>
   <record name="plone.app.caching.weakCaching.plone.content.folderView.lastModified">
     <field type="plone.registry.field.Bool">

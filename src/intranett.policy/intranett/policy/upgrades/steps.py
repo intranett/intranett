@@ -242,7 +242,7 @@ def cleanup_plone41(context):
     url_tool = getToolByName(context, 'portal_url')
     site = url_tool.getPortalObject()
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('languagetool', ))
+        steps=('languagetool', 'plone.app.registry', ))
     loadMigrationProfile(context, 'profile-plone.app.jquerytools:default',
         steps=('cssregistry', 'jsregistry', ))
     # unregister persistent steps
