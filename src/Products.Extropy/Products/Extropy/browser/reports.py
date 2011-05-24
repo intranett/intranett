@@ -1,8 +1,8 @@
-from re import search
 from zope import interface
 from Products import Five
 from DateTime import DateTime
 from Products.CMFCore import utils as cmf_utils
+from Products.Extropy.utils import activity
 
 
 # Iterators used by the view
@@ -13,7 +13,7 @@ class ReportKey:
     def __init__(self, key, data=None):
         self.keyname = str(key)
         if key == 'activity' and data is not None:
-            self.activity(key, data)
+            self.key = activity(data)
         elif data is None:
             self.key = key
         else:
@@ -24,27 +24,6 @@ class ReportKey:
             if callable(nodekey):
                 nodekey = nodekey()
             self.key = nodekey
-
-    def activity(self, key, data):
-        # Group by task/activity typically indicated by #455 or keywords like
-        # meeting, discussion, mgmt/management, test, release in Title
-        nodekey = data
-        nodekey = getattr(nodekey, 'Title')
-        if callable(nodekey):
-            nodekey = nodekey()
-        m = search('(^#?|#)(\d+)', nodekey)
-        if m:
-            self.key = m.group(2)
-        elif search('[Rr]elease', nodekey):
-            self.key = 'Release'
-        elif search('[Pp]lan(ing|ed|\s)|[Mm]eeting|[Dd]iscuss(ion|ed|\s)', nodekey):
-            self.key = 'Communication'
-        elif search('[Mm](anage(ment|d|\s)|gmt)', nodekey):
-            self.key = 'Project mgmt'
-        elif search('[Tt]est(ing|ed|\s)', nodekey):
-            self.key = 'Testing'
-        else:
-            self.key = 'Other'
 
     def __hash__(self):
         # XXX Add mutable check somewhere

@@ -92,6 +92,13 @@
       menu="timereport"
       />
 
+  <browser:page
+      name="csv_hours_report"
+      title="CSV report of this selection"
+      attribute="csv_hours_report"
+      menu="timereport"
+      />
+
 </browser:pages>
 
 <browser:view

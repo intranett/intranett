@@ -14,13 +14,13 @@ class TestTimeReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         hour = 1.0/24.0
         now = DateTime()
         _createObjectByType('ExtropyHours', self.folder, 'hours1',
-                            title='Hour entry 1',
+                            title='Hour entry #1',
                             budgetCategory='Billable',
                             startDate=now - (hour * 2),
                             endDate=now
                             )
         _createObjectByType('ExtropyHours', self.folder, 'hours2',
-                            title='Hour entry 2',
+                            title='Hour entry #2',
                             budgetCategory='Administration',
                             startDate=now - (hour * 4),
                             endDate=now - (hour * 2)
@@ -34,8 +34,8 @@ class TestTimeReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         from Products.Five.security import newInteraction
         newInteraction()
         html = self.getView('timereport')()
-        self.assertTrue('Hour entry 1' in html)
-        self.assertTrue('Hour entry 2' in html)
+        self.assertTrue('Hour entry #1' in html)
+        self.assertTrue('Hour entry #2' in html)
         self.assertTrue('Billable' in html)
         self.assertTrue('Administration' in html)
         self.assertTrue('2.0' in html)
@@ -74,10 +74,17 @@ class TestTimeReportViews(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
 
     def testEmailHoursReport(self):
         text = self.getView('email_hours_report')()
-        self.assertTrue('Hour entry 1' in text)
-        self.assertTrue('Hour entry 2' in text)
+        self.assertTrue('Hour entry #1' in text)
+        self.assertTrue('Hour entry #2' in text)
         self.assertTrue('2.0' in text)
         self.assertTrue('4.0' in text)
+
+    def testCSVHoursReport(self):
+        text = self.getView('csv_hours_report')()
+        self.assertTrue('start,duration,activity,title' in text)
+        self.assertTrue('2.0,2,"Hour entry #2"' in text)
+        self.assertTrue('2.0,1,"Hour entry #1"' in text)
+
 
 def test_suite():
     from unittest import TestSuite, makeSuite
