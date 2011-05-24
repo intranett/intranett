@@ -130,7 +130,11 @@ def enable_link_by_uid(site):
 
 
 def restrict_siteadmin(site):
-    perm_ids = ('Content rules: Manage rules', 'FTP access', )
+    perm_ids = (
+        'Content rules: Manage rules',
+        'FTP access',
+        'View management screens',
+        )
     for perm_id in perm_ids:
         site.manage_permission(perm_id, roles=['Manager'], acquire=1)
 

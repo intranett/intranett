@@ -4,10 +4,6 @@
     <role name="Site Administrator"/>
   </roles>
   <permissions>
-    <permission name="Add Groups" acquire="True">
-      <role name="Site Administrator"/>
-      <role name="Manager" />
-    </permission>
     <permission name="CMFEditions: Access previous versions" acquire="True">
       <role name="Site Administrator"/>
     </permission>
@@ -23,56 +19,10 @@
     <permission name="CMFEditions: Save new version" acquire="True">
       <role name="Site Administrator"/>
     </permission>
-    <permission name="Copy or Move" acquire="True">
-      <role name="Manager"/>
-      <role name="Site Administrator"/>
-    </permission>
-    <permission name="Delete objects" acquire="True">
-      <role name="Manager"/>
-      <role name="Site Administrator"/>
-      <role name="Owner"/>
-      <role name="Editor"/>
-    </permission>
-    <permission name="List folder contents" acquire="True">
-      <role name="Manager"/>
-      <role name="Site Administrator"/>
-      <role name="Owner"/>
-      <role name="Editor" />
-      <role name="Contributor" />
-    </permission>
-    <permission name="List portal members" acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="Site Administrator"/>
-    </permission>
-    <permission name="List undoable changes" acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-    </permission>
-    <permission name="Manage Groups" acquire="True">
-      <role name="Site Administrator"/>
-      <role name="Manager" />
-    </permission>
     <permission name="Manage properties" acquire="True">
       <role name="Editor"/>
       <role name="Manager"/>
       <role name="Owner"/>
-    </permission>
-    <permission name="Manage users" acquire="True">
-      <role name="Site Administrator"/>
-      <role name="Manager" />
-    </permission>
-    <permission name="Modify view template" acquire="True">
-      <role name="Editor"/>
-      <role name="Manager"/>
-      <role name="Owner"/>
-      <role name="Site Administrator"/>
-    </permission>
-    <permission name="Modify portal content" acquire="True">
-        <role name="Manager"/>
-        <role name="Site Administrator"/>
-        <role name="Editor" />
-        <role name="Owner" />
     </permission>
     <permission name="PloneFormGen: Add Content" acquire="True">
       <role name="Site Administrator"/>
@@ -112,19 +62,9 @@
     <permission name="Reply to item" acquire="True">
       <role name="Authenticated"/>
     </permission>
-    <permission name="View" acquire="True">
-        <role name="Manager"/>
-        <role name="Site Administrator"/>
-        <role name="Reader" />
-        <role name="Editor" />
-        <role name="Contributor" />
-    </permission>
     <permission name="View Groups" acquire="True">
       <role name="Site Administrator"/>
       <role name="Manager" />
-    </permission>
-    <permission name="View management screens" acquire="True">
-        <role name="Manager"/>
     </permission>
   </permissions>
 </rolemap>
