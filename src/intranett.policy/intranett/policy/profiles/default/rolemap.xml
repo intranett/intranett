@@ -1,8 +1,5 @@
 <?xml version="1.0" ?>
 <rolemap>
-  <roles>
-    <role name="Site Administrator"/>
-  </roles>
   <permissions>
     <permission name="CMFEditions: Access previous versions" acquire="True">
       <role name="Site Administrator"/>
@@ -18,11 +15,6 @@
     </permission>
     <permission name="CMFEditions: Save new version" acquire="True">
       <role name="Site Administrator"/>
-    </permission>
-    <permission name="Manage properties" acquire="True">
-      <role name="Editor"/>
-      <role name="Manager"/>
-      <role name="Owner"/>
     </permission>
     <permission name="PloneFormGen: Add Content" acquire="True">
       <role name="Site Administrator"/>
@@ -61,10 +53,6 @@
     </permission>
     <permission name="Reply to item" acquire="True">
       <role name="Authenticated"/>
-    </permission>
-    <permission name="View Groups" acquire="True">
-      <role name="Site Administrator"/>
-      <role name="Manager" />
     </permission>
   </permissions>
 </rolemap>
