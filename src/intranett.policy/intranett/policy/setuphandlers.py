@@ -148,6 +148,7 @@ def restrict_siteadmin(site):
         'Plone Site Setup: Themes',
         'Plone Site Setup: TinyMCE',
         'Plone Site Setup: Types',
+        'Sharing page: Delegate Reviewer role',
         'Undo changes',
         'Use Database Methods',
         'Use external editor',
