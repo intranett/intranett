@@ -32,7 +32,7 @@ def activity(data):
         return m.group(2)
     elif search('[Rr]eleas(ing|e)', nodekey):
         return 'Release'
-    elif search('[Pp]lan(ing|ed|\s)|[Mm]eeting|[Dd]iscuss(ion|ed|\s)', nodekey):
+    elif search('[Pp]lan(ing|ed|\s)|[Mm]eeting|[Dd]iscuss(ion|ed|\s)|[Ss]tandup', nodekey):
         return 'Communication'
     elif search('[Mm](anage(ment|d|\s)|gmt)', nodekey):
         return 'Project mgmt'
