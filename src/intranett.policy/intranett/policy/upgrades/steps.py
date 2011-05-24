@@ -296,10 +296,8 @@ def cleanup_plone41(context):
     actions = getToolByName(context, 'portal_actions')
     if 'plone_setup' in actions.user:
         del actions.user['plone_setup']
-    # XXX these can go once p.a.upgrade 1.1rc2+ is released
-    from plone.app.upgrade.v41.alphas import update_role_mappings
+    # XXX this can go once p.a.upgrade 1.1rc2+ is released
     from plone.app.upgrade.v41.alphas import update_controlpanel_permissions
-    update_role_mappings(context)
     update_controlpanel_permissions(context)
     # handle security
     loadMigrationProfile(context, 'profile-Products.CMFPlone:plone',
@@ -312,12 +310,11 @@ def cleanup_plone41(context):
     from intranett.policy.setuphandlers import restrict_siteadmin
     disallow_sendto(site)
     restrict_siteadmin(site)
-    update_role_mappings(context)
-    perm_id = 'FTP access'
-    site.manage_permission(perm_id, roles=['Manager'], acquire=1)
     # handle kupu
     try:
         delattr(site, '_Kupu__Manage_libraries_Permission')
         delattr(site, '_Kupu__Query_libraries_Permission')
     except AttributeError:
         pass
+    from plone.app.upgrade.v41.alphas import update_role_mappings
+    update_role_mappings(context)
