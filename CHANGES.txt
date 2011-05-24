@@ -4,6 +4,9 @@ Changelog
 1.2.6 - unreleased
 ------------------
 
+- Use Gocept's `f.pypi.python.org` mirror.
+  [hannosch]
+
 - Use the `catalogCounter` instead of `lastModified` as an etag element for
   item views. This solves problems with comments not being shown and changes
   to the navigation tree and portal tabs not being reflected.
