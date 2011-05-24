@@ -23,9 +23,6 @@
     <permission name="CMFEditions: Save new version" acquire="True">
       <role name="Site Administrator"/>
     </permission>
-    <permission name="Content rules: Manage rules" acquire="False">
-      <role name="Manager"/>
-    </permission>
     <permission name="Copy or Move" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
