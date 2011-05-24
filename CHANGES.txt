@@ -4,6 +4,13 @@ Changelog
 1.2.6 - unreleased
 ------------------
 
+- Use the `catalogCounter` instead of `lastModified` as an etag element for
+  item views. This solves problems with comments not being shown and changes
+  to the navigation tree and portal tabs not being reflected.
+  [hannosch]
+
+- Update to Plone 4.1rc2.
+  [hannosch]
 
 1.2.5 - 2011-05-24
 ------------------

@@ -184,3 +184,7 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         portal = self.layer['portal']
         tiny = getToolByName(portal, 'portal_tinymce')
         self.assertTrue(tiny.link_using_uids, True)
+
+    def after_29(self):
+        # tested by GS export diff
+        pass

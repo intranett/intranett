@@ -13,15 +13,6 @@ class IntranettFixture(PloneFixture):
     # No sunburst please
     extensionProfiles = ()
 
-    def setUpZCML(self):
-        super(IntranettFixture, self).setUpZCML()
-
-        # Work around z3c.unconfigure not doing its job in test setups
-        from zope.component import getGlobalSiteManager
-        from plone.app.workflow.interfaces import ISharingPageRole
-        sm = getGlobalSiteManager()
-        sm.unregisterUtility(provided=ISharingPageRole, name=u'Reviewer')
-
 INTRANETT_FIXTURE = IntranettFixture()
 
 

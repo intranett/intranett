@@ -20,7 +20,6 @@ setup(name='Products.Extropy',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'experimental.catalogqueryplan',
           'intranett.theme',
           'jarn.extranet',
           'Products.Invoice',

@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="commentBody">
-                        <span tal:replace="structure python:view.cook(reply.getText())" />
+                        <span tal:replace="structure reply/getText" />
                     </div>
 
                     <div class="commentActions">

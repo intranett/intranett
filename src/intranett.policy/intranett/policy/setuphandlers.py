@@ -79,7 +79,7 @@ def setup_default_groups(site):
     gtool = getToolByName(site, 'portal_groups')
     # We could add more groups like this:
     # gtool.addGroup('Users', title='Users', roles=['Member'])
-    gtool.removeGroups(['Administrators', 'Reviewers'])
+    gtool.removeGroups(['Administrators', 'Reviewers', 'Site Administrators'])
 
 
 def setup_reject_anonymous(site):
@@ -122,13 +122,45 @@ def ignore_link_integrity_exceptions(site):
 
 
 def enable_link_by_uid(site):
-    from Products.TinyMCE.setuphandlers import install_mimetype_and_transforms
+    from plone.outputfilters.setuphandlers import \
+        install_mimetype_and_transforms
     tiny = getToolByName(site, 'portal_tinymce')
     tiny.link_using_uids = True
     install_mimetype_and_transforms(site)
 
 
-@import_step()
+def restrict_siteadmin(site):
+    perm_ids = (
+        'Content rules: Manage rules',
+        'FTP access',
+        'Plone Site Setup: Overview',
+        'Plone Site Setup: Calendar',
+        'Plone Site Setup: Editing',
+        'Plone Site Setup: Filtering',
+        'Plone Site Setup: Imaging',
+        'Plone Site Setup: Language',
+        'Plone Site Setup: Mail',
+        'Plone Site Setup: Markup',
+        'Plone Site Setup: Navigation',
+        'Plone Site Setup: Search',
+        'Plone Site Setup: Security',
+        'Plone Site Setup: Site',
+        'Plone Site Setup: Themes',
+        'Plone Site Setup: TinyMCE',
+        'Plone Site Setup: Types',
+        'Sharing page: Delegate Reviewer role',
+        'Undo changes',
+        'Use Database Methods',
+        'Use external editor',
+        'View management screens',
+        'WebDAV access',
+        )
+    for perm_id in perm_ids:
+        site.manage_permission(perm_id, roles=['Manager'], acquire=0)
+
+
+# TODO the default can go with plutonian > 0.1a2
+@import_step(depends=('plone-final', 'workflow', ))
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -147,3 +179,4 @@ def various(context):
     enable_secure_cookies(site)
     ignore_link_integrity_exceptions(site)
     enable_link_by_uid(site)
+    restrict_siteadmin(site)
