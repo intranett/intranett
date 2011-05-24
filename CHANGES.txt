@@ -9,6 +9,9 @@ Changelog
   to the navigation tree and portal tabs not being reflected.
   [hannosch]
 
+- Update to Plone 4.1rc2.
+  [hannosch]
+
 1.2.5 - unreleased
 ------------------
 
