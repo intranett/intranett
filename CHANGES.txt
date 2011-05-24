@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.5 - unreleased
+1.2.5 - 2011-05-24
 ------------------
 
 - Get new plone.cachepurging to avoid lingering threads on shutdown which
