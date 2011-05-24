@@ -16,6 +16,9 @@
     <permission name="CMFEditions: Save new version" acquire="True">
       <role name="Site Administrator"/>
     </permission>
+    <permission name="Manage users" acquire="True">
+      <role name="Site Administrator"/>
+    </permission>
     <permission name="PloneFormGen: Add Content" acquire="True">
       <role name="Site Administrator"/>
       <role name="Manager" />
