@@ -7,6 +7,9 @@ Changelog
 - Change Nginx configuration to work without knowing the hostname.
   [hannosch]
 
+- Use Gocept's `f.pypi.python.org` mirror.
+  [hannosch]
+
 - Added new `create_site_admin` script.
   [stefan]
 
