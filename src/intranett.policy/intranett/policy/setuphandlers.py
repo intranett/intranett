@@ -139,6 +139,7 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=1)
 
 
+# TODO the default can go with plutonian > 0.1a2
 @import_step(depends=('plone-final', 'workflow', ))
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
