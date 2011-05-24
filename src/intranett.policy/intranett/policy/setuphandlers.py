@@ -139,7 +139,7 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=1)
 
 
-@import_step()
+@import_step(depends=('plone-final', 'workflow', ))
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
