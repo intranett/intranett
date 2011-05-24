@@ -133,10 +133,27 @@ def restrict_siteadmin(site):
     perm_ids = (
         'Content rules: Manage rules',
         'FTP access',
+        'Plone Site Setup: Overview',
+        'Plone Site Setup: Calendar',
+        'Plone Site Setup: Editing',
+        'Plone Site Setup: Filtering',
+        'Plone Site Setup: Language',
+        'Plone Site Setup: Mail',
+        'Plone Site Setup: Markup',
+        'Plone Site Setup: Navigation',
+        'Plone Site Setup: Search',
+        'Plone Site Setup: Security',
+        'Plone Site Setup: Site',
+        'Plone Site Setup: Themes',
+        'Plone Site Setup: Types',
+        'Undo changes',
+        'Use Database Methods',
+        'Use external editor',
         'View management screens',
+        'WebDAV access',
         )
     for perm_id in perm_ids:
-        site.manage_permission(perm_id, roles=['Manager'], acquire=1)
+        site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
 # TODO the default can go with plutonian > 0.1a2
