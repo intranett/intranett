@@ -4,6 +4,9 @@ Changelog
 1.2.6 - unreleased
 ------------------
 
+- Update to DateTime 3.
+  [hannosch]
+
 - Use Gocept's `f.pypi.python.org` mirror.
   [hannosch]
 
