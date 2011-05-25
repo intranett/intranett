@@ -86,7 +86,11 @@ class TimeSheet(BrowserView):
         extropytool = self.extropytool()
 
         # From the form
-        date = DateTime(request.get('date'))
+        date = request.get('date')
+        if date:
+            date = DateTime(date).Date()
+        else:
+            date = DateTime().Date()
 
         added = []
         last_task = None
@@ -129,7 +133,7 @@ class TimeSheet(BrowserView):
 
         url = context.absolute_url()
         url = url + '/@@timesheet'
-        query = date.Date()
+        query = date
         if last_task:
             query += '&' + 'last_task=' + str(last_task)
         return url + '?date=' + query

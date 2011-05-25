@@ -56,10 +56,11 @@ class WorkLogView(BrowserView):
         self.person=self.request.get("person", "all")
         self.group_by=self.request.get("group_by", "day")
         self.today=DateTime()
-        try:
-            start=DateTime(self.request.get("start"))
-        except SyntaxError:
-            start=DateTime()
+        start = self.request.get("start")
+        if start is not None:
+            start = DateTime(start)
+        else:
+            start = DateTime()
         (self.start, self.end)=DateToPeriod(period=self.period, date=start)
 
     def getMemberName(self, userid):

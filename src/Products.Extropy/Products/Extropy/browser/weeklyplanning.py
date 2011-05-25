@@ -20,7 +20,10 @@ class WeekReport(BrowserView, TimeReportQuery):
         super(WeekReport, self).__init__(context, request)
 
         start = self.request.get('startdate', None)
-        start = start and DateTime(start) or DateTime()
+        if start:
+            start = DateTime(start)
+        else:
+            start = DateTime()
         self.start = start.earliestTime() - (start.dow() - 1) % 7 # Find monday
         self.end = self.start + 7 # next monday 00:00
         self.now = DateTime()
