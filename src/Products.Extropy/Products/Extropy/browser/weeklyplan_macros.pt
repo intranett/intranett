@@ -11,10 +11,10 @@
       tal:define="here_url context/@@plone_context_state/object_url;
                   here_url string:$here_url/${view/__name__}">
   <a href="#"
-     tal:attributes="href string:$here_url?startdate=${view/prev}&amp;user=${view/user}"
+     tal:attributes="href string:$here_url?startdate=${view/prev/Date}&amp;user=${view/user}"
      >&larr; previous week</a> | 
   <a href="#"
-     tal:attributes="href string:$here_url?startdate=${view/next}&amp;user=${view/user}"
+     tal:attributes="href string:$here_url?startdate=${view/next/Date}&amp;user=${view/user}"
      >next week &rarr;</a>
 </span>
 
