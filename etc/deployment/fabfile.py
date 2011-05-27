@@ -190,16 +190,20 @@ def init_server():
     _git_update()
     _buildout(envvars=envvars)
     _buildout_munin(envvars=envvars)
-    _create_plone_site(initial=True)
+    _create_plone_site()
     # reload nginx so we pick up the new local/jarn.conf file and the buildout
     # local nginx-sites one
     reload_nginx()
     with cd(VENV):
         with settings(hide('warnings'), warn_only=True):
-            run('bin/supervisord')
+            output = run('bin/supervisorctl status')
+            if 'RUNNING' not in output:
+                run('bin/supervisord')
     with cd(MUNIN_HOME):
         with settings(hide('warnings'), warn_only=True):
-            run('bin/supervisord')
+            output = run('bin/supervisorctl status')
+            if 'RUNNING' not in output:
+                run('bin/supervisord')
 
 
 def reset_server():
@@ -210,7 +214,7 @@ def reset_server():
         run('rm var/filestorage/D*')
         with settings(hide('warnings'), warn_only=True):
             run('rm -r var/blobstorage/*')
-    _create_plone_site(initial=True)
+    _create_plone_site()
     reload_nginx()
     with cd(VENV):
         run('bin/supervisord')
@@ -244,16 +248,21 @@ def _buildout_munin(envvars):
     ploneid = envvars['ploneid']
     with cd(MUNIN_HOME):
         run('../bin/python2.6 ../bootstrap.py -d')
-        run('{x1}; {x2}; {x3}; bin/buildout -t 5'.format(
-            x1=front, x2=domain,x3=ploneid))
+        with settings(hide('stdout')):
+            run('{x1}; {x2}; {x3}; bin/buildout -t 5'.format(
+                x1=front, x2=domain,x3=ploneid))
 
 
-def _create_plone_site(initial=False):
+def _create_plone_site():
+    start_zeo = False
     title = env.server.config.get('title', '%s intranett' % env.host_string)
     language = env.server.config.get('language', 'no')
     with cd(VENV):
+        output = run('bin/supervisorctl status zeo')
+        if 'RUNNING' not in output:
+            start_zeo = True
         with settings(hide('warnings'), warn_only=True):
-            if initial:
+            if start_zeo:
                 run('bin/zeo start')
                 time.sleep(3)
             cfg = os.path.join(BUILDOUT_ROOT, 'cfgs', 'credentials.cfg')
@@ -264,7 +273,7 @@ def _create_plone_site(initial=False):
             with settings(hide('running')):
                 run('bin/instance1 create_site --title="%s" --language=%s '
                     '--rootpassword=%s' % (title, language, password))
-            if initial:
+            if start_zeo:
                 run('bin/zeo stop')
 
 
