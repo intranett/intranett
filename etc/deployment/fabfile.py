@@ -187,12 +187,10 @@ def init_server():
     _virtualenv()
 
     # switch / clone git
-    is_git = _is_git_repository()
-    _git_update(is_git=is_git)
+    _git_update()
     _buildout(envvars=envvars)
     _buildout_munin(envvars=envvars)
-    initial = not is_git
-    _create_plone_site(initial=initial)
+    _create_plone_site(initial=True)
     # reload nginx so we pick up the new local/jarn.conf file and the buildout
     # local nginx-sites one
     reload_nginx()
@@ -290,9 +288,10 @@ def _disable_svn_store_passwords():
                 content='\n'.join(new_lines), config=svn_config))
 
 
-def _git_update(is_git=True):
-    if not is_git:
-        with cd(VENV):
+def _git_update():
+    with cd(VENV):
+        output = run('[ ! -e .git ] && echo nogit || echo git')
+        if 'nogit' in output:
             run('git clone --no-checkout git@github.com:Jarn/intranett.git gittmp')
             run('mv gittmp/.git/ .')
             run('rmdir gittmp')
@@ -311,14 +310,6 @@ def _git_update(is_git=True):
         run('git checkout -q --force %s' % tag)
         run('git reset --hard HEAD')
         run('git clean -fd')
-
-
-def _is_git_repository():
-    out = ''
-    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        with cd(VENV):
-            out = run('git branch')
-    return 'master' in out
 
 
 def _latest_git_tag():
