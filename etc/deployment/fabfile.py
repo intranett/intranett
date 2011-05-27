@@ -261,8 +261,9 @@ def _create_plone_site(initial=False):
             config.read(cfg)
             value = config.get('credentials', 'zope-user')
             password = value.split(':')[-1]
-            run('bin/instance1 create_site --title="%s" --language=%s '
-                '--rootpassword=%s' % (title, language, password))
+            with settings(hide('running')):
+                run('bin/instance1 create_site --title="%s" --language=%s '
+                    '--rootpassword=%s' % (title, language, password))
             if initial:
                 run('bin/zeo stop')
 
@@ -313,7 +314,8 @@ def _git_update():
 
 
 def _latest_git_tag():
-    output = run('git tag -l')
+    with settings(hide('stdout')):
+        output = run('git tag -l')
     tags = [t.rstrip('/') for t in output.split('\n')]
     tags = [(pkg_resources.parse_version(t), t) for t in tags]
     tags.sort()
@@ -401,8 +403,9 @@ def _setup_ssh_keys():
         run('chmod 600 .ssh/id_rsa')
         run('chmod 644 .ssh/id_rsa.pub')
         # add github to known hosts
-        hosts = run("[ -e {hosts} ] && cat {hosts} || echo ''".format(
-            hosts='.ssh/known_hosts'))
+        with settings(hide('stdout')):
+            hosts = run("[ -e {hosts} ] && cat {hosts} || echo ''".format(
+                hosts='.ssh/known_hosts'))
         host_lines = hosts.split('\n')
         github = any([l for l in host_lines if l.startswith('github.com')])
         if not github:
