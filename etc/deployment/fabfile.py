@@ -181,7 +181,6 @@ def update_varnish():
 def init_server():
     envvars = _set_environment_vars()
     _set_cron_mailto()
-    _disable_svn_store_passwords()
     _setup_ssh_keys()
     _add_nginx_include()
     _virtualenv()
@@ -275,27 +274,6 @@ def _create_plone_site():
                     '--rootpassword=%s' % (title, language, password))
             if start_zeo:
                 run('bin/zeo stop')
-
-
-def _disable_svn_store_passwords():
-    svn_config = os.path.join(HOME, '.subversion', 'config')
-    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        # run svn info once, so we create ~/.subversion/config
-        run('svn info')
-        output = run('cat %s' % svn_config)
-    lines = output.split('\n')
-    new_lines = []
-    changed = False
-    for line in lines:
-        if 'store-passwords = no' in line:
-            changed = True
-            new_lines.append('store-passwords = no')
-        else:
-            new_lines.append(line)
-    if changed:
-        with settings(hide('running', 'stdout', 'stderr')):
-            run('echo -e "{content}" > {config}'.format(
-                content='\n'.join(new_lines), config=svn_config))
 
 
 def _git_update():
