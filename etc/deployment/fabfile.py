@@ -17,10 +17,10 @@ from fabric.api import show
 import pkg_resources
 
 env.shell = "/bin/bash -c"
-_staging = ['dev', 'demo']
-env.roledefs['staging'] = _staging
-_production = set(env.servers.keys()) - set(_staging)
-env.roledefs['production'] = list(_production)
+_nonzope = ['antivirus', 'database1']
+env.roledefs['nonzope'] = _nonzope
+_zope = set(env.servers.keys()) - set(_nonzope)
+env.roledefs['zope'] = list(_zope)
 
 BUILDOUT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
@@ -179,30 +179,32 @@ def update_varnish():
 
 
 def init_server():
+    zope_host = env.host_string in env.roledefs['zope']
     envvars = _set_environment_vars()
     _set_cron_mailto()
     _setup_ssh_keys()
-    _add_nginx_include()
     _virtualenv()
-
-    # switch / clone git
     _git_update()
-    _buildout(envvars=envvars)
     _buildout_munin(envvars=envvars)
-    _create_plone_site()
-    # reload nginx so we pick up the new local/jarn.conf file and the buildout
-    # local nginx-sites one
-    reload_nginx()
-    with cd(VENV):
-        with settings(hide('warnings'), warn_only=True):
-            output = run('bin/supervisorctl status')
-            if 'RUNNING' not in output:
-                run('bin/supervisord')
+    if zope_host:
+        _add_nginx_include()
+        _buildout(envvars=envvars)
+        _create_plone_site()
+        # reload nginx so we pick up the new local/jarn.conf file and the buildout
+        # local nginx-sites one
+        reload_nginx()
+        with cd(VENV):
+            with settings(hide('warnings'), warn_only=True):
+                output = run('bin/supervisorctl status')
+                if 'RUNNING' not in output:
+                    run('bin/supervisord')
     with cd(MUNIN_HOME):
         with settings(hide('warnings'), warn_only=True):
             output = run('bin/supervisorctl status')
             if 'RUNNING' not in output:
                 run('bin/supervisord')
+            time.sleep(3)
+            run('bin/supervisorctl status')
 
 
 def reset_server():
@@ -245,6 +247,8 @@ def _buildout_munin(envvars):
     domain = envvars['domain']
     front = envvars['front']
     ploneid = envvars['ploneid']
+    with cd(VENV):
+        run('[ ! -e downloads ] && mkdir downloads || echo')
     with cd(MUNIN_HOME):
         run('../bin/python2.6 ../bootstrap.py -d')
         with settings(hide('stdout')):
