@@ -44,7 +44,7 @@ body {
 select, input, textarea, button {
   font: 99% sans-serif; }
 
-/* normalize monospace sizing 
+/* normalize monospace sizing
  * en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
  */
 pre, code, kbd, samp {
@@ -237,7 +237,7 @@ input:invalid, textarea:invalid {
   background-color: #f0dddd; }
 
 /* These selection declarations have to be separate.
-   No text-shadow: twitter.com/miketaylr/status/12228805301 
+   No text-shadow: twitter.com/miketaylr/status/12228805301
    Also: hot pink. */
 ::-moz-selection {
   background: #39a3dd;
@@ -253,13 +253,13 @@ input:invalid, textarea:invalid {
 a:link {
   -webkit-tap-highlight-color: #39a3dd; }
 
-/* make buttons play nice in IE:    
+/* make buttons play nice in IE:
    www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
 button {
   width: auto;
   overflow: visible; }
 
-/* bicubic resizing for non-native sized IMG: 
+/* bicubic resizing for non-native sized IMG:
    code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
 .ie7 img {
   -ms-interpolation-mode: bicubic; }
@@ -542,7 +542,7 @@ body > header nav li a .toolTipArrow {
 /*#portal-column-content,
 #portal-column-one,
 #portal-column-two {
-	padding: 3.3em 0;
+    padding: 3.3em 0;
 }*/
 #portal-columns > aside {
   -moz-border-radius: 0px;
@@ -648,14 +648,14 @@ dd.image-caption {
 /* @group Listings */
 /* @group Folder Listing */
 /*body.template-folder_listing #content-core dt {
-	margin-top: $larger-size;
+    margin-top: $larger-size;
 }*/
 /* @end */
 /*.tileItem:nth-child(odd) {
-	background: $lightgrey;
+    background: $lightgrey;
 }*/
 /*.tileItem .documentByLine {
-	margin-top: -2.5em;
+    margin-top: -2.5em;
 }*/
 /* @end */
 /* @group Document Actions */
@@ -719,7 +719,7 @@ dd.image-caption {
   width: 100%; }
 
 /*#contentviews-wrapper, .contentActions {
-	display: none;
+    display: none;
 }*/
 .contentViews li {
   display: inline; }
@@ -1139,6 +1139,9 @@ textarea#description {
 
 textarea.mce_editable {
   height: 45em; }
+
+body.template-plone\.portlet\.static\.Static textarea.mce_editable {
+  height: 20em; }
 
 .fieldRequired {
   color: #f44;
@@ -1634,7 +1637,7 @@ small.commentDate {
   padding: 1em; }
 
 /*.discussion .comment:nth-child(odd) .commentWrapper {
-	background: $lightgrey;
+    background: $lightgrey;
 }*/
 .commentWrapper .commentBody {
   clear: none; }
@@ -1740,9 +1743,9 @@ small.commentDate {
   font-family: LatoBold, Helvetica, Arial, sans-serif; }
 
 /*.portletAssignments .managedPortlet {
-	background: $lightgrey;
-	border-top: 1px solid #E6E6E6;
-	border-bottom: 1px solid #CCCCCC;
+    background: $lightgrey;
+    border-top: 1px solid #E6E6E6;
+    border-bottom: 1px solid #CCCCCC;
 }*/
 .portletAssignments .portletHeader {
   /*padding: 0.5em 0;*/ }
@@ -1973,10 +1976,10 @@ body.template-manage-frontpage #portal-columns {
 
 /* @group Edit frontpage */
 /*body.template-manage-frontpage .portlets-manager .portletAssignments {
-	display: none;
+    display: none;
 }
 body.template-manage-frontpage .portlets-manager .section+.portletAssignments {
-	display: block;
+    display: block;
 }*/
 #company-board .portlets-manager {
   background: #c7c7c7;

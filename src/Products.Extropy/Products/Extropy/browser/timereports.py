@@ -13,7 +13,7 @@ from Products.Five import BrowserView
 from ZTUtils import make_query
 
 from Products.Extropy.permissions import MANAGE_FINANCES
-from Products.Extropy.utils import safe_unicode
+from Products.Extropy.utils import safe_unicode, activity
 
 
 class TimeReportQuery(object):
@@ -210,6 +210,19 @@ class TimeReports(BrowserView, TimeReportQuery):
         result.append('Total hours between %s and %s : %s' % (
             self.start.Date(), self.end.Date(), self.sum,))
         result.append('=' * 60)
+        return '\n'.join(result)
+
+    def csv_hours_report(self):
+        result = []
+        result.append('start,duration,activity,title')
+        for hour in self.hours:
+            start = hour.start.ISO()
+            duration = hour.workedHours
+            activity_ = activity(hour)
+            if activity_ is None:
+                activity_ = ''
+            title = hour.Title
+            result.append('%s,%s,%s,"%s"' % (start,duration,activity_,title))
         return '\n'.join(result)
 
     def mark_invoiced(self, number):

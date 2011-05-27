@@ -8,7 +8,7 @@ You can run tests for all packages at once using::
 
   bin/test
 
-In order to run coverage tests, use::
+In order to run coverage tests, which includes upgrade tests use::
 
   bin/coverage
   bin/report-html
@@ -24,9 +24,9 @@ To create a Plone site in the database call::
 
   bin/instance create_site
 
-To overwrite an existing site, you can use::
+To overwrite an existing site and set the admin password, you can use::
 
-  bin/instance create_site --force
+  bin/instance create_site --force --rootpassword=admin
 
 Working on a ticket
 -------------------
@@ -87,11 +87,12 @@ To update the translation files, do::
 Upgrades
 --------
 
-Add a new upgrade handler at the bottom of the upgrades.steps module with a
-corresponding test inside upgrades.tests. Use the next integer available in
-the ``@upgrade_to(42)`` decorator. The upgrade handler is called with the
-`portal_setup` tool as the context. Inside the tests you need to first emulate
-the old state of the site, then call the upgrade handler and finally test your
-assertions.
+Add a new upgrade handler at the bottom of the upgrades.steps module. Use the
+next integer available in the ``@upgrade_to(42)`` decorator. The upgrade
+handler is called with the `portal_setup` tool as the context.
+
+You also need to add a test to `upgrades.tests`. You can write a `before_42`
+and `after_42` method. They will be called with a real site being migrated to
+the point `before` and `after` your upgrade step is run.
 
 There's no other places involved - neither ZCML nor metadata.xml files.

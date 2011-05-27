@@ -12,7 +12,6 @@
 
   <include package="Products.CMFPlone" />
   <include package="collective.ATClamAV" />
-  <include package="experimental.catalogqueryplan" />
   <include package="iw.rejectanonymous" />
   <include package="munin.zope" />
   <include package="plone.principalsource" />
@@ -23,8 +22,6 @@
   <include package="intranett.theme" />
 
   <include package=".browser" />
-  <include package="collective.subtractiveworkflow" />
-
   <utility factory=".profile.HiddenProducts" name="intranett.policy" />
 
   <include package="z3c.jbot" file="meta.zcml" />
@@ -89,5 +86,7 @@
       handler=".content.workspace.fixupOwnerPermissions"
       for="Products.ATContentTypes.interfaces.IATContentType
            Products.CMFCore.interfaces.IActionSucceededEvent" />
+
+  <subscriber handler=".utils.warmupZODBCache" />
 
 </configure>

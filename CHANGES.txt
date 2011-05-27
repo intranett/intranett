@@ -1,8 +1,52 @@
 Changelog
 =========
 
-1.2.5 - unreleased
+1.2.6 - unreleased
 ------------------
+
+- Update to DateTime 3.
+  [hannosch]
+
+- Use Gocept's `f.pypi.python.org` mirror.
+  [hannosch]
+
+- Use the `catalogCounter` instead of `lastModified` as an etag element for
+  item views. This solves problems with comments not being shown and changes
+  to the navigation tree and portal tabs not being reflected.
+  [hannosch]
+
+- Update to Plone 4.1rc2.
+  [hannosch]
+
+1.2.5 - 2011-05-24
+------------------
+
+- Get new plone.cachepurging to avoid lingering threads on shutdown which
+  prevented the Jenkins from running.
+  [hannosch]
+
+- Added a simple ZODB cache pre-warmer, to improve the first load experience
+  for customers after software updates. Closes #200.
+  [hannosch]
+
+- Enabled `link-by-uid` for TinyMCE. Closes #206.
+  [hannosch]
+
+- Added a site action link to `hjelp.intranett.no`.
+  [martior, hannosch]
+
+- Don't send error log mails for link integrity exceptions. Closes #194.
+  [hannosch]
+
+- Reduce the height of text fields for the static text portlet.
+  [hannosch]
+
+- Fix the title of the employee listing, which accidentally got overridden by
+  the site title. Closes #211.
+  [hannosch]
+
+- Update to munin.zope = 1.2.
+  [ggozad]
 
 - Increase the default height of text fields from 20 to about 40 lines.
   [hannosch]

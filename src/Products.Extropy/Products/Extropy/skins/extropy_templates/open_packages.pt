@@ -2,28 +2,39 @@
       xml:lang="en"
       lang="en"
       i18n:domain="extropy"
-      metal:use-macro="here/main_template/macros/master">
+      metal:use-macro="context/main_template/macros/master">
   <head>
   </head>
   <body>
-    <div metal:fill-slot="main"
+    <metal:content metal:fill-slot="content"
           tal:define="catalog nocall:here/extropy_tracking_tool;
-                    etool nocall:here/extropy_timetracker_tool;
-                    global total python:0">
+                      etool nocall:here/extropy_timetracker_tool;
+                      global total python:0">
 
-        <h2>Open packages and contracts</h2>
+      <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+        Portal status message
+      </div>
 
-        <table class="listing">
+      <article id="content">
+
+        <header>
+          <h1 class="documentFirstHeading">Open contracts</h1>
+        </header>
+
+        <div id="content-core">
+          <table class="listing">
             <thead>
-                <th>Project / Customer</th>
-                <th>Package / Contract</th>
+                <th>Customer</th>
+                <th>Contract</th>
                 <th>Billable hours</th>
-                <th></th>
+                <th>Status</th>
             </thead>
             <tbody>
-                <tal:loop tal:repeat="item python:catalog(portal_type=['ExtropyPhase', 'Contract'], review_state=['active', 'prospective', 'closable'])">
-                    <tr tal:define="obj item/getObject"
-                        tal:condition="python:obj.getBudgetCategory()=='Billable'">
+                <tal:loop tal:repeat="item python:catalog(portal_type=['ExtropyPhase', 'Contract'], review_state=['active', 'prospective', 'closable'], sort_on='getProjectTitle')">
+                    <tr tal:define="obj item/getObject;
+                                    is_not_jarn python:obj.getProjectTitle() != 'Jarn';
+                                    is_billable python:obj.getBudgetCategory() == 'Billable'"
+                        tal:condition="python:is_billable and is_not_jarn">
 
                         <td tal:content="item/getProjectTitle"></td>
 
@@ -35,7 +46,7 @@
                         <td style="text-align:right">
                             <span tal:define="subtotal python:etool.countIntervalHours(obj, getBudgetCategory='Billable', review_state='entered');
                                               global total python:total+subtotal;"
-                                  tal:content="python:int(subtotal)" />
+                                  tal:content="python: '%.1f' % subtotal" />
                         </td>
                     <td tal:content="item/review_state"></td>
 
@@ -50,10 +61,10 @@
                     <th></th>
                 </tr>
             </tfoot>
+          </table>
+        </div>
 
-        </table>
-
-
-    </div>
+      </article>
+    </metal:content>
   </body>
 </html>

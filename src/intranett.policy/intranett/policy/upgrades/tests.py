@@ -164,6 +164,33 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
     def after_25(self):
         portal = self.layer['portal']
+        users = portal.users
+        self.assertNotEqual(users.Title(), portal.Title())
+
+    def after_26(self):
+        portal = self.layer['portal']
+        error_log = aq_get(portal, 'error_log')
+        exceptions = error_log.getProperties()['ignored_exceptions']
+        self.assertTrue('LinkIntegrityNotificationException' in exceptions)
+
+    def after_27(self):
+        portal = self.layer['portal']
+        atool = getToolByName(portal, 'portal_actions')
+        self.assertTrue('support' in atool.site_actions)
+        ids = atool.site_actions.keys()
+        self.assertLessEqual(ids.index('accessibility'), ids.index('support'))
+
+    def after_28(self):
+        portal = self.layer['portal']
+        tiny = getToolByName(portal, 'portal_tinymce')
+        self.assertTrue(tiny.link_using_uids, True)
+
+    def after_29(self):
+        # tested by GS export diff
+        pass
+
+    def after_30(self):
+        portal = self.layer['portal']
         self.assertIn('TeamWorkspace', portal.portal_types)
         self.assertIn('TeamWorkspace', portal.portal_factory.getFactoryTypes())
         self.assertIn('workspace_workflow', portal.portal_workflow)

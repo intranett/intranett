@@ -32,7 +32,7 @@ class TestSiteSetup(IntranettTestCase):
         actions = at.listActionInfos(object=portal,
                                      categories=('site_actions', ))
         ids = set([a['id'] for a in actions])
-        self.assertEquals(ids, set(['accessibility']))
+        self.assertEquals(ids, set(['accessibility', 'support']))
 
     def test_manage_users_action(self):
         portal = self.layer['portal']
@@ -230,6 +230,24 @@ class TestSiteSetup(IntranettTestCase):
         action = portal.portal_actions.object.local_roles
         self.assertEqual(action.getProperty('available_expr'),
             "python:getattr(object, 'getWorkspace', None) is None")
+
+    def test_error_log(self):
+        portal = self.layer['portal']
+        error_log = aq_get(portal, 'error_log')
+        exceptions = error_log.getProperties()['ignored_exceptions']
+        self.assertTrue('LinkIntegrityNotificationException' in exceptions)
+
+    def test_tinymce(self):
+        from Products.PortalTransforms.interfaces import IPortalTransformsTool
+        portal = self.layer['portal']
+        tiny = getToolByName(portal, 'portal_tinymce')
+        self.assertTrue(tiny.link_using_uids, True)
+        transform_utility = queryUtility(IPortalTransformsTool)
+        policies = transform_utility.listPolicies()
+        policies = [(mimetype, required) for (mimetype, required) in policies
+            if mimetype == "text/x-html-safe"]
+        self.assertEqual(policies[0][1],
+            ('html_to_plone_outputfilters_html', ))
 
 
 class TestAdmin(IntranettTestCase):

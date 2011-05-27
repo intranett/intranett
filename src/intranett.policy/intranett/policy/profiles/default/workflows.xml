@@ -14,5 +14,8 @@
   <type type_id="Topic">
    <bound-workflow workflow_id="(Default)" />
   </type>
+  <type type_id="Discussion Item">
+   <bound-workflow workflow_id="one_state_workflow"/>
+  </type>
  </bindings>
 </object>

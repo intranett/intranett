@@ -82,7 +82,7 @@ def setup_default_groups(site):
     gtool = getToolByName(site, 'portal_groups')
     # We could add more groups like this:
     # gtool.addGroup('Users', title='Users', roles=['Member'])
-    gtool.removeGroups(['Administrators', 'Reviewers'])
+    gtool.removeGroups(['Administrators', 'Reviewers', 'Site Administrators'])
 
 
 def setup_reject_anonymous(site):
@@ -100,8 +100,13 @@ def setup_members_folder(site):
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID,
         title=title)
+    # we fill the request with some values in commands.py create_site
+    # don't let those interfere in the processForm call
+    request = aq_get(portal, 'REQUEST', None)
+    if request is not None:
+        request.form['title'] = title
     portal[MEMBERS_FOLDER_ID].processForm() # Fire events
-    workflow = getToolByName(site, 'portal_workflow')
+    workflow = getToolByName(portal, 'portal_workflow')
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
 
 
@@ -110,7 +115,55 @@ def enable_secure_cookies(context):
     acl.session._updateProperty('secure', True)
 
 
-@import_step()
+def ignore_link_integrity_exceptions(site):
+    error_log = aq_get(site, 'error_log')
+    props = error_log.getProperties()
+    exceptions = props['ignored_exceptions']
+    exceptions = exceptions + ('LinkIntegrityNotificationException', )
+    error_log.setProperties(props['keep_entries'],
+        ignored_exceptions=tuple(sorted(set(exceptions))))
+
+
+def enable_link_by_uid(site):
+    from plone.outputfilters.setuphandlers import \
+        install_mimetype_and_transforms
+    tiny = getToolByName(site, 'portal_tinymce')
+    tiny.link_using_uids = True
+    install_mimetype_and_transforms(site)
+
+
+def restrict_siteadmin(site):
+    perm_ids = (
+        'Content rules: Manage rules',
+        'FTP access',
+        'Plone Site Setup: Overview',
+        'Plone Site Setup: Calendar',
+        'Plone Site Setup: Editing',
+        'Plone Site Setup: Filtering',
+        'Plone Site Setup: Imaging',
+        'Plone Site Setup: Language',
+        'Plone Site Setup: Mail',
+        'Plone Site Setup: Markup',
+        'Plone Site Setup: Navigation',
+        'Plone Site Setup: Search',
+        'Plone Site Setup: Security',
+        'Plone Site Setup: Site',
+        'Plone Site Setup: Themes',
+        'Plone Site Setup: TinyMCE',
+        'Plone Site Setup: Types',
+        'Sharing page: Delegate Reviewer role',
+        'Undo changes',
+        'Use Database Methods',
+        'Use external editor',
+        'View management screens',
+        'WebDAV access',
+        )
+    for perm_id in perm_ids:
+        site.manage_permission(perm_id, roles=['Manager'], acquire=0)
+
+
+# TODO the default can go with plutonian > 0.1a2
+@import_step(depends=('plone-final', 'workflow', ))
 def various(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -127,3 +180,6 @@ def various(context):
     setup_reject_anonymous(site)
     setup_members_folder(site)
     enable_secure_cookies(site)
+    ignore_link_integrity_exceptions(site)
+    enable_link_by_uid(site)
+    restrict_siteadmin(site)

@@ -20,8 +20,6 @@ src/*/*.egg-info
 src/collective.*
 src/plone.*
 src/plutonian
-src/Products.*
-src/jarn.*
 var
 .*
 *.pyc

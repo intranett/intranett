@@ -80,7 +80,7 @@
     <value>
       <element>userid</element>
       <element>language</element>
-      <element>lastModified</element>
+      <element>catalogCounter</element>
       <element>locked</element>
       <element>resourceRegistries</element>
       <element>editbar</element>

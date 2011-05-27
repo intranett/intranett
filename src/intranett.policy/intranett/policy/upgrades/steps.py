@@ -4,6 +4,7 @@ from plutonian.gs import upgrade_to
 from Products.CMFCore.utils import getToolByName
 from zope.component import getSiteManager
 from zope.component import queryUtility
+from zope.i18n import translate
 
 
 @upgrade_to(7)
@@ -206,8 +207,121 @@ def update_strong_caching_maxage2(context):
 
 
 @upgrade_to(25)
+def update_users_folder_title(context):
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    fti = getToolByName(site, 'portal_types')['MembersFolder']
+    if 'users' in site:
+        title = translate(fti.Title(), target_language=site.Language())
+        site['users'].setTitle(title)
+        site['users'].reindexObject()
+
+
+@upgrade_to(26)
+def ignore_linkintegrity_exceptions(context):
+    from intranett.policy.setuphandlers import ignore_link_integrity_exceptions
+    site = getToolByName(context, 'portal_url').getPortalObject()
+    ignore_link_integrity_exceptions(site)
+
+
+@upgrade_to(27)
+def add_help_site_action(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('actions', ))
+
+
+@upgrade_to(28)
+def enable_link_by_uid(context):
+    from intranett.policy.setuphandlers import enable_link_by_uid
+    site = getToolByName(context, 'portal_url').getPortalObject()
+    enable_link_by_uid(site)
+
+
+@upgrade_to(29)
+def cleanup_plone41(context):
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('languagetool', 'plone.app.registry', ))
+    loadMigrationProfile(context, 'profile-plone.app.jquerytools:default',
+        steps=('cssregistry', 'jsregistry', ))
+    # unregister persistent steps
+    registry = context.getImportStepRegistry()
+    for step in ('mimetypes-registry-various', 'plonepas'):
+        if step in registry._registered:
+            registry.unregisterStep(step)
+    context._p_changed = True
+    # remove `Site Administrators` group
+    gtool = getToolByName(context, 'portal_groups')
+    ids = gtool.getGroupIds()
+    if 'Site Administrators' in ids:
+        gtool.removeGroups(['Site Administrators'])
+    # reorder new external_login properties
+    ptool = getToolByName(context, 'portal_properties')
+    sprops = ptool.site_properties
+    ids = sprops.propertyIds()
+    if 'external_login_iframe' not in ids:
+        sprops._setProperty('external_login_iframe', False, type='boolean')
+    _properties = []
+    use_folder_tabs = None
+    for p in sprops._properties:
+        if p['id'] == 'use_folder_tabs':
+            use_folder_tabs = p
+        else:
+            _properties.append(p)
+    _properties.append(use_folder_tabs)
+    sprops._properties = tuple(_properties)
+    sprops._p_changed = True
+    # take care of skin layers
+    skins = getToolByName(context, 'portal_skins')
+    for key, value in skins.selections.items():
+        new = value.replace('LanguageTool,', '')
+        new = new.replace('PloneFormGen,tinymce,referencebrowser,',
+            'PloneFormGen,referencebrowser,tinymce,LanguageTool,')
+        skins.selections[key] = new
+    # UID index only supports string criteria
+    portal_atct = getToolByName(context, 'portal_atct')
+    portal_atct.topic_indexes['UID'].criteria = ('ATSimpleStringCriterion', )
+    # CSS
+    css = getToolByName(context, 'portal_css')
+    css.moveResourceAfter(
+        '++resource++plone.app.discussion.stylesheets/discussion.css',
+        '++resource++plone.formwidget.autocomplete/jquery.autocomplete.css')
+    css.moveResourceAfter(
+        '++resource++plone.app.jquerytools.dateinput.css',
+        '++resource++plone.app.jquerytools.overlays.css')
+    res = css.getResource('++resource++plone.app.jquerytools.overlays.css')
+    res.setEnabled(False)
+    # actions
+    actions = getToolByName(context, 'portal_actions')
+    if 'plone_setup' in actions.user:
+        del actions.user['plone_setup']
+    # XXX this can go once p.a.upgrade 1.1rc2+ is released
+    from plone.app.upgrade.v41.alphas import update_controlpanel_permissions
+    update_controlpanel_permissions(context)
+    # handle security
+    loadMigrationProfile(context, 'profile-Products.CMFPlone:plone',
+        steps=('rolemap', 'workflow', ))
+    loadMigrationProfile(context, 'profile-plone.app.discussion:default',
+        steps=('workflow', ))
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap', 'workflow', ))
+    from intranett.policy.setuphandlers import disallow_sendto
+    from intranett.policy.setuphandlers import restrict_siteadmin
+    disallow_sendto(site)
+    restrict_siteadmin(site)
+    # handle kupu
+    try:
+        delattr(site, '_Kupu__Manage_libraries_Permission')
+        delattr(site, '_Kupu__Query_libraries_Permission')
+    except AttributeError:
+        pass
+    from plone.app.upgrade.v41.alphas import update_role_mappings
+    update_role_mappings(context)
+
+
+@upgrade_to(30)
 def installWorkspaceType(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('actions', 'typeinfo', 'factorytool', 'workflow', 'portlets',
                'catalog', 'plone.app.registry'))
-
