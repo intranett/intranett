@@ -3,21 +3,45 @@
   <permissions>
     <permission name="CMFEditions: Access previous versions" acquire="True">
       <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+      <role name="Editor" />
+      <role name="Reviewer" />
+      <role name="Contributor" />
     </permission>
     <permission name="CMFEditions: Apply version control" acquire="True">
       <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+      <role name="Editor" />
+      <role name="Reviewer" />
+      <role name="Contributor" />
     </permission>
     <permission name="CMFEditions: Checkout to location" acquire="True">
       <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+      <role name="Editor" />
+      <role name="Reviewer" />
     </permission>
     <permission name="CMFEditions: Revert to previous versions" acquire="True">
       <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+      <role name="Editor" />
+      <role name="Reviewer" />
     </permission>
     <permission name="CMFEditions: Save new version" acquire="True">
       <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+      <role name="Editor" />
+      <role name="Reviewer" />
+      <role name="Contributor" />
     </permission>
     <permission name="Manage users" acquire="True">
       <role name="Site Administrator"/>
+      <role name="Manager" />
     </permission>
     <permission name="PloneFormGen: Add Content" acquire="True">
       <role name="Site Administrator"/>
@@ -56,9 +80,9 @@
       <role name="Contributor" />
     </permission>
     <permission name="plone.portlet.static: Add static portlet" acquire="True">
+      <role name="Site Administrator"/>
       <role name="Manager" />
       <role name="Member" />
-      <role name="Site Administrator"/>
     </permission>
     <permission name="Reply to item" acquire="True">
       <role name="Authenticated"/>
