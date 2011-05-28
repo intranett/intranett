@@ -625,7 +625,7 @@ Changelog
 - Translations basis with basic norwegian translations.
   [denys]
 
-- Made members searchable through the catalog. 
+- Made members searchable through the catalog.
   [ggozad, stefan]
 
 - Adjust profile version back to `1`. We will recreate the first site from
