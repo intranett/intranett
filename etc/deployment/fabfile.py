@@ -28,7 +28,11 @@ LIVEBACKUPS = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups')
 
 CRON_MAILTO = 'hosting@jarn.com'
 DISTRIBUTE_VERSION = '0.6.15'
+VIRTUALENV_VERSION= '1.6.1'
+VIRTUALENV_URL = 'http://f.pypi.python.org/packages/source/v/virtualenv/' \
+    'virtualenv-%s.tar.gz' % VIRTUALENV_VERSION
 HOME = '/srv/jarn'
+TMP =  '/srv/jarn/tmp'
 VENV = '/srv/jarn'
 MUNIN_HOME = '/srv/jarn/munin'
 PIL_VERSION = '1.1.7-jarn1'
@@ -404,11 +408,25 @@ def _setup_ssh_keys():
 
 
 def _virtualenv():
+    with cd(HOME):
+        run('[ ! -e tmp ] && mkdir tmp || echo')
+    venv_filename = 'virtualenv-%s.tar.gz' % VIRTUALENV_VERSION
+    download_venv = True
+    with cd(TMP):
+        output = run('[ -e %s ] && echo yes || echo no' % venv_filename)
+        if 'yes' in output:
+            download_venv = False
+        if download_venv:
+            with settings(hide('stderr')):
+                run('wget %s' % VIRTUALENV_URL)
+            with settings(hide('stdout')):
+                run('tar xzvf ' + venv_filename)
+    venv_tmp = os.path.join(TMP, 'virtualenv-%s' % VIRTUALENV_VERSION)
+    with cd(venv_tmp):
+        with settings(hide('warnings', 'stderr'), warn_only=True):
+            run('python2.6 virtualenv.py --no-site-packages --distribute ' +
+                VENV)
     with settings(hide('stdout', 'stderr')):
-        with cd(HOME):
-            with settings(hide('warnings'), show('stdout'), warn_only=True):
-                run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
-        run('rm -rf /tmp/distribute*')
         with cd(VENV):
             run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
             with settings(hide('warnings', 'running'), warn_only=True):

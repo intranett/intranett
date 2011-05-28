@@ -15,6 +15,7 @@ nginx-sites/jarn.conf
 parts
 htmlcov
 munin/etc/munin-node.conf
+munin/etc/plugin-conf.d
 munin/etc/plugins
 munin/etc/supervisord.conf
 src/*/*.egg-info
