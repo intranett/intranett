@@ -173,4 +173,12 @@
     template="projects_listing.pt"
     />
 
+<browser:page
+    for="Products.Archetypes.public.BaseFolder"
+    class=".support_listing.SupportListing"
+    permission="cmf.ModifyPortalContent"
+    name="support_listing"
+    template="support_listing.pt"
+    />
+
 </configure>
