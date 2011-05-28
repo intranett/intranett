@@ -32,6 +32,9 @@ class ProjectsListing(BrowserView):
             if contract.portal_type == 'ExtropyProject':
                 customer = contract
             else:
+                contract_type = contract.getContract_type()
+                if contract_type != 'development':
+                    continue
                 customer = aq_parent(contract)
 
             worklog = WorkLogView(contract, self.request)
