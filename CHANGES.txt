@@ -4,6 +4,8 @@ Changelog
 1.2.7 - unreleased
 ------------------
 
+- Fixed ZODB cache pre-warmer to avoid errors from the Gopip index.
+  [hannosch]
 
 1.2.6 - 2011-05-28
 ------------------
