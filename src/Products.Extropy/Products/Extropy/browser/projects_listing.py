@@ -37,7 +37,7 @@ class ProjectsListing(BrowserView):
                 if contract_type != 'development':
                     continue
                 customer = aq_parent(contract)
-                total_hours = contract.getWorkedHours()
+                total_hours = b.getWorkedHours
 
             worklog = WorkLogView(contract, self.request)
             worklog.group_by = self.request.get("group_by", "person")
