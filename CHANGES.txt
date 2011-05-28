@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.2.6 - unreleased
+------------------
+
+- Update plone.app.users to fix privilege escalation attack vector.
+  [hannosch]
+
 1.2.5 - 2011-05-24
 ------------------
 
