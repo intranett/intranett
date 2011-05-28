@@ -2,6 +2,7 @@ bin
 build
 develop-eggs
 dist
+distribute_setup.py
 downloads
 eggs
 etc/haproxy.cfg
@@ -20,6 +21,7 @@ src/*/*.egg-info
 src/collective.*
 src/plone.*
 src/plutonian
+tmp
 var
 .*
 *.pyc
