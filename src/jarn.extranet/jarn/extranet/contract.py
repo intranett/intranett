@@ -39,7 +39,7 @@ ContractSchema = ATFolderSchema + Schema((
                 default='development',
                 vocabulary=DisplayList((('support', 'Support'),
                                         ('development', 'Development or consulting'),
-                                        ('hosting', 'Hosting'),
+                                        ('internal', 'Internal project'),
                                         )),
 
                 ),

@@ -4,6 +4,12 @@ from DateTime import DateTime
 from Products.CMFCore import utils as cmf_utils
 from Products.Extropy.utils import activity
 
+# BBB DateTime < 3
+try:
+    from DateTime.DateTime import _MONTHS
+except ImportError:
+    _MONTHS = DateTime._months
+
 
 # Iterators used by the view
 # We use custom iterators because we need extra data (total)
@@ -43,7 +49,7 @@ class ReportKey:
         if self.keyname.endswith('week'):
             return 'Week %s' % self.key
         if self.keyname.endswith('month'):
-            return DateTime._months[self.key]
+            return _MONTHS[self.key]
         if not isinstance(self.key, basestring):
             return str(self.key)
         return self.key

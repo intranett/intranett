@@ -63,16 +63,16 @@ class TimeSheet(BrowserView):
                     work_types = obj.getUniqueWork_types()
                     w = work_types[0]
                     title = c.Title + ' ➝ ' + w
-                    value = c.UID + '-' + w
+                    value = c.UID + '$' + w
                     result[label].append({'Title': title, 'value': value})
                     if len(work_types) > 1:
                         for w in work_types[1:]:
                             title = ' ➝ ' + w
-                            value = c.UID + '-' + w
+                            value = c.UID + '$' + w
                             result[label].append(
                                 {'Title': title, 'value': value})
                 else:
-                    value = c.UID + '-'
+                    value = c.UID + '$'
                     result[label].append({'Title': c.Title, 'value': value})
 
         return result.iteritems()
@@ -86,7 +86,11 @@ class TimeSheet(BrowserView):
         extropytool = self.extropytool()
 
         # From the form
-        date = DateTime(request.get('date'))
+        date = request.get('date')
+        if date:
+            date = DateTime(date).Date()
+        else:
+            date = DateTime().Date()
 
         added = []
         last_task = None
@@ -99,8 +103,8 @@ class TimeSheet(BrowserView):
                 else:
                     mod = 0
                 identifier = r.task
-                if '-' in identifier:
-                    uid, work_type = r.task.split('-')
+                if '$' in identifier:
+                    uid, work_type = r.task.split('$')
                 else:
                     uid = identifier
                     work_type = None
@@ -129,7 +133,7 @@ class TimeSheet(BrowserView):
 
         url = context.absolute_url()
         url = url + '/@@timesheet'
-        query = date.Date()
+        query = date
         if last_task:
             query += '&' + 'last_task=' + str(last_task)
         return url + '?date=' + query

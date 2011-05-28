@@ -82,7 +82,7 @@ msgstr "Administrator"
 
 #: intranett.policy/intranett/policy/profiles/default/actions.xml
 msgid "Support"
-msgstr ""
+msgstr "Help"
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
 msgid "The most recently published news item"

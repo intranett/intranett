@@ -17,10 +17,10 @@ from fabric.api import show
 import pkg_resources
 
 env.shell = "/bin/bash -c"
-_staging = ['dev', 'demo']
-env.roledefs['staging'] = _staging
-_production = set(env.servers.keys()) - set(_staging)
-env.roledefs['production'] = list(_production)
+_nonzope = ['antivirus', 'database1']
+env.roledefs['nonzope'] = _nonzope
+_zope = set(env.servers.keys()) - set(_nonzope)
+env.roledefs['zope'] = list(_zope)
 
 BUILDOUT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
@@ -28,7 +28,11 @@ LIVEBACKUPS = os.path.join(BUILDOUT_ROOT, 'var', 'livebackups')
 
 CRON_MAILTO = 'hosting@jarn.com'
 DISTRIBUTE_VERSION = '0.6.15'
+VIRTUALENV_VERSION= '1.6.1'
+VIRTUALENV_URL = 'http://f.pypi.python.org/packages/source/v/virtualenv/' \
+    'virtualenv-%s.tar.gz' % VIRTUALENV_VERSION
 HOME = '/srv/jarn'
+TMP =  '/srv/jarn/tmp'
 VENV = '/srv/jarn'
 MUNIN_HOME = '/srv/jarn/munin'
 PIL_VERSION = '1.1.7-jarn1'
@@ -179,29 +183,32 @@ def update_varnish():
 
 
 def init_server():
+    zope_host = env.host_string in env.roledefs['zope']
     envvars = _set_environment_vars()
     _set_cron_mailto()
-    _disable_svn_store_passwords()
     _setup_ssh_keys()
-    _add_nginx_include()
     _virtualenv()
-
-    # switch / clone git
-    is_git = _is_git_repository()
-    _git_update(is_git=is_git)
-    _buildout(envvars=envvars)
+    _git_update()
     _buildout_munin(envvars=envvars)
-    initial = not is_git
-    _create_plone_site(initial=initial)
-    # reload nginx so we pick up the new local/jarn.conf file and the buildout
-    # local nginx-sites one
-    reload_nginx()
-    with cd(VENV):
-        with settings(hide('warnings'), warn_only=True):
-            run('bin/supervisord')
+    if zope_host:
+        _add_nginx_include()
+        _buildout(envvars=envvars)
+        _create_plone_site()
+        # reload nginx so we pick up the new local/jarn.conf file and the buildout
+        # local nginx-sites one
+        reload_nginx()
+        with cd(VENV):
+            with settings(hide('warnings'), warn_only=True):
+                output = run('bin/supervisorctl status')
+                if 'RUNNING' not in output:
+                    run('bin/supervisord')
     with cd(MUNIN_HOME):
         with settings(hide('warnings'), warn_only=True):
-            run('bin/supervisord')
+            output = run('bin/supervisorctl status')
+            if 'RUNNING' not in output:
+                run('bin/supervisord')
+            time.sleep(3)
+            run('bin/supervisorctl status')
 
 
 def reset_server():
@@ -212,7 +219,7 @@ def reset_server():
         run('rm var/filestorage/D*')
         with settings(hide('warnings'), warn_only=True):
             run('rm -r var/blobstorage/*')
-    _create_plone_site(initial=True)
+    _create_plone_site()
     reload_nginx()
     with cd(VENV):
         run('bin/supervisord')
@@ -244,18 +251,25 @@ def _buildout_munin(envvars):
     domain = envvars['domain']
     front = envvars['front']
     ploneid = envvars['ploneid']
+    with cd(VENV):
+        run('[ ! -e downloads ] && mkdir downloads || echo')
     with cd(MUNIN_HOME):
         run('../bin/python2.6 ../bootstrap.py -d')
-        run('{x1}; {x2}; {x3}; bin/buildout -t 5'.format(
-            x1=front, x2=domain,x3=ploneid))
+        with settings(hide('stdout')):
+            run('{x1}; {x2}; {x3}; bin/buildout -t 5'.format(
+                x1=front, x2=domain,x3=ploneid))
 
 
-def _create_plone_site(initial=False):
+def _create_plone_site():
+    start_zeo = False
     title = env.server.config.get('title', '%s intranett' % env.host_string)
     language = env.server.config.get('language', 'no')
     with cd(VENV):
+        output = run('bin/supervisorctl status zeo')
+        if 'RUNNING' not in output:
+            start_zeo = True
         with settings(hide('warnings'), warn_only=True):
-            if initial:
+            if start_zeo:
                 run('bin/zeo start')
                 time.sleep(3)
             cfg = os.path.join(BUILDOUT_ROOT, 'cfgs', 'credentials.cfg')
@@ -263,36 +277,17 @@ def _create_plone_site(initial=False):
             config.read(cfg)
             value = config.get('credentials', 'zope-user')
             password = value.split(':')[-1]
-            run('bin/instance1 create_site --title="%s" --language=%s '
-                '--rootpassword=%s' % (title, language, password))
-            if initial:
+            with settings(hide('running')):
+                run('bin/instance1 create_site --title="%s" --language=%s '
+                    '--rootpassword=%s' % (title, language, password))
+            if start_zeo:
                 run('bin/zeo stop')
 
 
-def _disable_svn_store_passwords():
-    svn_config = os.path.join(HOME, '.subversion', 'config')
-    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        # run svn info once, so we create ~/.subversion/config
-        run('svn info')
-        output = run('cat %s' % svn_config)
-    lines = output.split('\n')
-    new_lines = []
-    changed = False
-    for line in lines:
-        if 'store-passwords = no' in line:
-            changed = True
-            new_lines.append('store-passwords = no')
-        else:
-            new_lines.append(line)
-    if changed:
-        with settings(hide('running', 'stdout', 'stderr')):
-            run('echo -e "{content}" > {config}'.format(
-                content='\n'.join(new_lines), config=svn_config))
-
-
-def _git_update(is_git=True):
-    if not is_git:
-        with cd(VENV):
+def _git_update():
+    with cd(VENV):
+        output = run('[ ! -e .git ] && echo nogit || echo git')
+        if 'nogit' in output:
             run('git clone --no-checkout git@github.com:Jarn/intranett.git gittmp')
             run('mv gittmp/.git/ .')
             run('rmdir gittmp')
@@ -313,16 +308,9 @@ def _git_update(is_git=True):
         run('git clean -fd')
 
 
-def _is_git_repository():
-    out = ''
-    with settings(hide('stdout', 'stderr', 'warnings'), warn_only=True):
-        with cd(VENV):
-            out = run('git branch')
-    return 'master' in out
-
-
 def _latest_git_tag():
-    output = run('git tag -l')
+    with settings(hide('stdout')):
+        output = run('git tag -l')
     tags = [t.rstrip('/') for t in output.split('\n')]
     tags = [(pkg_resources.parse_version(t), t) for t in tags]
     tags.sort()
@@ -410,8 +398,9 @@ def _setup_ssh_keys():
         run('chmod 600 .ssh/id_rsa')
         run('chmod 644 .ssh/id_rsa.pub')
         # add github to known hosts
-        hosts = run("[ -e {hosts} ] && cat {hosts} || echo ''".format(
-            hosts='.ssh/known_hosts'))
+        with settings(hide('stdout')):
+            hosts = run("[ -e {hosts} ] && cat {hosts} || echo ''".format(
+                hosts='.ssh/known_hosts'))
         host_lines = hosts.split('\n')
         github = any([l for l in host_lines if l.startswith('github.com')])
         if not github:
@@ -419,11 +408,25 @@ def _setup_ssh_keys():
 
 
 def _virtualenv():
+    with cd(HOME):
+        run('[ ! -e tmp ] && mkdir tmp || echo')
+    venv_filename = 'virtualenv-%s.tar.gz' % VIRTUALENV_VERSION
+    download_venv = True
+    with cd(TMP):
+        output = run('[ -e %s ] && echo yes || echo no' % venv_filename)
+        if 'yes' in output:
+            download_venv = False
+        if download_venv:
+            with settings(hide('stderr')):
+                run('wget %s' % VIRTUALENV_URL)
+            with settings(hide('stdout')):
+                run('tar xzvf ' + venv_filename)
+    venv_tmp = os.path.join(TMP, 'virtualenv-%s' % VIRTUALENV_VERSION)
+    with cd(venv_tmp):
+        with settings(hide('warnings', 'stderr'), warn_only=True):
+            run('python2.6 virtualenv.py --no-site-packages --distribute ' +
+                VENV)
     with settings(hide('stdout', 'stderr')):
-        with cd(HOME):
-            with settings(hide('warnings'), show('stdout'), warn_only=True):
-                run('virtualenv-2.6 --no-site-packages --distribute %s' % VENV)
-        run('rm -rf /tmp/distribute*')
         with cd(VENV):
             run('bin/easy_install-2.6 distribute==%s' % DISTRIBUTE_VERSION)
             with settings(hide('warnings', 'running'), warn_only=True):

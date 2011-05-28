@@ -1,8 +1,11 @@
 Changelog
 =========
 
-1.2.6 - unreleased
+1.3.0 - unreleased
 ------------------
+
+- Update to DateTime 3.
+  [hannosch]
 
 - Use Gocept's `f.pypi.python.org` mirror.
   [hannosch]
@@ -13,6 +16,24 @@ Changelog
   [hannosch]
 
 - Update to Plone 4.1rc2.
+  [hannosch]
+
+1.2.8 - unreleased
+------------------
+
+- Update to Products.PloneFormGen 1.6.1 to include Norwegian translations.
+  [hannosch]
+
+1.2.7 - 2011-05-28
+------------------
+
+- Fixed ZODB cache pre-warmer to avoid errors from the Gopip index.
+  [hannosch]
+
+1.2.6 - 2011-05-28
+------------------
+
+- Update plone.app.users to fix privilege escalation attack vector.
   [hannosch]
 
 1.2.5 - 2011-05-24
@@ -604,7 +625,7 @@ Changelog
 - Translations basis with basic norwegian translations.
   [denys]
 
-- Made members searchable through the catalog. 
+- Made members searchable through the catalog.
   [ggozad, stefan]
 
 - Adjust profile version back to `1`. We will recreate the first site from
