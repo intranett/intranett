@@ -45,8 +45,7 @@ def warmupZODBCache(event):
         if sites:
             site = sites[0]
             path = {'query': '/'.join(site.getPhysicalPath()), 'depth': 1}
-            site.portal_catalog({'path': path,
-                'sort_on': 'getObjPositionInParent'})
+            site.portal_catalog({'path': path, 'sort_on': 'path'})
     logger.info('Warmed up ZODB cache with %d items.' % loaded)
 
 
