@@ -27,6 +27,7 @@ class ProjectsListing(BrowserView):
         result = {}
         for b in brains:
             contract = b.getObject()
+            total_hours = None
             if 'Management Project' in contract.Subject():
                 continue
             if contract.portal_type == 'ExtropyProject':
@@ -36,6 +37,7 @@ class ProjectsListing(BrowserView):
                 if contract_type != 'development':
                     continue
                 customer = aq_parent(contract)
+                total_hours = contract.getWorkedHours()
 
             worklog = WorkLogView(contract, self.request)
             worklog.group_by = self.request.get("group_by", "person")
@@ -61,6 +63,7 @@ class ProjectsListing(BrowserView):
                 'start': worklog.start,
                 'end': worklog.end,
                 'persons': persons,
+                'total': total_hours,
             })
         flatten = []
         def _key(value):
