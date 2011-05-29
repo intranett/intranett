@@ -2,6 +2,11 @@ body.template-projects_listing .documentByLine {
     display: none;
 }
 
+body.template-timesheet select,
+body.template-timesheet input {
+    font-size: 120%;
+}
+
 option[disabled] {
     color: grey;
 }
