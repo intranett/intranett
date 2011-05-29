@@ -20,11 +20,6 @@ class TestPhase(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         from Products.Extropy.interfaces import IExtropyTracking
         self.failUnless(IExtropyTracking.providedBy(self.phase))
 
-    def testGettingRequirements(self):
-        self.phase.invokeFactory('ExtropyFeature','r1')
-        self.assertEqual(len(self.phase.getDeliverables()),1)
-        self.assertEqual(self.phase.getDeliverables()[0].getObject(),getattr(self.phase,'r1'))
-
 
 def test_suite():
     from unittest import TestSuite, makeSuite

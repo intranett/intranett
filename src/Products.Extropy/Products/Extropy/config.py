@@ -10,24 +10,6 @@ TIMETOOLTYPE = 'Extropy TimeTracker Tool'
 
 GLOBALS = globals()
 
-TASK_PRIORITIES = (('1','NiceToHave'),('5','Normal'),('10','Urgent'))
-
-DEFAULT_WORKTYPES = ('Development',
-                     'Planning/Managing',
-                     'Paperwork',
-                     'Mail',
-                     'Meeting',
-                     'User Interface',
-                     'Design',
-                     'Travel')
-
-WORKDAY = 6.0
-
-TASK_FOR_RELATIONSHIP = 'taskFor'
-ORIGINATING_TASK_RELATIONSHIP = 'originatingTask'
-
-ROLES = ('Participant',)
-
 OPEN_STATES = ['open', 'in-progress','active','unassigned','deferred','assigned','testing','taskscomplete']
 
 # TIMETRACKING
@@ -41,14 +23,6 @@ DEFAULT_BUGDET_CATEGORIES = (('Billable','Billable'),
                              )
 
 BILLABLE_TYPES = (
-    'ExtropyTask',
     'ExtropyActivity',
-    'ExtropyFeature',
     'Contract',
     )
-
-PLAN_RELATIONSHIP = 'plannedItem'
-PLAN_ADDITIONAL_RELATIONSHIP = 'adHocItem'
-PLAN_TARGET_STATES = ('completed',)
-
-INVOICE_RELATIONSHIP = 'invoice'

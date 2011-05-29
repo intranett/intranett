@@ -57,11 +57,14 @@ class ItemsTree(Persistent):
             self.data.append(copy)
         self.data.sort(key=lambda d: (
             d['getProjectTitle'].lower(), d['getPhaseTitle'].lower(),
-            d['getDeliverableTitle'].lower(),
-            d['portal_type'] in ('ExtropyTask', 'ExtropyActivity', 'Contract')
+            '',
+            d['portal_type'] in ('ExtropyActivity', 'Contract')
                 and d['Title'].lower() or ''))
 
     def __iter__(self):
+        def getDeliverableTitle(key):
+            return ''
+
         for (prtitle, pritems) in groupby(
             self.data, itemgetter('getProjectTitle')):
             # Yield a project, or reconstruct enough info
@@ -84,21 +87,18 @@ class ItemsTree(Persistent):
                 yield phase
 
                 for (dtitle, tasks) in groupby(
-                    chain(next, phitems), itemgetter('getDeliverableTitle')):
+                    chain(next, phitems), getDeliverableTitle):
                     # Yield a deliverable, at least the title
                     deliverable = tasks.next()
-
-                    next = [] # Used to put iterated item back into flow
-                    if deliverable['portal_type'] != 'ExtropyFeature':
-                        next = [deliverable]
-                        if not dtitle:
-                            # Activities live in the phase, group together
-                            deliverable = dict(Title='Activities',
-                                               getURL=phase['getURL'])
-                        else:
-                            deliverable = dict(
-                                Title=safe_unicode(dtitle),
-                                getURL=_reconstructURL(phase, deliverable))
+                    next = [deliverable]
+                    if not dtitle:
+                        # Activities live in the phase, group together
+                        deliverable = dict(Title='Activities',
+                                           getURL=phase['getURL'])
+                    else:
+                        deliverable = dict(
+                            Title=safe_unicode(dtitle),
+                            getURL=_reconstructURL(phase, deliverable))
                     deliverable['depth'] = 2
                     yield deliverable
 
@@ -133,8 +133,7 @@ class Renderer(base.Renderer):
             getParticipants=user,
             review_state='active')
         items = etool.searchResults(
-            portal_type=('ExtropyActivity', 'ExtropyFeature',
-                         'ExtropyTask', 'Contract'),
+            portal_type=('ExtropyActivity', 'Contract'),
             getResponsiblePerson=[user, 'all'],
             review_state=OPEN_STATES)
         return ItemsTree(list(projects) + list(items))

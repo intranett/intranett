@@ -1,9 +1,7 @@
 from zope.interface import implements
 
 from DateTime import DateTime
-from Acquisition import aq_chain, aq_inner
 from AccessControl import ClassSecurityInfo
-from AccessControl import getSecurityManager
 
 from Products.Archetypes.public import *
 
@@ -11,7 +9,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFCore.permissions import ModifyPortalContent
 
-from Products.Extropy.config import TOOLNAME
 from Products.Extropy.config import OPEN_STATES
 from Products.Extropy.config import VIEW_PERMISSION
 from Products.Extropy.config import DEFAULT_BUGDET_CATEGORIES
@@ -111,22 +108,6 @@ ParticipantsSchema = Schema((
 
 ))
 
-ChangeNoteSchema = Schema((
-
-    TextField(
-        name='changenote',
-        widget=TextAreaWidget(
-            label='Change note / Comment',
-            label_msgid='label_changenote',
-            description=('Comment on every change made to the task,'
-                         ' or enter additional information.'),
-            description_msgid='help_changenote',
-            i18n_domain='extropy',
-        ),
-    ),
-
-))
-
 BudgetSchema = Schema((
     StringField(
         name='budgetCategory',
@@ -186,17 +167,6 @@ class ExtropyBase:
         p = self.getExtropyPhase()
         return p and p.Title() or ''
 
-    def getExtropyDeliverable(self):
-        """Returns the current deliverable."""
-        if self.meta_type == 'ExtropyFeature':
-            return self
-        return self.getExtropyParent(metatype='ExtropyFeature')
-
-    def getDeliverableTitle(self):
-        """Returns the title of the current deliverable."""
-        d = self.getExtropyDeliverable()
-        return d and d.Title() or ''
-
     security.declarePrivate('getExtropyParent')
     def getExtropyParent(self, metatype=None):
         """Gets the containg parent, if it is an ExtropyBase object."""
@@ -218,7 +188,6 @@ class ExtropyBase:
         oldparticipants = dict.fromkeys(self.getParticipants())
         newparticipants = dict.fromkeys(value)
 
-        added = [x for x in newparticipants if not oldparticipants.has_key(x)]
         removed = [x for x in oldparticipants if not newparticipants.has_key(x)]
 
         if kw.has_key('schema'):
@@ -228,16 +197,7 @@ class ExtropyBase:
             kw['schema'] = schema
         res = schema['participants'].set(self, value, **kw)
 
-        uf = aq_inner(self.acl_users)
-
-        # Add and remove local roles
-        for person in added:
-            user = uf.getUserById(person)
-            if user is not None and 'Participant' not in user.getRolesInContext(self):
-                # using dict to avoid duplicates - already handled by manage_setLocalRoles?
-                newroles = dict.fromkeys(self.get_local_roles_for_userid(person) + ('Participant', 'Owner')).keys()
-                self.manage_setLocalRoles(person, newroles )
-
+        # Remove local roles
         for person in removed:
             oldroles = self.get_local_roles_for_userid(person)
             newroles = [role for role in oldroles if role not in ('Participant', 'Owner')]
@@ -268,17 +228,6 @@ class ExtropyBase:
         if parent is not None:
             end = parent.end()
             return end and DateTime(end.Date())
-
-    def getNosy(self):
-        """People to be notified."""
-        try:
-            return self.getParticipants()
-        except AttributeError:
-            return []
-
-    def getDefaultNosy(self):
-        """Default value for nosy list."""
-        return [getSecurityManager().getUser().getUserName()]
 
     def getDefaultResponsible(self, *args, **kwargs):
         if getattr(self, 'getProjectManager', None) is not None:
@@ -311,72 +260,10 @@ class ExtropyBase:
             pass
         return res
 
-    #
-    # Vocabulary stuff
-    #
-
-    def hasExpired(self):
-        """Says if we have passed out deadline or not."""
-        return self.end() < DateTime()
-
-    def hasStarted(self):
-        """Says if we are within our start-time or not."""
-        return self.start() < DateTime()
-
-    security.declareProtected(VIEW_PERMISSION, 'getPriorities')
-    def getPriorities(self):
-        """Shows the priorities."""
-        tool = getToolByName(self, TOOLNAME)
-        return tool.getPriorityVocabulary()
-
-    security.declareProtected(VIEW_PERMISSION, 'getPriorityDescription')
-    def getPriorityDescription(self, priority=None):
-        """Gets the priority description."""
-        if priority is None:
-            priority = self.getPriority()
-        tool = getToolByName(self, TOOLNAME)
-        return tool.getPriorityDescription(priority)
-
-    security.declareProtected(VIEW_PERMISSION, 'getFullnameOf')
-    def getFullnameOf(self, username):
-        """Returns the fullname from a username."""
-        tool = getToolByName(self, TOOLNAME)
-        return tool.getFullnameOf(username)
-
-    security.declareProtected(VIEW_PERMISSION, 'howLongAgo')
-    def howLongAgo(self, date):
-        """Returns a nice printed display of how long ago something happened."""
-        tool = getToolByName(self, TOOLNAME)
-        return tool.howLongAgo(date)
-
     security.declareProtected(VIEW_PERMISSION, 'getOpenWorkflowStates')
     def getOpenWorkflowStates(self):
         """The workflow states that are classified as open."""
         return OPEN_STATES
-
-    security.declareProtected(VIEW_PERMISSION, 'getAvailableDates')
-    def getAvailableDates(self):
-        """Dates for start end selections on tasks."""
-        parent = self.getExtropyParent()
-        start = parent.start()
-        end = parent.end()
-        today = DateTime()
-        if not (end and start):
-            start = today
-            end = start + 21
-        if end < today:
-            end = today + 21
-        v = []
-        d = start.earliestTime()
-        while d <= end:
-            v.append(d)
-            d += 1
-        return v
-
-    security.declareProtected(VIEW_PERMISSION, 'getAvailableBudgetCategories')
-    def getAvailableBudgetCategories(self):
-        """Budget categories vocabulary."""
-        return DEFAULT_BUGDET_CATEGORIES
 
     security.declareProtected(VIEW_PERMISSION, 'getDefaultBudgetCategory')
     def getDefaultBudgetCategory(self):
@@ -384,4 +271,3 @@ class ExtropyBase:
         if hasattr(self.aq_parent, 'getBudgetCategory'):
             return self.aq_parent.getBudgetCategory() or 'Billable'
         return 'Billable'
-

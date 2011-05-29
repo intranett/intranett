@@ -84,10 +84,6 @@
         <p id="invoice-hoursreport" tal:condition="hours_view/page_hours_report" tal:content="structure hours_view/page_hours_report">
             Hours report
         </p>
-        <p style="text-align:right" tal:condition="not:hours_view/page_hours_report" class="visualNoPrint">
-            <a tal:attributes="href string:${context/absolute_url}/recurInvoice"><button>Create recurrence</button></a>
-        </p>
-
     </div>
   </body>
 </html>

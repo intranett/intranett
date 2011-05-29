@@ -38,12 +38,6 @@ class TestProject(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         # test the auto-population works
         self.failUnless('project' in self.folder.objectIds())
 
-    def testgetRequirementsByState(self):
-        self.project.invokeFactory('ExtropyPhase','phase')
-        self.project.phase.invokeFactory('ExtropyFeature','requirement1')
-        rs =  self.project.phase.getRequirementsByState()
-        self.assertEqual(len(rs),1)
-
 
 def test_suite():
     from unittest import TestSuite, makeSuite

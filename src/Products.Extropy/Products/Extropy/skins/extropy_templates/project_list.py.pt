@@ -20,7 +20,7 @@
                  gaps python:tool.fillGaps(hours);
                  sumhours python:tool.countHours(hours);
                  timefmt python:'%h.%d %H:%M';
-                 tasks python:etool.trackingQuery( portal, portal_type=['ExtropyTask', 'ExtropyActivity', 'ExtropyFeature'] , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates());
+                 tasks python:etool.trackingQuery( portal, portal_type='ExtropyActivity' , getResponsiblePerson=user.getUserName(), review_state=etool.getOpenStates());
                  last_task request/last_task | nothing; 
                  groupedtasks python:etool.dictifyBrains( tasks, 'getProjectTitle').items()">
 # update via <span tal:replace="here/absolute_url" />/project_list.py

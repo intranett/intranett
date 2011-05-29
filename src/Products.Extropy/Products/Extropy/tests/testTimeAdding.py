@@ -22,12 +22,6 @@ class TestTimeAdding(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         project = self.folder.project1
         self.assertEqual(self.tool.findTimeTrackableParent(project), None)
         self.folder.project1.invokeFactory('ExtropyPhase', 'p1')
-        p1 = self.folder.project1.p1
-        p1.invokeFactory('ExtropyFeature', 'f1')
-        self.assertEqual(self.tool.findTimeTrackableParent(p1),None)
-        self.folder.project1.p1.f1.invokeFactory('ExtropyTask', 't1')
-        t1 = p1.f1.t1
-        self.assertEqual(self.tool.findTimeTrackableParent(t1),t1)
 
     def testConvertHours(self):
         self.assertEqual(self.tool.convertHours(1), (1.0/24.0))
@@ -35,7 +29,6 @@ class TestTimeAdding(ExtropyTrackingTestCase.ExtropyTrackingTestCase):
         self.assertEqual(self.tool.convertHours(24),1)
 
     def testGetLastRegisteredTime(self):
-        now = DateTime()
         _createObjectByType('ExtropyHourGlass',self.folder, 'hourglass')
         self.folder.hourglass.invokeFactory('ExtropyHours','bluh')
         self.tool.addTimeTrackingHours( self.folder,'testHours', 1 )

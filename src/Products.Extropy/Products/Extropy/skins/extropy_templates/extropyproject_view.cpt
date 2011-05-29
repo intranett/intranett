@@ -110,7 +110,7 @@
 
         <div class="visualClear"><!----></div>
 
-        <tal:content define="extropy_types python:('ExtropyPhase', 'ExtropyFeature', 'ExtropyTask');
+        <tal:content define="extropy_types python:('ExtropyPhase');
                              types python:[t.getId() for t in context.allowedContentTypes()];
                              dummy python:[types.remove(t) for t in extropy_types if t in types];
                              contentFilter python:dict(portal_type=types)"

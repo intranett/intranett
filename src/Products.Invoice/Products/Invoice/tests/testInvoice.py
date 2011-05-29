@@ -77,11 +77,7 @@ class TestInvoice(InvoiceTestCase.InvoiceTestCase):
         wf_tool.doActionFor(self.folder.testinvoice, 'send')
         self.assertEqual(wf_tool.getInfoFor(self.folder.testinvoice, 'review_state'), 'Sent')
 
-    def testRecurInvoice(self):
-        l = len(self.folder.objectIds())
-        self.invoice.createRecurrence()
-        self.assertEqual(len(self.folder.objectIds()), l+1)
-        
+
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()

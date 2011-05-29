@@ -2,7 +2,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 
 from Products.Extropy.browser.timereports import TimeReportQuery
-from Products.Extropy.config import INVOICE_RELATIONSHIP
 
 
 class InvoicingError(ValueError):
@@ -18,7 +17,7 @@ class InvoiceHours(BrowserView, TimeReportQuery):
 
     def _query(self):
         uids = [r.sourceUID
-                for r in self.context.getBackReferenceImpl(INVOICE_RELATIONSHIP)]
+                for r in self.context.getBackReferenceImpl('invoice')]
 
         self._hours = self.ettool.getHours(UID=uids)
         self._sum = self.ettool.countHours(self._hours)
@@ -27,7 +26,6 @@ class InvoiceHours(BrowserView, TimeReportQuery):
         newline = '\n'
         if html:
             newline = '<br />'
-        timefmt = '%h.%d %H:%M';
         result = []
         for data in self.hours_by_date:
             if data['hours']:

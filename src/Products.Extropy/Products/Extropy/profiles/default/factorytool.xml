@@ -2,13 +2,8 @@
 <object name="portal_factory" meta_type="Plone Factory Tool">
  <factorytypes>
   <type portal_type="ExtropyActivity"/>
-  <type portal_type="ExtropyBug"/>
-  <type portal_type="ExtropyFeature"/>
   <type portal_type="ExtropyHourGlass"/>
-  <type portal_type="ExtropyJar"/>
   <type portal_type="ExtropyPhase"/>
   <type portal_type="ExtropyProject"/>
-  <type portal_type="ExtropyTask"/>
-  <type portal_type="ExtropyTaskHistory"/>
  </factorytypes>
 </object>

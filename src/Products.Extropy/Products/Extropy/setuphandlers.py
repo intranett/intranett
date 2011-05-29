@@ -23,8 +23,8 @@ def tweakTimeTrackerActions(portal, out):
 
 def setupCatalogMultiplex(portal, out):
     """ better than overriding all the index-methods, and more flexible too"""
-    trackingtypes = ['ExtropyFeature', 'ExtropyTask', 'ExtropyBug', 'ExtropyActivity']
-    remainingtypes = ['ExtropyProject', 'ExtropyPhase', 'ExtropyJar']
+    trackingtypes = ['ExtropyActivity']
+    remainingtypes = ['ExtropyProject', 'ExtropyPhase']
     attool = getToolByName(portal, 'archetype_tool')
     for k in trackingtypes:
         attool.setCatalogsByType(k, [config.TOOLNAME, 'portal_catalog'])

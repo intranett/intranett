@@ -3,13 +3,10 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import *
 
 from Products.Invoice.config import *
-from Products.Invoice import permissions
 from Products.Invoice.interfaces import IInvoice
 
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.utils import shasattr
-
-
 
 from Products.DataGridField import DataGridField, DataGridWidget
 
@@ -220,18 +217,6 @@ class Invoice(BaseContent):
 
         title = 'invoice-' + str(self.getInvoiceNumber()).zfill(5)
         return plone_tool.normalizeString(title)
-
-    #security.declareProtected(permissions.EDIT_CONTENT_PERMISSION, 'createRecurrence')
-    def createRecurrence(self):
-        """take the current invoice, and make a new recurrence of it"""
-        parent = self.aq_parent
-        parent.manage_pasteObjects(parent.manage_copyObjects(self.getId()))
-        newob = parent['copy_of_'+self.getId()]
-        newob.setInvoiceNumber(newob.getDefaultInvoiceNumber())
-        newob.setInvoiceDate(newob.today())
-        newid=newob.generateNewId()
-        parent.manage_renameObjects(('copy_of_'+self.getId(),), (newid,))
-        return parent.absolute_url()+'/'+newid
 
     def getFromAddress(self):
         value = self.Schema().getField('fromAddress').get(self)
