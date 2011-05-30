@@ -323,4 +323,4 @@ def cleanup_plone41(context):
 @upgrade_to(30)
 def add_one_step_intranett_workflow(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('workflow',))
+        steps=('workflow', 'plone.app.registry'))

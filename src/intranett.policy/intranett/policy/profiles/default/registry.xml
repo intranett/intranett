@@ -60,10 +60,6 @@
   <record name="plone.app.caching.strongCaching.maxage">
     <value>604800</value>
   </record>
-  <record name="plone.app.caching.strongCaching.plone.resource.maxage">
-    <field ref="plone.app.caching.strongCaching.maxage" />
-    <value>604800</value>
-  </record>
   <record name="plone.app.caching.strongCaching.ramCache">
     <value>False</value>
   </record>
@@ -84,6 +80,14 @@
       <element>locked</element>
       <element>resourceRegistries</element>
       <element>editbar</element>
+    </value>
+  </record>
+  <record name="plone.app.caching.weakCaching.plone.content.file.etags">
+    <field ref="plone.app.caching.weakCaching.etags" />
+    <value>
+      <element>userid</element>
+      <element>language</element>
+      <element>lastModified</element>
     </value>
   </record>
   <record name="plone.app.caching.weakCaching.lastModified">
@@ -159,7 +163,7 @@
     <value />
   </record>
   <record field="enabled" interface="plone.cachepurging.interfaces.ICachePurgingSettings" name="plone.cachepurging.interfaces.ICachePurgingSettings.enabled">
-    <value>True</value>
+    <value>False</value>
   </record>
   <record field="virtualHosting" interface="plone.cachepurging.interfaces.ICachePurgingSettings" name="plone.cachepurging.interfaces.ICachePurgingSettings.virtualHosting">
     <value>True</value>
@@ -175,7 +179,7 @@
       <element key="plone.content.itemView">plone.app.caching.weakCaching</element>
       <element key="plone.content.feed">plone.app.caching.moderateCaching</element>
       <element key="plone.content.folderView">plone.app.caching.weakCaching</element>
-      <element key="plone.content.file">plone.app.caching.moderateCaching</element>
+      <element key="plone.content.file">plone.app.caching.weakCaching</element>
     </value>
   </record>
 </registry>
