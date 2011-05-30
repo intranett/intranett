@@ -42,9 +42,9 @@ class TestWorkflowSetup(IntranettTestCase):
                               '(), ' % (wf, type_))
 
         workflows = {
-            'Discussion Item': ('one_state_workflow', ),
-            'File': (),
-            'Image': (),
+            'Discussion Item': ('one_state_intranett_workflow', ),
+            'File': ('one_state_intranett_workflow', ),
+            'Image': ('one_state_intranett_workflow', ),
         }
         for type_ in set(ttool.keys()) - no_workflow:
             wf = wftool.getChainForPortalType(type_)
