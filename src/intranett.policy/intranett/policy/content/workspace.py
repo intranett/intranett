@@ -46,7 +46,7 @@ class TeamWorkspace(ATFolder):
     security.declarePrivate('membersource')
     @property
     def membersource(self):
-        return getUtility(IVocabularyFactory, name="plone.principalsource.Users")(self)
+        return getUtility(IVocabularyFactory, name="plone.principalsource.Principals")(self)
 
     security.declarePrivate('userInMemberSource')
     def userInMemberSource(self, user_id):
