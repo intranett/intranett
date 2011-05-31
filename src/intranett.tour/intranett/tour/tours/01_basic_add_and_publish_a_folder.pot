@@ -1,0 +1,100 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-10-30 09:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: 01_basic_add_and_publish_a_folder\n"
+
+#. Default: "If you don't want to perform the indicated step yourself, just click the '>>' link and it will be automatically done by your browser."
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "0_0_microstep_description"
+msgstr ""
+
+#. Default: "Click the [Add new...] drop-down menu."
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "0_1_microstep_description"
+msgstr ""
+
+#. Default: "Select [Folder] from the menu."
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "0_2_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "0_3_microstep_description"
+msgstr ""
+
+#. Default: "Create a new folder"
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "0_create-a-new-folder_title"
+msgstr ""
+
+#. Default: "In the [Title] field, type 'MyFolder'."
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "1_0_microstep_description"
+msgstr ""
+
+#. Default: "In the [Description] field, type 'This folder will be used to contain sample content as I work through each tutorial.'."
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "1_1_microstep_description"
+msgstr ""
+
+#. Default: "Now click the [Save] button at the bottom of the page to save your new folder."
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "1_2_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "1_3_microstep_description"
+msgstr ""
+
+#. Default: "Fill out the fields"
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "1_fill-out-the-fields_title"
+msgstr ""
+
+#. Default: "Click the [State] drop-down menu."
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "2_0_microstep_description"
+msgstr ""
+
+#. Default: "Select [Publish] from the menu."
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "2_1_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "2_2_microstep_description"
+msgstr ""
+
+#. Default: "Publish the folder"
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "2_publish-the-folder_title"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "3_0_microstep_description"
+msgstr ""
+
+#. Default: "All done"
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "3_all-done_title"
+msgstr ""
+
+#. Default: "Add and publish a folder"
+#: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
+msgid "amberjack_title"
+msgstr ""
+

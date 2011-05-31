@@ -1,0 +1,95 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-10-30 09:57+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: 08_basic_upload_an_image\n"
+
+#. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "0_0_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "0_1_microstep_description"
+msgstr ""
+
+#. Default: "Add a new image to myfolder"
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "0_add-a-new-image-to-myfolder_title"
+msgstr ""
+
+#. Default: "Click the [Add New...] drop-down menu and select Image from the menu."
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "1_0_microstep_description"
+msgstr ""
+
+#. Default: "Select [Image] from the menu."
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "1_1_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "1_2_microstep_description"
+msgstr ""
+
+#. Default: "Add an image"
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "1_add-an-image_title"
+msgstr ""
+
+#. Default: "Provide a [Title] for your Image: My Photo."
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "2_0_microstep_description"
+msgstr ""
+
+#. Default: "Provide a [Description] for your Image."
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "2_1_microstep_description"
+msgstr ""
+
+#. Default: "Click the [Browse] button and find the image file you want to upload on your computer's filesystem."
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "2_2_microstep_description"
+msgstr ""
+
+#. Default: "Click [Save] to complete the upload."
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "2_3_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "2_4_microstep_description"
+msgstr ""
+
+#. Default: "Fill out the fields"
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "2_fill-out-the-fields_title"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "3_0_microstep_description"
+msgstr ""
+
+#. Default: "All done"
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "3_all-done_title"
+msgstr ""
+
+#. Default: "Upload an image"
+#: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
+msgid "amberjack_title"
+msgstr ""
+
