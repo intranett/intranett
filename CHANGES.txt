@@ -4,6 +4,9 @@ Changelog
 1.2.8 - unreleased
 ------------------
 
+- Change Nginx configuration to work without knowing the hostname.
+  [hannosch]
+
 - Added new `create_site_admin` script.
   [stefan]
 
