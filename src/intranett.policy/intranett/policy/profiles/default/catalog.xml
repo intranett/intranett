@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+  <index name="workspaceMembers" meta_type="KeywordIndex" purge="False">
+    <indexed_attr value="workspaceMembers"/>
+  </index>
+</object>

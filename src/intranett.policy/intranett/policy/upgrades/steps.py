@@ -324,3 +324,10 @@ def cleanup_plone41(context):
 def add_one_step_intranett_workflow(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('workflow', 'plone.app.registry'))
+
+
+@upgrade_to(31)
+def install_workspaces(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('actions', 'typeinfo', 'factorytool', 'workflow', 'portlets',
+               'catalog', 'plone.app.registry'))

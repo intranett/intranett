@@ -1,0 +1,31 @@
+<dl class="portlet portletSingleItem"
+    tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
+    tal:condition="view/available"
+    i18n:domain="intranett">
+
+    <dt class="portletHeader" tal:condition="view/portletTitle">
+        <span class="portletTopLeft"></span>
+        <span tal:content="python:view.portletTitle">Title</span>
+        <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem odd">
+      
+      <span class="portletItemDetails" tal:condition="python:view.state=='published'" i18n:translate="public_workspace_access">
+          All intranet users can see this workspace. Only members can edit content.
+      </span>
+      <span class="portletItemDetails" tal:condition="python:view.state=='private'" i18n:translate="private_workspace_access">
+          Only members of this workspace can see it or edit content.
+      </span>
+    
+    <span i18n:translate="members_are">Members are:</span>
+    <ul>
+      <li tal:repeat="member python:view.members" tal:content="member" />
+    </ul>
+
+    </dd>
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>

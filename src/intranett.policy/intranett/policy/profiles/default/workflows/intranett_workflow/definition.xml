@@ -4,7 +4,72 @@
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
+ <state state_id="private" title="Private">
+  <exit-transition transition_id="auto"/>
+  <exit-transition transition_id="autoprotect"/>
+  <exit-transition transition_id="autopublish"/>
+  <exit-transition transition_id="publish"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Contributor</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Contributor</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="protected" title="Protected">
+  <exit-transition transition_id="auto"/>
+  <exit-transition transition_id="autopublish"/>
+  <exit-transition transition_id="hide"/>
+  <permission-map name="Access contents information" acquired="True">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="True">
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
  <state state_id="published" title="Published">
+  <exit-transition transition_id="auto"/>
+  <exit-transition transition_id="autoprotect"/>
   <exit-transition transition_id="hide"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
@@ -37,44 +102,33 @@
    <permission-role>Member</permission-role>
   </permission-map>
  </state>
- <state state_id="private" title="Private">
-  <exit-transition transition_id="publish"/>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Reader</permission-role>
-   <permission-role>Contributor</permission-role>
-  </permission-map>
-  <permission-map name="Change portal events" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Reader</permission-role>
-   <permission-role>Contributor</permission-role>
-  </permission-map>
- </state>
- <transition transition_id="hide" title="User makes content private" new_state="private" trigger="USER" before_script="" after_script="">
+ <transition transition_id="auto" title="Trigger automatic transitions" new_state="" trigger="USER" before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="autoprotect" title="Protect workspace content" new_state="protected" trigger="AUTOMATIC" before_script="" after_script="">
+  
+  <guard>
+   <guard-permission>Modify portal content</guard-permission>
+   <guard-expression>python:here.getWorkspaceState()=='private' if getattr(here, 'getWorkspaceState', None) is not None and here.portal_type!='TeamWorkspace' else False</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="autopublish" title="Publish workspace content" new_state="published" trigger="AUTOMATIC" before_script="" after_script="">
+  
+  <guard>
+   <guard-permission>Modify portal content</guard-permission>
+   <guard-expression>python:here.getWorkspaceState()=='published' if getattr(here, 'getWorkspaceState', None) is not None and here.portal_type!='TeamWorkspace' else False</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="hide" title="Make content private" new_state="private" trigger="USER" before_script="" after_script="">
   <action url="%(content_url)s/content_status_modify?workflow_action=hide" category="workflow" icon="">Make private</action>
   <guard>
    <guard-permission>Modify portal content</guard-permission>
+   <guard-expression>python:getattr(here, 'getWorkspaceState', None) is None or here.portal_type=='TeamWorkspace'</guard-expression>
   </guard>
  </transition>
- <transition transition_id="publish" title="Publish" new_state="published" trigger="USER" before_script="" after_script="">
+ <transition transition_id="publish" title="Publish content" new_state="published" trigger="USER" before_script="" after_script="">
   <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
   <guard>
    <guard-permission>Modify portal content</guard-permission>

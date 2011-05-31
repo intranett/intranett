@@ -19,6 +19,18 @@
    description="Displays a selected content item."
    />
 
+ <portlet
+   addview="intranett.policy.portlets.WorkspaceInfo"
+   title="Workspace Information"
+   description="Displays details for the current workspace."
+   />
+
+ <portlet
+   addview="intranett.policy.portlets.MyWorkspaces"
+   title="My Workspaces"
+   description="Displays a list of all of your workspaces."
+   />
+
   <assignment name="navigation"
       category="context"
       key="/"
@@ -31,6 +43,14 @@
       <property name="includeTop">True</property>
       <property name="bottomLevel">1</property>
       <property name="root"></property>
+  </assignment>
+
+  <assignment name="workspaceinfo"
+      category="context"
+      key="/"
+      manager="plone.leftcolumn"
+      type="intranett.policy.portlets.WorkspaceInfo"
+      visible="True">
   </assignment>
 
 </portlets>

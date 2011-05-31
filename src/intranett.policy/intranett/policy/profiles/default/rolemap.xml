@@ -73,6 +73,12 @@
       <role name="Manager" />
       <role name="Owner" />
     </permission>
+    <permission name="intranett.policy: Add TeamWorkspace" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+      <role name="Contributor" />
+    </permission>
     <permission name="plone.portlet.static: Add static portlet" acquire="True">
       <role name="Site Administrator"/>
       <role name="Manager" />
