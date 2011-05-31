@@ -134,13 +134,14 @@ def triggerAutomaticTransitions(context, action):
         return
     if IObjectRemovedEvent.providedBy(action):
         return
-    wf = getattr(context, 'portal_workflow', None)
 
-    # If an object is moved out of a workspace, make it private
-    if getattr(action.oldParent, 'getWorkspaceState', None) is not None and \
-       getattr(action.newParent, 'getWorkspaceState', None) is None:
-        wf.doActionFor(context, "hide")
-        return
+    wf = getattr(context, 'portal_workflow', None)
+    if 'intranett_workflow' in wf.getChainFor(context):
+        # If an object is moved out of a workspace, make it private
+        if getattr(action.oldParent, 'getWorkspaceState', None) is not None and \
+           getattr(action.newParent, 'getWorkspaceState', None) is None:
+            wf.doActionFor(context, "hide")
+            return
 
     # In all other cases the automatic transitions do the right thing
     wf.doActionFor(context, "auto")
