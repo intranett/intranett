@@ -1,5 +1,4 @@
 import logging
-import os
 import sys
 from optparse import OptionParser
 
@@ -55,9 +54,8 @@ def create_site(app, args):
     parser.add_option('-r', '--rootpassword', default=None,
         help='Create a admin user in the Zope root with the given password.')
     parser.add_option('-t', '--title',
-        default=os.environ.get('INTRANETT_DOMAIN', 'intranett.no'),
-        help='The title for the new site. The default can also be set with '
-            'the INTRANETT_DOMAIN environment variable. [default: "%default"]')
+        default='intranett.no',
+        help='The title for the new site. [default: "%default"]')
     parser.add_option('-l', '--language', default='no',
         help='The language used in the new site. [default: "%default"]')
     (options, args) = parser.parse_args(args=args)
