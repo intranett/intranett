@@ -8,6 +8,7 @@
 
   <include package="collective.amberjack.core" />
   <include package="collective.amberjack.core" file="meta.zcml" />
+  <include package="collective.amberjack.portlet" />
 
   <collective.amberjack:tour
       tourlocation="tours"

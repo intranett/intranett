@@ -35,6 +35,10 @@ class IntranettLayer(PloneSandboxLayer):
     defaultBases = (INTRANETT_FIXTURE, )
 
     def setUpZope(self, app, configurationContext):
+        import intranett.tour
+        xmlconfig.file("configure.zcml", intranett.tour,
+                       context=configurationContext)
+
         import intranett.policy
 
         xmlconfig.file("meta.zcml", intranett.policy,
@@ -47,6 +51,7 @@ class IntranettLayer(PloneSandboxLayer):
         z2.installProduct(app, 'Products.PloneFormGen')
         z2.installProduct(app, 'intranett.theme')
         z2.installProduct(app, 'intranett.policy')
+        z2.installProduct(app, 'intranett.tour')
 
     def tearDownZope(self, app):
         z2.uninstallProduct(app, 'intranett.policy')

@@ -56,7 +56,7 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         css = getToolByName(portal, 'portal_css')
         resources = css.getEvaluatedResources(portal)
-        self.assertEqual(len(resources), 2)
+        self.assertEqual(len(resources), 4)
         self.assert_(resources[1]._data['id'].startswith('IEFixes'))
 
     def test_kss_resources(self):
@@ -67,7 +67,7 @@ class TestSiteSetup(IntranettTestCase):
     def test_js_resources(self):
         portal = self.layer['portal']
         js = getToolByName(portal, 'portal_javascripts')
-        self.assertEqual(len(js.getEvaluatedResources(portal)), 3)
+        self.assertEqual(len(js.getEvaluatedResources(portal)), 7)
 
     def test_selectivizr_requires_css_linking(self):
         # According to http://selectivizr.com/: Style sheets MUST be added to
