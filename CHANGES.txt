@@ -4,6 +4,9 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- Added new `create_site_admin` script.
+  [stefan]
+
 - Change Nginx configuration to work without knowing the hostname.
   [hannosch]
 
