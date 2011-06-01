@@ -1,15 +1,13 @@
 import logging
 import os
 import sys
+from email import message_from_string
 from optparse import OptionParser
 
 import transaction
 from AccessControl.SecurityManagement import newSecurityManager
 from zope.site.hooks import setHooks
 from zope.site.hooks import setSite
-
-from email import message_from_string
-from smtplib import SMTPRecipientsRefused
 
 logger = logging.getLogger()
 
