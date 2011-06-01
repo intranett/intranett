@@ -4,6 +4,9 @@ Changelog
 1.2.8 - unreleased
 ------------------
 
+- Added new `create_site_admin` script.
+  [stefan]
+
 - Include Products.PloneHotfix20110531 2.0.
   [hannosch]
 
