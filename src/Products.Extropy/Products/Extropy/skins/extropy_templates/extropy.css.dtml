@@ -105,29 +105,33 @@ option[disabled] {
 
 /* BUDGET CATEGORIES */
 
-.budget-category-skillandbrand{
-color : orange;
+.budget-category-skillandbrand {
+    color: orange;
 }
-.budget-category-sales{
-color:green
+.budget-category-sales {
+    color: green
 }
-.budget-category-administration{
-color:blue
+.budget-category-administration {
+    color: blue
+}
+.budget-category-unbillable {
+    color : blue;
 }
 
 
-.budget-category-block-skillandbrand{
+.budget-category-block-skillandbrand {
     background-color : orange;
     border-color: brown;
 }
-.budget-category-block-sales{
+.budget-category-block-sales {
     background-color : green;
     border-color: black;
-
 }
-.budget-category-block-administration{
+.budget-category-block-administration {
     background-color : blue;
-
+}
+.budget-category-block-unbillable {
+    background-color : blue;
 }
 
 
