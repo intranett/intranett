@@ -1,13 +1,12 @@
 import logging
-import os
 import sys
+from email import message_from_string
 from optparse import OptionParser
 
 import transaction
 from AccessControl.SecurityManagement import newSecurityManager
 from zope.site.hooks import setHooks
 from zope.site.hooks import setSite
-
 
 logger = logging.getLogger()
 
@@ -55,9 +54,8 @@ def create_site(app, args):
     parser.add_option('-r', '--rootpassword', default=None,
         help='Create a admin user in the Zope root with the given password.')
     parser.add_option('-t', '--title',
-        default=os.environ.get('INTRANETT_DOMAIN', 'intranett.no'),
-        help='The title for the new site. The default can also be set with '
-            'the INTRANETT_DOMAIN environment variable. [default: "%default"]')
+        default='intranett.no',
+        help='The title for the new site. [default: "%default"]')
     parser.add_option('-l', '--language', default='no',
         help='The language used in the new site. [default: "%default"]')
     (options, args) = parser.parse_args(args=args)
@@ -97,6 +95,88 @@ def create_site(app, args):
     transaction.get().note('Added new Plone site.')
     transaction.get().commit()
     logger.info('Added new Plone site.')
+
+
+def create_site_admin(app, args):
+    # Display all messages on stderr
+    logger.setLevel(logging.INFO)
+    logger.handlers[0].setLevel(logging.INFO)
+
+    existing = app.objectValues('Plone Site')
+    site = existing and existing[0] or None
+    if site is None:
+        logger.error("No Plone site found in the database.")
+        sys.exit(1)
+
+    _, site = _setup(app, site)
+    site.setupCurrentSkin(site.REQUEST)
+
+    parser = OptionParser()
+    parser.add_option('-l', '--login', default=None,
+        help='Site admin login.')
+    parser.add_option('-e', '--email', default=None,
+        help='Site admin email.')
+    parser.add_option('-n', '--fullname', default=None,
+        help='Site admin full name.')
+    parser.add_option('-a', '--hostname', default=None,
+        help='Intranett site host name.')
+    (options, args) = parser.parse_args(args=args)
+
+    # User info
+    login = options.login
+    email = options.email
+    fullname = options.fullname
+    hostname = options.hostname
+
+    if not login:
+        logger.error("Missing option --login.")
+        sys.exit(1)
+    if not email:
+        logger.error("Missing option --email.")
+        sys.exit(1)
+    if not fullname:
+        logger.error("Missing option --fullname.")
+        sys.exit(1)
+    if not hostname:
+        logger.error("Missing option --hostname.")
+        sys.exit(1)
+
+    # Add and notify the site admin user
+    mt = site.portal_membership
+    pt = site.portal_password_reset
+    rt = site.portal_registration
+
+    if mt.getMemberById(login) is not None:
+        logger.error("User %s already exists." % login)
+        sys.exit(1)
+
+    mt.addMember(login, rt.generatePassword(), ['Member', 'Site Administrator'], [])
+    member = mt.getMemberById(login) # getMemberByLogin???
+    member.setMemberProperties(dict(email=email, fullname=fullname))
+    reset = pt.requestReset(login)
+    mail_text = site.registered_notify_template(site, site.REQUEST,
+        member=member, reset=reset, email=email)
+    encoding = site.getProperty('email_charset', 'utf-8')
+    if isinstance(mail_text, unicode):
+        mail_text = mail_text.encode(encoding)
+
+    # Put the hostname into the URL
+    if not hostname.endswith('.intranett.no'):
+        hostname += '.intranett.no'
+    mail_text = mail_text.replace('http://foo/Plone/', 'https://%s/' % hostname)
+
+    message_obj = message_from_string(mail_text.strip())
+    subject = message_obj['Subject']
+    m_to = message_obj['To']
+    m_from = message_obj['From']
+
+    host = site.MailHost
+    host.send(mail_text, m_to, m_from, subject=subject,
+              charset=encoding, immediate=True)
+
+    transaction.get().note('Added site admin user %r.' % login)
+    transaction.get().commit()
+    logger.info('Added site admin user %r.', login)
 
 
 def upgrade(app, args):
