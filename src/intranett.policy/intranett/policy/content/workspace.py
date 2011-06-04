@@ -189,18 +189,17 @@ def removeOwnerPermissions(context, action):
     """Remove owner permissions when an object is published in a workspace."""
     if action.action in ('autopublish',):
         if getattr(context, 'getWorkspaceState', None) is not None:
-            if context.portal_type != 'TeamWorkspace':
-                for perm in (View, AccessContentsInformation,
-                             ModifyPortalContent, ChangeEvents):
-                    try:
-                        roles = context.rolesOfPermission(perm)
-                    except ValueError:
-                        pass # Only Folders have 'Change portal events'
-                    else:
-                        roles = [x['name'] for x in roles if x['selected']]
-                        if 'Owner' in roles:
-                            roles.remove('Owner')
-                            context.manage_permission(perm, roles, acquire=0)
+            for perm in (View, AccessContentsInformation,
+                         ModifyPortalContent, ChangeEvents):
+                try:
+                    roles = context.rolesOfPermission(perm)
+                except ValueError:
+                    pass # Only Folders have 'Change portal events'
+                else:
+                    roles = [x['name'] for x in roles if x['selected']]
+                    if 'Owner' in roles:
+                        roles.remove('Owner')
+                        context.manage_permission(perm, roles, acquire=0)
 
 
 def becomeOwner(context):

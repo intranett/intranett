@@ -45,6 +45,7 @@ class TestWorkflowSetup(IntranettTestCase):
             'Discussion Item': ('one_state_intranett_workflow', ),
             'File': ('two_state_intranett_workflow', ),
             'Image': ('two_state_intranett_workflow', ),
+            'TeamWorkspace': ('workspace_workflow', ),
         }
         for type_ in set(ttool.keys()) - no_workflow:
             wf = wftool.getChainForPortalType(type_)
@@ -88,6 +89,22 @@ class TestWorkflowPermissions(IntranettTestCase):
         file1 = portal.file1
         logout()
         self.assertFalse(checkPerm('View', file1))
+
+    def test_no_add_workspace_in_private_workspace(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        portal.invokeFactory('TeamWorkspace', 'team1')
+        team1 = portal.team1
+        self.assertFalse(checkPerm('intranett.policy: Add TeamWorkspace', team1))
+
+    def test_no_add_workspace_in_public_workspace(self):
+        portal = self.layer['portal']
+        wftool = getToolByName(portal, 'portal_workflow')
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        portal.invokeFactory('TeamWorkspace', 'team1')
+        team1 = portal.team1
+        wftool.doActionFor(team1, 'publish')
+        self.assertFalse(checkPerm('intranett.policy: Add TeamWorkspace', team1))
 
 
 class TestSitePermissions(IntranettTestCase):

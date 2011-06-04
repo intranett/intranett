@@ -202,10 +202,15 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
     def after_31(self):
         portal = self.layer['portal']
+        wtool = getToolByName(portal, 'portal_workflow')
+        self.assertTrue('workspace_workflow' in wtool)
         self.assertIn('TeamWorkspace', portal.portal_types)
         self.assertIn('TeamWorkspace', portal.portal_factory.getFactoryTypes())
-        self.assertEqual(('intranett_workflow',), portal.portal_workflow.getDefaultChain())
-        self.assertEqual(('intranett_workflow',), portal.portal_workflow.getChainForPortalType("Document"))
+        self.assertEqual(wtool.getDefaultChain(), ('intranett_workflow',))
+        self.assertEqual(wtool.getChainForPortalType("Document"), ('intranett_workflow',))
+        self.assertEqual(wtool.getChainForPortalType("TeamWorkspace"), ('workspace_workflow',))
 
         action = portal.portal_actions.object.local_roles
-        self.assertEqual(action.getProperty('available_expr'), "python:getattr(object, 'getWorkspace', None) is None")
+        self.assertEqual(action.getProperty('available_expr'),
+                "python:getattr(object, 'getWorkspace', None) is None")
+
