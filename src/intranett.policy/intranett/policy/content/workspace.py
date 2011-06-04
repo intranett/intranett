@@ -4,7 +4,9 @@ from borg.localrole.interfaces import ILocalRoleProvider
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.folder import ATFolder
+from Products.ATContentTypes.permission import ChangeEvents
 from Products.CMFCore.permissions import View, ModifyPortalContent
+from Products.CMFCore.permissions import AccessContentsInformation
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowTool import WorkflowException
 from zope.interface import implements
@@ -111,42 +113,6 @@ class WorkspaceMembershipRoles(object):
         return [(member, self.getRoles(member)) for member in self.context.members]
 
 
-def fixupOwnerPermissions(context, action):
-    """Owner role should not have permissions inside a workspace."""
-    if getattr(context, 'getWorkspaceState', None) is not None:
-        if action.action in ('auto',):
-            for perm in ('View', 'Access contents information',
-                         'Modify portal content', 'Change portal events'):
-                try:
-                    roles = context.rolesOfPermission(perm)
-                except ValueError:
-                    pass # Invalid permission!?
-                else:
-                    roles = [x['name'] for x in roles if x['selected']]
-                    if 'Owner' in roles:
-                        roles.remove('Owner')
-                        context.manage_permission(perm, roles, acquire=0)
-
-
-def triggerAutomaticTransitions(context, action):
-    """Transition objects when they have been moved."""
-    if IObjectAddedEvent.providedBy(action):
-        return
-    if IObjectRemovedEvent.providedBy(action):
-        return
-
-    wf = getattr(context, 'portal_workflow', None)
-    if 'intranett_workflow' in wf.getChainFor(context):
-        # If an object is moved out of a workspace, make it private
-        if getattr(action.oldParent, 'getWorkspaceState', None) is not None and \
-           getattr(action.newParent, 'getWorkspaceState', None) is None:
-            wf.doActionFor(context, "hide")
-            return
-
-    # In all other cases the automatic transitions do the right thing
-    wf.doActionFor(context, "auto")
-
-
 def transitionChildren(context, action):
     """Transition children when the workspace state has changed."""
     if action.action in ('publish', 'hide'):
@@ -186,4 +152,87 @@ def reindexObjectsByPaths(context, paths):
         if getattr(o, 'isPrincipiaFolderish', None):
             subobject_paths = ["%s/%s" % (path, id) for id in o]
             reindexObjectsByPaths(context, subobject_paths)
+
+
+def transitionMovedContent(context, action):
+    """Transition objects when they have been moved."""
+    if IObjectAddedEvent.providedBy(action):
+        return
+    if IObjectRemovedEvent.providedBy(action):
+        return
+
+    wf = getattr(context, 'portal_workflow', None)
+
+    if getattr(action.oldParent, 'getWorkspaceState', None) is not None:
+        if getattr(action.newParent, 'getWorkspaceState', None) is None:
+            # If an object is moved out of a workspace, take ownership.
+            becomeOwner(context)
+            restoreOwnerPermissions(context)
+
+            # If it uses the intranett_workflow, also hide it.
+            if 'intranett_workflow' in wf.getChainFor(context):
+                wf.doActionFor(context, "hide")
+                return
+        else:
+            # If an object is renamed inside a workspace or moved between
+            # workspaces, reapply removeOwnerPermissions.
+            if wf.getInfoFor(context, 'review_state') == 'published':
+                action.action = 'autopublish' # Abuse existing event
+                removeOwnerPermissions(context, action)
+                return
+
+    # In all other cases the automatic transitions do the right thing
+    wf.doActionFor(context, "auto")
+
+
+def removeOwnerPermissions(context, action):
+    """Remove owner permissions when an object is published in a workspace."""
+    if action.action in ('autopublish',):
+        if getattr(context, 'getWorkspaceState', None) is not None:
+            if context.portal_type != 'TeamWorkspace':
+                for perm in (View, AccessContentsInformation,
+                             ModifyPortalContent, ChangeEvents):
+                    try:
+                        roles = context.rolesOfPermission(perm)
+                    except ValueError:
+                        pass # Only Folders have 'Change portal events'
+                    else:
+                        roles = [x['name'] for x in roles if x['selected']]
+                        if 'Owner' in roles:
+                            roles.remove('Owner')
+                            context.manage_permission(perm, roles, acquire=0)
+
+
+def becomeOwner(context):
+    """Become the object's owner (in local role terms)."""
+    user_id = getSecurityManager().getUser().getId()
+    owners = context.users_with_local_role('Owner')
+
+    for owner_id in owners:
+        roles = context.get_local_roles_for_userid(owner_id)
+        roles = [x for x in roles if x != 'Owner']
+        if roles:
+            context.manage_setLocalRoles(owner_id, roles)
+        else:
+            context.manage_delLocalRoles([owner_id])
+
+    roles = context.get_local_roles_for_userid(user_id)
+    if 'Owner' not in roles:
+        roles += ('Owner',)
+        context.manage_setLocalRoles(user_id, roles)
+
+
+def restoreOwnerPermissions(context):
+    """Restore owner permissions."""
+    for perm in (View, AccessContentsInformation,
+                 ModifyPortalContent, ChangeEvents):
+        try:
+            roles = context.rolesOfPermission(perm)
+        except ValueError:
+            pass # Only Folders have 'Change portal events'
+        else:
+            roles = [x['name'] for x in roles if x['selected']]
+            if 'Owner' not in roles:
+                roles.append('Owner')
+                context.manage_permission(perm, roles, acquire=0)
 

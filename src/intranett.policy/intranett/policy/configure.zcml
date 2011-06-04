@@ -78,12 +78,12 @@
            Products.Archetypes.interfaces.IObjectEditedEvent" />
 
   <subscriber
-      handler=".content.workspace.triggerAutomaticTransitions"
+      handler=".content.workspace.transitionMovedContent"
       for="Products.ATContentTypes.interfaces.IATContentType
            zope.container.interfaces.IObjectMovedEvent" />
 
   <subscriber
-      handler=".content.workspace.fixupOwnerPermissions"
+      handler=".content.workspace.removeOwnerPermissions"
       for="Products.ATContentTypes.interfaces.IATContentType
            Products.CMFCore.interfaces.IActionSucceededEvent" />
 
