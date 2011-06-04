@@ -41,6 +41,7 @@
  <transition transition_id="auto" title="Trigger automatic transitions" new_state="" trigger="USER" before_script="" after_script="">
   
   <guard>
+   <guard-permission>Modify portal content</guard-permission>
   </guard>
  </transition>
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
