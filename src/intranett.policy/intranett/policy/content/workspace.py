@@ -125,13 +125,7 @@ def transitionObjectsByPaths(context, workflow_action, paths):
     for path in paths:
         o = traverse(path, None)
         if o is not None:
-            try:
-                o.portal_workflow.doActionFor(o, workflow_action)
-            except WorkflowException:
-                # We might be beaten to the punch by automatic transitions
-                # but as long as the tests pass we know we're not missing
-                # things here
-                pass
+            o.portal_workflow.doActionFor(o, workflow_action)
         if getattr(o, 'isPrincipiaFolderish', None):
             subobject_paths = ["%s/%s" % (path, id) for id in o]
             transitionObjectsByPaths(context, workflow_action, subobject_paths)
