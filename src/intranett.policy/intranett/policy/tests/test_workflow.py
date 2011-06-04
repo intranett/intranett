@@ -43,8 +43,8 @@ class TestWorkflowSetup(IntranettTestCase):
 
         workflows = {
             'Discussion Item': ('one_state_intranett_workflow', ),
-            'File': ('one_state_intranett_workflow', ),
-            'Image': ('one_state_intranett_workflow', ),
+            'File': ('two_state_intranett_workflow', ),
+            'Image': ('two_state_intranett_workflow', ),
         }
         for type_ in set(ttool.keys()) - no_workflow:
             wf = wftool.getChainForPortalType(type_)
@@ -80,6 +80,14 @@ class TestWorkflowPermissions(IntranettTestCase):
         folder1 = portal.folder1
         logout()
         self.assertFalse(checkPerm('View', folder1))
+
+    def test_no_anonymous_view_new_file(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        portal.invokeFactory('File', 'file1')
+        file1 = portal.file1
+        logout()
+        self.assertFalse(checkPerm('View', file1))
 
 
 class TestSitePermissions(IntranettTestCase):

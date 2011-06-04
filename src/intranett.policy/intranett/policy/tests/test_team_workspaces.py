@@ -17,154 +17,280 @@ class TestWorkflow(IntranettFunctionalTestCase):
         self.wf = portal.portal_workflow
         self.catalog = portal.portal_catalog
 
-    def checkCatalog(self, id, state):
-        brains = self.catalog(getId=id, review_state=state)
+    def checkCatalog(self, container, id, state):
+        # Object should be findable in catalog
+        path='/'.join(container.getPhysicalPath())
+        brains = self.catalog(path=path, getId=id, review_state=state)
         self.assertEqual(len(brains), 1)
         self.assertEqual(brains[0].getId, id)
 
+    def checkOwner(self, context):
+        # Owner role should have permissions
+        perms = context.permissionsOfRole('Owner')
+        perms = sorted(x['name'] for x in perms if x['selected'])
+        expected = ['Access contents information', 'Modify portal content', 'View']
+        if getattr(context, 'isPrincipiaFolderish', None):
+            expected.insert(1, 'Change portal events')
+        self.assertEqual(perms, expected)
+
+    def checkNoOwner(self, context):
+        # Owner role should not have permissions
+        perms = context.permissionsOfRole('Owner')
+        perms = sorted(x['name'] for x in perms if x['selected'])
+        self.assertEqual(perms, [])
+
     def test_new_workspace_is_private(self):
+        portal = self.layer['portal']
         getInfoFor = self.wf.getInfoFor
         self.assertEqual(getInfoFor(self.workspace, 'review_state'), 'private')
-        self.checkCatalog('workspace', 'private')
+        self.checkCatalog(portal, 'workspace', 'private')
+        self.checkOwner(self.workspace)
 
     def test_published_workspace_is_published(self):
+        portal = self.layer['portal']
         getInfoFor = self.wf.getInfoFor
         self.wf.doActionFor(self.workspace, "publish")
         self.assertEqual(getInfoFor(self.workspace, 'review_state'), 'published')
-        self.checkCatalog('workspace', 'published')
+        self.checkCatalog(portal, 'workspace', 'published')
+        self.checkOwner(self.workspace)
 
     def test_rehidden_workspace_is_private(self):
+        portal = self.layer['portal']
         getInfoFor = self.wf.getInfoFor
         self.wf.doActionFor(self.workspace, "publish")
         self.wf.doActionFor(self.workspace, "hide")
         self.assertEqual(getInfoFor(self.workspace, 'review_state'), 'private')
-        self.checkCatalog('workspace', 'private')
+        self.checkCatalog(portal, 'workspace', 'private')
+        self.checkOwner(self.workspace)
 
     def test_existing_content_in_workspace_is_protected_on_hiding(self):
         getInfoFor = self.wf.getInfoFor
         self.wf.doActionFor(self.workspace, "publish")
         link_id = self.workspace.invokeFactory("Link", "link")
         doc_id = self.workspace.invokeFactory("Document", "doc")
+        file_id = self.workspace.invokeFactory("File", "file")
+        self.checkNoOwner(self.workspace[link_id])
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
         self.wf.doActionFor(self.workspace, "hide")
         self.assertEqual(getInfoFor(self.workspace[link_id], 'review_state'), 'protected')
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'protected')
-        self.checkCatalog(link_id, 'protected')
-        self.checkCatalog(doc_id, 'protected')
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'protected')
+        self.checkCatalog(self.workspace, link_id, 'protected')
+        self.checkCatalog(self.workspace, doc_id, 'protected')
+        self.checkCatalog(self.workspace, file_id, 'protected')
+        self.checkNoOwner(self.workspace[link_id])
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
 
     def test_existing_content_in_workspace_is_unprotected_on_publishing(self):
         getInfoFor = self.wf.getInfoFor
         link_id = self.workspace.invokeFactory("Link", "link")
         doc_id = self.workspace.invokeFactory("Document", "doc")
+        file_id = self.workspace.invokeFactory("File", "file")
+        self.checkNoOwner(self.workspace[link_id])
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
         self.wf.doActionFor(self.workspace, "publish")
         self.assertEqual(getInfoFor(self.workspace[link_id], 'review_state'), 'published')
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'published')
-        self.checkCatalog(link_id, 'published')
-        self.checkCatalog(doc_id, 'published')
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'published')
+        self.checkCatalog(self.workspace, link_id, 'published')
+        self.checkCatalog(self.workspace, doc_id, 'published')
+        self.checkCatalog(self.workspace, file_id, 'published')
+        self.checkNoOwner(self.workspace[link_id])
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
 
     def test_new_content_in_private_workspace_is_protected(self):
         getInfoFor = self.wf.getInfoFor
         link_id = self.workspace.invokeFactory("Link", "link")
         doc_id = self.workspace.invokeFactory("Document", "doc")
+        file_id = self.workspace.invokeFactory("File", "file")
+        self.checkNoOwner(self.workspace[link_id])
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
         self.assertEqual(getInfoFor(self.workspace[link_id], 'review_state'), 'protected')
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'protected')
-        self.checkCatalog(link_id, 'protected')
-        self.checkCatalog(doc_id, 'protected')
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'protected')
+        self.checkCatalog(self.workspace, link_id, 'protected')
+        self.checkCatalog(self.workspace, doc_id, 'protected')
+        self.checkCatalog(self.workspace, file_id, 'protected')
+        self.checkNoOwner(self.workspace[link_id])
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
 
     def test_new_content_in_public_workspace_is_unprotected(self):
         getInfoFor = self.wf.getInfoFor
         self.wf.doActionFor(self.workspace, "publish")
         link_id = self.workspace.invokeFactory("Link", "link")
         doc_id = self.workspace.invokeFactory("Document", "doc")
+        file_id = self.workspace.invokeFactory("File", "file")
+        self.checkNoOwner(self.workspace[link_id])
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
         self.assertEqual(getInfoFor(self.workspace[link_id], 'review_state'), 'published')
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'published')
-        self.checkCatalog(link_id, 'published')
-        self.checkCatalog(doc_id, 'published')
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'published')
+        self.checkCatalog(self.workspace, link_id, 'published')
+        self.checkCatalog(self.workspace, doc_id, 'published')
+        self.checkCatalog(self.workspace, file_id, 'published')
+        self.checkNoOwner(self.workspace[link_id])
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
 
-#    def test_new_content_outside_workspace_is_unprotected(self):
-#        getInfoFor = self.wf.getInfoFor
-#        link_id = self.folder.invokeFactory("Link", "link")
-#        doc_id = self.folder.invokeFactory("Document", "doc")
-#
-#        self.assertEqual(getInfoFor(self.folder[link_id], 'workspace_visibility'), 'public')
-#        self.assertEqual(getInfoFor(self.folder[doc_id], 'workspace_visibility'), 'public')
-#
     def test_copypasted_content_in_private_workspace_is_protected(self):
         getInfoFor = self.wf.getInfoFor
         doc_id = self.folder.invokeFactory("Document", "doc")
+        file_id = self.folder.invokeFactory("File", "file")
+        self.checkOwner(self.folder[doc_id])
+        self.checkOwner(self.folder[file_id])
         transaction.savepoint(True)
-        cb = self.folder.manage_copyObjects('doc')
+        cb = self.folder.manage_copyObjects(['doc', 'file'])
         self.workspace.manage_pasteObjects(cb)
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'protected')
-        self.checkCatalog(doc_id, 'protected')
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'protected')
+        self.checkCatalog(self.workspace, doc_id, 'protected')
+        self.checkCatalog(self.workspace, file_id, 'protected')
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
 
     def test_copypasted_content_in_public_workspace_is_unprotected(self):
         getInfoFor = self.wf.getInfoFor
         self.wf.doActionFor(self.workspace, "publish")
         doc_id = self.folder.invokeFactory("Document", "doc")
+        file_id = self.folder.invokeFactory("File", "file")
+        self.checkOwner(self.folder[doc_id])
+        self.checkOwner(self.folder[file_id])
         transaction.savepoint(True)
-        cb = self.folder.manage_copyObjects('doc')
+        cb = self.folder.manage_copyObjects(['doc', 'file'])
         self.workspace.manage_pasteObjects(cb)
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'published')
-        self.checkCatalog(doc_id, 'published')
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'published')
+        self.checkCatalog(self.workspace, doc_id, 'published')
+        self.checkCatalog(self.workspace, file_id, 'published')
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
 
     def test_cutpasted_content_in_private_workspace_is_protected(self):
         getInfoFor = self.wf.getInfoFor
         doc_id = self.folder.invokeFactory("Document", "doc")
+        file_id = self.folder.invokeFactory("File", "file")
+        self.checkOwner(self.folder[doc_id])
+        self.checkOwner(self.folder[file_id])
         transaction.savepoint(True)
-        cb = self.folder.manage_cutObjects('doc')
+        cb = self.folder.manage_copyObjects(['doc', 'file'])
         self.workspace.manage_pasteObjects(cb)
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'protected')
-        self.checkCatalog(doc_id, 'protected')
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'protected')
+        self.checkCatalog(self.workspace, doc_id, 'protected')
+        self.checkCatalog(self.workspace, file_id, 'protected')
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
 
     def test_cutpasted_content_in_public_workspace_is_unprotected(self):
         getInfoFor = self.wf.getInfoFor
         self.wf.doActionFor(self.workspace, "publish")
         doc_id = self.folder.invokeFactory("Document", "doc")
+        file_id = self.folder.invokeFactory("File", "file")
+        self.checkOwner(self.folder[doc_id])
+        self.checkOwner(self.folder[file_id])
         transaction.savepoint(True)
-        cb = self.folder.manage_cutObjects('doc')
+        cb = self.folder.manage_copyObjects(['doc', 'file'])
         self.workspace.manage_pasteObjects(cb)
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'published')
-        self.checkCatalog(doc_id, 'published')
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'published')
+        self.checkCatalog(self.workspace, doc_id, 'published')
+        self.checkCatalog(self.workspace, file_id, 'published')
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
 
     def test_renamed_content_in_private_workspace_remains_protected(self):
         getInfoFor = self.wf.getInfoFor
         doc_id = self.workspace.invokeFactory("Document", "doc")
+        file_id = self.workspace.invokeFactory("File", "file")
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
         transaction.savepoint(True)
-        self.workspace.manage_renameObject('doc', 'doc1')
+        self.workspace.manage_renameObject(doc_id, 'doc1')
+        self.workspace.manage_renameObject(file_id, 'file1')
         self.assertEqual(getInfoFor(self.workspace['doc1'], 'review_state'), 'protected')
-        self.checkCatalog('doc1', 'protected')
+        self.assertEqual(getInfoFor(self.workspace['file1'], 'review_state'), 'protected')
+        self.checkCatalog(self.workspace, 'doc1', 'protected')
+        self.checkCatalog(self.workspace, 'file1', 'protected')
+        self.checkNoOwner(self.workspace['doc1'])
+        self.checkNoOwner(self.workspace['file1'])
 
     def test_renamed_content_in_public_workspace_remains_unprotected(self):
         getInfoFor = self.wf.getInfoFor
         self.wf.doActionFor(self.workspace, "publish")
         doc_id = self.workspace.invokeFactory("Document", "doc")
+        file_id = self.workspace.invokeFactory("File", "file")
+        self.checkNoOwner(self.workspace[doc_id])
+        self.checkNoOwner(self.workspace[file_id])
         transaction.savepoint(True)
-        self.workspace.manage_renameObject('doc', 'doc1')
+        self.workspace.manage_renameObject(doc_id, 'doc1')
+        self.workspace.manage_renameObject(file_id, 'file1')
         self.assertEqual(getInfoFor(self.workspace['doc1'], 'review_state'), 'published')
-        self.checkCatalog('doc1', 'published')
+        self.assertEqual(getInfoFor(self.workspace['file1'], 'review_state'), 'published')
+        self.checkCatalog(self.workspace, 'doc1', 'published')
+        self.checkCatalog(self.workspace, 'file1', 'published')
+        self.checkNoOwner(self.workspace['doc1'])
+        self.checkNoOwner(self.workspace['file1'])
 
     def test_content_cutpasted_from_private_workspace_to_outside_is_private(self):
         getInfoFor = self.wf.getInfoFor
         doc_id = self.workspace.invokeFactory("Document", "doc")
+        self.checkNoOwner(self.workspace[doc_id])
         transaction.savepoint(True)
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'protected')
-        self.checkCatalog(doc_id, 'protected')
-        cb = self.workspace.manage_cutObjects('doc')
+        self.checkCatalog(self.workspace, doc_id, 'protected')
+        cb = self.workspace.manage_cutObjects(doc_id)
         self.folder.manage_pasteObjects(cb)
         self.assertEqual(getInfoFor(self.folder[doc_id], 'review_state'), 'private')
-        self.checkCatalog(doc_id, 'private')
+        self.checkCatalog(self.folder, doc_id, 'private')
+        self.checkOwner(self.folder[doc_id])
 
     def test_content_cutpasted_from_public_workspace_to_outside_is_private(self):
         getInfoFor = self.wf.getInfoFor
         self.wf.doActionFor(self.workspace, "publish")
         doc_id = self.workspace.invokeFactory("Document", "doc")
+        self.checkNoOwner(self.workspace[doc_id])
         transaction.savepoint(True)
         self.assertEqual(getInfoFor(self.workspace[doc_id], 'review_state'), 'published')
-        self.checkCatalog(doc_id, 'published')
-        cb = self.workspace.manage_cutObjects('doc')
+        self.checkCatalog(self.workspace, doc_id, 'published')
+        cb = self.workspace.manage_cutObjects(doc_id)
         self.folder.manage_pasteObjects(cb)
         self.assertEqual(getInfoFor(self.folder[doc_id], 'review_state'), 'private')
-        self.checkCatalog(doc_id, 'private')
+        self.checkCatalog(self.folder, doc_id, 'private')
+        self.checkOwner(self.folder[doc_id])
+
+    def test_file_cutpasted_from_private_workspace_to_outside_is_published(self):
+        getInfoFor = self.wf.getInfoFor
+        file_id = self.workspace.invokeFactory("File", "file")
+        self.checkNoOwner(self.workspace[file_id])
+        transaction.savepoint(True)
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'protected')
+        self.checkCatalog(self.workspace, file_id, 'protected')
+        cb = self.workspace.manage_cutObjects(file_id)
+        self.folder.manage_pasteObjects(cb)
+        self.assertEqual(getInfoFor(self.folder[file_id], 'review_state'), 'published')
+        self.checkCatalog(self.folder, file_id, 'published')
+        self.checkOwner(self.folder[file_id])
+
+    def test_file_cutpasted_from_public_workspace_to_outside_is_published(self):
+        getInfoFor = self.wf.getInfoFor
+        self.wf.doActionFor(self.workspace, "publish")
+        file_id = self.workspace.invokeFactory("File", "file")
+        self.checkNoOwner(self.workspace[file_id])
+        transaction.savepoint(True)
+        self.assertEqual(getInfoFor(self.workspace[file_id], 'review_state'), 'published')
+        self.checkCatalog(self.workspace, file_id, 'published')
+        cb = self.workspace.manage_cutObjects(file_id)
+        self.folder.manage_pasteObjects(cb)
+        self.assertEqual(getInfoFor(self.folder[file_id], 'review_state'), 'published')
+        self.checkCatalog(self.folder, file_id, 'published')
+        self.checkOwner(self.folder[file_id])
 
 
 class TestWorkspaces(IntranettFunctionalTestCase):
