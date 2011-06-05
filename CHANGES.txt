@@ -4,16 +4,16 @@ Changelog
 1.2.8 - unreleased
 ------------------
 
-- Change Nginx configuration to work without knowing the hostname.
-  [hannosch]
-
-- Use Gocept's `f.pypi.python.org` mirror.
+- Include Products.PloneHotfix20110531 2.0.
   [hannosch]
 
 - Added new `create_site_admin` script.
   [stefan]
 
-- Include Products.PloneHotfix20110531 2.0.
+- Change Nginx configuration to work without knowing the hostname.
+  [hannosch]
+
+- Use Gocept's `f.pypi.python.org` mirror.
   [hannosch]
 
 - Update to Products.PloneFormGen 1.6.1 to include Norwegian translations.
