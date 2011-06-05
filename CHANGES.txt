@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.8 - unreleased
+1.2.8 - 2011-06-05
 ------------------
 
 - Include Products.PloneHotfix20110531 2.0.
