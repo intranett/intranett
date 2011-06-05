@@ -7,16 +7,7 @@ Changelog
 - Increase `zodb-cache-size` to 10000 now that we save memory via DateTime.
   [hannosch]
 
-- Added new `create_site_admin` script.
-  [stefan]
-
-- Change Nginx configuration to work without knowing the hostname.
-  [hannosch]
-
 - Update to DateTime 3.
-  [hannosch]
-
-- Use Gocept's `f.pypi.python.org` mirror.
   [hannosch]
 
 - Use the `catalogCounter` instead of `lastModified` as an etag element for
@@ -27,10 +18,23 @@ Changelog
 - Update to Plone 4.1rc2.
   [hannosch]
 
-1.2.8 - unreleased
+1.2.9 - unreleased
+------------------
+
+
+1.2.8 - 2011-06-05
 ------------------
 
 - Include Products.PloneHotfix20110531 2.0.
+  [hannosch]
+
+- Added new `create_site_admin` script.
+  [stefan]
+
+- Change Nginx configuration to work without knowing the hostname.
+  [hannosch]
+
+- Use Gocept's `f.pypi.python.org` mirror.
   [hannosch]
 
 - Update to Products.PloneFormGen 1.6.1 to include Norwegian translations.
