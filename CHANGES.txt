@@ -4,6 +4,9 @@ Changelog
 1.2.8 - unreleased
 ------------------
 
+- Include Products.PloneHotfix20110531 2.0.
+  [hannosch]
+
 - Update to Products.PloneFormGen 1.6.1 to include Norwegian translations.
   [hannosch]
 
