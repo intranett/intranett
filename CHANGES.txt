@@ -4,6 +4,9 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- Increase Nginx `client_max_body_size` from 10mb to 50mb.
+  [hannosch]
+
 - Increase `zodb-cache-size` to 10000 now that we save memory via DateTime.
   [hannosch]
 
