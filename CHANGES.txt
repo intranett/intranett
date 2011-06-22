@@ -4,6 +4,8 @@ Changelog
 1.2.9 - unreleased
 ------------------
 
+- Fix the account activation mail to be in Norwegian. Closes #218.
+  [hannosch]
 
 1.2.8 - 2011-06-05
 ------------------
