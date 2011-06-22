@@ -5,6 +5,7 @@ from optparse import OptionParser
 
 import transaction
 from AccessControl.SecurityManagement import newSecurityManager
+from Acquisition import aq_get
 from zope.site.hooks import setHooks
 from zope.site.hooks import setSite
 
@@ -143,27 +144,30 @@ def create_site_admin(app, args):
         sys.exit(1)
 
     # Add and notify the site admin user
-    mt = site.portal_membership
-    pt = site.portal_password_reset
-    rt = site.portal_registration
+    mt = aq_get(site, 'portal_membership')
+    pt = aq_get(site, 'portal_password_reset')
+    rt = aq_get(site, 'portal_registration')
 
     if mt.getMemberById(login) is not None:
         logger.error("User %s already exists." % login)
         sys.exit(1)
 
-    mt.addMember(login, rt.generatePassword(), ['Member', 'Site Administrator'], [])
+    from intranett.policy.browser.activation import ActivationMail
+
+    # Get the hostname
+    if not hostname.endswith('.intranett.no'):
+        hostname += '.intranett.no'
+
+    mt.addMember(login, rt.generatePassword(),
+        ['Member', 'Site Administrator'], [])
     member = mt.getMemberById(login) # getMemberByLogin???
     member.setMemberProperties(dict(email=email, fullname=fullname))
     reset = pt.requestReset(login)
-    mail_text = site.registered_notify_template(site, site.REQUEST,
-        member=member, reset=reset, email=email)
-    encoding = site.getProperty('email_charset', 'utf-8')
-    if isinstance(mail_text, unicode):
-        mail_text = mail_text.encode(encoding)
 
-    # Put the hostname into the URL
-    if not hostname.endswith('.intranett.no'):
-        hostname += '.intranett.no'
+    mail_text = ActivationMail(site, site.REQUEST)(member=member,
+        reset=reset, email=email, fullname=fullname, hostname=hostname)
+    if isinstance(mail_text, unicode):
+        mail_text = mail_text.encode('utf-8')
     mail_text = mail_text.replace('http://foo/Plone/', 'https://%s/' % hostname)
 
     message_obj = message_from_string(mail_text.strip())
@@ -171,12 +175,12 @@ def create_site_admin(app, args):
     m_to = message_obj['To']
     m_from = message_obj['From']
 
-    host = site.MailHost
+    host = aq_get(site, 'MailHost')
     host.send(mail_text, m_to, m_from, subject=subject,
-              charset=encoding, immediate=True)
+              charset='utf-8', immediate=True)
 
-    transaction.get().note('Added site admin user %r.' % login)
-    transaction.get().commit()
+    # transaction.get().note('Added site admin user %r.' % login)
+    # transaction.get().commit()
     logger.info('Added site admin user %r.', login)
 
 
