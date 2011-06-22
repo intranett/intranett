@@ -35,10 +35,12 @@ def _setup(app, site=None):
         admin = admin.__of__(app.acl_users)
     newSecurityManager(None, admin)
 
-    # Set up local site manager
+    # Set up local site manager, skins and language
     if site is not None:
         setHooks()
         setSite(site)
+        site.setupCurrentSkin(site.REQUEST)
+        site.REQUEST['HTTP_ACCEPT_LANGUAGE'] = site.Language()
 
     return (app, site)
 
@@ -109,7 +111,6 @@ def create_site_admin(app, args):
         sys.exit(1)
 
     _, site = _setup(app, site)
-    site.setupCurrentSkin(site.REQUEST)
 
     parser = OptionParser()
     parser.add_option('-l', '--login', default=None,
