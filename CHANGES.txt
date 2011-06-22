@@ -21,7 +21,11 @@ Changelog
 - Update to Plone 4.1rc2.
   [hannosch]
 
-1.2.9 - unreleased
+1.2.10 - unreleased
+-------------------
+
+
+1.2.9 - 2011-06-22
 ------------------
 
 - Sent out custom account activation mail. Closes #231.
