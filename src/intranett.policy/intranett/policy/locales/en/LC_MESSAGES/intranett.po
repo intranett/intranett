@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-16 09:46+0000\n"
+"POT-Creation-Date: 2011-06-22 13:55+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,6 +110,11 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
 msgid "You can select the item to be highlighted by searching on its title."
+msgstr ""
+
+#. Default: "Welcome ${fullname}, Thank you for trying out intranett.no free of charge for 30 days. Your intranet is available under the address: ${hostname} Your username is ‘${member}’. Please activate your account and choose a password by visiting: ${set_password} (You must activate your account before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those — And please don't hesitate to contact us at support@intranett.no or via phone at 21018911 if there's something we can help you with. With kind regards, intranett.no-team"
+#: intranett.policy/intranett/policy/browser/templates/activation-mail.pt:21
+msgid "activation-mail-body"
 msgstr ""
 
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"

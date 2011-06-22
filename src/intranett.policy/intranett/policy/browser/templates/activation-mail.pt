@@ -14,7 +14,7 @@ Thank you for trying out intranett.no free of charge for 30 days.
 Your intranet is available under the address: <span
 i18n:name="hostname" tal:replace="options/hostname" />
 
-Your username is '<span i18n:name="member" tal:replace="member" />'.
+Your username is ‘<span i18n:name="member" tal:replace="member" />’.
 Please activate your account and choose a password by visiting:
 
 <span i18n:name="set_password" tal:replace="python:context.pwreset_constructURL(reset['randomstring'])+'?userid='+member.getUserName()" />
@@ -22,7 +22,7 @@ Please activate your account and choose a password by visiting:
 context.toLocalizedTime(reset['expires'], long_format=0)" />)
 
 You can find help and instructions at http://hjelp.intranett.no/ if you
-would like those. And please don't hesitate to contact us at
+would like those — And please don't hesitate to contact us at
 support@intranett.no or via phone at 21018911 if there's something we can help
 you with.
 

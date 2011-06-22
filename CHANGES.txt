@@ -4,6 +4,9 @@ Changelog
 1.2.9 - unreleased
 ------------------
 
+- Sent out custom account activation mail. Closes #231.
+  [hannosch]
+
 - Fix the account activation mail to be in Norwegian. Closes #218.
   [hannosch]
 
