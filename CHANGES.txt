@@ -4,6 +4,8 @@ Changelog
 1.2.10 - unreleased
 -------------------
 
+- Fix a flaw in the user creation script, which didn't actually create any user.
+  [hannosch]
 
 1.2.9 - 2011-06-22
 ------------------
