@@ -194,6 +194,7 @@ def various(context):
     setup_default_groups(site)
     setup_reject_anonymous(site)
     setup_members_folder(site)
+    setup_personal_folder(site)
     enable_secure_cookies(site)
     ignore_link_integrity_exceptions(site)
     enable_link_by_uid(site)
