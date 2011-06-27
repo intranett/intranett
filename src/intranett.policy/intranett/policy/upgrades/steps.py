@@ -318,3 +318,12 @@ def cleanup_plone41(context):
         pass
     from plone.app.upgrade.v41.alphas import update_role_mappings
     update_role_mappings(context)
+
+
+@upgrade_to(30)
+def add_personal_folder(context):
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    from intranett.policy.setuphandlers import setup_personal_folder
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    if PERSONAL_FOLDER_ID not in portal:
+        setup_personal_folder(portal)

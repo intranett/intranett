@@ -565,7 +565,7 @@ class TestMembersFolder(IntranettTestCase):
         self.assertEqual(folder.portal_type, 'MembersFolder')
         self.assertEqual(folder.Title(), 'Members')
 
-    def test_setuphandler(self):
+    def test_users_setuphandler(self):
         from intranett.policy.setuphandlers import setup_members_folder
         portal = self.layer['portal']
         request = self.layer['request']
@@ -581,6 +581,25 @@ class TestMembersFolder(IntranettTestCase):
         setup_members_folder(portal)
         folder = portal['users']
         self.assertEqual(folder.portal_type, 'MembersFolder')
+        self.assertEqual(folder.Title(), 'Ansatte')
+        self.assertEqual(folder.Language(), portal.Language())
+
+    def test_personal_setuphandler(self):
+        from intranett.policy.setuphandlers import setup_personal_folder
+        portal = self.layer['portal']
+        request = self.layer['request']
+        if 'personal' in portal:
+            portal._delObject('personal')
+        # simulate the effect of commands.py create_site
+        request.form = {
+            'extension_ids': ('intranett.policy:default', ),
+            'form.submitted': True,
+            'title': 'Site title',
+            'language': portal.Language(),
+        }
+        setup_personal_folder(portal)
+        folder = portal['personal']
+        self.assertEqual(folder.portal_type, 'Folder')
         self.assertEqual(folder.Title(), 'Ansatte')
         self.assertEqual(folder.Language(), portal.Language())
 
