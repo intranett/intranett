@@ -21,6 +21,7 @@
   <include package="intranett.theme" />
 
   <include package=".browser" />
+  <include package=".subscribers" />
 
   <utility factory=".profile.HiddenProducts" name="intranett.policy" />
 
