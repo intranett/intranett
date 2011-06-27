@@ -179,8 +179,8 @@ def create_site_admin(app, args):
     host.send(mail_text, m_to, m_from, subject=subject,
               charset='utf-8', immediate=True)
 
-    # transaction.get().note('Added site admin user %r.' % login)
-    # transaction.get().commit()
+    transaction.get().note('Added site admin user %r.' % login)
+    transaction.get().commit()
     logger.info('Added site admin user %r.', login)
 
 
