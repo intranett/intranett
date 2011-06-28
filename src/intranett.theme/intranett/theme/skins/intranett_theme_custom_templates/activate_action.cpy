@@ -8,6 +8,7 @@
 ##parameters=randomstring, userid=None, password=None, password2=None
 from Products.CMFCore.utils import getToolByName
 from Products.PasswordResetTool.PasswordResetTool import InvalidRequestError, ExpiredRequestError
+from intranett.policy.browser.activation import loginUser
 
 status = "success"
 pw_tool = getToolByName(context, 'portal_password_reset')
@@ -20,7 +21,6 @@ except InvalidRequestError:
 except RuntimeError:
     status = "invalid"
 else:
-    context.REQUEST.set('__ac_name', userid)
-    context.REQUEST.set('__ac_password', password)
+    loginUser(context, userid, password)
 
 return state.set(status=status)
