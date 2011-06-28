@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.11 - unreleased
+1.2.11 - 2011-06-28
 -------------------
 
 - Update to Zope 2.12.19 to fix privilege escalation vulnerability.
