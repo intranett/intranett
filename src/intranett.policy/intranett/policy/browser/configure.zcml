@@ -73,4 +73,12 @@
       permission="zope2.View"
       />
 
+  <!-- Default content -->
+  <browser:view
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      name="create-default-content"
+      class=".defaultcontent.DefaultContent"
+      permission="zope2.ViewManagementScreens"
+      />
+
 </configure>
