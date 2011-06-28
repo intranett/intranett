@@ -4,6 +4,8 @@ Changelog
 1.2.11 - unreleased
 -------------------
 
+- Update to Zope 2.12.19 to fix privilege escalation vulnerability.
+  [hannosch]
 
 1.2.10 - 2011-06-27
 -------------------
