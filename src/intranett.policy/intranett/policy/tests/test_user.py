@@ -10,6 +10,9 @@ from Products.CMFCore.utils import getToolByName
 
 from plone.app.testing import login
 from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
@@ -53,10 +56,8 @@ class TestFunctionalUserView(IntranettFunctionalTestCase):
 
 class TestPersonalFolders(IntranettTestCase):
 
-    def setUp(self):
-        from plone.app.testing import setRoles
-        from plone.app.testing import TEST_USER_ID
 
+    def _createUser(self):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Manager'])
         mt = getToolByName(portal, 'portal_membership')
@@ -64,7 +65,8 @@ class TestPersonalFolders(IntranettTestCase):
             ['Member'], [])
         setRoles(portal, TEST_USER_ID, ['Member'])
 
-    def test_personal_folder(self):
+    def test_personal_folder_creation(self):
+        self._createUser()
         portal = self.layer['portal']
         login(portal, 'new_user')
         personal = self.layer['portal']['personal']
@@ -80,6 +82,20 @@ class TestPersonalFolders(IntranettTestCase):
         # New user is the owner of his personal folder
         self.assertEqual(folder.getOwner().getUserId(), 'new_user')
         logout()
+
+
+    def test_personal_folder_deletion(self):
+        self._createUser()
+        portal = self.layer['portal']
+        personal = portal['personal']
+        self.assertTrue('new_user' in personal)
+
+        # Delete the user
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        mt = getToolByName(portal, 'portal_membership')
+        mt.deleteMembers(['new_user'])
+        self.assertTrue('new_user' not in personal)
+        setRoles(portal, TEST_USER_ID, ['Member'])
 
 
 class TestMemberDataView(IntranettTestCase):

@@ -1,5 +1,7 @@
 from zope.component import adapter
+from zope.component import getUtility
 
+from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from Products.PluggableAuthService.interfaces.events import IPrincipalCreatedEvent
 from Products.PluggableAuthService.interfaces.events import IPrincipalDeletedEvent
@@ -25,8 +27,8 @@ def onPrincipalDeletion(event):
     """
     Delete person folder of member.
     """
-    # XXX
-    # We need to figure out what will be happening when a principal is deleted.
-    # Additionally PAS needs to be fixed to fire the IPrincipalDeletedEvent.
-    # For the time being we do nothing.
-    pass
+    portal = getUtility(ISiteRoot)
+    personal = portal['personal']
+    user_id = event.principal
+    if user_id in personal:
+        del personal[user_id]
