@@ -2,6 +2,7 @@ from zope.component import adapter
 
 from Products.CMFCore.utils import getToolByName
 from Products.PluggableAuthService.interfaces.events import IPrincipalCreatedEvent
+from Products.PluggableAuthService.interfaces.events import IPrincipalDeletedEvent
 
 
 @adapter(IPrincipalCreatedEvent)
@@ -17,3 +18,15 @@ def onPrincipalCreation(event):
         folder = personal[user_id]
         pu = getToolByName(personal, 'plone_utils')
         pu.changeOwnershipOf(folder, (user_id, ))
+
+
+@adapter(IPrincipalDeletedEvent)
+def onPrincipalDeletion(event):
+    """
+    Delete person folder of member.
+    """
+    # XXX
+    # We need to figure out what will be happening when a principal is deleted.
+    # Additionally PAS needs to be fixed to fire the IPrincipalDeletedEvent.
+    # For the time being we do nothing.
+    pass
