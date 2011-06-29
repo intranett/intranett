@@ -21,7 +21,7 @@ Changelog
   to the navigation tree and portal tabs not being reflected.
   [hannosch]
 
-- Update to Plone 4.1rc2. Refs #INTRANETT-120.
+- Update to Plone 4.1rc2. Refs INTRANETT-120.
   [hannosch]
 
 1.2.12 - unreleased
@@ -417,8 +417,7 @@ Changelog
 ------------------
 
 - Whenever an user uploads a file to the intranet it is checked for viruses
-  and rejected if it contains one.
-  Closes https://jira.jarn.com/browse/INTRANETT-137.
+  and rejected if it contains one. Closes INTRANETT-137.
   [ggozad, hannosch]
 
 1.1 - 2011-01-14
@@ -462,7 +461,7 @@ Changelog
 
 - Added HSTS header to enforce HTTPS connections. Details at
   http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security.
-  Refs https://jira.jarn.com/browse/INTRANETT-135.
+  Refs INTRANETT-135.
   [hannosch]
 
 - Added `mr.awsome` config, integrated SSH server management and wrote fabfile
@@ -529,7 +528,7 @@ Changelog
 ----------------
 
 - Added a basic `munin` resource monitoring client configuration. This refs
-  https://jira.jarn.com/browse/INTRANETT-81.
+  INTRANETT-81.
   [hannosch]
 
 - Updated distributions:
@@ -573,18 +572,18 @@ Changelog
 ----------------
 
 - Moved `Employees` tab to the last position in the navigation bar.
-  This closes https://jira.jarn.com/browse/INTRANETT-115.
+  This closes INTRANETT-115.
   [denys, hannosch]
 
 - Updated distributions:
   * intranett.theme = 0.5
 
 - Generate the nginx config from the buildout to deploy the error page changes
-  to all servers. This closes https://jira.jarn.com/browse/INTRANETT-119.
+  to all servers. This closes INTRANETT-119.
   [hannosch]
 
 - Added nicer error page to Nginx, which will be shown during software
-  upgrades. Refs https://jira.jarn.com/browse/INTRANETT-119.
+  upgrades. Refs INTRANETT-119.
   [hannosch]
 
 0.2 - 2010-11-15
@@ -634,22 +633,20 @@ Changelog
   for `modernizr.js` library.
   [denys]
 
-- Print stylesheet. References https://jira.jarn.com/browse/INTRANETT-51.
+- Print stylesheet. References INTRANETT-51.
   [denys]
 
-- Re-introduced workflow-state colors with `member.css`. Closes
-  https://jira.jarn.com/browse/INTRANETT-86.
+- Re-introduced workflow-state colors with `member.css`. Closes INTRANETT-86.
   [denys]
 
 - Copied over styles for calendar that were missing for PloneFormGen calendars.
-  Closes https://jira.jarn.com/browse/INTRANETT-106
+  Closes INTRANETT-106
   [denys]
 
 - Removed hardcoded height for the thumbnails in employee-listing.
   [denys]
 
-- Added ZEO authentication. This closes
-  https://jira.jarn.com/browse/INTRANETT-112.
+- Added ZEO authentication. This closes INTRANETT-112.
   [hannosch]
 
 - Updated distributions:
@@ -760,13 +757,11 @@ Changelog
 0.0.3 - 2010-10-14
 ------------------
 
-- Optimized CSS, KSS and JS resource merging.
-  This closes https://jira.jarn.com/browse/INTRANETT-60.
+- Optimized CSS, KSS and JS resource merging. This closes INTRANETT-60.
   [hannosch]
 
 - Include ``plone.app.caching`` as a dependency and configure simple caching
-  for stable resources, theme resources and feeds This closes
-  https://jira.jarn.com/browse/INTRANETT-76.
+  for stable resources, theme resources and feeds This closes INTRANETT-76.
   [hannosch]
 
 - Fixes to stylings in IE7+
