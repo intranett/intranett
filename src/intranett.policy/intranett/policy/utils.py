@@ -1,6 +1,7 @@
 import logging
 
 from Products.CMFCore.utils import getToolByName
+from Products.PlonePAS.utils import cleanId
 from ZODB.POSException import POSKeyError
 from ZODB.utils import p64
 from zope.component import adapter
@@ -23,6 +24,12 @@ def getMembersFolder(context):
     if id:
         portal = getToolByName(context, 'portal_url').getPortalObject()
         return portal.get(id)
+
+
+def get_peronal_folder_id(user_id):
+    if isinstance(user_id, unicode):
+        user_id = user_id.encode('utf-8')
+    return cleanId(user_id)
 
 
 @adapter(IProcessStarting)
