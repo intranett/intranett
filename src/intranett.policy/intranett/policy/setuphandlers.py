@@ -121,9 +121,11 @@ def setup_personal_folder(site):
     request = aq_get(portal, 'REQUEST', None)
     if request is not None:
         request.form['title'] = title
-    portal[PERSONAL_FOLDER_ID].processForm() # Fire events
+    folder = portal[PERSONAL_FOLDER_ID]
+    folder.setExcludeFromNav(True)
+    folder.processForm() # Fire events
     workflow = getToolByName(portal, 'portal_workflow')
-    workflow.doActionFor(portal[PERSONAL_FOLDER_ID], 'publish')
+    workflow.doActionFor(folder, 'publish')
 
 
 def enable_secure_cookies(context):
