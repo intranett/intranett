@@ -193,6 +193,9 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         portal = self.layer['portal']
         wtool = getToolByName(portal, 'portal_workflow')
         self.assertTrue('one_state_intranett_workflow' in wtool)
-        self.assertEqual(wtool.getChainFor('File'), ('one_state_intranett_workflow',))
-        self.assertEqual(wtool.getChainFor('Image'), ('one_state_intranett_workflow',))
-        self.assertEqual(wtool.getChainFor('Discussion Item'), ('one_state_intranett_workflow',))
+        self.assertEqual(wtool.getChainFor('File'),
+            ('one_state_intranett_workflow',))
+        self.assertEqual(wtool.getChainFor('Image'),
+            ('one_state_intranett_workflow',))
+        self.assertEqual(wtool.getChainFor('Discussion Item'),
+            ('one_state_intranett_workflow',))
