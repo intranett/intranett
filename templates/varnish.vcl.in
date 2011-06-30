@@ -45,7 +45,7 @@ sub vcl_recv {
 
 sub vcl_fetch {
     if (beresp.status == 302) {
-        # Neither createObject nor require_login should be cached
+        # require_login should not be cached
         set beresp.http.X-Varnish-Action = "FETCH (pass - redirect)";
         return(pass);
     }
