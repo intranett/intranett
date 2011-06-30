@@ -4,9 +4,10 @@ from AccessControl import ModuleSecurityInfo
 from AccessControl.SecurityManagement import newSecurityManager
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.publisher.browser import BrowserView
+
+from intranett.policy import IntranettMessageFactory as _
 
 
 class ActivationMail(BrowserView):
