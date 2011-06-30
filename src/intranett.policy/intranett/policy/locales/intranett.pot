@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-06-22 14:01+0000\n"
+"POT-Creation-Date: 2011-06-30 12:14+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -60,6 +60,10 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
 msgid "News Highlight"
+msgstr ""
+
+#: intranett.policy/intranett/policy/setuphandlers.py:114
+msgid "Personal folders"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:20
