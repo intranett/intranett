@@ -1,6 +1,7 @@
 import logging
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import _createObjectByType
 from Products.PlonePAS.utils import cleanId
 from ZODB.POSException import POSKeyError
 from ZODB.utils import p64
@@ -8,6 +9,7 @@ from zope.component import adapter
 from zope.component import queryUtility
 from zope.processlifetime import IProcessStarting
 
+from intranett.policy.config import PERSONAL_FOLDER_ID
 from intranett.policy.interfaces import IMembersFolderId
 
 logger = logging.getLogger("intranett")
@@ -30,6 +32,24 @@ def get_personal_folder_id(user_id):
     if isinstance(user_id, unicode):
         user_id = user_id.encode('utf-8')
     return cleanId(user_id)
+
+
+def create_personal_folder(context, user_id):
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    personal = portal.get(PERSONAL_FOLDER_ID, None)
+    if personal is None:
+        return
+    folder_id = get_personal_folder_id(user_id)
+    if folder_id not in personal:
+        _createObjectByType('Folder', personal, id=folder_id, title=user_id)
+        folder = personal[folder_id]
+        folder.processForm() # Fire events
+        pu = getToolByName(personal, 'plone_utils')
+        pu.changeOwnershipOf(folder, (user_id, ))
+        folder.__ac_local_roles__ = None
+        folder.manage_setLocalRoles(user_id, ['Owner'])
+        folder.setCreators([user_id])
+        folder.reindexObject()
 
 
 @adapter(IProcessStarting)

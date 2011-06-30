@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import os
 
 from Acquisition import aq_get
@@ -189,13 +190,20 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         # tested by GS export diff
         pass
 
+    def before_29(self):
+        from intranett.policy.config import PERSONAL_FOLDER_ID
+        portal = self.layer['portal']
+        mtool = getToolByName(portal, 'portal_membership')
+        mtool.addMember(u'fred', 'secret', ['Member'], [])
+        self.assertFalse(PERSONAL_FOLDER_ID in portal)
+
     def after_30(self):
         from intranett.policy.config import PERSONAL_FOLDER_ID
         from intranett.policy.utils import get_personal_folder_id
         portal = self.layer['portal']
         self.assertTrue(PERSONAL_FOLDER_ID in portal)
-        folder_id = get_personal_folder_id(TEST_USER_ID)
+        folder_id = get_personal_folder_id(u'fred')
         self.assertTrue(folder_id in portal[PERSONAL_FOLDER_ID])
         personal_folder = portal[PERSONAL_FOLDER_ID][folder_id]
-        self.assertEqual(personal_folder.getOwner().getId(), TEST_USER_ID)
-        self.assertEqual(personal_folder.Creator(), TEST_USER_ID)
+        self.assertEqual(personal_folder.getOwner().getId(), u'fred')
+        self.assertEqual(personal_folder.Creator(), 'fred')

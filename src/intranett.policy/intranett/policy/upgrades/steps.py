@@ -324,7 +324,12 @@ def cleanup_plone41(context):
 def add_personal_folder(context):
     from intranett.policy.config import PERSONAL_FOLDER_ID
     from intranett.policy.setuphandlers import setup_personal_folder
+    from intranett.policy.subscribers.users import create_personal_folder
     portal = getToolByName(context, 'portal_url').getPortalObject()
     if PERSONAL_FOLDER_ID not in portal:
         setup_personal_folder(portal)
-        # TODO create personal folders for existing users
+        # create personal folders for existing users
+        acl_users = aq_get(portal, 'acl_users')
+        user_ids = [a for a in acl_users.source_users.listUserIds()]
+        for user_id in user_ids:
+            create_personal_folder(portal, user_id)
