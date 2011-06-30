@@ -327,3 +327,4 @@ def add_personal_folder(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
     if PERSONAL_FOLDER_ID not in portal:
         setup_personal_folder(portal)
+        # TODO create personal folders for existing users

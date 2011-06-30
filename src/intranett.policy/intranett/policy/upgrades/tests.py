@@ -188,3 +188,14 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
     def after_29(self):
         # tested by GS export diff
         pass
+
+    def after_30(self):
+        from intranett.policy.config import PERSONAL_FOLDER_ID
+        from intranett.policy.utils import get_personal_folder_id
+        portal = self.layer['portal']
+        self.assertTrue(PERSONAL_FOLDER_ID in portal)
+        folder_id = get_personal_folder_id(TEST_USER_ID)
+        self.assertTrue(folder_id in portal[PERSONAL_FOLDER_ID])
+        personal_folder = portal[PERSONAL_FOLDER_ID][folder_id]
+        self.assertEqual(personal_folder.getOwner().getId(), TEST_USER_ID)
+        self.assertEqual(personal_folder.Creator(), TEST_USER_ID)
