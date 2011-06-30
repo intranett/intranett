@@ -8,7 +8,7 @@ from Products.PluggableAuthService.interfaces.events import IPrincipalCreatedEve
 from Products.PluggableAuthService.interfaces.events import IPrincipalDeletedEvent
 
 from intranett.policy.config import PERSONAL_FOLDER_ID
-from intranett.policy.utils import get_peronal_folder_id
+from intranett.policy.utils import get_personal_folder_id
 
 
 @adapter(IPrincipalCreatedEvent)
@@ -19,7 +19,7 @@ def onPrincipalCreation(event):
     portal = getToolByName(event.principal, 'portal_url').getPortalObject()
     personal = portal[PERSONAL_FOLDER_ID]
     user_id = event.principal.getUserId()
-    folder_id = get_peronal_folder_id(user_id)
+    folder_id = get_personal_folder_id(user_id)
     if folder_id not in personal:
         _createObjectByType('Folder', personal, id=folder_id, title=user_id)
         folder = personal[folder_id]
@@ -38,6 +38,6 @@ def onPrincipalDeletion(event):
     portal = getUtility(ISiteRoot)
     personal = portal[PERSONAL_FOLDER_ID]
     user_id = event.principal
-    folder_id = get_peronal_folder_id(user_id)
+    folder_id = get_personal_folder_id(user_id)
     if folder_id in personal:
         del personal[user_id]

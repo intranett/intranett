@@ -26,7 +26,7 @@ def getMembersFolder(context):
         return portal.get(id)
 
 
-def get_peronal_folder_id(user_id):
+def get_personal_folder_id(user_id):
     if isinstance(user_id, unicode):
         user_id = user_id.encode('utf-8')
     return cleanId(user_id)
