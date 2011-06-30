@@ -318,3 +318,15 @@ def cleanup_plone41(context):
         pass
     from plone.app.upgrade.v41.alphas import update_role_mappings
     update_role_mappings(context)
+
+
+@upgrade_to(30)
+def protect_images(context):
+    from plone.app.workflow.remap import remap_workflow
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('workflow', 'plone.app.registry'))
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    remap_workflow(site,
+                   type_ids=('Discussion Item', 'File', 'Image'),
+                   chain=('one_state_intranett_workflow', ))

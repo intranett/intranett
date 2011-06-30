@@ -1,12 +1,19 @@
 <?xml version="1.0"?>
 <object name="portal_workflow">
  <object name="intranett_workflow" meta_type="Workflow"/>
+ <object name="one_state_intranett_workflow" meta_type="Workflow"/>
  <bindings>
   <default>
    <bound-workflow workflow_id="intranett_workflow"/>
   </default>
   <type type_id="Discussion Item">
-   <bound-workflow workflow_id="one_state_workflow"/>
+   <bound-workflow workflow_id="one_state_intranett_workflow"/>
+  </type>
+  <type type_id="File">
+   <bound-workflow workflow_id="one_state_intranett_workflow"/>
+  </type>
+  <type type_id="Image">
+   <bound-workflow workflow_id="one_state_intranett_workflow"/>
   </type>
  </bindings>
 </object>
