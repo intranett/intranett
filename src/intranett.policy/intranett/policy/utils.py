@@ -53,7 +53,7 @@ def create_personal_folder(context, user_id):
 
 
 @adapter(IProcessStarting)
-def warmupZODBCache(event):
+def warmupZODBCache(event): # pragma: no cover
     logger.info('Warming up ZODB cache.')
     import Zope2
     cache_size = Zope2.DB.getCacheSize()

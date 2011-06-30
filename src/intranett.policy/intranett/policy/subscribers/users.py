@@ -24,7 +24,7 @@ def onPrincipalDeletion(event):
     """
     portal = getUtility(ISiteRoot)
     personal = portal.get(PERSONAL_FOLDER_ID, None)
-    if personal is None:
+    if personal is None: # pragma: no cover
         return
     user_id = event.principal
     folder_id = get_personal_folder_id(user_id)
