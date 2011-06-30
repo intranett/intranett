@@ -60,6 +60,10 @@
   <record name="plone.app.caching.strongCaching.maxage">
     <value>604800</value>
   </record>
+  <record name="plone.app.caching.strongCaching.plone.resource.maxage">
+    <field ref="plone.app.caching.strongCaching.maxage" />
+    <value>604800</value>
+  </record>
   <record name="plone.app.caching.strongCaching.ramCache">
     <value>False</value>
   </record>
