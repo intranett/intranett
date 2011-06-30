@@ -296,9 +296,6 @@ def cleanup_plone41(context):
     actions = getToolByName(context, 'portal_actions')
     if 'plone_setup' in actions.user:
         del actions.user['plone_setup']
-    # XXX this can go once p.a.upgrade 1.1rc2+ is released
-    from plone.app.upgrade.v41.alphas import update_controlpanel_permissions
-    update_controlpanel_permissions(context)
     # handle security
     loadMigrationProfile(context, 'profile-Products.CMFPlone:plone',
         steps=('rolemap', 'workflow', ))
