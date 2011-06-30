@@ -4,6 +4,9 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-177: Prevent anonymous access to files and images.
+  [stefan]
+
 - Update to DateTime 3.
   [hannosch]
 
