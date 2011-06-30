@@ -110,8 +110,9 @@ def setup_members_folder(site):
 def setup_personal_folder(site):
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import PERSONAL_FOLDER_ID
-
-    title = translate('Personal', target_language=site.Language())
+    from intranett.policy import IntranettMessageFactory as _
+    personal_folder_title = _(u'Personal')
+    title = translate(personal_folder_title, target_language=site.Language())
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('Folder', portal, id=PERSONAL_FOLDER_ID,
         title=title)
