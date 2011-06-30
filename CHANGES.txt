@@ -4,6 +4,9 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-235: Automatically log in the user after account activation.
+  [stefan]
+
 - Increase Nginx `client_max_body_size` from 10mb to 50mb.
   [hannosch]
 
