@@ -129,6 +129,12 @@ def enable_link_by_uid(site):
     install_mimetype_and_transforms(site)
 
 
+def open_ext_links_in_new_window(site):
+    jstool = getToolByName(site, 'portal_javascripts')
+    jstool.getResource('mark_special_links.js').setEnabled(True)
+    jstool.cookResources()
+
+
 def restrict_siteadmin(site):
     perm_ids = (
         'Content rules: Manage rules',
@@ -179,4 +185,5 @@ def various(context):
     enable_secure_cookies(site)
     ignore_link_integrity_exceptions(site)
     enable_link_by_uid(site)
+    open_ext_links_in_new_window(site)
     restrict_siteadmin(site)

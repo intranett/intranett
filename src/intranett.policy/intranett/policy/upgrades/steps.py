@@ -327,3 +327,11 @@ def protect_images(context):
     remap_workflow(site,
                    type_ids=('Discussion Item', 'File', 'Image'),
                    chain=('one_state_intranett_workflow', ))
+
+
+@upgrade_to(31)
+def ext_links_in_new_window(context):
+    from intranett.policy.setuphandlers import open_ext_links_in_new_window
+    ptool = getToolByName(context, 'portal_properties')
+    ptool.site_properties.external_links_open_new_window = 'true'
+    open_ext_links_in_new_window(context)

@@ -2,4 +2,6 @@
 <site>
  <property name="email_from_address" type="string">no-reply@intranett.no</property>
  <property name="email_from_name" type="string">intranett.no</property>
+ <property name="external_links_open_new_window"
+    type="string">true</property>
 </site>
