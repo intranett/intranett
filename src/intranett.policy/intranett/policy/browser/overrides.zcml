@@ -52,4 +52,11 @@
       template="templates/addsite.pt"
       />
 
+  <browser:viewlet
+      name="plone.personal_bar"
+      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+      class=".personalbar.PersonalBarViewlet"
+      permission="zope2.View"
+      />
+
 </configure>
