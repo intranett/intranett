@@ -1,5 +1,6 @@
 import logging
 
+from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 from Products.PlonePAS.utils import cleanId
@@ -43,6 +44,10 @@ def create_personal_folder(context, user_id):
     if folder_id not in personal:
         _createObjectByType('Folder', personal, id=folder_id, title=user_id)
         folder = personal[folder_id]
+        # don't let the request interfere in the processForm call
+        request = aq_get(portal, 'REQUEST', None)
+        if request is not None:
+            request.form['title'] = user_id
         folder.processForm() # Fire events
         pu = getToolByName(personal, 'plone_utils')
         pu.changeOwnershipOf(folder, (user_id, ))
