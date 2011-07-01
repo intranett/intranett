@@ -18,3 +18,6 @@ msgstr ""
 msgid "Edit"
 msgstr "Redigér"
 
+#: validation/validators/SupplValidators.py:67
+msgid "Validation failed($name: Uploaded data is too large: ${size}MB (max ${max}MB)"
+msgstr "Validering feilet($name: Opplastede data er for store: ${size}MB (max ${max}MB)"
