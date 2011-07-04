@@ -27,7 +27,7 @@ class UsersListingView(BrowserView):
             if member_id in md.portraits:
                 info['portrait_url'] = self.portrait_url(member_id)
                 info['thumbnail_url'] = self.thumbnail_url(member_id)
-            if info['department']:
+            if 'department' in info and info['department']:
                 info['department_url'] = self.department_url(info['department'])
                 self.department_info.setdefault(info['department'], {
                     'name': info['department'],
