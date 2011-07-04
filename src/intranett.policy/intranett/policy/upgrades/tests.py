@@ -199,3 +199,8 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
             ('one_state_intranett_workflow',))
         self.assertEqual(wtool.getChainFor('Discussion Item'),
             ('one_state_intranett_workflow',))
+
+    def after_31(self):
+        perm_id = '_Review_comments_Permission'
+        self.assertEqual(set(getattr(self.portal, perm_id)),
+            set(['Manager', 'Site Administrator', 'Reviewer']))
