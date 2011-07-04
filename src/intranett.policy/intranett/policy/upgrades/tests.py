@@ -106,8 +106,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         sm = getSiteManager()
         regs = [r.name for r in sm.registeredUtilities()
             if r.provided == IPortletType]
-        self.assertTrue('intranett.policy.portlets.NewsHighlight' in regs)
-        self.assertTrue('intranett.policy.portlets.EventHighlight' in regs)
+
+        # The following two lines are commented out as we disable the
+        # portlets in upgrade #31.
+        #self.assertTrue('intranett.policy.portlets.NewsHighlight' in regs)
+        #self.assertTrue('intranett.policy.portlets.EventHighlight' in regs)
         prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
             'autocomplete'
         css = getToolByName(portal, 'portal_css')
@@ -199,3 +202,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
             ('one_state_intranett_workflow',))
         self.assertEqual(wtool.getChainFor('Discussion Item'),
             ('one_state_intranett_workflow',))
+
+    def after_31(self):
+        sm = getSiteManager()
+        registrations = [r.name for r in sm.registeredUtilities()
+                         if IPortletManager == r.provided]
+        self.assertFalse('intranett.policy.portlets.NewsHighlight' in registrations)
+        self.assertFalse('intranett.policy.portlets.EventHighlight' in registrations)
+        self.assertFalse('intranett.policy.portlets.ContentHighlight' in registrations)

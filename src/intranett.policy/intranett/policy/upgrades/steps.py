@@ -327,3 +327,14 @@ def protect_images(context):
     remap_workflow(site,
                    type_ids=('Discussion Item', 'File', 'Image'),
                    chain=('one_state_intranett_workflow', ))
+
+
+@upgrade_to(31)
+def remove_crappy_portlets(context):
+    from plone.portlets.interfaces import IPortletManager
+    sm = getSiteManager()
+    names = ('intranett.policy.portlets.NewsHighlight',
+             'intranett.policy.portlets.EventHighlight',
+             'intranett.policy.portlets.EventHighlight')
+    for name in names:
+        sm.unregisterUtility(provided=IPortletManager, name=name)

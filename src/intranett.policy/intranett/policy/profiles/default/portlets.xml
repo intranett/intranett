@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <portlets>
 
+<!--
+
  <portlet
    addview="intranett.policy.portlets.NewsHighlight"
    title="News Highlight"
@@ -18,6 +20,7 @@
    title="Content Highlight"
    description="Displays a selected content item."
    />
+-->
 
   <assignment name="navigation"
       category="context"
