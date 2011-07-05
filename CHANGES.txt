@@ -4,6 +4,10 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-121: Prevent employee listing from breaking when no department is
+  defined.
+  [ggozad]
+
 - INTRANETT-120: Update to Plone 4.1rc3.
   [hannosch]
 
