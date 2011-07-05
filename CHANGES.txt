@@ -4,6 +4,10 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-240: Add file size validator and provide help texts stating the
+  50mb upload limit.
+  [ggozad]
+
 - INTRANETT-120: Update to Plone 4.1rc3.
   [hannosch]
 
