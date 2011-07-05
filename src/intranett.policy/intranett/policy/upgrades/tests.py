@@ -204,3 +204,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         perm_id = '_Review_comments_Permission'
         self.assertEqual(set(getattr(self.portal, perm_id)),
             set(['Manager', 'Site Administrator', 'Reviewer']))
+
+    def after_32(self):
+        portal = self.layer['portal']
+        js = getToolByName(portal, 'portal_javascripts')
+        resources = [r[1] for r in js.getResourcesDict().items() if
+            r[0] == 'mark_special_links.js']
+        self.assertEqual(len(resources), 1)
+        self.assertTrue(resources[0].getEnabled())

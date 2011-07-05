@@ -328,7 +328,16 @@ def protect_images(context):
                    type_ids=('Discussion Item', 'File', 'Image'),
                    chain=('one_state_intranett_workflow', ))
 
+
 @upgrade_to(31)
 def site_admins_can_review_comments(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('rolemap',))
+
+
+@upgrade_to(32)
+def ext_links_in_new_window(context):
+    from intranett.policy.setuphandlers import open_ext_links_in_new_window
+    ptool = getToolByName(context, 'portal_properties')
+    ptool.site_properties.external_links_open_new_window = 'true'
+    open_ext_links_in_new_window(context)
