@@ -4,6 +4,9 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-223: The content menu should be visible by default.
+  [ggozad]
+
 - Update to Zope 2.13.8 to fix privilege escalation vulnerability.
   [hannosch]
 
