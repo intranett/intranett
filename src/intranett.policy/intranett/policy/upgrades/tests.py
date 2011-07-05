@@ -199,3 +199,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
             ('one_state_intranett_workflow',))
         self.assertEqual(wtool.getChainFor('Discussion Item'),
             ('one_state_intranett_workflow',))
+
+    def after_31(self):
+        portal = self.layer['portal']
+        js = getToolByName(portal, 'portal_javascripts')
+        resources = [r[1] for r in js.getResourcesDict().items() if
+            r[0] == 'mark_special_links.js']
+        self.assertEqual(len(resources), 1)
+        self.assertTrue(resources[0].getEnabled())
