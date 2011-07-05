@@ -4,6 +4,9 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-214: Site admins can delete comments.
+  [ggozad]
+
 - INTRANETT-121: Prevent employee listing from breaking when no department is
   defined.
   [ggozad]

@@ -327,3 +327,8 @@ def protect_images(context):
     remap_workflow(site,
                    type_ids=('Discussion Item', 'File', 'Image'),
                    chain=('one_state_intranett_workflow', ))
+
+@upgrade_to(31)
+def site_admins_can_review_comments(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap',))
