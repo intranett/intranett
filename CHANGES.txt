@@ -4,6 +4,10 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-228: Open external links, including the link to hjelp.intranett.no
+  in a new window.
+  [ggozad]
+
 - INTRANETT-120: Update to Plone 4.1rc3.
   [hannosch]
 
