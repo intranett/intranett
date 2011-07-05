@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-06-30 08:22+0000\n"
+"POT-Creation-Date: 2011-07-05 17:52+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -16,5 +16,24 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/profiles/default/types/Plone_Site.xml
 msgid "Edit"
+msgstr ""
+
+#: validation/validators/SupplValidators.py:67
+msgid "Validation failed($name: Uploaded data is too large: ${size}MB (max ${max}MB)"
+msgstr ""
+
+#. Default: "File"
+#: widget label of FileWidget - description ""
+msgid "label_file"
+msgstr ""
+
+#. Default: "Image"
+#: widget label of ImageWidget - description ""
+msgid "label_image"
+msgstr ""
+
+#. Default: "Image"
+#: widget label of ImageWidget - description "Will be shown in the news listing, and in the news item itself. Image will be scaled to a sensible size."
+msgid "label_news_image"
 msgstr ""
 
