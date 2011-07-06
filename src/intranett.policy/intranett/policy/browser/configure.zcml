@@ -47,4 +47,11 @@
       permission="zope2.View"
       />
 
+  <browser:viewlet
+      name="plone.personal_bar"
+      manager="intranett.theme.browser.interfaces.ITopBar"
+      class=".personalbar.PersonalBarViewlet"
+      permission="zope2.View"
+      />
+
 </configure>

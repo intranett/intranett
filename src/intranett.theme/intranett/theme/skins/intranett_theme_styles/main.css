@@ -309,19 +309,19 @@ body > header > .contentAlignment {
 #portal-personaltools {
   width: 97.917%;
   font-size: 0.76em; }
-  #portal-personaltools li, #portal-personaltools dt, #portal-personaltools dd, #portal-personaltools ul {
+  #portal-personaltools li, #portal-personaltools ul {
     list-style: none;
     display: inline; }
-  #portal-personaltools dd ul {
+  #portal-personaltools ul {
     margin-left: 0; }
-  #portal-personaltools dt a, #portal-personaltools li a {
+  #portal-personaltools li {
     padding: 0 0.76em;
     display: inline-block;
     line-height: 1.4em;
     margin: 0.3em 0; }
-  #portal-personaltools dt a:link, #portal-personaltools li a:link, #portal-personaltools dt a:visited, #portal-personaltools li a:visited {
+  #portal-personaltools li, #portal-personaltools li a:link, #portal-personaltools li a:visited {
     color: #e6e6e6; }
-  #portal-personaltools dt a:hover, #portal-personaltools li a:hover {
+  #portal-personaltools li a:hover {
     color: #fff; }
   #portal-personaltools ul {
     white-space: nowrap; }
