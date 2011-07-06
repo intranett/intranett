@@ -357,3 +357,7 @@ def add_personal_folder(context):
         user_ids = [a for a in acl_users.source_users.listUserIds()]
         for user_id in user_ids:
             create_personal_folder(portal, user_id)
+    actions = getToolByName(context, 'portal_actions')
+    user_category = actions.user
+    if 'manage_users' in user_category:
+        del user_category['manage_users']
