@@ -341,31 +341,25 @@ body > header > .contentAlignment {
 #portal-personaltools {
     width: $width-full;
     font-size: $smaller-size;
-
-    li, ul {
+    margin-left: 0;
+    white-space: nowrap;
+    list-style: none;
+    display: inline;
+    li {
         list-style: none;
         display: inline;
-    }
-    ul {
-        margin-left: 0;
-    }
-    li {
         padding: 0 $smaller-size;
         display: inline-block;
         line-height: 1.4em;
         margin: 0.3em 0;
-    }
-    li, li a:link, li a:visited {
-        color: #e6e6e6;
-    }
-    li a:hover {
-        color: #fff;
-    }
-    ul {
-        white-space: nowrap;
+        &, a:link, a:visited {
+            color: #e6e6e6;
+        }
+        a:hover {
+            color: #fff;
+        }
     }
 }
-
 
 /* @end */
 
