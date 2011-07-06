@@ -56,7 +56,6 @@ class TestFunctionalUserView(IntranettFunctionalTestCase):
 
 class TestPersonalFolders(IntranettTestCase):
 
-
     def _createUser(self):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Manager'])
@@ -82,7 +81,6 @@ class TestPersonalFolders(IntranettTestCase):
         # New user is the owner of his personal folder
         self.assertEqual(folder.getOwner().getUserId(), 'new_user')
         logout()
-
 
     def test_personal_folder_deletion(self):
         self._createUser()
