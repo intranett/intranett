@@ -296,9 +296,6 @@ def cleanup_plone41(context):
     actions = getToolByName(context, 'portal_actions')
     if 'plone_setup' in actions.user:
         del actions.user['plone_setup']
-    # XXX this can go once p.a.upgrade 1.1rc2+ is released
-    from plone.app.upgrade.v41.alphas import update_controlpanel_permissions
-    update_controlpanel_permissions(context)
     # handle security
     loadMigrationProfile(context, 'profile-Products.CMFPlone:plone',
         steps=('rolemap', 'workflow', ))
@@ -321,6 +318,32 @@ def cleanup_plone41(context):
 
 
 @upgrade_to(30)
+def protect_images(context):
+    from plone.app.workflow.remap import remap_workflow
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('workflow', 'plone.app.registry'))
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    remap_workflow(site,
+                   type_ids=('Discussion Item', 'File', 'Image'),
+                   chain=('one_state_intranett_workflow', ))
+
+
+@upgrade_to(31)
+def site_admins_can_review_comments(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap',))
+
+
+@upgrade_to(32)
+def ext_links_in_new_window(context):
+    from intranett.policy.setuphandlers import open_ext_links_in_new_window
+    ptool = getToolByName(context, 'portal_properties')
+    ptool.site_properties.external_links_open_new_window = 'true'
+    open_ext_links_in_new_window(context)
+
+
+@upgrade_to(33)
 def add_personal_folder(context):
     from intranett.policy.config import PERSONAL_FOLDER_ID
     from intranett.policy.setuphandlers import setup_personal_folder

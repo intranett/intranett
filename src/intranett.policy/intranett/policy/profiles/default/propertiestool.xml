@@ -13,5 +13,6 @@
   <property name="types_not_searched" purge="False">
    <element value="MembersFolder"/>
   </property>
+ <property name="external_links_open_new_window" type="string">true</property>
  </object>
 </object>

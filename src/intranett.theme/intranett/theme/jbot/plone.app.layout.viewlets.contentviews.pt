@@ -1,7 +1,7 @@
 <div id="contentviews-wrapper"
      i18n:domain="plone"
      tal:define="ploneview context/@@plone;
-                 editbar_opened python:request.get('editbar_opened', 0);"
+                 editbar_opened python:request.get('editbar_opened', '1')=='1';"
      tal:condition="ploneview/showEditableBorder"
      tal:attributes="style python:editbar_opened and 'display:block' or 'display:none'">
 

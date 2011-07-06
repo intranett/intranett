@@ -190,14 +190,38 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         # tested by GS export diff
         pass
 
-    def before_29(self):
+    def after_30(self):
+        portal = self.layer['portal']
+        wtool = getToolByName(portal, 'portal_workflow')
+        self.assertTrue('one_state_intranett_workflow' in wtool)
+        self.assertEqual(wtool.getChainFor('File'),
+            ('one_state_intranett_workflow',))
+        self.assertEqual(wtool.getChainFor('Image'),
+            ('one_state_intranett_workflow',))
+        self.assertEqual(wtool.getChainFor('Discussion Item'),
+            ('one_state_intranett_workflow',))
+
+    def after_31(self):
+        perm_id = '_Review_comments_Permission'
+        self.assertEqual(set(getattr(self.portal, perm_id)),
+            set(['Manager', 'Site Administrator', 'Reviewer']))
+
+    def after_32(self):
+        portal = self.layer['portal']
+        js = getToolByName(portal, 'portal_javascripts')
+        resources = [r[1] for r in js.getResourcesDict().items() if
+            r[0] == 'mark_special_links.js']
+        self.assertEqual(len(resources), 1)
+        self.assertTrue(resources[0].getEnabled())
+
+    def before_33(self):
         from intranett.policy.config import PERSONAL_FOLDER_ID
         portal = self.layer['portal']
         mtool = getToolByName(portal, 'portal_membership')
         mtool.addMember(u'fred', 'secret', ['Member'], [])
         self.assertFalse(PERSONAL_FOLDER_ID in portal)
 
-    def after_30(self):
+    def after_33(self):
         from intranett.policy.config import PERSONAL_FOLDER_ID
         from intranett.policy.utils import get_personal_folder_id
         portal = self.layer['portal']

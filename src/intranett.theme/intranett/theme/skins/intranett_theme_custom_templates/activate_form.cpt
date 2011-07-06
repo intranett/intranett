@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+    <metal:main fill-slot="main"
+         tal:define="errors options/state/getErrors">
+
+        <h1 class="documentFirstHeading"
+            i18n:domain="passwordresettool"
+            i18n:translate="heading_reset_password">Set your password</h1>
+
+        <div class="documentDescription" i18n:domain="passwordresettool"
+           i18n:translate="description_reset_password">
+            Please fill out the form below to set your password.
+        </div>
+
+        <div id="content-core">
+            <form class="enableAutoFocus"
+                  name="pwreset_action"
+                  method="post"
+                  tal:attributes="action template/getId">
+                <fieldset>
+                    <input type="hidden"
+                           name="randomstring"
+                           value=""
+                           tal:attributes="value options/randomstring | request/randomstring | nothing" />
+
+                    <input type="hidden"
+                           name="userid"
+                           value=""
+                           tal:attributes="value options/userid | request/userid | nothing" />
+
+                    <div class="field"
+                         tal:define="error errors/password | nothing;"
+                         tal:attributes="class python:test(error, 'field error', 'field')">
+
+                        <label for="password"
+                               i18n:translate="label_new_password">New password</label>
+                        <div tal:content="error">Validation error output</div>
+
+                        <div class="formHelp"
+                             i18n:translate="help_new_password">
+                            Enter your new password. Minimum 5 characters.
+                        </div>
+
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               size="10" />
+                    </div>
+
+                    <div class="field"
+                         tal:define="error errors/password | nothing;"
+                         tal:attributes="class python:test(error, 'field error', 'field')">
+
+                        <label for="password2"
+                               i18n:translate="label_confirm_password">Confirm password</label>
+                        <div tal:content="error">Validation error output</div>
+
+                        <div class="formHelp"
+                             i18n:translate="help_confirm_password">
+                            Re-enter the password. Make sure the passwords are identical.
+                        </div>
+
+                        <input type="password"
+                               id="password2"
+                               name="password2"
+                               size="10"
+                               />
+                    </div>
+
+                    <div>
+                        <div class="label">&nbsp;</div>
+
+                        <div class="field">
+                            <input class="context"
+                                   type="submit"
+                                   value="Set my password"
+                                   i18n:domain="passwordresettool"
+                                   i18n:attributes="value"
+                                   />
+                        </div>
+                    </div>
+                    <input type="hidden" name="form.submitted" value="1" />
+                </fieldset>
+            </form>
+        </div>
+    </metal:main>
+</body>
+</html>

@@ -168,7 +168,8 @@ def create_site_admin(app, args):
         reset=reset, email=email, fullname=fullname, hostname=hostname)
     if isinstance(mail_text, unicode):
         mail_text = mail_text.encode('utf-8')
-    mail_text = mail_text.replace('http://foo/Plone/', 'https://%s/' % hostname)
+    mail_text = mail_text.replace('http://foo/Plone/passwordreset/',
+                                  'https://%s/activate/' % hostname)
 
     message_obj = message_from_string(mail_text.strip())
     subject = message_obj['Subject']
@@ -179,8 +180,8 @@ def create_site_admin(app, args):
     host.send(mail_text, m_to, m_from, subject=subject,
               charset='utf-8', immediate=True)
 
-    # transaction.get().note('Added site admin user %r.' % login)
-    # transaction.get().commit()
+    transaction.get().note('Added site admin user %r.' % login)
+    transaction.get().commit()
     logger.info('Added site admin user %r.', login)
 
 
