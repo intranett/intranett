@@ -21,7 +21,7 @@
             </li>
             <li>
               <a href=""
-                 tal:attributes="href string:${portal_url}/@@logout"
+                 tal:attributes="href string:${portal_url}/logout"
                  i18n:domain="plone"
                  i18n:translate="">Log out</a>
             </li>
