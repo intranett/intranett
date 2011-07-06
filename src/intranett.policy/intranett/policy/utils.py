@@ -80,13 +80,17 @@ def create_personal_folder(context, user_id):
         return
     folder_id = quote_userid(user_id)
     if folder_id not in personal:
-        fullname = get_fullname(context, user_id)
-        _createObjectByType('Folder', personal, id=folder_id, title=fullname)
-        folder = personal[folder_id]
         # don't let the request interfere in the processForm call
         request = aq_get(personal, 'REQUEST', None)
         if request is not None:
+            fullname = get_fullname(context, user_id)
+            # if we create a new user ttw - the memberdata isn't yet set when
+            # we call this, take it directly from the request
+            if fullname == user_id:
+                fullname = request.form.get('form.fullname', fullname)
             request.form['title'] = fullname
+        _createObjectByType('Folder', personal, id=folder_id, title=fullname)
+        folder = personal[folder_id]
         folder.processForm() # Fire events
         pu = getToolByName(personal, 'plone_utils')
         pu.changeOwnershipOf(folder, (user_id, ))

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-06 09:16+0000\n"
+"POT-Creation-Date: 2011-07-06 13:18+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Item"
 msgstr "Innhold"
 
-#: intranett.policy/intranett/policy/profiles/default/actions.xml
+#: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:18
 msgid "Manage users"
 msgstr "Administrér brukere"
 
@@ -62,7 +62,11 @@ msgstr "Endre infoboks"
 msgid "News Highlight"
 msgstr ""
 
-#: intranett.policy/intranett/policy/setuphandlers.py:114
+#: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
+msgid "Personal folder"
+msgstr "Personlige mappe"
+
+#: intranett.policy/intranett/policy/setuphandlers.py:117
 msgid "Personal folders"
 msgstr "Personlige mapper"
 

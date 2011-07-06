@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-07-06 09:16+0000\n"
+"POT-Creation-Date: 2011-07-06 13:18+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: intranett.policy/intranett/policy/profiles/default/actions.xml
+#: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:18
 msgid "Manage users"
 msgstr ""
 
@@ -62,7 +62,11 @@ msgstr ""
 msgid "News Highlight"
 msgstr ""
 
-#: intranett.policy/intranett/policy/setuphandlers.py:114
+#: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
+msgid "Personal folder"
+msgstr ""
+
+#: intranett.policy/intranett/policy/setuphandlers.py:117
 msgid "Personal folders"
 msgstr ""
 
