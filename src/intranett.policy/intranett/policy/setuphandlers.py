@@ -1,6 +1,7 @@
 from Acquisition import aq_get
 from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
+from zope.component import queryMultiAdapter
 from zope.component import queryUtility
 from zope.i18n import translate
 from zope.interface import alsoProvides
@@ -108,6 +109,8 @@ def setup_members_folder(site):
 
 
 def setup_personal_folder(site):
+    from plone.portlets.interfaces import ILocalPortletAssignmentManager
+    from plone.portlets.interfaces import IPortletManager
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import PERSONAL_FOLDER_ID
     from intranett.policy import IntranettMessageFactory as _
@@ -126,6 +129,15 @@ def setup_personal_folder(site):
     folder.processForm() # Fire events
     workflow = getToolByName(portal, 'portal_workflow')
     workflow.doActionFor(folder, 'publish')
+    # Block all portlets
+    for manager_name in ('plone.leftcolumn', 'plone.rightcolumn'):
+        manager = queryUtility(IPortletManager, name=manager_name)
+        if manager is not None:
+            assignable = queryMultiAdapter((folder, manager),
+                ILocalPortletAssignmentManager)
+            assignable.setBlacklistStatus('context', True)
+            assignable.setBlacklistStatus('group', True)
+            assignable.setBlacklistStatus('content_type', True)
 
 
 def enable_secure_cookies(context):
