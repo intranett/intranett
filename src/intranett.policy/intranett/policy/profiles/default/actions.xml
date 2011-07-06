@@ -1,21 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_actions" xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="plone">
- <object name="user">
-  <object name="review-comments">
-   <property name="visible">False</property>
-  </object>
-  <object name="manage_users" meta_type="CMF Action" i18n:domain="intranett"
-          insert-before="logout">
-   <property name="title" i18n:translate="">Manage users</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$portal_url/@@usergroup-userprefs</property>
-   <property name="permissions">
-    <element value="Manage users"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
  <object name="site_actions">
    <object name="sitemap" meta_type="CMF Action">
     <property name="visible">False</property>
