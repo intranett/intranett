@@ -1,4 +1,5 @@
 import logging
+from urllib import quote
 
 from Acquisition import aq_get
 from Products.CMFCore.utils import getToolByName
@@ -19,6 +20,15 @@ logger = logging.getLogger("intranett")
 def getMembersFolderId():
     """Helper function to retrieve the members folder id."""
     return queryUtility(IMembersFolderId, default='')
+
+
+def get_users_folder_url(context):
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    return portal.absolute_url() + '/' + quote(getMembersFolderId())
+
+
+def get_user_profile_url(context, member_id):
+    return get_users_folder_url(context) + '/' + quote(member_id)
 
 
 def getMembersFolder(context):

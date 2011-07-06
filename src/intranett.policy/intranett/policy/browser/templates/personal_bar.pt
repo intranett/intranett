@@ -1,14 +1,23 @@
-<div id="portal-personaltools-wrapper" i18n:domain="plone">
+<div id="portal-personaltools-wrapper" i18n:domain="intranett">
     <div class="contentAlignment" tal:condition="not: view/anonymous">
-        <ul id="portal-personaltools">
-            <li tal:content="view/user_name">
-                John
+        <ul id="portal-personaltools"
+            tal:define="portal_url view/portal_url;">
+            <li>
+              <a href=""
+                 tal:attributes="href view/profile_url"
+                 tal:content="view/user_name"
+                 i18n:translate="">John Doe</a>
             </li>
-            <li tal:repeat="action view/user_actions">
-                <a href=""
-                   tal:attributes="href action/url"
-                   tal:content="action/title"
-                   i18n:translate="">action title</a>
+            <li>
+              <a href=""
+                 tal:attributes="href string:${portal_url}/@@usergroup-userprefs"
+                 i18n:translate="">Manage users</a>
+            </li>
+            <li>
+              <a href=""
+                 tal:attributes="href string:${portal_url}/@@logout"
+                 i18n:domain="plone"
+                 i18n:translate="">Log out</a>
             </li>
         </ul>
     </div>
