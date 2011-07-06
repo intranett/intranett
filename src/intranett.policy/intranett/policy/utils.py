@@ -39,23 +39,38 @@ def getMembersFolder(context):
         return portal.get(id)
 
 
-def get_personal_folder_id(user_id):
+def quote_userid(user_id):
     if isinstance(user_id, unicode):
         user_id = user_id.encode('utf-8')
     return cleanId(user_id)
 
 
-def create_personal_folder(context, user_id):
+def get_personal_folder(context):
     portal = getToolByName(context, 'portal_url').getPortalObject()
-    personal = portal.get(PERSONAL_FOLDER_ID, None)
+    return portal.get(PERSONAL_FOLDER_ID, None)
+
+
+def get_personal_folder_url(context, userid):
+    personal = get_personal_folder(context)
     if personal is None:
         return
-    folder_id = get_personal_folder_id(user_id)
+    folder_id = quote_userid(userid)
+    folder = personal.get(folder_id, None)
+    if folder is None:
+        return
+    return folder.absolute_url()
+
+
+def create_personal_folder(context, user_id):
+    personal = get_personal_folder(context)
+    if personal is None:
+        return
+    folder_id = quote_userid(user_id)
     if folder_id not in personal:
         _createObjectByType('Folder', personal, id=folder_id, title=user_id)
         folder = personal[folder_id]
         # don't let the request interfere in the processForm call
-        request = aq_get(portal, 'REQUEST', None)
+        request = aq_get(personal, 'REQUEST', None)
         if request is not None:
             request.form['title'] = user_id
         folder.processForm() # Fire events

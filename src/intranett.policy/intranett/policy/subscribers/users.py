@@ -6,7 +6,7 @@ from zope.component import getUtility
 
 from intranett.policy.config import PERSONAL_FOLDER_ID
 from intranett.policy.utils import create_personal_folder
-from intranett.policy.utils import get_personal_folder_id
+from intranett.policy.utils import quote_userid
 
 
 @adapter(IPrincipalCreatedEvent)
@@ -27,6 +27,6 @@ def onPrincipalDeletion(event):
     if personal is None: # pragma: no cover
         return
     user_id = event.principal
-    folder_id = get_personal_folder_id(user_id)
+    folder_id = quote_userid(user_id)
     if folder_id in personal:
         del personal[user_id]

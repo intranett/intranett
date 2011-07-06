@@ -223,10 +223,10 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
     def after_33(self):
         from intranett.policy.config import PERSONAL_FOLDER_ID
-        from intranett.policy.utils import get_personal_folder_id
+        from intranett.policy.utils import quote_userid
         portal = self.layer['portal']
         self.assertTrue(PERSONAL_FOLDER_ID in portal)
-        folder_id = get_personal_folder_id(u'fred')
+        folder_id = quote_userid(u'fred')
         self.assertTrue(folder_id in portal[PERSONAL_FOLDER_ID])
         personal_folder = portal[PERSONAL_FOLDER_ID][folder_id]
         self.assertEqual(personal_folder.getOwner().getId(), u'fred')
