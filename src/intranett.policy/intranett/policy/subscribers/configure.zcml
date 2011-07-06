@@ -3,12 +3,7 @@
   xmlns:i18n="http://namespaces.zope.org/i18n"
   i18n_domain="intranett">
 
-  <subscriber
-    handler=".users.onPrincipalCreation"
-  />
-
-  <subscriber
-    handler=".users.onPrincipalDeletion"
-  />
+  <subscriber handler=".users.onPrincipalCreation" />
+  <subscriber handler=".users.onPrincipalDeletion" />
 
 </configure>
