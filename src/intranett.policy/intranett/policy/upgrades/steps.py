@@ -139,8 +139,9 @@ def update_discussion_10(context):
     user_category = actions.user
     review = user_category['review-comments']
     review.visible = False
-    pos = user_category.getObjectPosition('manage_users')
-    user_category.moveObjectToPosition('review-comments', pos)
+    if 'manage_users' in user_category:
+        pos = user_category.getObjectPosition('manage_users')
+        user_category.moveObjectToPosition('review-comments', pos)
     aitool = getToolByName(context, 'portal_actionicons')
     ids = [a._action_id for a in aitool.listActionIcons()]
     if 'discussion' in ids:

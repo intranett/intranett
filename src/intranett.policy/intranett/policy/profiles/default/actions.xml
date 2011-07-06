@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <object name="portal_actions" xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="plone">
+ <object name="user">
+   <object name="review-comments">
+     <property name="visible">False</property>
+   </object>
+ </object>
  <object name="site_actions">
    <object name="sitemap" meta_type="CMF Action">
     <property name="visible">False</property>
