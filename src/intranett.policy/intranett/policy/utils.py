@@ -17,6 +17,19 @@ from intranett.policy.interfaces import IMembersFolderId
 logger = logging.getLogger("intranett")
 
 
+def get_fullname(context, userid):
+    membership = getToolByName(context, 'portal_membership')
+    member_info = membership.getMemberInfo(userid)
+    # member_info is None if there's no Plone user object
+    if member_info:
+        fullname = member_info.get('fullname', '')
+    else:
+        fullname = None
+    if fullname:
+        return fullname
+    return userid
+
+
 def getMembersFolderId():
     """Helper function to retrieve the members folder id."""
     return queryUtility(IMembersFolderId, default='')
@@ -67,12 +80,13 @@ def create_personal_folder(context, user_id):
         return
     folder_id = quote_userid(user_id)
     if folder_id not in personal:
-        _createObjectByType('Folder', personal, id=folder_id, title=user_id)
+        fullname = get_fullname(context, user_id)
+        _createObjectByType('Folder', personal, id=folder_id, title=fullname)
         folder = personal[folder_id]
         # don't let the request interfere in the processForm call
         request = aq_get(personal, 'REQUEST', None)
         if request is not None:
-            request.form['title'] = user_id
+            request.form['title'] = fullname
         folder.processForm() # Fire events
         pu = getToolByName(personal, 'plone_utils')
         pu.changeOwnershipOf(folder, (user_id, ))
