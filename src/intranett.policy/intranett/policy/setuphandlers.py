@@ -31,17 +31,6 @@ def setup_locale(site):
     calendar.firstweekday = 0
 
 
-def ensure_workflow(site):
-    # Force the default content into the correct workflow
-    from plone.app.workflow.remap import remap_workflow
-    # No longer needed, we think.  Leaving here for a bit just in case.
-    # Matthew and Stefan.
-    # 
-    #remap_workflow(site,
-    #               type_ids=('Document', 'Folder', 'Topic'),
-    #s               chain=('intranett_workflow', 'workspace_workflow'))
-
-
 def disable_contentrules(site):
     from plone.contentrules.engine.interfaces import IRuleStorage
     rule = queryUtility(IRuleStorage)
@@ -210,7 +199,6 @@ def various(context):
     site = context.getSite()
     set_profile_version(site)
     setup_locale(site)
-    ensure_workflow(site)
     disable_contentrules(site)
     disallow_sendto(site)
     disable_collections(site)
