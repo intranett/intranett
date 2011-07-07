@@ -4,6 +4,9 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-239: Add personal folders.
+  [ggozad, hannosch]
+
 - INTRANETT-240: Add file size validator and provide help texts stating the
   50mb upload limit.
   [ggozad]
