@@ -102,13 +102,7 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
             set(['Manager', 'Contributor', 'Site Administrator', 'Owner']))
 
     def after_17(self):
-        portal = self.layer['portal']
-        prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
-            'autocomplete'
-        css = getToolByName(portal, 'portal_css')
-        self.assertTrue(prefix + '.css' in css.getResourcesDict().keys())
-        js = getToolByName(portal, 'portal_javascripts')
-        self.assertTrue(prefix + '.min.js' in js.getResourcesDict().keys())
+        pass
 
     def after_18(self):
         portal = self.layer['portal']
@@ -202,3 +196,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertFalse('intranett.policy.portlets.NewsHighlight' in registrations)
         self.assertFalse('intranett.policy.portlets.EventHighlight' in registrations)
         self.assertFalse('intranett.policy.portlets.ContentHighlight' in registrations)
+
+        portal = self.layer['portal']
+        prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
+            'autocomplete'
+        css = getToolByName(portal, 'portal_css')
+        self.assertFalse(prefix + '.css' in css.getResourcesDict().keys())
+        js = getToolByName(portal, 'portal_javascripts')
+        self.assertFalse(prefix + '.min.js' in js.getResourcesDict().keys())
