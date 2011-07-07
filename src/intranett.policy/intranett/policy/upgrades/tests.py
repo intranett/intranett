@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import os
 
 from Acquisition import aq_get
@@ -212,3 +213,21 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
             r[0] == 'mark_special_links.js']
         self.assertEqual(len(resources), 1)
         self.assertTrue(resources[0].getEnabled())
+
+    def before_33(self):
+        from intranett.policy.config import PERSONAL_FOLDER_ID
+        portal = self.layer['portal']
+        mtool = getToolByName(portal, 'portal_membership')
+        mtool.addMember(u'fred', 'secret', ['Member'], [])
+        self.assertFalse(PERSONAL_FOLDER_ID in portal)
+
+    def after_33(self):
+        from intranett.policy.config import PERSONAL_FOLDER_ID
+        from intranett.policy.utils import quote_userid
+        portal = self.layer['portal']
+        self.assertTrue(PERSONAL_FOLDER_ID in portal)
+        folder_id = quote_userid(u'fred')
+        self.assertTrue(folder_id in portal[PERSONAL_FOLDER_ID])
+        personal_folder = portal[PERSONAL_FOLDER_ID][folder_id]
+        self.assertEqual(personal_folder.getOwner().getId(), u'fred')
+        self.assertEqual(personal_folder.Creator(), 'fred')

@@ -57,7 +57,14 @@
                   <li>
                     <a href=""
                        tal:attributes="href string:${portal_url}/@@personal-information"
-                       i18n:translate="label_edit">Edit</a>
+                       i18n:domain="intranett"
+                       i18n:translate="">Edit profile</a>
+                  </li>
+                  <li>
+                    <a href=""
+                       tal:attributes="href string:${portal_url}/@@change-password"
+                       i18n:domain="plone"
+                       i18n:translate="label_password">Password</a>
                   </li>
                 </ul>
                 <div class="contentActions">&nbsp;</div>

@@ -6,7 +6,8 @@ from Acquisition import aq_inner
 from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from plone.memoize.view import memoize
-from intranett.policy.utils import getMembersFolderId
+from intranett.policy.utils import get_users_folder_url
+from intranett.policy.utils import get_user_profile_url
 
 
 class UsersListingView(BrowserView):
@@ -65,7 +66,7 @@ class UsersListingView(BrowserView):
 
     @memoize
     def user_url(self, member_id):
-        return self.users_folder_url() + '/' + quote(member_id)
+        return get_user_profile_url(self.context, member_id)
 
     @memoize
     def department_url(self, department):
@@ -73,5 +74,4 @@ class UsersListingView(BrowserView):
 
     @memoize
     def users_folder_url(self):
-        portal = getToolByName(self.context, 'portal_url').getPortalObject()
-        return portal.absolute_url() + '/' + quote(getMembersFolderId())
+        return get_users_folder_url(self.context)

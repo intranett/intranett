@@ -139,8 +139,9 @@ def update_discussion_10(context):
     user_category = actions.user
     review = user_category['review-comments']
     review.visible = False
-    pos = user_category.getObjectPosition('manage_users')
-    user_category.moveObjectToPosition('review-comments', pos)
+    if 'manage_users' in user_category: # pragma: no cover
+        pos = user_category.getObjectPosition('manage_users')
+        user_category.moveObjectToPosition('review-comments', pos)
     aitool = getToolByName(context, 'portal_actionicons')
     ids = [a._action_id for a in aitool.listActionIcons()]
     if 'discussion' in ids:
@@ -341,3 +342,22 @@ def ext_links_in_new_window(context):
     ptool = getToolByName(context, 'portal_properties')
     ptool.site_properties.external_links_open_new_window = 'true'
     open_ext_links_in_new_window(context)
+
+
+@upgrade_to(33)
+def add_personal_folder(context):
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    from intranett.policy.setuphandlers import setup_personal_folder
+    from intranett.policy.subscribers.users import create_personal_folder
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    if PERSONAL_FOLDER_ID not in portal:
+        setup_personal_folder(portal)
+        # create personal folders for existing users
+        acl_users = aq_get(portal, 'acl_users')
+        user_ids = [a for a in acl_users.source_users.listUserIds()]
+        for user_id in user_ids:
+            create_personal_folder(portal, user_id)
+    actions = getToolByName(context, 'portal_actions')
+    user_category = actions.user
+    if 'manage_users' in user_category:
+        del user_category['manage_users']

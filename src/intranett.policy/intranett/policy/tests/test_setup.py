@@ -34,15 +34,6 @@ class TestSiteSetup(IntranettTestCase):
         ids = set([a['id'] for a in actions])
         self.assertEquals(ids, set(['accessibility', 'support']))
 
-    def test_manage_users_action(self):
-        portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
-        at = getToolByName(portal, 'portal_actions')
-        actions = at.listActionInfos(object=portal,
-                                     categories=('user', ))
-        ids = set([a['id'] for a in actions])
-        self.assertTrue('manage_users' in ids)
-
     def test_clamav(self):
         portal = self.layer['portal']
         ptool = getToolByName(portal, 'portal_properties')
@@ -171,7 +162,7 @@ class TestSiteSetup(IntranettTestCase):
 
     def test_content(self):
         # The members folder is always present
-        expected = set(['users'])
+        expected = set(['personal', 'users'])
         # This content is only created in tests
         test_content = set(['test-folder'])
         portal = self.layer['portal']
