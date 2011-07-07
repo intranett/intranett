@@ -87,5 +87,11 @@
     <permission name="Reply to item" acquire="True">
       <role name="Authenticated"/>
     </permission>
+    <permission name="Review comments" acquire="True">
+        <role name="Manager"/>
+        <role name="Reviewer"/>
+        <role name="Site Administrator" />
+    </permission>
+
   </permissions>
 </rolemap>

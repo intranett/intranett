@@ -19,7 +19,7 @@ class EditBarCookie(object):
         self.request = request
 
     def __call__(self):
-        return self.request.cookies.get('editbar_opened', '0')
+        return self.request.cookies.get('editbar_opened', '1')
 
 
 class WorkspaceState(object):

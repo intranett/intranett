@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-16 09:46+0000\n"
+"POT-Creation-Date: 2011-07-07 08:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,4 +17,23 @@ msgstr ""
 #: intranett.policy/intranett/policy/profiles/default/types/Plone_Site.xml
 msgid "Edit"
 msgstr "Redigér"
+
+#: validation/validators/SupplValidators.py:67
+msgid "Validation failed($name: Uploaded data is too large: ${size}MB (max ${max}MB)"
+msgstr "Validering feilet. Opplastede data er for store: ${size}MB (max ${max}MB"
+
+#. Default: "File"
+#: widget label of FileWidget - description ""
+msgid "label_file"
+msgstr "Fil (max 50Mb)"
+
+#. Default: "Image"
+#: widget label of ImageWidget - description ""
+msgid "label_image"
+msgstr "Bilde (max 50Mb)"
+
+#. Default: "Image"
+#: widget label of ImageWidget - description "Will be shown in the news listing, and in the news item itself. Image will be scaled to a sensible size."
+msgid "label_news_image"
+msgstr "Bilde (max 50Mb)"
 

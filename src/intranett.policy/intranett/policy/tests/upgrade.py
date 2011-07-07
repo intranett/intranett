@@ -61,16 +61,16 @@ class UpgradeTests(object):
         strings = [f for f in diff.split('Index: ') if f]
         files = {}
         for s in strings:
+            if s.startswith('structure'):
+                continue
             name, content = self.rediff.match(s).groups()
             files[name] = content
 
         # There's a couple files where we get diffs for ordering changes,
         # but the order is not important
         expected_diff = set([
-            'browserlayer.xml',
             'portlets.xml',
             'registry.xml',
-            'structure/acl_users/portal_role_manager.xml',
             'types/FieldsetFolder.xml',
             'types/FormFolder.xml',
             'viewlets.xml',

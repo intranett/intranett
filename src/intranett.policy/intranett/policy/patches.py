@@ -5,5 +5,12 @@ def allow_anonymous_robotstxt():
     addValidSubparts('portal_kss')
 
 
+def allow_anonymous_activation():
+    from iw.rejectanonymous import addValidIds, addValidSubparts
+    addValidIds('activate_form')
+    addValidSubparts('activate')
+
+
 def apply():
     allow_anonymous_robotstxt()
+    allow_anonymous_activation()

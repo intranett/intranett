@@ -1,5 +1,5 @@
 <div id="settings-toggle" 
-     tal:define="editbar_opened python:request.get('editbar_opened', 0)">
+     tal:define="editbar_opened python:request.get('editbar_opened', '1')=='1'">
     <a href="#"
        tal:attributes="style python:editbar_opened and 'display: none' or None"
        id="open-edit-bar" title="Edit" i18n:attributes="title" i18n:translate=""

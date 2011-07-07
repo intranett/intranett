@@ -6,5 +6,4 @@
  <index name="getProjectTitle" meta_type="FieldIndex">
   <indexed_attr value="getProjectTitle"/>
  </index>
- <column value="getWorkedHours"/>
 </object>

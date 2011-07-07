@@ -1,35 +1,17 @@
 <?xml version="1.0"?>
 <portlets>
 
- <portlet
-   addview="intranett.policy.portlets.NewsHighlight"
-   title="News Highlight"
-   description="Displays a news item among the latest ones."
-   />
+  <portlet
+    addview="intranett.policy.portlets.WorkspaceInfo"
+    title="Workspace Information"
+    description="Displays details for the current workspace."
+    />
 
- <portlet
-   addview="intranett.policy.portlets.EventHighlight"
-   title="Event Highlight"
-   description="Displays an upcoming event."
-   />
-
- <portlet
-   addview="intranett.policy.portlets.ContentHighlight"
-   title="Content Highlight"
-   description="Displays a selected content item."
-   />
-
- <portlet
-   addview="intranett.policy.portlets.WorkspaceInfo"
-   title="Workspace Information"
-   description="Displays details for the current workspace."
-   />
-
- <portlet
-   addview="intranett.policy.portlets.MyWorkspaces"
-   title="My Workspaces"
-   description="Displays a list of all of your workspaces."
-   />
+  <portlet
+    addview="intranett.policy.portlets.MyWorkspaces"
+    title="My Workspaces"
+    description="Displays a list of all of your workspaces."
+    />
 
   <assignment name="navigation"
       category="context"

@@ -4,461 +4,409 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- Update to PloneFormGen bugfix release to fix quick-edit deletion of fields.
+
+- INTRANETT-196: Disabled half-finished highlight portlets.
+
+- INTRANETT-239: Add personal folders.
+
+- INTRANETT-240: Add file size validator and provide help texts stating the
+  50mb upload limit.
+
+- INTRANETT-223: The content menu should be visible by default.
+
+- INTRANETT-228: Open external links, including the link to hjelp.intranett.no
+  in a new window.
+
+- INTRANETT-214: Site admins can delete comments.
+
+- INTRANETT-121: Prevent employee listing from breaking when no department is
+  defined.
+
+- INTRANETT-120: Update to Plone 4.1rc3.
+
+- INTRANETT-177: Prevent anonymous access to files and images.
+
+- INTRANETT-235: Automatically log in the user after account activation.
+
+- Update to Zope 2.13.8 to fix privilege escalation vulnerability.
+
+- Increase Nginx `client_max_body_size` from 10mb to 50mb.
+
 - Increase `zodb-cache-size` to 10000 now that we save memory via DateTime.
-  [hannosch]
-
-- Added new `create_site_admin` script.
-  [stefan]
-
-- Change Nginx configuration to work without knowing the hostname.
-  [hannosch]
 
 - Update to DateTime 3.
-  [hannosch]
-
-- Use Gocept's `f.pypi.python.org` mirror.
-  [hannosch]
 
 - Use the `catalogCounter` instead of `lastModified` as an etag element for
   item views. This solves problems with comments not being shown and changes
   to the navigation tree and portal tabs not being reflected.
-  [hannosch]
 
-- Update to Plone 4.1rc2.
-  [hannosch]
+- INTRANETT-120: Update to Plone 4.1rc2.
 
-1.2.8 - unreleased
+1.2.12 - unreleased
+-------------------
+
+
+1.2.11 - 2011-06-28
+-------------------
+
+- Update to Zope 2.12.19 to fix privilege escalation vulnerability.
+
+1.2.10 - 2011-06-27
+-------------------
+
+- Fix a flaw in the user creation script, which didn't actually create any user.
+
+1.2.9 - 2011-06-22
 ------------------
 
+- Sent out custom account activation mail. Closes INTRANETT-231.
+
+- Fix the account activation mail to be in Norwegian. Closes INTRANETT-218.
+
+1.2.8 - 2011-06-05
+------------------
+
+- Include Products.PloneHotfix20110531 2.0.
+
+- Added new `create_site_admin` script.
+
+- Change Nginx configuration to work without knowing the hostname.
+
+- Use Gocept's `f.pypi.python.org` mirror.
+
 - Update to Products.PloneFormGen 1.6.1 to include Norwegian translations.
-  [hannosch]
 
 1.2.7 - 2011-05-28
 ------------------
 
 - Fixed ZODB cache pre-warmer to avoid errors from the Gopip index.
-  [hannosch]
 
 1.2.6 - 2011-05-28
 ------------------
 
 - Update plone.app.users to fix privilege escalation attack vector.
-  [hannosch]
 
 1.2.5 - 2011-05-24
 ------------------
 
 - Get new plone.cachepurging to avoid lingering threads on shutdown which
   prevented the Jenkins from running.
-  [hannosch]
 
 - Added a simple ZODB cache pre-warmer, to improve the first load experience
-  for customers after software updates. Closes #200.
-  [hannosch]
+  for customers after software updates. Closes INTRANETT-200.
 
-- Enabled `link-by-uid` for TinyMCE. Closes #206.
-  [hannosch]
+- Enabled `link-by-uid` for TinyMCE. Closes INTRANETT-206.
 
 - Added a site action link to `hjelp.intranett.no`.
-  [martior, hannosch]
 
-- Don't send error log mails for link integrity exceptions. Closes #194.
-  [hannosch]
+- Don't send error log mails for link integrity exceptions. Closes
+  INTRANETT-194.
 
 - Reduce the height of text fields for the static text portlet.
-  [hannosch]
 
 - Fix the title of the employee listing, which accidentally got overridden by
-  the site title. Closes #211.
-  [hannosch]
+  the site title. Closes INTRANETT-211.
 
 - Update to munin.zope = 1.2.
-  [ggozad]
 
 - Increase the default height of text fields from 20 to about 40 lines.
-  [hannosch]
 
 - Hide the `change note` field and the `upload file` link in text fields.
-  [hannosch]
 
 - Reduce height of description field from five to three rows.
-  [hannosch]
 
 - Hide the `Edit without visual editor` link from text fields.
-  [hannosch]
 
 - Specify image dimensions for the edit-bar images.
-  [hannosch]
 
 - Increase cache max age for static assets to one week to follow `page speed`
   best practices.
-  [hannosch]
 
 - Optimize all image data sizes.
-  [hannosch]
 
 - Update to distribute = 0.6.15.
-  [hannosch]
 
 1.2.4 - 2011-04-21
 ------------------
 
 - Change Varnish `default_ttl` to zero (from two minutes) to avoid caching
   responses without cache control headers.
-  [hannosch]
 
 - Update to Plone 4.0.5.
-  [hannosch]
 
-- Split out munin into its own buildout. Closes #201.
-  [hannosch]
+- Split out munin into its own buildout. Closes INTRANETT-201.
 
 1.2.3 - 2011-04-14
 ------------------
 
 - Add caching headers to under_construction image on error pages and specify
   image dimensions.
-  [hannosch]
 
-- Don't redirect to an error page if no Zope backend is available. Closes #198.
-  [hannosch]
+- Don't redirect to an error page if no Zope backend is available. Closes
+  INTRANETT-198.
 
 - Update to HAProxy 1.4.15.
-  [hannosch]
 
 - Sanitize and unbreak create_site and upgrade scripts.
-  [MJ, hannosch]
 
 - Don't rely on dist.plone.org.
-  [hannosch]
 
 1.2.2 - 2011-04-03
 ------------------
 
 - Correct buildout's `allow-hosts` restriction.
-  [hannosch]
 
 1.2.1 - 2011-04-03
 ------------------
 
 - Added new rapidssl certificate.
-  [martior]
 
 - Optimize Gzip compression settings for HTML content.
-  [hannosch]
 
-- Sent authentication cookies only over secure connections. Closes #135.
-  [hannosch]
+- Sent authentication cookies only over secure connections. Closes
+  INTRANETT-135.
 
-- Respect the `types_not_searched` filter on the user profile. Closes #123.
-  [hannosch]
+- Respect the `types_not_searched` filter on the user profile. Closes
+  INTRANETT-123.
 
 - Resolve remaining problems with the employee listing and search, including
-  catalog inconsistencies (#101, #104), Unicode problems (#103) and missing
-  breadcrumbs (#116, #117, #118).
-  [stefan, hannosch]
+  catalog inconsistencies (INTRANETT-101, INTRANETT-104), Unicode problems
+  (INTRANETT-103) and missing breadcrumbs (INTRANETT-116, INTRANETT-117,
+  INTRANETT-118).
 
 - Add missing mime types and enable gzip compression for web fonts.
-  [hannosch]
 
 - Enable click-jacking protection by preventing the site to be loaded inside
   a frame.
-  [hannosch]
 
 - Enable SSL session cache to support SSL session resumption. SSL sessions can
   be reused for up to 10 minutes.
-  [hannosch]
 
 - Added memory monitoring to Zope instances. If a Zope instance exceeds to use
   250mb of RSS memory, it will be restarted. This is checked every minute.
-  [hannosch]
 
 1.2.0 - 2011-03-15
 ------------------
 
 - Update to collective.ATClamAV = 1.2 to fix network socket problems.
-  [hannosch]
 
 - Change the antivirus checks to run on the central jarn11 server instead of
   locally on each server.
-  [hannosch]
 
 - Use the fastest gzip compression on blob storage snapshots, as there's not
-  much that can be compressed in binary data. Closes #197.
-  [martior, hannosch]
+  much that can be compressed in binary data. Closes INTRANETT-197.
 
 - Add the option to specify a different buildout config file for a server.
-  [martior, hannosch]
 
 - Update to plone.app.discussion 1.0.
-  [hannosch]
 
 - Externalize the plutonian helpers into their own distribution and rewrite
   the upgrade tests to run against a real database - inspired by bestform.
-  [hannosch]
 
 - Remove collective.flag as it's not been used after all.
-  [hannosch]
 
 - Update to ZODB 3.10.2.
-  [hannosch]
 
 - Update to Plone 4.0.4 and Zope 2.12.16.
-  [hannosch]
 
 - Update to Varnish 2.1.5 and HAProxy 1.4.13.
-  [hannosch]
 
 - Added frontpage content highlight portlet, that allows a user to select an
-  item to be shown in the portlet. Closes #186.
-  [ggozad, hannosch]
+  item to be shown in the portlet. Closes INTRANETT-186.
 
 - Added event and news highlight portlets, which allow a user to show the latest
-  or second latest item in the portlet. Closes #184 and #185.
-  [ggozad, hannosch]
+  or second latest item in the portlet. Closes INTRANETT-184 and INTRANETT-185.
 
 1.1.11 - 2011-03-15
 -------------------
 
 - Avoid caching temporary redirects, which could cause weird results during the
   default cache time of two minutes.
-  [hannosch]
 
 1.1.10 - 2011-03-12
 -------------------
 
 - Update to Munin 1.4.5.
-  [hannosch]
 
 - Add `server_name` to Nginx config for port 80 to generate properly named
   log files for Gocept's awstats support.
-  [hannosch]
 
 1.1.9 - 2011-03-04
 ------------------
 
 - Allow administrators to create and edit content in the entire site.
-  Closes #192 and #193.
-  [ggozad, hannosch]
+  Closes INTRANETT-192 and INTRANETT-193.
 
 - Split frontpage into more portlet managers.
-  [denys, ggozad, hannosch]
 
 - Fix caching of frontpage to no longer redirect to the login form.
-  Closes #195.
-  [ggozad, hannosch]
+  Closes INTRANETT-195.
 
 - Allow administrators to edit the frontpage and allow normal users to edit
-  their personal portlets. Closes #191.
-  [hannosch]
+  their personal portlets. Closes INTRANETT-191.
 
 - Disabled the automatic suggestions on the 404 page. The error page is always
   rendered as an anonymous user and the suggestions allowed to get at titles
-  and employee names. This closes #180.
-  [hannosch]
+  and employee names. This closes INTRANETT-180.
 
 - Added Site Administrator user role. Customized user/group management forms
-  and added user site action to access those. Closes #166.
-  [hannosch, ggozad]
+  and added user site action to access those. Closes INTRANETT-166.
 
-- Add Zope admin user during `reset_server` Fabric command. Closes #188.
-  [hannosch]
+- Add Zope admin user during `reset_server` Fabric command. Closes
+  INTRANETT-188.
 
 - Extend version information by Git revision and last commit date.
-  [hannosch]
 
 - Allow creation of non-Norwegian sites. The site language can be configured
   in the `aws.conf` per server and is passed as an argument to the
   `create_site` command. TTW creation of sites has been removed in favor of the
   command. Call it for example via: ``bin/instance create_site --language=en``.
-  This closes #124.
-  [hannosch]
+  This closes INTRANETT-124.
 
 - Implemented new frontpage combining a company and personal section.
-  Closes #170.
-  [denys, hannosch]
+  Closes INTRANETT-170.
 
-- Update TinyMCE to get new Norwegian translations. Closes #168.
-  [MJ, hannosch]
+- Update TinyMCE to get new Norwegian translations. Closes INTRANETT-168.
 
 - Update `collective.ATClamAV` to 1.1 to allow local development to take place
-  without a `clamd` setup. Closes #178.
-  [hannosch, ggozad]
+  without a `clamd` setup. Closes INTRANETT-178.
 
 1.1.8 - 2011-02-13
 ------------------
 
 - Fix production buildout configuration problem introduced in 1.1.7.
-  [hannosch]
 
 1.1.7 - 2011-02-13
 ------------------
 
-- Fix KSS problems on login page. Closes #182.
-  [mj]
+- Fix KSS problems on login page. Closes INTRANETT-182.
 
-- Fix unavailable spinner image. Closes #181.
-  [mj]
+- Fix unavailable spinner image. Closes INTRANETT-181.
 
-- Add version number to footer and adjust text. Refs #79.
-  [hannosch]
+- Add version number to footer and adjust text. Refs INTRANETT-79.
 
-- Fix lost Cache-Control header when `beresp.cacheable` is false. Refs #172.
-  [stefan]
+- Fix lost Cache-Control header when `beresp.cacheable` is false. Refs
+  INTRANETT-172.
 
 1.1.6 - 2011-02-09
 ------------------
 
-- Disable Google Analytics. Closes #179.
-  [hannosch]
+- Disable Google Analytics. Closes INTRANETT-179.
 
 - It wasn't possible to assign portlets except for "static text" to the
-  frontpage. Closes #164.
-  [hannosch]
+  frontpage. Closes INTRANETT-164.
 
-- Fix caching and security of portraits. Closes #154.
-  [stefan, hannosch]
+- Fix caching and security of portraits. Closes INTRANETT-154.
 
-- Improve and fix caching. Closes #172.
-  [stefan, hannosch]
+- Improve and fix caching. Closes INTRANETT-172.
 
 1.1.5 - 2011-02-08
 ------------------
 
 - Added Products.PloneHotfix20110720.
-  [hannosch]
 
 1.1.4 - 2011-02-06
 ------------------
 
 - Updated to Plone 4.0.3 and Zope 2.12.15 (incl. a security fix for acquiring
   docstrings).
-  [hannosch]
 
-- Repair the advanced search form. Closes #159.
-  [mj, hannosch]
+- Repair the advanced search form. Closes INTRANETT-159.
 
 - Protect all urls (like search forms) from being accessed by anonymous.
-  Closes #139.
-  [mj, hannosch]
+  Closes INTRANETT-139.
 
-- Only show folderish items in the tabs/sections. Closes #144.
-  [hannosch]
+- Only show folderish items in the tabs/sections. Closes INTRANETT-144.
 
-- Install collective.flag. Closes #173.
-  [tomster]
+- Install collective.flag. Closes INTRANETT-173.
 
 1.1.3 - 2011-01-27
 ------------------
 
 - Provide intermediate certificates in the SSL config to avoid security
-  warning in Firefox. Closes #165.
-  [hannosch, baekholt]
+  warning in Firefox. Closes INTRANETT-165.
 
 1.1.2 - 2011-01-26
 ------------------
 
 - Employee listing is fixed to not look too crammed with a column visible.
-  References #153. Also wrapped the employees in micro formats.
-  [denys]
+  References INTRANETT-153. Also wrapped the employees in micro formats.
 
-- Revealed 'managePortletsFallback' link. Closes #147.
-  [denys]
+- Revealed 'managePortletsFallback' link. Closes INTRANETT-147.
 
 - Fixed the layout for when we have 2 columns or only the right one.
-  Closes #146.
-  [denys]
+  Closes INTRANETT-146.
 
 - Removed left margin from comments to align the portrait's left border with
   the rest of the content.
-  [denys]
 
 - Removed rotation from the profile picture.
-  [denys]
 
 - Fixed columns on the frontpage to have equal height.
-  [denys]
 
 1.1.1 - 2011-01-19
 ------------------
 
 - Whenever an user uploads a file to the intranet it is checked for viruses
-  and rejected if it contains one.
-  Closes https://jira.jarn.com/browse/INTRANETT-137.
-  [ggozad, hannosch]
+  and rejected if it contains one. Closes INTRANETT-137.
 
 1.1 - 2011-01-14
 ----------------
 
 - Adapted fabric scripts to Github code hosting.
-  [hannosch]
 
 - Consolidate buildout configuration into one location and change branch
   concept to cover the entire buildout instead of individual distributions.
-  [hannosch]
 
 - Member portraits are now cropped in order to always result to a (100,100)
   image.
-  [ggozad]
 
 1.0 - 2010-12-22
 ----------------
 
 - Updated Norwegian translation.
-  [hannosch]
 
 - Added i18n extraction and update scripts.
-  [hannosch]
 
 - Cleaned up employee listing template and correct i18n tags.
-  [hannosch]
 
 - Correct the i18n domain of the employees tab action.
-  [hannosch]
 
 0.9.1 - 2010-12-11
 ------------------
 
 - Added SSL certificate / key to our buildout and use our versions in the
   Nginx config, instead of relying on Gocept to put them into `/etc/ssl`.
-  [hannosch]
 
 0.9 - 2010-12-08
 ----------------
 
 - Added HSTS header to enforce HTTPS connections. Details at
   http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security.
-  Refs https://jira.jarn.com/browse/INTRANETT-135.
-  [hannosch]
+  Refs INTRANETT-135.
 
 - Added `mr.awsome` config, integrated SSH server management and wrote fabfile
   for most common operations like setting up a new server and updating existing
   installations.
-  [hannosch]
 
 - Added a new `create_site` zopectl command. It has a `--force` option to
   overwrite an existing site. You can also specify the title via `--title=Site`
   or `--title="Some intranett"`.
-  [hannosch]
 
-- Updated distributions:
-  * Zope 2.12.14
+- Updated to Zope 2.12.14.
 
 0.8 - 2010-12-04
 ----------------
 
 - Update to PIL 1.1.7 (via Laurence Rowe's) repackaging.
-  [hannosch]
 
 - Tests now work with plone(.app).testing trunk. Importing a helper from
   CMFCore.tests caused ZTC to be loaded as a side-effect.
-  [stefan]
 
 - Changed tests to use plone.app.testing.
-  [hannosch, stefan]
 
 - Upgraded Modernizr to 1.6. This fixes "testdb" issue from INTRANETT-41.
-  [denys]
 
 - Updated distributions:
   * plone.app.testing = 1.0a3-jarn2
@@ -468,35 +416,28 @@ Changelog
 ----------------
 
 - Include `munin.zope` ZCML configuration.
-  [hannosch]
 
 - Added Zope instance specific monitoring to munin.
-  [hannosch]
 
 - Added ``missingok`` to `logrotate.conf` to avoid errors on new servers where
   some services haven't been started yet.
-  [hannosch]
 
 0.6 - 2010-11-28
 ----------------
 
 - Expose new command line script as a `zopectl.command` entry point, now
   callable via ``bin/instance upgrade``.
-  [hannosch]
 
 - Added command line script to upgrade an existing site and recook all
   resources.
-  [hannosch]
 
-- Remove some excessive legal text from the footer. Refs #79.
-  [hannosch]
+- Remove some excessive legal text from the footer. Refs INTRANETT-79.
 
 0.5 - 2010-11-28
 ----------------
 
 - Added a basic `munin` resource monitoring client configuration. This refs
-  https://jira.jarn.com/browse/INTRANETT-81.
-  [hannosch]
+  INTRANETT-81.
 
 - Updated distributions:
   * Plone = 4.0.2
@@ -507,51 +448,41 @@ Changelog
 ----------------
 
 - Added test to check `selectivizr.js` requirement on linking CSS files.
-  [hannosch]
 
 - Removes reference to no longer included `html5.js`.
-  [hannosch]
 
 - Move `selectivizr.js` before `tinymce.js` to keep the splitting we got via
-  `html5.js` before. Refs #126.
-  [hannosch]
+  `html5.js` before. Refs INTRANETT-126.
 
 - Removed `html5.js` since all of what it does is included in `modernizr.js`.
-  [denys]
 
-- Added `selectivizr.js` to make IE understand CSS3 selectors. Refs #126.
-  [denys]
+- Added `selectivizr.js` to make IE understand CSS3 selectors. Refs
+  INTRANETT-126.
 
 - Involved SCSS (SASS) for writing styles. Don't edit styles in main.css! Use
   `main.scss` instead and let SASS convert it to CSS.
   http://sass-lang.com/tutorial.html for more info.
-  [denys]
 
 - Remove `tal` statements from comments in main_template and avoid an internal
   reference to be present in the rendered HTML.
-  [hannosch]
 
 - Updated styles to work with template-user instead of template-author after
   the tenmplate's renaming.
-  [denys]
 
 0.3 - 2010-11-16
 ----------------
 
 - Moved `Employees` tab to the last position in the navigation bar.
-  This closes https://jira.jarn.com/browse/INTRANETT-115.
-  [denys, hannosch]
+  This closes INTRANETT-115.
 
 - Updated distributions:
   * intranett.theme = 0.5
 
 - Generate the nginx config from the buildout to deploy the error page changes
-  to all servers. This closes https://jira.jarn.com/browse/INTRANETT-119.
-  [hannosch]
+  to all servers. This closes INTRANETT-119.
 
 - Added nicer error page to Nginx, which will be shown during software
-  upgrades. Refs https://jira.jarn.com/browse/INTRANETT-119.
-  [hannosch]
+  upgrades. Refs INTRANETT-119.
 
 0.2 - 2010-11-15
 ----------------
@@ -560,63 +491,46 @@ Changelog
   * z3c.recipe.usercrontab = 1.1
 
 - Updated to haproxy = 1.4.9 and Varnish = 2.1.4.
-  [hannosch]
 
 - Move in configuration files into this Subversion location, avoiding an
   external definition.
-  [hannosch]
 
 0.1 - 2010-11-15
 ----------------
 
 - Use `z3c.unconfigure` to disable the reviewer role in the sharing page.
-  [stefan]
 
-- Make sure Description works even if some properties are None. Refs #100.
-  [stefan]
+- Make sure Description works even if some properties are None. Refs
+  INTRANETT-100.
 
 - Reimplemented author page as a browser page and renamed it to `@@user`,
   while using query strings instead of traversal for the name reference.
-  Refs #123.
-  [hannosch]
+  Refs INTRANETT-123.
 
-- Remove home folder references from `author.cpt`. Refs #123.
-  [hannosch]
+- Remove home folder references from `author.cpt`. Refs INTRANETT-123.
 
 - Updated livesearch.js to conform with JSLint code checker.
-  [denys]
 
-- Fixed background color for the calendar in Chrome. Closes #122.
-  [denys]
+- Fixed background color for the calendar in Chrome. Closes INTRANETT-122.
 
 - Improved print stylesheet by adding more styles from html5boilerplate.com.
-  [denys]
 
 - ``chrome=1`` property added to `X-UA-Compatible` ``<meta>`` to support
   `Google Chrome Frame`.
-  [denys]
 
 - Added default `no-js` class on ``<html>`` element to provide proper fallback
   for `modernizr.js` library.
-  [denys]
 
-- Print stylesheet. References https://jira.jarn.com/browse/INTRANETT-51.
-  [denys]
+- Print stylesheet. References INTRANETT-51.
 
-- Re-introduced workflow-state colors with `member.css`. Closes
-  https://jira.jarn.com/browse/INTRANETT-86.
-  [denys]
+- Re-introduced workflow-state colors with `member.css`. Closes INTRANETT-86.
 
 - Copied over styles for calendar that were missing for PloneFormGen calendars.
-  Closes https://jira.jarn.com/browse/INTRANETT-106
-  [denys]
+  Closes INTRANETT-106
 
 - Removed hardcoded height for the thumbnails in employee-listing.
-  [denys]
 
-- Added ZEO authentication. This closes
-  https://jira.jarn.com/browse/INTRANETT-112.
-  [hannosch]
+- Added ZEO authentication. This closes INTRANETT-112.
 
 - Updated distributions:
   * plone.app.controlpanel = 2.0.4
@@ -626,166 +540,118 @@ Changelog
 ------------------
 
 - Made biography in user preferences use rich text widget.
-  [stefan, ggozad]
 
-- Include Gocept mail server configuration into the profile. Refs #65.
-  [hannosch]
+- Include Gocept mail server configuration into the profile. Refs INTRANETT-65.
 
 - Translations basis with basic norwegian translations.
-  [denys]
 
 - Made members searchable through the catalog.
-  [ggozad, stefan]
 
 - Adjust profile version back to `1`. We will recreate the first site from
   scratch once more.
-  [hannosch]
 
 - Extend member data to include phones, position, department, and two image
   sizes for the portraits.
-  [ggozad, stefan]
 
 - Added basic upgrade step infrastructure.
-  [hannosch]
 
 - Explicitly remove stupid default content (front-page, news, events) in tests.
-  [hannosch]
 
 - Added convenience methods to functional test case to set up a test browser.
-  [hannosch]
 
 - Split eployee-listing view into 2 columns to make the view more compact.
   Reduced the noise in departments listing and title.
-  [denys]
 
 - Employee listing styles for thumbnails view.
-  [denys]
 
 - Linked department info on the ``profile`` view to ``employee-listing`` of
   this department.
-  [denys]
 
 - Removed contact form from author.pt.
-  [denys]
 
 - Added employee-listing view.
-  [ggozad]
 
 - Added a ``robots.txt`` to disallow any robot from indexing the site.
-  This refs #78.
-  [hannosch]
+  This refs INTRANETT-78.
 
 - Prevent the front page view from being accessible by anonymous users.
-  Refs #68.
-  [hannosch]
+  Refs INTRANETT-68.
 
 - Hooked translations from ``intranett`` domain to profile view.
-  [denys]
 
-- Profile page (author.cpt). References #67.
-  [denys]
+- Profile page (author.cpt). References INTRANETT-67.
 
 - Fixed edge case of the frontpage when no portlets registered in the
-  frontpage columns. Fixes #97.
-  [denys, hannosch]
+  frontpage columns. Fixes INTRANETT-97.
 
 - Ajaxified publishing of a comment when comment_review_workflow is the main
   workflow for the comments.
-  [denys]
 
 - Prevent "You already clicked" message from showing up when filling out "Add
   comment" form.
-  [denys]
 
 - Live binding click event on "Delete" actions of the comments, returned by
   Ajax calls.
-  [denys]
 
 - Fixing styles for <header> so that it would not look broken without global
   navigation items.
-  [denys]
 
-- Styling and js support for comments. References #72.
-  [denys]
+- Styling and js support for comments. References INTRANETT-72.
 
 - Added basic upgrade tests.
-  [hannosch]
 
 - Fixed styling for footer of the site.
-  [denys]
 
-- Styles for Table of Contents. References #49.
-  [denys]
+- Styles for Table of Contents. References INTRANETT-49.
 
-- Print styles. References #51.
-  [denys]
+- Print styles. References INTRANETT-51.
 
 - New favicon.ico
-  [denys]
 
 0.0.3 - 2010-10-14
 ------------------
 
-- Optimized CSS, KSS and JS resource merging.
-  This closes https://jira.jarn.com/browse/INTRANETT-60.
-  [hannosch]
+- Optimized CSS, KSS and JS resource merging. This closes INTRANETT-60.
 
 - Include ``plone.app.caching`` as a dependency and configure simple caching
-  for stable resources, theme resources and feeds This closes
-  https://jira.jarn.com/browse/INTRANETT-76.
-  [hannosch]
+  for stable resources, theme resources and feeds This closes INTRANETT-76.
 
 - Fixes to stylings in IE7+
-  [denys]
 
 - Customized some basic stylesheets, used in TinyMCE visual editor.
-  [denys]
 
 - Re-enabled edit-bar on manage-frontpage view. Test for this is supplied.
-  [denys]
 
 - Got rid of the right column on edit screens byt customizing base_edit.cpt.
-  [denys]
 
 - TinyMCE's toolbar now looks as other toolbars - grey gradient with a border.
-  [denys]
 
 - Aligned portal message with open/close edit-bar button.
-  [denys]
 
 - Equalize height of dl.portalMessage dt and .portalMessage dd in order to
   make them equally high in cases the message wraps into more than one line.
-  [denys]
 
 - Customized image_view_fullscreen to get rid of annoying underlining under
   the image.
-  [denys]
 
 - Moved ploneCustom.css to after main.css in order to be able to customize
   styles for separate projects.
-  [denys]
 
 - Styles for the images in the content (.image-left, image-right).
-  [denys]
 
 - Remove highlighting when hovering over a table.
-  [denys]
 
 - Styles for "Default page" popup.
-  [denys]
 
 - Added base skeleton for browser tests and add a test requirement on
   ``intranett.policy``.
-  [ggozad, hannosch]
 
 0.0.2 - 2010-10-06
 ------------------
 
 - Added ``munin.zope`` and ``Products.signalstack`` as new dependencies.
-  [hannosch]
 
 0.0.1 - 2010-10-05
 ------------------
 
 - Initial release
-  [hannosch]

@@ -180,9 +180,9 @@ class TimeReports(BrowserView, TimeReportQuery):
         for hour in self.hours:
             if hour.getPath() in selected:
                 if hour.getBudgetCategory != 'Billable':
-                    raise InvoicingError, 'Selected hour is not billable'
+                    raise InvoicingError('Selected hour is not billable')
                 if hour.review_state != 'entered':
-                    raise InvoicingError, 'Selected hour is already invoiced'
+                    raise InvoicingError('Selected hour is already invoiced')
                 yield hour.getObject()
 
     def can_invoice(self, hour):

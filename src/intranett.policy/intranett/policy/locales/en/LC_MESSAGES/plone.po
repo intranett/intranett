@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-07-07 08:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#: intranett.policy/intranett/policy/profiles/default/types/Plone_Site.xml
+msgid "Edit"
+msgstr ""
+
+#: validation/validators/SupplValidators.py:67
+msgid "Validation failed($name: Uploaded data is too large: ${size}MB (max ${max}MB)"
+msgstr "Validation failed. Uploaded data is too large: ${size}MB (max ${max}MB"
+
+#. Default: "File"
+#: widget label of FileWidget - description ""
+msgid "label_file"
+msgstr "File (max 50Mb)"
+
+#. Default: "Image"
+#: widget label of ImageWidget - description ""
+msgid "label_image"
+msgstr "Image (max 50Mb)"
+
+#. Default: "Image"
+#: widget label of ImageWidget - description "Will be shown in the news listing, and in the news item itself. Image will be scaled to a sensible size."
+msgid "label_news_image"
+msgstr "Image (max 50Mb)"
+

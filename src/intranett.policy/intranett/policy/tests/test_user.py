@@ -8,7 +8,11 @@ from zope.interface import Interface
 from zExceptions import Unauthorized
 from Products.CMFCore.utils import getToolByName
 
+from plone.app.testing import login
 from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettTestCase
 from intranett.policy.tests.base import IntranettFunctionalTestCase
@@ -48,6 +52,48 @@ class TestFunctionalUserView(IntranettFunctionalTestCase):
         portal = self.layer['portal']
         browser.open(portal.absolute_url() + '/author/test_user_1_')
         self.assertEqual(browser.url, 'http://nohost/plone/users/test_user_1_')
+
+
+class TestPersonalFolders(IntranettTestCase):
+
+    def _createUser(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        mt = getToolByName(portal, 'portal_membership')
+        mt.addMember('new_user', 'new_password',
+            ['Member'], [])
+        setRoles(portal, TEST_USER_ID, ['Member'])
+
+    def test_personal_folder_creation(self):
+        self._createUser()
+        portal = self.layer['portal']
+        login(portal, 'new_user')
+        personal = self.layer['portal']['personal']
+        self.assertTrue('new_user' in personal)
+
+        # The new user has a personal folder
+        folder = personal['new_user']
+        self.assertTrue(folder.portal_type, 'Folder')
+        # Personal folders are private
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(folder, 'review_state'),
+                         'private')
+        # New user is the owner of his personal folder
+        self.assertEqual(folder.getOwner().getUserId(), 'new_user')
+        logout()
+
+    def test_personal_folder_deletion(self):
+        self._createUser()
+        portal = self.layer['portal']
+        personal = portal['personal']
+        self.assertTrue('new_user' in personal)
+
+        # Delete the user
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        mt = getToolByName(portal, 'portal_membership')
+        mt.deleteMembers(['new_user'])
+        self.assertTrue('new_user' not in personal)
+        setRoles(portal, TEST_USER_ID, ['Member'])
 
 
 class TestMemberDataView(IntranettTestCase):

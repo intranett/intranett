@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-16 09:46+0000\n"
+"POT-Creation-Date: 2011-07-07 08:32+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,11 @@ msgstr "Opprett nytt intranett"
 msgid "Departments:"
 msgstr "Avdelinger:"
 
+#: intranett.policy/intranett/policy/browser/templates/user.pt:58
+#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:44
+msgid "Edit profile"
+msgstr "Endre profil"
+
 #: intranett.policy/intranett/policy/profiles/default/types/MemberData.xml
 msgid "Employee"
 msgstr "Ansatt"
@@ -50,7 +55,7 @@ msgstr ""
 msgid "Item"
 msgstr "Innhold"
 
-#: intranett.policy/intranett/policy/profiles/default/actions.xml
+#: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:18
 msgid "Manage users"
 msgstr "Administrér brukere"
 
@@ -61,6 +66,14 @@ msgstr "Endre infoboks"
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
 msgid "News Highlight"
 msgstr ""
+
+#: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
+msgid "Personal folder"
+msgstr "Personlige mappe"
+
+#: intranett.policy/intranett/policy/setuphandlers.py:117
+msgid "Personal folders"
+msgstr "Personlige mapper"
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:20
 #: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:18
@@ -104,6 +117,10 @@ msgstr "Versjon: ${number}"
 msgid "View your intranet"
 msgstr "Se intranettet"
 
+#: intranett.policy/intranett/policy/browser/activation.py:39
+msgid "Welcome! You are now logged in."
+msgstr "Velkommen! Du er nå logget inn."
+
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:26
 msgid "Which item to display"
 msgstr ""
@@ -111,6 +128,24 @@ msgstr ""
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
 msgid "You can select the item to be highlighted by searching on its title."
 msgstr ""
+
+#. Default: "Welcome ${fullname}, Thank you for trying out intranett.no free of charge for 30 days. Your intranet is available under the address: ${hostname} Your username is ‘${member}’. Please activate your account and choose a password by visiting: ${set_password} (You must activate your account before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those — And please don't hesitate to contact us at support@intranett.no or via phone at 21018911 if there's something we can help you with. With kind regards, intranett.no-team"
+#: intranett.policy/intranett/policy/browser/templates/activation-mail.pt:21
+msgid "activation-mail-body"
+msgstr ""
+"Velkommen ${fullname},\n"
+"\n"
+"Takk for at du vil prøve intranett.no gratis i 30 dager.\n"
+"Intranettet ditt er nå klart til bruk på følgende adresse: ${hostname}\n"
+"\n"
+"Brukernavnet ditt er ‘${member}’. Vennligst aktiver kontoen din og velg et passord ved å besøke:\n"
+"\n"
+"${set_password}\n"
+"(Du må aktivere kontoen før ${expirationdate})\n"
+"\n"
+"Du kan finne hjelp og instruksjoner på http://hjelp.intranett.no/ om du skulle trenge det.— Og ta gjerne kontakt med oss på support@intranett.no eller telefon 21018911 hvis det er noe vi kan hjelpe med.\n"
+"\n"
+"Med vennlig hilsen intranett.no-teamet"
 
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
 #: intranett.policy/intranett/policy/userdataschema.py:37
@@ -144,13 +179,13 @@ msgid "label_delete_portrait"
 msgstr "Slett portrett"
 
 #. Default: "Department"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:85
+#: intranett.policy/intranett/policy/browser/templates/user.pt:92
 #: intranett.policy/intranett/policy/userdataschema.py:48
 msgid "label_department"
 msgstr "Avdeling"
 
 #. Default: "E-mail"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:99
+#: intranett.policy/intranett/policy/browser/templates/user.pt:106
 #: intranett.policy/intranett/policy/userdataschema.py:20
 msgid "label_email"
 msgstr "E-post"
@@ -161,13 +196,13 @@ msgid "label_full_name"
 msgstr "Fullt navn"
 
 #. Default: "Location"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:92
+#: intranett.policy/intranett/policy/browser/templates/user.pt:99
 #: intranett.policy/intranett/policy/userdataschema.py:53
 msgid "label_location"
 msgstr "Sted"
 
 #. Default: "Mobile phone"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:116
+#: intranett.policy/intranett/policy/browser/templates/user.pt:123
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:95
 #: intranett.policy/intranett/policy/userdataschema.py:31
 msgid "label_mobile"
@@ -179,7 +214,7 @@ msgid "label_no_results_found"
 msgstr "Ingen resultater samsvarer med søket."
 
 #. Default: "Phone"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:108
+#: intranett.policy/intranett/policy/browser/templates/user.pt:115
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:101
 #: intranett.policy/intranett/policy/userdataschema.py:26
 msgid "label_phone"
