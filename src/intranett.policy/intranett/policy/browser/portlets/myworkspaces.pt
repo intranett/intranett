@@ -1,23 +1,20 @@
 <dl class="portlet portletSingleItem"
-    tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
-    tal:condition="view/available"
     i18n:domain="intranett">
 
-    <dt class="portletHeader" tal:condition="view/portletTitle">
+    <dt class="portletHeader">
         <span class="portletTopLeft"></span>
-        <span tal:content="python:view.portletTitle">Title</span>
+        <span i18n:translate="">My Workspaces</span>
         <span class="portletTopRight"></span>
     </dt>
     <dd class="portletItem odd">
-      
+
       <span class="portletItemDetails">
-    
         <ul>
           <li tal:repeat="workspace view/workspaces">
-            <a tal:attributes="href workspace/url" tal:content="workspace/title">Workspace 1</a>
+            <a tal:attributes="href workspace/url"
+               tal:content="workspace/title">Workspace 1</a>
           </li>
         </ul>
-
       </span>
 
     </dd>

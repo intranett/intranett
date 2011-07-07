@@ -1,6 +1,6 @@
+from AccessControl import getSecurityManager
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
-from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.formlib import form as formlibform
@@ -10,7 +10,7 @@ from intranett.policy import IntranettMessageFactory as _
 
 
 class IMyWorkspaces(IPortletDataProvider):
-    """Provides a list of all of my workspaces"""
+    pass
 
 
 class Assignment(base.Assignment):
@@ -23,22 +23,18 @@ class Assignment(base.Assignment):
 class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('myworkspaces.pt')
-
-    @property
-    def available(self):
-        return True
-
-    @property
-    def portletTitle(self):
-        return _("My Workspaces")
+    available = True
 
     def update(self):
-        if not self.available:
-            return
-        ct = getToolByName(self.context, 'portal_catalog')
+        catalog = getToolByName(self.context, 'portal_catalog')
         user_id = getSecurityManager().getUser().getId()
-        brains = ct(portal_type="TeamWorkspace", workspaceMembers=(user_id,), sort_on='sortable_title')
-        self.workspaces = ({'title':x.Title, 'url':x.getURL()} for x in brains)
+        query = dict(
+            portal_type="TeamWorkspace",
+            workspaceMembers=(user_id, ),
+            sort_on='sortable_title'
+        )
+        self.workspaces = ({'title': x.Title, 'url': x.getURL()}
+            for x in catalog(query))
 
 
 class AddForm(base.AddForm):

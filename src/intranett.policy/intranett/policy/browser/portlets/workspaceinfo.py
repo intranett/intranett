@@ -9,7 +9,7 @@ from intranett.policy import IntranettMessageFactory as _
 
 
 class IWorkspaceInfo(IPortletDataProvider):
-    """Provides information such as members and visibility of a workspace"""
+    pass
 
 
 class Assignment(base.Assignment):
@@ -28,10 +28,6 @@ class Renderer(base.Renderer):
         return (getattr(self.context, 'getWorkspace', None) is not None and
                 'portal_factory' not in self.request.URL)
 
-    @property
-    def portletTitle(self):
-        return _("Workspace Info")
-
     def update(self):
         if not self.available:
             return
@@ -39,8 +35,8 @@ class Renderer(base.Renderer):
         ws = self.context.getWorkspace()
         self.state = ws.getWorkspaceState()
         self.title = ws.Title()
-        members = (mt.getMemberById(x) for x in ws.members)
-        self.members = tuple(x.getProperty("fullname") or x.getId() for x in members)
+        self.members = tuple(x.getProperty("fullname") or x.getId()
+            for x in (mt.getMemberById(x) for x in ws.members))
 
 
 class AddForm(base.AddForm):
