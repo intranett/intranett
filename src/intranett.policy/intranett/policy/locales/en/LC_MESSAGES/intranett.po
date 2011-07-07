@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-06 13:18+0000\n"
+"POT-Creation-Date: 2011-07-07 08:32+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,11 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:46
 msgid "Departments:"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/templates/user.pt:58
+#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:44
+msgid "Edit profile"
 msgstr ""
 
 #: intranett.policy/intranett/policy/profiles/default/types/MemberData.xml
@@ -160,13 +165,13 @@ msgid "label_delete_portrait"
 msgstr ""
 
 #. Default: "Department"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:85
+#: intranett.policy/intranett/policy/browser/templates/user.pt:92
 #: intranett.policy/intranett/policy/userdataschema.py:48
 msgid "label_department"
 msgstr ""
 
 #. Default: "E-mail"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:99
+#: intranett.policy/intranett/policy/browser/templates/user.pt:106
 #: intranett.policy/intranett/policy/userdataschema.py:20
 msgid "label_email"
 msgstr ""
@@ -177,13 +182,13 @@ msgid "label_full_name"
 msgstr ""
 
 #. Default: "Location"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:92
+#: intranett.policy/intranett/policy/browser/templates/user.pt:99
 #: intranett.policy/intranett/policy/userdataschema.py:53
 msgid "label_location"
 msgstr ""
 
 #. Default: "Mobile phone"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:116
+#: intranett.policy/intranett/policy/browser/templates/user.pt:123
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:95
 #: intranett.policy/intranett/policy/userdataschema.py:31
 msgid "label_mobile"
@@ -195,7 +200,7 @@ msgid "label_no_results_found"
 msgstr ""
 
 #. Default: "Phone"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:108
+#: intranett.policy/intranett/policy/browser/templates/user.pt:115
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:101
 #: intranett.policy/intranett/policy/userdataschema.py:26
 msgid "label_phone"
