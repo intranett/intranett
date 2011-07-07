@@ -1,27 +1,6 @@
 <?xml version="1.0"?>
 <portlets>
 
-<!--
-
- <portlet
-   addview="intranett.policy.portlets.NewsHighlight"
-   title="News Highlight"
-   description="Displays a news item among the latest ones."
-   />
-
- <portlet
-   addview="intranett.policy.portlets.EventHighlight"
-   title="Event Highlight"
-   description="Displays an upcoming event."
-   />
-
- <portlet
-   addview="intranett.policy.portlets.ContentHighlight"
-   title="Content Highlight"
-   description="Displays a selected content item."
-   />
--->
-
   <assignment name="navigation"
       category="context"
       key="/"
