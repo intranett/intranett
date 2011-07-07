@@ -375,6 +375,12 @@ def remove_crappy_portlets(context):
 
 @upgrade_to(35)
 def install_workspaces(context):
+    from plone.app.workflow.remap import remap_workflow
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('actions', 'typeinfo', 'factorytool', 'workflow', 'portlets',
                'catalog', 'plone.app.registry'))
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    remap_workflow(site,
+                   type_ids=('File', 'Image'),
+                   chain=('two_state_intranett_workflow', ))

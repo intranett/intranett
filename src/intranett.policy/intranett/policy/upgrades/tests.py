@@ -186,9 +186,9 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         wtool = getToolByName(portal, 'portal_workflow')
         self.assertTrue('two_state_intranett_workflow' in wtool)
         self.assertEqual(wtool.getChainFor('File'),
-            ('two_state_intranett_workflow', ))
+            ('one_state_intranett_workflow', ))
         self.assertEqual(wtool.getChainFor('Image'),
-            ('two_state_intranett_workflow', ))
+            ('one_state_intranett_workflow', ))
         self.assertEqual(wtool.getChainFor('Discussion Item'),
             ('one_state_intranett_workflow', ))
 
@@ -248,6 +248,13 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertEqual(wtool.getDefaultChain(), ('intranett_workflow',))
         self.assertEqual(wtool.getChainForPortalType("Document"), ('intranett_workflow',))
         self.assertEqual(wtool.getChainForPortalType("TeamWorkspace"), ('workspace_workflow',))
+        self.assertTrue('two_state_intranett_workflow' in wtool)
+        self.assertEqual(wtool.getChainFor('File'),
+            ('two_state_intranett_workflow', ))
+        self.assertEqual(wtool.getChainFor('Image'),
+            ('two_state_intranett_workflow', ))
+        self.assertEqual(wtool.getChainFor('Discussion Item'),
+            ('one_state_intranett_workflow', ))
 
         action = portal.portal_actions.object.local_roles
         self.assertEqual(action.getProperty('available_expr'),
