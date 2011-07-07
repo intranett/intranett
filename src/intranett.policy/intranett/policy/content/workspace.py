@@ -1,19 +1,21 @@
 from AccessControl import ClassSecurityInfo
 from AccessControl import getSecurityManager
 from borg.localrole.interfaces import ILocalRoleProvider
+from plone.indexer.decorator import indexer
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.folder import ATFolder
 from Products.ATContentTypes.permission import ChangeEvents
-from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.permissions import AccessContentsInformation
+from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.WorkflowTool import WorkflowException
+from zope.component import adapts
+from zope.component import getUtility
 from zope.interface import implements
-from zope.component import getUtility, adapts
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
+from zope.lifecycleevent.interfaces import IObjectRemovedEvent
 from zope.schema.interfaces import IVocabularyFactory
-from zope.container.interfaces import IObjectRemovedEvent, IObjectAddedEvent
-from plone.indexer.decorator import indexer
 
 from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import PROJECTNAME
@@ -48,7 +50,8 @@ class TeamWorkspace(ATFolder):
     security.declarePrivate('membersource')
     @property
     def membersource(self):
-        return getUtility(IVocabularyFactory, name="plone.principalsource.Principals")(self)
+        return getUtility(IVocabularyFactory,
+            name="plone.principalsource.Principals")(self)
 
     security.declarePrivate('userInMemberSource')
     def userInMemberSource(self, user_id):
@@ -84,7 +87,8 @@ class TeamWorkspace(ATFolder):
     security.declareProtected(View, 'getWorkspaceState')
     def getWorkspaceState(self):
         """Return if the workspace is private or public"""
-        return self.portal_workflow.getInfoFor(self, "review_state")
+        wftool = getToolByName(self, 'portal_workflow')
+        return wftool.getInfoFor(self, "review_state")
 
 
 registerATCT(TeamWorkspace, PROJECTNAME)
@@ -110,13 +114,15 @@ class WorkspaceMembershipRoles(object):
             return []
 
     def getAllRoles(self):
-        return [(member, self.getRoles(member)) for member in self.context.members]
+        return [(member, self.getRoles(member)) for member in
+            self.context.members]
 
 
 def transitionChildren(context, action):
     """Transition children when the workspace state has changed."""
     if action.action in ('publish', 'hide'):
-        transitionObjectsByPaths(context, 'auto', ['/'.join(context.getPhysicalPath())])
+        transitionObjectsByPaths(context, 'auto',
+            ['/'.join(context.getPhysicalPath())])
 
 
 def transitionObjectsByPaths(context, workflow_action, paths):
@@ -228,4 +234,3 @@ def restoreOwnerPermissions(context):
             if 'Owner' not in roles:
                 roles.append('Owner')
                 context.manage_permission(perm, roles, acquire=0)
-
