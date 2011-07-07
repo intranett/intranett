@@ -104,22 +104,7 @@ def allow_siteadmin_to_edit_content(context):
 
 @upgrade_to(17)
 def install_highlight_portlets(context):
-    loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('portlets', ))
-    # Add CSS/JS
-    prefix = '++resource++plone.formwidget.autocomplete/jquery.autocomplete'
-    css = getToolByName(context, 'portal_css')
-    ids = css.getResourcesDict().keys()
-    css_id = prefix + '.css'
-    if css_id not in ids:
-        css.registerStylesheet(css_id)
-        css.moveResourceAfter(css_id, 'RTL.css')
-    js = getToolByName(context, 'portal_javascripts')
-    ids = js.getResourcesDict().keys()
-    js_id = prefix + '.min.js'
-    if js_id not in ids:
-        js.registerScript(js_id)
-        js.moveResourceBefore(js_id, 'tiny_mce.js')
+    pass
 
 
 @upgrade_to(18)
@@ -287,7 +272,7 @@ def cleanup_plone41(context):
     css = getToolByName(context, 'portal_css')
     css.moveResourceAfter(
         '++resource++plone.app.discussion.stylesheets/discussion.css',
-        '++resource++plone.formwidget.autocomplete/jquery.autocomplete.css')
+        'member.css')
     css.moveResourceAfter(
         '++resource++plone.app.jquerytools.dateinput.css',
         '++resource++plone.app.jquerytools.overlays.css')
@@ -361,3 +346,28 @@ def add_personal_folder(context):
     user_category = actions.user
     if 'manage_users' in user_category:
         del user_category['manage_users']
+
+
+@upgrade_to(34)
+def remove_crappy_portlets(context):
+    from plone.portlets.interfaces import IPortletManager
+    sm = getSiteManager()
+    names = ('intranett.policy.portlets.NewsHighlight',
+             'intranett.policy.portlets.EventHighlight',
+             'intranett.policy.portlets.ContentHighlight')
+    for name in names:
+        sm.unregisterUtility(provided=IPortletManager, name=name)
+    # Remove CSS/JS
+    prefix = '++resource++plone.formwidget.autocomplete/jquery.autocomplete'
+    css = getToolByName(context, 'portal_css')
+    ids = css.getResourcesDict().keys()
+    css_id = prefix + '.css'
+    if css_id in ids:
+        css.unregisterStylesheet(css_id)
+        css.cookResources()
+    js = getToolByName(context, 'portal_javascripts')
+    ids = js.getResourcesDict().keys()
+    js_id = prefix + '.min.js'
+    if js_id in ids:
+        js.unregisterScript(js_id)
+        js.cookResources()
