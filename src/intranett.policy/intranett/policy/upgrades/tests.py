@@ -147,12 +147,10 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertTrue(registry.get(key) >= 604800)
 
     def after_24(self):
-        # XXX: Removed in later step
-        #from plone.registry.interfaces import IRegistry
-        #registry = queryUtility(IRegistry)
-        #key = 'plone.app.caching.strongCaching.plone.resource.maxage'
-        #self.assertTrue(registry.get(key) >= 604800)
-        pass
+        from plone.registry.interfaces import IRegistry
+        registry = queryUtility(IRegistry)
+        key = 'plone.app.caching.strongCaching.plone.resource.maxage'
+        self.assertTrue(registry.get(key) >= 604800)
 
     def after_25(self):
         portal = self.layer['portal']
