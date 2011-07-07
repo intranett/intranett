@@ -363,11 +363,11 @@ def remove_crappy_portlets(context):
     ids = css.getResourcesDict().keys()
     css_id = prefix + '.css'
     if css_id in ids:
-        css.unregisterStylesheet(css_id)
+        css.unregisterResource(css_id)
         css.cookResources()
     js = getToolByName(context, 'portal_javascripts')
     ids = js.getResourcesDict().keys()
     js_id = prefix + '.min.js'
     if js_id in ids:
-        js.unregisterScript(js_id)
+        js.unregisterResource(js_id)
         js.cookResources()
