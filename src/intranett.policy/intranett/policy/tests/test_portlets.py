@@ -1,11 +1,10 @@
 from DateTime import DateTime
-
-from Products.CMFCore.utils import getToolByName
-from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
 from plone.portlets.interfaces import IPortletType
+from Products.CMFCore.utils import getToolByName
 import transaction
 from zope.component import getUtility, getMultiAdapter
 
@@ -14,9 +13,9 @@ from intranett.policy.browser.portlets import eventhighlight
 from intranett.policy.browser.portlets import newshighlight
 from intranett.policy.browser.portlets import workspaceinfo
 from intranett.policy.browser.sources import DocumentSourceBinder
+from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettFunctionalTestCase
 from intranett.policy.tests.base import IntranettTestCase
-from intranett.policy.tests.base import get_browser
 
 
 class TestPortlets(IntranettTestCase):
