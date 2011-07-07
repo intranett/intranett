@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-07-07 08:32+0000\n"
+"POT-Creation-Date: 2011-07-07 14:39+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:12
+msgid "All intranet users can see this workspace. Only workspace members can edit content."
+msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:76
 msgid "Assign personal portlets"
@@ -35,7 +39,7 @@ msgid "Departments:"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/user.pt:58
-#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:44
+#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:47
 msgid "Edit profile"
 msgstr ""
 
@@ -59,19 +63,32 @@ msgstr ""
 msgid "Manage users"
 msgstr ""
 
+#: intranett.policy/intranett/policy/content/workspace.py:32
+msgid "Members"
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:59
 msgid "Modify portlet"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/myworkspaces.pt:6
+#: intranett.policy/intranett/policy/browser/portlets/myworkspaces.py:20
+msgid "My Workspaces"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
 msgid "News Highlight"
 msgstr ""
 
+#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:18
+msgid "Only workspace members can see or edit content."
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
 msgid "Personal folder"
 msgstr ""
 
-#: intranett.policy/intranett/policy/setuphandlers.py:117
+#: intranett.policy/intranett/policy/setuphandlers.py:109
 msgid "Personal folders"
 msgstr ""
 
@@ -97,6 +114,10 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
+#: intranett.policy/intranett/policy/profiles/default/types/TeamWorkspace.xml
+msgid "Team Workspace"
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
 msgid "The most recently published news item"
 msgstr ""
@@ -107,6 +128,10 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
+msgstr ""
+
+#: intranett.policy/intranett/policy/content/workspace.py:33
+msgid "Users who have access to the workspace"
 msgstr ""
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14
@@ -123,6 +148,11 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:26
 msgid "Which item to display"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:7
+#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.py:19
+msgid "Workspace Info"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
@@ -235,5 +265,10 @@ msgstr ""
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:94
 #: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:68
 msgid "link_manage_personal_portlets"
+msgstr ""
+
+#. Default: "Members are:"
+#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:24
+msgid "members_are"
 msgstr ""
 
