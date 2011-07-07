@@ -7,7 +7,10 @@
       i18n:domain="plone">
 
 <head>
-
+    <metal:block fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
 </head>
 
 <body>
@@ -44,9 +47,7 @@
                     <a href=""
                        tal:attributes="href string:${context/portal_url}/${link}"
                        i18n:domain="intranett"
-                       i18n:translate="">
-                        Edit profile
-                    </a>
+                       i18n:translate="">Edit profile</a>
                 </li>
 
                 <li id="contentview-user_data-change-password"
