@@ -103,14 +103,6 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
 
     def after_17(self):
         portal = self.layer['portal']
-        sm = getSiteManager()
-        regs = [r.name for r in sm.registeredUtilities()
-            if r.provided == IPortletType]
-
-        # The following two lines are commented out as we disable the
-        # portlets in upgrade #31.
-        #self.assertTrue('intranett.policy.portlets.NewsHighlight' in regs)
-        #self.assertTrue('intranett.policy.portlets.EventHighlight' in regs)
         prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
             'autocomplete'
         css = getToolByName(portal, 'portal_css')
