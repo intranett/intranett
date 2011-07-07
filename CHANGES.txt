@@ -4,6 +4,9 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-196: Disabled half-finished highlight portlets.
+  [ggozad, hannosch]
+
 - INTRANETT-120: Update to Plone 4.1rc3.
   [hannosch]
 
