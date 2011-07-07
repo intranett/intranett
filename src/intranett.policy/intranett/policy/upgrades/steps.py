@@ -271,7 +271,7 @@ def cleanup_plone41(context):
     css = getToolByName(context, 'portal_css')
     css.moveResourceAfter(
         '++resource++plone.app.discussion.stylesheets/discussion.css',
-        '++resource++plone.formwidget.autocomplete/jquery.autocomplete.css')
+        'member.css')
     css.moveResourceAfter(
         '++resource++plone.app.jquerytools.dateinput.css',
         '++resource++plone.app.jquerytools.overlays.css')

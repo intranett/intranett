@@ -5,6 +5,7 @@
  <stylesheet id="RTL.css" enabled="0" />
 
  <stylesheet id="++resource++plone.app.discussion.stylesheets/discussion.css"
+   insert-after="member.css"
    rendering="link" cacheable="True" cookable="True" />
 
 </object>
