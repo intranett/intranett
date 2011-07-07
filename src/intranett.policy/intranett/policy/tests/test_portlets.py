@@ -121,7 +121,8 @@ class TestNewsHighlightPortlet(IntranettTestCase):
         addview.createAndAdd(
             data={'portletTitle': 'News Highlight', 'source': 'last'})
         self.assertEquals(len(mapping), 1+initial)
-        assignment_types = set(assignment.__class__ for assignment in mapping.values())
+        assignment_types = set(assignment.__class__ for assignment in
+            mapping.values())
         self.assertIn(newshighlight.Assignment, assignment_types)
 
 
@@ -187,7 +188,8 @@ class TestEventHighlightPortlet(IntranettTestCase):
         addview.createAndAdd(
             data={'portletTitle': 'Event Highlight'})
         self.assertEquals(len(mapping), 1+initial)
-        assignment_types = set(assignment.__class__ for assignment in mapping.values())
+        assignment_types = set(assignment.__class__ for assignment in
+            mapping.values())
         self.assertIn(eventhighlight.Assignment, assignment_types)
 
 
@@ -248,7 +250,8 @@ class TestContentHighlightPortlet(IntranettTestCase):
         addview.createAndAdd(
             data={'portletTitle': 'Content Highlight', 'item': 'xxx'})
         self.assertEquals(len(mapping), 1+initial)
-        assignment_types = set(assignment.__class__ for assignment in mapping.values())
+        assignment_types = set(assignment.__class__ for assignment in
+            mapping.values())
         self.assertIn(contenthighlight.Assignment, assignment_types)
 
     def test_document_source(self):
@@ -282,7 +285,7 @@ class TestContentHighlightPortlet(IntranettTestCase):
         self.assertEqual(len(query_source), 1)
         # Iterator
         self.assertTrue(len([x for x in query_source]), 1)
-    
+
 
 class TestWorkspaceStatePortlet(IntranettTestCase):
 
@@ -359,7 +362,7 @@ class TestWorkspaceStatePortlet(IntranettTestCase):
         self.assertFalse(r.available)
         output = r.render()
         self.assertEqual(output.strip(), "")
-    
+
 
 class TestZ3cBase(IntranettFunctionalTestCase):
 

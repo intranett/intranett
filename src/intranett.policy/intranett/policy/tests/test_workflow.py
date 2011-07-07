@@ -49,7 +49,7 @@ class TestWorkflowSetup(IntranettTestCase):
         }
         for type_ in set(ttool.keys()) - no_workflow:
             wf = wftool.getChainForPortalType(type_)
-            expected = workflows.get(type_, ('intranett_workflow',))
+            expected = workflows.get(type_, ('intranett_workflow', ))
             self.assertEquals(wf, expected,
                               'Found workflow %s for type %s, expected '
                               '%s, ' % (wf, type_, expected))
@@ -94,8 +94,8 @@ class TestWorkflowPermissions(IntranettTestCase):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
         portal.invokeFactory('TeamWorkspace', 'team1')
-        team1 = portal.team1
-        self.assertFalse(checkPerm('intranett.policy: Add TeamWorkspace', team1))
+        self.assertFalse(
+            checkPerm('intranett.policy: Add TeamWorkspace', portal.team1))
 
     def test_no_add_workspace_in_public_workspace(self):
         portal = self.layer['portal']
@@ -104,7 +104,8 @@ class TestWorkflowPermissions(IntranettTestCase):
         portal.invokeFactory('TeamWorkspace', 'team1')
         team1 = portal.team1
         wftool.doActionFor(team1, 'publish')
-        self.assertFalse(checkPerm('intranett.policy: Add TeamWorkspace', team1))
+        self.assertFalse(
+            checkPerm('intranett.policy: Add TeamWorkspace', team1))
 
 
 class TestSitePermissions(IntranettTestCase):
