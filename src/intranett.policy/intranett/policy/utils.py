@@ -23,7 +23,7 @@ def get_fullname(context, userid):
     # member_info is None if there's no Plone user object
     if member_info:
         fullname = member_info.get('fullname', '')
-    else:
+    else: # pragma: no cover
         fullname = None
     if fullname:
         return fullname
@@ -72,7 +72,7 @@ def get_personal_folder(context):
 
 def get_personal_folder_url(context, userid):
     personal = get_personal_folder(context)
-    if personal is None:
+    if personal is None: # pragma: no cover
         return
     folder_id = quote_userid(userid)
     folder = personal.get(folder_id, None)

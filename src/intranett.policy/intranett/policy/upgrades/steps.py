@@ -139,7 +139,7 @@ def update_discussion_10(context):
     user_category = actions.user
     review = user_category['review-comments']
     review.visible = False
-    if 'manage_users' in user_category:
+    if 'manage_users' in user_category: # pragma: no cover
         pos = user_category.getObjectPosition('manage_users')
         user_category.moveObjectToPosition('review-comments', pos)
     aitool = getToolByName(context, 'portal_actionicons')
