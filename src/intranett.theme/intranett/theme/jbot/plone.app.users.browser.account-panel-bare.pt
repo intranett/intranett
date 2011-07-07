@@ -5,13 +5,11 @@
                 name python:memberinfo['fullname'] or member.getId() or member.getId();
                 portal_url context/portal_url;">
 
-
     <div metal:use-macro="context/global_statusmessage/macros/portal_message">
         Portal status message
     </div>
 
     <div id="content">
-
 
         <h1 class="documentFirstHeading"
             i18n:translate=""
@@ -20,12 +18,6 @@
             metal:define-slot="heading">
             Do something
         </h1>
-
-        <div class="documentDescription" i18n:translate=""
-           tal:condition="view/description"
-           tal:content="view/description">
-            Description
-        </div>
 
         <a tal:condition="configlet_view|nothing"
            href=""

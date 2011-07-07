@@ -1,8 +1,12 @@
 from urllib import quote
 
-from zope.publisher.browser import BrowserView
-from Products.CMFCore.utils import getToolByName
+from plone.app.layout.viewlets.common import PathBarViewlet
 from plone.memoize.view import memoize
+from Products.CMFCore.utils import getToolByName
+from zope.publisher.browser import BrowserView
+
+from intranett.policy.utils import get_fullname
+from intranett.policy.utils import getMembersFolder
 from intranett.policy.utils import getMembersFolderId
 
 
@@ -59,3 +63,23 @@ class MemberDataView(BrowserView):
     def users_folder_url(self):
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         return portal.absolute_url() + '/' + quote(getMembersFolderId())
+
+
+class UserBreadcrumbs(PathBarViewlet):
+
+    def update(self):
+        context = self.context
+        # ignore the update method from PathBarViewlet on purpose
+        super(PathBarViewlet, self).update()
+        self.is_rtl = False
+        folder = getMembersFolder(context)
+        folder_url = folder.absolute_url()
+        result = [{'Title': folder.Title(), 'absolute_url': folder_url}]
+
+        mtool = getToolByName(context, "portal_membership")
+        member = mtool.getAuthenticatedMember()
+        userid = member.getId()
+        fullname = get_fullname(context, userid)
+        # the last segment is no link - so we don't need to calculate it
+        result.append({'Title': fullname, 'absolute_url': ''})
+        self.breadcrumbs = result

@@ -54,4 +54,23 @@
       permission="zope2.View"
       />
 
+  <!-- breadcrumbs for the profile/password views -->
+  <browser:viewlet
+      name="plone.path_bar"
+      manager="intranett.theme.browser.interfaces.IAboveColumns"
+      class=".user.UserBreadcrumbs"
+      view="plone.app.users.browser.personalpreferences.UserDataPanel"
+      layer="intranett.theme.browser.interfaces.IThemeSpecific"
+      permission="zope2.View"
+      />
+
+  <browser:viewlet
+      name="plone.path_bar"
+      manager="intranett.theme.browser.interfaces.IAboveColumns"
+      class=".user.UserBreadcrumbs"
+      view="plone.app.users.browser.personalpreferences.PasswordAccountPanel"
+      layer="intranett.theme.browser.interfaces.IThemeSpecific"
+      permission="zope2.View"
+      />
+
 </configure>
