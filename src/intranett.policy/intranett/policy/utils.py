@@ -44,6 +44,13 @@ def get_user_profile_url(context, member_id):
     return get_users_folder_url(context) + '/' + quote(member_id)
 
 
+def get_current_user_profile_url(context):
+    mtool = getToolByName(context, "portal_membership")
+    member = mtool.getAuthenticatedMember()
+    userid = member.getId()
+    return get_users_folder_url(context) + '/' + quote(userid)
+
+
 def getMembersFolder(context):
     """Helper function to retrieve the members folder."""
     id = getMembersFolderId()
@@ -128,3 +135,5 @@ def warmupZODBCache(event): # pragma: no cover
 from AccessControl import ModuleSecurityInfo
 ModuleSecurityInfo('intranett.policy.utils').declarePublic('getMembersFolderId')
 ModuleSecurityInfo('intranett.policy.utils').declarePublic('getMembersFolder')
+ModuleSecurityInfo('intranett.policy.utils').declarePublic(
+    'get_current_user_profile_url')

@@ -1142,6 +1142,9 @@ textarea.mce_editable {
 body.template-plone\.portlet\.static\.Static textarea.mce_editable {
   height: 20em; }
 
+body.template-personal-information textarea.mce_editable {
+  height: 15em; }
+
 .fieldRequired {
   color: #f44;
   font-size: 0.76em;

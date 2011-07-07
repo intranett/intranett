@@ -1,5 +1,6 @@
 from AccessControl import getSecurityManager
 from plone.app.layout.viewlets.common import ViewletBase
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from intranett.policy.utils import get_fullname
@@ -12,14 +13,14 @@ class PersonalBarViewlet(ViewletBase):
 
     def update(self):
         super(PersonalBarViewlet, self).update()
-        portal_state = self.portal_state
-        self.anonymous = portal_state.anonymous()
+        context = self.context
+        mtool = getToolByName(context, "portal_membership")
+        self.anonymous = bool(mtool.isAnonymousUser())
         if self.anonymous:
             return
 
         sm = getSecurityManager()
-        context = self.context
-        member = portal_state.member()
+        member = mtool.getAuthenticatedMember()
         userid = member.getId()
         self.user_name = get_fullname(context, userid)
         self.can_manage_users = sm.checkPermission('Manage users', self.context)
