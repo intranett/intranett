@@ -320,7 +320,7 @@ def remove_crappy_portlets(context):
     sm = getSiteManager()
     names = ('intranett.policy.portlets.NewsHighlight',
              'intranett.policy.portlets.EventHighlight',
-             'intranett.policy.portlets.EventHighlight')
+             'intranett.policy.portlets.ContentHighlight')
     for name in names:
         sm.unregisterUtility(provided=IPortletManager, name=name)
     # Remove CSS/JS
