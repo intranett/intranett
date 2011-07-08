@@ -313,7 +313,7 @@ class TestProjectRoomStatePortlet(IntranettTestCase):
         r.update()
 
         self.assertEqual(r.state, 'private')
-        self.assertEqual(r.members, ('test_user_1_', ))
+        self.assertEqual(r.participants, ('test_user_1_', ))
 
     def test_public_space(self):
         portal = self.layer['portal']
@@ -330,7 +330,7 @@ class TestProjectRoomStatePortlet(IntranettTestCase):
         r.update()
 
         self.assertEqual(r.state, 'published')
-        self.assertEqual(r.members, ('test_user_1_', ))
+        self.assertEqual(r.participants, ('test_user_1_', ))
 
     def test_member_fullname_shown(self):
         portal = self.layer['portal']
@@ -348,7 +348,7 @@ class TestProjectRoomStatePortlet(IntranettTestCase):
         r.update()
 
         self.assertEqual(r.state, 'published')
-        self.assertEqual(r.members, ('test_user_1_', ))
+        self.assertEqual(r.participants, ('test_user_1_', ))
 
     def test_outside_projectroom_no_portlet_rendered(self):
         portal = self.layer['portal']
