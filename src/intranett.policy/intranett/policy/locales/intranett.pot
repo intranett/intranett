@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-07-07 14:39+0000\n"
+"POT-Creation-Date: 2011-07-08 10:52+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -63,10 +63,6 @@ msgstr ""
 msgid "Manage users"
 msgstr ""
 
-#: intranett.policy/intranett/policy/content/projectroom.py:32
-msgid "Participants"
-msgstr ""
-
 #: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:59
 msgid "Modify portlet"
 msgstr ""
@@ -82,6 +78,14 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:18
 msgid "Only project participants can see or edit content."
+msgstr ""
+
+#: intranett.policy/intranett/policy/content/projectroom.py:32
+msgid "Participants"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:24
+msgid "Participants are:"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
@@ -102,6 +106,15 @@ msgstr ""
 msgid "Powered by intranett.no"
 msgstr ""
 
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:18
+msgid "Project Info"
+msgstr ""
+
+#: intranett.policy/intranett/policy/profiles/default/types/ProjectRoom.xml
+msgid "Project room"
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
 msgid "Show employees from all departments"
 msgstr ""
@@ -112,10 +125,6 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/profiles/default/actions.xml
 msgid "Support"
-msgstr ""
-
-#: intranett.policy/intranett/policy/profiles/default/types/TeamWorkspace.xml
-msgid "Project room"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
@@ -148,11 +157,6 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:26
 msgid "Which item to display"
-msgstr ""
-
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:19
-msgid "Project Info"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
@@ -265,9 +269,5 @@ msgstr ""
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:94
 #: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:68
 msgid "link_manage_personal_portlets"
-msgstr ""
-
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:24
-msgid "Participants are:"
 msgstr ""
 
