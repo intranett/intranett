@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-07-08 10:52+0000\n"
+"POT-Creation-Date: 2011-07-08 12:52+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -14,8 +14,20 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+# used in project participants widget
+msgid "Authenticated Users (Virtual Group)"
+msgstr ""
+
 #: intranett.policy/intranett/policy/profiles/default/types/Plone_Site.xml
 msgid "Edit"
+msgstr ""
+
+# portlet title
+msgid "My project rooms"
+msgstr ""
+
+# portlet title
+msgid "Project Info"
 msgstr ""
 
 #: validation/validators/SupplValidators.py:67

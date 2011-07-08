@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-08 10:52+0000\n"
+"POT-Creation-Date: 2011-07-08 12:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,9 +14,21 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 
+# used in project participants widget
+msgid "Authenticated Users (Virtual Group)"
+msgstr "All intranet users"
+
 #: intranett.policy/intranett/policy/profiles/default/types/Plone_Site.xml
 msgid "Edit"
-msgstr ""
+msgstr "Redigér"
+
+# portlet title
+msgid "My project rooms"
+msgstr "Mitt Prosjektrom"
+
+# portlet title
+msgid "Project Info"
+msgstr "Prosjektrom informasjon"
 
 #: validation/validators/SupplValidators.py:67
 msgid "Validation failed($name: Uploaded data is too large: ${size}MB (max ${max}MB)"
