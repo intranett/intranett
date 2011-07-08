@@ -29,8 +29,8 @@ WorkspaceSchema = ATFolder.schema.copy() + atapi.Schema((
         vocabulary='getMembersVocabulary',
         storage=atapi.AnnotationStorage(),
         widget=atapi.MultiSelectionWidget(
-            label=_(u"Members"),
-            description=_(u"Users who have access to the workspace"),
+            label=_(u"Participants"),
+            description=_(u"Users who have access to the project room."),
             format='checkbox',
         ),
     ),
@@ -38,7 +38,7 @@ WorkspaceSchema = ATFolder.schema.copy() + atapi.Schema((
 
 
 class TeamWorkspace(ATFolder):
-    """A workspace for groups of members"""
+    """A project room for groups of participants"""
 
     implements(ITeamWorkspace)
     schema = WorkspaceSchema
@@ -81,12 +81,12 @@ class TeamWorkspace(ATFolder):
 
     security.declareProtected(View, 'getWorkspace')
     def getWorkspace(self):
-        """Return the closest workspace"""
+        """Return the closest project room"""
         return self
 
     security.declareProtected(View, 'getWorkspaceState')
     def getWorkspaceState(self):
-        """Return if the workspace is private or public"""
+        """Return if the project room is private or public"""
         wftool = getToolByName(self, 'portal_workflow')
         return wftool.getInfoFor(self, "review_state")
 
@@ -119,7 +119,7 @@ class WorkspaceMembershipRoles(object):
 
 
 def transitionChildren(context, action):
-    """Transition children when the workspace state has changed."""
+    """Transition children when the project room state has changed."""
     if action.action in ('publish', 'hide'):
         transitionObjectsByPaths(context, 'auto',
             ['/'.join(context.getPhysicalPath())])
@@ -138,7 +138,7 @@ def transitionObjectsByPaths(context, workflow_action, paths):
 
 
 def reindexChildren(context, action):
-    """Reindex children when the workspace membership has changed."""
+    """Reindex children when the project participants have changed."""
     reindexObjectsByPaths(context, ["/".join(context.getPhysicalPath())])
 
 
@@ -165,7 +165,7 @@ def transitionMovedContent(context, action):
 
     if getattr(action.oldParent, 'getWorkspaceState', None) is not None:
         if getattr(action.newParent, 'getWorkspaceState', None) is None:
-            # If an object is moved out of a workspace, take ownership.
+            # If an object is moved out of a project room, take ownership.
             becomeOwner(context)
             restoreOwnerPermissions(context)
 
@@ -174,8 +174,8 @@ def transitionMovedContent(context, action):
                 wf.doActionFor(context, "hide")
                 return
         else:
-            # If an object is renamed inside a workspace or moved between
-            # workspaces, reapply removeOwnerPermissions.
+            # If an object is renamed inside a project room or moved between
+            # project rooms, reapply removeOwnerPermissions.
             if wf.getInfoFor(context, 'review_state') == 'published':
                 action.action = 'autopublish' # Abuse existing event
                 removeOwnerPermissions(context, action)
@@ -186,7 +186,8 @@ def transitionMovedContent(context, action):
 
 
 def removeOwnerPermissions(context, action):
-    """Remove owner permissions when an object is published in a workspace."""
+    """Remove owner permissions when an object is published in a project room
+    """
     if action.action in ('autopublish',):
         if getattr(context, 'getWorkspaceState', None) is not None:
             for perm in (View, AccessContentsInformation,

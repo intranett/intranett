@@ -108,13 +108,13 @@
    <guard-permission>Modify portal content</guard-permission>
   </guard>
  </transition>
- <transition transition_id="autoprotect" title="Protect workspace content" new_state="protected" trigger="AUTOMATIC" before_script="" after_script="notifyActionSucceeded">
+ <transition transition_id="autoprotect" title="Protect project room content" new_state="protected" trigger="AUTOMATIC" before_script="" after_script="notifyActionSucceeded">
   
   <guard>
    <guard-expression>python:(getattr(here, 'getWorkspaceState', None) is not None and here.getWorkspaceState()=='private')</guard-expression>
   </guard>
  </transition>
- <transition transition_id="autopublish" title="Publish workspace content" new_state="published" trigger="AUTOMATIC" before_script="" after_script="notifyActionSucceeded">
+ <transition transition_id="autopublish" title="Publish project room content" new_state="published" trigger="AUTOMATIC" before_script="" after_script="notifyActionSucceeded">
   
   <guard>
    <guard-expression>python:(getattr(here, 'getWorkspaceState', None) is not None and here.getWorkspaceState()=='published')</guard-expression>

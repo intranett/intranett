@@ -16,7 +16,7 @@ class Assignment(base.Assignment):
 
     implements(IWorkspaceInfo)
 
-    title = _("Workspace Info")
+    title = _("Project Info")
 
 
 class Renderer(base.Renderer):

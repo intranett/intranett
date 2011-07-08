@@ -15,8 +15,8 @@ msgstr ""
 "Domain: intranett\n"
 
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:12
-msgid "All intranet users can see this workspace. Only workspace members can edit content."
-msgstr ""
+msgid "All intranet users can see this project room. Only project participants can edit content."
+msgstr "Alle intranett brukere kan se dette prosjektrommet. Kun prosjektdeltakere kan redigere innhold."
 
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:76
 msgid "Assign personal portlets"
@@ -64,7 +64,7 @@ msgid "Manage users"
 msgstr "Administrér brukere"
 
 #: intranett.policy/intranett/policy/content/workspace.py:32
-msgid "Members"
+msgid "Participants"
 msgstr "Prosjektdeltakere"
 
 #: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:59
@@ -73,7 +73,7 @@ msgstr "Endre infoboks"
 
 #: intranett.policy/intranett/policy/browser/portlets/myworkspaces.pt:6
 #: intranett.policy/intranett/policy/browser/portlets/myworkspaces.py:20
-msgid "My Workspaces"
+msgid "My project rooms"
 msgstr "Mitt Prosjektrom"
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
@@ -81,7 +81,7 @@ msgid "News Highlight"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:18
-msgid "Only workspace members can see or edit content."
+msgid "Only project participants can see or edit content."
 msgstr "Bare prosjektdeltakere kan se eller redigere innhold."
 
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
@@ -131,7 +131,7 @@ msgid "This site is powered by intranett.no"
 msgstr "Dette nettstedet er bygget med intranett.no"
 
 #: intranett.policy/intranett/policy/content/workspace.py:33
-msgid "Users who have access to the workspace"
+msgid "Users who have access to the project room."
 msgstr "Deltakere som har tilgang til prosjektrommet"
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14
@@ -152,7 +152,7 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:7
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.py:19
-msgid "Workspace Info"
+msgid "Project Info"
 msgstr "Prosjektrom informasjon"
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
@@ -281,8 +281,7 @@ msgstr "Hurtigsøk &#8595;"
 msgid "link_manage_personal_portlets"
 msgstr "Rediger personlige infobokser"
 
-#. Default: "Members are:"
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:24
-msgid "members_are"
+msgid "Participants are:"
 msgstr "Prosjektdeltakere er:"
 

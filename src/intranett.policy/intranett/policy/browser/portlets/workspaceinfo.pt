@@ -4,7 +4,7 @@
 
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
-        <span i18n:translate="">Workspace Info</span>
+        <span i18n:translate="">Project Info</span>
         <span class="portletTopRight"></span>
     </dt>
     <dd class="portletItem odd">
@@ -12,16 +12,16 @@
       <span class="portletItemDetails"
             tal:condition="python:view.state=='published'"
             i18n:translate="">
-          All intranet users can see this workspace. Only workspace members
-          can edit content.
+          All intranet users can see this project room. Only project
+          participants can edit content.
       </span>
       <span class="portletItemDetails"
             tal:condition="python:view.state=='private'"
             i18n:translate="">
-          Only workspace members can see or edit content.
+          Only project participants can see or edit content.
       </span>
 
-    <span i18n:translate="members_are">Members are:</span>
+    <span i18n:translate="">Participants are:</span>
     <ul>
       <li tal:repeat="member python:view.members" tal:content="member" />
     </ul>

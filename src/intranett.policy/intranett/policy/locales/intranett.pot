@@ -15,7 +15,7 @@ msgstr ""
 "Domain: DOMAIN\n"
 
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:12
-msgid "All intranet users can see this workspace. Only workspace members can edit content."
+msgid "All intranet users can see this project room. Only project participants can edit content."
 msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:76
@@ -64,7 +64,7 @@ msgid "Manage users"
 msgstr ""
 
 #: intranett.policy/intranett/policy/content/workspace.py:32
-msgid "Members"
+msgid "Participants"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:59
@@ -73,7 +73,7 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/myworkspaces.pt:6
 #: intranett.policy/intranett/policy/browser/portlets/myworkspaces.py:20
-msgid "My Workspaces"
+msgid "My project rooms"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
@@ -81,7 +81,7 @@ msgid "News Highlight"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:18
-msgid "Only workspace members can see or edit content."
+msgid "Only project participants can see or edit content."
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
@@ -131,7 +131,7 @@ msgid "This site is powered by intranett.no"
 msgstr ""
 
 #: intranett.policy/intranett/policy/content/workspace.py:33
-msgid "Users who have access to the workspace"
+msgid "Users who have access to the project room."
 msgstr ""
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14
@@ -152,7 +152,7 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:7
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.py:19
-msgid "Workspace Info"
+msgid "Project Info"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
@@ -267,8 +267,7 @@ msgstr ""
 msgid "link_manage_personal_portlets"
 msgstr ""
 
-#. Default: "Members are:"
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:24
-msgid "members_are"
+msgid "Participants are:"
 msgstr ""
 

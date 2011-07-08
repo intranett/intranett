@@ -3,7 +3,7 @@
 
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
-        <span i18n:translate="">My Workspaces</span>
+        <span i18n:translate="">My project rooms</span>
         <span class="portletTopRight"></span>
     </dt>
     <dd class="portletItem odd">

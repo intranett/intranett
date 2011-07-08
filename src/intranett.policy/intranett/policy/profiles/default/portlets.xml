@@ -3,14 +3,14 @@
 
   <portlet
     addview="intranett.policy.portlets.WorkspaceInfo"
-    title="Workspace Information"
-    description="Displays details for the current workspace."
+    title="Project Info"
+    description="Displays details for the current project room."
     />
 
   <portlet
     addview="intranett.policy.portlets.MyWorkspaces"
-    title="My Workspaces"
-    description="Displays a list of all of your workspaces."
+    title="My project rooms"
+    description="Displays a list of all of your project rooms."
     />
 
   <assignment name="navigation"

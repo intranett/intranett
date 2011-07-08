@@ -17,7 +17,7 @@ class Assignment(base.Assignment):
 
     implements(IMyWorkspaces)
 
-    title = _("My Workspaces")
+    title = _("My project rooms")
 
 
 class Renderer(base.Renderer):
