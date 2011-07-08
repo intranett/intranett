@@ -65,7 +65,7 @@ msgstr "Administrér brukere"
 
 #: intranett.policy/intranett/policy/content/workspace.py:32
 msgid "Members"
-msgstr ""
+msgstr "Prosjektdeltakere"
 
 #: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:59
 msgid "Modify portlet"
@@ -74,7 +74,7 @@ msgstr "Endre infoboks"
 #: intranett.policy/intranett/policy/browser/portlets/myworkspaces.pt:6
 #: intranett.policy/intranett/policy/browser/portlets/myworkspaces.py:20
 msgid "My Workspaces"
-msgstr ""
+msgstr "Mitt Prosjektrom"
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
 msgid "News Highlight"
@@ -82,7 +82,7 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:18
 msgid "Only workspace members can see or edit content."
-msgstr ""
+msgstr "Bare prosjektdeltakere kan se eller redigere innhold."
 
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
 msgid "Personal folder"
@@ -116,7 +116,7 @@ msgstr "Hjelp"
 
 #: intranett.policy/intranett/policy/profiles/default/types/TeamWorkspace.xml
 msgid "Team Workspace"
-msgstr ""
+msgstr "Prosjektrom"
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
 msgid "The most recently published news item"
@@ -132,7 +132,7 @@ msgstr "Dette nettstedet er bygget med intranett.no"
 
 #: intranett.policy/intranett/policy/content/workspace.py:33
 msgid "Users who have access to the workspace"
-msgstr ""
+msgstr "Deltakere som har tilgang til prosjektrommet"
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14
 msgid "Version: ${number}"
@@ -153,7 +153,7 @@ msgstr ""
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:7
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.py:19
 msgid "Workspace Info"
-msgstr ""
+msgstr "Prosjektrom informasjon"
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
 msgid "You can select the item to be highlighted by searching on its title."
@@ -284,5 +284,5 @@ msgstr "Rediger personlige infobokser"
 #. Default: "Members are:"
 #: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:24
 msgid "members_are"
-msgstr ""
+msgstr "Prosjektdeltakere er:"
 
