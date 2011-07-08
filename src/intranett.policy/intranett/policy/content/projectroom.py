@@ -53,15 +53,6 @@ class ProjectRoom(ATFolder):
         return getUtility(IVocabularyFactory,
             name="plone.principalsource.Principals")(self)
 
-    security.declarePrivate('userInMemberSource')
-    def userInMemberSource(self, user_id):
-        """Return true if user_id is in participant source."""
-        try:
-            self.participantsource.getTermByToken(user_id)
-        except LookupError:
-            return False
-        return True
-
     security.declarePrivate('getParticipantsVocabulary')
     def getParticipantsVocabulary(self):
         """Return user_id -> fullname DisplayList."""
