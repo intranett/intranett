@@ -34,8 +34,8 @@ class Renderer(base.Renderer):
         ws = self.context.getProjectRoom()
         self.state = ws.getProjectRoomState()
         self.title = ws.Title()
-        self.members = tuple(x.getProperty("fullname") or x.getId()
-            for x in (mt.getMemberById(x) for x in ws.members))
+        self.participants = tuple(x.getProperty("fullname") or x.getId()
+            for x in (mt.getMemberById(x) for x in ws.participants))
 
 
 class AddForm(base.AddForm):

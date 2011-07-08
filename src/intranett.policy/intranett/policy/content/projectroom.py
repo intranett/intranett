@@ -23,10 +23,10 @@ from intranett.policy.interfaces import IProjectRoom
 
 ProjectRoomSchema = ATFolder.schema.copy() + atapi.Schema((
     atapi.LinesField(
-        'members',
+        'participants',
         required=False,
         multiValued=True,
-        vocabulary='getMembersVocabulary',
+        vocabulary='getParticipantsVocabulary',
         storage=atapi.AnnotationStorage(),
         widget=atapi.MultiSelectionWidget(
             label=_(u"Participants"),
@@ -45,39 +45,40 @@ class ProjectRoom(ATFolder):
     meta_type = "ProjectRoom"
     security = ClassSecurityInfo()
 
-    members = atapi.ATFieldProperty("members")
+    participants = atapi.ATFieldProperty("participants")
 
-    security.declarePrivate('membersource')
+    security.declarePrivate('participantsource')
     @property
-    def membersource(self):
+    def participantsource(self):
         return getUtility(IVocabularyFactory,
             name="plone.principalsource.Principals")(self)
 
     security.declarePrivate('userInMemberSource')
     def userInMemberSource(self, user_id):
-        """Return true if user_id is in member source."""
+        """Return true if user_id is in participant source."""
         try:
-            self.membersource.getTermByToken(user_id)
+            self.participantsource.getTermByToken(user_id)
         except LookupError:
             return False
         return True
 
-    security.declarePrivate('getMembersVocabulary')
-    def getMembersVocabulary(self):
+    security.declarePrivate('getParticipantsVocabulary')
+    def getParticipantsVocabulary(self):
         """Return user_id -> fullname DisplayList."""
         # We cannot use 'vocabulary_factory' on the field as this would
         # result in a login -> fullname DisplayList.
-        return atapi.DisplayList((t.token, t.title) for t in self.membersource)
+        return atapi.DisplayList(
+            (t.token, t.title) for t in self.participantsource)
 
-    security.declareProtected(ModifyPortalContent, 'setMembers')
-    def setMembers(self, value):
+    security.declareProtected(ModifyPortalContent, 'setParticipants')
+    def setParticipants(self, value):
         """Make sure the current user is always included."""
         user_id = getSecurityManager().getUser().getId()
         value = list(value)
         if user_id not in value and self.userInMemberSource(user_id):
             value.append(user_id)
         value.sort()
-        self.Schema().getField('members').set(self, value)
+        self.Schema().getField('participants').set(self, value)
 
     security.declareProtected(View, 'getProjectRoom')
     def getProjectRoom(self):
@@ -95,12 +96,12 @@ registerATCT(ProjectRoom, PROJECTNAME)
 
 
 @indexer(IProjectRoom)
-def projectroomMembers(context):
-    return context.members
+def participants(context):
+    return context.participants
 
 
-class ProjectRoomMembershipRoles(object):
-    """Gives members of a ProjectRoom appropriate roles in context"""
+class ProjectRoomParticipantRoles(object):
+    """Gives participants of a ProjectRoom appropriate roles in context"""
     implements(ILocalRoleProvider)
     adapts(IProjectRoom)
 
@@ -108,14 +109,14 @@ class ProjectRoomMembershipRoles(object):
         self.context = context
 
     def getRoles(self, principal_id):
-        if principal_id in self.context.members:
+        if principal_id in self.context.participants:
             return ['Editor', 'Contributor']
         else:
             return []
 
     def getAllRoles(self):
-        return [(member, self.getRoles(member)) for member in
-            self.context.members]
+        return [(participant, self.getRoles(participant)) for participant in
+            self.context.participants]
 
 
 def transitionChildren(context, action):

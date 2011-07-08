@@ -313,7 +313,7 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         browser = get_browser(self.layer['app'], loggedIn=True)
         browser.open(projectroom.absolute_url())
 
-    def test_projectroom_creator_can_add_members(self):
+    def test_projectroom_creator_can_add_participants(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
@@ -322,17 +322,17 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         projectroom = folder[projectroom_id]
         wt.doActionFor(projectroom, 'publish')
         acl_users = getToolByName(portal, 'acl_users')
-        acl_users.userFolderAddUser('member1', 'secret', ['Member'], [])
+        acl_users.userFolderAddUser('participant1', 'secret', ['Member'], [])
         transaction.commit()
 
         browser = get_browser(self.layer['app'], loggedIn=True)
         browser.handleErrors = False
         browser.open(projectroom.absolute_url()+"/edit")
-        browser.getControl(name="members:list").value = ["member1"]
+        browser.getControl(name="participants:list").value = ["participant1"]
         browser.getControl("Lagre").click()
-        self.assertIn("member1", projectroom.members)
+        self.assertIn("participant1", projectroom.participants)
 
-    def test_members_shown_on_projectroom_home(self):
+    def test_participants_shown_on_projectroom_home(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
@@ -342,9 +342,9 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         wt.doActionFor(projectroom, 'publish')
 
         acl_users = getToolByName(portal, 'acl_users')
-        acl_users.userFolderAddUser('member1', 'secret', ['Member'], [])
-        portal.portal_membership.getMemberById("member1").setMemberProperties({"fullname": "Max Mustermann", })
-        projectroom.members = ('member1', )
+        acl_users.userFolderAddUser('participant1', 'secret', ['Member'], [])
+        portal.portal_membership.getMemberById("participant1").setMemberProperties({"fullname": "Max Mustermann", })
+        projectroom.participants = ('participant1', )
         transaction.commit()
 
         browser = get_browser(self.layer['app'], loggedIn=True)
@@ -352,7 +352,7 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         browser.open(projectroom.absolute_url())
         self.assertTrue("Max Mustermann" in browser.contents)
 
-    def test_members_can_add_content_in_projectroom(self):
+    def test_participants_can_add_content_in_projectroom(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
@@ -362,12 +362,12 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         wt.doActionFor(projectroom, 'publish')
 
         acl_users = getToolByName(portal, 'acl_users')
-        acl_users.userFolderAddUser('member1', 'secret', ['Member'], [])
-        projectroom.members = ('member1', )
+        acl_users.userFolderAddUser('participant1', 'secret', ['Member'], [])
+        projectroom.participants = ('participant1', )
         transaction.commit()
 
         browser = get_browser(self.layer['app'], loggedIn=False)
-        auth = 'Basic %s:%s' % ('member1', 'secret')
+        auth = 'Basic %s:%s' % ('participant1', 'secret')
         browser.addHeader('Authorization', auth)
         browser.handleErrors = False
         browser.open(projectroom.absolute_url())
@@ -376,7 +376,7 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         browser.getControl(name="text").value="qazxswedc"
         browser.getControl("Lagre").click()
 
-    def test_members_shown_on_subcontent_of_projectroom(self):
+    def test_participants_shown_on_subcontent_of_projectroom(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
@@ -388,9 +388,9 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         wt.doActionFor(projectroom, 'publish')
 
         acl_users = getToolByName(portal, 'acl_users')
-        acl_users.userFolderAddUser('member1', 'secret', ['Member'], [])
-        portal.portal_membership.getMemberById("member1").setMemberProperties({"fullname": "Max Mustermann", })
-        projectroom.members = ('member1', )
+        acl_users.userFolderAddUser('participant1', 'secret', ['Member'], [])
+        portal.portal_membership.getMemberById("participant1").setMemberProperties({"fullname": "Max Mustermann", })
+        projectroom.participants = ('participant1', )
         transaction.commit()
 
         browser = get_browser(self.layer['app'], loggedIn=True)
@@ -398,7 +398,7 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         browser.open(doc.absolute_url())
         self.assertTrue("Max Mustermann" in browser.contents)
 
-    def test_non_members_can_see_public_projectroom_content(self):
+    def test_non_participants_can_see_public_projectroom_content(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
@@ -410,16 +410,16 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         wt.doActionFor(projectroom, 'publish')
 
         acl_users = getToolByName(portal, 'acl_users')
-        acl_users.userFolderAddUser('nonmember', 'secret', ['Member'], [])
+        acl_users.userFolderAddUser('nonparticipant', 'secret', ['Member'], [])
         transaction.commit()
 
         browser = get_browser(self.layer['app'], loggedIn=False)
-        auth = 'Basic %s:%s' % ('nonmember', 'secret')
+        auth = 'Basic %s:%s' % ('nonparticipant', 'secret')
         browser.addHeader('Authorization', auth)
         browser.handleErrors = False
         browser.open(document.absolute_url())
 
-    def test_non_members_cannot_see_private_projectroom_in_navigation(self):
+    def test_non_participants_cannot_see_private_projectroom_in_navigation(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
@@ -429,11 +429,11 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         projectroom = folder[projectroom_id]
 
         acl_users = getToolByName(portal, 'acl_users')
-        acl_users.userFolderAddUser('nonmember', 'secret', ['Member'], [])
+        acl_users.userFolderAddUser('nonparticipant', 'secret', ['Member'], [])
         transaction.commit()
 
         browser = get_browser(self.layer['app'], loggedIn=False)
-        auth = 'Basic %s:%s' % ('nonmember', 'secret')
+        auth = 'Basic %s:%s' % ('nonparticipant', 'secret')
         browser.addHeader('Authorization', auth)
         browser.handleErrors = False
         browser.open(folder.absolute_url())
@@ -446,7 +446,7 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         browser.open(folder.absolute_url())
         self.assertTrue("wibblewobblewoo" in browser.contents)
 
-    def test_owner_of_protected_content_in_projectroom_cannot_see_it_when_not_a_member(self):
+    def test_owner_of_protected_content_in_projectroom_cannot_see_it_when_not_a_participant(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
 
@@ -456,18 +456,18 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         document = projectroom[document_id]
 
         acl_users = getToolByName(portal, 'acl_users')
-        acl_users.userFolderAddUser('nonmember', 'secret', ['Member'], [])
-        document.manage_setLocalRoles('nonmember', ["Owner"])
+        acl_users.userFolderAddUser('nonparticipant', 'secret', ['Member'], [])
+        document.manage_setLocalRoles('nonparticipant', ["Owner"])
         transaction.commit()
 
         browser = get_browser(self.layer['app'], loggedIn=False)
-        auth = 'Basic %s:%s' % ('nonmember', 'secret')
+        auth = 'Basic %s:%s' % ('nonparticipant', 'secret')
         browser.addHeader('Authorization', auth)
         browser.handleErrors = False
         with self.assertRaises(Unauthorized):
             browser.open(document.absolute_url())
 
-    def test_owner_of_published_content_in_projectroom_cannot_edit_it_when_not_a_member(self):
+    def test_owner_of_published_content_in_projectroom_cannot_edit_it_when_not_a_participant(self):
         portal = self.layer['portal']
         folder = portal['test-folder']
         wt = getToolByName(portal, 'portal_workflow')
@@ -479,12 +479,12 @@ class TestProjectRooms(IntranettFunctionalTestCase):
         wt.doActionFor(projectroom, 'publish')
 
         acl_users = getToolByName(portal, 'acl_users')
-        acl_users.userFolderAddUser('nonmember', 'secret', ['Member'], [])
-        document.manage_setLocalRoles('nonmember', ["Owner"])
+        acl_users.userFolderAddUser('nonparticipant', 'secret', ['Member'], [])
+        document.manage_setLocalRoles('nonparticipant', ["Owner"])
         transaction.commit()
 
         browser = get_browser(self.layer['app'], loggedIn=False)
-        auth = 'Basic %s:%s' % ('nonmember', 'secret')
+        auth = 'Basic %s:%s' % ('nonparticipant', 'secret')
         browser.addHeader('Authorization', auth)
         browser.handleErrors = False
         with self.assertRaises(Unauthorized):

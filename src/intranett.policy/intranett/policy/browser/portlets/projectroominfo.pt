@@ -23,7 +23,8 @@
 
     <span i18n:translate="">Participants are:</span>
     <ul>
-      <li tal:repeat="member python:view.members" tal:content="member" />
+      <li tal:repeat="participant python:view.participants"
+          tal:content="participant" />
     </ul>
 
     </dd>

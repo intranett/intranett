@@ -30,7 +30,7 @@ class Renderer(base.Renderer):
         user_id = getSecurityManager().getUser().getId()
         query = dict(
             portal_type="ProjectRoom",
-            projectroomMembers=(user_id, ),
+            participants=(user_id, ),
             sort_on='sortable_title'
         )
         self.projectrooms = ({'title': x.Title, 'url': x.getURL()}

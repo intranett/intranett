@@ -61,12 +61,12 @@
 
   <!-- project rooms -->
   <adapter
-      factory=".content.projectroom.projectroomMembers"
-      name="projectroomMembers"
+      factory=".content.projectroom.participants"
+      name="participants"
       />
 
   <adapter
-      factory=".content.projectroom.ProjectRoomMembershipRoles"
+      factory=".content.projectroom.ProjectRoomParticipantRoles"
       />
 
   <subscriber
