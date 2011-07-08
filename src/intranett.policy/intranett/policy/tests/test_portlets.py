@@ -11,7 +11,7 @@ from zope.component import getUtility, getMultiAdapter
 from intranett.policy.browser.portlets import contenthighlight
 from intranett.policy.browser.portlets import eventhighlight
 from intranett.policy.browser.portlets import newshighlight
-from intranett.policy.browser.portlets import workspaceinfo
+from intranett.policy.browser.portlets import projectroominfo
 from intranett.policy.browser.sources import DocumentSourceBinder
 from intranett.policy.tests.base import get_browser
 from intranett.policy.tests.base import IntranettFunctionalTestCase
@@ -287,7 +287,7 @@ class TestContentHighlightPortlet(IntranettTestCase):
         self.assertTrue(len([x for x in query_source]), 1)
 
 
-class TestWorkspaceStatePortlet(IntranettTestCase):
+class TestProjectRoomStatePortlet(IntranettTestCase):
 
     def renderer(self, context=None, request=None, view=None, manager=None,
                  assignment=None):
@@ -303,13 +303,13 @@ class TestWorkspaceStatePortlet(IntranettTestCase):
     def test_private_space(self):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Contributor'])
-        workspace_id = portal.invokeFactory('TeamWorkspace', 'workspace',
+        projectroom_id = portal.invokeFactory('ProjectRoom', 'projectroom',
                              title='First Space')
-        workspace = portal[workspace_id]
+        projectroom = portal[projectroom_id]
 
-        assignment = workspaceinfo.Assignment()
-        r = self.renderer(context=workspace, assignment=assignment)
-        r = r.__of__(workspace)
+        assignment = projectroominfo.Assignment()
+        r = self.renderer(context=projectroom, assignment=assignment)
+        r = r.__of__(projectroom)
         r.update()
 
         self.assertEqual(r.state, 'private')
@@ -319,14 +319,14 @@ class TestWorkspaceStatePortlet(IntranettTestCase):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Contributor'])
         wt = getToolByName(portal, 'portal_workflow')
-        workspace_id = portal.invokeFactory('TeamWorkspace', 'workspace',
+        projectroom_id = portal.invokeFactory('ProjectRoom', 'projectroom',
                              title='First Space')
-        workspace = portal[workspace_id]
-        wt.doActionFor(workspace, "publish")
+        projectroom = portal[projectroom_id]
+        wt.doActionFor(projectroom, "publish")
 
-        assignment = workspaceinfo.Assignment()
-        r = self.renderer(context=workspace, assignment=assignment)
-        r = r.__of__(workspace)
+        assignment = projectroominfo.Assignment()
+        r = self.renderer(context=projectroom, assignment=assignment)
+        r = r.__of__(projectroom)
         r.update()
 
         self.assertEqual(r.state, 'published')
@@ -336,25 +336,25 @@ class TestWorkspaceStatePortlet(IntranettTestCase):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Contributor'])
         wt = getToolByName(portal, 'portal_workflow')
-        workspace_id = portal.invokeFactory('TeamWorkspace', 'workspace',
+        projectroom_id = portal.invokeFactory('ProjectRoom', 'projectroom',
                              title='First Space')
-        workspace = portal[workspace_id]
-        workspace.members = (TEST_USER_ID, )
-        wt.doActionFor(workspace, "publish")
+        projectroom = portal[projectroom_id]
+        projectroom.members = (TEST_USER_ID, )
+        wt.doActionFor(projectroom, "publish")
 
-        assignment = workspaceinfo.Assignment()
-        r = self.renderer(context=workspace, assignment=assignment)
-        r = r.__of__(workspace)
+        assignment = projectroominfo.Assignment()
+        r = self.renderer(context=projectroom, assignment=assignment)
+        r = r.__of__(projectroom)
         r.update()
 
         self.assertEqual(r.state, 'published')
         self.assertEqual(r.members, ('test_user_1_', ))
 
-    def test_outside_workspace_no_portlet_rendered(self):
+    def test_outside_projectroom_no_portlet_rendered(self):
         portal = self.layer['portal']
         setRoles(portal, TEST_USER_ID, ['Contributor'])
 
-        assignment = workspaceinfo.Assignment()
+        assignment = projectroominfo.Assignment()
         r = self.renderer(context=portal, assignment=assignment)
         r = r.__of__(portal)
         r.update()

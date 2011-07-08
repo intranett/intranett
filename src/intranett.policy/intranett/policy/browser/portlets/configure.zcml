@@ -38,25 +38,25 @@
     />
 
   <plone:portlet
-    name="intranett.policy.portlets.WorkspaceInfo"
-    interface=".workspaceinfo.IWorkspaceInfo"
-    assignment=".workspaceinfo.Assignment"
+    name="intranett.policy.portlets.ProjectRoomInfo"
+    interface=".projectroominfo.IProjectRoomInfo"
+    assignment=".projectroominfo.Assignment"
     view_permission="zope2.View"
     edit_permission="plone.app.portlets.ManagePortlets"
-    renderer=".workspaceinfo.Renderer"
-    addview=".workspaceinfo.AddForm"
-    editview=".workspaceinfo.EditForm"
+    renderer=".projectroominfo.Renderer"
+    addview=".projectroominfo.AddForm"
+    editview=".projectroominfo.EditForm"
     />
 
   <plone:portlet
-    name="intranett.policy.portlets.MyWorkspaces"
-    interface=".myworkspaces.IMyWorkspaces"
-    assignment=".myworkspaces.Assignment"
+    name="intranett.policy.portlets.MyProjectRooms"
+    interface=".myprojectrooms.IMyProjectRooms"
+    assignment=".myprojectrooms.Assignment"
     view_permission="zope2.View"
     edit_permission="plone.app.portlets.ManageOwnPortlets"
-    renderer=".myworkspaces.Renderer"
-    addview=".myworkspaces.AddForm"
-    editview=".myworkspaces.EditForm"
+    renderer=".myprojectrooms.Renderer"
+    addview=".myprojectrooms.AddForm"
+    editview=".myprojectrooms.EditForm"
     />
 
 </configure>

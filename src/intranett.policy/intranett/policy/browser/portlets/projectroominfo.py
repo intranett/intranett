@@ -8,32 +8,31 @@ from zope.interface import implements
 from intranett.policy import IntranettMessageFactory as _
 
 
-class IWorkspaceInfo(IPortletDataProvider):
+class IProjectRoomInfo(IPortletDataProvider):
     pass
 
 
 class Assignment(base.Assignment):
 
-    implements(IWorkspaceInfo)
-
+    implements(IProjectRoomInfo)
     title = _("Project Info")
 
 
 class Renderer(base.Renderer):
 
-    render = ViewPageTemplateFile('workspaceinfo.pt')
+    render = ViewPageTemplateFile('projectroominfo.pt')
 
     @property
     def available(self):
-        return (getattr(self.context, 'getWorkspace', None) is not None and
+        return (getattr(self.context, 'getProjectRoom', None) is not None and
                 'portal_factory' not in self.request.URL)
 
     def update(self):
         if not self.available:
             return
         mt = getToolByName(self.context, 'portal_membership')
-        ws = self.context.getWorkspace()
-        self.state = ws.getWorkspaceState()
+        ws = self.context.getProjectRoom()
+        self.state = ws.getProjectRoomState()
         self.title = ws.Title()
         self.members = tuple(x.getProperty("fullname") or x.getId()
             for x in (mt.getMemberById(x) for x in ws.members))
@@ -41,7 +40,7 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
 
-    form_fields = formlibform.Fields(IWorkspaceInfo)
+    form_fields = formlibform.Fields(IProjectRoomInfo)
 
     def create(self, data):
         return Assignment()
@@ -49,4 +48,4 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
 
-    form_fields = formlibform.Fields(IWorkspaceInfo)
+    form_fields = formlibform.Fields(IProjectRoomInfo)

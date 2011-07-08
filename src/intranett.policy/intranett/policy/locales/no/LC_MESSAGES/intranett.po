@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: intranett\n"
 
-#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:12
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:12
 msgid "All intranet users can see this project room. Only project participants can edit content."
 msgstr "Alle intranett brukere kan se dette prosjektrommet. Kun prosjektdeltakere kan redigere innhold."
 
@@ -63,7 +63,7 @@ msgstr "Innhold"
 msgid "Manage users"
 msgstr "Administrér brukere"
 
-#: intranett.policy/intranett/policy/content/workspace.py:32
+#: intranett.policy/intranett/policy/content/projectroom.py:32
 msgid "Participants"
 msgstr "Prosjektdeltakere"
 
@@ -71,8 +71,8 @@ msgstr "Prosjektdeltakere"
 msgid "Modify portlet"
 msgstr "Endre infoboks"
 
-#: intranett.policy/intranett/policy/browser/portlets/myworkspaces.pt:6
-#: intranett.policy/intranett/policy/browser/portlets/myworkspaces.py:20
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.pt:6
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.py:20
 msgid "My project rooms"
 msgstr "Mitt Prosjektrom"
 
@@ -80,7 +80,7 @@ msgstr "Mitt Prosjektrom"
 msgid "News Highlight"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:18
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:18
 msgid "Only project participants can see or edit content."
 msgstr "Bare prosjektdeltakere kan se eller redigere innhold."
 
@@ -115,7 +115,7 @@ msgid "Support"
 msgstr "Hjelp"
 
 #: intranett.policy/intranett/policy/profiles/default/types/TeamWorkspace.xml
-msgid "Team Workspace"
+msgid "Project room"
 msgstr "Prosjektrom"
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
@@ -130,7 +130,7 @@ msgstr ""
 msgid "This site is powered by intranett.no"
 msgstr "Dette nettstedet er bygget med intranett.no"
 
-#: intranett.policy/intranett/policy/content/workspace.py:33
+#: intranett.policy/intranett/policy/content/projectroom.py:33
 msgid "Users who have access to the project room."
 msgstr "Deltakere som har tilgang til prosjektrommet"
 
@@ -150,8 +150,8 @@ msgstr "Velkommen! Du er nå logget inn."
 msgid "Which item to display"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:7
-#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.py:19
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:19
 msgid "Project Info"
 msgstr "Prosjektrom informasjon"
 
@@ -281,7 +281,7 @@ msgstr "Hurtigsøk &#8595;"
 msgid "link_manage_personal_portlets"
 msgstr "Rediger personlige infobokser"
 
-#: intranett.policy/intranett/policy/browser/portlets/workspaceinfo.pt:24
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:24
 msgid "Participants are:"
 msgstr "Prosjektdeltakere er:"
 

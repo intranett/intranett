@@ -73,7 +73,7 @@
       <role name="Manager" />
       <role name="Owner" />
     </permission>
-    <permission name="intranett.policy: Add TeamWorkspace" acquire="True">
+    <permission name="intranett.policy: Add ProjectRoom" acquire="True">
       <role name="Site Administrator"/>
       <role name="Manager" />
       <role name="Owner" />

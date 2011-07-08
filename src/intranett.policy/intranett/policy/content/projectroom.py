@@ -19,9 +19,9 @@ from zope.schema.interfaces import IVocabularyFactory
 
 from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import PROJECTNAME
-from intranett.policy.interfaces import ITeamWorkspace
+from intranett.policy.interfaces import IProjectRoom
 
-WorkspaceSchema = ATFolder.schema.copy() + atapi.Schema((
+ProjectRoomSchema = ATFolder.schema.copy() + atapi.Schema((
     atapi.LinesField(
         'members',
         required=False,
@@ -37,12 +37,12 @@ WorkspaceSchema = ATFolder.schema.copy() + atapi.Schema((
 ))
 
 
-class TeamWorkspace(ATFolder):
+class ProjectRoom(ATFolder):
     """A project room for groups of participants"""
 
-    implements(ITeamWorkspace)
-    schema = WorkspaceSchema
-    meta_type = "TeamWorkspace"
+    implements(IProjectRoom)
+    schema = ProjectRoomSchema
+    meta_type = "ProjectRoom"
     security = ClassSecurityInfo()
 
     members = atapi.ATFieldProperty("members")
@@ -79,30 +79,30 @@ class TeamWorkspace(ATFolder):
         value.sort()
         self.Schema().getField('members').set(self, value)
 
-    security.declareProtected(View, 'getWorkspace')
-    def getWorkspace(self):
+    security.declareProtected(View, 'getProjectRoom')
+    def getProjectRoom(self):
         """Return the closest project room"""
         return self
 
-    security.declareProtected(View, 'getWorkspaceState')
-    def getWorkspaceState(self):
+    security.declareProtected(View, 'getProjectRoomState')
+    def getProjectRoomState(self):
         """Return if the project room is private or public"""
         wftool = getToolByName(self, 'portal_workflow')
         return wftool.getInfoFor(self, "review_state")
 
 
-registerATCT(TeamWorkspace, PROJECTNAME)
+registerATCT(ProjectRoom, PROJECTNAME)
 
 
-@indexer(ITeamWorkspace)
-def workspaceMembers(context):
+@indexer(IProjectRoom)
+def projectroomMembers(context):
     return context.members
 
 
-class WorkspaceMembershipRoles(object):
-    """Gives members of a TeamWorkspace appropriate roles in context"""
+class ProjectRoomMembershipRoles(object):
+    """Gives members of a ProjectRoom appropriate roles in context"""
     implements(ILocalRoleProvider)
-    adapts(ITeamWorkspace)
+    adapts(IProjectRoom)
 
     def __init__(self, context):
         self.context = context
@@ -163,8 +163,8 @@ def transitionMovedContent(context, action):
 
     wf = getattr(context, 'portal_workflow', None)
 
-    if getattr(action.oldParent, 'getWorkspaceState', None) is not None:
-        if getattr(action.newParent, 'getWorkspaceState', None) is None:
+    if getattr(action.oldParent, 'getProjectRoomState', None) is not None:
+        if getattr(action.newParent, 'getProjectRoomState', None) is None:
             # If an object is moved out of a project room, take ownership.
             becomeOwner(context)
             restoreOwnerPermissions(context)
@@ -189,7 +189,7 @@ def removeOwnerPermissions(context, action):
     """Remove owner permissions when an object is published in a project room
     """
     if action.action in ('autopublish',):
-        if getattr(context, 'getWorkspaceState', None) is not None:
+        if getattr(context, 'getProjectRoomState', None) is not None:
             for perm in (View, AccessContentsInformation,
                          ModifyPortalContent, ChangeEvents):
                 try:

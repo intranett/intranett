@@ -10,9 +10,9 @@
 
       <span class="portletItemDetails">
         <ul>
-          <li tal:repeat="workspace view/workspaces">
-            <a tal:attributes="href workspace/url"
-               tal:content="workspace/title">Workspace 1</a>
+          <li tal:repeat="projectroom view/projectrooms">
+            <a tal:attributes="href projectroom/url"
+               tal:content="projectroom/title">Project room 1</a>
           </li>
         </ul>
       </span>

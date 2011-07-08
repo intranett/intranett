@@ -2,6 +2,6 @@
 <object name="portal_factory" meta_type="Plone Factory Tool">
   <factorytypes>
     <type portal_type="MembersFolder" />
-    <type portal_type="TeamWorkspace" />
+    <type portal_type="ProjectRoom" />
   </factorytypes>
 </object>

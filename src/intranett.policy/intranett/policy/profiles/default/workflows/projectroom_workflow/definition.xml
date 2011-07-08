@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="workspace_workflow" title="Intranett.no Workflow" description="" state_variable="review_state" initial_state="private" manager_bypass="False">
+<dc-workflow workflow_id="projectroom_workflow" title="Intranett.no Workflow" description="" state_variable="review_state" initial_state="private" manager_bypass="False">
  <permission>Access contents information</permission>
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
- <permission>intranett.policy: Add TeamWorkspace</permission>
+ <permission>intranett.policy: Add ProjectRoom</permission>
  <state state_id="private" title="Private">
   <exit-transition transition_id="auto"/>
   <exit-transition transition_id="publish"/>
@@ -36,7 +36,7 @@
    <permission-role>Reader</permission-role>
    <permission-role>Contributor</permission-role>
   </permission-map>
-  <permission-map name="intranett.policy: Add TeamWorkspace" acquired="False">
+  <permission-map name="intranett.policy: Add ProjectRoom" acquired="False">
   </permission-map>
  </state>
  <state state_id="published" title="Published">
@@ -72,7 +72,7 @@
    <permission-role>Reader</permission-role>
    <permission-role>Member</permission-role>
   </permission-map>
-  <permission-map name="intranett.policy: Add TeamWorkspace" acquired="False">
+  <permission-map name="intranett.policy: Add ProjectRoom" acquired="False">
   </permission-map>
  </state>
  <transition transition_id="auto" title="Trigger automatic transitions" new_state="" trigger="USER" before_script="" after_script="">

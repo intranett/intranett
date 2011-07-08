@@ -2,13 +2,13 @@
 <portlets>
 
   <portlet
-    addview="intranett.policy.portlets.WorkspaceInfo"
+    addview="intranett.policy.portlets.ProjectRoomInfo"
     title="Project Info"
     description="Displays details for the current project room."
     />
 
   <portlet
-    addview="intranett.policy.portlets.MyWorkspaces"
+    addview="intranett.policy.portlets.MyProjectRooms"
     title="My project rooms"
     description="Displays a list of all of your project rooms."
     />
@@ -27,11 +27,11 @@
       <property name="root"></property>
   </assignment>
 
-  <assignment name="workspaceinfo"
+  <assignment name="projectroominfo"
       category="context"
       key="/"
       manager="plone.leftcolumn"
-      type="intranett.policy.portlets.WorkspaceInfo"
+      type="intranett.policy.portlets.ProjectRoomInfo"
       visible="True">
   </assignment>
 

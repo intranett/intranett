@@ -9,5 +9,5 @@ class IMembersFolderId(Interface):
     """A MembersFolder registers its id as a utility."""
 
 
-class ITeamWorkspace(Interface):
-    """TeamWorkspace marker interface."""
+class IProjectRoom(Interface):
+    """ProjectRoom marker interface."""

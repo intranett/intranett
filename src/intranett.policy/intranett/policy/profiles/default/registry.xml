@@ -84,7 +84,7 @@
       <element>locked</element>
       <element>resourceRegistries</element>
       <element>editbar</element>
-      <element>workspace</element>
+      <element>projectroom</element>
     </value>
   </record>
   <record name="plone.app.caching.weakCaching.plone.content.file.etags">

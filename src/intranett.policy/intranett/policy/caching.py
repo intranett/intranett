@@ -22,9 +22,9 @@ class EditBarCookie(object):
         return self.request.cookies.get('editbar_opened', '1')
 
 
-class WorkspaceState(object):
-    """The ``workspace`` etag component, returning 1 if a containing
-    workspace is private, 0 if it is public or if there is no workspace.
+class ProjectRoomState(object):
+    """The ``projectroom`` etag component, returning 1 if a containing
+    projectroom is private, 0 if it is public or if there is no projectroom.
     """
 
     implements(IETagValue)
@@ -35,7 +35,7 @@ class WorkspaceState(object):
         self.request = request
 
     def __call__(self):
-        if getattr(self.published, 'getWorkspaceState', None) is not None:
-            if self.published.getWorkspaceState() == 'private':
+        if getattr(self.published, 'getProjectRoomState', None) is not None:
+            if self.published.getProjectRoomState() == 'private':
                 return '1'
         return '0'

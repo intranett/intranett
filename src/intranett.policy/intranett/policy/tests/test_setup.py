@@ -220,7 +220,7 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         action = portal.portal_actions.object.local_roles
         self.assertEqual(action.getProperty('available_expr'),
-            "python:getattr(object, 'getWorkspace', None) is None")
+            "python:getattr(object, 'getProjectRoom', None) is None")
 
     def test_error_log(self):
         portal = self.layer['portal']

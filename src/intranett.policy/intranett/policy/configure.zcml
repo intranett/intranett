@@ -32,7 +32,7 @@
       layer="intranett.theme.browser.interfaces.IThemeSpecific" />
 
   <adapter factory=".caching.EditBarCookie" name="editbar" />
-  <adapter factory=".caching.WorkspaceState" name="workspace" />
+  <adapter factory=".caching.ProjectRoomState" name="projectroom" />
 
   <adapter
     for=".tools.MemberData
@@ -59,33 +59,33 @@
     permission="plone.app.portlets.ManageOwnPortlets"
     />
 
-  <!-- Team Workspaces -->
+  <!-- project rooms -->
   <adapter
-      factory=".content.workspace.workspaceMembers"
-      name="workspaceMembers"
+      factory=".content.projectroom.projectroomMembers"
+      name="projectroomMembers"
       />
 
   <adapter
-      factory=".content.workspace.WorkspaceMembershipRoles"
+      factory=".content.projectroom.ProjectRoomMembershipRoles"
       />
 
   <subscriber
-      handler=".content.workspace.transitionChildren"
-      for="intranett.policy.interfaces.ITeamWorkspace
+      handler=".content.projectroom.transitionChildren"
+      for="intranett.policy.interfaces.IProjectRoom
            Products.CMFCore.interfaces.IActionSucceededEvent" />
 
   <subscriber
-      handler=".content.workspace.reindexChildren"
-      for="intranett.policy.interfaces.ITeamWorkspace
+      handler=".content.projectroom.reindexChildren"
+      for="intranett.policy.interfaces.IProjectRoom
            Products.Archetypes.interfaces.IObjectEditedEvent" />
 
   <subscriber
-      handler=".content.workspace.transitionMovedContent"
+      handler=".content.projectroom.transitionMovedContent"
       for="Products.ATContentTypes.interfaces.IATContentType
            zope.container.interfaces.IObjectMovedEvent" />
 
   <subscriber
-      handler=".content.workspace.removeOwnerPermissions"
+      handler=".content.projectroom.removeOwnerPermissions"
       for="Products.ATContentTypes.interfaces.IATContentType
            Products.CMFCore.interfaces.IActionSucceededEvent" />
 
