@@ -41,8 +41,6 @@ Changelog
   item views. This solves problems with comments not being shown and changes
   to the navigation tree and portal tabs not being reflected.
 
-- INTRANETT-120: Update to Plone 4.1rc2.
-
 1.2.12 - unreleased
 -------------------
 
