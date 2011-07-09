@@ -574,6 +574,9 @@ body > header nav li a .toolTipArrow {
 .state-private {
   color: #e3005a; }
 
+.state-protected {
+  color: #e3005a; }
+
 #content-core {
   margin-bottom: 1.25em; }
 
