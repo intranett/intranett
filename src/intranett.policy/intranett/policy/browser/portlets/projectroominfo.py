@@ -7,6 +7,7 @@ from zope.i18n import translate
 from zope.interface import implements
 
 from intranett.policy import IntranettMessageFactory as _
+from intranett.policy.utils import get_user_profile_url
 
 
 class IProjectRoomInfo(IPortletDataProvider):
@@ -31,27 +32,31 @@ class Renderer(base.Renderer):
     def update(self):
         if not self.available:
             return
-        mtool = getToolByName(self.context, 'portal_membership')
-        gtool = getToolByName(self.context, 'portal_groups')
+        context = self.context
+        mtool = getToolByName(context, 'portal_membership')
+        gtool = getToolByName(context, 'portal_groups')
         ws = self.context.getProjectRoom()
         self.state = ws.getProjectRoomState()
         self.title = ws.Title()
         result = []
         for name in ws.participants:
+            title = name
+            url = None
             if name == 'AuthenticatedUsers':
-                name = translate(u'Authenticated Users (Virtual Group)',
+                title = translate(u'Authenticated Users (Virtual Group)',
                     domain='plone', context=self.request)
-                result.append(name)
+                result.append(dict(name=name, title=title, url=None))
                 continue
             member = mtool.getMemberById(name)
             if member is not None:
-                name = member.getProperty("fullname") or name
+                title = member.getProperty("fullname") or name
+                url = get_user_profile_url(context, name)
             else:
                 group = gtool.getGroupById(name)
                 if group is not None:
-                    name = group.getProperty('title') or name
-            result.append(name)
-        self.participants = tuple(result)
+                    title = group.getProperty('title') or name
+            result.append(dict(name=name, title=title, url=url))
+        self.participants = result
 
 
 class AddForm(base.AddForm):

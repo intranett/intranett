@@ -23,8 +23,19 @@
 
     <span i18n:translate="">Participants are:</span>
     <ul>
-      <li tal:repeat="participant python:view.participants"
-          tal:content="participant" />
+      <li tal:repeat="info python:view.participants">
+          <tal:user tal:condition="info/url">
+              <a href=""
+                 tal:attributes="href info/url;"
+                 tal:content="info/title">
+                  John Doe
+              </a>
+          </tal:user>
+          <tal:group tal:condition="not:info/url"
+                     tal:content="info/title">
+              Marketing
+          </tal:group>
+      </li>
     </ul>
 
     </dd>

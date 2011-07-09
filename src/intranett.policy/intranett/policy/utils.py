@@ -137,3 +137,5 @@ ModuleSecurityInfo('intranett.policy.utils').declarePublic('getMembersFolderId')
 ModuleSecurityInfo('intranett.policy.utils').declarePublic('getMembersFolder')
 ModuleSecurityInfo('intranett.policy.utils').declarePublic(
     'get_current_user_profile_url')
+ModuleSecurityInfo('intranett.policy.utils').declarePublic(
+    'get_user_profile_url')
