@@ -42,7 +42,7 @@
     interface=".projectroominfo.IProjectRoomInfo"
     assignment=".projectroominfo.Assignment"
     view_permission="zope2.View"
-    edit_permission="plone.app.portlets.ManagePortlets"
+    edit_permission="zope2.ViewManagementScreens"
     renderer=".projectroominfo.Renderer"
     addview=".projectroominfo.AddForm"
     editview=".projectroominfo.EditForm"
