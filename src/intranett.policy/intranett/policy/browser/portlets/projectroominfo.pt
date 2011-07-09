@@ -1,4 +1,4 @@
-<dl class="portlet portletSingleItem"
+<dl class="portlet portletProjectroomInfo"
     tal:condition="view/available"
     i18n:domain="intranett">
 

@@ -3,6 +3,7 @@ from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.formlib import form as formlibform
+from zope.i18n import translate
 from zope.interface import implements
 
 from intranett.policy import IntranettMessageFactory as _
@@ -30,12 +31,27 @@ class Renderer(base.Renderer):
     def update(self):
         if not self.available:
             return
-        mt = getToolByName(self.context, 'portal_membership')
+        mtool = getToolByName(self.context, 'portal_membership')
+        gtool = getToolByName(self.context, 'portal_groups')
         ws = self.context.getProjectRoom()
         self.state = ws.getProjectRoomState()
         self.title = ws.Title()
-        self.participants = tuple(x.getProperty("fullname") or x.getId()
-            for x in (mt.getMemberById(x) for x in ws.participants))
+        result = []
+        for name in ws.participants:
+            if name == 'AuthenticatedUsers':
+                name = translate(u'Authenticated Users (Virtual Group)',
+                    domain='plone', context=self.request)
+                result.append(name)
+                continue
+            member = mtool.getMemberById(name)
+            if member is not None:
+                name = member.getProperty("fullname") or name
+            else:
+                group = gtool.getGroupById(name)
+                if group is not None:
+                    name = group.getProperty('title') or name
+            result.append(name)
+        self.participants = tuple(result)
 
 
 class AddForm(base.AddForm):
