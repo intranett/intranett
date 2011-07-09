@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-07-07 08:32+0000\n"
+"POT-Creation-Date: 2011-07-09 12:57+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:17
+msgid "All intranet users can see this project room. Only project participants can edit content."
+msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:76
 msgid "Assign personal portlets"
@@ -35,7 +39,7 @@ msgid "Departments:"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/user.pt:58
-#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:44
+#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:47
 msgid "Edit profile"
 msgstr ""
 
@@ -63,15 +67,32 @@ msgstr ""
 msgid "Modify portlet"
 msgstr ""
 
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.pt:6
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.py:20
+msgid "My project rooms"
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
 msgid "News Highlight"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:23
+msgid "Only project participants can see or edit content."
+msgstr ""
+
+#: intranett.policy/intranett/policy/content/projectroom.py:32
+msgid "Participants"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:29
+msgid "Participants are:"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
 msgid "Personal folder"
 msgstr ""
 
-#: intranett.policy/intranett/policy/setuphandlers.py:117
+#: intranett.policy/intranett/policy/setuphandlers.py:109
 msgid "Personal folders"
 msgstr ""
 
@@ -83,6 +104,15 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:20
+msgid "Project Info"
+msgstr ""
+
+#: intranett.policy/intranett/policy/profiles/default/types/ProjectRoom.xml
+msgid "Project room"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
@@ -107,6 +137,10 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
+msgstr ""
+
+#: intranett.policy/intranett/policy/content/projectroom.py:33
+msgid "Users who have access to the project room."
 msgstr ""
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14

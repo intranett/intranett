@@ -574,6 +574,9 @@ body > header nav li a .toolTipArrow {
 .state-private {
   color: #e3005a; }
 
+.state-protected {
+  color: #e3005a; }
+
 #content-core {
   margin-bottom: 1.25em; }
 
@@ -1763,6 +1766,10 @@ a.delete {
 .portletAssignments form select {
   display: block;
   margin: 0.62em 0; }
+
+.portletProjectroomInfo ul li {
+  list-style: disc;
+  margin-left: 1.25em; }
 
 /* @group Navigation portlet */
 .portletNavigationTree,

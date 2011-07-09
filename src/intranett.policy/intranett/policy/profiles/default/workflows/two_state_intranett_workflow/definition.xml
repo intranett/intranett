@@ -1,47 +1,17 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="intranett_workflow" title="Intranett.no Workflow" description="" state_variable="review_state" initial_state="private" manager_bypass="False">
+<dc-workflow workflow_id="two_state_intranett_workflow" title="Intranett.no Workflow" description="" state_variable="review_state" initial_state="initial" manager_bypass="False">
  <permission>Access contents information</permission>
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
- <state state_id="private" title="Private">
+ <state state_id="initial" title="Transitory state">
   <exit-transition transition_id="auto"/>
   <exit-transition transition_id="autoprotect"/>
   <exit-transition transition_id="autopublish"/>
-  <exit-transition transition_id="publish"/>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Reader</permission-role>
-   <permission-role>Contributor</permission-role>
-  </permission-map>
-  <permission-map name="Change portal events" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Reader</permission-role>
-   <permission-role>Contributor</permission-role>
-  </permission-map>
  </state>
  <state state_id="protected" title="Protected">
   <exit-transition transition_id="auto"/>
   <exit-transition transition_id="autopublish"/>
-  <exit-transition transition_id="hide"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -50,9 +20,9 @@
    <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="Change portal events" acquired="False">
-   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
+   <permission-role>Editor</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
@@ -62,15 +32,14 @@
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
  </state>
  <state state_id="published" title="Published">
   <exit-transition transition_id="auto"/>
   <exit-transition transition_id="autoprotect"/>
-  <exit-transition transition_id="hide"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -117,20 +86,7 @@
  <transition transition_id="autopublish" title="Publish project room content" new_state="published" trigger="AUTOMATIC" before_script="" after_script="notifyActionSucceeded">
   
   <guard>
-   <guard-expression>python:(getattr(here, 'getProjectRoomState', None) is not None and here.getProjectRoomState()=='published')</guard-expression>
-  </guard>
- </transition>
- <transition transition_id="hide" title="Make content private" new_state="private" trigger="USER" before_script="" after_script="">
-  <action url="%(content_url)s/content_status_modify?workflow_action=hide" category="workflow" icon="">Make private</action>
-  <guard>
-   <guard-permission>Modify portal content</guard-permission>
-   <guard-expression>python:(getattr(here, 'getProjectRoomState', None) is None)</guard-expression>
-  </guard>
- </transition>
- <transition transition_id="publish" title="Publish content" new_state="published" trigger="USER" before_script="" after_script="">
-  <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
-  <guard>
-   <guard-permission>Modify portal content</guard-permission>
+   <guard-expression>python:(getattr(here, 'getProjectRoomState', None) is None or here.getProjectRoomState()=='published')</guard-expression>
   </guard>
  </transition>
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
@@ -180,5 +136,5 @@
   <guard>
   </guard>
  </variable>
- <script script_id="notifyActionSucceeded" type="Script (Python)" filename="workflows/intranett_workflow/scripts/notifyActionSucceeded.py" module="" function=""/>
+ <script script_id="notifyActionSucceeded" type="Script (Python)" filename="workflows/two_state_intranett_workflow/scripts/notifyActionSucceeded.py" module="" function=""/>
 </dc-workflow>

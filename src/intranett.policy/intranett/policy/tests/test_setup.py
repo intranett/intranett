@@ -150,6 +150,9 @@ class TestSiteSetup(IntranettTestCase):
         from plone.portlets.interfaces import IPortletManager
         left = queryUtility(IPortletManager, name='plone.leftcolumn')
         available = set([p.addview for p in left.getAddablePortletTypes()])
+        # the ProjectRoomInfo portlet is always assigned to the root and
+        # shouldn't be manageable by the customer
+        available.remove('intranett.policy.portlets.ProjectRoomInfo')
 
         from plone.app.portlets.browser import editmanager
         renderer = editmanager.EditPortletManagerRenderer(
@@ -215,6 +218,12 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         acl = aq_get(portal, 'acl_users')
         self.assertEquals(acl.session.getProperty('secure'), True)
+
+    def test_sharing_action_condition(self):
+        portal = self.layer['portal']
+        action = portal.portal_actions.object.local_roles
+        self.assertEqual(action.getProperty('available_expr'),
+            "python:getattr(object, 'getProjectRoom', None) is None")
 
     def test_error_log(self):
         portal = self.layer['portal']

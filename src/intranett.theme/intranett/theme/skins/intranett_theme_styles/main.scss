@@ -627,6 +627,9 @@ body > header nav li a .toolTipArrow {
 .state-private {
     color: $logored;
 }
+.state-protected {
+    color: $logored;
+}
 #content-core {
     margin-bottom: $larger-size;
 }
@@ -1859,6 +1862,10 @@ a.delete {
 .portletAssignments form select {
     display: block;
     margin: 0.62em 0;
+}
+.portletProjectroomInfo ul li {
+    list-style: disc;
+    margin-left: 1.25em;
 }
 
 /* @group Navigation portlet */

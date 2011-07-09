@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-07 08:32+0000\n"
+"POT-Creation-Date: 2011-07-09 12:57+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: Norwegian\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: intranett\n"
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:17
+msgid "All intranet users can see this project room. Only project participants can edit content."
+msgstr "Alle intranett brukere kan se dette prosjektrommet. Kun prosjektdeltakere kan redigere innhold."
 
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:76
 msgid "Assign personal portlets"
@@ -35,7 +39,7 @@ msgid "Departments:"
 msgstr "Avdelinger:"
 
 #: intranett.policy/intranett/policy/browser/templates/user.pt:58
-#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:44
+#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:47
 msgid "Edit profile"
 msgstr "Endre profil"
 
@@ -63,15 +67,32 @@ msgstr "Administrér brukere"
 msgid "Modify portlet"
 msgstr "Endre infoboks"
 
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.pt:6
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.py:20
+msgid "My project rooms"
+msgstr "Mitt Prosjektrom"
+
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
 msgid "News Highlight"
 msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:23
+msgid "Only project participants can see or edit content."
+msgstr "Bare prosjektdeltakere kan se eller redigere innhold."
+
+#: intranett.policy/intranett/policy/content/projectroom.py:32
+msgid "Participants"
+msgstr "Prosjektdeltakere"
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:29
+msgid "Participants are:"
+msgstr "Prosjektdeltakere er:"
 
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
 msgid "Personal folder"
 msgstr "Personlige mappe"
 
-#: intranett.policy/intranett/policy/setuphandlers.py:117
+#: intranett.policy/intranett/policy/setuphandlers.py:109
 msgid "Personal folders"
 msgstr "Personlige mapper"
 
@@ -84,6 +105,15 @@ msgstr ""
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
 msgstr "Bygget med intranett.no"
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:20
+msgid "Project Info"
+msgstr "Prosjektrom informasjon"
+
+#: intranett.policy/intranett/policy/profiles/default/types/ProjectRoom.xml
+msgid "Project room"
+msgstr "Prosjektrom"
 
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
 msgid "Show employees from all departments"
@@ -108,6 +138,10 @@ msgstr ""
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
 msgstr "Dette nettstedet er bygget med intranett.no"
+
+#: intranett.policy/intranett/policy/content/projectroom.py:33
+msgid "Users who have access to the project room."
+msgstr "Deltakere som har tilgang til prosjektrommet"
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14
 msgid "Version: ${number}"

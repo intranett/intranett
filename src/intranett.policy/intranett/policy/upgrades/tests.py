@@ -182,13 +182,13 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
     def after_30(self):
         portal = self.layer['portal']
         wtool = getToolByName(portal, 'portal_workflow')
-        self.assertTrue('one_state_intranett_workflow' in wtool)
+        self.assertTrue('two_state_intranett_workflow' in wtool)
         self.assertEqual(wtool.getChainFor('File'),
-            ('one_state_intranett_workflow',))
+            ('one_state_intranett_workflow', ))
         self.assertEqual(wtool.getChainFor('Image'),
-            ('one_state_intranett_workflow',))
+            ('one_state_intranett_workflow', ))
         self.assertEqual(wtool.getChainFor('Discussion Item'),
-            ('one_state_intranett_workflow',))
+            ('one_state_intranett_workflow', ))
 
     def after_31(self):
         perm_id = '_Review_comments_Permission'
@@ -236,3 +236,24 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertFalse(prefix + '.css' in css.getResourcesDict().keys())
         js = getToolByName(portal, 'portal_javascripts')
         self.assertFalse(prefix + '.min.js' in js.getResourcesDict().keys())
+
+    def after_35(self):
+        portal = self.layer['portal']
+        wtool = getToolByName(portal, 'portal_workflow')
+        self.assertTrue('projectroom_workflow' in wtool)
+        self.assertIn('ProjectRoom', portal.portal_types)
+        self.assertIn('ProjectRoom', portal.portal_factory.getFactoryTypes())
+        self.assertEqual(wtool.getDefaultChain(), ('intranett_workflow',))
+        self.assertEqual(wtool.getChainForPortalType("Document"), ('intranett_workflow',))
+        self.assertEqual(wtool.getChainForPortalType("ProjectRoom"), ('projectroom_workflow',))
+        self.assertTrue('two_state_intranett_workflow' in wtool)
+        self.assertEqual(wtool.getChainFor('File'),
+            ('two_state_intranett_workflow', ))
+        self.assertEqual(wtool.getChainFor('Image'),
+            ('two_state_intranett_workflow', ))
+        self.assertEqual(wtool.getChainFor('Discussion Item'),
+            ('one_state_intranett_workflow', ))
+
+        action = portal.portal_actions.object.local_roles
+        self.assertEqual(action.getProperty('available_expr'),
+                "python:getattr(object, 'getProjectRoom', None) is None")

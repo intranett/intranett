@@ -28,3 +28,7 @@ msgstr ""
 #: widget label of ImageWidget - description "Will be shown in the news listing, and in the news item itself. Image will be scaled to a sensible size."
 msgid "label_news_image"
 msgstr ""
+
+# used in project participants widget
+msgid "Authenticated Users (Virtual Group)"
+msgstr ""

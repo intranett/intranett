@@ -4,6 +4,8 @@ Changelog
 1.3.0 - unreleased
 ------------------
 
+- INTRANETT-237: Added project rooms.
+
 - Update to PloneFormGen bugfix release to fix quick-edit deletion of fields.
 
 - INTRANETT-196: Disabled half-finished highlight portlets.
