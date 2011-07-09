@@ -4,7 +4,7 @@ Changelog
 1.3.0 - 2011-07-09
 ------------------
 
-- INTRANETT-237: Added project rooms.
+- INTRANETT-237: Add project rooms.
 
 - Update to PloneFormGen bugfix release to fix quick-edit deletion of fields.
 
