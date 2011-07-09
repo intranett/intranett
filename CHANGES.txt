@@ -41,10 +41,6 @@ Changelog
   item views. This solves problems with comments not being shown and changes
   to the navigation tree and portal tabs not being reflected.
 
-1.2.12 - unreleased
--------------------
-
-
 1.2.11 - 2011-06-28
 -------------------
 
