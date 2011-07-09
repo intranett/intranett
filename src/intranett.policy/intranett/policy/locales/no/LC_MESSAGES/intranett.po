@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-08 12:52+0000\n"
+"POT-Creation-Date: 2011-07-09 12:57+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: intranett\n"
 
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:12
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:17
 msgid "All intranet users can see this project room. Only project participants can edit content."
 msgstr "Alle intranett brukere kan se dette prosjektrommet. Kun prosjektdeltakere kan redigere innhold."
 
@@ -76,7 +76,7 @@ msgstr "Mitt Prosjektrom"
 msgid "News Highlight"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:18
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:23
 msgid "Only project participants can see or edit content."
 msgstr "Bare prosjektdeltakere kan se eller redigere innhold."
 
@@ -84,7 +84,7 @@ msgstr "Bare prosjektdeltakere kan se eller redigere innhold."
 msgid "Participants"
 msgstr "Prosjektdeltakere"
 
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:24
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:29
 msgid "Participants are:"
 msgstr "Prosjektdeltakere er:"
 
@@ -107,7 +107,7 @@ msgid "Powered by intranett.no"
 msgstr "Bygget med intranett.no"
 
 #: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:18
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:20
 msgid "Project Info"
 msgstr "Prosjektrom informasjon"
 

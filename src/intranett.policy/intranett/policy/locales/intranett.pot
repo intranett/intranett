@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-07-08 12:52+0000\n"
+"POT-Creation-Date: 2011-07-09 12:57+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:12
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:17
 msgid "All intranet users can see this project room. Only project participants can edit content."
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr ""
 msgid "News Highlight"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:18
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:23
 msgid "Only project participants can see or edit content."
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Participants"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:24
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:29
 msgid "Participants are:"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgid "Powered by intranett.no"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:18
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:20
 msgid "Project Info"
 msgstr ""
 

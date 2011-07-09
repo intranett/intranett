@@ -32,11 +32,3 @@ msgstr ""
 # used in project participants widget
 msgid "Authenticated Users (Virtual Group)"
 msgstr ""
-
-# portlet title
-msgid "My project rooms"
-msgstr ""
-
-# portlet title
-msgid "Project Info"
-msgstr ""

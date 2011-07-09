@@ -1,16 +1,20 @@
 <?xml version="1.0"?>
-<portlets>
+<portlets
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plone">
 
   <portlet
     addview="intranett.policy.portlets.ProjectRoomInfo"
     title="Project Info"
-    description="Displays details for the current project room."
+    description=""
+    i18n:attributes="title"
     />
 
   <portlet
     addview="intranett.policy.portlets.MyProjectRooms"
     title="My project rooms"
-    description="Displays a list of all of your project rooms."
+    description=""
+    i18n:attributes="title"
     />
 
   <assignment name="navigation"

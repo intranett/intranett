@@ -23,6 +23,7 @@ class Assignment(base.Assignment):
 class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('projectroominfo.pt')
+    portletTitle = _("Project Info")
 
     @property
     def available(self):
