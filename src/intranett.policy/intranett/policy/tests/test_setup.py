@@ -150,6 +150,9 @@ class TestSiteSetup(IntranettTestCase):
         from plone.portlets.interfaces import IPortletManager
         left = queryUtility(IPortletManager, name='plone.leftcolumn')
         available = set([p.addview for p in left.getAddablePortletTypes()])
+        # the ProjectRoomInfo portlet is always assigned to the root and
+        # shouldn't be manageable by the customer
+        available.remove('intranett.policy.portlets.ProjectRoomInfo')
 
         from plone.app.portlets.browser import editmanager
         renderer = editmanager.EditPortletManagerRenderer(
