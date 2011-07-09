@@ -2,7 +2,6 @@ from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.formlib import form as formlibform
 from zope.i18n import translate
 from zope.interface import implements
 
@@ -61,14 +60,7 @@ class Renderer(base.Renderer):
         self.participants = result
 
 
-class AddForm(base.AddForm):
+class AddForm(base.NullAddForm):
 
-    form_fields = formlibform.Fields(IProjectRoomInfo)
-
-    def create(self, data):
+    def create(self):
         return Assignment()
-
-
-class EditForm(base.EditForm):
-
-    form_fields = formlibform.Fields(IProjectRoomInfo)

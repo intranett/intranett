@@ -3,7 +3,6 @@ from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.formlib import form as formlibform
 from zope.interface import implements
 
 from intranett.policy import IntranettMessageFactory as _
@@ -38,14 +37,7 @@ class Renderer(base.Renderer):
             for x in catalog(query))
 
 
-class AddForm(base.AddForm):
+class AddForm(base.NullAddForm):
 
-    form_fields = formlibform.Fields(IMyProjectRooms)
-
-    def create(self, data):
+    def create(self):
         return Assignment()
-
-
-class EditForm(base.EditForm):
-
-    form_fields = formlibform.Fields(IMyProjectRooms)

@@ -45,7 +45,6 @@
     edit_permission="zope2.ViewManagementScreens"
     renderer=".projectroominfo.Renderer"
     addview=".projectroominfo.AddForm"
-    editview=".projectroominfo.EditForm"
     />
 
   <plone:portlet
@@ -56,7 +55,6 @@
     edit_permission="plone.app.portlets.ManageOwnPortlets"
     renderer=".myprojectrooms.Renderer"
     addview=".myprojectrooms.AddForm"
-    editview=".myprojectrooms.EditForm"
     />
 
 </configure>
