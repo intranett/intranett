@@ -58,7 +58,7 @@ class ProjectRoom(ATFolder):
         """Return true if user_id is in participant source."""
         try:
             self.participantsource.getTermByToken(user_id)
-        except LookupError:
+        except LookupError: # pragma: no cover
             return False
         return True
 

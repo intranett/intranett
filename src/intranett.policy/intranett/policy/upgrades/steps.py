@@ -344,7 +344,7 @@ def add_personal_folder(context):
             create_personal_folder(portal, user_id)
     actions = getToolByName(context, 'portal_actions')
     user_category = actions.user
-    if 'manage_users' in user_category:
+    if 'manage_users' in user_category: # pragma: no cover
         del user_category['manage_users']
 
 
@@ -362,13 +362,13 @@ def remove_crappy_portlets(context):
     css = getToolByName(context, 'portal_css')
     ids = css.getResourcesDict().keys()
     css_id = prefix + '.css'
-    if css_id in ids:
+    if css_id in ids: # pragma: no cover
         css.unregisterResource(css_id)
         css.cookResources()
     js = getToolByName(context, 'portal_javascripts')
     ids = js.getResourcesDict().keys()
     js_id = prefix + '.min.js'
-    if js_id in ids:
+    if js_id in ids: # pragma: no cover
         js.unregisterResource(js_id)
         js.cookResources()
 
