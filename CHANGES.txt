@@ -31,7 +31,7 @@ Changelog
 
 - Update to Zope 2.13.8 to fix privilege escalation vulnerability.
 
-- Increase Nginx `client_max_body_size` from 10mb to 50mb.
+- Increase Nginx `client_max_body_size` from 10mb to 500mb.
 
 - Increase `zodb-cache-size` to 10000 now that we save memory via DateTime.
 
