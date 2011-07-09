@@ -11,11 +11,11 @@ Changelog
 - INTRANETT-239: Add personal folders.
 
 - INTRANETT-240: Add file size validator and provide help texts stating the
-  50mb upload limit.
+  50mb upload limit, while limiting Nginx to 500mb.
 
-- INTRANETT-223: The content menu should be visible by default.
+- INTRANETT-223: The content menu is visible by default.
 
-- INTRANETT-228: Open external links, including the link to hjelp.intranett.no
+- INTRANETT-228: Open external links, including the link to `hjelp.intranett.no`
   in a new window.
 
 - INTRANETT-214: Site admins can delete comments.
@@ -30,8 +30,6 @@ Changelog
 - INTRANETT-235: Automatically log in the user after account activation.
 
 - Update to Zope 2.13.8 to fix privilege escalation vulnerability.
-
-- Increase Nginx `client_max_body_size` from 10mb to 500mb.
 
 - Increase `zodb-cache-size` to 10000 now that we save memory via DateTime.
 
