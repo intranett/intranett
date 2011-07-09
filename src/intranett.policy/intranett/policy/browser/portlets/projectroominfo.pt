@@ -5,6 +5,11 @@
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
         <span i18n:translate="">Project Info</span>
+        <span>
+            <a href=""
+               tal:attributes="href view/project_url;"
+               tal:content="view/title">Project 47</a>
+        </span>
         <span class="portletTopRight"></span>
     </dt>
     <dd class="portletItem odd">

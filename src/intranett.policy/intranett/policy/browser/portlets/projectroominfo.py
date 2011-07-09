@@ -35,11 +35,12 @@ class Renderer(base.Renderer):
         context = self.context
         mtool = getToolByName(context, 'portal_membership')
         gtool = getToolByName(context, 'portal_groups')
-        ws = self.context.getProjectRoom()
-        self.state = ws.getProjectRoomState()
-        self.title = ws.Title()
+        room = self.context.getProjectRoom()
+        self.state = room.getProjectRoomState()
+        self.title = room.Title()
+        self.project_url = room.absolute_url()
         result = []
-        for name in ws.participants:
+        for name in room.participants:
             title = name
             url = None
             if name == 'AuthenticatedUsers':
