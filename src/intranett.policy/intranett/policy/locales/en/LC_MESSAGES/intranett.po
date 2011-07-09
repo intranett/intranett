@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-07-09 12:57+0000\n"
+"POT-Creation-Date: 2011-07-09 13:23+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,7 +68,7 @@ msgid "Modify portlet"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.pt:6
-#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.py:20
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.py:19
 msgid "My project rooms"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgid "Powered by intranett.no"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
-#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:20
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:19
 msgid "Project Info"
 msgstr ""
 
