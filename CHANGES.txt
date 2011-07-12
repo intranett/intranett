@@ -4,6 +4,8 @@ Changelog
 1.3.2 - unreleased
 ------------------
 
+- Switch to using yuicompressor for JS/CSS optimization, saves about 30kb on
+  each page load.
 
 1.3.1 - 2011-07-12
 ------------------
