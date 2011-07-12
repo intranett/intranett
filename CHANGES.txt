@@ -4,6 +4,8 @@ Changelog
 1.3.1 - unreleased
 ------------------
 
+- INTRANETT-246: Add ProjectRoom to portal_factory.
+
 - Removed ZODB cache warming code - it didn't actually help in practice.
 
 1.3.0 - 2011-07-09

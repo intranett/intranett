@@ -257,3 +257,17 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         action = portal.portal_actions.object.local_roles
         self.assertEqual(action.getProperty('available_expr'),
                 "python:getattr(object, 'getProjectRoom', None) is None")
+
+    def before_36(self):
+        # simulate what happened on the actual live servers
+        portal = self.layer['portal']
+        ftool = getToolByName(portal, 'portal_factory')
+        types = set(ftool.getFactoryTypes().keys())
+        types.remove('ProjectRoom')
+        ftool.manage_setPortalFactoryTypes(listOfTypeIds=list(types))
+
+    def after_36(self):
+        portal = self.layer['portal']
+        ftool = getToolByName(portal, 'portal_factory')
+        types = set(ftool.getFactoryTypes().keys())
+        self.assertTrue('ProjectRoom' in types)

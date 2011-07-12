@@ -384,3 +384,12 @@ def install_project_rooms(context):
     remap_workflow(site,
                    type_ids=('File', 'Image'),
                    chain=('two_state_intranett_workflow', ))
+
+
+@upgrade_to(36)
+def fix_small_problems(context):
+    # add type to factory tool
+    ftool = getToolByName(context, 'portal_factory')
+    types = set(ftool.getFactoryTypes().keys())
+    types.add('ProjectRoom')
+    ftool.manage_setPortalFactoryTypes(listOfTypeIds=list(types))
