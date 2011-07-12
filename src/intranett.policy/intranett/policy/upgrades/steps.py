@@ -350,13 +350,7 @@ def add_personal_folder(context):
 
 @upgrade_to(34)
 def remove_crappy_portlets(context):
-    from plone.portlets.interfaces import IPortletManager
-    sm = getSiteManager()
-    names = ('intranett.policy.portlets.NewsHighlight',
-             'intranett.policy.portlets.EventHighlight',
-             'intranett.policy.portlets.ContentHighlight')
-    for name in names:
-        sm.unregisterUtility(provided=IPortletManager, name=name)
+    # Remove portlets -- the code tried to remove named portlet managers :(
     # Remove CSS/JS
     prefix = '++resource++plone.formwidget.autocomplete/jquery.autocomplete'
     css = getToolByName(context, 'portal_css')
@@ -393,3 +387,11 @@ def fix_small_problems(context):
     types = set(ftool.getFactoryTypes().keys())
     types.add('ProjectRoom')
     ftool.manage_setPortalFactoryTypes(listOfTypeIds=list(types))
+    # remove crappy portlets
+    from plone.portlets.interfaces import IPortletType
+    sm = getSiteManager()
+    names = ('intranett.policy.portlets.NewsHighlight',
+             'intranett.policy.portlets.EventHighlight',
+             'intranett.policy.portlets.ContentHighlight')
+    for name in names:
+        sm.unregisterUtility(provided=IPortletType, name=name)

@@ -222,13 +222,6 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertEqual(personal_folder.Creator(), 'fred')
 
     def after_34(self):
-        sm = getSiteManager()
-        registrations = [r.name for r in sm.registeredUtilities()
-                         if IPortletManager == r.provided]
-        self.assertFalse('intranett.policy.portlets.NewsHighlight' in registrations)
-        self.assertFalse('intranett.policy.portlets.EventHighlight' in registrations)
-        self.assertFalse('intranett.policy.portlets.ContentHighlight' in registrations)
-
         portal = self.layer['portal']
         prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
             'autocomplete'
@@ -271,3 +264,9 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         ftool = getToolByName(portal, 'portal_factory')
         types = set(ftool.getFactoryTypes().keys())
         self.assertTrue('ProjectRoom' in types)
+        sm = getSiteManager()
+        regs = [r.name for r in sm.registeredUtilities()
+                if IPortletType == r.provided]
+        self.assertFalse('intranett.policy.portlets.NewsHighlight' in regs)
+        self.assertFalse('intranett.policy.portlets.EventHighlight' in regs)
+        self.assertFalse('intranett.policy.portlets.ContentHighlight' in regs)
