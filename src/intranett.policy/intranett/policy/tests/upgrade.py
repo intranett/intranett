@@ -69,6 +69,7 @@ class UpgradeTests(object):
         # There's a couple files where we get diffs for ordering changes,
         # but the order is not important
         expected_diff = set([
+            'browserlayer.xml', # fails randomly on ordering
             'portlets.xml',
             'registry.xml',
             'types/FieldsetFolder.xml',
