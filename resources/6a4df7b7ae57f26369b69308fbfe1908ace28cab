@@ -1,0 +1,1 @@
+jQuery(function(a){if(a("form div.error :input:first").focus().length){return}a("form.enableAutoFocus :input:not(.formTabs):visible:first").focus()});
