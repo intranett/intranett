@@ -89,6 +89,4 @@
       for="Products.ATContentTypes.interfaces.IATContentType
            Products.CMFCore.interfaces.IActionSucceededEvent" />
 
-  <subscriber handler=".utils.warmupZODBCache" />
-
 </configure>
