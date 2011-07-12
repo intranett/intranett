@@ -395,3 +395,11 @@ def fix_small_problems(context):
              'intranett.policy.portlets.ContentHighlight')
     for name in names:
         sm.unregisterUtility(provided=IPortletType, name=name)
+
+
+@upgrade_to(37)
+def fix_resource_compression_settings(context):
+    loadMigrationProfile(context, 'profile-intranett.theme:default',
+        steps=('jsregistry', ))
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('jsregistry', ))

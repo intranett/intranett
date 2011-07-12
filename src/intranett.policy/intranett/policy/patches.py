@@ -11,6 +11,17 @@ def allow_anonymous_activation():
     addValidSubparts('activate')
 
 
+def optimize_rr_packing():
+    from Products.ResourceRegistries.tools import CSSRegistry
+    from Products.ResourceRegistries.tools import JSRegistry
+    from Products.ResourceRegistries.tools import KSSRegistry
+    from .compress import css, js
+    CSSRegistry.CSSRegistryTool._compressCSS = css
+    JSRegistry.JSRegistryTool._compressJS = js
+    KSSRegistry.KSSRegistryTool._compressKSS = css
+
+
 def apply():
     allow_anonymous_robotstxt()
     allow_anonymous_activation()
+    optimize_rr_packing()

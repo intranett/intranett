@@ -270,3 +270,7 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertFalse('intranett.policy.portlets.NewsHighlight' in regs)
         self.assertFalse('intranett.policy.portlets.EventHighlight' in regs)
         self.assertFalse('intranett.policy.portlets.ContentHighlight' in regs)
+
+    def after_37(self):
+        # tested by GS export diff
+        pass
