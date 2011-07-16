@@ -9,10 +9,7 @@
                 <a i18n:translate="tabs_home"
                    tal:attributes="href view/navigation_root_url">Home</a>
             </li>
-            <metal:breadcrumbs 
-                  tal:repeat="crumb breadcrumbs"
-                  tal:attributes="dir python:is_rtl and 'rtl' or 'ltr';
-                                  id string:breadcrumbs-${repeat/crumb/number}">
+            <metal:breadcrumbs tal:repeat="crumb breadcrumbs">
                 <li tal:define="is_last repeat/crumb/end;
                                 url crumb/absolute_url;
                                 title crumb/Title">
