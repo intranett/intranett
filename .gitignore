@@ -23,6 +23,7 @@ src/*/*.egg-info
 src/collective.*
 src/plone.*
 src/plutonian
+template_cache/*
 tmp
 var
 .*
