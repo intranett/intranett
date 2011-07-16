@@ -1,1 +1,0 @@
-var jq=jQuery;if(typeof cssQuery==="undefined"){var cssQuery=function(a,b){return jQuery.makeArray(jQuery(a,b))}};

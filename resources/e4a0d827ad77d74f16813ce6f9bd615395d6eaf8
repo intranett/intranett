@@ -1,1 +1,0 @@
-function setActiveStyleSheet(b,a){jQuery("link[rel*=style][title]").attr("disabled",true).find("[title="+b+"]").attr("disabled",false);if(a){createCookie("wstyle",b,365)}}jQuery(function(){var a=readCookie("wstyle");if(a){setActiveStyleSheet(a,0)}});

@@ -1,1 +1,0 @@
-function toggleSelect(b,g,a,c){var f,e,d;f=g||"ids:list";e=b.isSelected;if(e===undefined){e=Boolean(a)}b.isSelected=!e;jQuery(b).attr("src",portal_url+"/select_"+(e?"all":"none")+"_icon.png");d=c?jQuery(document.forms[c]):jQuery(document);d.find(":checkbox[name="+f+"]").attr("checked",!e)};

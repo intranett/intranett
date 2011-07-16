@@ -1,1 +1,0 @@
-function setBaseFontSize(b,a){var c=jQuery("body");if(a){c.removeClass("smallText").removeClass("largeText");createCookie("fontsize",b,365)}c.addClass(b)}jQuery(function(b){var a=readCookie("fontsize");if(a){setBaseFontSize(a,0)}});
