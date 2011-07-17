@@ -407,7 +407,7 @@ class TestFunctionalUserSearch(IntranettFunctionalTestCase):
                                     'email': 'info@jarn.com'})
         transaction.commit()
         browser.open(portal.absolute_url())
-        browser.getControl(name='SearchableText').value = 'Døe'
+        browser.getControl(name='SearchableText').value = 'Bob'
         browser.getForm(name='searchform').submit()
         self.failUnless('Bob Døe' in browser.contents)
         self.failUnless('Øngønør' in browser.contents)
