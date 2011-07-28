@@ -1,13 +1,22 @@
-#!/sbin/runscript
+#!/bin/bash
 
 start() {
-    ebegin "Starting jarn/munin/supervisord"
     /srv/jarn/munin/bin/supervisord -c /srv/jarn/munin/etc/supervisord.conf
-    eend ${?}
 }
 
 stop() {
-    ebegin "Stopping jarn/munin/supervisord"
     /srv/jarn/munin/bin/supervisorctl -c /srv/jarn/munin/etc/supervisord.conf shutdown
-    eend ${?}
 }
+
+case "$1" in
+  start)
+    start
+    exit $?
+    ;;
+  stop)
+    stop
+    exit $?
+    ;;
+esac
+
+exit 1
