@@ -1,0 +1,13 @@
+#!/sbin/runscript
+
+start() {
+    ebegin "Starting jarn/munin/supervisord"
+    /srv/jarn/munin/bin/supervisord -c /srv/jarn/munin/etc/supervisord.conf
+    eend ${?}
+}
+
+stop() {
+    ebegin "Stopping jarn/munin/supervisord"
+    /srv/jarn/munin/bin/supervisorctl -c /srv/jarn/munin/etc/supervisord.conf shutdown
+    eend ${?}
+}

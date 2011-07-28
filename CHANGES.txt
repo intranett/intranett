@@ -4,6 +4,9 @@ Changelog
 1.3.2 - unreleased
 ------------------
 
+- Implement new `init.d` service start/stop approach following
+  http://gocept.net/doc/tutorials/userinit.html
+
 - Restore scored search results.
 
 - Update to Plone 4.1 final.
