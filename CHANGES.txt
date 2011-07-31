@@ -4,6 +4,8 @@ Changelog
 1.3.2 - unreleased
 ------------------
 
+- Add back BTree enhancements via `experimental.btree`.
+
 - Implement new `init.d` service start/stop approach following
   http://gocept.net/doc/tutorials/userinit.html
 
