@@ -1,0 +1,14 @@
+<h1 tal:define="site_properties context/portal_properties/site_properties;
+                site_title site_properties/site_title|string:intranett.no;
+                "><a metal:define-macro="portal_logo"
+   id="portal-logo"
+   title="Home"
+   accesskey="1"
+   i18n:domain="plone"
+   i18n:attributes="title"
+   tal:attributes="href view/navigation_root_url;
+                   title site_title">
+   <img src="logo.jpg" alt="" tal:condition="view/logo_tag"
+        tal:replace="structure view/logo_tag" />
+   <span tal:condition="not:view/logo_tag" tal:content="site_title">site's title</span>
+   </a></h1>

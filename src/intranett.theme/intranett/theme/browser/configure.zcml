@@ -33,7 +33,6 @@
       permission="zope2.View"
       layer=".interfaces.IThemeSpecific"
       />
-      
   <browser:viewletManager
         name="intranett.abovecolumns"
         provides=".interfaces.IAboveColumns"
@@ -64,6 +63,15 @@
       name="intranett.collapse.contentviews"
       manager="plone.app.layout.viewlets.interfaces.IContentViews"
       template="templates/collapsible_contentviews.pt"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+      />
+
+  <!-- The logo -->
+  <browser:viewlet
+      name="plone.logo"
+      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+      class=".viewlets.IntranettLogoViewlet"
       layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
       />
