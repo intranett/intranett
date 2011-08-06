@@ -4,6 +4,8 @@ Changelog
 1.3.2 - unreleased
 ------------------
 
+- Disable debug HTTP headers by default.
+
 - Set gzip compression level to 7.
 
 - Disable SSLv2 in Nginx and disable ephemeral Diffie-Hellman SSL ciphers.
