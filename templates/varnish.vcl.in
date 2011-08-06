@@ -77,9 +77,8 @@ sub vcl_fetch {
 sub vcl_deliver {
     call restore_cache_control_header;
     call rewrite_age;
-    remove resp.http.Age;
-    remove resp.http.Via;
     remove resp.http.X-Varnish;
+    remove resp.http.X-Varnish-Age;
     remove resp.http.X-Cache-Rule;
     remove resp.http.X-Cache-Operation;
 }
