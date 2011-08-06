@@ -10,6 +10,7 @@ from Products.CMFCore.permissions import AccessContentsInformation
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.WorkflowCore import WorkflowException
 from zope.component import adapts
 from zope.component import getUtility
 from zope.interface import implements
@@ -182,8 +183,11 @@ def transitionMovedContent(context, action):
                 removeOwnerPermissions(context, action)
                 return
 
-    # In all other cases the automatic transitions do the right thing
-    wf.doActionFor(context, "auto")
+    # In all other cases the automatic transitions do the right thing.
+    try:
+        wf.doActionFor(context, "auto")
+    except WorkflowException:
+        pass # This workflow is not ProjectRoom aware.
 
 
 def removeOwnerPermissions(context, action):

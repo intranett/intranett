@@ -33,17 +33,17 @@
                         <tal:status content="status">[status]</tal:status><br />
                     </span>
                     <span class="discreet">
-                    <tal:block tal:condition="contract/total|nothing">
-                      Total hours:
-                      <span tal:replace="contract/total">100h</span>
-                      &mdash; Last week:
-                    </tal:block>
                     <tal:block tal:condition="contract/hours|nothing">
-                        <a tal:content="contract/hours" tal:attributes="title python:'%s - %s' % (contract['start'], contract['end']); href python:'%s/worklog?%s' % (contract['url'], ztu.make_query(period='week', person='all', group_by='person', start=contract['start']))">hours</a>h,
+                        <a tal:content="contract/hours"
+                           tal:attributes="title python:'%s - %s' % (contract['start'], contract['end']); href python:'%s/worklog?%s' % (contract['url'], ztu.make_query(period='week', person='all', group_by='person', start=contract['start']))">hours</a>h,
                         <span tal:content="contract/persons">persons</span>
                     </tal:block>
                     <tal:block tal:condition="not:contract/hours|nothing">
                         No hours spent last week
+                    </tal:block>
+                    <tal:block tal:condition="contract/total|nothing">
+                      &mdash; total:
+                      <span tal:replace="contract/total">100h</span>
                     </tal:block>
                     </span>
                 </span>

@@ -4,6 +4,23 @@ Changelog
 1.3.2 - unreleased
 ------------------
 
+- Disable haproxy application sessions.
+
+- Disable debug HTTP headers by default.
+
+- Set gzip compression level to 7.
+
+- Disable SSLv2 in Nginx and disable ephemeral Diffie-Hellman SSL ciphers.
+
+- INTRANETT-250: Use a textual logo if no customer logo can be found.
+
+- Add back BTree enhancements via `experimental.btree`.
+
+- Implement new `init.d` service start/stop approach following
+  http://gocept.net/doc/tutorials/userinit.html
+
+- Restore scored search results.
+
 - Update to Plone 4.1 final.
 
 - Switch to using yuicompressor for JS/CSS optimization, saves about 30kb on

@@ -403,3 +403,9 @@ def fix_resource_compression_settings(context):
         steps=('jsregistry', ))
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('jsregistry', ))
+
+
+@upgrade_to(38)
+def counter_plone_js_upgrade(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    steps=('jsregistry', ))

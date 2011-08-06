@@ -338,7 +338,8 @@ body > header h1 {
 
 a#portal-logo {
   display: block;
-  color: #5E5E5E; }
+  color: #5E5E5E;
+  font-family: LatoRegular, Helvetica, Arial, sans-serif; }
   a#portal-logo img {
     display: block; }
 
