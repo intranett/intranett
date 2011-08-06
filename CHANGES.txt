@@ -6,6 +6,8 @@ Changelog
 
 - Disable SSLv2 in Nginx and disable ephemeral Diffie-Hellman SSL ciphers.
 
+- INTRANETT-250: Use a textual logo if no customer logo can be found.
+
 - Add back BTree enhancements via `experimental.btree`.
 
 - Implement new `init.d` service start/stop approach following
