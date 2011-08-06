@@ -4,6 +4,8 @@ Changelog
 1.3.2 - unreleased
 ------------------
 
+- Add Chameleon template engine to Jarn intranet.
+
 - Disable haproxy application sessions.
 
 - Disable debug HTTP headers by default.
