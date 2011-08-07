@@ -6,11 +6,6 @@
       i18n:domain="plone">
 
 <head>
-    <metal:js fill-slot="javascript_head_slot">
-        <script type="text/javascript" src=""
-                tal:attributes="src string:${context/portal_url}/login.js">
-        </script>
-    </metal:js>
     <metal:block fill-slot="top_slot"
                  tal:define="dummy python:request.set('disable_border',1);
                              disable_column_one python:request.set('disable_plone.leftcolumn',1);
@@ -54,17 +49,6 @@
                         target request/target|nothing;
                         target python:test(target in ('_parent', '_top', '_blank', '_self'), target, None);
                         ztu modules/ZTUtils;">
-
-            <dl class="portalMessage error"
-                id="enable_cookies_message"
-                style="display:none">
-                <dt i18n:translate="">
-                    Error
-                </dt>
-                <dd i18n:translate="enable_cookies_message_before_login">
-                    Cookies are not enabled. You must enable cookies before you can log in.
-                </dd>
-            </dl>
 
             <div tal:condition="python: not auth" i18n:translate="login_form_disabled">
                 Since cookie authentication is disabled, cookie-based login is not available.
