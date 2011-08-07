@@ -10,7 +10,8 @@
                         site_properties context/portal_properties/site_properties;
                         ajax_load request/ajax_load | nothing;
                         dummy python:request.RESPONSE.setHeader('X-UA-Compatible', 'IE=edge,chrome=1');
-                        dummy python:request.RESPONSE.setHeader('X-Frame-Options', 'SAMEORIGIN');">
+                        dummy python:request.RESPONSE.setHeader('X-Frame-Options', 'SAMEORIGIN');
+                        dummy python:request.RESPONSE.setHeader('Strict-Transport-Security', 'max-age=2592000');">
 <metal:block define-slot="top_slot" />
 
 <tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
