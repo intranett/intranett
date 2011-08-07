@@ -7,9 +7,16 @@
 
 <head>
     <metal:block fill-slot="top_slot"
-                 tal:define="dummy python:request.set('disable_border',1);
+                 tal:define="dummy python:request.set('disable_plone.resources',1);
+                             dummy python:request.set('disable_plone.spinner',1);
+                             dummy python:request.set('disable_border',1);
                              disable_column_one python:request.set('disable_plone.leftcolumn',1);
                              disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+
+    <metal:css fill-slot="style_slot">
+        <tal:styles replace="structure provider:plone.resourceregistries.styles" />
+    </metal:css>
+
 </head>
 
 <body>

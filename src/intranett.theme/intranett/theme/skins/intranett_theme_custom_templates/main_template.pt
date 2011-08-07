@@ -239,7 +239,9 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
             <div class="contentAlignment"><div tal:replace="structure provider:plone.portalfooter" /></div>
         </footer>
 
-        <div id="kss-spinner" tal:condition="not:ajax_load">
+        <div id="kss-spinner"
+             tal:define="disable python:request.get('disable_plone.spinner', 0);"
+             tal:condition="python: not (ajax_load or disable)">
           <img tal:attributes="src string:${portal_url}/spinner.gif" alt=""
                width="16" height="16" />
         </div>
