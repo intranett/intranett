@@ -16,10 +16,11 @@ OPEN_STATES = ['open', 'in-progress','active','unassigned','deferred','assigned'
 
 WORKTYPES=('development', 'administration', 'managing', 'user-interface')
 
-DEFAULT_BUGDET_CATEGORIES = (('Billable','Billable'),
+DEFAULT_BUGDET_CATEGORIES = (('Billable', 'Billable'),
+                             ('Unbillable', 'Unbillable'),
                              ('Administration', 'Administration'),
-                             ('SkillAndBrand','Skill and brand investment'),
-                             ('Sales','Sales')
+                             ('SkillAndBrand', 'Skill and brand investment'),
+                             ('Sales', 'Sales')
                              )
 
 BILLABLE_TYPES = (

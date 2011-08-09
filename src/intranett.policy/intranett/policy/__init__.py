@@ -19,7 +19,9 @@ def initialize(context):
 
     # Register content
     from intranett.policy.content import membersfolder
+    from intranett.policy.content import projectroom
     membersfolder # pyflakes
+    projectroom # pyflakes
 
     content_types, constructors, ftis = atapi.process_types(
         atapi.listTypes(config.PROJECTNAME),

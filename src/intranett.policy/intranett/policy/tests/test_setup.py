@@ -34,15 +34,6 @@ class TestSiteSetup(IntranettTestCase):
         ids = set([a['id'] for a in actions])
         self.assertEquals(ids, set(['accessibility', 'support']))
 
-    def test_manage_users_action(self):
-        portal = self.layer['portal']
-        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
-        at = getToolByName(portal, 'portal_actions')
-        actions = at.listActionInfos(object=portal,
-                                     categories=('user', ))
-        ids = set([a['id'] for a in actions])
-        self.assertTrue('manage_users' in ids)
-
     def test_clamav(self):
         portal = self.layer['portal']
         ptool = getToolByName(portal, 'portal_properties')
@@ -159,6 +150,9 @@ class TestSiteSetup(IntranettTestCase):
         from plone.portlets.interfaces import IPortletManager
         left = queryUtility(IPortletManager, name='plone.leftcolumn')
         available = set([p.addview for p in left.getAddablePortletTypes()])
+        # the ProjectRoomInfo portlet is always assigned to the root and
+        # shouldn't be manageable by the customer
+        available.remove('intranett.policy.portlets.ProjectRoomInfo')
 
         from plone.app.portlets.browser import editmanager
         renderer = editmanager.EditPortletManagerRenderer(
@@ -171,7 +165,7 @@ class TestSiteSetup(IntranettTestCase):
 
     def test_content(self):
         # The members folder is always present
-        expected = set(['users'])
+        expected = set(['personal', 'users'])
         # This content is only created in tests
         test_content = set(['test-folder'])
         portal = self.layer['portal']
@@ -224,6 +218,12 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         acl = aq_get(portal, 'acl_users')
         self.assertEquals(acl.session.getProperty('secure'), True)
+
+    def test_sharing_action_condition(self):
+        portal = self.layer['portal']
+        action = portal.portal_actions.object.local_roles
+        self.assertEqual(action.getProperty('available_expr'),
+            "python:getattr(object, 'getProjectRoom', None) is None")
 
     def test_error_log(self):
         portal = self.layer['portal']

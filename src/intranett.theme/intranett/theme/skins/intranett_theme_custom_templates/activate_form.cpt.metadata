@@ -1,0 +1,7 @@
+[validators]
+validators = validate_pwreset_userid, validate_pwreset_password
+
+[actions]
+action.success = traverse_to:string:activate_action
+action.invalid = traverse_to:string:pwreset_invalid
+action.expired = traverse_to:string:pwreset_expired

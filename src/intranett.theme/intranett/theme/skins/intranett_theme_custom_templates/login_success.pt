@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<body>
+
+<metal:main fill-slot="main"
+     tal:define="isAnon portal_state/anonymous;
+                 redirect python:context.REQUEST.response.redirect;">
+
+  <tal:auth condition="not:isAnon"
+            define="dummy python:redirect(context.portal_url())">
+  </tal:auth>
+
+  <tal:anon condition="isAnon">
+      <div metal:use-macro="context/login_failed/macros/login_failed" />
+  </tal:anon>
+
+</metal:main>
+
+</body>
+</html>

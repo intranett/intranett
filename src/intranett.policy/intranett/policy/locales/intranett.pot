@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-05-16 09:46+0000\n"
+"POT-Creation-Date: 2011-07-09 13:23+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:17
+msgid "All intranet users can see this project room. Only project participants can edit content."
+msgstr ""
 
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:76
 msgid "Assign personal portlets"
@@ -34,6 +38,11 @@ msgstr ""
 msgid "Departments:"
 msgstr ""
 
+#: intranett.policy/intranett/policy/browser/templates/user.pt:58
+#: intranett.theme/intranett/theme/jbot/plone.app.users.browser.account-panel.pt:47
+msgid "Edit profile"
+msgstr ""
+
 #: intranett.policy/intranett/policy/profiles/default/types/MemberData.xml
 msgid "Employee"
 msgstr ""
@@ -50,7 +59,7 @@ msgstr ""
 msgid "Item"
 msgstr ""
 
-#: intranett.policy/intranett/policy/profiles/default/actions.xml
+#: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:18
 msgid "Manage users"
 msgstr ""
 
@@ -58,8 +67,33 @@ msgstr ""
 msgid "Modify portlet"
 msgstr ""
 
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.pt:6
+#: intranett.policy/intranett/policy/browser/portlets/myprojectrooms.py:19
+msgid "My project rooms"
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:38
 msgid "News Highlight"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:23
+msgid "Only project participants can see or edit content."
+msgstr ""
+
+#: intranett.policy/intranett/policy/content/projectroom.py:32
+msgid "Participants"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:29
+msgid "Participants are:"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
+msgid "Personal folder"
+msgstr ""
+
+#: intranett.policy/intranett/policy/setuphandlers.py:109
+msgid "Personal folders"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:20
@@ -70,6 +104,15 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "Powered by intranett.no"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.pt:7
+#: intranett.policy/intranett/policy/browser/portlets/projectroominfo.py:19
+msgid "Project Info"
+msgstr ""
+
+#: intranett.policy/intranett/policy/profiles/default/types/ProjectRoom.xml
+msgid "Project room"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
@@ -96,6 +139,10 @@ msgstr ""
 msgid "This site is powered by intranett.no"
 msgstr ""
 
+#: intranett.policy/intranett/policy/content/projectroom.py:33
+msgid "Users who have access to the project room."
+msgstr ""
+
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:14
 msgid "Version: ${number}"
 msgstr ""
@@ -104,12 +151,21 @@ msgstr ""
 msgid "View your intranet"
 msgstr ""
 
+#: intranett.policy/intranett/policy/browser/activation.py:39
+msgid "Welcome! You are now logged in."
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:26
 msgid "Which item to display"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:23
 msgid "You can select the item to be highlighted by searching on its title."
+msgstr ""
+
+#. Default: "Welcome ${fullname}, Thank you for trying out intranett.no free of charge for 30 days. Your intranet is available under the address: ${hostname} Your username is ‘${member}’. Please activate your account and choose a password by visiting: ${set_password} (You must activate your account before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those — And please don't hesitate to contact us at support@intranett.no or via phone at 21018911 if there's something we can help you with. With kind regards, intranett.no-team"
+#: intranett.policy/intranett/policy/browser/templates/activation-mail.pt:21
+msgid "activation-mail-body"
 msgstr ""
 
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
@@ -143,13 +199,13 @@ msgid "label_delete_portrait"
 msgstr ""
 
 #. Default: "Department"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:85
+#: intranett.policy/intranett/policy/browser/templates/user.pt:92
 #: intranett.policy/intranett/policy/userdataschema.py:48
 msgid "label_department"
 msgstr ""
 
 #. Default: "E-mail"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:99
+#: intranett.policy/intranett/policy/browser/templates/user.pt:106
 #: intranett.policy/intranett/policy/userdataschema.py:20
 msgid "label_email"
 msgstr ""
@@ -160,13 +216,13 @@ msgid "label_full_name"
 msgstr ""
 
 #. Default: "Location"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:92
+#: intranett.policy/intranett/policy/browser/templates/user.pt:99
 #: intranett.policy/intranett/policy/userdataschema.py:53
 msgid "label_location"
 msgstr ""
 
 #. Default: "Mobile phone"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:116
+#: intranett.policy/intranett/policy/browser/templates/user.pt:123
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:95
 #: intranett.policy/intranett/policy/userdataschema.py:31
 msgid "label_mobile"
@@ -178,7 +234,7 @@ msgid "label_no_results_found"
 msgstr ""
 
 #. Default: "Phone"
-#: intranett.policy/intranett/policy/browser/templates/user.pt:108
+#: intranett.policy/intranett/policy/browser/templates/user.pt:115
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:101
 #: intranett.policy/intranett/policy/userdataschema.py:26
 msgid "label_phone"

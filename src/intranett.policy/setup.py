@@ -43,6 +43,7 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'collective.ATClamAV',
+          'experimental.btree',
           'iw.rejectanonymous',
           'munin.zope',
           'PIL',
@@ -51,6 +52,7 @@ setup(name='intranett.policy',
           'plone.app.discussion',
           'plone.app.testing',
           'plone.formwidget.autocomplete',
+          'plone.principalsource',
           'plutonian',
           'Products.CMFQuickInstallerTool',
           'Products.GenericSetup',
@@ -65,5 +67,6 @@ setup(name='intranett.policy',
       entry_points="""
       [zopectl.command]
       create_site = intranett.policy.commands:create_site
+      create_site_admin = intranett.policy.commands:create_site_admin
       upgrade = intranett.policy.commands:upgrade
       """)

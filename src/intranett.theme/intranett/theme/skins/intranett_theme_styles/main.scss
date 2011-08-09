@@ -341,31 +341,25 @@ body > header > .contentAlignment {
 #portal-personaltools {
     width: $width-full;
     font-size: $smaller-size;
-
-    li, dt, dd, ul {
+    margin-left: 0;
+    white-space: nowrap;
+    list-style: none;
+    display: inline;
+    li {
         list-style: none;
         display: inline;
-    }
-    dd ul {
-        margin-left: 0;
-    }
-    dt a, li a {
         padding: 0 $smaller-size;
         display: inline-block;
         line-height: 1.4em;
         margin: 0.3em 0;
-    }
-    dt a:link, li a:link, dt a:visited, li a:visited {
-        color: #e6e6e6;
-    }
-    dt a:hover, li a:hover {
-        color: #fff;
-    }
-    ul {
-        white-space: nowrap;
+        &, a:link, a:visited {
+            color: #e6e6e6;
+        }
+        a:hover {
+            color: #fff;
+        }
     }
 }
-
 
 /* @end */
 
@@ -384,6 +378,7 @@ body > header h1 {
 a#portal-logo {
     display: block;
     color: #5E5E5E;
+    font-family: $regular-web-font;
 
     img {
         display: block;
@@ -631,6 +626,9 @@ body > header nav li a .toolTipArrow {
 /* @group Content */
 
 .state-private {
+    color: $logored;
+}
+.state-protected {
     color: $logored;
 }
 #content-core {
@@ -1213,6 +1211,9 @@ textarea.mce_editable {
 }
 body.template-plone\.portlet\.static\.Static textarea.mce_editable {
     height: 20em;
+}
+body.template-personal-information textarea.mce_editable {
+    height: 15em;
 }
 .fieldRequired {
     color: #f44;
@@ -1862,6 +1863,10 @@ a.delete {
 .portletAssignments form select {
     display: block;
     margin: 0.62em 0;
+}
+.portletProjectroomInfo ul li {
+    list-style: disc;
+    margin-left: 1.25em;
 }
 
 /* @group Navigation portlet */

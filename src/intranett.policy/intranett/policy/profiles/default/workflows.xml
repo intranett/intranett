@@ -1,12 +1,33 @@
 <?xml version="1.0"?>
 <object name="portal_workflow">
  <object name="intranett_workflow" meta_type="Workflow"/>
+ <object name="projectroom_workflow" meta_type="Workflow"/>
+ <object name="one_state_intranett_workflow" meta_type="Workflow"/>
+ <object name="two_state_intranett_workflow" meta_type="Workflow"/>
  <bindings>
   <default>
    <bound-workflow workflow_id="intranett_workflow"/>
   </default>
+  <type type_id="Document">
+   <bound-workflow workflow_id="(Default)" />
+  </type>
+  <type type_id="Folder">
+   <bound-workflow workflow_id="(Default)" />
+  </type>
+  <type type_id="Topic">
+   <bound-workflow workflow_id="(Default)" />
+  </type>
   <type type_id="Discussion Item">
-   <bound-workflow workflow_id="one_state_workflow"/>
+   <bound-workflow workflow_id="one_state_intranett_workflow"/>
+  </type>
+  <type type_id="File">
+   <bound-workflow workflow_id="two_state_intranett_workflow"/>
+  </type>
+  <type type_id="Image">
+   <bound-workflow workflow_id="two_state_intranett_workflow"/>
+  </type>
+  <type type_id="ProjectRoom">
+   <bound-workflow workflow_id="projectroom_workflow"/>
   </type>
  </bindings>
 </object>

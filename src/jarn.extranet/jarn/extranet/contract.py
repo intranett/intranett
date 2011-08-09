@@ -210,11 +210,17 @@ class Contract(ATFolder):
     security.declareProtected(VIEW_PERMISSION, 'getBudgetCategory')
     def getBudgetCategory(self):
         """The budget category."""
+        ctype = self.getContract_type()
+        if ctype == 'internal':
+            return 'Unbillable'
         return 'Billable'
 
     security.declareProtected(VIEW_PERMISSION, 'getDefaultBudgetCategory')
     def getDefaultBudgetCategory(self):
         """The default budget category."""
+        ctype = self.getContract_type()
+        if ctype == 'internal':
+            return 'Unbillable'
         return 'Billable'
 
 registerType(Contract, PROJECTNAME)

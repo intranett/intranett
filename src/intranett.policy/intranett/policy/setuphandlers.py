@@ -1,6 +1,7 @@
 from Acquisition import aq_get
 from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
+from zope.component import queryMultiAdapter
 from zope.component import queryUtility
 from zope.i18n import translate
 from zope.interface import alsoProvides
@@ -28,14 +29,6 @@ def setup_locale(site):
 
     calendar = getToolByName(site, "portal_calendar")
     calendar.firstweekday = 0
-
-
-def ensure_workflow(site):
-    # Force the default content into the correct workflow
-    from plone.app.workflow.remap import remap_workflow
-    remap_workflow(site,
-                   type_ids=('Document', 'Folder', 'Topic'),
-                   chain=('intranett_workflow', ))
 
 
 def disable_contentrules(site):
@@ -107,6 +100,38 @@ def setup_members_folder(site):
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
 
 
+def setup_personal_folder(site):
+    from plone.portlets.interfaces import ILocalPortletAssignmentManager
+    from plone.portlets.interfaces import IPortletManager
+    from Products.CMFPlone.utils import _createObjectByType
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    from intranett.policy import IntranettMessageFactory as _
+    personal_folder_title = _(u'Personal folders')
+    title = translate(personal_folder_title, target_language=site.Language())
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    _createObjectByType('Folder', portal, id=PERSONAL_FOLDER_ID,
+        title=title)
+    # we fill the request with some values in commands.py create_site
+    # don't let those interfere in the processForm call
+    request = aq_get(portal, 'REQUEST', None)
+    if request is not None:
+        request.form['title'] = title
+    folder = portal[PERSONAL_FOLDER_ID]
+    folder.setExcludeFromNav(True)
+    folder.processForm() # Fire events
+    workflow = getToolByName(portal, 'portal_workflow')
+    workflow.doActionFor(folder, 'publish')
+    # Block all portlets
+    for manager_name in ('plone.leftcolumn', 'plone.rightcolumn'):
+        manager = queryUtility(IPortletManager, name=manager_name)
+        if manager is not None:
+            assignable = queryMultiAdapter((folder, manager),
+                ILocalPortletAssignmentManager)
+            assignable.setBlacklistStatus('context', True)
+            assignable.setBlacklistStatus('group', True)
+            assignable.setBlacklistStatus('content_type', True)
+
+
 def enable_secure_cookies(context):
     acl = aq_get(context, 'acl_users')
     acl.session._updateProperty('secure', True)
@@ -127,6 +152,12 @@ def enable_link_by_uid(site):
     tiny = getToolByName(site, 'portal_tinymce')
     tiny.link_using_uids = True
     install_mimetype_and_transforms(site)
+
+
+def open_ext_links_in_new_window(site):
+    jstool = getToolByName(site, 'portal_javascripts')
+    jstool.getResource('mark_special_links.js').setEnabled(True)
+    jstool.cookResources()
 
 
 def restrict_siteadmin(site):
@@ -168,7 +199,6 @@ def various(context):
     site = context.getSite()
     set_profile_version(site)
     setup_locale(site)
-    ensure_workflow(site)
     disable_contentrules(site)
     disallow_sendto(site)
     disable_collections(site)
@@ -176,7 +206,9 @@ def various(context):
     setup_default_groups(site)
     setup_reject_anonymous(site)
     setup_members_folder(site)
+    setup_personal_folder(site)
     enable_secure_cookies(site)
     ignore_link_integrity_exceptions(site)
     enable_link_by_uid(site)
+    open_ext_links_in_new_window(site)
     restrict_siteadmin(site)

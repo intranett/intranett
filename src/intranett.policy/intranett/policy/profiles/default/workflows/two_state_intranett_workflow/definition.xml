@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="two_state_intranett_workflow" title="Intranett.no Workflow" description="" state_variable="review_state" initial_state="initial" manager_bypass="False">
+ <permission>Access contents information</permission>
+ <permission>Change portal events</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <state state_id="initial" title="Transitory state">
+  <exit-transition transition_id="auto"/>
+  <exit-transition transition_id="autoprotect"/>
+  <exit-transition transition_id="autopublish"/>
+ </state>
+ <state state_id="protected" title="Protected">
+  <exit-transition transition_id="auto"/>
+  <exit-transition transition_id="autopublish"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Editor</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Editor</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="published" title="Published">
+  <exit-transition transition_id="auto"/>
+  <exit-transition transition_id="autoprotect"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Member</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Member</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="auto" title="Trigger automatic transitions" new_state="" trigger="USER" before_script="" after_script="">
+  
+  <guard>
+   <guard-permission>Modify portal content</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="autoprotect" title="Protect project room content" new_state="protected" trigger="AUTOMATIC" before_script="" after_script="notifyActionSucceeded">
+  
+  <guard>
+   <guard-expression>python:(getattr(here, 'getProjectRoomState', None) is not None and here.getProjectRoomState()=='private')</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="autopublish" title="Publish project room content" new_state="published" trigger="AUTOMATIC" before_script="" after_script="notifyActionSucceeded">
+  
+  <guard>
+   <guard-expression>python:(getattr(here, 'getProjectRoomState', None) is None or here.getProjectRoomState()=='published')</guard-expression>
+  </guard>
+ </transition>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>Previous transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+  <description>Comment about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>When the previous transition was performed</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="notifyActionSucceeded" type="Script (Python)" filename="workflows/two_state_intranett_workflow/scripts/notifyActionSucceeded.py" module="" function=""/>
+</dc-workflow>

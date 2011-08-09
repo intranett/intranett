@@ -308,23 +308,22 @@ body > header > .contentAlignment {
 
 #portal-personaltools {
   width: 97.917%;
-  font-size: 0.76em; }
-  #portal-personaltools li, #portal-personaltools dt, #portal-personaltools dd, #portal-personaltools ul {
+  font-size: 0.76em;
+  margin-left: 0;
+  white-space: nowrap;
+  list-style: none;
+  display: inline; }
+  #portal-personaltools li {
     list-style: none;
-    display: inline; }
-  #portal-personaltools dd ul {
-    margin-left: 0; }
-  #portal-personaltools dt a, #portal-personaltools li a {
+    display: inline;
     padding: 0 0.76em;
     display: inline-block;
     line-height: 1.4em;
     margin: 0.3em 0; }
-  #portal-personaltools dt a:link, #portal-personaltools li a:link, #portal-personaltools dt a:visited, #portal-personaltools li a:visited {
-    color: #e6e6e6; }
-  #portal-personaltools dt a:hover, #portal-personaltools li a:hover {
-    color: #fff; }
-  #portal-personaltools ul {
-    white-space: nowrap; }
+    #portal-personaltools li, #portal-personaltools li a:link, #portal-personaltools li a:visited {
+      color: #e6e6e6; }
+    #portal-personaltools li a:hover {
+      color: #fff; }
 
 /* @end */
 /* @group Logo */
@@ -339,7 +338,8 @@ body > header h1 {
 
 a#portal-logo {
   display: block;
-  color: #5E5E5E; }
+  color: #5E5E5E;
+  font-family: LatoRegular, Helvetica, Arial, sans-serif; }
   a#portal-logo img {
     display: block; }
 
@@ -573,6 +573,9 @@ body > header nav li a .toolTipArrow {
 
 /* @group Content */
 .state-private {
+  color: #e3005a; }
+
+.state-protected {
   color: #e3005a; }
 
 #content-core {
@@ -1142,6 +1145,9 @@ textarea.mce_editable {
 
 body.template-plone\.portlet\.static\.Static textarea.mce_editable {
   height: 20em; }
+
+body.template-personal-information textarea.mce_editable {
+  height: 15em; }
 
 .fieldRequired {
   color: #f44;
@@ -1761,6 +1767,10 @@ a.delete {
 .portletAssignments form select {
   display: block;
   margin: 0.62em 0; }
+
+.portletProjectroomInfo ul li {
+  list-style: disc;
+  margin-left: 1.25em; }
 
 /* @group Navigation portlet */
 .portletNavigationTree,
