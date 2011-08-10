@@ -1,0 +1,9 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <utility
+    name="collective.amberjack.core.toursroot"
+    factory=".utils.ToursRoot"
+    />
+
+</configure>
