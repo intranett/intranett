@@ -68,6 +68,11 @@ def disable_portlets(site):
             p._p_changed = True
 
 
+def setup_amberjack(site):
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    setattr(portal.portal_amberjack, 'sandbox', True)
+
+
 def setup_default_groups(site):
     gtool = getToolByName(site, 'portal_groups')
     # We could add more groups like this:
@@ -210,6 +215,7 @@ def various(context):
     disallow_sendto(site)
     disable_collections(site)
     disable_portlets(site)
+    setup_amberjack(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
     setup_members_folder(site)
