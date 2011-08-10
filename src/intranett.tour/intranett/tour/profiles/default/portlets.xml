@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<portlets
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="plone"> <!-- plone domain is required -->
+
+ <!-- Remove default amberjack portlet at root -->
+
+ <assignment
+     remove="True"
+     name="amberjack-choice-portlet"
+     category="context"
+     key="/"
+     manager="plone.leftcolumn"
+     type="collective.amberjack.portlet.AmberjackChoicePortlet">
+ </assignment>
+
+
+</portlets>

@@ -1,4 +1,5 @@
 from Acquisition import aq_get
+from plone.portlets.interfaces import IPortletType
 from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryMultiAdapter
@@ -53,7 +54,6 @@ def disable_collections(site):
 
 
 def disable_portlets(site):
-    from plone.portlets.interfaces import IPortletType
     from zope.component import getUtilitiesFor
 
     disabled = ['portlets.Calendar', 'portlets.Classic', 'portlets.Login',
@@ -130,6 +130,13 @@ def setup_personal_folder(site):
             assignable.setBlacklistStatus('context', True)
             assignable.setBlacklistStatus('group', True)
             assignable.setBlacklistStatus('content_type', True)
+
+    # Assign amberjack portlet
+    portlet = queryUtility(IPortletType,
+         name='collective.amberjack.portlet.AmberjackChoicePortlet')
+    mapping = folder.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    addview.createAndAdd(data={})
 
 
 def enable_secure_cookies(context):
