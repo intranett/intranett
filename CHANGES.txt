@@ -8,7 +8,7 @@ Changelog
 
 - Modified login procedure to skip the `login_success` page.
 
-- Add Chameleon template engine to Jarn intranet.
+- Enable Chameleon template engine.
 
 - Disable haproxy application sessions.
 
