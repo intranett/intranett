@@ -278,3 +278,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
     def after_38(self):
         # tested by GS export diff
         pass
+
+    def after_39(self):
+        portal = self.layer['portal']
+        at = getToolByName(portal, 'portal_amberjack')
+        self.assertTrue(at.sandbox)
+        personal = portal['personal']
+        mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        self.assertTrue('amberjack-choice-portlet-skinid' in mapping)

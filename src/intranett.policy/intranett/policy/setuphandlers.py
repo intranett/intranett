@@ -68,11 +68,6 @@ def disable_portlets(site):
             p._p_changed = True
 
 
-def setup_amberjack(site):
-    portal = getToolByName(site, 'portal_url').getPortalObject()
-    setattr(portal.portal_amberjack, 'sandbox', True)
-
-
 def setup_default_groups(site):
     gtool = getToolByName(site, 'portal_groups')
     # We could add more groups like this:
@@ -136,7 +131,13 @@ def setup_personal_folder(site):
             assignable.setBlacklistStatus('group', True)
             assignable.setBlacklistStatus('content_type', True)
 
+
+def setup_amberjack(site):
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    setattr(portal.portal_amberjack, 'sandbox', True)
     # Assign amberjack portlet
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    folder = portal[PERSONAL_FOLDER_ID]
     portlet = queryUtility(IPortletType,
          name='collective.amberjack.portlet.AmberjackChoicePortlet')
     mapping = folder.restrictedTraverse('++contextportlets++plone.leftcolumn')
@@ -215,11 +216,11 @@ def various(context):
     disallow_sendto(site)
     disable_collections(site)
     disable_portlets(site)
-    setup_amberjack(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
     setup_members_folder(site)
     setup_personal_folder(site)
+    setup_amberjack(site)
     enable_secure_cookies(site)
     ignore_link_integrity_exceptions(site)
     enable_link_by_uid(site)
