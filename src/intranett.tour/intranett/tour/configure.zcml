@@ -4,7 +4,7 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:collective.amberjack="http://namespaces.plone.org/collective.amberjack.core"
-    i18n_domain="intranett.tour">
+    i18n_domain="collective.amberjack.core">
 
   <include package="collective.amberjack.core" />
   <include package="collective.amberjack.core" file="meta.zcml" />
