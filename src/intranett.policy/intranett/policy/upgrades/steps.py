@@ -414,13 +414,7 @@ def counter_plone_js_upgrade(context):
 @upgrade_to(39)
 def install_amberjack(context):
     loadMigrationProfile(context, 'profile-intranett.tour:default')
-    portal = getToolByName(context, 'portal_url').getPortalObject()
-    setattr(portal.portal_amberjack, 'sandbox', True)
-    # Assign amberjack portlet
-    from plone.portlets.interfaces import IPortletType
-    portlet = queryUtility(IPortletType,
-         name='collective.amberjack.portlet.AmberjackChoicePortlet')
-    personal = portal['personal']
-    mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
-    addview = mapping.restrictedTraverse('+/' + portlet.addview)
-    addview.createAndAdd(data={})
+    from intranett.policy.setuphandlers import setup_amberjack
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    setup_amberjack(site)
