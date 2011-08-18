@@ -143,7 +143,7 @@ def setup_amberjack(site):
     mapping = folder.restrictedTraverse('++contextportlets++plone.leftcolumn')
     addview = mapping.restrictedTraverse('+/' + portlet.addview)
     addview.createAndAdd(data={
-        'user_title':u'amberjack',
+        'user_title':u'Tutorials',
         'tours': [u'01_basic_add_and_publish_a_folder-add-and-publish',
                   u'02_basic_add_and_publish_a_page-add-and-publish-a',
                   u'03_basic_add_and_publish_a_news_item-add-and',
