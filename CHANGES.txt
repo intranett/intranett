@@ -4,6 +4,9 @@ Changelog
 1.3.2 - unreleased
 ------------------
 
+- Changed authentication cookies to have a timeout instead of being browser
+  session based.
+
 - Update to latest Chameleon, Zope 2 and ZTK releases.
 
 - Optimize login form to avoid JavaScript, `spinner.gif` and KSS resources.

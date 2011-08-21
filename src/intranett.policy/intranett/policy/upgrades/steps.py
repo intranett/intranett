@@ -176,8 +176,8 @@ def install_users_folder(context):
 
 @upgrade_to(22)
 def enable_secure_cookies(context):
-    acl = aq_get(context, 'acl_users')
-    acl.session._updateProperty('secure', True)
+    from intranett.policy.setuphandlers import enable_secure_cookies
+    enable_secure_cookies(context)
 
 
 @upgrade_to(23)
@@ -409,3 +409,11 @@ def fix_resource_compression_settings(context):
 def counter_plone_js_upgrade(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
     steps=('jsregistry', ))
+
+
+@upgrade_to(39)
+def enable_session_refresh(context):
+    from intranett.policy.setuphandlers import enable_secure_cookies
+    enable_secure_cookies(context)
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    steps=('cssregistry', ))

@@ -278,3 +278,8 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
     def after_38(self):
         # tested by GS export diff
         pass
+
+    def after_39(self):
+        portal = self.layer['portal']
+        acl = aq_get(portal, 'acl_users')
+        self.assertNotEqual(acl.session.cookie_lifetime, 0)
