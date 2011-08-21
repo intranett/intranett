@@ -16,7 +16,7 @@
                             start python:context.ZopeTime().earliestTime()-6;">
                 <a tal:attributes="href string:${portal_url}/weeklyplan_report?user=${person}"
                    tal:define="name python:fullname and fullname or person;
-                               name python:len(name) &gt; 18 and name[:17] + '&amp;hellip;;' or name"
+                               name python:len(name) &gt; 18 and name[:17] + '…' or name"
                    tal:content="structure name"></a></td>
             <td style="text-align:right;"><span tal:content="python:obj[1]"/><span class="discreet">h</span></td>
         </tr>
