@@ -15,7 +15,7 @@ def _get_paths():
         if not BUILDOUT_ROOT:
             return None, None
     if RESOURCE_DIR is None:
-        RESOURCE_DIR = os.path.join(BUILDOUT_ROOT, 'resources')
+        RESOURCE_DIR = os.path.join(BUILDOUT_ROOT, 'var', 'resources')
     if YUI_PATH is None:
         YUI_PATH = os.path.join(
             BUILDOUT_ROOT, 'tools', 'yuicompressor-2.4.6.jar')

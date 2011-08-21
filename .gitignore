@@ -18,12 +18,10 @@ munin/etc/munin-node.conf
 munin/etc/plugin-conf.d
 munin/etc/plugins
 munin/etc/supervisord.conf
-resources/*
 src/*/*.egg-info
 src/collective.*
 src/plone.*
 src/plutonian
-template_cache/*
 tmp
 var
 .*
