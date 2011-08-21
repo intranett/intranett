@@ -4,6 +4,8 @@ Changelog
 1.3.2 - unreleased
 ------------------
 
+- Update to latest Chameleon, Zope 2 and ZTK releases.
+
 - Optimize login form to avoid JavaScript, `spinner.gif` and KSS resources.
 
 - Modified login procedure to skip the `login_success` page.
