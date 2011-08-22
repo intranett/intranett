@@ -20,17 +20,17 @@ msgstr ""
 #. Default: "If you don't want to perform the indicated step yourself, just click the '>>' link and it will be automatically done by your browser."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "0_0_microstep_description"
-msgstr ""
+msgstr "(tips: Om du ikke ønsker å gjøre et steg, er det bare å klikke '>' og turguiden vil gjøre det for deg.)"
 
 #. Default: "Click the [Add new...] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "0_1_microstep_description"
-msgstr ""
+msgstr "Klikk [legg til innhold…] menyen."
 
 #. Default: "Select [Folder] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "0_2_microstep_description"
-msgstr ""
+msgstr "Velg [Mappe] fra menyen."
 
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "0_3_microstep_description"
@@ -39,22 +39,22 @@ msgstr ""
 #. Default: "Create a new folder"
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "0_create-a-new-folder_title"
-msgstr ""
+msgstr "Opprett en ny mappe"
 
 #. Default: "In the [Title] field, type 'MyFolder'."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_0_microstep_description"
-msgstr ""
+msgstr "i [Tittel]-feltet, skriv 'Min mappe'"
 
 #. Default: "In the [Description] field, type 'This folder will be used to contain sample content as I work through each tutorial.'."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_1_microstep_description"
-msgstr ""
+msgstr "i [Beskrivelse]-feltet, skriv 'Denne mappen er for øvelsesmateriale jeg lager.'"
 
 #. Default: "Now click the [Save] button at the bottom of the page to save your new folder."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_2_microstep_description"
-msgstr ""
+msgstr "Klikk [Lagre]-knappen nederst på siden for å lagre den nye mappen din"
 
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_3_microstep_description"
@@ -63,17 +63,17 @@ msgstr ""
 #. Default: "Fill out the fields"
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_fill-out-the-fields_title"
-msgstr ""
+msgstr "Fyll ut feltene"
 
 #. Default: "Click the [State] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "2_0_microstep_description"
-msgstr ""
+msgstr "Klikk [Tilstand]-menyen."
 
 #. Default: "Select [Publish] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "2_1_microstep_description"
-msgstr ""
+msgstr "Velg [Publisér] fra menyen"
 
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "2_2_microstep_description"
@@ -82,7 +82,7 @@ msgstr ""
 #. Default: "Publish the folder"
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "2_publish-the-folder_title"
-msgstr ""
+msgstr "Publiser mappen"
 
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "3_0_microstep_description"
@@ -91,10 +91,10 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "3_all-done_title"
-msgstr ""
+msgstr "Ferdig!"
 
 #. Default: "Add and publish a folder"
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "amberjack_title"
-msgstr ""
+msgstr "Legg til en mappe og publiser den"
 
