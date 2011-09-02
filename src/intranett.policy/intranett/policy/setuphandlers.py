@@ -135,8 +135,8 @@ def setup_personal_folder(site):
 def enable_secure_cookies(context):
     acl = aq_get(context, 'acl_users')
     acl.session._updateProperty('secure', True)
-    acl.session._updateProperty('timeout', 86400)
-    acl.session._updateProperty('refresh_interval', 3600)
+    acl.session._updateProperty('timeout', 172800)
+    acl.session._updateProperty('refresh_interval', 7200)
     acl.session._updateProperty('cookie_lifetime', 7)
 
 
