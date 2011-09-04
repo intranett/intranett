@@ -21,36 +21,24 @@ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
 </tal:comment>
 <!--[if lt IE 7 ]>
     <html xmlns="http://www.w3.org/1999/xhtml"
-          xmlns:tal="http://xml.zope.org/namespaces/tal"
-          xmlns:metal="http://xml.zope.org/namespaces/metal"
-          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
           xml:lang="no"
           lang="no"
           class="no-js ie6">
 <![endif]-->
 <!--[if IE 7 ]>
     <html xmlns="http://www.w3.org/1999/xhtml"
-          xmlns:tal="http://xml.zope.org/namespaces/tal"
-          xmlns:metal="http://xml.zope.org/namespaces/metal"
-          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
           xml:lang="no"
           lang="no"
           class="no-js ie7">
 <![endif]-->
 <!--[if IE 8 ]>
     <html xmlns="http://www.w3.org/1999/xhtml"
-          xmlns:tal="http://xml.zope.org/namespaces/tal"
-          xmlns:metal="http://xml.zope.org/namespaces/metal"
-          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
           xml:lang="no"
           lang="no"
           class="no-js ie8">
 <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
     <html xmlns="http://www.w3.org/1999/xhtml"
-          xmlns:tal="http://xml.zope.org/namespaces/tal"
-          xmlns:metal="http://xml.zope.org/namespaces/metal"
-          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
           xml:lang="en"
           lang="en"
           class="no-js"
