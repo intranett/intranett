@@ -11,7 +11,9 @@
                         ajax_load request/ajax_load | nothing;
                         dummy python:request.RESPONSE.setHeader('X-UA-Compatible', 'IE=edge,chrome=1');
                         dummy python:request.RESPONSE.setHeader('X-Frame-Options', 'SAMEORIGIN');
-                        dummy python:request.RESPONSE.setHeader('Strict-Transport-Security', 'max-age=2592000');">
+                        dummy python:request.RESPONSE.setHeader('Strict-Transport-Security', 'max-age=2592000');
+                        dummy python:setHeader('Content-Type', 'text/html;;charset=utf-8');
+                        dummy python:setHeader('Content-Language', lang);">
 <metal:block define-slot="top_slot" />
 <tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
 <!--[if lt IE 7 ]>
@@ -38,10 +40,6 @@
       lang="no"
       class="no-js">
 <!--<![endif]-->
-
-<metal:cache use-macro="context/global_cache_settings/macros/cacheheaders">
-  Get the global cache headers located in global_cache_settings.
-</metal:cache>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
