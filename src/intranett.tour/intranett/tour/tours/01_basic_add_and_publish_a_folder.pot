@@ -51,6 +51,9 @@ msgstr ""
 msgid "1_1_microstep_description"
 msgstr ""
 
+msgid "1_1_microstep_text"
+msgstr ""
+
 #. Default: "Now click the [Save] button at the bottom of the page to save your new folder."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_2_microstep_description"
@@ -91,6 +94,9 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "3_all-done_title"
+msgstr ""
+
+msgid "3_all-done_text"
 msgstr ""
 
 #. Default: "Add and publish a folder"

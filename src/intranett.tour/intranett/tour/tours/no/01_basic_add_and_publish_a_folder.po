@@ -51,6 +51,11 @@ msgstr "i [Tittel]-feltet, skriv 'Prøvemappe'"
 msgid "1_1_microstep_description"
 msgstr "i [Beskrivelse]-feltet, skriv 'Denne mappen er for øvelsesmateriale jeg lager'"
 
+msgid "1_1_microstep_text"
+msgstr "{'text': \"Denne mappen er for øvelsesmateriale jeg lager\"}"
+
+
+
 #. Default: "Now click the [Save] button at the bottom of the page to save your new folder."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_2_microstep_description"
@@ -92,6 +97,10 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "3_all-done_title"
 msgstr "Ferdig!"
+
+msgid "3_all-done_text"
+msgstr "<p>Replace me with <strong>Nørwegiån</strong></p>"
+
 
 #. Default: "Add and publish a folder"
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
