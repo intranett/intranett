@@ -1,5 +1,5 @@
-# German translation of collective.amberjack tours
-# Philip Bauer <bauer@starzel.de>, 2010.
+# Norwegian translation of collective.amberjack tours
+# Geir Bækholt <baekholt@jarn.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. Default: "If you don't want to perform the indicated step yourself, just click the '>>' link and it will be automatically done by your browser."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "0_0_microstep_description"
-msgstr "(tips: Om du ikke ønsker å gjøre et steg, er det bare å klikke '>' og turguiden vil gjøre det for deg.)"
+msgstr "(tips: Om du ønsker å hoppe over et steg, er det bare å klikke '>' og turguiden vil gjøre det for deg.)"
 
 #. Default: "Click the [Add new...] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
@@ -44,12 +44,12 @@ msgstr "Opprett en ny mappe"
 #. Default: "In the [Title] field, type 'MyFolder'."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_0_microstep_description"
-msgstr "i [Tittel]-feltet, skriv 'Min mappe'"
+msgstr "i [Tittel]-feltet, skriv 'Prøvemappe'"
 
 #. Default: "In the [Description] field, type 'This folder will be used to contain sample content as I work through each tutorial.'."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_1_microstep_description"
-msgstr "i [Beskrivelse]-feltet, skriv 'Denne mappen er for øvelsesmateriale jeg lager.'"
+msgstr "i [Beskrivelse]-feltet, skriv 'Denne mappen er for øvelsesmateriale jeg lager'"
 
 #. Default: "Now click the [Save] button at the bottom of the page to save your new folder."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
