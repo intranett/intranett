@@ -417,3 +417,12 @@ def enable_session_refresh(context):
     enable_secure_cookies(context)
     loadMigrationProfile(context, 'profile-intranett.policy:default',
     steps=('cssregistry', ))
+
+
+@upgrade_to(40)
+def install_quickupload(context):
+    loadMigrationProfile(context, 'profile-collective.quickupload:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('jsregistry', 'cssregistry'))
+    from intranett.policy.setuphandlers import setup_quickupload
+    setup_quickupload(context)

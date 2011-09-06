@@ -59,7 +59,7 @@ class TestSiteSetup(IntranettTestCase):
     def test_js_resources(self):
         portal = self.layer['portal']
         js = getToolByName(portal, 'portal_javascripts')
-        self.assertEqual(len(js.getEvaluatedResources(portal)), 5)
+        self.assertEqual(len(js.getEvaluatedResources(portal)), 3)
 
     def test_discussion(self):
         # Test that the profile got applied
