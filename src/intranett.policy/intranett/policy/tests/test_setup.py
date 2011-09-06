@@ -47,7 +47,7 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         css = getToolByName(portal, 'portal_css')
         resources = css.getEvaluatedResources(portal)
-        self.assertEqual(len(resources), 3)
+        self.assertEqual(len(resources), 4)
         self.assert_(resources[1]._data['id'].startswith('acl_users'))
         self.assert_(resources[2]._data['id'].startswith('IEFixes'))
 
@@ -59,7 +59,7 @@ class TestSiteSetup(IntranettTestCase):
     def test_js_resources(self):
         portal = self.layer['portal']
         js = getToolByName(portal, 'portal_javascripts')
-        self.assertEqual(len(js.getEvaluatedResources(portal)), 3)
+        self.assertEqual(len(js.getEvaluatedResources(portal)), 5)
 
     def test_discussion(self):
         # Test that the profile got applied

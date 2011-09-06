@@ -4,6 +4,7 @@
   <!-- <version>unknown</version> -->
   <dependencies>
     <dependency>profile-collective.ATClamAV:default</dependency>
+    <dependency>profile-collective.quickupload:default</dependency>
     <dependency>profile-plone.app.caching:default</dependency>
     <dependency>profile-plone.app.discussion:default</dependency>
     <dependency>profile-Products.PloneFormGen:default</dependency>
