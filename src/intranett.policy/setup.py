@@ -43,6 +43,7 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'collective.ATClamAV',
+          'collective.quickupload',
           'experimental.btree',
           'five.pt',
           'iw.rejectanonymous',
