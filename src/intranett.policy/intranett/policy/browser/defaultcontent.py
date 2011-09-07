@@ -110,11 +110,14 @@ class DefaultContent(BrowserView):
 
         assignment = self._create_portlet(site, 'frontpage.portlets.right',
             'introduksjon', 'plone.portlet.static.Static')
-        # TODO - add introduksjon text
+        assignment.header = u'Introduksjon'
+        assignment.text = INTRODUKSJON.decode('utf-8').format(
+            url=grunnleggende_bruk.UID())
 
         assignment = self._create_portlet(site, 'frontpage.portlets.right',
             'personinformasjon', 'plone.portlet.static.Static')
-        # TODO - add person info text
+        assignment.header = u'Personinformasjon'
+        assignment.text = PERSONINFORMASJON.decode('utf-8')
 
         # Go to frontpage
         self.request.response.redirect(site.absolute_url())
@@ -175,4 +178,15 @@ intranett. Vanlige eller mye brukte toppmenypunkter er:</p>
 <p>Det finnes ikke noe rett eller galt når det gjelder organsieringen av
 intranettet, kun hva som passer hver og en organisasjon. Intranettet er heller
 ikke statisk, men utvikles og tilpasses over tid.</p>
+"""
+
+INTRODUKSJON = """\
+<p>Les om hvordan du kan komme i gang med intranettet på "<a
+href="resolveuid/{url}" class="internal-link">kom i gang</a>"-siden, eller
+dykk mer i dybden på <a href="http://hjelp.intranett.no" class="external-link">
+hjelpeportalen</a>.</p> """
+
+PERSONINFORMASJON = """\
+<p>Husk å legge til din personlige informasjon og et bilde av deg selv på <a
+href="@@personal-information">din profil</a>.</p>
 """
