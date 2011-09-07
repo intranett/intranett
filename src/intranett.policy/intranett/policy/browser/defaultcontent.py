@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.ATContentTypes.lib import constraintypes
 from Products.CMFCore.utils import getToolByName
 from zope.publisher.browser import BrowserView
 
@@ -11,50 +12,63 @@ class DefaultContent(BrowserView):
         portal_url = getToolByName(self.context, 'portal_url')
         site = portal_url.getPortalObject()
 
-        # Kom i gang folder
+        # Aktuelt og nytt folder
         site.invokeFactory('Folder',
-            id='kom-i-gang',
-            title='Kom i gang',
-            description='Hvordan komme raskt i gang.')
-        kom_i_gang = site['kom-i-gang']
-        kom_i_gang.processForm()
-        wf.doActionFor(kom_i_gang, 'publish')
-        kom_i_gang.reindexObject()
+            id='aktuelt',
+            title='Aktuelt og nytt',
+            description='Nyheter og oppdateringer på intranettet.')
+        aktuelt = site['aktuelt']
+        aktuelt.processForm()
+        wf.doActionFor(aktuelt, 'publish')
+        aktuelt.reindexObject()
+
+        # Initial news item
+        aktuelt.invokeFactory('News Item',
+            id='nytt-intranett',
+            title='Nytt intranett',
+            description='Det nye intranettet er klart til bruk.',
+            text=NYTT_INTRANETT,
+            text_format='html')
+        nytt_intranett = aktuelt['nytt-intranett']
+        nytt_intranett.processForm()
+        wf.doActionFor(nytt_intranett, 'publish')
+        nytt_intranett.reindexObject()
+
+        # prosjekter
+        site.invokeFactory('Folder',
+            id='prosjekter',
+            title='Prosjekter',
+            description='Mappe for prosjekter')
+        prosjekter = site['dokumenter']
+        prosjekter.setConstrainTypesMode(constraintypes.ENABLED)
+        prosjekter.setLocallyAllowedTypes(['TeamWorkspace'])
+        prosjekter.setImmediatelyAddableTypes(['TeamWorkspace'])
+        prosjekter.processForm()
+        wf.doActionFor(prosjekter, 'publish')
+        prosjekter.reindexObject()
+
+        # dokumenter folder
+        site.invokeFactory('Folder',
+            id='dokumenter',
+            title='Dokumenter',
+            description='Mappe for dokumenter')
+        dokumenter = site['dokumenter']
+        dokumenter.processForm()
+        wf.doActionFor(dokumenter, 'publish')
+        dokumenter.reindexObject()
 
         # Grunnleggende bruk page
-        kom_i_gang.invokeFactory('Document',
+        dokumenter.invokeFactory('Document',
             id='grunnleggende-bruk',
             title='Grunnleggende bruk',
             description='Kom i gang med bruk av intranettet. '
             '(Dette innholdet er hentet fra hjelp.intranett.no og kan slettes når det ikke er behov for lengre)',
             text=GRUNNLEGGENDE_BRUK,
             text_format='html')
-        grunnleggende_bruk = kom_i_gang['grunnleggende-bruk']
+        grunnleggende_bruk = dokumenter['grunnleggende-bruk']
         grunnleggende_bruk.processForm()
         wf.doActionFor(grunnleggende_bruk, 'publish')
         grunnleggende_bruk.reindexObject()
-
-        # Aktuelt folder
-        site.invokeFactory('Folder',
-            id='nyheter',
-            title='Nyheter',
-            description='Nyheter og oppdateringer på intranettet.')
-        nyheter = site['nyheter']
-        nyheter.processForm()
-        wf.doActionFor(nyheter, 'publish')
-        nyheter.reindexObject()
-
-        # Initial news item
-        nyheter.invokeFactory('News Item',
-            id='nytt-intranett',
-            title='Nytt intranett',
-            description='Det nye intranettet er klart til bruk.',
-            text=NYTT_INTRANETT,
-            text_format='html')
-        nytt_intranett = nyheter['nytt-intranett']
-        nytt_intranett.processForm()
-        wf.doActionFor(nytt_intranett, 'publish')
-        nytt_intranett.reindexObject()
 
         # Go to frontpage
         self.request.response.redirect(site.absolute_url())
@@ -74,9 +88,8 @@ innholdet som bestemmer hva slags type det er.</p>
 <p>Når noen har lagt til innhold, og publisert det, vil det være synlig for de
 andre brukerne av intranettet. Det vil dukke opp i menyene og i relevante
 søkeresultater.</p>
-<p>Innholdet er ordnet i mapper, akkurat som
-man gjør på sin egen datamaskin. Det er mappene som bestemmer hva
-menystrukturen blir.</p>
+<p>Innholdet er ordnet i mapper, akkurat som man gjør på sin egen datamaskin.
+Det er mappene som bestemmer hva menystrukturen blir.</p>
 <h3>Brukerkonto</h3>
 <p>For å kunne se intranettet må du ha en brukerkonto. Brukerkontoen er
 personlig og har et eget brukernavn og et passord bare for deg.</p>
@@ -92,4 +105,16 @@ være synlig for deg.</p>
 Administratorbrukere kan legge til eller endre innhold overalt i intranettet,
 mens andre brukere gjerne får tildelt muligheten til å legge til innhold i en
 egen mappe eller en mappe for sin avdeling.</p>
+<h3>Organisering av intranettet</h3>
+<p>Utgangspunktet for organiseringen av innhold på intranett.no er en vanlig
+mappestruktur.</p>
+<p>Mapper på toppnivå eller rot vil automatisk danne toppmenyen på ditt
+intranett. Vanlige eller mye brukte toppmenypunkter er:</p>
+<p>Nyheter - Aktuelt - Siste nytt - Ansatte</p>
+<p>Hendelser - Hva skjer? - Ansatte</p>
+<p>Prosjekter - Dokumenter - Kunder - Leverandører - Ansatte</p>
+<p>HR - Rutiner - Skjemaer - Ansatte</p>
+<p>Det finnes ikke noe rett eller galt når det gjelder organsieringen av
+intranettet, kun hva som passer hver og en organisasjon. Intranettet er heller
+ikke statisk, men utvikles og tilpasses over tid.</p>
 """
