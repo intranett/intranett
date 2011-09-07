@@ -100,7 +100,7 @@ class DefaultContent(BrowserView):
 
         _add_image('hjelp-ikon', 'Hjelp-ikon', 'hjelp-ikon.jpeg')
         _add_image('redningsboye', 'Redningsbøye', 'redningsboye.jpeg')
-        _add_image('mapper', 'Mapper', 'mapper.png')
+        _add_image('mapper', 'Mapper', 'mapper.jpeg')
 
         # frontpage portlets
         self._create_portlet(site, 'frontpage.main.left', 'nyheter',
