@@ -65,7 +65,8 @@ class DefaultContent(BrowserView):
             id='grunnleggende-bruk',
             title='Grunnleggende bruk',
             description='Kom i gang med bruk av intranettet. '
-            '(Dette innholdet er hentet fra hjelp.intranett.no og kan slettes når det ikke er behov for lengre)',
+            '(Dette innholdet er hentet fra hjelp.intranett.no og kan slettes '
+            'når det ikke er behov for lengre)',
             text=GRUNNLEGGENDE_BRUK,
             text_format='html')
         grunnleggende_bruk = dokumenter['grunnleggende-bruk']
