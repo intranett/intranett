@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os.path
 
 from plone.app.portlets.utils import assignment_mapping_from_key
 from Products.ATContentTypes.lib import constraintypes
@@ -6,6 +7,8 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import getUtility
 from zope.component.interfaces import IFactory
 from zope.publisher.browser import BrowserView
+
+DEFAULT = os.path.join(os.path.dirname(__file__), 'default')
 
 
 class DefaultContent(BrowserView):
@@ -82,11 +85,22 @@ class DefaultContent(BrowserView):
         bilder = site['bilder']
         bilder.processForm()
         bilder.setExcludeFromNav(True)
-        # TODO - change default view to photo listing
+        bilder.setLayout('atct_album_view')
         wf.doActionFor(bilder, 'publish')
         bilder.reindexObject()
 
-        # TODO - add images
+        # add images
+        def _add_image(id_, title, filename):
+            bilder.invokeFactory('Image', id=id_, title=title)
+            image = bilder[id_]
+            image.processForm()
+            with open(os.path.join(DEFAULT, filename)) as fd:
+                image.setImage(fd)
+            image.reindexObject()
+
+        _add_image('hjelp-ikon', 'Hjelp-ikon', 'hjelp-ikon.jpeg')
+        _add_image('redningsboye', 'Redningsbøye', 'redningsboye.jpeg')
+        _add_image('mapper', 'Mapper', 'mapper.png')
 
         # frontpage portlets
         self._create_portlet(site, 'frontpage.main.left', 'nyheter',
