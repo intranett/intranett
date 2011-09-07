@@ -4,7 +4,7 @@
      i18n:domain="intranett"
 >From: <span tal:replace="structure options/from_" />
 To: <span tal:replace="options/email" />
-Subject: User account information for <span tal:replace="options/hostname" />
+Subject: <tal:i18n i18n:translate="">User account information for <span i18n:name="hostname" tal:replace="options/hostname" /></tal:i18n>
 Precedence: bulk
 <div i18n:translate="activation-mail-body"
      tal:omit-tag="">
