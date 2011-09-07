@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from plone.app.portlets.utils import assignment_mapping_from_key
 from Products.ATContentTypes.lib import constraintypes
 from Products.CMFCore.utils import getToolByName
+from zope.component import getUtility
+from zope.component.interfaces import IFactory
 from zope.publisher.browser import BrowserView
 
 
@@ -39,7 +42,7 @@ class DefaultContent(BrowserView):
             id='prosjekter',
             title='Prosjekter',
             description='Mappe for prosjekter')
-        prosjekter = site['dokumenter']
+        prosjekter = site['prosjekter']
         prosjekter.setConstrainTypesMode(constraintypes.ENABLED)
         prosjekter.setLocallyAllowedTypes(['TeamWorkspace'])
         prosjekter.setImmediatelyAddableTypes(['TeamWorkspace'])
@@ -70,10 +73,50 @@ class DefaultContent(BrowserView):
         wf.doActionFor(grunnleggende_bruk, 'publish')
         grunnleggende_bruk.reindexObject()
 
+        # bilder folder
+        site.invokeFactory('Folder',
+            id='bilder',
+            title='Bilder',
+            description='Bilder til bruk i intranettet.')
+        bilder = site['bilder']
+        bilder.processForm()
+        bilder.setExcludeFromNav(True)
+        # TODO - change default view to photo listing
+        wf.doActionFor(bilder, 'publish')
+        bilder.reindexObject()
+
+        # TODO - add images
+
+        # frontpage portlets
+        self._create_portlet(site, 'frontpage.main.left', 'nyheter',
+            'portlets.News')
+        self._create_portlet(site, 'frontpage.main.left', 'sist_endret',
+            'portlets.Recent')
+
+        assignment = self._create_portlet(site, 'frontpage.portlets.right',
+            'introduksjon', 'plone.portlet.static.Static')
+        # TODO - add introduksjon text
+
+        assignment = self._create_portlet(site, 'frontpage.portlets.right',
+            'personinformasjon', 'plone.portlet.static.Static')
+        # TODO - add person info text
+
         # Go to frontpage
         self.request.response.redirect(site.absolute_url())
         return 'done'
 
+    def _create_portlet(self, site, manager, name, type_):
+        category = 'context'
+        key = '/'
+        mapping = assignment_mapping_from_key(
+            site, manager, category, key, create=True)
+
+        if name in mapping:
+            del mapping[name]
+
+        assignment = getUtility(IFactory, name=type_)()
+        mapping[name] = assignment
+        return assignment.__of__(site)
 
 NYTT_INTRANETT="""\
 <p>Intranettet lar oss dele dokumenter, tekst, bilder, nyheter og
