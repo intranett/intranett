@@ -84,7 +84,8 @@ def create_site(app, args):
 
     request = app.REQUEST
     request.form = {
-        'extension_ids': ('intranett.policy:default', ),
+        'extension_ids': (
+            'intranett.policy:default', 'intranett.policy:content',),
         'form.submitted': True,
         'language': options.language,
     }
