@@ -201,7 +201,7 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
-@import_step
+@import_step()
 def various(context):
     if context.readDataFile('intranett-policy-various.txt') is None:
         return
@@ -223,7 +223,7 @@ def various(context):
     restrict_siteadmin(site)
 
 
-@import_step
+@import_step()
 def content(context):
     if context.readDataFile('intranett-policy-content.txt') is None:
         return
