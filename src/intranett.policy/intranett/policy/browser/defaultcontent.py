@@ -47,8 +47,8 @@ class DefaultContent(BrowserView):
             description='Mappe for prosjekter')
         prosjekter = site['prosjekter']
         prosjekter.setConstrainTypesMode(constraintypes.ENABLED)
-        prosjekter.setLocallyAllowedTypes(['TeamWorkspace'])
-        prosjekter.setImmediatelyAddableTypes(['TeamWorkspace'])
+        prosjekter.setLocallyAllowedTypes(['ProjectRoom'])
+        prosjekter.setImmediatelyAddableTypes(['ProjectRoom'])
         prosjekter.processForm()
         wf.doActionFor(prosjekter, 'publish')
         prosjekter.reindexObject()
