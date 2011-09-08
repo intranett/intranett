@@ -216,11 +216,11 @@ def various(context):
     disable_portlets(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
+    ignore_link_integrity_exceptions(site)
+    enable_link_by_uid(site)
     setup_members_folder(site)
     setup_personal_folder(site)
     enable_secure_cookies(site)
-    ignore_link_integrity_exceptions(site)
-    enable_link_by_uid(site)
     open_ext_links_in_new_window(site)
     restrict_siteadmin(site)
 
