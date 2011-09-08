@@ -47,6 +47,7 @@
       permission="zope2.View"
       />
 
+  <!-- Personal bar -->
   <browser:viewlet
       name="plone.personal_bar"
       manager="intranett.theme.browser.interfaces.ITopBar"
@@ -54,7 +55,7 @@
       permission="zope2.View"
       />
 
-  <!-- breadcrumbs for the profile/password views -->
+  <!-- Breadcrumbs for the profile/password views -->
   <browser:viewlet
       name="plone.path_bar"
       manager="intranett.theme.browser.interfaces.IAboveColumns"
