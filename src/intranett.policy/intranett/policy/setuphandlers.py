@@ -132,6 +132,14 @@ def setup_personal_folder(site):
             assignable.setBlacklistStatus('content_type', True)
 
 
+def setup_default_content(site):
+    from Testing import makerequest
+    wrapped = makerequest.makerequest(site)
+    from intranett.policy.browser.defaultcontent import DefaultContent
+    view = DefaultContent(wrapped, wrapped.REQUEST)
+    view()
+
+
 def enable_secure_cookies(context):
     acl = aq_get(context, 'acl_users')
     acl.session._updateProperty('secure', True)
@@ -215,3 +223,12 @@ def various(context):
     enable_link_by_uid(site)
     open_ext_links_in_new_window(site)
     restrict_siteadmin(site)
+
+
+@import_step(depends=('plone-final', 'workflow', ))
+def content(context):
+    # Only run step if a flag file is present (e.g. not an extension profile)
+    if context.readDataFile('intranett-policy-content.txt') is None:
+        return
+    site = context.getSite()
+    setup_default_content(site)

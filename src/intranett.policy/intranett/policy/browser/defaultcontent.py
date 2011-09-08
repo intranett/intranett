@@ -121,9 +121,6 @@ class DefaultContent(BrowserView):
             'personinformasjon', 'plone.portlet.static.Static')
         assignment.header = u'Personinformasjon'
         assignment.text = PERSONINFORMASJON.decode('utf-8')
-
-        # Go to frontpage
-        self.request.response.redirect(site.absolute_url())
         return 'done'
 
     def _create_portlet(self, site, manager, name, type_):
