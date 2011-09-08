@@ -18,6 +18,32 @@ class DefaultContent(BrowserView):
         portal_url = getToolByName(self.context, 'portal_url')
         site = portal_url.getPortalObject()
 
+        # bilder folder
+        site.invokeFactory('Folder',
+            id='bilder',
+            title='Bilder',
+            description='Bilder til bruk i intranettet.')
+        bilder = site['bilder']
+        bilder.processForm()
+        bilder.setExcludeFromNav(True)
+        bilder.setLayout('atct_album_view')
+        wf.doActionFor(bilder, 'publish')
+        bilder.reindexObject()
+
+        # add images
+        def _add_image(id_, title, filename):
+            bilder.invokeFactory('Image', id=id_, title=title)
+            image = bilder[id_]
+            image.processForm()
+            with open(os.path.join(DEFAULT, filename)) as fd:
+                image.setImage(fd)
+            image.reindexObject()
+            return image
+
+        help_image = _add_image('hjelp-ikon', 'Hjelp-ikon', 'hjelp-ikon.jpeg')
+        _add_image('redningsboye', 'Redningsbøye', 'redningsboye.jpeg')
+        folder_image = _add_image('mapper', 'Mapper', 'mapper.jpeg')
+
         # Aktuelt og nytt folder
         site.invokeFactory('Folder',
             id='aktuelt',
@@ -70,38 +96,12 @@ class DefaultContent(BrowserView):
             description='Kom i gang med bruk av intranettet. '
             '(Dette innholdet er hentet fra hjelp.intranett.no og kan slettes '
             'når det ikke er behov for lengre)',
-            text=GRUNNLEGGENDE_BRUK,
+            text=GRUNNLEGGENDE_BRUK.format(mappe_uid=folder_image.UID()),
             text_format='html')
         grunnleggende_bruk = dokumenter['grunnleggende-bruk']
         grunnleggende_bruk.processForm()
         wf.doActionFor(grunnleggende_bruk, 'publish')
         grunnleggende_bruk.reindexObject()
-
-        # bilder folder
-        site.invokeFactory('Folder',
-            id='bilder',
-            title='Bilder',
-            description='Bilder til bruk i intranettet.')
-        bilder = site['bilder']
-        bilder.processForm()
-        bilder.setExcludeFromNav(True)
-        bilder.setLayout('atct_album_view')
-        wf.doActionFor(bilder, 'publish')
-        bilder.reindexObject()
-
-        # add images
-        def _add_image(id_, title, filename):
-            bilder.invokeFactory('Image', id=id_, title=title)
-            image = bilder[id_]
-            image.processForm()
-            with open(os.path.join(DEFAULT, filename)) as fd:
-                image.setImage(fd)
-            image.reindexObject()
-            return image
-
-        help_image = _add_image('hjelp-ikon', 'Hjelp-ikon', 'hjelp-ikon.jpeg')
-        _add_image('redningsboye', 'Redningsbøye', 'redningsboye.jpeg')
-        _add_image('mapper', 'Mapper', 'mapper.jpeg')
 
         # frontpage portlets
         self._create_portlet(site, 'frontpage.main.left', 'nyheter',
@@ -167,7 +167,8 @@ Administratorbrukere kan legge til eller endre innhold overalt i intranettet,
 mens andre brukere gjerne får tildelt muligheten til å legge til innhold i en
 egen mappe eller en mappe for sin avdeling.</p>
 <h3>Organisering av intranettet</h3>
-<p>Utgangspunktet for organiseringen av innhold på intranett.no er en vanlig
+<p><img class="image-right" src="resolveuid/{mappe_uid}/@@images/image/mini" />
+Utgangspunktet for organiseringen av innhold på intranett.no er en vanlig
 mappestruktur.</p>
 <p>Mapper på toppnivå eller rot vil automatisk danne toppmenyen på ditt
 intranett. Vanlige eller mye brukte toppmenypunkter er:</p>
