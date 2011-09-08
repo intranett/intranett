@@ -97,8 +97,9 @@ class DefaultContent(BrowserView):
             with open(os.path.join(DEFAULT, filename)) as fd:
                 image.setImage(fd)
             image.reindexObject()
+            return image
 
-        _add_image('hjelp-ikon', 'Hjelp-ikon', 'hjelp-ikon.jpeg')
+        help_image = _add_image('hjelp-ikon', 'Hjelp-ikon', 'hjelp-ikon.jpeg')
         _add_image('redningsboye', 'Redningsbøye', 'redningsboye.jpeg')
         _add_image('mapper', 'Mapper', 'mapper.jpeg')
 
@@ -112,7 +113,9 @@ class DefaultContent(BrowserView):
             'introduksjon', 'plone.portlet.static.Static')
         assignment.header = u'Introduksjon'
         assignment.text = INTRODUKSJON.decode('utf-8').format(
-            url=grunnleggende_bruk.UID())
+            img_url=help_image.UID(),
+            kom_url=grunnleggende_bruk.UID(),
+            )
 
         assignment = self._create_portlet(site, 'frontpage.portlets.right',
             'personinformasjon', 'plone.portlet.static.Static')
@@ -181,8 +184,9 @@ ikke statisk, men utvikles og tilpasses over tid.</p>
 """
 
 INTRODUKSJON = """\
-<p>Les om hvordan du kan komme i gang med intranettet på "<a
-href="resolveuid/{url}" class="internal-link">kom i gang</a>"-siden, eller
+<p><img class="image-left" src="resolveuid/{img_url}/@@images/image/tile" />
+Les om hvordan du kan komme i gang med intranettet på "<a
+href="resolveuid/{kom_url}" class="internal-link">kom i gang</a>"-siden, eller
 dykk mer i dybden på <a href="http://hjelp.intranett.no" class="external-link">
 hjelpeportalen</a>.</p> """
 
