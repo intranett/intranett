@@ -201,10 +201,8 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
-# TODO the default can go with plutonian > 0.1a2
-@import_step(depends=('plone-final', 'workflow', ))
+@import_step
 def various(context):
-    # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
         return
     site = context.getSite()
@@ -225,9 +223,8 @@ def various(context):
     restrict_siteadmin(site)
 
 
-@import_step(depends=('plone-final', 'workflow', ))
+@import_step
 def content(context):
-    # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-content.txt') is None:
         return
     site = context.getSite()
