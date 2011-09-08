@@ -90,11 +90,6 @@ def setup_members_folder(site):
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID,
         title=title)
-    # we fill the request with some values in commands.py create_site
-    # don't let those interfere in the processForm call
-    request = aq_get(portal, 'REQUEST', None)
-    if request is not None:
-        request.form['title'] = title
     portal[MEMBERS_FOLDER_ID].processForm() # Fire events
     workflow = getToolByName(portal, 'portal_workflow')
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
@@ -111,11 +106,6 @@ def setup_personal_folder(site):
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('Folder', portal, id=PERSONAL_FOLDER_ID,
         title=title)
-    # we fill the request with some values in commands.py create_site
-    # don't let those interfere in the processForm call
-    request = aq_get(portal, 'REQUEST', None)
-    if request is not None:
-        request.form['title'] = title
     folder = portal[PERSONAL_FOLDER_ID]
     folder.setExcludeFromNav(True)
     folder.processForm() # Fire events

@@ -417,3 +417,9 @@ def enable_session_refresh(context):
     enable_secure_cookies(context)
     loadMigrationProfile(context, 'profile-intranett.policy:default',
     steps=('cssregistry', ))
+
+
+@upgrade_to(40)
+def set_site_title(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    steps=('properties', ))

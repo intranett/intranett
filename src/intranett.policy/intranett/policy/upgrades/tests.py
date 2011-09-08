@@ -283,3 +283,7 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         portal = self.layer['portal']
         acl = aq_get(portal, 'acl_users')
         self.assertNotEqual(acl.session.cookie_lifetime, 0)
+
+    def after_40(self):
+        # tested by GS export diff
+        pass

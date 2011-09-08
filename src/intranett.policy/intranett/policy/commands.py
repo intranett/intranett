@@ -56,9 +56,6 @@ def create_site(app, args):
         help='Force creation of a site when one already exists.')
     parser.add_option('-r', '--rootpassword', default=None,
         help='Create a admin user in the Zope root with the given password.')
-    parser.add_option('-t', '--title',
-        default='intranett.no',
-        help='The title for the new site. [default: "%default"]')
     parser.add_option('-l', '--language', default='no',
         help='The language used in the new site. [default: "%default"]')
     (options, args) = parser.parse_args(args=args)
@@ -89,7 +86,6 @@ def create_site(app, args):
     request.form = {
         'extension_ids': ('intranett.policy:default', ),
         'form.submitted': True,
-        'title': options.title,
         'language': options.language,
     }
     from intranett.policy.browser.admin import AddIntranettSite

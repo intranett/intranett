@@ -21,7 +21,6 @@ class AddIntranettSite(AddPloneSite):
         if submitted:
             site = addPloneSite(
                 context, 'Plone',
-                title=form.get('title', ''),
                 profile_id=_DEFAULT_PROFILE,
                 extension_ids=form.get('extension_ids',
                     (u'intranett.policy:default',)),
