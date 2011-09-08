@@ -181,7 +181,9 @@ ikke statisk, men utvikles og tilpasses over tid.</p>
 """
 
 INTRODUKSJON = """\
-<p><img class="image-left" src="resolveuid/{img_url}/@@images/image/tile" />
+<p><a href="http://hjelp.intranett.no" class="external-link">
+<img class="image-left" width=64 height=63 title="Hjelp"
+src="resolveuid/{img_url}/@@images/image/tile" /></a>
 Les om hvordan du kan komme i gang med intranettet på "<a
 href="resolveuid/{kom_url}" class="internal-link">kom i gang</a>"-siden, eller
 dykk mer i dybden på <a href="http://hjelp.intranett.no" class="external-link">
