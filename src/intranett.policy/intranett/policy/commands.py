@@ -161,6 +161,11 @@ def create_site_admin(app, args):
     member.setMemberProperties(dict(email=email, fullname=fullname))
     reset = pt.requestReset(login)
 
+    # TODO
+    # - change ownership of all default content to new user
+    # - change creation / modification / publication dates for all content
+    #   to now
+
     mail_text = ActivationMail(site, site.REQUEST)(member=member,
         reset=reset, email=email, fullname=fullname, hostname=hostname)
     if isinstance(mail_text, unicode):
