@@ -161,10 +161,27 @@ def create_site_admin(app, args):
     member.setMemberProperties(dict(email=email, fullname=fullname))
     reset = pt.requestReset(login)
 
-    # TODO
-    # - change ownership of all default content to new user
-    # - change creation / modification / publication dates for all content
-    #   to now
+    # change ownership of all content to new user and update dates to now
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    from DateTime import DateTime
+    user = member.getUser()
+    userid = user.getId()
+    now = DateTime()
+
+    catalog = aq_get(site, 'portal_catalog')
+    brains = catalog.unrestrictedSearchResults()
+    for brain in brains:
+        if brain.portal_type.startswith('Member'):
+            continue
+        if brain.getId == PERSONAL_FOLDER_ID:
+            continue
+        obj = brain.getObject()
+        obj.setCreators(userid)
+        obj.changeOwnership(user)
+        obj.setCreationDate(now)
+        obj.setEffectiveDate(now)
+        obj.setModificationDate(now)
+        obj.reindexObject(idxs=None)
 
     mail_text = ActivationMail(site, site.REQUEST)(member=member,
         reset=reset, email=email, fullname=fullname, hostname=hostname)
