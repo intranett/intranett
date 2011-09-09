@@ -22,3 +22,8 @@ class IntranettTestCase(unittest.TestCase):
 class IntranettFunctionalTestCase(unittest.TestCase):
 
     layer = layer.INTRANETT_FUNCTIONAL
+
+
+class IntranettContentTestCase(unittest.TestCase):
+
+    layer = layer.INTRANETT_CONTENT_INTEGRATION

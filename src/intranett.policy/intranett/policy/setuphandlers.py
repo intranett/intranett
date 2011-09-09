@@ -90,11 +90,6 @@ def setup_members_folder(site):
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID,
         title=title)
-    # we fill the request with some values in commands.py create_site
-    # don't let those interfere in the processForm call
-    request = aq_get(portal, 'REQUEST', None)
-    if request is not None:
-        request.form['title'] = title
     portal[MEMBERS_FOLDER_ID].processForm() # Fire events
     workflow = getToolByName(portal, 'portal_workflow')
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
@@ -111,11 +106,6 @@ def setup_personal_folder(site):
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('Folder', portal, id=PERSONAL_FOLDER_ID,
         title=title)
-    # we fill the request with some values in commands.py create_site
-    # don't let those interfere in the processForm call
-    request = aq_get(portal, 'REQUEST', None)
-    if request is not None:
-        request.form['title'] = title
     folder = portal[PERSONAL_FOLDER_ID]
     folder.setExcludeFromNav(True)
     folder.processForm() # Fire events
@@ -130,6 +120,14 @@ def setup_personal_folder(site):
             assignable.setBlacklistStatus('context', True)
             assignable.setBlacklistStatus('group', True)
             assignable.setBlacklistStatus('content_type', True)
+
+
+def setup_default_content(site):
+    from Testing import makerequest
+    wrapped = makerequest.makerequest(site)
+    from intranett.policy.browser.defaultcontent import DefaultContent
+    view = DefaultContent(wrapped, wrapped.REQUEST)
+    view()
 
 
 def enable_secure_cookies(context):
@@ -193,10 +191,8 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
-# TODO the default can go with plutonian > 0.1a2
-@import_step(depends=('plone-final', 'workflow', ))
+@import_step()
 def various(context):
-    # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
         return
     site = context.getSite()
@@ -208,10 +204,18 @@ def various(context):
     disable_portlets(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
+    ignore_link_integrity_exceptions(site)
+    enable_link_by_uid(site)
     setup_members_folder(site)
     setup_personal_folder(site)
     enable_secure_cookies(site)
-    ignore_link_integrity_exceptions(site)
-    enable_link_by_uid(site)
     open_ext_links_in_new_window(site)
     restrict_siteadmin(site)
+
+
+@import_step()
+def content(context):
+    if context.readDataFile('intranett-policy-content.txt') is None:
+        return
+    site = context.getSite()
+    setup_default_content(site)
