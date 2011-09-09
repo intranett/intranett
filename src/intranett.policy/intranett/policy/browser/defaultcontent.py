@@ -63,6 +63,8 @@ class DefaultContent(BrowserView):
             text_format='html')
         nytt_intranett = aktuelt['nytt-intranett']
         nytt_intranett.processForm()
+        with open(os.path.join(DEFAULT, 'kopp-kaffe.jpeg')) as fd:
+            nytt_intranett.setImage(fd)
         wf.doActionFor(nytt_intranett, 'publish')
         nytt_intranett.reindexObject()
 
