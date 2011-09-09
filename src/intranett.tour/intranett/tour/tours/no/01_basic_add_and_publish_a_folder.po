@@ -99,7 +99,7 @@ msgid "3_all-done_title"
 msgstr "Ferdig!"
 
 msgid "3_all-done_text"
-msgstr "<p>Replace me with <strong>Nørwegiån</strong></p>"
+msgstr "<p>Du har nå en din personlige mappe på intranettet ditt som du vil bruke til å lage eksempel innhold for bruk i øvelsene. <strong>Ikke slett eller endre navn på mappen</strong> før du er ferdig med alle øvelsene!</p>"
 
 
 #. Default: "Add and publish a folder"
