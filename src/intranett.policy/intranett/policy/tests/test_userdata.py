@@ -38,6 +38,29 @@ class TestMemberTools(IntranettTestCase):
         self.failUnless(isinstance(tool.thumbnails, BTreeFolder2))
 
 
+class TestGetMember(IntranettTestCase):
+
+    def test_get_by_id(self):
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
+        self.failIfEqual(tool.getMemberById('test_user_1_'), None)
+
+    def test_get_by_id_returns_None(self):
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
+        self.assertEqual(tool.getMemberById('test-user'), None)
+
+    def test_get_by_login(self):
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
+        self.failIfEqual(tool.getMemberByLogin('test-user'), None)
+
+    def test_get_by_login_returns_None(self):
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
+        self.assertEqual(tool.getMemberByLogin('test_user_1_'), None)
+
+
 class TestUserdataSchema(IntranettTestCase):
 
     def test_no_homepage(self):
