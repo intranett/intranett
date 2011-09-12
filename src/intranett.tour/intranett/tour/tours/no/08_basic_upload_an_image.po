@@ -1,11 +1,11 @@
-# German translation of collective.amberjack tours
-# Carsten Raddatz <i18n-de@veit-schiele.de>
+# Norwegian translation of collective.amberjack tours
+# Tormod Mansaker <tormod@jarn.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2010-10-30 09:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: Carsten Raddatz <carsten.raddatz@veit-schiele.de>\n"
+"Last-Translator: Tormod Mansåker <tormod@jarn.com>\n"
 "Language-Team: de <i18n-de@veit-schiele.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "0_0_microstep_description"
-msgstr ""
+msgstr "Navigér til mappen [Prøvemappe] som du laget i den første øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "0_1_microstep_description"
@@ -29,17 +29,17 @@ msgstr ""
 #. Default: "Add a new image to myfolder"
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "0_add-a-new-image-to-myfolder_title"
-msgstr ""
+msgstr "Legg til et bilde i Prøvemappen"
 
 #. Default: "Click the [Add New...] drop-down menu and select Image from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "1_0_microstep_description"
-msgstr ""
+msgstr "Klikk på [Legg til innhold] i nedtrekksmenyen og velg Bilde fra menyen."
 
 #. Default: "Select [Image] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "1_1_microstep_description"
-msgstr ""
+msgstr "Velg [Bilde] fra menyen."
 
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "1_2_microstep_description"
@@ -48,27 +48,27 @@ msgstr ""
 #. Default: "Add an image"
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "1_add-an-image_title"
-msgstr ""
+msgstr "Legg til bilde"
 
 #. Default: "Provide a [Title] for your Image: My Photo."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "2_0_microstep_description"
-msgstr ""
+msgstr "Lag en tittel [Tittel] for bildet: Mitt Bilde."
 
 #. Default: "Provide a [Description] for your Image."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "2_1_microstep_description"
-msgstr ""
+msgstr "Skriv en [Beskrivelse]"
 
 #. Default: "Click the [Browse] button and find the image file you want to upload on your computer's filesystem."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "2_2_microstep_description"
-msgstr ""
+msgstr "Klikk på [Browse] knappen og finn bildefilen du vil laste opp på intranettet."
 
 #. Default: "Click [Save] to complete the upload."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "2_3_microstep_description"
-msgstr ""
+msgstr "Klikk [Lagre] for å laste opp og avslutte."
 
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "2_4_microstep_description"
@@ -77,7 +77,7 @@ msgstr ""
 #. Default: "Fill out the fields"
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "2_fill-out-the-fields_title"
-msgstr ""
+msgstr "Fyll ut feltene"
 
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "3_0_microstep_description"
@@ -86,10 +86,10 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "3_all-done_title"
-msgstr ""
+msgstr "Ferdig"
 
 #. Default: "Upload an image"
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "amberjack_title"
-msgstr ""
+msgstr "Laste opp et bilde"
 
