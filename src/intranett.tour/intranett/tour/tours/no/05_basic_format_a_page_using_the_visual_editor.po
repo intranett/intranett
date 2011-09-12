@@ -1,5 +1,3 @@
-# German translation of collective.amberjack tours
-# Philip Bauer <bauer@starzel.de>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -16,11 +14,10 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.amberjack.plonetour\n"
 
-
 #. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "0_0_microstep_description"
-msgstr ""
+msgstr "Navigér til mappen [Prøvemappe] som du laget i den første øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "0_1_microstep_description"
@@ -29,12 +26,15 @@ msgstr ""
 #. Default: "Format a page using the visual editor"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "0_format-a-page-using-the-visual-editor_title"
-msgstr ""
+msgstr "Formatér en side i teksteditoren"
+
+msgid "0_format-a-page-using-the-visual-editor_text"
+msgstr "<p>I denne øvelsen vil du gjenåpne siden du har laget og lære hvordan formatere teksten.</p>"
 
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "1_0_microstep_description"
-msgstr ""
+msgstr "Navigér til siden [Min Side] som du laget i den forrige øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "1_1_microstep_description"
@@ -43,12 +43,12 @@ msgstr ""
 #. Default: "Edit an existing page"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "1_edit-an-existing-page_title"
-msgstr ""
+msgstr "Redigér en eksisterende side"
 
 #. Default: "Click the [Edit] tab to begin editing."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "2_0_microstep_description"
-msgstr ""
+msgstr "Klikk [Redigér] fliken for å starte redigeringsmodus."
 
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "2_1_microstep_description"
@@ -57,37 +57,37 @@ msgstr ""
 #. Default: "Edit my page"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "2_edit-my-page_title"
-msgstr ""
+msgstr "Redigér min side"
 
 #. Default: "Type the following text into the [Body Text] field: 'The quick brown fox jumps over the lazy dog.'"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_0_microstep_description"
-msgstr ""
+msgstr "Skriv følgende tekst i [Brødtekst] feltet: 'Den raske brune reven hopper over den late hunden.'"
 
 #. Default: "and select Subheading. Notice that the text you selected appears larger and bolder than Normal Paragraph text."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_10_microstep_description"
-msgstr ""
+msgstr "og velg Subheading. Legg merke til at teksten som du valgte nå har blitt større og fyldigere enn Brødtekst."
 
 #. Default: "Type more text of your own choosing and experiment with the other text styles in the formatting menu."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_11_microstep_description"
-msgstr ""
+msgstr "Skriv inn mer tekst etter eget valg og ekperimentér med andre tekst stiler i formaterings menyen."
 
 #. Default: "click on the [screen icon]"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_12_microstep_description"
-msgstr ""
+msgstr "klikk på [til/fra fullskjerm ikon]"
 
 #. Default: "you can return to the previous view simply clicking again on [screen icon]"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_13_microstep_description"
-msgstr ""
+msgstr "du kan returnere til forrige visning enkelt med å klikke igjen på [fullskjerm ikonet]"
 
 #. Default: "When you are all done, click the [Save] button at the bottom of the page."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_14_microstep_description"
-msgstr ""
+msgstr "Når du er ferdig, klikk på [Lagre] knappen nederst på siden."
 
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_15_microstep_description"
@@ -96,52 +96,52 @@ msgstr ""
 #. Default: "Now highlight the phrase 'brown fox' with your mouse pointer"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_1_microstep_description"
-msgstr ""
+msgstr "Nå velg 'Den raske brune reven' med pekeren"
 
 #. Default: "select the [Bold icon] from the formatting toolbar."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_2_microstep_description"
-msgstr ""
+msgstr "velg [Fet ikonet] fra verktøylinjen."
 
 #. Default: "Next, highlight the phrase 'lazy dog' with your mouse pointer"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_3_microstep_description"
-msgstr ""
+msgstr "Velg så 'hopper over den late hunden.' med pekeren"
 
 #. Default: "select the [Italics icon] from the formatting toolbar."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_4_microstep_description"
-msgstr ""
+msgstr "velg [kursiv ikon] fra verktøylinjen."
 
 #. Default: "To change text alignment, highlight the entire sentence"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_5_microstep_description"
-msgstr ""
+msgstr "For å endre justering, velg område"
 
 #. Default: "and select any of the three [text alignment icons] (left, center, or right)."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_6_microstep_description"
-msgstr ""
+msgstr "og velg ønsket justering fra [justerings ikonene] (venstrejustert, midstilt, høyre- eller blokkjustert)."
 
 #. Default: "Now type the word 'Introduction' above your sentence."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_7_microstep_description"
-msgstr ""
+msgstr "Skriv 'Introduksjon' over setningen din."
 
 #. Default: "Highlight 'Introduction'"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_8_microstep_description"
-msgstr ""
+msgstr "Uthev 'Introduksjon'"
 
 #. Default: "click the text formatting [drop-down menu]"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_9_microstep_description"
-msgstr ""
+msgstr "klikk tekstformatéring i [nedtrekksmenyen]"
 
 #. Default: "Add and format page content"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_add-and-format-page-content_title"
-msgstr ""
+msgstr "Legg til og formatér innhold"
 
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "4_0_microstep_description"
@@ -150,10 +150,13 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "4_all-done_title"
-msgstr ""
+msgstr "Ferdig"
+
+msgid "4_all-done_text"
+msgstr "<p>Denne øvelsen har en kort introduksjon på forskjellige måter du kan formatere en side. De etterfølgende øvelsen vil lære deg å sette in lenker og bilder.</p>"
 
 #. Default: "Format a page using the visual editor"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "amberjack_title"
-msgstr ""
+msgstr "Formatér en side ved bruk av teksteditoren."
 
