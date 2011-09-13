@@ -45,30 +45,30 @@ sub vcl_recv {
 
 sub vcl_fetch {
     if (beresp.status == 302) {
-        # Neither createObject nor require_login should be cached
-        set beresp.http.X-Varnish-Action = "FETCH (pass - redirect)";
+        # require_login should not be cached
+        # set beresp.http.X-Varnish-Action = "FETCH (pass - redirect)";
         return(pass);
     }
     if (!beresp.cacheable) {
-        set beresp.http.X-Varnish-Action = "FETCH (pass - not cacheable)";
+        # set beresp.http.X-Varnish-Action = "FETCH (pass - not cacheable)";
         call save_cache_control_header;
         return(pass);
     }
     if (beresp.http.Set-Cookie) {
-        set beresp.http.X-Varnish-Action = "FETCH (pass - response sets cookie)";
+        # set beresp.http.X-Varnish-Action = "FETCH (pass - response sets cookie)";
         return(pass);
     }
     if (!beresp.http.Cache-Control ~ "s-maxage=[1-9]" && beresp.http.Cache-Control ~ "(private|no-cache|no-store)") {
-        set beresp.http.X-Varnish-Action = "FETCH (pass - response sets private/no-cache/no-store token)";
+        # set beresp.http.X-Varnish-Action = "FETCH (pass - response sets private/no-cache/no-store token)";
         return(pass);
     }
     if (req.http.Authorization && !beresp.http.Cache-Control ~ "public") {
-        set beresp.http.X-Varnish-Action = "FETCH (pass - authorized and no public cache control)";
+        # set beresp.http.X-Varnish-Action = "FETCH (pass - authorized and no public cache control)";
         return(pass);
     }
     if (req.http.X-Anonymous && !beresp.http.Cache-Control) {
         set beresp.ttl = 600s;
-        set beresp.http.X-Varnish-Action = "FETCH (override - backend not setting cache control)";
+        # set beresp.http.X-Varnish-Action = "FETCH (override - backend not setting cache control)";
     }
     call rewrite_s_maxage;
     return(deliver);
@@ -77,6 +77,10 @@ sub vcl_fetch {
 sub vcl_deliver {
     call restore_cache_control_header;
     call rewrite_age;
+    remove resp.http.X-Varnish;
+    remove resp.http.X-Varnish-Age;
+    remove resp.http.X-Cache-Rule;
+    remove resp.http.X-Cache-Operation;
 }
 
 

@@ -76,8 +76,7 @@ class TestFunctionalFrontpage(IntranettFunctionalTestCase):
         edit = browser.getLink('Redig\xc3\xa9r')
         edit.click()
         self.assertTrue(browser.url.endswith('manage-frontpage'))
-        self.assert_('<ul class="contentViews" id="content-views">'
-                     in browser.contents)
+        self.assert_('<ul class="contentViews"' in browser.contents)
         # and we can add multiple portlet types
         self.assertTrue('+/plone.portlet.static.Static' in browser.contents)
         self.assertTrue('+/portlets.News' in browser.contents)

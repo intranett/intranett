@@ -23,23 +23,10 @@
                                        id search_input_id"
                        class="searchField inputLabel" />
 
-                <button class="searchButton"       
+                <button class="searchButton"
                         type="submit"
                         i18n:translate="label_search">Search</button>
             </div>
-        <!-- <div class="searchSection">
-            <input id="searchbox_currentfolder_only"
-                   class="noborder"
-                   type="checkbox"
-                   name="path"
-                   tal:attributes="value view/folder_path"
-                   />
-            <label for="searchbox_currentfolder_only"
-                   i18n:translate="label_searchbox_currentfolder_only"
-                   style="cursor: pointer">
-                only in current section
-            </label>
-        </div> -->
 
         <div class="LSResult" id="LSResult" style="display:none"><span class="toolTipArrow">&nbsp;</span>
         <span class="toolTipArrow innerTooltipArrow">&nbsp;</span><div class="LSShadow" id="LSShadow"></div></div>

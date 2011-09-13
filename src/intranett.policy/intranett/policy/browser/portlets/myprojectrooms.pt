@@ -1,0 +1,26 @@
+<dl class="portlet portletSingleItem"
+    i18n:domain="intranett">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span i18n:translate="">My project rooms</span>
+        <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem odd">
+
+      <span class="portletItemDetails">
+        <ul>
+          <li tal:repeat="projectroom view/projectrooms">
+            <a tal:attributes="href projectroom/url"
+               tal:content="projectroom/title">Project room 1</a>
+          </li>
+        </ul>
+      </span>
+
+    </dd>
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>

@@ -1,0 +1,52 @@
+<dl class="portlet portletProjectroomInfo"
+    tal:condition="view/available"
+    i18n:domain="intranett">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span i18n:translate="">Project Info</span>
+        <span>
+            <a href=""
+               tal:attributes="href view/project_url;"
+               tal:content="view/title">Project 47</a>
+        </span>
+        <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem odd">
+
+      <span class="portletItemDetails"
+            tal:condition="python:view.state=='published'"
+            i18n:translate="">
+          All intranet users can see this project room. Only project
+          participants can edit content.
+      </span>
+      <span class="portletItemDetails"
+            tal:condition="python:view.state=='private'"
+            i18n:translate="">
+          Only project participants can see or edit content.
+      </span>
+
+    <span i18n:translate="">Participants are:</span>
+    <ul>
+      <li tal:repeat="info python:view.participants">
+          <tal:user tal:condition="info/url">
+              <a href=""
+                 tal:attributes="href info/url;"
+                 tal:content="info/title">
+                  John Doe
+              </a>
+          </tal:user>
+          <tal:group tal:condition="not:info/url"
+                     tal:content="info/title">
+              Marketing
+          </tal:group>
+      </li>
+    </ul>
+
+    </dd>
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>

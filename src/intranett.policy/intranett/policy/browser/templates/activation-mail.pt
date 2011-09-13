@@ -1,0 +1,32 @@
+<div tal:define="member python:options['member'];
+                 reset python:options['reset']"
+     tal:omit-tag=""
+     i18n:domain="intranett"
+>From: <span tal:replace="structure options/from_" />
+To: <span tal:replace="options/email" />
+Subject: <tal:i18n i18n:translate="">User account information for <span i18n:name="hostname" tal:replace="options/hostname" /></tal:i18n>
+Precedence: bulk
+<div i18n:translate="activation-mail-body"
+     tal:omit-tag="">
+Welcome <span i18n:name="fullname" tal:replace="options/fullname" />,
+
+Thank you for trying out intranett.no free of charge for 30 days.
+Your intranet is available under the address: <span
+i18n:name="hostname" tal:replace="options/hostname" />
+
+Your username is ‘<span i18n:name="member" tal:replace="member" />’.
+Please activate your account and choose a password by visiting:
+
+<span i18n:name="set_password" tal:replace="python:context.pwreset_constructURL(reset['randomstring'])+'?userid='+member.getUserName()" />
+(You must activate your account before <span i18n:name="expirationdate" tal:replace="python:
+context.toLocalizedTime(reset['expires'], long_format=0)" />)
+
+You can find help and instructions at http://hjelp.intranett.no/ if you
+would like those — And please don't hesitate to contact us at
+support@intranett.no or via phone at 21018911 if there's something we can help
+you with.
+
+With kind regards,
+intranett.no-team
+</div>
+</div>

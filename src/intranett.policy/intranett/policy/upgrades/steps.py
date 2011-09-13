@@ -104,22 +104,7 @@ def allow_siteadmin_to_edit_content(context):
 
 @upgrade_to(17)
 def install_highlight_portlets(context):
-    loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('portlets', ))
-    # Add CSS/JS
-    prefix = '++resource++plone.formwidget.autocomplete/jquery.autocomplete'
-    css = getToolByName(context, 'portal_css')
-    ids = css.getResourcesDict().keys()
-    css_id = prefix + '.css'
-    if css_id not in ids:
-        css.registerStylesheet(css_id)
-        css.moveResourceAfter(css_id, 'RTL.css')
-    js = getToolByName(context, 'portal_javascripts')
-    ids = js.getResourcesDict().keys()
-    js_id = prefix + '.min.js'
-    if js_id not in ids:
-        js.registerScript(js_id)
-        js.moveResourceBefore(js_id, 'tiny_mce.js')
+    pass
 
 
 @upgrade_to(18)
@@ -139,8 +124,9 @@ def update_discussion_10(context):
     user_category = actions.user
     review = user_category['review-comments']
     review.visible = False
-    pos = user_category.getObjectPosition('manage_users')
-    user_category.moveObjectToPosition('review-comments', pos)
+    if 'manage_users' in user_category: # pragma: no cover
+        pos = user_category.getObjectPosition('manage_users')
+        user_category.moveObjectToPosition('review-comments', pos)
     aitool = getToolByName(context, 'portal_actionicons')
     ids = [a._action_id for a in aitool.listActionIcons()]
     if 'discussion' in ids:
@@ -190,8 +176,8 @@ def install_users_folder(context):
 
 @upgrade_to(22)
 def enable_secure_cookies(context):
-    acl = aq_get(context, 'acl_users')
-    acl.session._updateProperty('secure', True)
+    from intranett.policy.setuphandlers import enable_secure_cookies
+    enable_secure_cookies(context)
 
 
 @upgrade_to(23)
@@ -286,7 +272,7 @@ def cleanup_plone41(context):
     css = getToolByName(context, 'portal_css')
     css.moveResourceAfter(
         '++resource++plone.app.discussion.stylesheets/discussion.css',
-        '++resource++plone.formwidget.autocomplete/jquery.autocomplete.css')
+        'member.css')
     css.moveResourceAfter(
         '++resource++plone.app.jquerytools.dateinput.css',
         '++resource++plone.app.jquerytools.overlays.css')
@@ -296,9 +282,6 @@ def cleanup_plone41(context):
     actions = getToolByName(context, 'portal_actions')
     if 'plone_setup' in actions.user:
         del actions.user['plone_setup']
-    # XXX this can go once p.a.upgrade 1.1rc2+ is released
-    from plone.app.upgrade.v41.alphas import update_controlpanel_permissions
-    update_controlpanel_permissions(context)
     # handle security
     loadMigrationProfile(context, 'profile-Products.CMFPlone:plone',
         steps=('rolemap', 'workflow', ))
@@ -318,3 +301,125 @@ def cleanup_plone41(context):
         pass
     from plone.app.upgrade.v41.alphas import update_role_mappings
     update_role_mappings(context)
+
+
+@upgrade_to(30)
+def protect_images(context):
+    from plone.app.workflow.remap import remap_workflow
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('workflow', 'plone.app.registry'))
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    remap_workflow(site,
+                   type_ids=('Discussion Item', 'File', 'Image'),
+                   chain=('one_state_intranett_workflow', ))
+
+
+@upgrade_to(31)
+def site_admins_can_review_comments(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('rolemap',))
+
+
+@upgrade_to(32)
+def ext_links_in_new_window(context):
+    from intranett.policy.setuphandlers import open_ext_links_in_new_window
+    ptool = getToolByName(context, 'portal_properties')
+    ptool.site_properties.external_links_open_new_window = 'true'
+    open_ext_links_in_new_window(context)
+
+
+@upgrade_to(33)
+def add_personal_folder(context):
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    from intranett.policy.setuphandlers import setup_personal_folder
+    from intranett.policy.subscribers.users import create_personal_folder
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    if PERSONAL_FOLDER_ID not in portal:
+        setup_personal_folder(portal)
+        # create personal folders for existing users
+        acl_users = aq_get(portal, 'acl_users')
+        user_ids = [a for a in acl_users.source_users.listUserIds()]
+        for user_id in user_ids:
+            create_personal_folder(portal, user_id)
+    actions = getToolByName(context, 'portal_actions')
+    user_category = actions.user
+    if 'manage_users' in user_category: # pragma: no cover
+        del user_category['manage_users']
+
+
+@upgrade_to(34)
+def remove_crappy_portlets(context):
+    # Remove portlets -- the code tried to remove named portlet managers :(
+    # Remove CSS/JS
+    prefix = '++resource++plone.formwidget.autocomplete/jquery.autocomplete'
+    css = getToolByName(context, 'portal_css')
+    ids = css.getResourcesDict().keys()
+    css_id = prefix + '.css'
+    if css_id in ids: # pragma: no cover
+        css.unregisterResource(css_id)
+        css.cookResources()
+    js = getToolByName(context, 'portal_javascripts')
+    ids = js.getResourcesDict().keys()
+    js_id = prefix + '.min.js'
+    if js_id in ids: # pragma: no cover
+        js.unregisterResource(js_id)
+        js.cookResources()
+
+
+@upgrade_to(35)
+def install_project_rooms(context):
+    from plone.app.workflow.remap import remap_workflow
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('actions', 'catalog', 'factorytool', 'plone.app.registry',
+               'portlets', 'typeinfo', 'workflow', ))
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    remap_workflow(site,
+                   type_ids=('File', 'Image'),
+                   chain=('two_state_intranett_workflow', ))
+
+
+@upgrade_to(36)
+def fix_small_problems(context):
+    # add type to factory tool
+    ftool = getToolByName(context, 'portal_factory')
+    types = set(ftool.getFactoryTypes().keys())
+    types.add('ProjectRoom')
+    ftool.manage_setPortalFactoryTypes(listOfTypeIds=list(types))
+    # remove crappy portlets
+    from plone.portlets.interfaces import IPortletType
+    sm = getSiteManager()
+    names = ('intranett.policy.portlets.NewsHighlight',
+             'intranett.policy.portlets.EventHighlight',
+             'intranett.policy.portlets.ContentHighlight')
+    for name in names:
+        sm.unregisterUtility(provided=IPortletType, name=name)
+
+
+@upgrade_to(37)
+def fix_resource_compression_settings(context):
+    loadMigrationProfile(context, 'profile-intranett.theme:default',
+        steps=('jsregistry', ))
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('jsregistry', ))
+
+
+@upgrade_to(38)
+def counter_plone_js_upgrade(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    steps=('jsregistry', ))
+
+
+@upgrade_to(39)
+def enable_session_refresh(context):
+    from intranett.policy.setuphandlers import enable_secure_cookies
+    enable_secure_cookies(context)
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    steps=('cssregistry', ))
+
+
+@upgrade_to(40)
+def set_site_title(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    steps=('properties', ))

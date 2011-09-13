@@ -407,7 +407,7 @@ class TestFunctionalUserSearch(IntranettFunctionalTestCase):
                                     'email': 'info@jarn.com'})
         transaction.commit()
         browser.open(portal.absolute_url())
-        browser.getControl(name='SearchableText').value = 'Døe'
+        browser.getControl(name='SearchableText').value = 'Bob'
         browser.getForm(name='searchform').submit()
         self.failUnless('Bob Døe' in browser.contents)
         self.failUnless('Øngønør' in browser.contents)
@@ -565,7 +565,7 @@ class TestMembersFolder(IntranettTestCase):
         self.assertEqual(folder.portal_type, 'MembersFolder')
         self.assertEqual(folder.Title(), 'Members')
 
-    def test_setuphandler(self):
+    def test_users_setuphandler(self):
         from intranett.policy.setuphandlers import setup_members_folder
         portal = self.layer['portal']
         request = self.layer['request']
@@ -575,7 +575,6 @@ class TestMembersFolder(IntranettTestCase):
         request.form = {
             'extension_ids': ('intranett.policy:default', ),
             'form.submitted': True,
-            'title': 'Site title',
             'language': portal.Language(),
         }
         setup_members_folder(portal)
@@ -655,3 +654,25 @@ class TestMembersFolder(IntranettTestCase):
         # Deleting members keeps persons active
         portal._delObject(folder.getId())
         self.assertEqual(getMembersFolderId(), 'persons')
+
+
+class TestPersonalFolder(IntranettTestCase):
+
+    def test_personal_setuphandler(self):
+        from intranett.policy.config import PERSONAL_FOLDER_ID
+        from intranett.policy.setuphandlers import setup_personal_folder
+        portal = self.layer['portal']
+        request = self.layer['request']
+        if PERSONAL_FOLDER_ID in portal:
+            portal._delObject(PERSONAL_FOLDER_ID)
+        # simulate the effect of commands.py create_site
+        request.form = {
+            'extension_ids': ('intranett.policy:default', ),
+            'form.submitted': True,
+            'language': portal.Language(),
+        }
+        setup_personal_folder(portal)
+        folder = portal[PERSONAL_FOLDER_ID]
+        self.assertEqual(folder.portal_type, 'Folder')
+        self.assertEqual(folder.Title(), 'Personlige mapper')
+        self.assertEqual(folder.Language(), portal.Language())

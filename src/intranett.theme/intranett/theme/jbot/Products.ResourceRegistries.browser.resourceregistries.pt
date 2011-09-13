@@ -1,0 +1,7 @@
+<tal:resourceregistries
+    define="disable python:request.get('disable_plone.resources', 0);"
+    condition="not:disable">
+  <tal:styles replace="structure provider:plone.resourceregistries.styles" />
+  <tal:styles replace="structure provider:plone.resourceregistries.kineticstylesheets" />
+  <tal:scripts replace="structure provider:plone.resourceregistries.scripts" />
+</tal:resourceregistries>

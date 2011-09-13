@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import os
 
 from Acquisition import aq_get
@@ -102,18 +103,7 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
             set(['Manager', 'Contributor', 'Site Administrator', 'Owner']))
 
     def after_17(self):
-        portal = self.layer['portal']
-        sm = getSiteManager()
-        regs = [r.name for r in sm.registeredUtilities()
-            if r.provided == IPortletType]
-        self.assertTrue('intranett.policy.portlets.NewsHighlight' in regs)
-        self.assertTrue('intranett.policy.portlets.EventHighlight' in regs)
-        prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
-            'autocomplete'
-        css = getToolByName(portal, 'portal_css')
-        self.assertTrue(prefix + '.css' in css.getResourcesDict().keys())
-        js = getToolByName(portal, 'portal_javascripts')
-        self.assertTrue(prefix + '.min.js' in js.getResourcesDict().keys())
+        pass
 
     def after_18(self):
         portal = self.layer['portal']
@@ -186,5 +176,114 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertTrue(tiny.link_using_uids, True)
 
     def after_29(self):
+        # tested by GS export diff
+        pass
+
+    def after_30(self):
+        portal = self.layer['portal']
+        wtool = getToolByName(portal, 'portal_workflow')
+        self.assertTrue('two_state_intranett_workflow' in wtool)
+        self.assertEqual(wtool.getChainFor('File'),
+            ('one_state_intranett_workflow', ))
+        self.assertEqual(wtool.getChainFor('Image'),
+            ('one_state_intranett_workflow', ))
+        self.assertEqual(wtool.getChainFor('Discussion Item'),
+            ('one_state_intranett_workflow', ))
+
+    def after_31(self):
+        perm_id = '_Review_comments_Permission'
+        self.assertEqual(set(getattr(self.portal, perm_id)),
+            set(['Manager', 'Site Administrator', 'Reviewer']))
+
+    def after_32(self):
+        portal = self.layer['portal']
+        js = getToolByName(portal, 'portal_javascripts')
+        resources = [r[1] for r in js.getResourcesDict().items() if
+            r[0] == 'mark_special_links.js']
+        self.assertEqual(len(resources), 1)
+        self.assertTrue(resources[0].getEnabled())
+
+    def before_33(self):
+        from intranett.policy.config import PERSONAL_FOLDER_ID
+        portal = self.layer['portal']
+        mtool = getToolByName(portal, 'portal_membership')
+        mtool.addMember(u'fred', 'secret', ['Member'], [])
+        self.assertFalse(PERSONAL_FOLDER_ID in portal)
+
+    def after_33(self):
+        from intranett.policy.config import PERSONAL_FOLDER_ID
+        from intranett.policy.utils import quote_userid
+        portal = self.layer['portal']
+        self.assertTrue(PERSONAL_FOLDER_ID in portal)
+        folder_id = quote_userid(u'fred')
+        self.assertTrue(folder_id in portal[PERSONAL_FOLDER_ID])
+        personal_folder = portal[PERSONAL_FOLDER_ID][folder_id]
+        self.assertEqual(personal_folder.getOwner().getId(), u'fred')
+        self.assertEqual(personal_folder.Creator(), 'fred')
+
+    def after_34(self):
+        portal = self.layer['portal']
+        prefix = '++resource++plone.formwidget.autocomplete/jquery.' \
+            'autocomplete'
+        css = getToolByName(portal, 'portal_css')
+        self.assertFalse(prefix + '.css' in css.getResourcesDict().keys())
+        js = getToolByName(portal, 'portal_javascripts')
+        self.assertFalse(prefix + '.min.js' in js.getResourcesDict().keys())
+
+    def after_35(self):
+        portal = self.layer['portal']
+        wtool = getToolByName(portal, 'portal_workflow')
+        self.assertTrue('projectroom_workflow' in wtool)
+        self.assertIn('ProjectRoom', portal.portal_types)
+        self.assertIn('ProjectRoom', portal.portal_factory.getFactoryTypes())
+        self.assertEqual(wtool.getDefaultChain(), ('intranett_workflow',))
+        self.assertEqual(wtool.getChainForPortalType("Document"), ('intranett_workflow',))
+        self.assertEqual(wtool.getChainForPortalType("ProjectRoom"), ('projectroom_workflow',))
+        self.assertTrue('two_state_intranett_workflow' in wtool)
+        self.assertEqual(wtool.getChainFor('File'),
+            ('two_state_intranett_workflow', ))
+        self.assertEqual(wtool.getChainFor('Image'),
+            ('two_state_intranett_workflow', ))
+        self.assertEqual(wtool.getChainFor('Discussion Item'),
+            ('one_state_intranett_workflow', ))
+
+        action = portal.portal_actions.object.local_roles
+        self.assertEqual(action.getProperty('available_expr'),
+                "python:getattr(object, 'getProjectRoom', None) is None")
+
+    def before_36(self):
+        # simulate what happened on the actual live servers
+        portal = self.layer['portal']
+        ftool = getToolByName(portal, 'portal_factory')
+        types = set(ftool.getFactoryTypes().keys())
+        types.remove('ProjectRoom')
+        ftool.manage_setPortalFactoryTypes(listOfTypeIds=list(types))
+
+    def after_36(self):
+        portal = self.layer['portal']
+        ftool = getToolByName(portal, 'portal_factory')
+        types = set(ftool.getFactoryTypes().keys())
+        self.assertTrue('ProjectRoom' in types)
+        sm = getSiteManager()
+        regs = [r.name for r in sm.registeredUtilities()
+                if IPortletType == r.provided]
+        self.assertFalse('intranett.policy.portlets.NewsHighlight' in regs)
+        self.assertFalse('intranett.policy.portlets.EventHighlight' in regs)
+        self.assertFalse('intranett.policy.portlets.ContentHighlight' in regs)
+
+    def after_37(self):
+        # tested by GS export diff
+        pass
+
+    def after_38(self):
+        # tested by GS export diff
+        pass
+
+    def after_39(self):
+        portal = self.layer['portal']
+        acl = aq_get(portal, 'acl_users')
+        self.assertNotEqual(acl.session.cookie_lifetime, 0)
+
+    def after_40(self):
         # tested by GS export diff
         pass

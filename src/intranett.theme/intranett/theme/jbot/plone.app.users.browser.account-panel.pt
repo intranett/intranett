@@ -7,14 +7,16 @@
       i18n:domain="plone">
 
 <head>
-
+    <metal:block fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
 </head>
 
 <body>
     <div class="cell width-full position-0"
          tal:define="getmacro nocall: context/account-macro;"
          metal:fill-slot="content">
-
 
         <div id="edit-bar">
 
@@ -26,6 +28,17 @@
                 tal:define="view_name view/__name__"
                 i18n:domain="plone">
 
+                <li tal:define="link python:modules['intranett.policy.utils'
+                                     ].get_current_user_profile_url(context)"
+                    tal:condition="link|nothing"
+                    class="plain">
+                    <a href=""
+                       tal:attributes="href link"
+                       i18n:translate="">
+                        View
+                    </a>
+                </li>
+
                 <li id="contentview-user_data-personal-information"
                     tal:define="link view/getPersonalInfoLink;
                                 selected python:view_name=='personal-information'"
@@ -33,9 +46,8 @@
                     tal:attributes="class python:selected and 'selected' or 'plain'">
                     <a href=""
                        tal:attributes="href string:${context/portal_url}/${link}"
-                       i18n:translate="title_personal_information_form">
-                        Personal Information
-                    </a>
+                       i18n:domain="intranett"
+                       i18n:translate="">Edit profile</a>
                 </li>
 
                 <li id="contentview-user_data-change-password"
@@ -54,7 +66,7 @@
 
             <div class="contentActions">&nbsp;</div>
         </div>
-    
+
        <metal:use_form use-macro="python: getmacro('main')"/>
 
     </div>

@@ -5,6 +5,7 @@ from optparse import OptionParser
 
 import transaction
 from AccessControl.SecurityManagement import newSecurityManager
+from Acquisition import aq_get
 from zope.site.hooks import setHooks
 from zope.site.hooks import setSite
 
@@ -35,10 +36,12 @@ def _setup(app, site=None):
         admin = admin.__of__(app.acl_users)
     newSecurityManager(None, admin)
 
-    # Set up local site manager
+    # Set up local site manager, skins and language
     if site is not None:
         setHooks()
         setSite(site)
+        site.setupCurrentSkin(site.REQUEST)
+        site.REQUEST['HTTP_ACCEPT_LANGUAGE'] = site.Language()
 
     return (app, site)
 
@@ -53,9 +56,6 @@ def create_site(app, args):
         help='Force creation of a site when one already exists.')
     parser.add_option('-r', '--rootpassword', default=None,
         help='Create a admin user in the Zope root with the given password.')
-    parser.add_option('-t', '--title',
-        default='intranett.no',
-        help='The title for the new site. [default: "%default"]')
     parser.add_option('-l', '--language', default='no',
         help='The language used in the new site. [default: "%default"]')
     (options, args) = parser.parse_args(args=args)
@@ -84,9 +84,9 @@ def create_site(app, args):
 
     request = app.REQUEST
     request.form = {
-        'extension_ids': ('intranett.policy:default', ),
+        'extension_ids': (
+            'intranett.policy:default', 'intranett.policy:content',),
         'form.submitted': True,
-        'title': options.title,
         'language': options.language,
     }
     from intranett.policy.browser.admin import AddIntranettSite
@@ -109,7 +109,6 @@ def create_site_admin(app, args):
         sys.exit(1)
 
     _, site = _setup(app, site)
-    site.setupCurrentSkin(site.REQUEST)
 
     parser = OptionParser()
     parser.add_option('-l', '--login', default=None,
@@ -142,37 +141,63 @@ def create_site_admin(app, args):
         sys.exit(1)
 
     # Add and notify the site admin user
-    mt = site.portal_membership
-    pt = site.portal_password_reset
-    rt = site.portal_registration
+    mt = aq_get(site, 'portal_membership')
+    pt = aq_get(site, 'portal_password_reset')
+    rt = aq_get(site, 'portal_registration')
 
     if mt.getMemberById(login) is not None:
         logger.error("User %s already exists." % login)
         sys.exit(1)
 
-    mt.addMember(login, rt.generatePassword(), ['Member', 'Site Administrator'], [])
+    from intranett.policy.browser.activation import ActivationMail
+
+    # Get the hostname
+    if not hostname.endswith('.intranett.no'):
+        hostname += '.intranett.no'
+
+    mt.addMember(login, rt.generatePassword(),
+        ['Member', 'Site Administrator'], [])
     member = mt.getMemberById(login) # getMemberByLogin???
     member.setMemberProperties(dict(email=email, fullname=fullname))
     reset = pt.requestReset(login)
-    mail_text = site.registered_notify_template(site, site.REQUEST,
-        member=member, reset=reset, email=email)
-    encoding = site.getProperty('email_charset', 'utf-8')
-    if isinstance(mail_text, unicode):
-        mail_text = mail_text.encode(encoding)
 
-    # Put the hostname into the URL
-    if not hostname.endswith('.intranett.no'):
-        hostname += '.intranett.no'
-    mail_text = mail_text.replace('http://foo/Plone/', 'https://%s/' % hostname)
+    # change ownership of all content to new user and update dates to now
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    from DateTime import DateTime
+    user = member.getUser()
+    userid = user.getId()
+    now = DateTime()
+
+    catalog = aq_get(site, 'portal_catalog')
+    brains = catalog.unrestrictedSearchResults()
+    for brain in brains:
+        if brain.portal_type.startswith('Member'):
+            continue
+        if brain.getId == PERSONAL_FOLDER_ID:
+            continue
+        obj = brain.getObject()
+        obj.setCreators(userid)
+        obj.changeOwnership(user)
+        obj.setCreationDate(now)
+        obj.setEffectiveDate(now)
+        obj.setModificationDate(now)
+        obj.reindexObject(idxs=None)
+
+    mail_text = ActivationMail(site, site.REQUEST)(member=member,
+        reset=reset, email=email, fullname=fullname, hostname=hostname)
+    if isinstance(mail_text, unicode):
+        mail_text = mail_text.encode('utf-8')
+    mail_text = mail_text.replace('http://foo/Plone/passwordreset/',
+                                  'https://%s/activate/' % hostname)
 
     message_obj = message_from_string(mail_text.strip())
     subject = message_obj['Subject']
     m_to = message_obj['To']
     m_from = message_obj['From']
 
-    host = site.MailHost
+    host = aq_get(site, 'MailHost')
     host.send(mail_text, m_to, m_from, subject=subject,
-              charset=encoding, immediate=True)
+              charset='utf-8', immediate=True)
 
     transaction.get().note('Added site admin user %r.' % login)
     transaction.get().commit()

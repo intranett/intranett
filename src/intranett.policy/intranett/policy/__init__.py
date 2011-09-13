@@ -9,6 +9,7 @@ patches.apply()
 def initialize(context):
     from intranett.policy import config
     config.config.register_profile()
+    config.config.register_profile(profile_name='content')
     config.config.scan()
 
     from AccessControl import allow_module
@@ -19,7 +20,9 @@ def initialize(context):
 
     # Register content
     from intranett.policy.content import membersfolder
+    from intranett.policy.content import projectroom
     membersfolder # pyflakes
+    projectroom # pyflakes
 
     content_types, constructors, ftis = atapi.process_types(
         atapi.listTypes(config.PROJECTNAME),

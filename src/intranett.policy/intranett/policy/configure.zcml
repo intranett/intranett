@@ -14,6 +14,7 @@
   <include package="collective.ATClamAV" />
   <include package="iw.rejectanonymous" />
   <include package="munin.zope" />
+  <include package="plone.principalsource" />
   <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
   <include package="plone.formwidget.autocomplete" />
@@ -21,6 +22,7 @@
   <include package="intranett.theme" />
 
   <include package=".browser" />
+  <include package=".subscribers" />
 
   <utility factory=".profile.HiddenProducts" name="intranett.policy" />
 
@@ -30,6 +32,7 @@
       layer="intranett.theme.browser.interfaces.IThemeSpecific" />
 
   <adapter factory=".caching.EditBarCookie" name="editbar" />
+  <adapter factory=".caching.ProjectRoomState" name="projectroom" />
 
   <adapter
     for=".tools.MemberData
@@ -56,6 +59,34 @@
     permission="plone.app.portlets.ManageOwnPortlets"
     />
 
-  <!-- <subscriber handler=".utils.warmupZODBCache" /> -->
+  <!-- project rooms -->
+  <adapter
+      factory=".content.projectroom.participants"
+      name="participants"
+      />
+
+  <adapter
+      factory=".content.projectroom.ProjectRoomParticipantRoles"
+      />
+
+  <subscriber
+      handler=".content.projectroom.transitionChildren"
+      for="intranett.policy.interfaces.IProjectRoom
+           Products.CMFCore.interfaces.IActionSucceededEvent" />
+
+  <subscriber
+      handler=".content.projectroom.reindexChildren"
+      for="intranett.policy.interfaces.IProjectRoom
+           Products.Archetypes.interfaces.IObjectEditedEvent" />
+
+  <subscriber
+      handler=".content.projectroom.transitionMovedContent"
+      for="Products.ATContentTypes.interfaces.IATContentType
+           zope.container.interfaces.IObjectMovedEvent" />
+
+  <subscriber
+      handler=".content.projectroom.removeOwnerPermissions"
+      for="Products.ATContentTypes.interfaces.IATContentType
+           Products.CMFCore.interfaces.IActionSucceededEvent" />
 
 </configure>

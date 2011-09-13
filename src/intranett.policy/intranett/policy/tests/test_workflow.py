@@ -42,9 +42,10 @@ class TestWorkflowSetup(IntranettTestCase):
                               '(), ' % (wf, type_))
 
         workflows = {
-            'Discussion Item': ('one_state_workflow', ),
-            'File': (),
-            'Image': (),
+            'Discussion Item': ('one_state_intranett_workflow', ),
+            'File': ('two_state_intranett_workflow', ),
+            'Image': ('two_state_intranett_workflow', ),
+            'ProjectRoom': ('projectroom_workflow', ),
         }
         for type_ in set(ttool.keys()) - no_workflow:
             wf = wftool.getChainForPortalType(type_)
@@ -80,6 +81,31 @@ class TestWorkflowPermissions(IntranettTestCase):
         folder1 = portal.folder1
         logout()
         self.assertFalse(checkPerm('View', folder1))
+
+    def test_no_anonymous_view_new_file(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        portal.invokeFactory('File', 'file1')
+        file1 = portal.file1
+        logout()
+        self.assertFalse(checkPerm('View', file1))
+
+    def test_no_add_perm_in_private_project_room(self):
+        portal = self.layer['portal']
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        portal.invokeFactory('ProjectRoom', 'room1')
+        self.assertFalse(
+            checkPerm('intranett.policy: Add ProjectRoom', portal.room1))
+
+    def test_no_add_perm_in_public_project_room(self):
+        portal = self.layer['portal']
+        wftool = getToolByName(portal, 'portal_workflow')
+        setRoles(portal, TEST_USER_ID, ['Member', 'Site Administrator'])
+        portal.invokeFactory('ProjectRoom', 'room1')
+        room1 = portal.room1
+        wftool.doActionFor(room1, 'publish')
+        self.assertFalse(
+            checkPerm('intranett.policy: Add ProjectRoom', room1))
 
 
 class TestSitePermissions(IntranettTestCase):
@@ -117,13 +143,12 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'private')
 
-    def _check_edit(self, user):
+    def _check_edit(self, doc, user):
+        portal = self.layer['portal']
         if user is None:
             logout()
         else:
-            login(self.layer['portal'], user)
-        portal = self.layer['portal']
-        doc = portal['test-folder'].doc
+            login(portal, user)
         return checkPerm('Modify portal content', doc)
 
     def test_edit_permission_private(self):
@@ -133,11 +158,11 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'private')
 
-        self.assertFalse(self._check_edit('member'))
-        self.assertTrue(self._check_edit('admin'))
-        self.assertTrue(self._check_edit('editor'))
-        self.assertFalse(self._check_edit('reader'))
-        self.assertFalse(self._check_edit(None))
+        self.assertFalse(self._check_edit(doc, 'member'))
+        self.assertTrue(self._check_edit(doc, 'admin'))
+        self.assertTrue(self._check_edit(doc, 'editor'))
+        self.assertFalse(self._check_edit(doc, 'reader'))
+        self.assertFalse(self._check_edit(doc, None))
 
     def test_edit_permission_published(self):
         portal = self.layer['portal']
@@ -147,19 +172,18 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'published')
 
-        self.assertFalse(self._check_edit('member'))
-        self.assertTrue(self._check_edit('admin'))
-        self.assertTrue(self._check_edit('editor'))
-        self.assertFalse(self._check_edit('reader'))
-        self.assertFalse(self._check_edit(None))
+        self.assertFalse(self._check_edit(doc, 'member'))
+        self.assertTrue(self._check_edit(doc, 'admin'))
+        self.assertTrue(self._check_edit(doc, 'editor'))
+        self.assertFalse(self._check_edit(doc, 'reader'))
+        self.assertFalse(self._check_edit(doc, None))
 
-    def _check_view(self, user):
+    def _check_view(self, doc, user):
         portal = self.layer['portal']
         if user is None:
             logout()
         else:
             login(portal, user)
-        doc = portal['test-folder'].doc
         view = checkPerm('View', doc)
         access = checkPerm('Access contents information', doc)
         return view and access
@@ -170,11 +194,11 @@ class TestWorkflowTransitions(IntranettTestCase):
         wftool = getToolByName(portal, 'portal_workflow')
         self.assertEqual(wftool.getInfoFor(doc, 'review_state'), 'private')
 
-        self.assertFalse(self._check_view('member'))
-        self.assertTrue(self._check_view('admin'))
-        self.assertTrue(self._check_view('editor'))
-        self.assertTrue(self._check_view('reader'))
-        self.assertFalse(self._check_view(None))
+        self.assertFalse(self._check_view(doc, 'member'))
+        self.assertTrue(self._check_view(doc, 'admin'))
+        self.assertTrue(self._check_view(doc, 'editor'))
+        self.assertTrue(self._check_view(doc, 'reader'))
+        self.assertFalse(self._check_view(doc, None))
 
     def test_view_permission_published(self):
         portal = self.layer['portal']
@@ -184,8 +208,64 @@ class TestWorkflowTransitions(IntranettTestCase):
         self.assertEqual(wftool.getInfoFor(doc, 'review_state'),
                          'published')
 
-        self.assertTrue(self._check_view('member'))
-        self.assertTrue(self._check_view('admin'))
-        self.assertTrue(self._check_view('editor'))
-        self.assertTrue(self._check_view('reader'))
-        self.assertFalse(self._check_view(None))
+        self.assertTrue(self._check_view(doc, 'member'))
+        self.assertTrue(self._check_view(doc, 'admin'))
+        self.assertTrue(self._check_view(doc, 'editor'))
+        self.assertTrue(self._check_view(doc, 'reader'))
+        self.assertFalse(self._check_view(doc, None))
+
+    def test_file_edit_permission_published(self):
+        portal = self.layer['portal']
+        file_id = portal['test-folder'].invokeFactory('File', id='file')
+        file = portal['test-folder'][file_id]
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(file, 'review_state'),
+                         'published')
+
+        self.assertFalse(self._check_edit(file, 'member'))
+        self.assertTrue(self._check_edit(file, 'admin'))
+        self.assertTrue(self._check_edit(file, 'editor'))
+        self.assertFalse(self._check_edit(file, 'reader'))
+        self.assertFalse(self._check_edit(file, None))
+
+    def test_file_view_permission_published(self):
+        portal = self.layer['portal']
+        file_id = portal['test-folder'].invokeFactory('File', id='file')
+        file = portal['test-folder'][file_id]
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(file, 'review_state'),
+                         'published')
+
+        self.assertTrue(self._check_view(file, 'member'))
+        self.assertTrue(self._check_view(file, 'admin'))
+        self.assertTrue(self._check_view(file, 'editor'))
+        self.assertTrue(self._check_view(file, 'reader'))
+        self.assertFalse(self._check_view(file, None))
+
+    def test_image_edit_permission_published(self):
+        portal = self.layer['portal']
+        image_id = portal['test-folder'].invokeFactory('Image', id='image')
+        image = portal['test-folder'][image_id]
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(image, 'review_state'),
+                         'published')
+
+        self.assertFalse(self._check_edit(image, 'member'))
+        self.assertTrue(self._check_edit(image, 'admin'))
+        self.assertTrue(self._check_edit(image, 'editor'))
+        self.assertFalse(self._check_edit(image, 'reader'))
+        self.assertFalse(self._check_edit(image, None))
+
+    def test_image_view_permission_published(self):
+        portal = self.layer['portal']
+        image_id = portal['test-folder'].invokeFactory('Image', id='image')
+        image = portal['test-folder'][image_id]
+        wftool = getToolByName(portal, 'portal_workflow')
+        self.assertEqual(wftool.getInfoFor(image, 'review_state'),
+                         'published')
+
+        self.assertTrue(self._check_view(image, 'member'))
+        self.assertTrue(self._check_view(image, 'admin'))
+        self.assertTrue(self._check_view(image, 'editor'))
+        self.assertTrue(self._check_view(image, 'reader'))
+        self.assertFalse(self._check_view(image, None))

@@ -84,42 +84,19 @@
       <element>locked</element>
       <element>resourceRegistries</element>
       <element>editbar</element>
+      <element>projectroom</element>
+    </value>
+  </record>
+  <record name="plone.app.caching.weakCaching.plone.content.file.etags">
+    <field ref="plone.app.caching.weakCaching.etags" />
+    <value>
+      <element>userid</element>
+      <element>language</element>
+      <element>lastModified</element>
     </value>
   </record>
   <record name="plone.app.caching.weakCaching.lastModified">
     <value>False</value>
-  </record>
-  <record name="plone.app.caching.weakCaching.plone.content.folderView.anonOnly">
-    <field type="plone.registry.field.Bool">
-      <description>Ensure logging users always get a fresh page. Note that if you are caching pages in a proxy cache, you'll still need to use a Vary response header to keep anonymous and authenticated content separate.</description>
-      <required>False</required>
-      <title>Only cache for anonymous users</title>
-    </field>
-    <value>False</value>
-  </record>
-  <record name="plone.app.caching.weakCaching.plone.content.folderView.lastModified">
-    <field type="plone.registry.field.Bool">
-      <description>Turn on Last-Modified headers</description>
-      <required>False</required>
-      <title>Last-modified validation</title>
-    </field>
-    <value>False</value>
-  </record>
-  <record name="plone.app.caching.weakCaching.plone.content.folderView.ramCache">
-    <field type="plone.registry.field.Bool">
-      <description>Turn on caching in Zope memory</description>
-      <required>False</required>
-      <title>RAM cache</title>
-    </field>
-    <value>False</value>
-  </record>
-  <record name="plone.app.caching.weakCaching.plone.content.folderView.vary">
-    <field type="plone.registry.field.ASCIILine">
-      <description>Name(s) of HTTP headers that must match for the caching proxy to return a cached response</description>
-      <required>False</required>
-      <title>Vary</title>
-    </field>
-    <value />
   </record>
   <record name="plone.app.caching.weakCaching.ramCache">
     <value>False</value>
@@ -159,7 +136,7 @@
     <value />
   </record>
   <record field="enabled" interface="plone.cachepurging.interfaces.ICachePurgingSettings" name="plone.cachepurging.interfaces.ICachePurgingSettings.enabled">
-    <value>True</value>
+    <value>False</value>
   </record>
   <record field="virtualHosting" interface="plone.cachepurging.interfaces.ICachePurgingSettings" name="plone.cachepurging.interfaces.ICachePurgingSettings.virtualHosting">
     <value>True</value>
@@ -175,7 +152,7 @@
       <element key="plone.content.itemView">plone.app.caching.weakCaching</element>
       <element key="plone.content.feed">plone.app.caching.moderateCaching</element>
       <element key="plone.content.folderView">plone.app.caching.weakCaching</element>
-      <element key="plone.content.file">plone.app.caching.moderateCaching</element>
+      <element key="plone.content.file">plone.app.caching.weakCaching</element>
     </value>
   </record>
 </registry>

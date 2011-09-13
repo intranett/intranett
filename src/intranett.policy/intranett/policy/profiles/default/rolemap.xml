@@ -73,6 +73,12 @@
       <role name="Manager" />
       <role name="Owner" />
     </permission>
+    <permission name="intranett.policy: Add ProjectRoom" acquire="True">
+      <role name="Site Administrator"/>
+      <role name="Manager" />
+      <role name="Owner" />
+      <role name="Contributor" />
+    </permission>
     <permission name="plone.portlet.static: Add static portlet" acquire="True">
       <role name="Site Administrator"/>
       <role name="Manager" />
@@ -81,5 +87,11 @@
     <permission name="Reply to item" acquire="True">
       <role name="Authenticated"/>
     </permission>
+    <permission name="Review comments" acquire="True">
+        <role name="Manager"/>
+        <role name="Reviewer"/>
+        <role name="Site Administrator" />
+    </permission>
+
   </permissions>
 </rolemap>
