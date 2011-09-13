@@ -31,6 +31,9 @@ msgstr ""
 msgid "0_add-a-new-image-to-myfolder_title"
 msgstr "Legg til et bilde i Prøvemappen"
 
+msgid "0_add-a-new-image-to-myfolder_text"
+msgstr "<p>Før du kan bruke et bilde på siden, må du ha bildet lastes opp på intranettet. Bildet bør egne seg for web publisering og ikke være for stort. Bruk formatene GIF, JPG eller PNG og redusér størrelsen om nødvendig for raskere opplasting.</p>"
+
 #. Default: "Click the [Add New...] drop-down menu and select Image from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "1_0_microstep_description"

@@ -135,6 +135,9 @@ msgstr ""
 msgid "4_all-done_title"
 msgstr "Ferdig"
 
+msgid "4_all-done_text"
+msgstr "Du har nå publisert en hendelse."
+
 #. Default: "Add and publish an Event"
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "amberjack_title"

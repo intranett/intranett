@@ -22,6 +22,9 @@ msgstr ""
 msgid "0_0_microstep_description"
 msgstr "Navigér til mappen [Prøvemappe] som du laget i den første øvelsen."
 
+msgid "0_insert-image-on-a-page_text"
+msgstr "<p>I denne øvelsen vil du lære å sette inn et bilde på siden du laget i en tidligere øvelse.</p>"
+
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
 msgid "0_1_microstep_description"
 msgstr ""
@@ -103,6 +106,9 @@ msgstr ""
 msgid "3_insert-an-image_title"
 msgstr "Sett inn et bilde"
 
+msgid "3_insert-an-image_text"
+msgstr "<p>Sett markøren i [Brødteksten] der du ønsker å sette inn et bilde. Finn eller skriv en setning og plassér markøren til venstre for den første bokstaven i setningen.</p>"
+
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
 msgid "4_0_microstep_description"
 msgstr ""
@@ -111,6 +117,9 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
 msgid "4_all-done_title"
 msgstr "Ferdig"
+
+msgid "4_all-done_text"
+msgstr "<p>Du har nå satt inn et bilde på en side. Du kan redigere siden igjen og sette inn flere bilder, flytte ekstisterende eller endre justering.</p>"
 
 #. Default: "Insert image on a page"
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
