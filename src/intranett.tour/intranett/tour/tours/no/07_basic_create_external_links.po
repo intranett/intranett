@@ -65,12 +65,12 @@ msgstr "Redigér min side"
 #. Default: "Type the following text into the [Body Text] field: 'Visit Plone.Org'."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_0_microstep_description"
-msgstr "Skriv følgende tekst i [Brødtekst] feltet: 'Besøk Hjelp.intranett.no'"
+msgstr "Skriv følgende tekst i [Brødtekst] feltet: 'Besøk hjelp.intranett.no'"
 
 #. Default: "Now highlight that text with your mouse pointer"
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_1_microstep_description"
-msgstr "Velg så teksten (Besøk Hjelp.intranett.no) med pekeren og"
+msgstr "Velg så teksten (Besøk hjelp.intranett.no) med pekeren og"
 
 #. Default: "click the [Link icon] in the toolbar. A pop-up window should now appear."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
@@ -80,7 +80,7 @@ msgstr "klikk på [Sett inn / endre lenke] ikonet i verktøylinjen. Et popp-opp 
 #. Default: "This pop-up window allows you to browse the content of your site. Notice the links in the left-hand column. Click on [External] to insert a web address."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_3_microstep_description"
-msgstr "Dette popp-opp vinduet lar det søke gjennom innholdet på intranett. Legg merke til lenken i venstre kolonne. Klikk på [Ekstern lenke] for å sette inn en web adresse."
+msgstr "Dette popp-opp vinduet lar deg søke gjennom innholdet på intranettet. Legg merke til lenkene i venstre kolonne. Klikk på [Ekstern] for å sette inn en web adresse."
 
 #. Default: "Notice the select box containing the familiar http:// prefix. In the empty text field type 'www.plone.org'."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
@@ -90,7 +90,7 @@ msgstr "Legg merke til valg boksen som inneholder http:// perfix. I det tomme te
 #. Default: "Now click the [Preview button] to check the link. Preview lets you confirm that you have the correct webpage before you commit the link."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_5_microstep_description"
-msgstr "Klikk så på [Forhåndsvis] for å sjekke at lenken. Forhåndsvis lar det sjekke at du har den riktige siden før du lagrer lenken."
+msgstr "Klikk så på [Forhåndsvis] for å sjekke at lenken virker."
 
 #. Default: "Click [Insert] to create the hyperlink."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg

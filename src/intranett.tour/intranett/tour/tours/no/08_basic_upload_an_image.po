@@ -56,7 +56,7 @@ msgstr "Legg til bilde"
 #. Default: "Provide a [Title] for your Image: My Photo."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "2_0_microstep_description"
-msgstr "Lag en tittel [Tittel] for bildet: Mitt Bilde."
+msgstr "Lag en tittel [Tittel] for bildet: Mitt bilde."
 
 #. Default: "Provide a [Description] for your Image."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
