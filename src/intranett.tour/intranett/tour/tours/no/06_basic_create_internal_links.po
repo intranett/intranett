@@ -85,7 +85,7 @@ msgstr "Dette popp-opp vinduet lar deg søke gjennom innholdet på intranett. Le
 #. Default: "Find the page titled 'Welcome to Plone' and select the [radio button] next to it."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_4_microstep_description"
-msgstr "Finn siden 'Forside' og velg [Radio knappen] tilknyttet denne."
+msgstr "Finn nyheten 'Min nyhet' og velg [Radioknappen] tilknyttet denne."
 
 #. Default: "Click [Insert] to create the hyperlink."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
