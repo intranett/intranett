@@ -31,6 +31,9 @@ msgstr ""
 msgid "0_create-external-links_title"
 msgstr "Sette inn eksterne lenker"
 
+msgid "0_create-external-links_text"
+msgstr "<p>I denne øvelsen skal du redigére siden som ble laget i en tidligere øvelse ved å sette inn en ekstern lenke på siden.</p>"
+
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "1_0_microstep_description"
@@ -48,7 +51,7 @@ msgstr "Redigér en eksisterende side"
 #. Default: "Click the [Edit] tab to begin editing."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "2_0_microstep_description"
-msgstr ""
+msgstr "Klikk [Redigér] fliken for å starte redigeringsmodus."
 
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "2_1_microstep_description"
@@ -116,6 +119,9 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "4_all-done_title"
 msgstr "Ferdig"
+
+msgid "4_all-done_text"
+msgstr "<p>En ekstern lenke er brukt for å lage koblinger til andre websider, dokumenter eller ressurser på nettet. Finn lenkeikonet i verktøylinjen som ser ut som et lite stykke kjetting.</p>"
 
 #. Default: "Create external links"
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
