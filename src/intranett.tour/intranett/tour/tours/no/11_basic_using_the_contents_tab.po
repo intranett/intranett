@@ -22,6 +22,9 @@ msgstr ""
 msgid "0_0_microstep_description"
 msgstr "Navigér til mappen [Prøvemappe] som du laget i den første øvelsen."
 
+msgid "0_the-contents-tab_text"
+msgstr "<p>Inntil nå har du hovedsaklig arbeidet med Redigér fanen. Nå skal vi se på Innholds fanen og hva den kan gjøre. Innholdsfanen lar deg bla gjennom innholdet på intranettet og utføre redigeringsoppgaver som: sortére innhold, slette innhold, kopiére og klipp-og-lim.</p>"
+
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "0_1_microstep_description"
 msgstr ""
@@ -88,6 +91,9 @@ msgstr ""
 msgid "3_reordering-content_title"
 msgstr "Sortér innhold"
 
+msgid "3_reordering-content_text"
+msgstr "<p>Alt som er laget i forbindelse med øvelsene er synlig i Innhold visning. Du kan se informasjon om hvert enkelt objekt som: Tittel, Størrelse, Endret og Tilstand.</p>"
+
 #. Default: "[Check the box] next to My Page in the contents listing."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "4_0_microstep_description"
@@ -107,6 +113,9 @@ msgstr ""
 msgid "4_copy-content_title"
 msgstr "Kopiér innhold"
 
+msgid "4_copy-content_text"
+msgstr "<p>Det vil ofte være behov eller ønskelig å endre på rekkefølgen av innhold i en mappe. En av de vanligste grunnene for å endre rekkefølge er for å styre hvordan opplistingen i Navigasjonsbokser blir gjort.</p>"
+
 #. Default: "Notice that a Paste button now appears. Click [Paste] to create a copy of My Page."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "5_0_microstep_description"
@@ -120,6 +129,9 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "5_paste-content_title"
 msgstr "Kopiér og Lim Inn innhold"
+
+msgid "5_paste-content_text"
+msgstr "<p>Det kan være mange grunner for å lage kopier av innholdsobjekter, som for eksempel gjenbruk av innhold eller som mal for nytt innhold. Du kan kopiére innhold til hvor som helst på intranettet.</p>"
 
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "6_0_microstep_description"
