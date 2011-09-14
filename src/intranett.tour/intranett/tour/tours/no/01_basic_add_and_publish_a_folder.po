@@ -89,6 +89,9 @@ msgstr ""
 msgid "2_publish-the-folder_title"
 msgstr "Publiser mappen"
 
+msgid "2_publish-the-folder_text"
+msgstr "<p>Du har nå opprettet en mappe i intranettet. For at andre personer skal kunne se mappen din, må du publisere den.</p>"
+
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "3_0_microstep_description"
 msgstr ""

@@ -97,7 +97,7 @@ msgstr "<p>Alt som er laget i forbindelse med øvelsene er synlig i Innhold visn
 #. Default: "[Check the box] next to My Page in the contents listing."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "4_0_microstep_description"
-msgstr "Klikk på [Sjekkboks] tilhørende Min Side i innholdsoversikten."
+msgstr "Klikk på [Sjekkboks] tilhørende Min side i innholdsoversikten."
 
 #. Default: "Click the [Copy] button at the bottom of the page."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
@@ -119,7 +119,7 @@ msgstr "<p>Det vil ofte være behov eller ønskelig å endre på rekkefølgen av
 #. Default: "Notice that a Paste button now appears. Click [Paste] to create a copy of My Page."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "5_0_microstep_description"
-msgstr "Legg merke til at Lim inn knappen nå blir synlig. Klikk på [Lim inn] for å lage en kopi av Min Side"
+msgstr "Legg merke til at Lim inn knappen nå blir synlig. Klikk på [Lim inn] for å lage en kopi av Min side"
 
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "5_1_microstep_description"

@@ -34,7 +34,7 @@ msgstr "<p>I denne øvelsen vil du gjenåpne siden du har laget og lære hvordan
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "1_0_microstep_description"
-msgstr "Navigér til siden [Min Side] som du laget i den forrige øvelsen."
+msgstr "Navigér til siden [Min side] som du laget i den forrige øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "1_1_microstep_description"
@@ -136,7 +136,7 @@ msgstr "Uthev 'Introduksjon'"
 #. Default: "click the text formatting [drop-down menu]"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_9_microstep_description"
-msgstr "klikk tekstformatéring i [nedtrekksmenyen]"
+msgstr "Klikk tekstformateringsmenyen: Vanligvis [Vanlig avsnitt] eller [Format] "
 
 #. Default: "Add and format page content"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg

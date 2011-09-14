@@ -37,7 +37,7 @@ msgstr "<p>I denne øvelsen skal du redigére siden som ble laget i en tidligere
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "1_0_microstep_description"
-msgstr "Navigér til siden [Min Side] som du laget i den Legg til side øvelsen."
+msgstr "Navigér til siden [Min side] som du laget i den Legg til side øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "1_1_microstep_description"

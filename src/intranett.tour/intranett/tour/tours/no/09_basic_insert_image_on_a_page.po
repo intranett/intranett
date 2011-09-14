@@ -37,7 +37,7 @@ msgstr "Sett inn et bilde på en side"
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
 msgid "1_0_microstep_description"
-msgstr "Navigér til mappen [Min Side] som du laget en tidligere øvelse."
+msgstr "Navigér til mappen [Min side] som du laget en tidligere øvelse."
 
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
 msgid "1_1_microstep_description"
@@ -46,7 +46,7 @@ msgstr ""
 #. Default: "Open my page"
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
 msgid "1_open-my-page_title"
-msgstr "Klikk på Min Side"
+msgstr "Klikk på Min side"
 
 #. Default: "Click the [Edit] tab to begin editing."
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
@@ -60,7 +60,7 @@ msgstr ""
 #. Default: "Edit my page"
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg
 msgid "2_edit-my-page_title"
-msgstr "Redigér Min Side"
+msgstr "Redigér Min side"
 
 #. Default: "Now click the [Insert Image] icon in the editor toolbar (it looks like a tree)."
 #: /home/zope/virtualenv/i18ndude/tours/09_basic_insert_image_on_a_page.cfg

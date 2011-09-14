@@ -56,7 +56,7 @@ msgstr "Legg til en hendelse"
 #. Default: "Provide a [Title]: My Event."
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "2_0_microstep_description"
-msgstr "Lag en tittel [Tittel]: Min Hendelse."
+msgstr "Lag en tittel [Tittel]: Min hendelse."
 
 #. Default: "Provide a [Description] for your Event. <br />The description will appear in site searches and in summary listings of events on your site."
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
@@ -106,6 +106,9 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "2_fill-out-the-fields_title"
 msgstr "Fyll ut feltene"
+
+msgid "2_fill-out-the-fields_text"
+msgstr "<p></p>"
 
 #. Default: "Click the [State] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg

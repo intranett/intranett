@@ -84,6 +84,9 @@ msgstr ""
 msgid "2_fill-out-the-fields_title"
 msgstr "Fyll ut feltene"
 
+msgid "2_fill-out-the-fields_text"
+msgstr "<p></p>"
+
 #. Default: "Click the [State] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "3_0_microstep_description"

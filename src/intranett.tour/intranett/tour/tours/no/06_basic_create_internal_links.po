@@ -80,7 +80,7 @@ msgstr "klikk på [Sett inn / endre lenke] ikonet i verktøylinjen. Et popp-opp 
 #. Default: "This pop-up window allows you to browse the content of your site. Notice the links in the left-hand column. Click on [Home] to browse to the root directory of your site."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_3_microstep_description"
-msgstr "Dette popp-opp vinduet lar deg søke gjennom innholdet på intranett. Legg merke til lenken i venstre kolonne. Klikk på [Min Nyhet] for å søke i rot-mappen på intranettet."
+msgstr "Dette popp-opp vinduet lar deg søke gjennom innholdet på intranett. Legg merke til lenken i venstre kolonne. Klikk på [Min nyhet] for å søke i rot-mappen på intranettet."
 
 #. Default: "Find the page titled 'Welcome to Plone' and select the [radio button] next to it."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
@@ -124,7 +124,7 @@ msgid "4_test-your-link_title"
 msgstr "Test lenken din"
 
 msgid "4_test-your-link_text"
-msgstr "<p>Nå når du har laget den interne lenken og lagret siden, prøv lenken ved å klikke på den. Du skal umiddelbart komme til Min Nyhet.</p>"
+msgstr "<p>Nå når du har laget den interne lenken og lagret siden, prøv lenken ved å klikke på den. Du skal umiddelbart komme til Min nyhet.</p>"
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "5_0_microstep_description"

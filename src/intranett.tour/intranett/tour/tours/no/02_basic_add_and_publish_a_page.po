@@ -53,7 +53,7 @@ msgstr "Legg til side"
 #. Default: "Provide a [Title]: My Page."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
 msgid "2_0_microstep_description"
-msgstr "Lag en tittel [Min Side]"
+msgstr "Lag en tittel [Min side]"
 
 #. Default: "Provide a [Description]: This is my first Plone page."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
@@ -78,6 +78,9 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
 msgid "2_fill-out-the-fields_title"
 msgstr "Fyll ut feltene"
+
+msgid "2_fill-out-the-fields_text"
+msgstr "<p>Nå har du en ny, tom, side. Gi den litt innhold:</p>"
 
 #. Default: "Click the [State] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
