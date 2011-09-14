@@ -31,6 +31,9 @@ msgstr ""
 msgid "0_create-internal-links_title"
 msgstr "Lage internal lenker"
 
+msgid "0_create-internal-links_text"
+msgstr "<p>I denne øvelsen skal du redigére siden som ble laget i en tidligere øvelse ved å sette inn en lenke på siden.</p>"
+
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "1_0_microstep_description"
@@ -103,6 +106,9 @@ msgstr ""
 msgid "3_insert-an-internal-link_title"
 msgstr "Sett inn en intern lenke tittel"
 
+msgid "3_insert-an-internal-link_text"
+msgstr "<p>En intern lenke er for å lage koblinger til en side, nyhet, hendelse, bilde, fil eller et hvilket som helst innholdsobjekt på intranettet. Finn lenkeikonet i verktøylinjen, det ser ut som et lite stykke kjetting.</p>"
+
 #. Default: "[Click] your new link. You should be taken directly to the defined page."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "4_0_microstep_description"
@@ -117,6 +123,9 @@ msgstr ""
 msgid "4_test-your-link_title"
 msgstr "Test lenken din"
 
+msgid "4_test-your-link_text"
+msgstr "<p>Nå når du har laget den interne lenken og lagret siden, prøv lenken ved å klikke på den. Du skal umiddelbart komme til Min Nyhet.</p>"
+
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "5_0_microstep_description"
 msgstr ""
@@ -125,6 +134,9 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "5_all-done_title"
 msgstr "Ferdig"
+
+msgid "5_all-done_text"
+msgstr "<p>Du har nå lært å lage en type lenker på intranettet: Interne lenker for å koble innhold innenfor intranettet.</p>"
 
 #. Default: "Create internal links"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
