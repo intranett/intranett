@@ -62,12 +62,12 @@ msgstr "Redigér min side"
 #. Default: "Type the following text in the [Body Text] field 'Visit the Homepage'."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_0_microstep_description"
-msgstr "Skriv følgende tekst i [Brødtekst] feltet 'Gå til Forsiden'."
+msgstr "Skriv følgende tekst i [Brødtekst] feltet 'Gå til min nyhet'."
 
 #. Default: "Now highlight that text with your mouse pointer and"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_1_microstep_description"
-msgstr "Velg så teksten (Gå til Forsiden) med pekeren og"
+msgstr "Velg så teksten (Gå til min nyhet) med pekeren og"
 
 #. Default: "click the [Link icon] in the toolbar. A pop-up window should now appear."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
@@ -77,7 +77,7 @@ msgstr "klikk på [Sett inn / endre lenke] ikonet i verktøylinjen. Et popp-opp 
 #. Default: "This pop-up window allows you to browse the content of your site. Notice the links in the left-hand column. Click on [Home] to browse to the root directory of your site."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_3_microstep_description"
-msgstr "Dette popp-opp vinduet lar deg søke gjennom innholdet på intranett. Legg merke til lenken i venstre kolonne. Klikk på [Forside] for å søke i rot-mappen på intranettet."
+msgstr "Dette popp-opp vinduet lar deg søke gjennom innholdet på intranett. Legg merke til lenken i venstre kolonne. Klikk på [Min Nyhet] for å søke i rot-mappen på intranettet."
 
 #. Default: "Find the page titled 'Welcome to Plone' and select the [radio button] next to it."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
