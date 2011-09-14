@@ -11,6 +11,11 @@ def allow_anonymous_activation():
     addValidSubparts('activate')
 
 
+def allow_anonymous_invitation():
+    from iw.rejectanonymous import addValidIds, addValidSubparts
+    addValidIds('accept')
+
+
 def optimize_rr_packing():
     from Products.ResourceRegistries.tools import CSSRegistry
     from Products.ResourceRegistries.tools import JSRegistry
@@ -24,4 +29,5 @@ def optimize_rr_packing():
 def apply():
     allow_anonymous_robotstxt()
     allow_anonymous_activation()
+    allow_anonymous_invitation()
     optimize_rr_packing()
