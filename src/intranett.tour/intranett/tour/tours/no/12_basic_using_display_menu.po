@@ -31,6 +31,9 @@ msgstr ""
 msgid "0_using-the-display-menu_title"
 msgstr "Å bruke Vis menyen"
 
+msgid "0_using-the-display-menu_text"
+msgstr "<p>En mappe er en spesiell innholdstype på intranettet ettersom den inneholder andre objekter. Hvordan disse objektene vises på skjermen kontrolleres og kan endres gjennom Visning nedtrekksmenyen.</p>"
+
 #. Default: "Click the [Display] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
 msgid "1_0_microstep_description"
@@ -69,6 +72,9 @@ msgstr ""
 msgid "2_summary-view_title"
 msgstr "Standardvisning"
 
+msgid "2_summary-view_text"
+msgstr "<p>Inntil nå har Prøvemappe vært vist som Standardvisning. Standardvisning lister opp hvert enkelt objekt i rekkefølgen som det har i mappen. Tabellvisning lister opp innholdet i et tabellformat. Foto-visning er et annet alternativ egnet for bilder.</p>"
+
 #. Default: "Click the [Display] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
 msgid "3_0_microstep_description"
@@ -97,6 +103,9 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
 msgid "3_tabular-view_title"
 msgstr "Tabellvisning."
+
+msgid "3_tabular-view_text"
+msgstr "<p>Tabellvisning ligner på hvordan innhold vises ved bruk av Innhold-fanen, bortsett fra at det ikke er mulig å utføre operasjoner som for eksempel kopiér eller slett.</p>"
 
 #. Default: "So far you have seen the various ways that a folder in Plone can display its contents. However, in many cases you may wish to choose a single item such as a Page to act as the 'landing page' for the folder. This is common in cases where the folder is intended to be a subsection of the site."
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
@@ -135,6 +144,9 @@ msgstr ""
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
 msgid "5_standard-view_title"
 msgstr "Standardvisning"
+
+msgid "5_standard-view_text"
+msgstr "<p>Du kan nå endre tilbake til standardvisning.</p>"
 
 #. Default: "In this tutorial you have explored some of the ways that a folder can display its contents. On your own, try out the Thumbnail view by uploading several images to a folder. This view is used to create a simple photo gallery."
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
