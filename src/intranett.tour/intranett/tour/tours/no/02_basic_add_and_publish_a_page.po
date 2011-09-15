@@ -58,12 +58,12 @@ msgstr "Gi siden en tittel: [Min side]"
 #. Default: "Provide a [Description]: This is my first Plone page."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
 msgid "2_1_microstep_description"
-msgstr "Skriv et [Sammendrag/beskrivelse]: Min første intranettside."
+msgstr "Skriv en [Beskrivelse]: Min første intranettside."
 
 #. Default: "Add some page content in the [Body Text] field (you can come back and edit this later)."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
 msgid "2_2_microstep_description"
-msgstr "Skriv inn noe innhold i [Brødtekst] feltet (du kan returnere og endre dette senere)."
+msgstr "Skriv inn tekst i [brødtekst]-feltet (du kan returnere og endre dette senere)."
 
 #. Default: "[Save] the page."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
@@ -80,12 +80,12 @@ msgid "2_fill-out-the-fields_title"
 msgstr "Fyll ut feltene"
 
 msgid "2_fill-out-the-fields_text"
-msgstr "<p>Nå har du en ny, tom, side. Gi den litt innhold:</p>"
+msgstr "<p>Nå har du en ny, tom, side. Gi den litt tekst:</p>"
 
 #. Default: "Click the [State] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
 msgid "3_0_microstep_description"
-msgstr "Klikk på [Tilstand] nedtrekksmenyen."
+msgstr "Klikk på [Tilstand]-menyen."
 
 #. Default: "Select [Publish] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
@@ -108,10 +108,10 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
 msgid "4_all-done_title"
-msgstr "Ferdig"
+msgstr "Ferdig!"
 
 msgid "4_all-done_text"
-msgstr "<p>Du har nå lagt til en side og publisert den.</p>"
+msgstr "<p>Du har nå laget en side og publisert den så andre kan se den.</p>"
 
 #. Default: "Add and publish a Page"
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
