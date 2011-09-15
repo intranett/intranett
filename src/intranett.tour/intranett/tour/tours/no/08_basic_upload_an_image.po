@@ -20,7 +20,7 @@ msgstr ""
 #. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "0_0_microstep_description"
-msgstr "Navigér til mappen [Prøvemappe] som du laget i den første øvelsen."
+msgstr "Naviger til mappen [Prøvemappe] du lagde i den første øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "0_1_microstep_description"
@@ -29,15 +29,15 @@ msgstr ""
 #. Default: "Add a new image to myfolder"
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "0_add-a-new-image-to-myfolder_title"
-msgstr "Legg til et bilde i Prøvemappen"
+msgstr "Legg til et bilde i prøvemappen"
 
 msgid "0_add-a-new-image-to-myfolder_text"
-msgstr "<p>Før du kan bruke et bilde på siden, må du ha bildet lastes opp på intranettet. Bildet bør egne seg for web publisering og ikke være for stort. Bruk formatene GIF, JPG eller PNG og redusér størrelsen om nødvendig for raskere opplasting.</p>"
+msgstr "<p>Før du kan bruke et bilde på siden, må du laste bildet opp til intranettet. Bildet må være av et format som egner seg for web. Bruk formatene GIF, JPG eller PNG.</p>"
 
 #. Default: "Click the [Add New...] drop-down menu and select Image from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
 msgid "1_0_microstep_description"
-msgstr "Klikk på [Legg til innhold] i nedtrekksmenyen og velg Bilde fra menyen."
+msgstr "Klikk på [Legg til innhold] i nedtrekksmenyen og velg Bilde."
 
 #. Default: "Select [Image] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg

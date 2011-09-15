@@ -1,4 +1,4 @@
-# German translation of collective.amberjack tours
+# Norwegian translation of  intranett amberjack tours
 # Carsten Raddatz <i18n-de@veit-schiele.de>
 msgid ""
 msgstr ""

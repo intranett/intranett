@@ -20,7 +20,7 @@ msgstr ""
 #. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "0_0_microstep_description"
-msgstr "Navigér til mappen [Prøvemappe] som du laget i den første øvelsen."
+msgstr "Naviger til mappen [Prøvemappe] som du laget i den første øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "0_1_microstep_description"
@@ -32,12 +32,12 @@ msgid "0_create-internal-links_title"
 msgstr "Lage internal lenker"
 
 msgid "0_create-internal-links_text"
-msgstr "<p>I denne øvelsen skal du redigére siden som ble laget i en tidligere øvelse ved å sette inn en lenke på siden.</p>"
+msgstr "<p>I denne øvelsen skal du redigere siden som ble laget i en tidligere øvelse ved å sette inn en lenke på siden.</p>"
 
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "1_0_microstep_description"
-msgstr "Navigér til siden [Min side] som du laget i 'Legg til side' øvelsen."
+msgstr "Naviger til siden [Min side] som du laget i 'Legg til side' øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "1_1_microstep_description"
@@ -46,12 +46,12 @@ msgstr ""
 #. Default: "Edit an existing page"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "1_edit-an-existing-page_title"
-msgstr "Redigér en eksisterende side"
+msgstr "Rediger en eksisterende side"
 
 #. Default: "Click the [Edit] tab to begin editing."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "2_0_microstep_description"
-msgstr "Klikk [Redigér] fliken for å starte redigeringsmodus."
+msgstr "Klikk [Rediger] fliken for å starte redigeringsmodus."
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "2_1_microstep_description"
@@ -60,7 +60,7 @@ msgstr ""
 #. Default: "Edit my page"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "2_edit-my-page_title"
-msgstr "Redigér min side"
+msgstr "Rediger min side"
 
 #. Default: "Type the following text in the [Body Text] field 'Visit the Homepage'."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg

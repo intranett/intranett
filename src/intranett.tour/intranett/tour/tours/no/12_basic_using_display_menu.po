@@ -20,7 +20,7 @@ msgstr ""
 #. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
 msgid "0_0_microstep_description"
-msgstr "Navigér til mappen [Prøvemappe] som du laget i den første øvelsen."
+msgstr "Naviger til mappen [Prøvemappe] som du laget i den første øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
 msgid "0_1_microstep_description"
@@ -105,7 +105,7 @@ msgid "3_tabular-view_title"
 msgstr "Tabellvisning."
 
 msgid "3_tabular-view_text"
-msgstr "<p>Tabellvisning ligner på hvordan innhold vises ved bruk av Innhold-fanen, bortsett fra at det ikke er mulig å utføre operasjoner som for eksempel kopiér eller slett.</p>"
+msgstr "<p>Tabellvisning ligner på hvordan innhold vises ved bruk av Innhold-fanen, bortsett fra at det ikke er mulig å utføre operasjoner som for eksempel kopier eller slett.</p>"
 
 #. Default: "So far you have seen the various ways that a folder in Plone can display its contents. However, in many cases you may wish to choose a single item such as a Page to act as the 'landing page' for the folder. This is common in cases where the folder is intended to be a subsection of the site."
 #: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
