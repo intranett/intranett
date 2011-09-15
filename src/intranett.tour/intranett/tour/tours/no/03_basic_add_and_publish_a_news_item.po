@@ -34,7 +34,7 @@ msgstr "Legg til og publiser en nyhetsartikkel"
 #. Default: "Click the [Add new...] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "1_0_microstep_description"
-msgstr "Klikk på [Legg til innhold] i nedtrekksmenyen."
+msgstr "Klikk på [Legg til innhold]-menyen."
 
 #. Default: "Select [News Item] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
@@ -58,22 +58,22 @@ msgstr "Lag en [Tittel]: Min nyhet"
 #. Default: "Provide a [Description] for your News Item. <br />The description will appear in site searches and in summary listings of news on your site."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "2_1_microstep_description"
-msgstr "Skriv et [Sammendrag/beskrivelse] for nyheten din. <br />Beskrivelsen vil bli vist i søk og sammendrag på nettstedet."
+msgstr "Gi nyheten din en [Sammendrag/beskrivelse]. <br />Beskrivelsen vil bli vist i søkeresultater og lister på nettstedet."
 
 #. Default: "Put some content in the [Body Text] field."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "2_2_microstep_description"
-msgstr "Skriv inn noe innhold i [Brødtekst] feltet."
+msgstr "Skriv inn tekst i [Brødtekst]-feltet."
 
 #. Default: "Notice the [Image] field at the bottom of the page. You can attach an image to a News Item which will appear in summary listings of News Items. You can also caption the image."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "2_3_microstep_description"
-msgstr "Legg merke til [Bilde] feltet nederst på siden. Du kan legge ved et bilde til en nyhetsartikkel som vil vises i opplistingen av nyhetsartikler."
+msgstr "Legg merke til [Bilde] feltet nederst på siden. Du kan legge ved et bilde til en nyhetsartikkel. Bildet vil vises i opplistingen av nyhetsartikler."
 
 #. Default: "Click [Save] to finish."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "2_4_microstep_description"
-msgstr "Klikk på [Lagre] for å avslutte"
+msgstr "Klikk på [Lagre]"
 
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "2_5_microstep_description"
@@ -90,7 +90,7 @@ msgstr "<p></p>"
 #. Default: "Click the [State] drop-down menu."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "3_0_microstep_description"
-msgstr "Klikk på [Tilstand] i nedtrekksmenyen."
+msgstr "Klikk på [Tilstand]-menyen."
 
 #. Default: "Select [Publish] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
@@ -113,7 +113,7 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "4_all-done_title"
-msgstr "Ferdig"
+msgstr "Ferdig!"
 
 msgid "4_all-done_text"
 msgstr "<p>Du har nå lagt til og publisert en nyhet.</p>"
@@ -122,5 +122,5 @@ msgstr "<p>Du har nå lagt til og publisert en nyhet.</p>"
 #. Default: "Add and publish a News Item"
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "amberjack_title"
-msgstr "Legg til og publiser en Nyhetsartikkel"
+msgstr "Legg til og publiser en nyhetsartikkel"
 

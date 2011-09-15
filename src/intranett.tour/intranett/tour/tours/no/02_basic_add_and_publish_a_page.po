@@ -58,7 +58,7 @@ msgstr "Gi siden en tittel: [Min side]"
 #. Default: "Provide a [Description]: This is my first Plone page."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg
 msgid "2_1_microstep_description"
-msgstr "Skriv en [Beskrivelse]: Min første intranettside."
+msgstr "Skriv en [Sammendrag/beskrivelse]: Min første intranettside."
 
 #. Default: "Add some page content in the [Body Text] field (you can come back and edit this later)."
 #: /home/zope/virtualenv/i18ndude/tours/02_basic_add_and_publish_a_page.cfg

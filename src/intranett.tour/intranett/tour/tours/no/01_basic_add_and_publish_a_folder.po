@@ -49,7 +49,7 @@ msgstr "i [Tittel]-feltet, skriv 'Prøvemappe'"
 #. Default: "In the [Description] field, type 'This folder will be used to contain sample content as I work through each tutorial.'."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "1_1_microstep_description"
-msgstr "i [Beskrivelse]-feltet, skriv 'Denne mappen er for øvelsesmateriale jeg lager'"
+msgstr "i [Sammendrag/beskrivelse]-feltet, skriv 'Denne mappen er for øvelsesmateriale jeg lager'"
 
 msgid "1_1_microstep_text"
 msgstr "{'text': \"Denne mappen er for øvelsesmateriale jeg lager\"}"
