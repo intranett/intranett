@@ -1,5 +1,5 @@
 # Norwegian translation of  intranett amberjack tours
-# Carsten Raddatz <i18n-de@veit-schiele.de>
+# Jarn <info@jarn.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "0_0_microstep_description"
-msgstr "Naviger til mappen [Prøvemappe] som du laget i den første øvelsen."
+msgstr "Naviger til mappen [Prøvemappe] du lagde i den første øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/03_basic_add_and_publish_a_news_item.cfg
 msgid "0_1_microstep_description"
