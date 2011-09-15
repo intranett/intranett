@@ -1,4 +1,4 @@
-# German translation of collective.amberjack tours
+# Norwegian translation of  intranett amberjack tours
 # Carsten Raddatz <i18n-de@veit-schiele.de>
 msgid ""
 msgstr ""
@@ -20,7 +20,7 @@ msgstr ""
 #. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "0_0_microstep_description"
-msgstr "Navigér til mappen [Prøvemappe] som du laget i den første øvelsen."
+msgstr "Naviger til mappen [Prøvemappe] som du laget i den første øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "0_1_microstep_description"
@@ -29,7 +29,7 @@ msgstr ""
 #. Default: "Add and publish an event"
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "0_add-and-publish-an-event_title"
-msgstr "Legg til og publisér en Hendelse"
+msgstr "Legg til og publiser en Hendelse"
 
 msgid "1_create-a-event_text"
 msgstr "<p>Hendelser er nyttige annonseringer for ting som skal skje. Hendelser er ganske lik en vanlig side, men med tilleggsfelter for å legge informasjon om hendelsen, som tid, sted og kontaktpersoner.</p>"
@@ -118,7 +118,7 @@ msgstr "Klikk på [Status] i nedtrekksmenyen."
 #. Default: "Select [Publish] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "3_1_microstep_description"
-msgstr "Velg [Publisér] fra menyen."
+msgstr "Velg [Publiser] fra menyen."
 
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "3_2_microstep_description"
@@ -127,7 +127,7 @@ msgstr ""
 #. Default: "Publish the event"
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "3_publish-the-event_title"
-msgstr "Publisér hendelsen"
+msgstr "Publiser hendelsen"
 
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "4_0_microstep_description"
@@ -144,5 +144,5 @@ msgstr "Du har nå publisert en hendelse."
 #. Default: "Add and publish an Event"
 #: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
 msgid "amberjack_title"
-msgstr "Legg til og publisér en Hendelse"
+msgstr "Legg til og publiser en Hendelse"
 

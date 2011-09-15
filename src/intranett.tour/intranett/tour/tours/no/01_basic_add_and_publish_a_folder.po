@@ -78,7 +78,7 @@ msgstr "Klikk [Tilstand]-menyen."
 #. Default: "Select [Publish] from the menu."
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "2_1_microstep_description"
-msgstr "Velg [Publisér] fra menyen"
+msgstr "Velg [Publiser] fra menyen"
 
 #: /home/zope/virtualenv/i18ndude/tours/01_basic_add_and_publish_a_folder.cfg
 msgid "2_2_microstep_description"
