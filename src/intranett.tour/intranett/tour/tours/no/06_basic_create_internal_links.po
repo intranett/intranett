@@ -29,15 +29,15 @@ msgstr ""
 #. Default: "Create internal links"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "0_create-internal-links_title"
-msgstr "Lage internal lenker"
+msgstr "Lage lenker internt i intranettet"
 
 msgid "0_create-internal-links_text"
-msgstr "<p>I denne øvelsen skal du redigere siden som ble laget i en tidligere øvelse ved å sette inn en lenke på siden.</p>"
+msgstr "<p>I denne øvelsen skal du sette inn en lenke på siden du lagde tidligere.</p>"
 
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "1_0_microstep_description"
-msgstr "Naviger til siden [Min side] som du laget i 'Legg til side' øvelsen."
+msgstr "Naviger til siden [Min side] du lagde i 'Legg til side' øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "1_1_microstep_description"
@@ -46,12 +46,12 @@ msgstr ""
 #. Default: "Edit an existing page"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "1_edit-an-existing-page_title"
-msgstr "Rediger en eksisterende side"
+msgstr "Rediger en side"
 
 #. Default: "Click the [Edit] tab to begin editing."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "2_0_microstep_description"
-msgstr "Klikk [Rediger] fliken for å starte redigeringsmodus."
+msgstr "Klikk [Rediger]-fanen."
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "2_1_microstep_description"
@@ -65,27 +65,27 @@ msgstr "Rediger min side"
 #. Default: "Type the following text in the [Body Text] field 'Visit the Homepage'."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_0_microstep_description"
-msgstr "Skriv følgende tekst i [Brødtekst] feltet 'Gå til min nyhet'."
+msgstr "Skriv følgende tekst i [Brødtekst]-feltet 'Gå til min nyhet'."
 
 #. Default: "Now highlight that text with your mouse pointer and"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_1_microstep_description"
-msgstr "Velg så teksten (Gå til min nyhet) med pekeren og"
+msgstr "Merk teksten 'Gå til min nyhet' og…"
 
 #. Default: "click the [Link icon] in the toolbar. A pop-up window should now appear."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_2_microstep_description"
-msgstr "klikk på [Sett inn / endre lenke] ikonet i verktøylinjen. Et popp-opp vindu vil nå vises."
+msgstr "klikk på [Sett inn/endre lenke]-ikonet i verktøylinjen. Et lenkevindu dukker opp."
 
 #. Default: "This pop-up window allows you to browse the content of your site. Notice the links in the left-hand column. Click on [Home] to browse to the root directory of your site."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_3_microstep_description"
-msgstr "Dette popp-opp vinduet lar deg søke gjennom innholdet på intranett. Legg merke til lenken i venstre kolonne. Klikk på [Min nyhet] for å søke i rot-mappen på intranettet."
+msgstr "Dette vinduet lar deg søke gjennom innholdet. "
 
 #. Default: "Find the page titled 'Welcome to Plone' and select the [radio button] next to it."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_4_microstep_description"
-msgstr "Finn nyheten 'Min nyhet' og velg [Radioknappen] tilknyttet denne."
+msgstr "Finn nyheten din: 'Min nyhet' og klikk [Radioknappen] tilknyttet denne."
 
 #. Default: "Click [Insert] to create the hyperlink."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
@@ -95,7 +95,7 @@ msgstr "Klikk [Sett inn] for å lage lenken."
 #. Default: "Click [Save] to finish."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_6_microstep_description"
-msgstr "Klikk [Lagre] for å avslutte"
+msgstr "Klikk [Lagre]"
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_7_microstep_description"
@@ -104,15 +104,15 @@ msgstr ""
 #. Default: "Insert an internal link"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "3_insert-an-internal-link_title"
-msgstr "Sett inn en intern lenke tittel"
+msgstr "Sett inn en intern lenke"
 
 msgid "3_insert-an-internal-link_text"
-msgstr "<p>En intern lenke er for å lage koblinger til en side, nyhet, hendelse, bilde, fil eller et hvilket som helst innholdsobjekt på intranettet. Finn lenkeikonet i verktøylinjen, det ser ut som et lite stykke kjetting.</p>"
+msgstr "<p>En intern lenke er en klikkbar kobling til en side, nyhet, hendelse, bilde, fil eller et hvilket som helst innholdsobjekt på intranettet. Finn lenkeikonet i verktøylinjen, det ser ut som en kjetting.</p>"
 
 #. Default: "[Click] your new link. You should be taken directly to the defined page."
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "4_0_microstep_description"
-msgstr "[Klikk] lenken. Du skal da lande direkte på den valgte siden. "
+msgstr "[Klikk] lenken. Du skal da lande direkte på nyheten du valgte."
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "4_1_microstep_description"
@@ -121,10 +121,10 @@ msgstr ""
 #. Default: "Test your link"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "4_test-your-link_title"
-msgstr "Test lenken din"
+msgstr "Test lenken"
 
 msgid "4_test-your-link_text"
-msgstr "<p>Nå når du har laget den interne lenken og lagret siden, prøv lenken ved å klikke på den. Du skal umiddelbart komme til Min nyhet.</p>"
+msgstr "<p>Nå når du har laget den interne lenken og lagret siden, prøv lenken ved å klikke på den. Du skal umiddelbart komme til 'Min nyhet'.</p>"
 
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "5_0_microstep_description"
@@ -133,7 +133,7 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
 msgid "5_all-done_title"
-msgstr "Ferdig"
+msgstr "Ferdig!"
 
 msgid "5_all-done_text"
 msgstr "<p>Du har nå lært å lage en type lenker på intranettet: Interne lenker for å koble innhold innenfor intranettet.</p>"
