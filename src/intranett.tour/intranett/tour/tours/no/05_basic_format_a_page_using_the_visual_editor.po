@@ -73,7 +73,7 @@ msgstr "og velg Subheading (mellomoverskrift). Legg merke til at teksten som du 
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_11_microstep_description"
 msgstr "Skriv egen tekst og eksperimenter med andre tekststiler i tekstformat-menyen."
-
+    
 #. Default: "click on the [screen icon]"
 #: /home/zope/virtualenv/i18ndude/tours/05_basic_format_a_page_using_the_visual_editor.cfg
 msgid "3_12_microstep_description"
