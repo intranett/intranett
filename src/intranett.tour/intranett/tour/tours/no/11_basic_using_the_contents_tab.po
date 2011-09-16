@@ -23,7 +23,7 @@ msgid "0_0_microstep_description"
 msgstr "Naviger til mappen [Prøvemappe] du lagde i den første øvelsen."
 
 msgid "0_the-contents-tab_text"
-msgstr "<p>Inntil nå har du hovedsaklig arbeidet med Rediger fanen. Nå skal vi se på Innholds fanen og hva den kan gjøre. Innholdsfanen lar deg bla gjennom innholdet på intranettet og utføre redigeringsoppgaver som: sortere innhold, slette innhold, kopiere og klipp-og-lim.</p>"
+msgstr "<p>Inntil nå har du hovedsaklig arbeidet med redigeringsfanen. Nå skal vi se på innholds-fanen. Innholdsfanen lar deg se gjennom innholdet på intranettet og utføre redigeringsoppgaver som sortering, sletting og kopiering.</p>"
 
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "0_1_microstep_description"
@@ -37,7 +37,7 @@ msgstr "Innholdsfanen"
 #. Default: "Click on the [Contents] tab."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "1_0_microstep_description"
-msgstr "Klikk på [Innhold] fanen"
+msgstr "Klikk på [Innhold]-fanen"
 
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "1_1_microstep_description"
@@ -51,12 +51,12 @@ msgstr "Innholdsfanen"
 #. Default: "Also notice the buttons along the bottom of the Contents view: Copy, Cut, Rename, Delete, and Change State. By using the checkboxes next to each content item you can apply any of these changes to those checked items."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "2_0_microstep_description"
-msgstr "Legg også merke til alternativene nederst i skjermbildet: Kopier, Klipp ut, Gi nytt navn, Slett og Endre tilstand. Ved å bruke sjekkboksene ved hvert enkelt innhold kan du anvende alternativene på de markerte innholdsobjektene."
+msgstr "Legg merke til alternativene nederst i skjermbildet: Kopier, Klipp ut, Gi nytt navn, Slett og Endre tilstand. Ved å bruke avkrysningsboksene ved hvert enkelt innhold kan du bruke alternativene fra knappene på det markerte innholdet."
 
 #. Default: "To move to the next step use the button with the double arrow in the head of this popup."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "2_1_microstep_description"
-msgstr "For å velge neste steg, bruk knappen med dobbel pil øverst i nedtrekksmenyen."
+msgstr "For å komme til neste steg, bruk knappen med dobbel pil øverst til høyre i dette viduet."
 
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "2_2_microstep_description"
@@ -65,22 +65,22 @@ msgstr ""
 #. Default: "Features of the contents tab"
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "2_features-of-the-contents-tab_title"
-msgstr "Funksjoner i Innhold fanen"
+msgstr "Funksjoner i innholdsfanen"
 
 #. Default: "Position your mouse pointer over one of the items in the [Order column]. Notice that your pointer’s shape changed."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "3_0_microstep_description"
-msgstr "Plasser muse-pekeren over en av innholdsobjektene i venstre [Sorteringskolonnen]. Legg merke til hvordan pekeren endrer seg."
+msgstr "Plasser muse-pekeren over :: før innholdsobjektene i venstre kolonne. Legg merke til hvordan pekeren endrer seg."
 
 #. Default: "Click-and-drag the item to the top of the Contents listing. The item is now moved - you do not need to save the change in any way."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "3_1_microstep_description"
-msgstr "Dra-og-slipp objektet til toppen av Innholdslisten. Objektet er nå flyttet - og det er ikke nødvendig med å lagre etter denne operasjonen."
+msgstr "klikk og dra objektet oppover eller nedover i listen. På denne måten kan du endre sorteringsrekkefølge internt i mappen. Det er ikke nødvendig å lagre."
 
 #. Default: "To move to the next step use the button with the double arrow in the head of this popup."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "3_2_microstep_description"
-msgstr "For å velge neste steg, bruk knappen med dobbel pil øverst i nedtrekksmenyen."
+msgstr "For å komme til neste steg, bruk knappen med dobbel pil øverst i dette vinduet."
 
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "3_3_microstep_description"
@@ -92,12 +92,12 @@ msgid "3_reordering-content_title"
 msgstr "Sorter innhold"
 
 msgid "3_reordering-content_text"
-msgstr "<p>Alt som er laget i forbindelse med øvelsene er synlig i Innhold visning. Du kan se informasjon om hvert enkelt objekt som: Tittel, Størrelse, Endret og Tilstand.</p>"
+msgstr "<p>Alt du har laget i forbindelse med øvelsene er synlig i innholdsvisningen. Du kan se informasjon om hvert enkelt objekt som: tittel, størrelse, når den sist ble endret og hvilken tilstand (publisert/privat) det befinner seg i.</p>"
 
 #. Default: "[Check the box] next to My Page in the contents listing."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "4_0_microstep_description"
-msgstr "Klikk på [Sjekkboks] tilhørende Min side i innholdsoversikten."
+msgstr "Klikk på [avkrysningsboksen] tilhørende Min side i innholdsoversikten."
 
 #. Default: "Click the [Copy] button at the bottom of the page."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
@@ -114,12 +114,12 @@ msgid "4_copy-content_title"
 msgstr "Kopier innhold"
 
 msgid "4_copy-content_text"
-msgstr "<p>Det vil ofte være behov eller ønskelig å endre på rekkefølgen av innhold i en mappe. En av de vanligste grunnene for å endre rekkefølge er for å styre hvordan opplistingen i Navigasjonsbokser blir gjort.</p>"
+msgstr "<p>Noen ganger er det ønskelig å endre rekkefølgen av innhold i en mappe. Rekkefølgen brukes blant annet i navigasjonsbokser.</p>"
 
 #. Default: "Notice that a Paste button now appears. Click [Paste] to create a copy of My Page."
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "5_0_microstep_description"
-msgstr "Legg merke til at Lim inn knappen nå blir synlig. Klikk på [Lim inn] for å lage en kopi av Min side"
+msgstr "Legg merke til at 'lim inn'-knappen nå blir synlig. Klikk på [Lim inn] for å sette inn en kopi av 'Min side'"
 
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "5_1_microstep_description"
@@ -128,7 +128,7 @@ msgstr ""
 #. Default: "Paste content"
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "5_paste-content_title"
-msgstr "Kopier og Lim Inn innhold"
+msgstr "Kopier og lim inn innhold"
 
 msgid "5_paste-content_text"
 msgstr "<p>Det kan være mange grunner for å lage kopier av innholdsobjekter, som for eksempel gjenbruk av innhold eller som mal for nytt innhold. Du kan kopiere innhold til hvor som helst på intranettet.</p>"
@@ -140,10 +140,10 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "6_all-done_title"
-msgstr "Ferdig"
+msgstr "Ferdig!"
 
 #. Default: "Using the Contents tab"
 #: /home/zope/virtualenv/i18ndude/tours/11_basic_using_the_contents_tab.cfg
 msgid "amberjack_title"
-msgstr "Å bruke Innhold fanen"
+msgstr "Å bruke innholdsfanen"
 
