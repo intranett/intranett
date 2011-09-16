@@ -153,7 +153,6 @@ def setup_amberjack(site):
                   u'07_basic_create_external_links-create-external',
                   u'08_basic_upload_an_image-upload-an-image',
                   u'09_basic_insert_image_on_a_page-insert-image-on-a',
-                  u'10_basic_upload_and_link_to_a_file-upload-and-link',
                   u'11_basic_using_the_contents_tab-using-the-contents',
                   u'12_basic_using_display_menu-using-the-display-menu']})
 
