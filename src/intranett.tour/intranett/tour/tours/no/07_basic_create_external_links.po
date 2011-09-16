@@ -37,7 +37,7 @@ msgstr "<p>I denne øvelsen skal du redigere siden som ble laget i en tidligere 
 #. Default: "Navigate to [My Page] that you created from the previous tutorial."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "1_0_microstep_description"
-msgstr "Naviger til siden [Min side] som du laget i den Legg til side øvelsen."
+msgstr "Naviger til siden [Min side] du lagde i 'Legg til side'-øvelsen."
 
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "1_1_microstep_description"
@@ -46,12 +46,12 @@ msgstr ""
 #. Default: "Edit an existing page"
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "1_edit-an-existing-page_title"
-msgstr "Rediger en eksisterende side"
+msgstr "Rediger en side"
 
 #. Default: "Click the [Edit] tab to begin editing."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "2_0_microstep_description"
-msgstr "Klikk [Rediger] fliken for å starte redigeringsmodus."
+msgstr "Klikk [Rediger]-fanen."
 
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "2_1_microstep_description"
@@ -65,7 +65,7 @@ msgstr "Rediger min side"
 #. Default: "Type the following text into the [Body Text] field: 'Visit Plone.Org'."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_0_microstep_description"
-msgstr "Skriv følgende tekst i [Brødtekst] feltet: 'Besøk hjelp.intranett.no'"
+msgstr "Skriv følgende tekst i [Brødtekst]-feltet: 'Besøk hjelp.intranett.no'"
 
 #. Default: "Now highlight that text with your mouse pointer"
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
@@ -75,32 +75,32 @@ msgstr "Velg så teksten (Besøk hjelp.intranett.no) med pekeren og"
 #. Default: "click the [Link icon] in the toolbar. A pop-up window should now appear."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_2_microstep_description"
-msgstr "klikk på [Sett inn / endre lenke] ikonet i verktøylinjen. Et popp-opp vindu vil nå vises."
+msgstr "klikk på [Sett inn/endre lenke] ikonet i verktøylinjen. Et vindu vil nå vises."
 
 #. Default: "This pop-up window allows you to browse the content of your site. Notice the links in the left-hand column. Click on [External] to insert a web address."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_3_microstep_description"
-msgstr "Dette popp-opp vinduet lar deg søke gjennom innholdet på intranettet. Legg merke til lenkene i venstre kolonne. Klikk på [Ekstern] for å sette inn en web adresse."
+msgstr "Dette vinduet lar deg søke gjennom innholdet på intranettet. Legg merke til navigasjonen i venstre kolonne. Klikk på [Ekstern] for å sette inn en nettadresse(URL)."
 
 #. Default: "Notice the select box containing the familiar http:// prefix. In the empty text field type 'www.plone.org'."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_4_microstep_description"
-msgstr "Legg merke til valg boksen som inneholder http:// perfix. I det tomme tekstfeltet skrive eller lim inn 'hjelp.intranett.no'"
+msgstr "Legg merke til valg-boksen som inneholder http://. I det tomme tekstfeltet: skriv inn 'hjelp.intranett.no'"
 
 #. Default: "Now click the [Preview button] to check the link. Preview lets you confirm that you have the correct webpage before you commit the link."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_5_microstep_description"
-msgstr "Klikk så på [Forhåndsvis] for å sjekke at lenken virker."
+msgstr "Klikk på [Forhåndsvis] for å sjekke at lenken er korrekt."
 
 #. Default: "Click [Insert] to create the hyperlink."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_6_microstep_description"
-msgstr "Klikk [Sett inn] for å lage lenken."
+msgstr "Klikk [Sett inn]."
 
 #. Default: "Click [Save] to finish."
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_7_microstep_description"
-msgstr "Klikk [Lagre] for å avslutte"
+msgstr "Klikk [Lagre]"
 
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_8_microstep_description"
@@ -109,7 +109,7 @@ msgstr ""
 #. Default: "Insert an external link"
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "3_insert-an-external-link_title"
-msgstr "Sett in en ekstern lenke"
+msgstr "Sett inn en ekstern lenke"
 
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "4_0_microstep_description"
@@ -118,10 +118,10 @@ msgstr ""
 #. Default: "All done"
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
 msgid "4_all-done_title"
-msgstr "Ferdig"
+msgstr "Ferdig!"
 
 msgid "4_all-done_text"
-msgstr "<p>En ekstern lenke er brukt for å lage koblinger til andre websider, dokumenter eller ressurser på nettet. Finn lenkeikonet i verktøylinjen som ser ut som et lite stykke kjetting.</p>"
+msgstr "<p>Eksterne lenker brukes til å lage koblinger til andre websider ute på Internett. Finn lenkeikonet i verktøylinjen. Det ser ut som en  kjetting.</p>"
 
 #. Default: "Create external links"
 #: /home/zope/virtualenv/i18ndude/tours/07_basic_create_external_links.cfg
