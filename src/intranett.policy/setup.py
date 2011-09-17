@@ -63,8 +63,6 @@ setup(name='intranett.policy',
           'zope.component',
           'zope.interface',
           'intranett.theme',
-          'jarn.xmpp.twisted',
-          'jarn.xmpp.core',
       ],
       entry_points="""
       [zopectl.command]
