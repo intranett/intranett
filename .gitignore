@@ -8,6 +8,7 @@ eggs
 etc/ejabberd.cfg
 etc/haproxy.cfg
 etc/logrotate.conf
+etc/nginx.conf
 etc/supervisord.conf
 etc/varnish.vcl
 include
