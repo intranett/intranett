@@ -5,6 +5,7 @@ dist
 distribute_setup.py
 downloads
 eggs
+etc/ejabberd.cfg
 etc/haproxy.cfg
 etc/logrotate.conf
 etc/supervisord.conf
