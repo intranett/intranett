@@ -575,7 +575,6 @@ class TestMembersFolder(IntranettTestCase):
         request.form = {
             'extension_ids': ('intranett.policy:default', ),
             'form.submitted': True,
-            'title': 'Site title',
             'language': portal.Language(),
         }
         setup_members_folder(portal)
@@ -670,7 +669,6 @@ class TestPersonalFolder(IntranettTestCase):
         request.form = {
             'extension_ids': ('intranett.policy:default', ),
             'form.submitted': True,
-            'title': 'Site title',
             'language': portal.Language(),
         }
         setup_personal_folder(portal)

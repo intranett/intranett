@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-07-09 13:23+0000\n"
+"POT-Creation-Date: 2011-09-07 10:51+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Only project participants can see or edit content."
 msgstr ""
 
-#: intranett.policy/intranett/policy/content/projectroom.py:32
+#: intranett.policy/intranett/policy/content/projectroom.py:33
 msgid "Participants"
 msgstr ""
 
@@ -139,7 +139,11 @@ msgstr ""
 msgid "This site is powered by intranett.no"
 msgstr ""
 
-#: intranett.policy/intranett/policy/content/projectroom.py:33
+#: intranett.policy/intranett/policy/browser/templates/activation-mail.pt:7
+msgid "User account information for ${hostname}"
+msgstr ""
+
+#: intranett.policy/intranett/policy/content/projectroom.py:34
 msgid "Users who have access to the project room."
 msgstr ""
 
