@@ -1,0 +1,43 @@
+from zope.interface import implements
+from zope.viewlet.interfaces import IViewlet
+
+from Products.Five.browser import BrowserView
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode
+
+VIELET_TEXT = """
+<script type="text/javascript" src="//asset0.zendesk.com/external/zenbox/v2.1/zenbox.js"></script>
+<style type="text/css" media="screen, projection">
+  @import url(//asset0.zendesk.com/external/zenbox/v2.1/zenbox.css);
+</style>
+<script type="text/javascript">
+  if (typeof(Zenbox) !== "undefined") {
+    Zenbox.init({
+      dropboxID:   "20021871",
+      url:         "https://jarn.zendesk.com",
+      tabID:       "support",
+      tabColor:    "#444",
+      tabPosition: "Right"
+    });
+  }
+</script>
+"""
+
+class SupportViewlet(BrowserView):
+    implements(IViewlet)
+
+    def __init__(self, context, request, view, manager):
+        super(SupportViewlet, self).__init__(context, request)
+        self.__parent__ = view
+        self.context = context
+        self.request = request
+        self.view = view
+        self.manager = manager
+
+    def update(self):
+        pass
+
+    def render(self):
+        """render the webstats snippet"""
+        snippet = safe_unicode(VIELET_TEXT)
+        return snippet
