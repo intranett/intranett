@@ -367,12 +367,24 @@ a#portal-logo:hover {
   border: 1px solid #ccc;
   vertical-align: middle; }
 
+form#search .field {
+  background: #ddd;
+  border: 1px solid #ccc;
+  margin: 1em auto;
+  float: left; }
+
+form#search:after {
+  content: "";
+  display: block;
+  clear: left; }
+
 .searchSection {
   font-size: 0.76em;
   text-align: left;
   color: #808080; }
 
-button.searchButton {
+button.searchButton,
+form#search .field input.searchButton {
   border: none;
   background: transparent;
   padding: 0 0.76em;
