@@ -7,6 +7,7 @@ from zope.component import queryUtility
 from zope.i18n import translate
 from zope.interface import alsoProvides
 
+from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import config
 
 
@@ -105,7 +106,6 @@ def setup_personal_folder(site):
     from plone.portlets.interfaces import IPortletManager
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import PERSONAL_FOLDER_ID
-    from intranett.policy import IntranettMessageFactory as _
     personal_folder_title = _(u'Personal folders')
     title = translate(personal_folder_title, target_language=site.Language())
     portal = getToolByName(site, 'portal_url').getPortalObject()
@@ -200,7 +200,9 @@ def setup_quickupload(site):
          name='collective.quickupload.QuickUploadPortlet')
     mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
     addview = mapping.restrictedTraverse('+/' + portlet.addview)
-    addview.createAndAdd(data={'header': translate('Quick upload', target_language=site.Language())})
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=site.Language())})
 
 # TODO the default can go with plutonian > 0.1a2
 @import_step(depends=('plone-final', 'workflow', ))
