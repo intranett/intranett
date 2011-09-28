@@ -25,4 +25,7 @@
   <javascript id="++resource++quickupload_static/helpers.js" authenticated="False"
       insert-after="++resource++plone.app.discussion.javascripts/comments.js"/>
 
+  <javascript id="++resource++jquery-ui.min.js" expression="" />
+  <javascript id="++resource++jquery-ui-i18n.js" expression="" />
+
 </object>
