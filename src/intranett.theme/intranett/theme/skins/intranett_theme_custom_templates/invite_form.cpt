@@ -75,7 +75,6 @@
                            />
             </div>
 
-
             <!--
             <div class="field">
               <label i18n:translate="label_message">Message</label>
@@ -94,6 +93,7 @@
             </div>
             -->
 
+            <!--
               <div class="field"
                   tal:condition="python:len(here.portal_invitations.getInvitesUser(sent=0, used=0, enforce_address=0))"
 
@@ -129,6 +129,7 @@
                 </div>
                   <input type="hidden" name="enforce_address" value="1">
               </div>
+            -->
               
             <div class="formControls">
               <input class="context"
@@ -186,9 +187,9 @@
           <table class="listing" summary="User Listing">
           <tal:block>
           <tr>
-            <th i18n:translate="listingheader_recipient">Recipient</th>
             <th i18n:translate="listingheader_sent_address">Sent to address</th>
-            <th i18n:translate="listingheader_enforce_address">Enforce email address</th>
+            <th i18n:translate="listingheader_recipient">Recipient</th>
+            <!--<th i18n:translate="listingheader_enforce_address">Enforce email address</th>-->
             <th i18n:translate="listingheader_enforce_sent">Sent</th>
             <th i18n:translate="listingheader_enforce_used">Used</th>
             <th i18n:translate="listingheader_expired">Expired</th>
@@ -199,9 +200,9 @@
           <tr tal:define="oddrow repeat/invite/odd;
                           userid invite/sender;"
               tal:attributes="class python:test(oddrow,'odd','even')">
-            <td tal:content="invite/recipient">Recipient</td>
             <td tal:content="invite/sent_address">Sent Address</td>
-            <td i18n:translate="" tal:content="python:test(invite['enforce_address'],'Yes','No')">Enforce email address</td>
+            <td tal:content="invite/recipient">Recipient</td>
+            <!--<td i18n:translate="" tal:content="python:test(invite['enforce_address'],'Yes','No')">Enforce email address</td>-->
             <td i18n:translate="" tal:content="python:test(invite['sent'],'Yes','No')">Sent</td>
             <td i18n:translate="" tal:content="python:test(invite['used'], 'Yes','No')">Used</td>
             <td i18n:translate="" tal:content="python:test((invite['sent'] and (invite['xdate']<DateTime() or invite['used'])), 'Yes', 'No')"></td>
