@@ -437,6 +437,8 @@ def install_quickupload(context):
 @upgrade_to(42)
 def install_amberjack(context):
     loadMigrationProfile(context, 'profile-intranett.tour:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('cssregistry', ))
     from intranett.policy.setuphandlers import setup_amberjack
     url_tool = getToolByName(context, 'portal_url')
     site = url_tool.getPortalObject()

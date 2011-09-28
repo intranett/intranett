@@ -18,6 +18,18 @@
    rendering="link"
    authenticated="False" />
 
+ <stylesheet id="++resource++jquery-ui-themes/sunburst/jqueryui.css"
+   insert-before="member.css"
+   expression="" />
+
+ <stylesheet id="++resource++jquery-ui-themes/sunburst-patch.css"
+   insert-before="member.css"
+   expression="" />
+
+ <stylesheet id="collective.amberjack.css"
+   insert-before="member.css"
+   media="screen" />
+
  <stylesheet
    id="acl_users/session/refresh?session_refresh=true&amp;type=css&amp;minutes=10"
    authenticated="True"
