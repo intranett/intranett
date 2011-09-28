@@ -1,37 +1,42 @@
+from collective.amberjack.core.interfaces import ITour
+from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 from zope.interface import implements
 
 from intranett.policy.config import PERSONAL_FOLDER_ID
-from collective.amberjack.core.interfaces import ITour
 
 
 class ToursRoot(object):
     implements(ITour)
 
     def getTourContext(self, context, path):
-        site_root = '/'.join(context.portal_url.getPortalObject().getPhysicalPath())
-        if not context.portal_amberjack.sandbox:
-            return context.unrestrictedTraverse(site_root + path)
+        amberjack = getToolByName(context, 'portal_amberjack')
+        mtool = getToolByName(context, 'portal_membership')
+        portal_url = getToolByName(context, 'portal_url')
+        site = portal_url.getPortalObject()
+        if not amberjack.sandbox:
+            return site.unrestrictedTraverse(path)
         try:
-            user_id = context.portal_membership.getAuthenticatedMember().id
-            return context.unrestrictedTraverse(
-                site_root +
-                '/%s/' % PERSONAL_FOLDER_ID +
-                user_id + path)
+            user_id = mtool.getAuthenticatedMember().id
+            return site.unrestrictedTraverse(
+                '%s/' % PERSONAL_FOLDER_ID + user_id + path)
         except AttributeError:
-            return context.unrestrictedTraverse(site_root + path)
+            return site.unrestrictedTraverse(path)
 
     def getToursRoot(self, context, request, url=''):
-        portal_state = getMultiAdapter((context, request), name=u'plone_portal_state')
-        if url:
-            if url.startswith('ABS'):
-                return unicode(portal_state.navigation_root_url())
-        if not context.portal_amberjack.sandbox:
-            return unicode(portal_state.navigation_root_url())
-        user_id = context.portal_membership.getAuthenticatedMember().id
+        amberjack = getToolByName(context, 'portal_amberjack')
+        mtool = getToolByName(context, 'portal_membership')
+        portal_state = getMultiAdapter(
+            (context, request), name=u'plone_portal_state')
+        navroot = unicode(portal_state.navigation_root_url())
+        if url and url.startswith('ABS'):
+            return navroot
+        if not amberjack.sandbox:
+            return navroot
+        user_id = mtool.getAuthenticatedMember().id
         member_folder_path = '/%s/' % PERSONAL_FOLDER_ID + user_id
         try:
             portal_state.portal().restrictedTraverse(member_folder_path.split('/')[1:])
-            return unicode(portal_state.navigation_root_url() + member_folder_path)
+            return navroot + unicode(member_folder_path)
         except AttributeError:
-            return unicode(portal_state.navigation_root_url())
+            return navroot

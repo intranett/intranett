@@ -3,5 +3,6 @@
   i18n_domain="intranett">
 
   <include package="Products.CMFPlone" file="meta.zcml" />
+  <include package="intranett.tour" file="meta.zcml" />
 
 </configure>

@@ -64,7 +64,7 @@ setup(name='intranett.policy',
           'zope.component',
           'zope.interface',
           'intranett.theme',
-          'intranett.tour'
+          'intranett.tour',
       ],
       entry_points="""
       [zopectl.command]

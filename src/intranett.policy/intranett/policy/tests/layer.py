@@ -51,7 +51,6 @@ class IntranettLayer(PloneSandboxLayer):
         z2.installProduct(app, 'Products.PloneFormGen')
         z2.installProduct(app, 'intranett.theme')
         z2.installProduct(app, 'intranett.policy')
-        z2.installProduct(app, 'intranett.tour')
 
     def tearDownZope(self, app):
         z2.uninstallProduct(app, 'intranett.policy')

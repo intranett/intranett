@@ -1,5 +1,4 @@
-<configure
-    xmlns="http://namespaces.zope.org/zope">
+<configure xmlns="http://namespaces.zope.org/zope">
 
   <utility
     name="collective.amberjack.core.toursroot"
