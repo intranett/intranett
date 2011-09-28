@@ -429,7 +429,7 @@ def set_site_title(context):
 def install_quickupload(context):
     loadMigrationProfile(context, 'profile-collective.quickupload:default')
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('jsregistry', 'cssregistry', 'propertiestool'))
+        steps=('cssregistry', 'jsregistry', 'propertiestool'))
     from intranett.policy.setuphandlers import setup_quickupload
     setup_quickupload(context)
 
@@ -438,7 +438,7 @@ def install_quickupload(context):
 def install_amberjack(context):
     loadMigrationProfile(context, 'profile-intranett.tour:default')
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('cssregistry', ))
+        steps=('cssregistry', 'jsregistry', ))
     from intranett.policy.setuphandlers import setup_amberjack
     url_tool = getToolByName(context, 'portal_url')
     site = url_tool.getPortalObject()
