@@ -17,14 +17,11 @@
    insert-after="ploneCustom.css" />
 
  <stylesheet id="++resource++quickupload_static/uploadify.css"
-   insert-after="IEFixes.css"
-   cacheable="True" cookable="True"
+   insert-after="ploneCustom.css"
    authenticated="False" />
 
  <stylesheet id="++resource++quickupload_static/fileuploader.css"
-   insert-after="IEFixes.css"
-   cacheable="True" cookable="True"
+   insert-after="ploneCustom.css"
    authenticated="False" />
-
 
 </object>

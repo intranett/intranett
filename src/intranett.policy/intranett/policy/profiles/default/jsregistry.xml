@@ -16,12 +16,13 @@
   <javascript id="++resource++plone.app.discussion.javascripts/comments.js"
       insert-after="tiny_mce_init.js" />
 
- <javascript id="++resource++quickupload_static/swfobject.js" authenticated="False" 
+  <javascript id="++resource++quickupload_static/swfobject.js" authenticated="False"
       insert-after="++resource++plone.app.discussion.javascripts/comments.js" />
- <javascript id="++resource++quickupload_static/jquery.uploadify.js" authenticated="False"
+  <javascript id="++resource++quickupload_static/jquery.uploadify.js" authenticated="False"
       insert-after="++resource++plone.app.discussion.javascripts/comments.js"/>
- <javascript id="++resource++quickupload_static/fileuploader.js" authenticated="False" 
+  <javascript id="++resource++quickupload_static/fileuploader.js" authenticated="False"
       insert-after="++resource++plone.app.discussion.javascripts/comments.js"/>
- <javascript id="++resource++quickupload_static/helpers.js" authenticated="False" 
+  <javascript id="++resource++quickupload_static/helpers.js" authenticated="False"
       insert-after="++resource++plone.app.discussion.javascripts/comments.js"/>
+
 </object>
