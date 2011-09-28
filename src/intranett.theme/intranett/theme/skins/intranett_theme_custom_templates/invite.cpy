@@ -5,7 +5,7 @@
 ##bind script=script
 ##bind state=state
 ##bind subpath=traverse_subpath
-##parameters=invite_to_address, message='', enforce_address=False
+##parameters=invite_to_address, message='', enforce_address=False, came_from_portlet=False
 ##title=Send an URL to a friend
 ##
 
@@ -33,5 +33,8 @@ portal_invitations.invites[invitecode].sendTo(invite_to_address)
 portalmessage = _(u"Sent invitation to %s.") % invite_to_address
 
 putils.addPortalMessage(portalmessage)
+
+if came_from_portlet:
+    state.set(status='from_portlet')
 
 return state

@@ -4,4 +4,5 @@ validators=validate_invite
 [actions]
 action.success = redirect_to:string:invite_form
 action.failure = redirect_to:string:invite_form
+action.from_portlet = redirect_to:request/HTTP_REFERER
 
