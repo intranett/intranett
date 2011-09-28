@@ -1,4 +1,5 @@
 from Acquisition import aq_get
+from plone.portlets.interfaces import IPortletType
 from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryMultiAdapter
@@ -6,6 +7,7 @@ from zope.component import queryUtility
 from zope.i18n import translate
 from zope.interface import alsoProvides
 
+from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import config
 
 
@@ -53,7 +55,6 @@ def disable_collections(site):
 
 
 def disable_portlets(site):
-    from plone.portlets.interfaces import IPortletType
     from zope.component import getUtilitiesFor
 
     disabled = ['portlets.Calendar', 'portlets.Classic', 'portlets.Login',
@@ -100,7 +101,6 @@ def setup_personal_folder(site):
     from plone.portlets.interfaces import IPortletManager
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import PERSONAL_FOLDER_ID
-    from intranett.policy import IntranettMessageFactory as _
     personal_folder_title = _(u'Personal folders')
     title = translate(personal_folder_title, target_language=site.Language())
     portal = getToolByName(site, 'portal_url').getPortalObject()
@@ -191,6 +191,18 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
+def setup_quickupload(site):
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    # Assign quickupload portlet
+    portlet = queryUtility(IPortletType,
+         name='collective.quickupload.QuickUploadPortlet')
+    mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=site.Language())})
+
+
 @import_step()
 def various(context):
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -211,6 +223,7 @@ def various(context):
     enable_secure_cookies(site)
     open_ext_links_in_new_window(site)
     restrict_siteadmin(site)
+    setup_quickupload(site)
 
 
 @import_step()

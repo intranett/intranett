@@ -423,3 +423,12 @@ def enable_session_refresh(context):
 def set_site_title(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
     steps=('properties', ))
+
+
+@upgrade_to(41)
+def install_quickupload(context):
+    loadMigrationProfile(context, 'profile-collective.quickupload:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('jsregistry', 'cssregistry', 'propertiestool'))
+    from intranett.policy.setuphandlers import setup_quickupload
+    setup_quickupload(context)
