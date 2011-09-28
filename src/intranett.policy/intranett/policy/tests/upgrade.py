@@ -70,6 +70,7 @@ class UpgradeTests(object):
         # but the order is not important
         expected_diff = set([
             'browserlayer.xml', # fails randomly on ordering
+            'controlpanel.xml', # TODO ordering is fixed in Plone 4.2
             'portlets.xml',
             'registry.xml',
             'types/FieldsetFolder.xml',
