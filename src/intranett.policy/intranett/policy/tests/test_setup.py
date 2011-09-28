@@ -47,7 +47,7 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         css = getToolByName(portal, 'portal_css')
         resources = css.getEvaluatedResources(portal)
-        self.assertEqual(len(resources), 4)
+        self.assertEqual(len(resources), 3)
         self.assert_(resources[1]._data['id'].startswith('acl_users'))
         self.assert_(resources[2]._data['id'].startswith('IEFixes'))
 
