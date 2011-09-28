@@ -17,11 +17,13 @@
    insert-after="ploneCustom.css" />
 
  <stylesheet id="++resource++quickupload_static/uploadify.css"
-   insert-after="ploneCustom.css"
+   insert-before="ploneCustom.css"
+   rendering="link"
    authenticated="False" />
 
  <stylesheet id="++resource++quickupload_static/fileuploader.css"
-   insert-after="ploneCustom.css"
+   insert-before="ploneCustom.css"
+   rendering="link"
    authenticated="False" />
 
 </object>
