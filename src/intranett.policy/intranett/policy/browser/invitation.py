@@ -45,7 +45,7 @@ def sendInvitationMail(site, member, vars):
     tool = getToolByName(site, 'portal_invitations')
     expires = DateTime() + tool.getProperty('days', 7)
 
-    accept_url = '%s/accept?code=%s&email=%s' % (
+    accept_url = '%s/accept/%s?email=%s' % (
         site.absolute_url(), quote(invitecode), quote(invite_to_address))
 
     mail_text = InvitationMail(site, site.REQUEST)(member=member,
@@ -67,29 +67,3 @@ def sendInvitationMail(site, member, vars):
 # Allow from Python scripts
 security = ModuleSecurityInfo('intranett.policy.browser.invitation')
 security.declarePublic('sendInvitationMail')
-
-
-class AcceptForm(InviteRegistrationForm):
-
-    description = u""
-
-    @property
-    def form_fields(self):
-        """Insert the 'invite_code' field."""
-        fields = super(AcceptForm, self).form_fields
-        # Move invite_code field up one slot
-        fields.__FormFields_seq__ = (
-            fields.__FormFields_seq__[:-2] +
-            fields.__FormFields_seq__[-1:] +
-            fields.__FormFields_seq__[-2:-1])
-        return fields
-
-    def __call__(self):
-        code = self.request.get('code')
-        if code:
-            self.request.form['form.invite_code'] = code
-        email = self.request.get('email')
-        if email:
-            self.request.form['form.email'] = email
-        return super(AcceptForm, self).__call__()
-

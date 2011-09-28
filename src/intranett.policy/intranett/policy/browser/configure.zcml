@@ -74,12 +74,4 @@
       permission="zope2.View"
       />
 
-  <!-- Accept invitation view -->
-  <browser:page
-      name="accept"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
-      class=".invitation.AcceptForm"
-      permission="zope.Public"
-      />
-
 </configure>

@@ -13,7 +13,8 @@ def allow_anonymous_activation():
 
 def allow_anonymous_invitation():
     from iw.rejectanonymous import addValidIds, addValidSubparts
-    addValidIds('accept')
+    addValidIds('accept_form')
+    addValidSubparts('accept')
 
 
 def optimize_rr_packing():
