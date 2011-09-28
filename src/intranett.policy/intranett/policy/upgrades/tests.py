@@ -285,10 +285,12 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertNotEqual(acl.session.cookie_lifetime, 0)
 
     def after_40(self):
+        from collective.quickupload.portlet import quickuploadportlet
         sm = getSiteManager()
         regs = [r.name for r in sm.registeredUtilities()
                 if IPortletType == r.provided]
         self.assertTrue('collective.quickupload.QuickUploadPortlet' in regs)
         portal = self.layer['portal']
         mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
-        self.assertTrue('quick-upload' in mapping)
+        assigned = [type(p) for p in mapping.values()]
+        self.assertTrue(quickuploadportlet.Assignment in assigned)
