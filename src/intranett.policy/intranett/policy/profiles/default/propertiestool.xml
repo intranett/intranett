@@ -6,6 +6,12 @@
    <property name="clamav_port" type="string">3310</property>
    <property name="clamav_timeout" type="int">120</property>
   </object>
+ <object name="quickupload_properties">
+   <property name="auto_upload" type="boolean">True</property>
+   <property name="fill_titles" type="boolean">False</property>
+   <property name="size_limit" type="int">51200</property>
+   <property name="sim_upload_limit" type="int">1</property>
+ </object>
  <object name="site_properties">
   <property name="disable_nonfolderish_sections"
     type="boolean">True</property>

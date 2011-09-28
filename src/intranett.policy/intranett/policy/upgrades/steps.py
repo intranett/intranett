@@ -423,6 +423,6 @@ def enable_session_refresh(context):
 def install_quickupload(context):
     loadMigrationProfile(context, 'profile-collective.quickupload:default')
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('jsregistry', 'cssregistry'))
+        steps=('jsregistry', 'cssregistry', 'propertiestool'))
     from intranett.policy.setuphandlers import setup_quickupload
     setup_quickupload(context)
