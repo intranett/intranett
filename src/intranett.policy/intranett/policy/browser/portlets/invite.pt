@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="">
+
+<dl class="portlet portletInvite" i18n:domain="intranett">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span i18n:translate="">Invite others</span>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem even">
+        <form action="invite"
+              method="post">
+            <input type="hidden" name="came_from_portlet" value="1" />
+            <div class="formHelp"
+                i18n:translate="portlet_invite_address">
+              The e-mail address to send an invitation to:
+            </div>
+            <input type="text"
+                   id="invite_to_address"
+                   name="invite_to_address"
+                   size="25"
+                   />
+            <div class="formControls">
+              <input class="context"
+                     type="submit"
+                     name="form.button.Invite"
+                     value="Invite"
+                     i18n:attributes="value"
+                     />
+            </div>
+        </form>
+    </dd>
+
+    <dd class="portletFooter" style="display:none">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+
+</dl>
+
+</html>

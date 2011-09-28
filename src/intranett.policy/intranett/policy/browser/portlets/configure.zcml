@@ -57,4 +57,14 @@
     addview=".myprojectrooms.AddForm"
     />
 
+  <plone:portlet
+    name="intranett.policy.portlets.InvitePortlet"
+    interface=".invite.IInvitePortlet"
+    assignment=".invite.Assignment"
+    view_permission="plone.app.portlets.ManagePortlets"
+    edit_permission="plone.app.portlets.ManagePortlets"
+    renderer=".invite.Renderer"
+    addview=".invite.AddForm"
+    />
+
 </configure>

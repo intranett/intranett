@@ -17,6 +17,13 @@
     i18n:attributes="title"
     />
 
+  <portlet
+    addview="intranett.policy.portlets.InvitePortlet"
+    title="Invite others"
+    description=""
+    i18n:attributes="title"
+    />
+
   <assignment name="navigation"
       category="context"
       key="/"
