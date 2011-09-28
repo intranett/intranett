@@ -411,12 +411,24 @@ a#portal-logo:hover {
     border: 1px solid #ccc;
     vertical-align: middle;
 }
+form#search .field {
+    background: #ddd;
+    border: 1px solid #ccc;
+    margin: 1em auto;
+    float: left;
+}
+form#search:after {
+    content: "";
+    display: block;
+    clear: left;
+}
 .searchSection {
     font-size: $smaller-size;
     text-align: left;
     color: #808080;
 }
-button.searchButton {
+button.searchButton,
+form#search .field input.searchButton {
     border: none;
     background: transparent;
     padding: 0 $smaller-size;
@@ -804,7 +816,7 @@ dd.image-caption {
     z-index: 3;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
-    margin-right: -1px;
+    margin-right: -4px;
     text-decoration: none;
     background-color: transparent;
     color: $fontcolor;
@@ -1226,7 +1238,8 @@ body.template-personal-information textarea.mce_editable {
 .formControls .actionButtons .button,
 .documentEditable * .context,
 .destructive,
-.documentEditable * .destructive {
+.documentEditable * .destructive,
+.qq-upload-button {
     background:#eee;
     border:1px solid #ccc;
     color:#222;
@@ -1916,6 +1929,20 @@ li.navTreeCurrentNode.navTreeFolderish {
 .portletNavigationTree dd.portletItem {
     padding:0.63em 0.63em 0;
     /*font-size: $base-size;*/
+}
+
+.qq-upload-button {
+    float: right;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    margin-bottom: 1em;
+}
+
+#label-upload {
+  display: block;
+  float: left;
+  padding: 1em 0;
 }
 
 /* @end */

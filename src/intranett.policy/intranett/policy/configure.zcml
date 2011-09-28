@@ -12,6 +12,7 @@
 
   <include package="Products.CMFPlone" />
   <include package="collective.ATClamAV" />
+  <include package="collective.quickupload" />
   <include package="iw.rejectanonymous" />
   <include package="munin.zope" />
   <include package="plone.principalsource" />

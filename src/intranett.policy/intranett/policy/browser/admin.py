@@ -12,6 +12,7 @@ class AddIntranettSite(AddPloneSite):
 
     default_extension_profiles = (
         'intranett.policy:default',
+        'intranett.policy:content',
         )
 
     def __call__(self):
@@ -21,10 +22,10 @@ class AddIntranettSite(AddPloneSite):
         if submitted:
             site = addPloneSite(
                 context, 'Plone',
-                title=form.get('title', ''),
                 profile_id=_DEFAULT_PROFILE,
                 extension_ids=form.get('extension_ids',
-                    (u'intranett.policy:default',)),
+                    (u'intranett.policy:default',
+                     u'intranett.policy:content')),
                 setup_content=False,
                 default_language=form.get('language', 'no'),
                 )

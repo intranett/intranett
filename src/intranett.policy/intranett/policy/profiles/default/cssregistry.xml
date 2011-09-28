@@ -8,4 +8,22 @@
    insert-after="member.css"
    rendering="link" cacheable="True" cookable="True" />
 
+ <stylesheet id="++resource++quickupload_static/uploadify.css"
+   insert-before="member.css"
+   rendering="link"
+   authenticated="False" />
+
+ <stylesheet id="++resource++quickupload_static/fileuploader.css"
+   insert-before="member.css"
+   rendering="link"
+   authenticated="False" />
+
+ <stylesheet
+   id="acl_users/session/refresh?session_refresh=true&amp;type=css&amp;minutes=10"
+   authenticated="True"
+   cacheable="False"
+   compression="none"
+   cookable="False"
+   insert-after="ploneCustom.css" />
+
 </object>

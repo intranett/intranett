@@ -23,6 +23,5 @@ setup(name='Products.Extropy',
           'intranett.theme',
           'jarn.extranet',
           'Products.Invoice',
-          'five.pt',
       ],
       )

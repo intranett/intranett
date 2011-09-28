@@ -1,14 +1,37 @@
 Changelog
 =========
 
-1.3.2 - unreleased
+1.3.4 - unreleased
 ------------------
+
+- INTRANETT-253: Add quick file and image upload feature.
+
+- Fix styling of search box in related items dialog.
+
+- INTRANETT-254: Fix logo title to use the site title.
+
+1.3.3 - 2011-09-09
+------------------
+
+- INTRANETT-224: Add default content.
+
+- Update to distribute = 0.6.21.
+
+- INTRANETT-248: Translate subject of welcome mail to Norwegian.
+
+1.3.2 - 2011-09-03
+------------------
+
+- Changed authentication cookies to have a timeout instead of being browser
+  session based.
+
+- Update to latest Chameleon, Zope 2 and ZTK releases.
 
 - Optimize login form to avoid JavaScript, `spinner.gif` and KSS resources.
 
 - Modified login procedure to skip the `login_success` page.
 
-- Add Chameleon template engine to Jarn intranet.
+- Enable Chameleon template engine.
 
 - Disable haproxy application sessions.
 

@@ -47,8 +47,9 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         css = getToolByName(portal, 'portal_css')
         resources = css.getEvaluatedResources(portal)
-        self.assertEqual(len(resources), 4)
-        self.assert_(resources[1]._data['id'].startswith('IEFixes'))
+        self.assertEqual(len(resources), 3)
+        self.assert_(resources[1]._data['id'].startswith('acl_users'))
+        self.assert_(resources[2]._data['id'].startswith('IEFixes'))
 
     def test_kss_resources(self):
         portal = self.layer['portal']
@@ -59,35 +60,6 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         js = getToolByName(portal, 'portal_javascripts')
         self.assertEqual(len(js.getEvaluatedResources(portal)), 7)
-
-    def test_selectivizr_requires_css_linking(self):
-        # According to http://selectivizr.com/: Style sheets MUST be added to
-        # the page using a <link> tag but you can still use @import in your
-        # style sheets
-        # Since its a good idea anyways, we test all CSS files and not just
-        # our own where we might use CSS3 selectors
-        portal = self.layer['portal']
-        css = getToolByName(portal, 'portal_css')
-        for id_, resource in css.getResourcesDict().items():
-            if not resource.getEnabled():
-                continue
-            self.assertEquals(resource.getRendering(), 'link', id_)
-
-    def test_selectivizr_jquery_unsupported_syntax(self):
-        # According to http://selectivizr.com/ the jQuery version does not
-        # support certain selectors, let's check that we don't introduce those
-        portal = self.layer['portal']
-        css = getToolByName(portal, 'portal_css')
-        unsupported_patterns = ('^=', '$=', '*=', ':nth-last-child',
-            ':nth-of-type', ':nth-last-of-type', ':root', ':first-of-type',
-            ':last-of-type', ':only-of-type', ':empty', )
-        for id_, resource in css.getResourcesDict().items():
-            if not resource.getEnabled():
-                continue
-            text = css.getInlineResource(id_, portal)
-            for pattern in unsupported_patterns:
-                self.assert_(pattern not in text,
-                    '%s found in %s' % (pattern, id_))
 
     def test_discussion(self):
         # Test that the profile got applied

@@ -7,6 +7,7 @@ from zope.component import queryUtility
 from zope.i18n import translate
 from zope.interface import alsoProvides
 
+from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import config
 
 
@@ -90,11 +91,6 @@ def setup_members_folder(site):
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID,
         title=title)
-    # we fill the request with some values in commands.py create_site
-    # don't let those interfere in the processForm call
-    request = aq_get(portal, 'REQUEST', None)
-    if request is not None:
-        request.form['title'] = title
     portal[MEMBERS_FOLDER_ID].processForm() # Fire events
     workflow = getToolByName(portal, 'portal_workflow')
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
@@ -105,17 +101,11 @@ def setup_personal_folder(site):
     from plone.portlets.interfaces import IPortletManager
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import PERSONAL_FOLDER_ID
-    from intranett.policy import IntranettMessageFactory as _
     personal_folder_title = _(u'Personal folders')
     title = translate(personal_folder_title, target_language=site.Language())
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('Folder', portal, id=PERSONAL_FOLDER_ID,
         title=title)
-    # we fill the request with some values in commands.py create_site
-    # don't let those interfere in the processForm call
-    request = aq_get(portal, 'REQUEST', None)
-    if request is not None:
-        request.form['title'] = title
     folder = portal[PERSONAL_FOLDER_ID]
     folder.setExcludeFromNav(True)
     folder.processForm() # Fire events
@@ -157,9 +147,20 @@ def setup_amberjack(site):
                   u'12_basic_using_display_menu-using-the-display-menu']})
 
 
+def setup_default_content(site):
+    from Testing import makerequest
+    wrapped = makerequest.makerequest(site)
+    from intranett.policy.browser.defaultcontent import DefaultContent
+    view = DefaultContent(wrapped, wrapped.REQUEST)
+    view()
+
+
 def enable_secure_cookies(context):
     acl = aq_get(context, 'acl_users')
     acl.session._updateProperty('secure', True)
+    acl.session._updateProperty('timeout', 172800)
+    acl.session._updateProperty('refresh_interval', 7200)
+    acl.session._updateProperty('cookie_lifetime', 7)
 
 
 def ignore_link_integrity_exceptions(site):
@@ -215,10 +216,20 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
-# TODO the default can go with plutonian > 0.1a2
-@import_step(depends=('plone-final', 'workflow', ))
+def setup_quickupload(site):
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    # Assign quickupload portlet
+    portlet = queryUtility(IPortletType,
+         name='collective.quickupload.QuickUploadPortlet')
+    mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=site.Language())})
+
+
+@import_step()
 def various(context):
-    # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
         return
     site = context.getSite()
@@ -230,11 +241,20 @@ def various(context):
     disable_portlets(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
+    ignore_link_integrity_exceptions(site)
+    enable_link_by_uid(site)
     setup_members_folder(site)
     setup_personal_folder(site)
     setup_amberjack(site)
     enable_secure_cookies(site)
-    ignore_link_integrity_exceptions(site)
-    enable_link_by_uid(site)
     open_ext_links_in_new_window(site)
     restrict_siteadmin(site)
+    setup_quickupload(site)
+
+
+@import_step()
+def content(context):
+    if context.readDataFile('intranett-policy-content.txt') is None:
+        return
+    site = context.getSite()
+    setup_default_content(site)
