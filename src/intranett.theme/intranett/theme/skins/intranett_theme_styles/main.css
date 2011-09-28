@@ -1160,7 +1160,8 @@ body.template-personal-information textarea.mce_editable {
 .formControls .actionButtons .button,
 .documentEditable * .context,
 .destructive,
-.documentEditable * .destructive {
+.documentEditable * .destructive,
+.qq-upload-button {
   background: #eee;
   border: 1px solid #ccc;
   color: #222;
@@ -1818,6 +1819,18 @@ li.navTreeCurrentNode.navTreeFolderish {
 .portletNavigationTree dd.portletItem {
   padding: 0.63em 0.63em 0;
   /*font-size: $base-size;*/ }
+
+.qq-upload-button {
+  float: right;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  margin-bottom: 1em; }
+
+#label-upload {
+  display: block;
+  float: left;
+  padding: 1em 0; }
 
 /* @end */
 /* @end */
