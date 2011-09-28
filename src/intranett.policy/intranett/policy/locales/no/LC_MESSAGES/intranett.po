@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-07 10:51+0000\n"
+"POT-Creation-Date: 2011-09-28 11:19+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,10 @@ msgstr "Ansatte"
 msgid "Event Highlight"
 msgstr ""
 
+#: intranett.policy/intranett/policy/browser/templates/invitation-mail.pt:6
+msgid "Invitation to join ${hostname}"
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:22
 msgid "Item"
 msgstr "Innhold"
@@ -88,6 +92,14 @@ msgstr "Prosjektdeltakere"
 msgid "Participants are:"
 msgstr "Prosjektdeltakere er:"
 
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:17
+msgid "Passwords do not match."
+msgstr ""
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:19
+msgid "Passwords must contain at least 5 letters."
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
 msgid "Personal folder"
 msgstr "Personlige mappe"
@@ -95,6 +107,11 @@ msgstr "Personlige mappe"
 #: intranett.policy/intranett/policy/setuphandlers.py:109
 msgid "Personal folders"
 msgstr "Personlige mapper"
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_action.cpy:28
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:52
+msgid "Please correct the indicated errors."
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:20
 #: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:18
@@ -115,6 +132,10 @@ msgstr "Prosjektrom informasjon"
 msgid "Project room"
 msgstr "Prosjektrom"
 
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/invite.cpy:33
+msgid "Sent invitation to %s."
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
 msgid "Show employees from all departments"
 msgstr "Vis ansatte fra alle avdelinger"
@@ -127,6 +148,11 @@ msgstr "Administrator"
 msgid "Support"
 msgstr "Hjelp"
 
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_action.cpy:27
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:48
+msgid "The login name you selected is already in use or is not valid. Please choose another."
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
 msgid "The most recently published news item"
 msgstr ""
@@ -135,9 +161,17 @@ msgstr ""
 msgid "The second-most recently published news item"
 msgstr ""
 
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:15
+msgid "This field is required, please provide some information."
+msgstr ""
+
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
 msgstr "Dette nettstedet er bygget med intranett.no"
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:21
+msgid "This username is reserved. Please choose a different name."
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/activation-mail.pt:7
 msgid "User account information for ${hostname}"
@@ -185,6 +219,21 @@ msgstr ""
 "\n"
 "Med vennlig hilsen intranett.no-teamet"
 
+#. Default: "Accept invitation"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form.cpt:22
+msgid "heading_accept_form"
+msgstr ""
+
+#. Default: "Invitation expired"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_expired.pt:9
+msgid "heading_invitation_expired"
+msgstr ""
+
+#. Default: "Invalid invitation"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_invalid.pt:9
+msgid "heading_invitation_invalid"
+msgstr ""
+
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
 #: intranett.policy/intranett/policy/userdataschema.py:37
 msgid "help_biography"
@@ -195,6 +244,11 @@ msgstr "En kort oversikt over hvem du er og hva du gjør. Vil vises for andre p�
 #, fuzzy
 msgid "help_portrait"
 msgstr "For å legge til et nytt portrett, trykk \"Bla igjennom\" og velg et bilde av deg selv. Du får best resultat ved å bruke et kvadratisk bilde større enn 300 x 300 bildepunkter. Andre størrelser vil også virke."
+
+#. Default: "Hi, ${sender_fullname} has invited you to join the intranet site ${hostname}. Please accept this invitation by visiting: ${accept_invitation} (You must accept the invitation before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those — And please don't hesitate to contact us at support@intranett.no or via phone at 21018911 if there's something we can help you with. With kind regards, intranett.no-team"
+#: intranett.policy/intranett/policy/browser/templates/invitation-mail.pt:20
+msgid "invitation-mail-body"
+msgstr ""
 
 #. Default: "Advanced Search…"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:86
@@ -288,4 +342,14 @@ msgstr "Hurtigsøk &#8595;"
 #: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:68
 msgid "link_manage_personal_portlets"
 msgstr "Rediger personlige infobokser"
+
+#. Default: "This URL has already been used, or it has expired. For your security, invitation URLs are only valid for ${days} days."
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_expired.pt:16
+msgid "message_invitation_expired"
+msgstr ""
+
+#. Default: "Sorry, this appears to be an invalid request. Please make sure you copied the URL exactly as it appears in your email."
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_invalid.pt:12
+msgid "message_invitation_invalid"
+msgstr ""
 
