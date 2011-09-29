@@ -298,3 +298,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
         assigned = [type(p) for p in mapping.values()]
         self.assertTrue(quickuploadportlet.Assignment in assigned)
+
+    def after_42(self):
+        portal = self.layer['portal']
+        at = getToolByName(portal, 'portal_amberjack')
+        self.assertTrue(at.sandbox)
+        personal = portal['personal']
+        mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        self.assertTrue('amberjack-choice-portlet-skinid' in mapping)

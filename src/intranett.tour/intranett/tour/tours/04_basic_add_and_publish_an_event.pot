@@ -1,0 +1,139 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-10-30 09:56+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: 04_basic_add_and_publish_an_event\n"
+
+#. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "0_0_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "0_1_microstep_description"
+msgstr ""
+
+#. Default: "Add and publish an event"
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "0_add-and-publish-an-event_title"
+msgstr ""
+
+#. Default: "Click the [Add new...] drop-down menu."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "1_0_microstep_description"
+msgstr ""
+
+#. Default: "Select [Event] from the menu."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "1_1_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "1_2_microstep_description"
+msgstr ""
+
+#. Default: "Create a event"
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "1_create-a-event_title"
+msgstr ""
+
+#. Default: "Provide a [Title]: My Event."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_0_microstep_description"
+msgstr ""
+
+#. Default: "Provide a [Description] for your Event. <br />The description will appear in site searches and in summary listings of events on your site."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_1_microstep_description"
+msgstr ""
+
+#. Default: "Provide an [Event Location]. The location is the physical location of the event. You can describe the address or provide directions in the Body Text field."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_2_microstep_description"
+msgstr ""
+
+#. Default: "Provide the event [Start and End] dates."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_3_microstep_description"
+msgstr ""
+
+#. Default: "Put some content in the [Body Text] field. This is the best place to add directions to your event, information about what to expect, images, etc."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_4_microstep_description"
+msgstr ""
+
+#. Default: "Provide [contact information] in the remaining fields."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_5_microstep_description"
+msgstr ""
+
+#. Default: "Manage the type: open the [Categorization] tab."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_6_microstep_description"
+msgstr ""
+
+#. Default: "then provide an [Event Type] by typing in the New Categories field. Typical event types include: Fundraiser, Auction, Sale, Concert, Performance, etc. Once you have added a new event type, it will appear for selection in the Existing Categories field the next time you create an event."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_7_microstep_description"
+msgstr ""
+
+#. Default: "Click [Save] to finish."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_8_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_9_microstep_description"
+msgstr ""
+
+#. Default: "Fill out the fields"
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "2_fill-out-the-fields_title"
+msgstr ""
+
+#. Default: "Click the [State] drop-down menu."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "3_0_microstep_description"
+msgstr ""
+
+#. Default: "Select [Publish] from the menu."
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "3_1_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "3_2_microstep_description"
+msgstr ""
+
+#. Default: "Publish the event"
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "3_publish-the-event_title"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "4_0_microstep_description"
+msgstr ""
+
+#. Default: "All done"
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "4_all-done_title"
+msgstr ""
+
+#. Default: "Add and publish an Event"
+#: /home/zope/virtualenv/i18ndude/tours/04_basic_add_and_publish_an_event.cfg
+msgid "amberjack_title"
+msgstr ""
+

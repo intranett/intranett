@@ -1,0 +1,20 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:collective.amberjack="http://namespaces.plone.org/collective.amberjack.core"
+    i18n_domain="intranett">
+
+  <include package="collective.amberjack.core" />
+  <include package="collective.amberjack.portlet" />
+
+  <collective.amberjack:tour tourlocation="tours" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="intranett.no Tour"
+      directory="profiles/default"
+      description='Extension profile for the intranett.no Tour.'
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>

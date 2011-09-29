@@ -47,6 +47,9 @@ class TestSiteSetup(IntranettTestCase):
         portal = self.layer['portal']
         css = getToolByName(portal, 'portal_css')
         resources = css.getEvaluatedResources(portal)
+        # Don't just increase this number to get the test passing!
+        # You need a really good reason why you want to make page loading
+        # a lot slower (as caused by each additional request)
         self.assertEqual(len(resources), 3)
         self.assert_(resources[1]._data['id'].startswith('acl_users'))
         self.assert_(resources[2]._data['id'].startswith('IEFixes'))
@@ -59,6 +62,9 @@ class TestSiteSetup(IntranettTestCase):
     def test_js_resources(self):
         portal = self.layer['portal']
         js = getToolByName(portal, 'portal_javascripts')
+        # Don't just increase this number to get the test passing!
+        # You need a really good reason why you want to make page loading
+        # a lot slower (as caused by each additional request)
         self.assertEqual(len(js.getEvaluatedResources(portal)), 3)
 
     def test_discussion(self):
