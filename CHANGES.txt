@@ -4,6 +4,8 @@ Changelog
 1.3.4 - unreleased
 ------------------
 
+- INTRANETT-209: Setup XMPP for jarn.intranett.no.
+
 - INTRANETT-229: Provide Amberjack based tutorials.
 
 - INTRANETT-253: Add quick file and image upload feature.
