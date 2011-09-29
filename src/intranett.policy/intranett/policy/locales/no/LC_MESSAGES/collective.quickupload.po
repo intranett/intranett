@@ -12,7 +12,7 @@ msgstr ""
 
 #: ../browser/quick_upload.py:402
 msgid " files uploaded with success, "
-msgstr ""
+msgstr "vellykket opplasting av filer,"
 
 #: ../browser/quick_upload.py:403
 msgid " uploads return an error."
@@ -20,19 +20,19 @@ msgstr ""
 
 #: ../browser/quick_upload.py:414
 msgid "A data base conflict error happened when uploading this file:"
-msgstr ""
+msgstr "Det oppstod en database konflikt når denne filen ble forsøkt opplastet:"
 
 #: ../portlet/quickuploadportlet.py:63
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: ../browser/quick_upload.py:401
 msgid "All files uploaded with success."
-msgstr ""
+msgstr "Alle filene ble lastet opp."
 
 #: ../portlet/quickuploadportlet.py:66
 msgid "Audio files"
-msgstr ""
+msgstr "Lydfiler"
 
 #: ../portlet/quickuploadportlet.py:44
 msgid "Box title"
@@ -44,23 +44,23 @@ msgstr "Bla gjennom"
 
 #: ../browser/quick_upload.py:346
 msgid "Choose audio files to upload"
-msgstr ""
+msgstr "Velg lydfiler som skal lastes opp"
 
 #: ../browser/quick_upload.py:354
 msgid "Choose file for upload: ${ext}"
-msgstr ""
+msgstr "Velg filer som skal lastes opp: ${ext}"
 
 #: ../browser/quick_upload.py:349
 msgid "Choose flash files to upload"
-msgstr ""
+msgstr "Velg flash filer som skal lastes opp"
 
 #: ../browser/quick_upload.py:340
 msgid "Choose images to upload"
-msgstr ""
+msgstr "Velg bilder som skal lastes opp"
 
 #: ../portlet/quickuploadportlet.py:59
 msgid "Choose the media type used for file upload. image, audio, video ..."
-msgstr ""
+msgstr "Velg filtype for opplasting. Image, lyd, video ..."
 
 #: ../portlet/quickuploadportlet.py:51
 msgid "Choose the portal type used for file upload. Let the default configuration for an automatic portal type, depending on settings defined in content_type_registry."
@@ -68,19 +68,19 @@ msgstr ""
 
 #: ../browser/quick_upload.py:343
 msgid "Choose video files to upload"
-msgstr ""
+msgstr "Velg video filer som skal lastes opp"
 
 #: ../portlet/quickuploadportlet.py:50
 msgid "Content type"
-msgstr ""
+msgstr "Innholdstype"
 
 #: ../browser/quickupload_settings.py:115
 msgid "Control how the quick upload tool is used."
-msgstr ""
+msgstr "Kontrollerer hvordan filopplastingsverktøyet blir brukt"
 
 #: ../browser/quick_upload.py:400
 msgid "Drag and drop files to upload"
-msgstr "Dra og slippe filer til opplasting"
+msgstr "Dra og slipp filer til opplasting"
 
 #: ../browser/quick_upload.py:404
 msgid "Failed"
@@ -93,7 +93,7 @@ msgstr ""
 
 #: ../portlet/quickuploadportlet.py:67
 msgid "Flash files"
-msgstr ""
+msgstr "Flash filer"
 
 #: ../portlet/quickuploadportlet.py:46
 msgid "If title is empty, the portlet title will be the Media Choice + ' Quick Upload'."
@@ -101,7 +101,7 @@ msgstr ""
 
 #: ../portlet/quickuploadportlet.py:64
 msgid "Images"
-msgstr ""
+msgstr "Bilder"
 
 #: ../browser/quick_upload.py:149
 #: ../portlet/quickuploadportlet.py:90
@@ -114,11 +114,11 @@ msgstr ""
 
 #: ../browser/quick_upload.py:411
 msgid "Only allowed:"
-msgstr ""
+msgstr "Kun tillatt"
 
 #: ../profiles/default/portlets.xml
 msgid "Portlet displaying a quick and multiple upload form"
-msgstr ""
+msgstr "Infoboks som viser multiple filopplastingsverktøy"
 
 #: ../profiles/default/portlets.xml
 msgid "Quick Upload Portlet"
@@ -130,11 +130,11 @@ msgstr ""
 
 #: ../browser/quick_upload.py:407
 msgid "Selected elements contain an empty file or a folder:"
-msgstr ""
+msgstr "Valgte elementer inneholder en top fil eller mappe:"
 
 #: ../browser/quick_upload.py:415
 msgid "Server error, please contact support and/or try again."
-msgstr ""
+msgstr "Server feil, vennligst kontakt support og/eller prøv igjen."
 
 #: ../browser/quick_upload.py:413
 msgid "This file already exists with the same name on server:"
@@ -142,7 +142,7 @@ msgstr "Denne filen finnes allerede med samme navn på serveren:"
 
 #: ../browser/quick_upload.py:410
 msgid "This file has invalid extension:"
-msgstr ""
+msgstr "Denne filen har ikke tillatt type angivelse:"
 
 #: ../browser/quick_upload.py:408
 msgid "This file is too large:"
@@ -150,11 +150,11 @@ msgstr "Denne filen er for stor:"
 
 #: ../portlet/quickuploadportlet.py:65
 msgid "Video files"
-msgstr ""
+msgstr "Videofiler"
 
 #: ../browser/quick_upload.py:412
 msgid "You don't have permission to add this content in this place."
-msgstr ""
+msgstr "Du har ikke rettigheter til å legge til innhold på dette stedet."
 
 #. Default: "Check if you want to start the files upload on select, without submit the form. Note that you cannot choose file titles or descriptions with this option set to True."
 #: ../browser/quickupload_settings.py:26
@@ -209,15 +209,15 @@ msgstr ""
 
 #: ../browser/quick_upload.py:409
 msgid "maximum file size is:"
-msgstr ""
+msgstr "maksimum filstørrelse er:"
 
 #: ../browser/quick_upload.py:405
 msgid "please select files again without it."
-msgstr ""
+msgstr "vennligst velg filer igjen uten den."
 
 #: ../browser/quick_upload.py:406
 msgid "please try again."
-msgstr ""
+msgstr "vennligst prøv igjen."
 
 #. Default: "Automatic upload on select"
 #: ../browser/quickupload_settings.py:25
@@ -227,7 +227,7 @@ msgstr ""
 #. Default: "Fill description before upload"
 #: ../browser/quickupload_settings.py:37
 msgid "title_fill_descriptions"
-msgstr ""
+msgstr "Fyll ut beskrivelse feltet før opplasting"
 
 #. Default: "Fill title before upload"
 #: ../browser/quickupload_settings.py:31
