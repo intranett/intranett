@@ -12,9 +12,8 @@
     </dt>
 
     <dd class="portletItem even">
-        <form action="invite"
+        <form action="portlet_invite"
               method="post">
-            <input type="hidden" name="came_from_portlet" value="1" />
             <div class="formHelp"
                 i18n:translate="portlet_invite_address">
               The e-mail address to send an invitation to:
