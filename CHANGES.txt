@@ -4,6 +4,8 @@ Changelog
 1.3.4 - unreleased
 ------------------
 
+- Integrate Zendesk support widget.
+
 - INTRANETT-209: Setup XMPP for jarn.intranett.no.
 
 - INTRANETT-229: Provide Amberjack based tutorials.
