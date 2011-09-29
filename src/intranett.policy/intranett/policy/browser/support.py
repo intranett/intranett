@@ -27,7 +27,7 @@ class SupportViewlet(BrowserView):
     implements(IViewlet)
 
     def __init__(self, context, request, view, manager):
-        super(SupportViewlet, self).__init__(context, request)
+        super(SupportViewlet, self).__init__(context, request, view, manager)
         self.view = view
         self.manager = manager
 
