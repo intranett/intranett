@@ -1,11 +1,9 @@
 from zope.interface import implements
+from zope.publisher.browser import BrowserView
 from zope.viewlet.interfaces import IViewlet
 
-from Products.Five.browser import BrowserView
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import safe_unicode
 
-VIELET_TEXT = """
+VIEWLET_TEXT = u"""
 <script type="text/javascript" src="//asset0.zendesk.com/external/zenbox/v2.1/zenbox.js"></script>
 <style type="text/css" media="screen, projection">
   @import url(//asset0.zendesk.com/external/zenbox/v2.1/zenbox.css);
@@ -23,14 +21,12 @@ VIELET_TEXT = """
 </script>
 """
 
+
 class SupportViewlet(BrowserView):
     implements(IViewlet)
 
     def __init__(self, context, request, view, manager):
         super(SupportViewlet, self).__init__(context, request)
-        self.__parent__ = view
-        self.context = context
-        self.request = request
         self.view = view
         self.manager = manager
 
@@ -38,6 +34,4 @@ class SupportViewlet(BrowserView):
         pass
 
     def render(self):
-        """render the webstats snippet"""
-        snippet = safe_unicode(VIELET_TEXT)
-        return snippet
+        return VIEWLET_TEXT
