@@ -1,8 +1,16 @@
-<configure xmlns="http://namespaces.zope.org/zope">
+<configure xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser">
 
   <utility
     name="collective.amberjack.core.toursroot"
     factory=".utils.ToursRoot"
     />
+
+  <browser:page
+      name="amberjackDefaults.js"
+      for="*"
+      permission="zope2.View"
+      class=".browser.AmberjackDefaults"
+      />
 
 </configure>
