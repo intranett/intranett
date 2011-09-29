@@ -4,6 +4,8 @@
   xmlns:cache="http://namespaces.zope.org/cache"
   i18n_domain="intranett">
 
+  <include package="AccessControl"  file="permissions.zcml" />
+
   <browser:resource
       file="jarn-logo.jpg"
       name="jarn-logo.jpg"
@@ -71,6 +73,13 @@
       view="plone.app.users.browser.personalpreferences.PasswordAccountPanel"
       layer="intranett.theme.browser.interfaces.IThemeSpecific"
       permission="zope2.View"
+      />
+
+  <browser:viewlet
+      name="jarn.support"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      class=".support.SupportViewlet"
+      permission="zope2.ManageUsers"
       />
 
   <!-- Default content -->
