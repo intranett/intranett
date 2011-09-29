@@ -92,7 +92,7 @@ msgid "3_all-done_title"
 msgstr "Ferdig!"
 
 msgid "3_all-done_text"
-msgstr ""
+msgstr "<p>Du har lagt til bildet ditt. Bilder er alltid publiserte.</p>"
 
 #. Default: "Upload an image"
 #: /home/zope/virtualenv/i18ndude/tours/08_basic_upload_an_image.cfg
