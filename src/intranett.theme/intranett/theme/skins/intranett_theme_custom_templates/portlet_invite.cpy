@@ -11,6 +11,7 @@
 
 from Products.CMFCore.utils import getToolByName
 from Products.PloneInvite import PloneInviteMessageFactory as _
+from ZODB.POSException import ConflictError
 from intranett.policy.browser.invitation import sendInvitationMail
 
 portal_invitations = getToolByName(context,'portal_invitations')
@@ -25,13 +26,19 @@ variables = {'invite_to_address' : invite_to_address,
              'invitecode' : invitecode,
             }
 site = getToolByName(context, 'portal_url').getPortalObject()
-sendInvitationMail(site, member, variables)
 
-# Mark this invite as sent.
-portal_invitations.invites[invitecode].sendTo(invite_to_address)
-
-portalmessage = _(u"Sent invitation to %s.") % invite_to_address
-
-putils.addPortalMessage(portalmessage)
+try:
+    sendInvitationMail(site, member, variables)
+except ConflictError:
+    raise
+except:
+    portalmessage = _(u"Failed to send invitation.")
+    putils.addPortalMessage(portalmessage, type='error')
+    state.set(status='failure')
+else:
+    portalmessage = _(u"Sent invitation to %s.") % invite_to_address
+    putils.addPortalMessage(portalmessage)
+    # Mark this invite as sent.
+    portal_invitations.invites[invitecode].sendTo(invite_to_address)
 
 return state
