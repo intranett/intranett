@@ -4,7 +4,7 @@ from zope.viewlet.interfaces import IViewlet
 
 
 VIEWLET_TEXT = u"""
-<script type="text/javascript"
+<script type="text/javascript" defer="defer"
   src="//asset0.zendesk.com/external/zenbox/v2.1/zenbox.js"></script>
 <style type="text/css" media="screen, projection">
   @import url(//asset0.zendesk.com/external/zenbox/v2.1/zenbox.css);

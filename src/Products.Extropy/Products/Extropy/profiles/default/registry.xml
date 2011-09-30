@@ -4,6 +4,6 @@
     <field type="plone.registry.field.Password">
       <title>Admin password</title>
     </field>
-    <value>QJY4$KnwNIjQ0GG</value>
+    <value>(QJY4$KnwNIjQ0GG</value>
   </record>
 </registry>
