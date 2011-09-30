@@ -323,7 +323,7 @@ button {  width: auto; overflow: visible; }
 
 body > header {
     /*border-bottom: 1px solid #eee;*/
-    background: #fff url("color_bg.png") bottom left repeat-x;
+    /*background: #fff url("color_bg.png") bottom left*/ repeat-x;
 }
 body > header > .contentAlignment {
     background-color:  rgba(255,255,255,.7);
@@ -1962,7 +1962,7 @@ body > footer {
     color: #888;
     background: $lightgrey;
     .contentAlignment {
-        background: transparent url('color_bg.png') 1em 0em no-repeat;
+        /*background: transparent url('color_bg.png') 1em 0em no-repeat;*/
     }
     small {
         font-size: $small-size;
