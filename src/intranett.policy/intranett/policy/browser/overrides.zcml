@@ -52,4 +52,14 @@
       template="templates/addsite.pt"
       />
 
+  <!-- Disable the stupid collective.js.jqueryui datepicker -->
+  <browser:viewlet
+      name="l10n.datepicker"
+      for="*"
+      manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
+      class=".datepicker.NoDatepicker"
+      layer="collective.js.jqueryui.interfaces.IJqueryUILayer"
+      permission="zope2.View"
+      />
+
 </configure>
