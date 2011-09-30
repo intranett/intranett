@@ -12,6 +12,8 @@ def initialize(context):
     config.config.register_profile(profile_name='content')
     config.config.scan()
 
+    patches.after_zcml()
+
     from AccessControl import allow_module
     allow_module('intranett.policy.config')
 
