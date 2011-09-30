@@ -9,7 +9,7 @@ VIEWLET_TEXT = u"""
 <style type="text/css" media="screen, projection">
   @import url(//asset0.zendesk.com/external/zenbox/v2.1/zenbox.css);
 </style>
-<script type="text/javascript">
+<script type="text/javascript" defer="defer">
   if (typeof(Zenbox) !== "undefined") {
     Zenbox.init({
       dropboxID:   "20021871",
