@@ -91,4 +91,8 @@
       for="Products.ATContentTypes.interfaces.IATContentType
            Products.CMFCore.interfaces.IActionSucceededEvent" />
 
+  <class class="Products.CMFPlone.Portal.PloneSite">
+    <implements interface="collective.quickupload.browser.interfaces.IQuickUploadNotCapable" />
+  </class>
+
 </configure>
