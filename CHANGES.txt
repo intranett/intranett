@@ -4,6 +4,8 @@ Changelog
 1.3.4 - unreleased
 ------------------
 
+- Drop the color stripe.
+
 - Integrate Zendesk support widget.
 
 - INTRANETT-209: Setup XMPP for jarn.intranett.no.
