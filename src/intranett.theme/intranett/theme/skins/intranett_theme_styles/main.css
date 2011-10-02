@@ -291,10 +291,6 @@ button {
 
 /* @end */
 /* @group Header */
-body > header {
-  /*border-bottom: 1px solid #eee;*/
- /* background: white url("color_bg.png") bottom left repeat-x;*/ }
-
 body > header > .contentAlignment {
   background-color: rgba(255, 255, 255, 0.7);
   margin-top: 1px;
@@ -1856,8 +1852,6 @@ body > footer {
   padding-top: 0;
   color: #888;
   background: #f7f7f7; }
-  body > footer .contentAlignment {
-    /*background: transparent url("color_bg.png") 1em 0em no-repeat; */}
   body > footer small {
     font-size: 0.62em; }
   body > footer strong {

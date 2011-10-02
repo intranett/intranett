@@ -321,10 +321,6 @@ button {  width: auto; overflow: visible; }
 
 /* @group Header */
 
-body > header {
-    /*border-bottom: 1px solid #eee;*/
-    /*background: #fff url("color_bg.png") bottom left*/ repeat-x;
-}
 body > header > .contentAlignment {
     background-color:  rgba(255,255,255,.7);
     margin-top: 1px;
@@ -1961,9 +1957,6 @@ body > footer {
     padding-top: 0;
     color: #888;
     background: $lightgrey;
-    .contentAlignment {
-        /*background: transparent url('color_bg.png') 1em 0em no-repeat;*/
-    }
     small {
         font-size: $small-size;
     }
