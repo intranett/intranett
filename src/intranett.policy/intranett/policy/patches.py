@@ -1,7 +1,8 @@
-def allow_anonymous_robotstxt():
+def allow_anonymous():
     from iw.rejectanonymous import addValidIds, addValidSubparts
     addValidIds('robots.txt')
     addValidIds('logged_out')
+    addValidIds('system-info')
     addValidSubparts('portal_kss')
 
 
@@ -22,6 +23,6 @@ def optimize_rr_packing():
 
 
 def apply():
-    allow_anonymous_robotstxt()
+    allow_anonymous()
     allow_anonymous_activation()
     optimize_rr_packing()

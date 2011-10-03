@@ -90,4 +90,11 @@
       permission="zope2.ViewManagementScreens"
       />
 
+  <browser:page
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      name="system-info"
+      class=".version.SystemInfo"
+      permission="zope.Public"
+      />
+
 </configure>
