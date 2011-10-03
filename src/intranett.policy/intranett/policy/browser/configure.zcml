@@ -93,7 +93,7 @@
   <browser:page
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="system-info"
-      class=".version.SystemInfo"
+      class=".systeminfo.SystemInfo"
       permission="zope.Public"
       />
 
