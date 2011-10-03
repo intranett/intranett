@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3.5 - unreleased
+1.3.5 - 2011-10-03
 ------------------
 
 - Add a `system-info` view to provide structured information about the
