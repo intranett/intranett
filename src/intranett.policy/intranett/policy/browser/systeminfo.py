@@ -9,4 +9,6 @@ class SystemInfo(BrowserView):
 
     def __call__(self):
         output = {'version': config.package_version}
-        return json.dumps(output)
+        self.request.response.setHeader('content-type', 'application/json')
+        self.request.response.setBody(json.dumps(output))
+        return self.request.response
