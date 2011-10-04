@@ -43,6 +43,7 @@ setup(name='intranett.policy',
       install_requires=[
           'setuptools',
           'Products.Zope_Hotfix_CVE_2011_3587',
+          'Products.PloneHotfix20110928',
           'collective.ATClamAV',
           'collective.quickupload',
           'experimental.btree',
