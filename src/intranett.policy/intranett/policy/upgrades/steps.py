@@ -443,3 +443,8 @@ def install_amberjack(context):
     url_tool = getToolByName(context, 'portal_url')
     site = url_tool.getPortalObject()
     setup_amberjack(site)
+
+@upgrade_to(43)
+def remove_kss(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('jsregistry', ))
