@@ -11,6 +11,26 @@
         <tal:insert tal:replace="nothing"
               tal:define="dummy python:request.set('enable_border', 1)" />
       </metal:block>
+      <metal:block fill-slot="javascript_head_slot">
+      <script type="text/javascript">
+        $(document).ready(function() {
+          var table = '#listing-table';
+          ploneDnDReorder.table = $(table);
+          if (ploneDnDReorder.table.length) {
+            ploneDnDReorder.rows = $(table + " > tr," +
+                                     table + " > tbody > tr");
+            $(table + " > tr > td.draggable," +
+              table + " > tbody > tr > td.draggable")
+                .not('.notDraggable')
+                .mousedown(ploneDnDReorder.doDown)
+                .mouseup(ploneDnDReorder.doUp)
+                .addClass("draggingHook")
+                .css("cursor", "ns-resize")
+                .html('&#x28ff;');
+          }
+         });
+      </script>
+      </metal:block>
   </head>
 
   <body>
