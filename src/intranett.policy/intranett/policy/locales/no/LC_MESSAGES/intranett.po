@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-10-05 10:57+0000\n"
+"POT-Creation-Date: 2011-10-05 12:36+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,12 +63,12 @@ msgstr "Kunne ikke å sende invitasjon."
 msgid "Invitation to join ${hostname}"
 msgstr "Invitasjon til å delta ${hostname}"
 
-#: intranett.policy/intranett/policy/browser/portlets/invite.pt:27
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:26
 msgid "Invite"
 msgstr "Invitere"
 
 #: intranett.policy/intranett/policy/browser/portlets/invite.pt:10
-#: intranett.policy/intranett/policy/browser/portlets/invite.py:21
+#: intranett.policy/intranett/policy/browser/portlets/invite.py:22
 #: intranett.policy/intranett/policy/profiles/default/portlets.xml
 msgid "Invite others"
 msgstr "Invitere andre"
@@ -361,15 +361,21 @@ msgstr "Rediger personlige infobokser"
 #. Default: "This URL has already been used, or it has expired. For your security, invitation URLs are only valid for ${days} days."
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_expired.pt:16
 msgid "message_invitation_expired"
-msgstr ""
+msgstr "Denne URL har allerede blitt brukt, eller den har utløpt. For din sikkerhet, invitasjon URLer er kun gyldig for ${days} dager."
 
 #. Default: "Sorry, this appears to be an invalid request. Please make sure you copied the URL exactly as it appears in your email."
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_invalid.pt:12
 msgid "message_invitation_invalid"
-msgstr ""
+msgstr "Beklager, synes dette å være en ugyldig forespørsel. Sørg for at du kopierte URLen nøyaktig slik den vises i
+din e-post."
 
 #. Default: "The e-mail address to send an invitation to:"
 #: intranett.policy/intranett/policy/browser/portlets/invite.pt:17
 msgid "portlet_invite_address"
 msgstr "E-postadresse for å sende en invitasjon til:"
+
+#. Default: "You have no more invites left. Please contact site administration."
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:37
+msgid "portlet_no_more_invites"
+msgstr "Du har ingen flere invitasjoner igjen. Ta kontakt nettsted administrasjon."
 

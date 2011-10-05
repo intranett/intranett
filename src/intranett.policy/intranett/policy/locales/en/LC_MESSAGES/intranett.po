@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-10-05 10:57+0000\n"
+"POT-Creation-Date: 2011-10-05 12:36+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,12 +63,12 @@ msgstr ""
 msgid "Invitation to join ${hostname}"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/portlets/invite.pt:27
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:26
 msgid "Invite"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/invite.pt:10
-#: intranett.policy/intranett/policy/browser/portlets/invite.py:21
+#: intranett.policy/intranett/policy/browser/portlets/invite.py:22
 #: intranett.policy/intranett/policy/profiles/default/portlets.xml
 msgid "Invite others"
 msgstr ""
@@ -357,5 +357,10 @@ msgstr ""
 #. Default: "The e-mail address to send an invitation to:"
 #: intranett.policy/intranett/policy/browser/portlets/invite.pt:17
 msgid "portlet_invite_address"
+msgstr ""
+
+#. Default: "You have no more invites left. Please contact site administration."
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:37
+msgid "portlet_no_more_invites"
 msgstr ""
 
