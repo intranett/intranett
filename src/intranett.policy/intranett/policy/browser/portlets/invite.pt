@@ -11,11 +11,10 @@
         <span class="portletTopRight"></span>
     </dt>
 
-    <dd class="portletItem even">
+    <dd class="portletItem even" tal:condition="view/invites">
         <form action="portlet_invite"
               method="post">
-            <div class="formHelp"
-                i18n:translate="portlet_invite_address">
+            <div class="formHelp" i18n:translate="portlet_invite_address">
               The e-mail address to send an invitation to:
             </div>
             <input type="text"
@@ -32,6 +31,12 @@
                      />
             </div>
         </form>
+    </dd>
+
+    <dd class="portletItem even" tal:condition="not:view/invites">
+        <div i18n:translate="portlet_no_more_invites">
+          You have no more invites left. Please contact site administration.
+        </div>
     </dd>
 
     <dd class="portletFooter" style="display:none">

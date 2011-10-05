@@ -1,4 +1,5 @@
 from AccessControl import getSecurityManager
+from plone.memoize.view import memoize
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
@@ -29,6 +30,11 @@ class Renderer(base.Renderer):
     @property
     def available(self):
         return _checkPermission(ManageUsers, self.context)
+
+    @memoize
+    def invites(self):
+        inv_tool = getToolByName(self.context, 'portal_invitations')
+        return inv_tool.getInvitesUser(sent=0, used=0)
 
 
 class AddForm(base.NullAddForm):
