@@ -46,4 +46,12 @@
       visible="True">
   </assignment>
 
+  <assignment name="inviteportlet"
+      category="context"
+      key="/"
+      manager="frontpage.portlets.right"
+      type="intranett.policy.portlets.InvitePortlet"
+      visible="True">
+  </assignment>
+
 </portlets>

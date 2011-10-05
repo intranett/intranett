@@ -408,7 +408,7 @@ def fix_resource_compression_settings(context):
 @upgrade_to(38)
 def counter_plone_js_upgrade(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-    steps=('jsregistry', ))
+        steps=('jsregistry', ))
 
 
 @upgrade_to(39)
@@ -416,4 +416,11 @@ def enable_session_refresh(context):
     from intranett.policy.setuphandlers import enable_secure_cookies
     enable_secure_cookies(context)
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-    steps=('cssregistry', ))
+        steps=('cssregistry', ))
+
+
+@upgrade_to(40)
+def add_invite_portlet(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('portlets', ))
+
