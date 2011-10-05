@@ -10,7 +10,7 @@
 ##
 
 from Products.CMFCore.utils import getToolByName
-from Products.PloneInvite import PloneInviteMessageFactory as _
+from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.browser.invitation import sendInvitationMail
 
 portal_invitations = getToolByName(context,'portal_invitations')
@@ -30,7 +30,7 @@ sendInvitationMail(site, member, variables)
 # Mark this invite as sent.
 portal_invitations.invites[invitecode].sendTo(invite_to_address)
 
-portalmessage = _(u"Sent invitation to %s.") % invite_to_address
+portalmessage = _(u"Sent invitation to ${email}.", mapping={u'email': invite_to_address})
 
 putils.addPortalMessage(portalmessage)
 

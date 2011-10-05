@@ -21,6 +21,7 @@
     addview="intranett.policy.portlets.InvitePortlet"
     title="Invite others"
     description=""
+    i18n:domain="intranett"
     i18n:attributes="title"
     />
 
