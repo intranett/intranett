@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-09-28 11:19+0000\n"
+"POT-Creation-Date: 2011-10-05 10:57+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -55,8 +55,22 @@ msgstr ""
 msgid "Event Highlight"
 msgstr ""
 
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/portlet_invite.cpy:35
+msgid "Failed to send invitation."
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/templates/invitation-mail.pt:6
 msgid "Invitation to join ${hostname}"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:27
+msgid "Invite"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:10
+#: intranett.policy/intranett/policy/browser/portlets/invite.py:21
+#: intranett.policy/intranett/policy/profiles/default/portlets.xml
+msgid "Invite others"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:22
@@ -133,7 +147,8 @@ msgid "Project room"
 msgstr ""
 
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/invite.cpy:33
-msgid "Sent invitation to %s."
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/portlet_invite.cpy:39
+msgid "Sent invitation to ${email}."
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
@@ -337,5 +352,10 @@ msgstr ""
 #. Default: "Sorry, this appears to be an invalid request. Please make sure you copied the URL exactly as it appears in your email."
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_invalid.pt:12
 msgid "message_invitation_invalid"
+msgstr ""
+
+#. Default: "The e-mail address to send an invitation to:"
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:17
+msgid "portlet_invite_address"
 msgstr ""
 
