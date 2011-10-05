@@ -306,3 +306,16 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         personal = portal['personal']
         mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
         self.assertTrue('amberjack-choice-portlet-skinid' in mapping)
+
+    def after_43(self):
+        portal = self.layer['portal']
+        js = getToolByName(portal, 'portal_javascripts')
+        resources = js.getResourcesDict()
+        self.assertFalse('sarissa.js' in resources)
+        self.assertFalse('++resource++MochiKit.js' in resources)
+        self.assertFalse('++resource++prototype.js' in resources)
+        self.assertFalse('++resource++effects.js' in resources)
+        self.assertFalse('++resource++cssQuery-compat.js' in resources)
+        self.assertFalse('++resource++base2-dom-fp.js' in resources)
+        self.assertFalse('++resource++kukit.js' in resources)
+        self.assertFalse('++resource++kukit-devel.js' in resources)

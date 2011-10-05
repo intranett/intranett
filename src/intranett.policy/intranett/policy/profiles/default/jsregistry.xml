@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts" meta_type="JavaScripts Registry">
 
-  <javascript id="sarissa.js" expression="" />
-
   <javascript id="dropdown.js" authenticated="False" />
   <javascript id="table_sorter.js" authenticated="False" />
   <javascript id="calendar_formfield.js" authenticated="False" />
@@ -10,7 +8,6 @@
   <javascript id="formsubmithelpers.js" authenticated="False" />
   <javascript id="unlockOnFormUnload.js" authenticated="False" />
   <javascript id="tiny_mce.js" authenticated="False" />
-  <javascript id="++resource++kukit.js" authenticated="False" />
   <javascript id="tiny_mce_init.js" authenticated="False" compression="full" />
 
   <javascript id="++resource++plone.app.discussion.javascripts/comments.js"
@@ -48,5 +45,15 @@
       expression="python: 'personal' in request['URL']" insert-after="js-xpath.js"/>
   <javascript id="set_aj_cookie.js"
       expression="python: 'personal' in request['URL']" insert-after="manage_aj_cookie.js"/>
+
+  <!-- Remove KSS -->
+  <javascript id="sarissa.js" remove="True"/>
+  <javascript id="++resource++MochiKit.js" remove="True"/>
+  <javascript id="++resource++prototype.js" remove="True"/>
+  <javascript id="++resource++effects.js" remove="True"/>
+  <javascript id="++resource++cssQuery-compat.js"  remove="True"/>
+  <javascript id="++resource++base2-dom-fp.js"  remove="True"/>
+  <javascript id="++resource++kukit.js" remove="True"/>
+  <javascript id="++resource++kukit-devel.js" remove="True"/>
 
 </object>
