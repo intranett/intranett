@@ -61,8 +61,8 @@
     name="intranett.policy.portlets.InvitePortlet"
     interface=".invite.IInvitePortlet"
     assignment=".invite.Assignment"
-    view_permission="plone.app.portlets.ManagePortlets"
-    edit_permission="plone.app.portlets.ManagePortlets"
+    view_permission="zope2.ManageUsers"
+    edit_permission="zope2.ManageUsers"
     renderer=".invite.Renderer"
     addview=".invite.AddForm"
     />

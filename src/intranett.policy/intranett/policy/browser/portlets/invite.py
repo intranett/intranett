@@ -2,6 +2,8 @@ from AccessControl import getSecurityManager
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.utils import _checkPermission
+from Products.CMFCore.permissions import ManageUsers
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import implements
 
@@ -23,7 +25,10 @@ class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('invite.pt')
     portletTitle = _("Invite others")
-    available = True
+
+    @property
+    def available(self):
+        return _checkPermission(ManageUsers, self.context)
 
 
 class AddForm(base.NullAddForm):
