@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-07 10:51+0000\n"
+"POT-Creation-Date: 2011-09-28 12:19+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Personal folder"
 msgstr ""
 
-#: intranett.policy/intranett/policy/setuphandlers.py:109
+#: intranett.policy/intranett/policy/setuphandlers.py:104
 msgid "Personal folders"
 msgstr ""
 
@@ -113,6 +113,10 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/profiles/default/types/ProjectRoom.xml
 msgid "Project room"
+msgstr ""
+
+#: intranett.policy/intranett/policy/setuphandlers.py:201
+msgid "Quick upload"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30

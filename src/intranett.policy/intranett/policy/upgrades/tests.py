@@ -283,3 +283,39 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         portal = self.layer['portal']
         acl = aq_get(portal, 'acl_users')
         self.assertNotEqual(acl.session.cookie_lifetime, 0)
+
+    def after_40(self):
+        # tested by GS export diff
+        pass
+
+    def after_41(self):
+        from collective.quickupload.portlet import quickuploadportlet
+        sm = getSiteManager()
+        regs = [r.name for r in sm.registeredUtilities()
+                if IPortletType == r.provided]
+        self.assertTrue('collective.quickupload.QuickUploadPortlet' in regs)
+        portal = self.layer['portal']
+        mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        assigned = [type(p) for p in mapping.values()]
+        self.assertTrue(quickuploadportlet.Assignment in assigned)
+
+    def after_42(self):
+        portal = self.layer['portal']
+        at = getToolByName(portal, 'portal_amberjack')
+        self.assertTrue(at.sandbox)
+        personal = portal['personal']
+        mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        self.assertTrue('amberjack-choice-portlet-skinid' in mapping)
+
+    def after_43(self):
+        portal = self.layer['portal']
+        js = getToolByName(portal, 'portal_javascripts')
+        resources = js.getResourcesDict()
+        self.assertFalse('sarissa.js' in resources)
+        self.assertFalse('++resource++MochiKit.js' in resources)
+        self.assertFalse('++resource++prototype.js' in resources)
+        self.assertFalse('++resource++effects.js' in resources)
+        self.assertFalse('++resource++cssQuery-compat.js' in resources)
+        self.assertFalse('++resource++base2-dom-fp.js' in resources)
+        self.assertFalse('++resource++kukit.js' in resources)
+        self.assertFalse('++resource++kukit-devel.js' in resources)

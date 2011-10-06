@@ -417,3 +417,34 @@ def enable_session_refresh(context):
     enable_secure_cookies(context)
     loadMigrationProfile(context, 'profile-intranett.policy:default',
     steps=('cssregistry', ))
+
+
+@upgrade_to(40)
+def set_site_title(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    steps=('properties', ))
+
+
+@upgrade_to(41)
+def install_quickupload(context):
+    loadMigrationProfile(context, 'profile-collective.quickupload:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('cssregistry', 'jsregistry', 'propertiestool'))
+    from intranett.policy.setuphandlers import setup_quickupload
+    setup_quickupload(context)
+
+
+@upgrade_to(42)
+def install_amberjack(context):
+    loadMigrationProfile(context, 'profile-intranett.tour:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('cssregistry', 'jsregistry', ))
+    from intranett.policy.setuphandlers import setup_amberjack
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    setup_amberjack(site)
+
+@upgrade_to(43)
+def remove_kss(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('jsregistry', ))

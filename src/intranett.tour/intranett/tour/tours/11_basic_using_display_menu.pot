@@ -1,0 +1,157 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-10-30 09:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: 12_basic_using_display_menu\n"
+
+#. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "0_0_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "0_1_microstep_description"
+msgstr ""
+
+#. Default: "Using the display menu"
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "0_using-the-display-menu_title"
+msgstr ""
+
+#. Default: "Click the [Display] drop-down menu."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "1_0_microstep_description"
+msgstr ""
+
+#. Default: "Select [Summary view]."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "1_1_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "1_2_microstep_description"
+msgstr ""
+
+#. Default: "Use summary view"
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "1_use-summary-view_title"
+msgstr ""
+
+#. Default: "Click the [Display] drop-down menu."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "2_0_microstep_description"
+msgstr ""
+
+#. Default: "Select [Tabular view]."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "2_1_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "2_2_microstep_description"
+msgstr ""
+
+#. Default: "Summary view"
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "2_summary-view_title"
+msgstr ""
+
+#. Default: "Click the [Display] drop-down menu."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "3_0_microstep_description"
+msgstr ""
+
+#. Default: "Select [content item as default view]."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "3_1_microstep_description"
+msgstr ""
+
+#. Default: "Select [My Page] as the default page for MyFolder."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "3_2_microstep_description"
+msgstr ""
+
+#. Default: "Click the [Save] button to finish."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "3_3_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "3_4_microstep_description"
+msgstr ""
+
+#. Default: "Tabular view"
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "3_tabular-view_title"
+msgstr ""
+
+#. Default: "So far you have seen the various ways that a folder in Plone can display its contents. However, in many cases you may wish to choose a single item such as a Page to act as the 'landing page' for the folder. This is common in cases where the folder is intended to be a subsection of the site."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "4_0_microstep_description"
+msgstr ""
+
+#. Default: "To move to the next step use the button with the double arrow in the head of this popup."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "4_1_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "4_2_microstep_description"
+msgstr ""
+
+#. Default: "Default page"
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "4_default-page_title"
+msgstr ""
+
+#. Default: "Click the [Display] drop-down menu."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "5_0_microstep_description"
+msgstr ""
+
+#. Default: "Select [Standard view]."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "5_1_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "5_2_microstep_description"
+msgstr ""
+
+#. Default: "Standard view"
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "5_standard-view_title"
+msgstr ""
+
+#. Default: "In this tutorial you have explored some of the ways that a folder can display its contents. On your own, try out the Thumbnail view by uploading several images to a folder. This view is used to create a simple photo gallery."
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "6_0_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "6_1_microstep_description"
+msgstr ""
+
+#. Default: "All done"
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "6_all-done_title"
+msgstr ""
+
+#. Default: "Using the Display menu"
+#: /home/zope/virtualenv/i18ndude/tours/12_basic_using_display_menu.cfg
+msgid "amberjack_title"
+msgstr ""
+

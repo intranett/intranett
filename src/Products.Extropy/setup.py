@@ -23,5 +23,7 @@ setup(name='Products.Extropy',
           'intranett.theme',
           'jarn.extranet',
           'Products.Invoice',
+          'jarn.xmpp.twisted',
+          'jarn.xmpp.core',
       ],
       )

@@ -10,7 +10,7 @@
             </li>
             <li tal:define="personal_folder_url view/personal_folder_url"
                 tal:condition="python:personal_folder_url">
-              <a href=""
+              <a id="personal-folder-link" href=""
                  tal:attributes="href personal_folder_url"
                  i18n:translate="">Personal folder</a>
             </li>
