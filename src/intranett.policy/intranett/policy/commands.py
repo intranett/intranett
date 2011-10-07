@@ -147,6 +147,7 @@ def create_site_admin(app, args):
     mt = aq_get(site, 'portal_membership')
     pt = aq_get(site, 'portal_password_reset')
     rt = aq_get(site, 'portal_registration')
+    it = aq_get(site, 'portal_invitations')
 
     if mt.getMemberById(login) is not None:
         logger.error("User %s already exists." % login)
@@ -164,6 +165,10 @@ def create_site_admin(app, args):
     member.setMemberProperties(dict(email=email, fullname=fullname))
     reset = pt.requestReset(login)
 
+    # Allocate 100 invites to site admin
+    it.generateInvite(login, count=100)
+
+    # Mail him
     mail_text = ActivationMail(site, site.REQUEST)(member=member,
         reset=reset, email=email, fullname=fullname, hostname=hostname)
     if isinstance(mail_text, unicode):
