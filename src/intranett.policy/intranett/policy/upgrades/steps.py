@@ -422,5 +422,4 @@ def enable_session_refresh(context):
 @upgrade_to(40)
 def add_invite_portlet(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('portlets', ))
-
+        steps=('portlets', 'skins', 'toolset', 'rolemap'))

@@ -92,6 +92,17 @@
         <role name="Reviewer"/>
         <role name="Site Administrator" />
     </permission>
-
+    <permission name="PloneInvite: Generate Portal Invites" acquire="False">
+        <role name="Manager" />
+        <role name="Site Administrator" />
+    </permission>
+    <permission name="PloneInvite: Invite Portal Users" acquire="False">
+        <role name="Manager" />
+        <role name="Site Administrator" />
+    </permission>
+    <permission name="PloneInvite: Manage Member Invites" acquire="False">
+        <role name="Manager" />
+        <role name="Site Administrator" />
+    </permission>
   </permissions>
 </rolemap>
