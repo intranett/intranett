@@ -28,8 +28,10 @@ def check_quick_upload_locally_addable():
         context = aq_inner(self.context)
         allowed_types = context.getLocallyAllowedTypes()
         return self._old_available and ('File' in allowed_types or 'Image' in allowed_types)
+
     Renderer._old_available = Renderer.available
     Renderer.available = available
+
 
 def apply():
     allow_anonymous()
