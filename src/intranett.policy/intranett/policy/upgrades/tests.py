@@ -319,3 +319,11 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         self.assertFalse('++resource++base2-dom-fp.js' in resources)
         self.assertFalse('++resource++kukit.js' in resources)
         self.assertFalse('++resource++kukit-devel.js' in resources)
+
+    def after_44(self):
+        from collective.quickupload.portlet import quickuploadportlet
+        from intranett.policy.config import PERSONAL_FOLDER_ID
+        personal = self.layer['portal'][PERSONAL_FOLDER_ID]
+        mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        assigned = [type(p) for p in mapping.values()]
+        self.assertTrue(quickuploadportlet.Assignment in assigned)
