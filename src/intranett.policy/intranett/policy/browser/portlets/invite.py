@@ -33,8 +33,16 @@ class Renderer(base.Renderer):
 
     @memoize
     def invites(self):
-        inv_tool = getToolByName(self.context, 'portal_invitations')
-        return inv_tool.getInvitesUser(sent=0, used=0)
+        mt = getToolByName(self.context, 'portal_membership')
+        it = getToolByName(self.context, 'portal_invitations')
+        invites = it.getInvitesUser(sent=0, used=0)
+        if not invites:
+            # Auto-refresh number of allocated invites
+            member = mt.getAuthenticatedMember()
+            if 'Site Administrator' in member.getRoles():
+                it.generateInvite(member.getId(), count=100)
+                invites = it.getInvitesUser(sent=0, used=0)
+        return not not invites
 
 
 class AddForm(base.NullAddForm):
