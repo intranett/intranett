@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-10-05 12:36+0000\n"
+"POT-Creation-Date: 2011-10-10 13:07+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -366,8 +366,7 @@ msgstr "Denne URL har allerede blitt brukt, eller den har utløpt. For din sikke
 #. Default: "Sorry, this appears to be an invalid request. Please make sure you copied the URL exactly as it appears in your email."
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_invalid.pt:12
 msgid "message_invitation_invalid"
-msgstr "Beklager, synes dette å være en ugyldig forespørsel. Sørg for at du kopierte URLen nøyaktig slik den vises i
-din e-post."
+msgstr "Beklager, synes dette å være en ugyldig forespørsel. Sørg for at du kopierte URLen nøyaktig slik den vises i din e-post."
 
 #. Default: "The e-mail address to send an invitation to:"
 #: intranett.policy/intranett/policy/browser/portlets/invite.pt:17
