@@ -27,19 +27,19 @@ def _compress(content, format, level=None):
     if res_dir is None:
         return content
     if isinstance(content, unicode):
-        content = content.encode('utf-8')
+        content = content.encode('ascii', 'ignore')
     digest = hashlib.sha1(content).hexdigest()
     cache_path = os.path.join(res_dir, digest)
     if os.path.isfile(cache_path):
         with open(cache_path, 'rb') as fp:
             result = fp.read()
-        return result.decode('utf-8')
+        return result.decode('ascii', 'ignore')
     args = ['java', '-jar', yui_path, '--type=%s' % format]
     process = subprocess.Popen(args,
         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = process.communicate(input=content)
     del process
-    result = out.decode('utf-8')
+    result = out.decode('ascii', 'decode')
     with open(cache_path, 'wb') as fp:
         fp.write(result)
         fp.flush()
