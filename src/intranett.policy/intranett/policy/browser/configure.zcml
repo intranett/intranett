@@ -12,6 +12,7 @@
       />
 
   <include package=".portlets" />
+  <include package=".controlpanels" />
 
   <!-- Users listing -->
   <browser:page

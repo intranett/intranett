@@ -1,0 +1,15 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="intranett">
+
+<include package="plone.app.registry" />
+
+   <!-- Control panel -->
+   <browser:page
+       name="visual-settings"
+       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+       class=".visualcontrolpanel.VisualSettingsControlPanel"
+      permission="zope2.ManageUsers"
+       />
+</configure>

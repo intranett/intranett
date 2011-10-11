@@ -1,4 +1,5 @@
 <registry>
+  <records interface="intranett.policy.browser.controlpanels.interfaces.IVisualSettings" />
   <record field="cacheStopRequestVariables" interface="plone.app.caching.interfaces.IPloneCacheSettings" name="plone.app.caching.interfaces.IPloneCacheSettings.cacheStopRequestVariables">
     <value>
       <element>statusmessages</element>
