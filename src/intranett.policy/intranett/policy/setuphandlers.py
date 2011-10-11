@@ -133,7 +133,7 @@ def setup_amberjack(site):
     mapping = folder.restrictedTraverse('++contextportlets++plone.leftcolumn')
     addview = mapping.restrictedTraverse('+/' + portlet.addview)
     addview.createAndAdd(data={
-        'user_title':u'Tutorials',
+        'user_title': u'Tutorials',
         'tours': [u'01_basic_add_and_publish_a_folder-add-and-publish',
                   u'02_basic_add_and_publish_a_page-add-and-publish-a',
                   u'03_basic_add_and_publish_a_news_item-add-and',
@@ -218,10 +218,19 @@ def restrict_siteadmin(site):
 
 def setup_quickupload(site):
     portal = getToolByName(site, 'portal_url').getPortalObject()
-    # Assign quickupload portlet
+    # Assign quickupload portlet to root.
     portlet = queryUtility(IPortletType,
          name='collective.quickupload.QuickUploadPortlet')
     mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=site.Language())})
+
+    # Assign quickupload to personal folders.
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    personal = portal[PERSONAL_FOLDER_ID]
+    mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
     addview = mapping.restrictedTraverse('+/' + portlet.addview)
     quick_title = _(u'Quick upload')
     addview.createAndAdd(data={'header':
