@@ -15,13 +15,14 @@ VIEWLET_TEXT = u"""
       dropboxID:   "20021871",
       url:         "https://jarn.zendesk.com",
       tabID:       "support",
-      tabColor:    "#444",
-      tabPosition: "Right"
+      hide_tab:       true,
     });
+    $('#supportLink').click(function() {
+       window.Zenbox.show()
+       });
   }
 </script>
 """
-
 
 class SupportViewlet(BrowserView):
     implements(IViewlet)
