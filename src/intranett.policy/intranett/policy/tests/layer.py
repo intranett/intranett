@@ -58,6 +58,8 @@ class IntranettLayer(PloneSandboxLayer):
 
         setRoles(portal, TEST_USER_ID, ['Manager'])
         portal.invokeFactory('Folder', 'test-folder')
+        # don't require secure cookies in tests
+        portal.acl_users.session.secure = False
         setRoles(portal, TEST_USER_ID, ['Member'])
 
 
