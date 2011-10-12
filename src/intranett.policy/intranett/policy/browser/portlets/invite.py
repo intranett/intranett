@@ -38,10 +38,10 @@ class Renderer(base.Renderer):
         if not invites:
             # Auto-refresh number of allocated invites
             member = mt.getAuthenticatedMember()
-            if 'Site Administrator' in member.getRoles():
-                it.generateInvite(member.getId(), count=100)
+            if self.available:
+                it.generateInvite(member.getId(), count=10)
                 invites = it.getInvitesUser(sent=0, used=0)
-        return not not invites
+        return bool(invites)
 
 
 class AddForm(base.NullAddForm):
