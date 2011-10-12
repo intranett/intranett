@@ -31,7 +31,7 @@ class InvitationMail(BrowserView):
 def sendInvitationMail(site, member, vars):
     request = aq_get(site, 'REQUEST')
     fullname = member.getProperty('fullname') or member.getId()
-    hostname = request.SERVER_NAME
+    hostname = request.other['SERVER_URL']
     invite_to_address = vars['invite_to_address']
     invitecode = vars['invitecode']
     message = vars['message']
