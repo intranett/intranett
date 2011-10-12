@@ -1,0 +1,133 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-10-30 09:57+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: 06_basic_create_internal_links\n"
+
+#. Default: "Navigate to the folder called [MyFolder] that you created in a previous tutorial."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "0_0_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "0_1_microstep_description"
+msgstr ""
+
+#. Default: "Create internal links"
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "0_create-internal-links_title"
+msgstr ""
+
+#. Default: "Navigate to [My Page] that you created from the previous tutorial."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "1_0_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "1_1_microstep_description"
+msgstr ""
+
+#. Default: "Edit an existing page"
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "1_edit-an-existing-page_title"
+msgstr ""
+
+#. Default: "Click the [Edit] tab to begin editing."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "2_0_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "2_1_microstep_description"
+msgstr ""
+
+#. Default: "Edit my page"
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "2_edit-my-page_title"
+msgstr ""
+
+#. Default: "Type the following text in the [Body Text] field 'Visit the Homepage'."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_0_microstep_description"
+msgstr ""
+
+#. Default: "Now highlight that text with your mouse pointer and"
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_1_microstep_description"
+msgstr ""
+
+#. Default: "click the [Link icon] in the toolbar. A pop-up window should now appear."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_2_microstep_description"
+msgstr ""
+
+#. Default: "This pop-up window allows you to browse the content of your site. Notice the links in the left-hand column. Click on [Home] to browse to the root directory of your site."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_3_microstep_description"
+msgstr ""
+
+#. Default: "Find the page titled 'Welcome to Plone' and select the [radio button] next to it."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_4_microstep_description"
+msgstr ""
+
+#. Default: "Click [Insert] to create the hyperlink."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_5_microstep_description"
+msgstr ""
+
+#. Default: "Click [Save] to finish."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_6_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_7_microstep_description"
+msgstr ""
+
+#. Default: "Insert an internal link"
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "3_insert-an-internal-link_title"
+msgstr ""
+
+#. Default: "[Click] your new link. You should be taken directly to the defined page."
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "4_0_microstep_description"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "4_1_microstep_description"
+msgstr ""
+
+#. Default: "Test your link"
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "4_test-your-link_title"
+msgstr ""
+
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "5_0_microstep_description"
+msgstr ""
+
+#. Default: "All done"
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "5_all-done_title"
+msgstr ""
+
+#. Default: "Create internal links"
+#: /home/zope/virtualenv/i18ndude/tours/06_basic_create_internal_links.cfg
+msgid "amberjack_title"
+msgstr ""
+

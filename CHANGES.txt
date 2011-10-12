@@ -1,8 +1,59 @@
 Changelog
 =========
 
-1.3.3 - unreleased
+1.3.8 - unreleased
 ------------------
+
+- Internal: Expand system-info view to print out statistics on number of users,
+  content items and modified items.
+
+- INTRANETT-274: Hide quick upload portlet if neither images nor files can be
+  added in the current folder and enable quick upload portlet inside personal
+  folders.
+
+- INTRANETT-270: Fixed failure to create groups.
+
+- INTRANETT-272: Remove KSS to fix problems in Internet Explorer.
+
+1.3.7 - 2011-10-04
+------------------
+
+- Add Plone Hotfix 20110928.
+
+1.3.6 - 2011-10-04
+------------------
+
+- Add Zope hotfix CVE 2011-3587.
+
+1.3.5 - 2011-10-03
+------------------
+
+- Add a `system-info` view to provide structured information about the
+  installed software version.
+
+1.3.4 - 2011-10-03
+------------------
+
+- Drop the color stripe.
+
+- Integrate Zendesk support widget.
+
+- INTRANETT-209: Setup XMPP for jarn.intranett.no.
+
+- INTRANETT-229: Provide Amberjack based tutorials.
+
+- INTRANETT-253: Add quick file and image upload feature.
+
+- Fix styling of search box in related items dialog.
+
+- INTRANETT-254: Fix logo title to use the site title.
+
+1.3.3 - 2011-09-09
+------------------
+
+- INTRANETT-224: Add default content.
+
+- Update to distribute = 0.6.21.
 
 - INTRANETT-248: Translate subject of welcome mail to Norwegian.
 

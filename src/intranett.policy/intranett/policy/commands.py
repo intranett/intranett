@@ -56,9 +56,6 @@ def create_site(app, args):
         help='Force creation of a site when one already exists.')
     parser.add_option('-r', '--rootpassword', default=None,
         help='Create a admin user in the Zope root with the given password.')
-    parser.add_option('-t', '--title',
-        default='intranett.no',
-        help='The title for the new site. [default: "%default"]')
     parser.add_option('-l', '--language', default='no',
         help='The language used in the new site. [default: "%default"]')
     (options, args) = parser.parse_args(args=args)
@@ -87,9 +84,9 @@ def create_site(app, args):
 
     request = app.REQUEST
     request.form = {
-        'extension_ids': ('intranett.policy:default', ),
+        'extension_ids': (
+            'intranett.policy:default', 'intranett.policy:content',),
         'form.submitted': True,
-        'title': options.title,
         'language': options.language,
     }
     from intranett.policy.browser.admin import AddIntranettSite
@@ -163,6 +160,28 @@ def create_site_admin(app, args):
     member = mt.getMemberById(login) # getMemberByLogin???
     member.setMemberProperties(dict(email=email, fullname=fullname))
     reset = pt.requestReset(login)
+
+    # change ownership of all content to new user and update dates to now
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    from DateTime import DateTime
+    user = member.getUser()
+    userid = user.getId()
+    now = DateTime()
+
+    catalog = aq_get(site, 'portal_catalog')
+    brains = catalog.unrestrictedSearchResults()
+    for brain in brains:
+        if brain.portal_type.startswith('Member'):
+            continue
+        if brain.getId == PERSONAL_FOLDER_ID:
+            continue
+        obj = brain.getObject()
+        obj.setCreators(userid)
+        obj.changeOwnership(user)
+        obj.setCreationDate(now)
+        obj.setEffectiveDate(now)
+        obj.setModificationDate(now)
+        obj.reindexObject(idxs=None)
 
     # Mail him
     mail_text = ActivationMail(site, site.REQUEST)(member=member,

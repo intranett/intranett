@@ -42,7 +42,10 @@ setup(name='intranett.policy',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'Products.Zope_Hotfix_CVE_2011_3587',
+          'Products.PloneHotfix20110928',
           'collective.ATClamAV',
+          'collective.quickupload',
           'experimental.btree',
           'five.pt',
           'iw.rejectanonymous',
@@ -65,6 +68,7 @@ setup(name='intranett.policy',
           'zope.component',
           'zope.interface',
           'intranett.theme',
+          'intranett.tour',
       ],
       entry_points="""
       [zopectl.command]

@@ -58,11 +58,26 @@ class IntranettLayer(PloneSandboxLayer):
 
         setRoles(portal, TEST_USER_ID, ['Manager'])
         portal.invokeFactory('Folder', 'test-folder')
+        # don't require secure cookies in tests
+        portal.acl_users.session.secure = False
         setRoles(portal, TEST_USER_ID, ['Member'])
 
 
 INTRANETT_LAYER = IntranettLayer()
 INTRANETT_INTEGRATION = IntegrationTesting(
-    bases=(INTRANETT_LAYER, ), name="IntranettLayer:Integration")
+    bases=(INTRANETT_LAYER, ), name="Intranett:Integration")
 INTRANETT_FUNCTIONAL = FunctionalTesting(
-    bases=(INTRANETT_LAYER, ), name="IntranettLayer:Functional")
+    bases=(INTRANETT_LAYER, ), name="Intranett:Functional")
+
+
+class IntranettContentLayer(PloneSandboxLayer):
+    """ layer for default content tests """
+
+    defaultBases = (INTRANETT_LAYER, )
+
+    def setUpPloneSite(self, portal):
+        applyProfile(portal, 'intranett.policy:content')
+
+INTRANETT_CONTENT_LAYER = IntranettContentLayer()
+INTRANETT_CONTENT_INTEGRATION = IntegrationTesting(
+    bases=(INTRANETT_CONTENT_LAYER, ), name="IntranettContent:Integration")

@@ -1,4 +1,5 @@
 from Acquisition import aq_get
+from plone.portlets.interfaces import IPortletType
 from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryMultiAdapter
@@ -6,6 +7,7 @@ from zope.component import queryUtility
 from zope.i18n import translate
 from zope.interface import alsoProvides
 
+from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import config
 
 
@@ -53,7 +55,6 @@ def disable_collections(site):
 
 
 def disable_portlets(site):
-    from plone.portlets.interfaces import IPortletType
     from zope.component import getUtilitiesFor
 
     disabled = ['portlets.Calendar', 'portlets.Classic', 'portlets.Login',
@@ -90,11 +91,6 @@ def setup_members_folder(site):
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('MembersFolder', portal, id=MEMBERS_FOLDER_ID,
         title=title)
-    # we fill the request with some values in commands.py create_site
-    # don't let those interfere in the processForm call
-    request = aq_get(portal, 'REQUEST', None)
-    if request is not None:
-        request.form['title'] = title
     portal[MEMBERS_FOLDER_ID].processForm() # Fire events
     workflow = getToolByName(portal, 'portal_workflow')
     workflow.doActionFor(portal[MEMBERS_FOLDER_ID], 'publish')
@@ -105,17 +101,11 @@ def setup_personal_folder(site):
     from plone.portlets.interfaces import IPortletManager
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import PERSONAL_FOLDER_ID
-    from intranett.policy import IntranettMessageFactory as _
     personal_folder_title = _(u'Personal folders')
     title = translate(personal_folder_title, target_language=site.Language())
     portal = getToolByName(site, 'portal_url').getPortalObject()
     _createObjectByType('Folder', portal, id=PERSONAL_FOLDER_ID,
         title=title)
-    # we fill the request with some values in commands.py create_site
-    # don't let those interfere in the processForm call
-    request = aq_get(portal, 'REQUEST', None)
-    if request is not None:
-        request.form['title'] = title
     folder = portal[PERSONAL_FOLDER_ID]
     folder.setExcludeFromNav(True)
     folder.processForm() # Fire events
@@ -130,6 +120,39 @@ def setup_personal_folder(site):
             assignable.setBlacklistStatus('context', True)
             assignable.setBlacklistStatus('group', True)
             assignable.setBlacklistStatus('content_type', True)
+
+
+def setup_amberjack(site):
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    setattr(portal.portal_amberjack, 'sandbox', True)
+    # Assign amberjack portlet
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    folder = portal[PERSONAL_FOLDER_ID]
+    portlet = queryUtility(IPortletType,
+         name='collective.amberjack.portlet.AmberjackChoicePortlet')
+    mapping = folder.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    addview.createAndAdd(data={
+        'user_title': u'Tutorials',
+        'tours': [u'01_basic_add_and_publish_a_folder-add-and-publish',
+                  u'02_basic_add_and_publish_a_page-add-and-publish-a',
+                  u'03_basic_add_and_publish_a_news_item-add-and',
+                  u'04_basic_add_and_publish_an_event-add-and-publish',
+                  u'05_basic_format_a_page_using_the_visual_editor',
+                  u'06_basic_create_internal_links-create-internal',
+                  u'07_basic_create_external_links-create-external',
+                  u'08_basic_upload_an_image-upload-an-image',
+                  u'09_basic_insert_image_on_a_page-insert-image-on-a',
+                  u'10_basic_using_the_contents_tab-using-the-contents',
+                  u'11_basic_using_display_menu-using-the-display-menu']})
+
+
+def setup_default_content(site):
+    from Testing import makerequest
+    wrapped = makerequest.makerequest(site)
+    from intranett.policy.browser.defaultcontent import DefaultContent
+    view = DefaultContent(wrapped, wrapped.REQUEST)
+    view()
 
 
 def enable_secure_cookies(context):
@@ -193,10 +216,29 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
-# TODO the default can go with plutonian > 0.1a2
-@import_step(depends=('plone-final', 'workflow', ))
+def setup_quickupload(site):
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    # Assign quickupload portlet to root.
+    portlet = queryUtility(IPortletType,
+         name='collective.quickupload.QuickUploadPortlet')
+    mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=site.Language())})
+
+    # Assign quickupload to personal folders.
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    personal = portal[PERSONAL_FOLDER_ID]
+    mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=site.Language())})
+
+
+@import_step()
 def various(context):
-    # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('intranett-policy-various.txt') is None:
         return
     site = context.getSite()
@@ -208,10 +250,20 @@ def various(context):
     disable_portlets(site)
     setup_default_groups(site)
     setup_reject_anonymous(site)
-    setup_members_folder(site)
-    setup_personal_folder(site)
-    enable_secure_cookies(site)
     ignore_link_integrity_exceptions(site)
     enable_link_by_uid(site)
+    setup_members_folder(site)
+    setup_personal_folder(site)
+    setup_amberjack(site)
+    enable_secure_cookies(site)
     open_ext_links_in_new_window(site)
     restrict_siteadmin(site)
+    setup_quickupload(site)
+
+
+@import_step()
+def content(context):
+    if context.readDataFile('intranett-policy-content.txt') is None:
+        return
+    site = context.getSite()
+    setup_default_content(site)

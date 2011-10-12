@@ -420,6 +420,55 @@ def enable_session_refresh(context):
 
 
 @upgrade_to(40)
+def set_site_title(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+    steps=('properties', ))
+
+
+@upgrade_to(41)
+def install_quickupload(context):
+    loadMigrationProfile(context, 'profile-collective.quickupload:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('cssregistry', 'jsregistry', 'propertiestool'))
+    from intranett.policy.setuphandlers import setup_quickupload
+    setup_quickupload(context)
+
+
+@upgrade_to(42)
+def install_amberjack(context):
+    loadMigrationProfile(context, 'profile-intranett.tour:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('cssregistry', 'jsregistry', ))
+    from intranett.policy.setuphandlers import setup_amberjack
+    url_tool = getToolByName(context, 'portal_url')
+    site = url_tool.getPortalObject()
+    setup_amberjack(site)
+
+
+@upgrade_to(43)
+def remove_kss(context):
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('jsregistry', ))
+
+
+@upgrade_to(44)
+def quickupload_in_personal_folder(context):
+    from plone.portlets.interfaces import IPortletType
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    from intranett.policy import IntranettMessageFactory as _
+    url_tool = getToolByName(context, 'portal_url')
+    portal = url_tool.getPortalObject()
+    portlet = queryUtility(IPortletType,
+         name='collective.quickupload.QuickUploadPortlet')
+    personal = portal[PERSONAL_FOLDER_ID]
+    mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=portal.Language())})
+
+
+@upgrade_to(45)
 def add_invite_portlet(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('portlets', 'skins', 'toolset', 'rolemap'))
