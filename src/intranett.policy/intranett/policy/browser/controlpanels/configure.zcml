@@ -5,11 +5,13 @@
 
 <include package="plone.app.registry" />
 
+<adapter factory=".settings.SettingsAdapter" />
+
    <!-- Control panel -->
    <browser:page
-       name="visual-settings"
+       name="intranett-settings"
        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-       class=".visualcontrolpanel.VisualSettingsControlPanel"
+       class=".settings.SettingsControlPanel"
       permission="zope2.ManageUsers"
        />
 </configure>
