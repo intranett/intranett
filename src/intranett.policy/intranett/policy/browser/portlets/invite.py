@@ -1,10 +1,9 @@
-from AccessControl import getSecurityManager
-from plone.memoize.view import memoize
 from plone.app.portlets.portlets import base
+from plone.memoize.view import memoize
 from plone.portlets.interfaces import IPortletDataProvider
-from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.utils import _checkPermission
 from Products.CMFCore.permissions import ManageUsers
+from Products.CMFCore.utils import _checkPermission
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import implements
 
