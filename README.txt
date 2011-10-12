@@ -26,7 +26,7 @@ To create a Plone site in the database call::
 
 To overwrite an existing site and set the admin password, you can use::
 
-  bin/instance create_site --force --rootpassword=admin
+  bin/instance create_site --force --rootpassword=admin --language=no
 
 Working on a ticket
 -------------------
