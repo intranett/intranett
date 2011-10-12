@@ -62,4 +62,17 @@
       permission="zope2.View"
       />
 
+  <!-- Unconfigure PloneInvite's custom register view -->
+  <include package="z3c.unconfigure" file="meta.zcml" />
+
+  <unconfigure>
+    <browser:page
+        name="register"
+        for="Products.CMFPlone.Portal.PloneSite"
+        class="Products.PloneInvite.browser.register.InviteRegistrationForm"
+        permission="zope.Public"
+        layer="Products.PloneInvite.interfaces.IPloneInvitePolicy"
+        />
+  </unconfigure>
+
 </configure>

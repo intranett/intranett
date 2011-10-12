@@ -12,6 +12,7 @@ from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.permissions import View
+from Products.CMFCore.permissions import ManageUsers
 from Products.CMFPlone.utils import safe_hasattr
 from Products.PlonePAS.tools.membership import MembershipTool as \
     BaseMembershipTool
@@ -235,6 +236,8 @@ class MemberDataTool(BaseMemberDataTool):
 
 class MembershipTool(BaseMembershipTool):
 
+    security = ClassSecurityInfo()
+
     def getMemberInfo(self, memberId=None):
         memberinfo = super(MembershipTool, self).getMemberInfo(memberId)
         if memberinfo is None:
@@ -318,3 +321,17 @@ class MembershipTool(BaseMembershipTool):
         memberdata = membership.getMemberById(safe_id)
         if memberdata is not None:
             memberdata.notifyModified()
+
+    security.declareProtected(ManageUsers, 'getMemberByLogin')
+    def getMemberByLogin(self, login):
+        """Retrieve a Member object by login name."""
+        acl_users = getToolByName(self, 'acl_users')
+        users = acl_users.searchUsers(login=login, exact_match=True)
+        users = [x.get('userid') for x in users if x.get('userid')]
+        if not users:
+            return None
+        if len(users) > 1:
+            raise ValueError('Multiple users found with the same login name')
+        return self.getMemberById(users[0])
+
+InitializeClass(MembershipTool)

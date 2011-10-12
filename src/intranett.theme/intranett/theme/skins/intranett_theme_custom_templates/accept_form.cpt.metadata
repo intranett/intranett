@@ -1,0 +1,10 @@
+[default]
+title=Please sign in
+border=None
+
+[validators]
+validators = validate_emailaddr,accept_form_validate
+
+[actions]
+action.success = traverse_to:string:accept_action
+action.failure = traverse_to:string:accept_form

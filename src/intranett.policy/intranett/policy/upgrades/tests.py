@@ -327,3 +327,7 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
         mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
         assigned = [type(p) for p in mapping.values()]
         self.assertTrue(quickuploadportlet.Assignment in assigned)
+
+    def after_45(self):
+        # tested by GS export diff
+        pass

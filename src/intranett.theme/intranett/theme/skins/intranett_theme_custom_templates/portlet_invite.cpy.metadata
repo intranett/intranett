@@ -1,0 +1,7 @@
+[validators]
+validators=
+
+[actions]
+action.success = redirect_to:request/HTTP_REFERER
+action.failure = redirect_to:request/HTTP_REFERER
+

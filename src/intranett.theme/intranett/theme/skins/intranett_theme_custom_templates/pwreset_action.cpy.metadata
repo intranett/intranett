@@ -1,0 +1,4 @@
+[actions]
+action.success = traverse_to:string:pwreset_finish
+action.invalid = traverse_to:string:pwreset_invalid
+action.expired = traverse_to:string:pwreset_expired

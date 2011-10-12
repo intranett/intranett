@@ -17,6 +17,14 @@
     i18n:attributes="title"
     />
 
+  <portlet
+    addview="intranett.policy.portlets.InvitePortlet"
+    title="Invite others"
+    description=""
+    i18n:domain="intranett"
+    i18n:attributes="title"
+    />
+
   <assignment name="navigation"
       category="context"
       key="/"
@@ -36,6 +44,14 @@
       key="/"
       manager="plone.leftcolumn"
       type="intranett.policy.portlets.ProjectRoomInfo"
+      visible="True">
+  </assignment>
+
+  <assignment name="inviteportlet"
+      category="context"
+      key="/"
+      manager="frontpage.portlets.right"
+      type="intranett.policy.portlets.InvitePortlet"
       visible="True">
   </assignment>
 

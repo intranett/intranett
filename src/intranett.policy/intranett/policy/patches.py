@@ -3,10 +3,12 @@ from Acquisition import aq_inner
 
 def allow_anonymous():
     from iw.rejectanonymous import addValidIds, addValidSubparts
+    addValidIds('accept_form')
     addValidIds('activate_form')
     addValidIds('logged_out')
     addValidIds('robots.txt')
     addValidIds('system-info')
+    addValidSubparts('accept')
     addValidSubparts('activate')
     addValidSubparts('portal_kss')
 
