@@ -73,7 +73,7 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/invitation-mail.pt:6
 msgid "Invitation to join ${hostname}"
-msgstr "Invitasjon til å delta ${hostname}"
+msgstr "Invitasjon til å delta på ${hostname}"
 
 #: intranett.policy/intranett/policy/browser/portlets/invite.pt:22
 msgid "Invite"
@@ -294,9 +294,9 @@ msgid "invitation-mail-body"
 msgstr ""
 "Velkommen,\n"
 "\n"
-"${sender_fullname} har invitert deg til å delta i intranett ${hostname}.\n"
+"${sender_fullname} har invitert deg til å delta på intranettet ${hostname}.\n"
 "\n"
-"Vennligst godta denne invitasjonen ved å besøke:\n"
+"Vennligst akseptèr denne invitasjonen ved å gå til:\n"
 "\n"
 "${accept_invitation}\n"
 "(Du må aktivere kontoen før ${expirationdate})\n"
