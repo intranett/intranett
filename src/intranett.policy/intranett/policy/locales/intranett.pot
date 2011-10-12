@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: intranett\n"
-"POT-Creation-Date: 2011-10-12 12:10+0000\n"
+"POT-Creation-Date: 2011-10-12 12:48+0000\n"
 "PO-Revision-Date: 2010-12-22 10:00+0000\n"
 "Last-Translator: Jarn AS <info@jarn.com>\n"
 "Language-Team: Jarn AS <info@jarn.com>\n"
@@ -275,7 +275,7 @@ msgstr ""
 msgid "help_portrait"
 msgstr ""
 
-#. Default: "Hi, ${sender_fullname} has invited you to join the intranet site ${hostname}. Please accept this invitation by visiting: ${accept_invitation} (You must accept the invitation before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those — And please don't hesitate to contact us at support@intranett.no or via phone at 33501850 if there's something we can help you with. With kind regards, intranett.no-team"
+#. Default: "Hi, ${sender_fullname} has invited you to join the intranet site ${hostname}. Please accept this invitation by visiting: ${accept_invitation} (You must accept the invitation before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those. With kind regards, intranett.no-team"
 #: intranett.policy/intranett/policy/browser/templates/invitation-mail.pt:20
 msgid "invitation-mail-body"
 msgstr ""
