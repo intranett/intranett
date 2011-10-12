@@ -4,6 +4,9 @@ Changelog
 1.3.8 - unreleased
 ------------------
 
+- INTRANETT-258: Add invite portlet to the front page, which allows any site
+  administrator to invite new users by providing only an email address.
+
 - Move Zendesk support form to a link in the personal bar and only enable it
   for site administrators.
 
