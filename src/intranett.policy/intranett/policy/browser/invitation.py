@@ -3,6 +3,7 @@ from email.Header import Header
 from urllib import quote
 
 from AccessControl import ModuleSecurityInfo
+from Acquisition import aq_get
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
@@ -28,8 +29,9 @@ class InvitationMail(BrowserView):
 
 
 def sendInvitationMail(site, member, vars):
+    request = aq_get(site, 'REQUEST')
     fullname = member.getProperty('fullname') or member.getId()
-    hostname = site.REQUEST.SERVER_NAME
+    hostname = request.SERVER_NAME
     invite_to_address = vars['invite_to_address']
     invitecode = vars['invitecode']
     message = vars['message']
@@ -40,7 +42,7 @@ def sendInvitationMail(site, member, vars):
     accept_url = '%s/accept/%s?email=%s' % (
         site.absolute_url(), quote(invitecode), quote(invite_to_address))
 
-    mail_text = InvitationMail(site, site.REQUEST)(member=member,
+    mail_text = InvitationMail(site, request)(member=member,
         email=invite_to_address, sender_fullname=fullname, hostname=hostname,
         message=message, expires=expires, accept_url=accept_url)
     if isinstance(mail_text, unicode):
