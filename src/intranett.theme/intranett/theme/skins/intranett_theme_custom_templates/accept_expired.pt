@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
       lang="en-US"
-      metal:use-macro="here/main_template/macros/master"
+      metal:use-macro="context/main_template/macros/master"
       i18n:domain="intranett">
 <body>
 
@@ -13,7 +13,7 @@
             <p i18n:translate="message_invitation_expired">
                 This URL has already been used, or it has expired.
                 For your security, invitation URLs are only valid for
-                <span i18n:name="days" tal:replace="here/portal_invitations/days" />
+                <span i18n:name="days" tal:replace="context/portal_invitations/days" />
                 days.
             </p>
         </div>
