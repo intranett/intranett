@@ -266,17 +266,17 @@ msgstr ""
 #. Default: "Accept invitation"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form.cpt:22
 msgid "heading_accept_form"
-msgstr ""
+msgstr "Akseptere invitasjon"
 
 #. Default: "Invitation expired"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_expired.pt:9
 msgid "heading_invitation_expired"
-msgstr ""
+msgstr "Invitasjon utløpt"
 
 #. Default: "Invalid invitation"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_invalid.pt:9
 msgid "heading_invitation_invalid"
-msgstr ""
+msgstr "Ugyldige invitasjon"
 
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
 #: intranett.policy/intranett/policy/userdataschema.py:37
@@ -292,6 +292,18 @@ msgstr "For å legge til et nytt portrett, trykk \"Bla igjennom\" og velg et bil
 #: intranett.policy/intranett/policy/browser/templates/invitation-mail.pt:20
 msgid "invitation-mail-body"
 msgstr ""
+"Velkommen,\n"
+"\n"
+"${sender_fullname} har invitert deg til å slutte seg til intranett ${hostname}.\n"
+"\n"
+"Vennligst godta denne invitasjonen ved å besøke:\n"
+"\n"
+"${accept_invitation}\n"
+"(Du må aktivere kontoen før ${expirationdate})\n"
+"\n"
+"Du kan finne hjelp og instruksjoner på http://hjelp.intranett.no/ om du skulle trenge det.— Og ta gjerne kontakt med oss på support@intranett.no eller telefon 33501850 hvis det er noe vi kan hjelpe med.\n"
+"\n"
+"Med vennlig hilsen intranett.no-teamet"
 
 #. Default: "Advanced Search…"
 #: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/livesearch_reply.py:86
