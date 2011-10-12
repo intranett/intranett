@@ -7,17 +7,18 @@
     </dt>
 
     <dd class="portletItem even" tal:condition="view/invites">
-        <form action="portlet_invite"
-              method="post">
-            <div class="formHelp" i18n:translate="portlet_invite_address">
-              The e-mail address to send an invitation to:
+        <form action="portlet_invite" method="post">
+            <div i18n:translate="portlet_invite_address">
+              Invite others to join your intranet! Fill in an e-mail address:
             </div>
-            <input type="text"
+            <div id="portletInviteFormControls">
+              <input type="email"
                    id="invite_to_address"
                    name="invite_to_address"
+                   placeholder="name@example.com"
                    size="25"
+                   i18n:attributes="placeholder"
                    />
-            <div class="formControls">
               <input class="context"
                      type="submit"
                      name="form.button.Invite"
