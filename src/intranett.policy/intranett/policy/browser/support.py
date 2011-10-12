@@ -1,3 +1,4 @@
+from AccessControl import getSecurityManager
 from zope.interface import implements
 from zope.publisher.browser import BrowserView
 from zope.viewlet.interfaces import IViewlet
@@ -36,4 +37,8 @@ class SupportViewlet(BrowserView):
         pass
 
     def render(self):
-        return VIEWLET_TEXT
+        sm = getSecurityManager()
+        can_manage_users = sm.checkPermission('Manage users', self.context)
+        if can_manage_users:
+            return VIEWLET_TEXT
+        return u''
