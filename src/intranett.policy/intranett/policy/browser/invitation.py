@@ -1,20 +1,13 @@
-from urllib import quote
 from email import message_from_string
 from email.Header import Header
-
-from zope.interface import Interface
-from zope import schema
+from urllib import quote
 
 from AccessControl import ModuleSecurityInfo
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.PloneInvite.browser.register import InviteRegistrationForm
-from zope.formlib import form, widget
 from zope.publisher.browser import BrowserView
-
-from intranett.policy import IntranettMessageFactory as _
 
 
 class InvitationMail(BrowserView):
@@ -38,7 +31,6 @@ def sendInvitationMail(site, member, vars):
     fullname = member.getProperty('fullname') or member.getId()
     hostname = site.REQUEST.SERVER_NAME
     invite_to_address = vars['invite_to_address']
-    enforce_address = vars['enforce_address']
     invitecode = vars['invitecode']
     message = vars['message']
 
