@@ -331,3 +331,7 @@ class TestUpgradeSteps(UpgradeTests, IntranettFunctionalTestCase):
     def after_45(self):
         # tested by GS export diff
         pass
+
+    def after_46(self):
+        # tested by GS export diff
+        pass

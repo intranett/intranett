@@ -472,3 +472,9 @@ def quickupload_in_personal_folder(context):
 def add_invite_portlet(context):
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('portlets', 'skins', 'toolset', 'rolemap'))
+
+
+@upgrade_to(46)
+def remove_unused_workflows(context):
+    from intranett.policy.setuphandlers import remove_unused_workflows
+    remove_unused_workflows(context)
