@@ -4,6 +4,8 @@ Changelog
 1.3.8 - unreleased
 ------------------
 
+- Update to Plone 4.1.2: No user visible changes.
+
 - INTRANETT-267: After completing a password reset, the user is automatically
   logged in.
 
