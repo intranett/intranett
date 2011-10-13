@@ -183,6 +183,7 @@ def create_site_admin(app, args):
         obj.setModificationDate(now)
         obj.reindexObject(idxs=None)
 
+    # Mail him
     mail_text = ActivationMail(site, site.REQUEST)(member=member,
         reset=reset, email=email, fullname=fullname, hostname=hostname)
     if isinstance(mail_text, unicode):
@@ -224,11 +225,10 @@ def upgrade(app, args):
     config.run_all_upgrades(setup)
     logger.info("Ran upgrade steps.")
 
-    # Recook resources, as some CSS/JS/KSS files might have changed.
+    # Recook resources, as some CSS/JS files might have changed.
     # TODO: We could try to determine if this is needed in some way
     site.portal_javascripts.cookResources()
     site.portal_css.cookResources()
-    site.portal_kss.cookResources()
     logger.info("Resources recooked.")
 
     transaction.get().note('Upgraded profiles and recooked resources.')

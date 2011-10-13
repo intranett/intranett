@@ -1,5 +1,5 @@
 <h1 tal:define="site_properties context/portal_properties/site_properties;
-                site_title site_properties/site_title|string:intranett.no;
+                site_title view/navigation_root_title|string:intranett.no;
                 "><a metal:define-macro="portal_logo"
    id="portal-logo"
    title="Home"

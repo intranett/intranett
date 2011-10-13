@@ -26,7 +26,7 @@ To create a Plone site in the database call::
 
 To overwrite an existing site and set the admin password, you can use::
 
-  bin/instance create_site --force --rootpassword=admin
+  bin/instance create_site --force --rootpassword=admin --language=no
 
 Working on a ticket
 -------------------
@@ -96,3 +96,15 @@ and `after_42` method. They will be called with a real site being migrated to
 the point `before` and `after` your upgrade step is run.
 
 There's no other places involved - neither ZCML nor metadata.xml files.
+
+
+Email
+-----
+
+If you need to work on email related tasks, you can use the `bin/debugsmtp`
+script. It starts a simple mail server which dumps all received mails to the
+console. The text is quoted, so replace `=3D` by `=` and remove `=` on the line
+endings.
+
+To use it go to `http://localhost:8080/Plone/@@mail-controlpanel` and change
+the mail server to be `localhost` on port `8025`.

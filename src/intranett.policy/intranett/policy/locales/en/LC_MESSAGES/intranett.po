@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-09-07 10:51+0000\n"
+"POT-Creation-Date: 2011-10-12 12:48+0000\n"
 "PO-Revision-Date: 2011-02-27 20:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,16 @@ msgstr ""
 msgid "All intranet users can see this project room. Only project participants can edit content."
 msgstr ""
 
+#: intranett.tour/intranett/tour/browser.py:24
+msgid "Amberjack alert"
+msgstr ""
+
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:76
 msgid "Assign personal portlets"
+msgstr ""
+
+#: intranett.tour/intranett/tour/browser.py:27
+msgid "Can't go to next step automatically. Do it manually."
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/z3cbase.py:15
@@ -34,7 +42,7 @@ msgstr ""
 msgid "Create intranet"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:46
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:52
 msgid "Departments:"
 msgstr ""
 
@@ -53,6 +61,28 @@ msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/eventhighlight.py:28
 msgid "Event Highlight"
+msgstr ""
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/portlet_invite.cpy:35
+msgid "Failed to send invitation."
+msgstr ""
+
+#: intranett.tour/intranett/tour/browser.py:26
+msgid "Go to next step automatically."
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/templates/invitation-mail.pt:6
+msgid "Invitation to join ${hostname}"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:22
+msgid "Invite"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:5
+#: intranett.policy/intranett/policy/browser/portlets/invite.py:21
+#: intranett.policy/intranett/policy/profiles/default/portlets.xml
+msgid "Invite others"
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:22
@@ -88,12 +118,29 @@ msgstr ""
 msgid "Participants are:"
 msgstr ""
 
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:17
+msgid "Passwords do not match."
+msgstr ""
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:19
+msgid "Passwords must contain at least 5 letters."
+msgstr ""
+
 #: intranett.policy/intranett/policy/browser/templates/personal_bar.pt:13
 msgid "Personal folder"
 msgstr ""
 
-#: intranett.policy/intranett/policy/setuphandlers.py:109
+#: intranett.policy/intranett/policy/setuphandlers.py:104
 msgid "Personal folders"
+msgstr ""
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_action.cpy:28
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:52
+msgid "Please correct the indicated errors."
+msgstr ""
+
+#: intranett.tour/intranett/tour/browser.py:23
+msgid "Please select a file."
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/contenthighlight.py:20
@@ -115,17 +162,32 @@ msgstr ""
 msgid "Project room"
 msgstr ""
 
-#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:30
+#: intranett.policy/intranett/policy/setuphandlers.py:226
+#: intranett.policy/intranett/policy/upgrades/steps.py:466
+msgid "Quick upload"
+msgstr ""
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/invite.cpy:33
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/portlet_invite.cpy:39
+msgid "Sent invitation to ${email}."
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:36
 msgid "Show employees from all departments"
 msgstr ""
 
-#: intranett.policy/intranett/policy/jbot/plone.app.controlpanel.usergroups_usersoverview.pt:108
+#: intranett.policy/intranett/policy/jbot/plone.app.controlpanel.usergroups_usersoverview.pt:113
 msgid "Site Administrator"
 msgstr "Administrator"
 
 #: intranett.policy/intranett/policy/profiles/default/actions.xml
 msgid "Support"
 msgstr "Help"
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_action.cpy:27
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:48
+msgid "The login name you selected is already in use or is not valid. Please choose another."
+msgstr ""
 
 #: intranett.policy/intranett/policy/browser/portlets/newshighlight.py:15
 msgid "The most recently published news item"
@@ -135,8 +197,20 @@ msgstr ""
 msgid "The second-most recently published news item"
 msgstr ""
 
+#: intranett.tour/intranett/tour/browser.py:28
+msgid "This field is required, please correct."
+msgstr ""
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:15
+msgid "This field is required, please provide some information."
+msgstr ""
+
 #: intranett.policy/intranett/policy/jbot/plone.app.layout.viewlets.colophon.pt:7
 msgid "This site is powered by intranett.no"
+msgstr ""
+
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form_validate.vpy:21
+msgid "This username is reserved. Please choose a different name."
 msgstr ""
 
 #: intranett.policy/intranett/policy/browser/templates/activation-mail.pt:7
@@ -167,9 +241,28 @@ msgstr ""
 msgid "You can select the item to be highlighted by searching on its title."
 msgstr ""
 
-#. Default: "Welcome ${fullname}, Thank you for trying out intranett.no free of charge for 30 days. Your intranet is available under the address: ${hostname} Your username is ‘${member}’. Please activate your account and choose a password by visiting: ${set_password} (You must activate your account before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those — And please don't hesitate to contact us at support@intranett.no or via phone at 21018911 if there's something we can help you with. With kind regards, intranett.no-team"
+#: intranett.tour/intranett/tour/browser.py:25
+msgid "You cannot click on other links, please use the console's exit button."
+msgstr ""
+
+#. Default: "Welcome ${fullname}, Thank you for trying out intranett.no free of charge for 30 days. Your intranet is available under the address: ${hostname} Your username is ‘${member}’. Please activate your account and choose a password by visiting: ${set_password} (You must activate your account before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those — And please don't hesitate to contact us at support@intranett.no or via phone at 33501850 if there's something we can help you with. With kind regards, intranett.no-team"
 #: intranett.policy/intranett/policy/browser/templates/activation-mail.pt:21
 msgid "activation-mail-body"
+msgstr ""
+
+#. Default: "Accept invitation"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_form.cpt:22
+msgid "heading_accept_form"
+msgstr ""
+
+#. Default: "Invitation expired"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_expired.pt:9
+msgid "heading_invitation_expired"
+msgstr ""
+
+#. Default: "Invalid invitation"
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_invalid.pt:9
+msgid "heading_invitation_invalid"
 msgstr ""
 
 #. Default: "A short overview of who you are and what you do. Will be displayed on your profile page"
@@ -180,6 +273,11 @@ msgstr ""
 #. Default: "To add or change the portrait: click the \"Browse\" button; select a picture of yourself. We recommend to upload a square image not smaller than 300px wide by 300px tall."
 #: intranett.policy/intranett/policy/userdataschema.py:58
 msgid "help_portrait"
+msgstr ""
+
+#. Default: "Hi, ${sender_fullname} has invited you to join the intranet site ${hostname}. Please accept this invitation by visiting: ${accept_invitation} (You must accept the invitation before ${expirationdate}) You can find help and instructions at http://hjelp.intranett.no/ if you would like those. With kind regards, intranett.no-team"
+#: intranett.policy/intranett/policy/browser/templates/invitation-mail.pt:20
+msgid "invitation-mail-body"
 msgstr ""
 
 #. Default: "Advanced Search…"
@@ -227,7 +325,7 @@ msgstr ""
 
 #. Default: "Mobile phone"
 #: intranett.policy/intranett/policy/browser/templates/user.pt:123
-#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:95
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:101
 #: intranett.policy/intranett/policy/userdataschema.py:31
 msgid "label_mobile"
 msgstr ""
@@ -239,7 +337,7 @@ msgstr ""
 
 #. Default: "Phone"
 #: intranett.policy/intranett/policy/browser/templates/user.pt:115
-#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:101
+#: intranett.policy/intranett/policy/browser/templates/userslisting_view.pt:107
 #: intranett.policy/intranett/policy/userdataschema.py:26
 msgid "label_phone"
 msgstr ""
@@ -273,5 +371,34 @@ msgstr ""
 #: intranett.theme/intranett/theme/browser/templates/frontpage_view.pt:94
 #: intranett.theme/intranett/theme/browser/templates/manage-frontpage.pt:68
 msgid "link_manage_personal_portlets"
+msgstr ""
+
+#. Default: "This URL has already been used, or it has expired. For your security, invitation URLs are only valid for ${days} days."
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_expired.pt:16
+msgid "message_invitation_expired"
+msgstr ""
+
+#. Default: "Sorry, this appears to be an invalid request. Please make sure you copied the URL exactly as it appears in your email."
+#: intranett.theme/intranett/theme/skins/intranett_theme_custom_templates/accept_invalid.pt:12
+msgid "message_invitation_invalid"
+msgstr ""
+
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:15
+msgid "name@example.com"
+msgstr ""
+
+#. Default: "Invite others to join your intranet! Fill in an e-mail address:"
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:11
+msgid "portlet_invite_address"
+msgstr ""
+
+#. Default: "You have no more invites left. Please contact site administration."
+#: intranett.policy/intranett/policy/browser/portlets/invite.pt:33
+msgid "portlet_no_more_invites"
+msgstr ""
+
+#. Default: "of"
+#: intranett.tour/intranett/tour/browser.py:41
+msgid "separator-between-steps"
 msgstr ""
 

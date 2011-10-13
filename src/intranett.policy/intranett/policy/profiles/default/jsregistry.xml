@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts" meta_type="JavaScripts Registry">
 
-  <javascript id="sarissa.js" expression="" />
-
   <javascript id="dropdown.js" authenticated="False" />
   <javascript id="table_sorter.js" authenticated="False" />
   <javascript id="calendar_formfield.js" authenticated="False" />
@@ -10,10 +8,52 @@
   <javascript id="formsubmithelpers.js" authenticated="False" />
   <javascript id="unlockOnFormUnload.js" authenticated="False" />
   <javascript id="tiny_mce.js" authenticated="False" />
-  <javascript id="++resource++kukit.js" authenticated="False" />
   <javascript id="tiny_mce_init.js" authenticated="False" compression="full" />
 
   <javascript id="++resource++plone.app.discussion.javascripts/comments.js"
       insert-after="tiny_mce_init.js" />
+
+  <javascript id="++resource++quickupload_static/swfobject.js" authenticated="False"
+      insert-after="++resource++plone.app.discussion.javascripts/comments.js" />
+  <javascript id="++resource++quickupload_static/jquery.uploadify.js" authenticated="False"
+      insert-after="++resource++plone.app.discussion.javascripts/comments.js"/>
+  <javascript id="++resource++quickupload_static/fileuploader.js" authenticated="False"
+      insert-after="++resource++plone.app.discussion.javascripts/comments.js"/>
+  <javascript id="++resource++quickupload_static/helpers.js" authenticated="False"
+      insert-after="++resource++plone.app.discussion.javascripts/comments.js"/>
+
+  <!-- Amberjack -->
+  <javascript id="++resource++jquery-ui.min.js"
+      expression="python: 'personal' in request['URL']" insert-after="main.js"/>
+  <javascript id="++resource++jquery-ui-i18n.js"
+      expression="python: 'personal' in request['URL']" insert-after="++resource++jquery-ui.min.js" />
+  <javascript id="amberjack.js"
+      expression="python: 'personal' in request['URL']" insert-after="++resource++jquery-ui-i18n.js"/>
+  <javascript id="amberjackPlone.js"
+      expression="python: 'personal' in request['URL']" insert-after="amberjack.js"/>
+  <javascript id="amberjackDefaults.js"
+      expression="python: 'personal' in request['URL']" cacheable="True" insert-after="amberjackPlone.js" compression="none"/>
+  <javascript id="stepAdapters.js"
+      expression="python: 'personal' in request['URL']" insert-after="amberjackDefaults.js"/>
+
+  <!-- Windmill libraries modified for amberjack's integration-->
+  <javascript id="windmillUtils.js"
+      expression="python: 'personal' in request['URL']" insert-after="stepAdapters.js"/>
+  <javascript id="js-xpath.js"
+      expression="python: 'personal' in request['URL']" insert-after="windmillUtils.js"/>
+  <javascript id="manage_aj_cookie.js"
+      expression="python: 'personal' in request['URL']" insert-after="js-xpath.js"/>
+  <javascript id="set_aj_cookie.js"
+      expression="python: 'personal' in request['URL']" insert-after="manage_aj_cookie.js"/>
+
+  <!-- Remove KSS -->
+  <javascript id="sarissa.js" remove="True"/>
+  <javascript id="++resource++MochiKit.js" remove="True"/>
+  <javascript id="++resource++prototype.js" remove="True"/>
+  <javascript id="++resource++effects.js" remove="True"/>
+  <javascript id="++resource++cssQuery-compat.js"  remove="True"/>
+  <javascript id="++resource++base2-dom-fp.js"  remove="True"/>
+  <javascript id="++resource++kukit.js" remove="True"/>
+  <javascript id="++resource++kukit-devel.js" remove="True"/>
 
 </object>

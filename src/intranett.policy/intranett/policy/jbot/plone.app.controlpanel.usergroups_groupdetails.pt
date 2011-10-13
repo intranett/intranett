@@ -5,29 +5,23 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
-
+<head>
+    <metal:block fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+</head>
 <body>
 
 <metal:main fill-slot="content"
-     tal:define="errors python:request.get('errors', {});
-                 portal_roles python:context.portal_membership.getPortalRoles();
-                 mq python:modules['ZTUtils'].make_query;
-                 groupname request/groupname | nothing;
-                 groupquery python:mq(groupname=groupname);
-                 groupkeyquery python:mq(key=groupname);
-                 grouproles python:request.set('grouproles', []);
-                 gtool context/portal_groups;
-                 group python:gtool.getGroupById(groupname);
-                 grouptitle group/getGroupTitleOrName | nothing;
-                 portal_url context/portal_url;">
-
-    <tal:conditional condition="group">
-        <tal:defines define="dummy python:request.set('grouproles', group.getRoles())" />
-    </tal:conditional>
+     tal:define="template_id string:@@usergroup-groupdetails;
+                 portal_roles view/portal_roles;
+                 groupquery python:view.makeQuery(groupname=view.groupname);
+                 groupkeyquery python:view.makeQuery(key=view.groupname)">
 
     <div class="documentEditable">
         <!-- simulating views on the groups/user pages until we have real objects. -->
-        <div id="edit-bar">
+        <div id="edit-bar" tal:condition="view/group">
             <ul class="contentViews" id="content-views">
               <li>
                 <a href=""
@@ -36,7 +30,7 @@
               </li>
               <li class="selected">
                 <a href=""
-                   tal:attributes="href string:$portal_url/${template/getId}?${groupquery}"
+                   tal:attributes="href string:$portal_url/${template_id}?${groupquery}"
                    i18n:translate="label_group_properties">Group Properties</a>
               </li>
             </ul>
@@ -49,7 +43,7 @@
         </div>
 
         <!-- When no group is specified, this gets used as the add group page page -->
-        <div id="content" tal:condition="not:group | nothing">
+        <div id="content" tal:condition="not:view/group">
             <metal:block metal:use-macro="template/macros/props">
                 <metal:title metal:fill-slot="content-title">
                     <h1 class="documentFirstHeading"
@@ -70,19 +64,19 @@
 
                         <input type="text" name="addname" value="groupname"
                                id="addname"
-                               tal:attributes="value group/getGroupName | string:"/>
+                               tal:attributes="value view/groupname | string:"/>
                     </div>
                 </metal:name>
             </metal:block>
         </div>
 
-        <div id="content" tal:condition="group | nothing">
+        <div id="content" tal:condition="view/group | nothing">
             <metal:block define-macro="props">
 
                 <h1 class="documentFirstHeading"
                     i18n:translate="heading_edit_groupproperties"
                     metal:define-slot="content-title">
-                    Edit Group Properties for <span tal:content="grouptitle | default" tal:omit-tag="" i18n:name="groupname">unavailable</span>
+                    Edit Group Properties for <span tal:content="view/grouptitle | default" tal:omit-tag="" i18n:name="groupname">unavailable</span>
                 </h1>
 
                 <div class="documentDescription" i18n:translate="description_edit_groupproperties">
@@ -104,9 +98,9 @@
                           name="groups"
                           method="post"
                           class="enableUnloadProtection enableAutoFocus"
-                          tal:attributes="action string:${gtool/absolute_url}"
+                          tal:attributes="action string:$portal_url/$template_id"
                           tal:define="targetobject context/portal_groupdata;
-                                      targetGetProperty nocall:group/getProperty | nocall:context/returnNone;">
+                                      targetGetProperty nocall:view/group/getProperty | nocall:context/returnNone;">
 
                         <fieldset>
                             <legend i18n:translate="link_group_properties">Group Properties</legend>
@@ -114,9 +108,10 @@
                             <div class="field" metal:define-slot="name">
                                <label for="groupname" i18n:translate="label_name">Name</label>
 
-                               <div tal:content="group/getGroupName | string:" />
-                               <input type="hidden" name="groupname" value="groupname" id="groupname"
-                                             tal:attributes="value group/getGroupName | string:"/>
+                               <div tal:content="view/groupname | string:" />
+                               <input type="hidden" name="groupname" value="groupname"
+                                      id="groupname"
+                                      tal:attributes="value view/groupname | string:"/>
                             </div>
 
                              <tal:set tal:condition="targetobject/management_page_charset|nothing"
@@ -139,28 +134,28 @@
                                         tal:content="python:targetobject.propertyLabel(id).capitalize()">Property Value</label>
 
                                 <div tal:define="propertyitem python:targetobject.getProperty(id);
-                                                 disabled python:(not group or group.canWriteProperty(id)) and default or 'disabled';"
+                                                 disabled python:None if (not view.group or view.group.canWriteProperty(id)) else 'disabled';"
                                 tal:condition="python:'w' in property.get('mode', 'awd')">
 
                                 <input type="text" name="id" size="35"
                                         tal:condition="python:type in ('int', 'long')"
                                         tal:attributes="name string:$id:$type;
                                                         id id;
-                                                        value python:test(propertyvalue, propertyvalue, '');
+                                                        value python:propertyvalue if propertyvalue else '';
                                                         disabled disabled;" />
 
                                 <input type="text" name="id" size="35"
                                         tal:condition="python:type in ('float','date')"
                                         tal:attributes="name string:$id:${request/management_page_charset_tag}$type;
                                                         id id;
-                                                        value python:test(propertyvalue, propertyvalue, '');
+                                                        value python:propertyvalue if propertyvalue else '';
                                                         disabled disabled;" />
 
                                 <input type="text" name="string and ustring" size="35"
                                         tal:condition="python:type in ('string','ustring')"
                                         tal:attributes="name string:$id:${request/management_page_charset_tag}$type;
                                                         id id;
-                                                        value python:test(propertyvalue, propertyvalue, '');
+                                                        value python:propertyvalue if propertyvalue else '';
                                                         disabled disabled;" />
 
                                 <input type="checkbox"
@@ -170,13 +165,13 @@
                                         tal:condition="python: type in ('boolean',)"
                                         tal:attributes="name string:$id:$type;
                                                         id id;
-                                                        checked python:test(propertyvalue, 'checked', '');
+                                                        checked python:'checked' if propertyvalue else '';
                                                         disabled disabled;" />
 
                                 <input name="tokens and utokens" value="" type="text" size="35"
                                         tal:condition="python:type in ('tokens', 'utokens')"
                                         tal:attributes="name string:$id:${request/management_page_charset_tag}$type;
-                                                        value python:test(propertyvalue, propertyvalue, '');
+                                                        value python:propertyvalue if propertyvalue else '';
                                                         disabled disabled;" />
 
                                 <textarea name="text and utext"
@@ -205,7 +200,7 @@
                                     tal:attributes="name string:$id:${request/management_page_charset_tag}text;
                                                     disabled disabled;">
                                     <tal:values repeat="option select_value">
-                                        <option tal:attributes="SELECTED python:test(propertyvalue==option,'SELECTED','')"
+                                        <option tal:attributes="SELECTED python:'SELECTED' if propertyvalue==option else ''"
                                             tal:content="option">value</option>
                                     </tal:values>
                                 </select>
@@ -215,8 +210,7 @@
                                                         size python:min(7, len(select_value));
                                                         disabled disabled;">
                                     <tal:values repeat="option select_value">
-                                        <option tal:attributes="SELECTED python:test(propertyvalue and option in propertyvalue,
-                                                                                    'selected', '')"
+                                        <option tal:attributes="SELECTED python:'selected' if (propertyvalue and option in propertyvalue) else ''"
                                                 tal:content="option">value</option>
                                     </tal:values>
                                 </select>
@@ -228,14 +222,18 @@
                                 </div>
                             </tal:properties>
 
+                            <input type="hidden" name="form.submitted" value="1" />
+
                             <div class="formControls">
                                 <input class="context"
                                        type="submit"
-                                       name="prefs_group_edit:method"
+                                       name="form.button.Save"
                                        value="Save"
                                        i18n:attributes="value label_save;" />
                             </div>
                         </fieldset>
+                        
+                        <input tal:replace="structure context/@@authenticator/authenticator" />
                     </form>
                 </div>
             </metal:block>
@@ -248,4 +246,3 @@
 
 </body>
 </html>
-

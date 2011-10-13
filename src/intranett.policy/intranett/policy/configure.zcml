@@ -12,14 +12,18 @@
 
   <include package="Products.CMFPlone" />
   <include package="collective.ATClamAV" />
+  <include package="collective.quickupload" />
+  <include package="five.pt" />
   <include package="iw.rejectanonymous" />
   <include package="munin.zope" />
   <include package="plone.principalsource" />
   <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
   <include package="plone.formwidget.autocomplete" />
+  <include package="Products.PloneInvite" />
   <include package="Products.PloneFormGen" />
   <include package="intranett.theme" />
+  <include package="intranett.tour" />
 
   <include package=".browser" />
   <include package=".subscribers" />
@@ -88,5 +92,9 @@
       handler=".content.projectroom.removeOwnerPermissions"
       for="Products.ATContentTypes.interfaces.IATContentType
            Products.CMFCore.interfaces.IActionSucceededEvent" />
+
+  <class class="Products.CMFPlone.Portal.PloneSite">
+    <implements interface="collective.quickupload.browser.interfaces.IQuickUploadNotCapable" />
+  </class>
 
 </configure>

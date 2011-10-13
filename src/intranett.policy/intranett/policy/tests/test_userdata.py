@@ -38,6 +38,29 @@ class TestMemberTools(IntranettTestCase):
         self.failUnless(isinstance(tool.thumbnails, BTreeFolder2))
 
 
+class TestGetMember(IntranettTestCase):
+
+    def test_get_by_id(self):
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
+        self.assertNotEqual(tool.getMemberById('test_user_1_'), None)
+
+    def test_get_by_id_returns_None(self):
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
+        self.assertEqual(tool.getMemberById('test-user'), None)
+
+    def test_get_by_login(self):
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
+        self.assertNotEqual(tool.getMemberByLogin('test-user'), None)
+
+    def test_get_by_login_returns_None(self):
+        portal = self.layer['portal']
+        tool = getToolByName(portal, 'portal_membership')
+        self.assertEqual(tool.getMemberByLogin('test_user_1_'), None)
+
+
 class TestUserdataSchema(IntranettTestCase):
 
     def test_no_homepage(self):
@@ -190,9 +213,9 @@ class TestUserPortraits(IntranettTestCase):
         image_gif = make_file_upload(path, 'image/gif', 'myportrait.gif')
         mt.changeMemberPortrait(image_gif)
         portrait = mt.getPersonalPortrait(thumbnail=False)
-        self.failIfEqual(old_portrait_size, portrait.get_size())
+        self.assertNotEqual(old_portrait_size, portrait.get_size())
         portrait = mt.getPersonalPortrait(thumbnail=True)
-        self.failIfEqual(old_thumbnail_size, portrait.get_size())
+        self.assertNotEqual(old_thumbnail_size, portrait.get_size())
 
     def test_delete_portraits(self):
         portal = self.layer['portal']
@@ -620,7 +643,7 @@ class TestMembersFolder(IntranettTestCase):
         portal = self.layer['portal']
         folder = self._make_one()
         members = getMembersFolder(portal)
-        self.failIfEqual(members, None)
+        self.assertNotEqual(members, None)
         self.assertEqual(members.getId(), folder.getId())
         self.assertEqual(members.absolute_url(), 'http://nohost/plone/members')
         portal._delObject('members')

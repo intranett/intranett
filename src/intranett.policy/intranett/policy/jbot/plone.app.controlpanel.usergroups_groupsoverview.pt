@@ -5,7 +5,12 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
-
+<head>
+    <metal:block fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1);
+                             disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                             disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+</head>
 <body>
 
 <metal:main fill-slot="content"
@@ -63,7 +68,7 @@
                 <form action=""
                       name="groups_add"
                       method="post"
-                      tal:attributes="action string:$portal_url/prefs_group_details">
+                      tal:attributes="action string:$portal_url/@@usergroup-groupdetails">
 
                     <input type="hidden" name="form.submitted" value="1" />
 

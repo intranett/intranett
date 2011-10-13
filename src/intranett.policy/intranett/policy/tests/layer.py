@@ -44,6 +44,7 @@ class IntranettLayer(PloneSandboxLayer):
         xmlconfig.file("overrides.zcml", intranett.policy,
                        context=configurationContext)
 
+        z2.installProduct(app, 'Products.PloneInvite')
         z2.installProduct(app, 'Products.PloneFormGen')
         z2.installProduct(app, 'intranett.theme')
         z2.installProduct(app, 'intranett.policy')
@@ -52,12 +53,15 @@ class IntranettLayer(PloneSandboxLayer):
         z2.uninstallProduct(app, 'intranett.policy')
         z2.uninstallProduct(app, 'intranett.theme')
         z2.uninstallProduct(app, 'Products.PloneFormGen')
+        z2.uninstallProduct(app, 'Products.PloneInvite')
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'intranett.policy:default')
 
         setRoles(portal, TEST_USER_ID, ['Manager'])
         portal.invokeFactory('Folder', 'test-folder')
+        # don't require secure cookies in tests
+        portal.acl_users.session.secure = False
         setRoles(portal, TEST_USER_ID, ['Member'])
 
 

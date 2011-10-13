@@ -1,0 +1,9 @@
+[default]
+title=Invite a person
+
+[validators]
+validators = validate_invite
+
+[actions]
+action.success = traverse_to:string:invite
+action.failure = traverse_to:string:invite_form

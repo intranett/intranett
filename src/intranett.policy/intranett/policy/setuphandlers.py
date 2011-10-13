@@ -1,4 +1,5 @@
 from Acquisition import aq_get
+from plone.portlets.interfaces import IPortletType
 from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
 from zope.component import queryMultiAdapter
@@ -6,6 +7,7 @@ from zope.component import queryUtility
 from zope.i18n import translate
 from zope.interface import alsoProvides
 
+from intranett.policy import IntranettMessageFactory as _
 from intranett.policy.config import config
 
 
@@ -53,7 +55,6 @@ def disable_collections(site):
 
 
 def disable_portlets(site):
-    from plone.portlets.interfaces import IPortletType
     from zope.component import getUtilitiesFor
 
     disabled = ['portlets.Calendar', 'portlets.Classic', 'portlets.Login',
@@ -100,7 +101,6 @@ def setup_personal_folder(site):
     from plone.portlets.interfaces import IPortletManager
     from Products.CMFPlone.utils import _createObjectByType
     from intranett.policy.config import PERSONAL_FOLDER_ID
-    from intranett.policy import IntranettMessageFactory as _
     personal_folder_title = _(u'Personal folders')
     title = translate(personal_folder_title, target_language=site.Language())
     portal = getToolByName(site, 'portal_url').getPortalObject()
@@ -120,6 +120,31 @@ def setup_personal_folder(site):
             assignable.setBlacklistStatus('context', True)
             assignable.setBlacklistStatus('group', True)
             assignable.setBlacklistStatus('content_type', True)
+
+
+def setup_amberjack(site):
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    setattr(portal.portal_amberjack, 'sandbox', True)
+    # Assign amberjack portlet
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    folder = portal[PERSONAL_FOLDER_ID]
+    portlet = queryUtility(IPortletType,
+         name='collective.amberjack.portlet.AmberjackChoicePortlet')
+    mapping = folder.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    addview.createAndAdd(data={
+        'user_title': u'Tutorials',
+        'tours': [u'01_basic_add_and_publish_a_folder-add-and-publish',
+                  u'02_basic_add_and_publish_a_page-add-and-publish-a',
+                  u'03_basic_add_and_publish_a_news_item-add-and',
+                  u'04_basic_add_and_publish_an_event-add-and-publish',
+                  u'05_basic_format_a_page_using_the_visual_editor',
+                  u'06_basic_create_internal_links-create-internal',
+                  u'07_basic_create_external_links-create-external',
+                  u'08_basic_upload_an_image-upload-an-image',
+                  u'09_basic_insert_image_on_a_page-insert-image-on-a',
+                  u'10_basic_using_the_contents_tab-using-the-contents',
+                  u'11_basic_using_display_menu-using-the-display-menu']})
 
 
 def setup_default_content(site):
@@ -191,6 +216,37 @@ def restrict_siteadmin(site):
         site.manage_permission(perm_id, roles=['Manager'], acquire=0)
 
 
+def setup_quickupload(site):
+    portal = getToolByName(site, 'portal_url').getPortalObject()
+    # Assign quickupload portlet to root.
+    portlet = queryUtility(IPortletType,
+         name='collective.quickupload.QuickUploadPortlet')
+    mapping = portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=site.Language())})
+
+    # Assign quickupload to personal folders.
+    from intranett.policy.config import PERSONAL_FOLDER_ID
+    personal = portal[PERSONAL_FOLDER_ID]
+    mapping = personal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+    addview = mapping.restrictedTraverse('+/' + portlet.addview)
+    quick_title = _(u'Quick upload')
+    addview.createAndAdd(data={'header':
+        translate(quick_title, target_language=site.Language())})
+
+
+def remove_unused_workflows(site):
+    wftool = getToolByName(site, 'portal_workflow')
+    remove = ('one_state_workflow', 'folder_workflow', 'plone_workflow',
+        'simple_publication_workflow', 'comment_review_workflow', )
+    existing = list(wftool.keys())
+    for r in remove:
+        if r in existing:
+            wftool._delObject(r)
+
+
 @import_step()
 def various(context):
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -208,9 +264,12 @@ def various(context):
     enable_link_by_uid(site)
     setup_members_folder(site)
     setup_personal_folder(site)
+    setup_amberjack(site)
     enable_secure_cookies(site)
     open_ext_links_in_new_window(site)
     restrict_siteadmin(site)
+    setup_quickupload(site)
+    remove_unused_workflows(site)
 
 
 @import_step()

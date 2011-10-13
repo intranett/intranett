@@ -291,12 +291,7 @@ button {
 
 /* @end */
 /* @group Header */
-body > header {
-  /*border-bottom: 1px solid #eee;*/
-  background: white url("color_bg.png") bottom left repeat-x; }
-
 body > header > .contentAlignment {
-  background-color: rgba(255, 255, 255, 0.7);
   margin-top: 1px;
   min-height: 100px; }
 
@@ -338,7 +333,7 @@ body > header h1 {
 
 a#portal-logo {
   display: block;
-  color: #5E5E5E;
+  color: #555;
   font-family: LatoRegular, Helvetica, Arial, sans-serif; }
   a#portal-logo img {
     display: block; }
@@ -367,12 +362,24 @@ a#portal-logo:hover {
   border: 1px solid #ccc;
   vertical-align: middle; }
 
+form#search .field {
+  background: #ddd;
+  border: 1px solid #ccc;
+  margin: 1em auto;
+  float: left; }
+
+form#search:after {
+  content: "";
+  display: block;
+  clear: left; }
+
 .searchSection {
   font-size: 0.76em;
   text-align: left;
   color: #808080; }
 
-button.searchButton {
+button.searchButton,
+form#search .field input.searchButton {
   border: none;
   background: transparent;
   padding: 0 0.76em;
@@ -736,7 +743,7 @@ dd.image-caption {
   z-index: 3;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  margin-right: -1px;
+  margin-right: -4px;
   text-decoration: none;
   background-color: transparent;
   color: #444444;
@@ -1160,7 +1167,8 @@ body.template-personal-information textarea.mce_editable {
 .formControls .actionButtons .button,
 .documentEditable * .context,
 .destructive,
-.documentEditable * .destructive {
+.documentEditable * .destructive,
+.qq-upload-button {
   background: #eee;
   border: 1px solid #ccc;
   color: #222;
@@ -1772,6 +1780,13 @@ a.delete {
   list-style: disc;
   margin-left: 1.25em; }
 
+#portletInviteFormControls {
+  margin-top: 1em;
+  margin-bottom: 1em; }
+
+#portletInviteFormControls input {
+  font-size: 1em; }
+
 /* @group Navigation portlet */
 .portletNavigationTree,
 .portletHourslastweek,
@@ -1819,6 +1834,18 @@ li.navTreeCurrentNode.navTreeFolderish {
   padding: 0.63em 0.63em 0;
   /*font-size: $base-size;*/ }
 
+.qq-upload-button {
+  float: right;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  margin-bottom: 1em; }
+
+#label-upload {
+  display: block;
+  float: left;
+  padding: 1em 0; }
+
 /* @end */
 /* @end */
 /* @end */
@@ -1831,8 +1858,6 @@ body > footer {
   padding-top: 0;
   color: #888;
   background: #f7f7f7; }
-  body > footer .contentAlignment {
-    background: transparent url("color_bg.png") 1em 0em no-repeat; }
   body > footer small {
     font-size: 0.62em; }
   body > footer strong {

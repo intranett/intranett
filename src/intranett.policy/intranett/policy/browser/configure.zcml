@@ -4,6 +4,8 @@
   xmlns:cache="http://namespaces.zope.org/cache"
   i18n_domain="intranett">
 
+  <include package="AccessControl"  file="permissions.zcml" />
+
   <browser:resource
       file="jarn-logo.jpg"
       name="jarn-logo.jpg"
@@ -47,6 +49,7 @@
       permission="zope2.View"
       />
 
+  <!-- Personal bar -->
   <browser:viewlet
       name="plone.personal_bar"
       manager="intranett.theme.browser.interfaces.ITopBar"
@@ -54,7 +57,7 @@
       permission="zope2.View"
       />
 
-  <!-- breadcrumbs for the profile/password views -->
+  <!-- Breadcrumbs for the profile/password views -->
   <browser:viewlet
       name="plone.path_bar"
       manager="intranett.theme.browser.interfaces.IAboveColumns"
@@ -73,12 +76,26 @@
       permission="zope2.View"
       />
 
+  <browser:viewlet
+      name="jarn.support"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      class=".support.SupportViewlet"
+      permission="zope2.ManageUsers"
+      />
+
   <!-- Default content -->
   <browser:view
       for="Products.CMFCore.interfaces.ISiteRoot"
       name="create-default-content"
       class=".defaultcontent.DefaultContent"
       permission="zope2.ViewManagementScreens"
+      />
+
+  <browser:page
+      for="Products.CMFCore.interfaces.ISiteRoot"
+      name="system-info"
+      class=".systeminfo.SystemInfo"
+      permission="zope.Public"
       />
 
 </configure>

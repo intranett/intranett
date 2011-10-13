@@ -6,7 +6,8 @@ from Products.CMFQuickInstallerTool.interfaces import INonInstallable as INonQ
 HIDDEN = ['collective.ATClamAV', 'plone.app.caching',
     'plone.app.discussion', 'plone.app.openid', 'plone.app.registry',
     'plone.app.z3cform', 'plone.formwidget.autocomplete', 'plone.session',
-    'plonetheme.classic', 'Products.PloneFormGen', 'intranett.theme']
+    'plonetheme.classic', 'Products.PloneInvite', 'Products.PloneFormGen',
+    'intranett.theme']
 
 
 class HiddenProducts(object):
