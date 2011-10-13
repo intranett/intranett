@@ -9,6 +9,7 @@ etc/ejabberd.cfg
 etc/haproxy.cfg
 etc/logrotate.conf
 etc/nginx.conf
+etc/pack.conf
 etc/supervisord.conf
 etc/varnish.vcl
 etc/fastcgi.conf
