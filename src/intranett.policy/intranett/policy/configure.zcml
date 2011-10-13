@@ -20,6 +20,7 @@
   <include package="plone.app.caching" />
   <include package="plone.app.discussion" />
   <include package="plone.formwidget.autocomplete" />
+  <include package="Products.PloneInvite" />
   <include package="Products.PloneFormGen" />
   <include package="intranett.theme" />
   <include package="intranett.tour" />
