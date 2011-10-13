@@ -237,6 +237,16 @@ def setup_quickupload(site):
         translate(quick_title, target_language=site.Language())})
 
 
+def remove_unused_workflows(site):
+    wftool = getToolByName(site, 'portal_workflow')
+    remove = ('one_state_workflow', 'folder_workflow', 'plone_workflow',
+        'simple_publication_workflow', 'comment_review_workflow', )
+    existing = list(wftool.keys())
+    for r in remove:
+        if r in existing:
+            wftool._delObject(r)
+
+
 @import_step()
 def various(context):
     if context.readDataFile('intranett-policy-various.txt') is None:
@@ -259,6 +269,7 @@ def various(context):
     open_ext_links_in_new_window(site)
     restrict_siteadmin(site)
     setup_quickupload(site)
+    remove_unused_workflows(site)
 
 
 @import_step()
