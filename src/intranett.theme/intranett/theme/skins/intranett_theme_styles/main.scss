@@ -1877,6 +1877,15 @@ a.delete {
     margin-left: 1.25em;
 }
 
+#portletInviteFormControls {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#portletInviteFormControls input {
+    font-size: $base-size;
+}
+
 /* @group Navigation portlet */
 
 .portletNavigationTree,

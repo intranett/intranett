@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+ <object
+    name="PloneInvite_templates"
+    meta_type="Filesystem Directory View"
+    directory="Products.PloneInvite:skins/ploneinvite"/>
+  <skin-path name="*">
+    <layer name="PloneInvite_templates" insert-before="PloneFormGen" />
+  </skin-path>
+</object>

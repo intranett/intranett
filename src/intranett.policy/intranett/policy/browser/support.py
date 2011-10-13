@@ -1,3 +1,4 @@
+from AccessControl import getSecurityManager
 from zope.interface import implements
 from zope.publisher.browser import BrowserView
 from zope.viewlet.interfaces import IViewlet
@@ -12,16 +13,17 @@ VIEWLET_TEXT = u"""
 <script type="text/javascript">
   if (typeof(Zenbox) !== "undefined") {
     Zenbox.init({
-      dropboxID:   "20021871",
-      url:         "https://jarn.zendesk.com",
-      tabID:       "support",
-      tabColor:    "#444",
-      tabPosition: "Right"
+      dropboxID: "20021871",
+      url: "https://jarn.zendesk.com",
+      tabID: "support",
+      hide_tab: true,
     });
+    $('#supportLink').click(function() {
+       window.Zenbox.show()
+       });
   }
 </script>
 """
-
 
 class SupportViewlet(BrowserView):
     implements(IViewlet)
@@ -35,4 +37,8 @@ class SupportViewlet(BrowserView):
         pass
 
     def render(self):
-        return VIEWLET_TEXT
+        sm = getSecurityManager()
+        can_manage_users = sm.checkPermission('Manage users', self.context)
+        if can_manage_users:
+            return VIEWLET_TEXT
+        return u''

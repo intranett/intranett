@@ -1,0 +1,232 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="PloneInvite">
+
+<metal:block fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1)" />
+
+  <metal:head fill-slot="head_slot">
+    <meta name="robots" content="noindex,follow" />
+  </metal:head>
+
+  <body>
+
+    <div metal:fill-slot="main"
+        tal:define="
+          errors options/state/getErrors;
+          meminvites python:len(here.portal_invitations.getInvitesUser(sent=0, used=0));
+          ">
+
+      <h1 i18n:translate="heading_invite_a_person">Invite a person</h1>
+
+      <div class="documentDescription" i18n:translate="description_invite">
+        Fill in the email address of the person you want to invite.
+      </div>
+
+      <div tal:condition="python:meminvites!=0">
+        <span i18n:translate="label_number_invites">Number of invites you have</span>:
+          <span
+            tal:content="meminvites"
+            tal:omit-tag="">
+          </span>
+
+      </div>
+
+      <div tal:condition="python:meminvites==0"
+          i18n:translate="message_quota_exhausted">  
+        You have exhausted your allotted quota of invites.
+      </div>
+        
+      <div tal:define="Batch python:modules['Products.CMFPlone'].Batch;
+                b_start request/b_start | python:0;
+                b_size request/b_size | python:20;">
+        
+        <form action=""
+              method="post"
+              tal:attributes="action template/getId"
+              tal:condition="python:len(here.portal_invitations.getInvitesUser(sent=0, used=0))">
+
+          <fieldset>
+
+            <legend i18n:translate="legend_send_invite">Send an Invite</legend>
+
+            <div class="field"
+                 tal:define="error errors/invite_to_address|nothing;"
+                 tal:attributes="class python:test(error, 'field error', 'field')">
+
+              <label for="invite_to_address" i18n:translate="label_invite_to_mail">Send to</label>
+
+              <span class="fieldRequired" title="Required"
+                    i18n:attributes="title"
+                    i18n:translate="label_required">(Required)</span>
+
+                    <div class="formHelp"
+                        i18n:translate="help_invite_address">
+                      The e-mail address to send an invite to.
+                    </div>
+
+                    <div tal:content="error">Validation error output</div>
+
+                    <input type="text"
+                           id="invite_to_address"
+                           name="invite_to_address"
+                           size="25"
+                           tal:attributes="value request/invite_to_address | nothing"
+                           />
+            </div>
+
+            <!--
+            <div class="field">
+              <label i18n:translate="label_message">Message</label>
+
+              <div class="formHelp" i18n:translate="label_message_help">
+                A message for the person you want to invite.
+              </div>
+
+              <textarea cols="80"
+                        rows="5"
+                        name="message"
+                        tal:content="request/message | nothing"
+                        >
+                Comment
+              </textarea>
+            </div>
+            -->
+
+            <!--
+              <div class="field"
+                  tal:condition="python:len(here.portal_invitations.getInvitesUser(sent=0, used=0, enforce_address=0))"
+
+                  tal:define="enforce_address request/enforce_address|nothing;
+                              error errors/generated_tabs | nothing;"
+                  tal:attributes="class python:test(error, 'field error', 'field')">
+
+                <label i18n:translate="label_enforce_email_address">Enforce E-mail Address</label>
+
+                <div class="formHelp" i18n:translate="help_enforce_address">
+                    Check the box if you want the invitee to register with the
+                    same email address you sent the invitation to.
+                </div>
+                
+                <input type="checkbox"
+                  class="noborder"
+                  id="enforce"
+                  name="enforce_address"
+                  value="1"
+                  tal:attributes="checked python:test(enforce_address, 'checked', None)" />
+                  <span i18n:translate="">Yes</span>
+
+              </div>
+                
+              <div class="field"
+                  tal:condition="python:len(here.portal_invitations.getInvitesUser(sent=0, used=0, enforce_address=0))==0">
+
+                <label i18n:translate="label_fixed_enforce_address">E-mail address enforced</label>
+
+                <div class="formHelp" i18n:translate="help_fixed_enforce_address">
+                  The people you invite will have to register on the site using
+                  the e-mail address you specified.
+                </div>
+                  <input type="hidden" name="enforce_address" value="1">
+              </div>
+            -->
+              
+            <div class="formControls">
+              <input class="context"
+                     type="submit"
+                     name="form.button.Invite"
+                     value="Invite"
+                     i18n:attributes="value"
+                     />
+            </div>
+
+            <input type="hidden" name="form.submitted" value="1" />
+
+          </fieldset>
+
+        </form>
+          <fieldset>
+            <legend i18n:translate="legend_user_invites">Status of your invites</legend>
+
+            <div class="field"
+                 tal:define="error errors/invites | nothing;"
+                 tal:attributes="class python:test(error, 'field error', 'field')">
+                    
+             <label i18n:translate="label_new_invites">New Invites</label>
+                <div class="formHelp" i18n:translate="help_invite_status_help">
+                
+                </div>
+    
+                <div tal:content="error">Validation error output</div>
+                <div i18n:translate="text_invitations_left"> You have 
+                  <span i18n:name="count"
+                      tal:replace="python:len(here.portal_invitations.getInvitesUser(sent=0))"
+                  /> 
+                  invitations left.
+                </div>
+          </div>
+
+        <form action=""
+              name="manage_invites"
+              method="post"
+              tal:attributes="action template/getId"
+              tal:define="plone_invites python:here.portal_invitations.getInvitesUser(sent=1);
+                          batch python:Batch(plone_invites, b_size, int(b_start), orphan=1)">
+
+            <div class="field"
+                 tal:define="error errors/invites | nothing;"
+                 tal:attributes="class python:test(error, 'field error', 'field')">
+                    
+             <label i18n:translate="label_invites_sent">Invites Sent</label>
+                <div class="formHelp" i18n:translate="help_invite_status_help">
+                
+                </div>
+    
+                <div tal:content="error">Validation error output</div>
+           
+          <table class="listing" summary="User Listing">
+          <tal:block>
+          <tr>
+            <th i18n:translate="listingheader_sent_address">Sent to address</th>
+            <th i18n:translate="listingheader_recipient">Recipient</th>
+            <!--<th i18n:translate="listingheader_enforce_address">Enforce email address</th>-->
+            <th i18n:translate="listingheader_enforce_sent">Sent</th>
+            <th i18n:translate="listingheader_enforce_used">Used</th>
+            <th i18n:translate="listingheader_expired">Expired</th>
+          </tr>
+          </tal:block>
+
+        <tal:block repeat="invite batch">
+          <tr tal:define="oddrow repeat/invite/odd;
+                          userid invite/sender;"
+              tal:attributes="class python:test(oddrow,'odd','even')">
+            <td tal:content="invite/sent_address">Sent Address</td>
+            <td tal:content="invite/recipient">Recipient</td>
+            <!--<td i18n:translate="" tal:content="python:test(invite['enforce_address'],'Yes','No')">Enforce email address</td>-->
+            <td i18n:translate="" tal:content="python:test(invite['sent'],'Yes','No')">Sent</td>
+            <td i18n:translate="" tal:content="python:test(invite['used'], 'Yes','No')">Used</td>
+            <td i18n:translate="" tal:content="python:test((invite['sent'] and (invite['xdate']<DateTime() or invite['used'])), 'Yes', 'No')"></td>
+          </tr>
+        </tal:block>
+                <tr tal:condition="not:batch">
+                    <td colspan="8" i18n:translate="text_noplone_invites"
+                        style="text-align:center;">No portal invites.</td>
+                </tr>
+          </table>
+
+          <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+          </div>
+
+                    
+        <input type="hidden" name="form.submitted" value="1" />
+                
+        </form>
+        </fieldset>
+          
+</div>
+          
+    </div>
+
+  </body>
+</html>

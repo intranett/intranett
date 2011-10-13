@@ -1,0 +1,7 @@
+[validators]
+validators=validate_invite
+
+[actions]
+action.success = redirect_to:string:invite_form
+action.failure = redirect_to:string:invite_form
+

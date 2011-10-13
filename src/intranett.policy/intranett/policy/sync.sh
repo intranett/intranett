@@ -7,5 +7,3 @@ bin/i18ndude sync --pot src/intranett.policy/intranett/policy/locales/intranett.
 msgfmt --no-hash -o src/intranett.policy/intranett/policy/locales/no/LC_MESSAGES/intranett.mo src/intranett.policy/intranett/policy/locales/no/LC_MESSAGES/intranett.po
 bin/i18ndude sync --pot src/intranett.policy/intranett/policy/locales/plone.pot src/intranett.policy/intranett/policy/locales/no/LC_MESSAGES/plone.po
 msgfmt --no-hash -o src/intranett.policy/intranett/policy/locales/no/LC_MESSAGES/plone.mo src/intranett.policy/intranett/policy/locales/no/LC_MESSAGES/plone.po
-# TODO: Compile mo file - translation should be moved upstream
-msgfmt --no-hash -o src/intranett.policy/intranett/policy/locales/no/LC_MESSAGES/collective.quickupload.mo src/intranett.policy/intranett/policy/locales/no/LC_MESSAGES/collective.quickupload.po

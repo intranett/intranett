@@ -183,6 +183,7 @@ def create_site_admin(app, args):
         obj.setModificationDate(now)
         obj.reindexObject(idxs=None)
 
+    # Mail him
     mail_text = ActivationMail(site, site.REQUEST)(member=member,
         reset=reset, email=email, fullname=fullname, hostname=hostname)
     if isinstance(mail_text, unicode):

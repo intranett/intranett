@@ -3,10 +3,12 @@ from Acquisition import aq_inner
 
 def allow_anonymous():
     from iw.rejectanonymous import addValidIds, addValidSubparts
+    addValidIds('accept_form')
     addValidIds('activate_form')
     addValidIds('logged_out')
     addValidIds('robots.txt')
     addValidIds('system-info')
+    addValidSubparts('accept')
     addValidSubparts('activate')
     addValidSubparts('portal_kss')
 
@@ -26,10 +28,16 @@ def check_quick_upload_locally_addable():
 
     def available(self):
         context = aq_inner(self.context)
-        allowed_types = context.getLocallyAllowedTypes()
-        return self._old_available and ('File' in allowed_types or 'Image' in allowed_types)
+        get_allowed_types = getattr(context, 'getLocallyAllowedTypes', None)
+        if get_allowed_types is not None:
+            allowed_types = get_allowed_types()
+        else:
+            allowed_types = ()
+        return self._old_available and \
+            ('File' in allowed_types or 'Image' in allowed_types)
+
     Renderer._old_available = Renderer.available
-    Renderer.available = property(available)
+    setattr(Renderer, 'available', property(available))
 
 
 def apply():

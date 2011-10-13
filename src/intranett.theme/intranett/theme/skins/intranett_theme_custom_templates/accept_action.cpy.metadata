@@ -1,0 +1,10 @@
+[default]
+title=Register a User
+proxy=Manager,Anonymous
+
+[validators]
+validators = accept_form_validate
+
+[actions]
+action.failure=traverse_to:string:accept_form
+action.success=traverse_to:string:accept_finish
