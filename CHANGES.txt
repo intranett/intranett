@@ -4,6 +4,8 @@ Changelog
 1.3.9 - unreleased
 ------------------
 
+- INTRANETT-277: Fix problems in control panels / manage users forms.
+
 - Internal: Updated to buildout 1.5.
 
 1.3.8 - 2011-10-15
