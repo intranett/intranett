@@ -1,6 +1,17 @@
 Documentation
 =============
 
+Prerequisites
+-------------
+
+In addition to Git and Python, you need to have Ruby, Erlang and some stuff
+installed. Via MacPorts install:
+
+    pcre
+    pkgconfig
+    rb19-haml
+    erlang
+
 Tests
 -----
 
