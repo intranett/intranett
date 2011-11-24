@@ -155,4 +155,10 @@
       <element key="plone.content.file">plone.app.caching.weakCaching</element>
     </value>
   </record>
+  <record name="jarn.xmpp.adminPassword">
+    <field type="plone.registry.field.Password">
+      <title>Admin password</title>
+    </field>
+    <value>KnwNIjQ0GG</value>
+  </record>
 </registry>

@@ -15,6 +15,10 @@
   <include package="collective.quickupload" />
   <include package="five.pt" />
   <include package="iw.rejectanonymous" />
+  <include package="jarn.xmpp.twisted" />
+  <include package="jarn.xmpp.twisted" file="reactor.zcml" />
+  <include package="jarn.xmpp.core" />
+  <include package="jarn.xmpp.collaboration" />
   <include package="munin.zope" />
   <include package="plone.principalsource" />
   <include package="plone.app.caching" />
