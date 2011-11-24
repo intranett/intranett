@@ -1,6 +1,17 @@
-{tables,[{pubsub_node,[{record_name,pubsub_node},
-                       {attributes,[nodeid,id,parents,type,owners,
-                                    options]}]}]}.
+{tables,[{pubsub_subscription,[{record_name,pubsub_subscription},
+                               {attributes,[subid,options]}]},
+         {pubsub_item,[{record_name,pubsub_item},
+                       {attributes,[itemid,creation,modification,payload]}]},
+         {pubsub_index,[{record_name,pubsub_index},
+                        {attributes,[index,last,free]}]},
+         {pubsub_state,[{record_name,pubsub_state},
+                        {attributes,[stateid,items,affiliation,
+                                     subscriptions]}]},
+         {pubsub_node,[{record_name,pubsub_node},
+                       {attributes,[nodeid,id,parents,type,owners,options]}]}]}.
+{pubsub_index,node,2,[]}.
+{pubsub_state,{{[],"pubsub.localhost",[]},1},[],owner,[]}.
+{pubsub_state,{{[],"pubsub.localhost",[]},2},[],owner,[]}.
 {pubsub_node,{"pubsub.localhost",<<"dummy_people_node">>},
              4,
              [<<"people">>],
