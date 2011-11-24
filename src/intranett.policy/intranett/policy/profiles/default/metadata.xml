@@ -11,5 +11,6 @@
     <dependency>profile-intranett.theme:default</dependency>
     <dependency>profile-intranett.tour:default</dependency>
     <dependency>profile-jarn.xmpp.core:default</dependency>
+    <dependency>profile-jarn.xmpp.collaboration:default</dependency>
   </dependencies>
 </metadata>
