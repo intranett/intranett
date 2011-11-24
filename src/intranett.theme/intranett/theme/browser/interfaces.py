@@ -25,6 +25,11 @@ class ITopBar(IViewletManager):
     """
 
 
+class ITopBarWrapper(IViewletManager):
+    """A viewlet manager that directly contains the top bar items
+    """
+
+
 class IFrontpagePortletManagers(IColumn):
     """ General interface for portlet managers on the Frontpage View.
     """

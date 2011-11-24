@@ -48,6 +48,22 @@
       class="plone.app.viewletmanager.manager.OrderedViewletManager"
       layer=".interfaces.IThemeSpecific"
       />
+      
+  <!-- The top bar wrapper -->
+  <browser:viewlet
+      name="intranett.top_bar_wrapper"
+      manager="intranett.theme.browser.interfaces.ITopBar"
+      template="templates/top-bar-wrapper.pt"
+      permission="zope2.View"
+      />
+      
+  <browser:viewletManager
+      name="intranett.topbar_wrapper"
+      provides=".interfaces.ITopBarWrapper"
+      permission="zope2.View"
+      class="plone.app.viewletmanager.manager.OrderedViewletManager"
+      layer=".interfaces.IThemeSpecific"
+      />
 
   <!-- The breadcrumbs -->
   <browser:viewlet

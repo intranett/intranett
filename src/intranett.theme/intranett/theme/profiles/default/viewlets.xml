@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
 <object>
     <order manager="intranett.topbar" skinname="Intranett.no base theme">
-      <viewlet name="plone.personal_bar" />
-      <viewlet name="jarn.xmpp.core.ui" />
+      <viewlet name="intranett.top_bar_wrapper" />
+    </order>
+    <order manager="intranett.topbar_wrapper" based-on="Intranett.no base theme">
+        <viewlet name="plone.personal_bar" />
+        <viewlet name="jarn.xmpp.core.ui" />
     </order>
     <order manager="plone.portalheader" skinname="Intranett.no base theme" based-on="Plone Default">
       <viewlet name="plone.logo" insert-after="plone.skip_links" />
