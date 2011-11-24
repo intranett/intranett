@@ -328,13 +328,12 @@ body > header > .contentAlignment {
 
 /* @group Personal tools */
 
-#portal-personaltools-wrapper {
+#top-bar-wrapper {
     background: #333;
     text-align: right;
     border-bottom: 1px solid #333;
 }
 #portal-personaltools {
-    width: $width-full;
     font-size: $smaller-size;
     margin-left: 0;
     white-space: nowrap;
@@ -342,7 +341,6 @@ body > header > .contentAlignment {
     display: inline;
     li {
         list-style: none;
-        display: inline;
         padding: 0 $smaller-size;
         display: inline-block;
         line-height: 1.4em;
@@ -354,6 +352,39 @@ body > header > .contentAlignment {
             color: #fff;
         }
     }
+}
+
+/* @end */
+
+/* @group XMPP viewlet */
+
+#xmpp-viewlet {
+    margin-right: 2.0833%;
+}
+#xmpp-viewlet-container {
+	font-size: $smaller-size;
+	a {
+	    background: #555;
+		padding: 0 $smaller-size;
+		line-height: 1.4em;
+        margin: 0.3em 0 0.3em 2px;
+        color: #e6e6e6;
+	}
+	> a:first-of-type,
+	> a:last-of-type {
+        -webkit-border-radius: .3em;
+        -moz-border-radius: .3em;
+        border-radius: .3em;
+	}
+	a:hover {
+	    color: #fff;
+	}
+}
+#online-users {
+    text-align: left;
+    -webkit-box-shadow: 0px 0px 4px #777;
+    -moz-box-shadow: 0px 0px 4px #777;
+    box-shadow: 0px 0px 4px #777;
 }
 
 /* @end */
@@ -1601,13 +1632,13 @@ body.template-login_failed div.field input {
 }
 body.template-login_form #portal-globalnav,
 body.template-login_form #portal-searchbox,
-body.template-login_form #portal-personaltools-wrapper,
+body.template-login_form #top-bar-wrapper,
 body.template-logged_out #portal-globalnav,
 body.template-logged_out #portal-searchbox,
-body.template-logged_out #portal-personaltools-wrapper,
+body.template-logged_out #top-bar-wrapper,
 body.template-login_failed #portal-globalnav,
 body.template-login_failed #portal-searchbox,
-body.template-login_failed #portal-personaltools-wrapper {
+body.template-login_failed #top-bar-wrapper {
     display: none;
 }
 
