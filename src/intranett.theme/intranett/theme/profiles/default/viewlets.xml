@@ -22,6 +22,7 @@
 
     <hidden manager="plone.portalheader" skinname="Intranett.no base theme">
       <viewlet name="plone.personal_bar" />
+      <viewlet name="jarn.xmpp.core.ui" />
     </hidden>
     <hidden manager="plone.abovecontent" skinname="Intranett.no base theme">
       <viewlet name="plone.path_bar" />
