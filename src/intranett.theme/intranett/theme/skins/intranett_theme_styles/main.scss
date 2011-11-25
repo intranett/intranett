@@ -2271,6 +2271,15 @@ body.template-employee-listing .tileItem .image-left {
 }
 /* @end */
 
+/* @group Users overview form */
+
+form[name="users_search"] table.listing a > img {
+    height: 50px;
+    width: auto;
+}
+
+/* @end */
+
 @media print {
 /* @group Print styles */
 
