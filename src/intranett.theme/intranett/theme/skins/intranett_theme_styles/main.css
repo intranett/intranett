@@ -329,11 +329,11 @@ body > header > .contentAlignment {
 #xmpp-viewlet-container {
   font-size: 0.76em; }
   #xmpp-viewlet-container > a {
-    background: #999;
+    background: #777;
     padding: 0 0.76em;
     line-height: 1.4em;
     margin: 0.3em 0 0.3em 2px;
-    color: #efefef; }
+    color: #E6E6E6; }
   #xmpp-viewlet-container > a:first-of-type,
   #xmpp-viewlet-container > a:last-of-type {
     -webkit-border-radius: .3em;
@@ -356,6 +356,8 @@ body > header > .contentAlignment {
   font-size: 1em;
   border: none;
   top: 1.5em; }
+  #online-users li {
+    margin-bottom: 0; }
 
 #xmpp-viewlet-container a.active {
   background: #ccc;
@@ -365,6 +367,23 @@ body > header > .contentAlignment {
 
 .loadMoreToggle button {
   bottom: -1em; }
+
+.pubsubAvatar {
+  width: 77px;
+  height: 77px; }
+
+.pubsubAvatar img {
+  margin: 0;
+  padding: 0;
+  height: 75px;
+  width: auto; }
+
+.pubsubItemMsg {
+  margin-top: 0.5em; }
+
+.pubsubItemComment .pubsubAvatar {
+  height: 52px;
+  width: 52px; }
 
 /* @end */
 /* @group Logo */
