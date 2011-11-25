@@ -364,17 +364,24 @@ body > header > .contentAlignment {
 #xmpp-viewlet-container {
 	font-size: $smaller-size;
 	> a {
-	    background: #555;
+	    background: #999;
 		padding: 0 $smaller-size;
 		line-height: 1.4em;
         margin: 0.3em 0 0.3em 2px;
-        color: #e6e6e6;
+        color: #efefef;
 	}
 	> a:first-of-type,
 	> a:last-of-type {
         -webkit-border-radius: .3em;
         -moz-border-radius: .3em;
         border-radius: .3em;
+	}
+	#toggle-online-users {
+		-webkit-transition: none;
+		-moz-transition: none;
+		-ms-transition: none;
+		-o-transition: none;
+		transition: none; 
 	}
 	a:hover {
 	    color: #fff;

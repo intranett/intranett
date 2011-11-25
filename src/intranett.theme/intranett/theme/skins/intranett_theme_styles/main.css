@@ -326,16 +326,22 @@ body > header > .contentAlignment {
 #xmpp-viewlet-container {
   font-size: 0.76em; }
   #xmpp-viewlet-container > a {
-    background: #555;
+    background: #999;
     padding: 0 0.76em;
     line-height: 1.4em;
     margin: 0.3em 0 0.3em 2px;
-    color: #e6e6e6; }
+    color: #efefef; }
   #xmpp-viewlet-container > a:first-of-type,
   #xmpp-viewlet-container > a:last-of-type {
     -webkit-border-radius: .3em;
     -moz-border-radius: .3em;
     border-radius: .3em; }
+  #xmpp-viewlet-container #toggle-online-users {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none; }
   #xmpp-viewlet-container a:hover {
     color: #fff; }
 
