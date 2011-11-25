@@ -478,3 +478,8 @@ def add_invite_portlet(context):
 def remove_unused_workflows(context):
     from intranett.policy.setuphandlers import remove_unused_workflows
     remove_unused_workflows(context)
+
+
+@upgrade_to(47)
+def install_xmpp(context):
+    pass
