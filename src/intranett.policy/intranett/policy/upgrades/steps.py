@@ -482,4 +482,7 @@ def remove_unused_workflows(context):
 
 @upgrade_to(47)
 def install_xmpp(context):
-    pass
+    loadMigrationProfile(context, 'profile-jarn.xmpp.core:default')
+    loadMigrationProfile(context, 'profile-jarn.xmpp.collaboration:default')
+    loadMigrationProfile(context, 'profile-intranett.policy:default',
+        steps=('kssregistry', ))
