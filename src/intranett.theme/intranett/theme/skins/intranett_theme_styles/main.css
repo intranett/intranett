@@ -393,16 +393,6 @@ ul.pubsubNode,
 .postItemWrapper {
   max-width: 850px; }
 
-.pubsubItemContent:before, .pubsubItemContent:after {
-  content: "";
-  display: table; }
-
-.pubsubItemContent:after {
-  clear: both; }
-
-.pubsubItemContent {
-  *zoom: 1; }
-
 /* @end */
 /* @group Logo */
 body > header h1 {
