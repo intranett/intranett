@@ -428,6 +428,14 @@ body > header > .contentAlignment {
     height: 52px;
     width: 52px;
 }
+.template-pubsub-feed #content-core {
+    max-width: 850px;
+    margin: 0 auto 1.25em;
+}
+ul.pubsubNode,
+.postItemWrapper {
+    max-width: 850px;
+}
 
 /* @end */
 
