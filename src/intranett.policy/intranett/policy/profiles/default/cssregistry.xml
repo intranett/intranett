@@ -32,6 +32,15 @@
    insert-before="member.css"
    media="screen" />
 
+ <stylesheet id="++resource++gritter/jquery.gritter.css"
+   insert-before="member.css" />
+
+ <stylesheet id="++resource++jarn.xmpp.core.css/styles.css"
+   insert-before="member.css" />
+
+ <stylesheet id="++resource++jarn.xmpp.collaboration.css/collaborate.css"
+   insert-before="member.css" />
+
  <stylesheet
    id="acl_users/session/refresh?session_refresh=true&amp;type=css&amp;minutes=10"
    authenticated="True"
