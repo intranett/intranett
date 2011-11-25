@@ -1,6 +1,8 @@
-<metal:personaltools tal:condition="not: view/anonymous">
-    <ul id="portal-personaltools" i18n:domain="intranett"
-        tal:define="portal_url view/portal_url;">
+<div id="top-bar-wrapper" i18n:domain="intranett">
+  <div class="contentAlignment"
+       tal:define="portal_url view/portal_url;"
+       tal:condition="not: view/anonymous">
+    <ul id="portal-personaltools" i18n:domain="intranett">
         <li>
           <a href=""
              tal:attributes="href view/profile_url"
@@ -28,4 +30,25 @@
              i18n:translate="">Log out</a>
         </li>
     </ul>
-</metal:personaltools>
+
+    <div id="xmpp-viewlet" i18n:domain="jarn.xmpp.core">
+        <div id="xmpp-viewlet-container">
+            <a id="site-stream-link"
+               tal:attributes="href string:${portal_url}/@@pubsub-feed"
+               i18n:translate="">
+                  My stream
+            </a><a href="#" id="toggle-online-users">
+                <span i18n:translate="">People online:</span>
+                <span id="online-count">0</span>
+            </a>
+            <div id="online-users-container"
+                 class="autohide">
+                <ul id="online-users">
+                    <li id="no-users-online">Nobody else online</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+  </div>
+</div>

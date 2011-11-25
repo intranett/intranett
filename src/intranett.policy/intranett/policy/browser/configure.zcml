@@ -52,7 +52,7 @@
   <!-- Personal bar -->
   <browser:viewlet
       name="plone.personal_bar"
-      manager="intranett.theme.browser.interfaces.ITopBarWrapper"
+      manager="intranett.theme.browser.interfaces.ITopBar"
       class=".personalbar.PersonalBarViewlet"
       permission="zope2.View"
       />
@@ -96,13 +96,6 @@
       name="system-info"
       class=".systeminfo.SystemInfo"
       permission="zope.Public"
-      />
-
-  <browser:viewlet
-      name="jarn.xmpp.core.ui"
-      manager="intranett.theme.browser.interfaces.ITopBarWrapper"
-      class="jarn.xmpp.core.browser.viewlet.XMPPViewlet"
-      permission="zope2.View"
       />
 
 </configure>

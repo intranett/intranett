@@ -1,5 +1,0 @@
-<div id="top-bar-wrapper" i18n:domain="intranett">
-    <div class="contentAlignment">
-        <div tal:replace="structure provider:intranett.topbar_wrapper" />
-    </div>
-</div>
