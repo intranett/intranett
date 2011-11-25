@@ -167,4 +167,10 @@
     </field>
     <value>4j_X1ZFLf6qmEuIZJvm</value>
   </record>
+  <record name="jarn.xmpp.boshURL">
+    <field type="plone.registry.field.URI">
+      <title>BOSH url</title>
+    </field>
+    <value>https://localhost:8080/http-bind/</value>
+  </record>
 </registry>
