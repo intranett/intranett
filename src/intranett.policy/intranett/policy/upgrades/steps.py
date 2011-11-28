@@ -15,6 +15,8 @@ def install_xmpp(context):
     loadMigrationProfile(context, 'profile-jarn.xmpp.core:default')
     loadMigrationProfile(context, 'profile-intranett.policy:default',
         steps=('cssregistry', 'jsregistry', 'kssregistry', 'plone.app.registry', ))
+    loadMigrationProfile(context, 'profile-intranett.theme:default',
+        steps=('viewlets', ))
 
     # Setup existing users
     from jarn.xmpp.twisted.testing import wait_for_client_state
