@@ -18,7 +18,6 @@
   <include package="jarn.xmpp.twisted" />
   <include package="jarn.xmpp.twisted" file="reactor.zcml" />
   <include package="jarn.xmpp.core" />
-  <include package="jarn.xmpp.collaboration" />
   <include package="jarn.jsi18n" />
   <include package="munin.zope" />
   <include package="plone.principalsource" />

@@ -161,12 +161,6 @@
     </field>
     <value>KnwNIjQ0GG</value>
   </record>
-  <record name="jarn.xmpp.collaborationPassword">
-    <field type="plone.registry.field.Password">
-      <title>Component password</title>
-    </field>
-    <value>4j_X1ZFLf6qmEuIZJvm</value>
-  </record>
   <record name="jarn.xmpp.boshURL">
     <field type="plone.registry.field.URI">
       <title>BOSH url</title>
