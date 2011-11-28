@@ -35,6 +35,7 @@ munin/etc/plugins
 munin/etc/supervisord.conf
 src/*/*.egg-info
 src/collective.*
+src/jarn.xmpp.*
 src/plone.*
 src/plutonian
 tmp
