@@ -1,3 +1,5 @@
+from zope.component import getUtility
+
 from plone.app.upgrade.utils import loadMigrationProfile
 from plutonian.gs import upgrade_to
 
@@ -12,4 +14,15 @@ def remove_unused_workflows(context):
 def install_xmpp(context):
     loadMigrationProfile(context, 'profile-jarn.xmpp.core:default')
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('cssregistry', 'jsregistry', 'kssregistry', ))
+        steps=('cssregistry', 'jsregistry', 'kssregistry', 'plone.app.registry', ))
+
+    # Setup existing users
+    from jarn.xmpp.twisted.testing import wait_for_client_state
+    from jarn.xmpp.core.interfaces import IAdminClient
+    from jarn.xmpp.core.subscribers.startup import setupAdminClient
+    from jarn.xmpp.core.utils.setup import setupXMPPEnvironment
+    setupAdminClient(None, None)
+
+    client = getUtility(IAdminClient)
+    wait_for_client_state(client, 'authenticated')
+    setupXMPPEnvironment(context)
