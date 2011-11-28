@@ -1,3 +1,4 @@
+from plone.app.upgrade.utils import loadMigrationProfile
 from plutonian.gs import upgrade_to
 
 
@@ -11,4 +12,4 @@ def remove_unused_workflows(context):
 def install_xmpp(context):
     loadMigrationProfile(context, 'profile-jarn.xmpp.core:default')
     loadMigrationProfile(context, 'profile-intranett.policy:default',
-        steps=('cssregistry', 'kssregistry', ))
+        steps=('cssregistry', 'jsregistry', 'kssregistry', ))
