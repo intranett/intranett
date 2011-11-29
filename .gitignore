@@ -29,6 +29,7 @@ include
 lib
 nginx-sites/jarn.conf
 parts
+python
 htmlcov
 munin/etc/munin-node.conf
 munin/etc/plugin-conf.d
