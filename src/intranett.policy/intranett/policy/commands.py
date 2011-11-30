@@ -6,6 +6,7 @@ from optparse import OptionParser
 import transaction
 from AccessControl.SecurityManagement import newSecurityManager
 from Acquisition import aq_get
+from zope.component import getUtility
 from zope.site.hooks import setHooks
 from zope.site.hooks import setSite
 
@@ -199,6 +200,27 @@ def create_site_admin(app, args):
     host = aq_get(site, 'MailHost')
     host.send(mail_text, m_to, m_from, subject=subject,
               charset='utf-8', immediate=True)
+
+    from jarn.xmpp.core.interfaces import IAdminClient
+    from jarn.xmpp.core.subscribers.startup import setupAdminClient
+    from jarn.xmpp.core.subscribers.user_management import onUserCreation
+    from jarn.xmpp.twisted.testing import wait_for_client_state
+    from jarn.xmpp.twisted.testing import wait_on_deferred
+    from jarn.xmpp.twisted.testing import wait_on_client_deferreds
+
+    setupAdminClient(None, None)
+    client = getUtility(IAdminClient)
+    wait_for_client_state(client, 'authenticated')
+    wait_on_client_deferreds(client)
+
+
+    class FakeEvent(object):
+        pass
+
+    ev = FakeEvent()
+    ev.principal = user
+    d = onUserCreation(ev)
+    wait_on_deferred(d)
 
     transaction.get().note('Added site admin user %r.' % login)
     transaction.get().commit()
