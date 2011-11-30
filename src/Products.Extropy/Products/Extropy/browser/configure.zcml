@@ -181,11 +181,4 @@
     template="support_listing.pt"
     />
 
-  <browser:viewlet
-      name="jarn.xmpp.core.ui"
-      manager="intranett.theme.browser.interfaces.ITopBar"
-      class="jarn.xmpp.core.browser.viewlet.XMPPViewlet"
-      permission="zope2.View"
-      />
-
 </configure>

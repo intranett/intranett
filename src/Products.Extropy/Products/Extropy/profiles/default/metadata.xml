@@ -4,6 +4,5 @@
   <dependencies>
     <dependency>profile-Products.Invoice:default</dependency>
     <dependency>profile-jarn.extranet:default</dependency>
-    <dependency>profile-jarn.xmpp.core:default</dependency>
   </dependencies>
 </metadata>

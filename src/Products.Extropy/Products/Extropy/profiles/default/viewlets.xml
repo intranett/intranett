@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<object>
-    <order manager="intranett.topbar" skinname="Intranett.no base theme">
-      <viewlet name="plone.personal_bar" />
-      <viewlet name="jarn.xmpp.core.ui" />
-    </order>
-</object>

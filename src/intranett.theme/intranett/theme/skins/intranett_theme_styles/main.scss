@@ -225,6 +225,9 @@ select, input, textarea {
     font-size: $smaller-size;
     font-family: $sans-serif;
 }
+input[type="text"] {
+    font-size: 1em;
+}
 /* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
 .clearfix:before, .clearfix:after {
   content: "\0020"; display: block; height: 0; visibility: hidden;
@@ -328,13 +331,12 @@ body > header > .contentAlignment {
 
 /* @group Personal tools */
 
-#portal-personaltools-wrapper {
+#top-bar-wrapper {
     background: #333;
     text-align: right;
     border-bottom: 1px solid #333;
 }
 #portal-personaltools {
-    width: $width-full;
     font-size: $smaller-size;
     margin-left: 0;
     white-space: nowrap;
@@ -342,7 +344,6 @@ body > header > .contentAlignment {
     display: inline;
     li {
         list-style: none;
-        display: inline;
         padding: 0 $smaller-size;
         display: inline-block;
         line-height: 1.4em;
@@ -354,6 +355,86 @@ body > header > .contentAlignment {
             color: #fff;
         }
     }
+}
+
+/* @end */
+
+/* @group XMPP viewlet */
+
+#xmpp-viewlet {
+    margin-right: 2.0833%;
+}
+#xmpp-viewlet-container {
+	font-size: $smaller-size;
+	> a {
+	    background: #777;
+		padding: 0 $smaller-size;
+		line-height: 1.4em;
+        margin: 0.3em 0 0.3em 2px;
+        color: #E6E6E6;
+	}
+	> a:first-of-type,
+	> a:last-of-type {
+        -webkit-border-radius: .3em;
+        -moz-border-radius: .3em;
+        border-radius: .3em;
+	}
+	#toggle-online-users {
+		-webkit-transition: none;
+		-moz-transition: none;
+		-ms-transition: none;
+		-o-transition: none;
+		transition: none; 
+	}
+	a:hover {
+	    color: #fff;
+	}
+}
+#online-users {
+    text-align: left;
+    -webkit-box-shadow: 0px 0px 4px #777;
+    -moz-box-shadow: 0px 0px 4px #777;
+    box-shadow: 0px 0px 4px #777;
+    font-size: 1em;
+    border: none;
+    top: 1.5em;
+    li {
+	    margin-bottom: 0;
+	}
+}
+#xmpp-viewlet-container a.active {
+    background: #ccc;
+    color: #000;
+    position: relative;
+    z-index: 11;
+}
+.loadMoreToggle button {
+    bottom: -1em;
+}
+.pubsubAvatar {
+    width: 77px;
+    height: 77px;
+}
+.pubsubAvatar img {
+    margin: 0;
+    padding: 0;
+    height: 75px;
+    width: auto;
+}
+.pubsubItemMsg {
+    margin-top: 0.5em;
+}
+.pubsubItemComment .pubsubAvatar {
+    height: 52px;
+    width: 52px;
+}
+.template-pubsub-feed #content-core {
+    max-width: 850px;
+    margin: 0 auto 1.25em;
+}
+ul.pubsubNode,
+.postItemWrapper {
+    max-width: 850px;
 }
 
 /* @end */
@@ -1601,13 +1682,13 @@ body.template-login_failed div.field input {
 }
 body.template-login_form #portal-globalnav,
 body.template-login_form #portal-searchbox,
-body.template-login_form #portal-personaltools-wrapper,
+body.template-login_form #top-bar-wrapper,
 body.template-logged_out #portal-globalnav,
 body.template-logged_out #portal-searchbox,
-body.template-logged_out #portal-personaltools-wrapper,
+body.template-logged_out #top-bar-wrapper,
 body.template-login_failed #portal-globalnav,
 body.template-login_failed #portal-searchbox,
-body.template-login_failed #portal-personaltools-wrapper {
+body.template-login_failed #top-bar-wrapper {
     display: none;
 }
 
@@ -2216,6 +2297,15 @@ body.template-employee-listing .tileItem .image-left {
 #dashboard dl.portlet a:link {
     border-bottom: none;
 }
+/* @end */
+
+/* @group Users overview form */
+
+form[name="users_search"] table.listing a > img {
+    height: 50px;
+    width: auto;
+}
+
 /* @end */
 
 @media print {
