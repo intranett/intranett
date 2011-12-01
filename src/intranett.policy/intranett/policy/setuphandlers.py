@@ -2,6 +2,7 @@ from Acquisition import aq_get
 from plone.portlets.interfaces import IPortletType
 from plutonian.gs import import_step
 from Products.CMFCore.utils import getToolByName
+from zope.component import getUtility
 from zope.component import queryMultiAdapter
 from zope.component import queryUtility
 from zope.i18n import translate
@@ -245,6 +246,21 @@ def remove_unused_workflows(site):
     for r in remove:
         if r in existing:
             wftool._delObject(r)
+
+
+def setup_xmpp(context):
+    # Setup existing users
+    from jarn.xmpp.core.interfaces import IAdminClient
+    from jarn.xmpp.core.subscribers.startup import setupAdminClient
+    from jarn.xmpp.core.utils.setup import setupXMPPEnvironment
+    from jarn.xmpp.twisted.testing import wait_for_client_state
+    from jarn.xmpp.twisted.testing import wait_on_client_deferreds
+    setupAdminClient(None, None)
+
+    client = getUtility(IAdminClient)
+    wait_for_client_state(client, 'authenticated')
+    wait_on_client_deferreds(client)
+    setupXMPPEnvironment(context)
 
 
 @import_step()
