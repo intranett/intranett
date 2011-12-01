@@ -49,8 +49,8 @@ def _setup(app, site=None):
 
 def create_site(app, args):
     # Display all messages on stderr
-    logger.setLevel(logging.INFO)
-    logger.handlers[0].setLevel(logging.INFO)
+    logger.setLevel(logging.WARN)
+    logger.handlers[0].setLevel(logging.WARN)
 
     parser = OptionParser()
     parser.add_option('-f', '--force', action='store_true', default=False,
@@ -93,6 +93,12 @@ def create_site(app, args):
     from intranett.policy.browser.admin import AddIntranettSite
     addsite = AddIntranettSite(app, request)
     addsite()
+
+    # setup initial xmpp nodes
+    from intranett.policy.setuphandlers import setup_xmpp
+    existing = app.objectValues('Plone Site')
+    setup_xmpp(existing[0])
+
     transaction.get().note('Added new Plone site.')
     transaction.get().commit()
     logger.info('Added new Plone site.')
