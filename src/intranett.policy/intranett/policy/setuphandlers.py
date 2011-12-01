@@ -261,6 +261,7 @@ def setup_xmpp(context):
     wait_for_client_state(client, 'authenticated')
     wait_on_client_deferreds(client)
     setupXMPPEnvironment(context)
+    wait_on_client_deferreds(client)
 
 
 @import_step()
