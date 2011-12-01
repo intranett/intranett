@@ -93,6 +93,12 @@ def create_site(app, args):
     from intranett.policy.browser.admin import AddIntranettSite
     addsite = AddIntranettSite(app, request)
     addsite()
+
+    # setup initial xmpp nodes
+    from intranett.policy.setuphandlers import setup_xmpp
+    existing = app.objectValues('Plone Site')
+    setup_xmpp(existing[0])
+
     transaction.get().note('Added new Plone site.')
     transaction.get().commit()
     logger.info('Added new Plone site.')
