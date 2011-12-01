@@ -4,7 +4,9 @@ Changelog
 1.4.0 - unreleased
 ------------------
 
-- Install and configure ejabberd for every instance.
+- Add activity streams and personal chat messages.
+
+- Install and configure ejabberd on every server.
 
 - Update to haproxy 1.4.18.
 
