@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.4.0 - unreleased
+1.4.0 - 2011-12-01
 ------------------
 
 - Add activity streams and personal chat messages.
