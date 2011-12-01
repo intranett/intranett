@@ -49,8 +49,8 @@ def _setup(app, site=None):
 
 def create_site(app, args):
     # Display all messages on stderr
-    logger.setLevel(logging.INFO)
-    logger.handlers[0].setLevel(logging.INFO)
+    logger.setLevel(logging.WARN)
+    logger.handlers[0].setLevel(logging.WARN)
 
     parser = OptionParser()
     parser.add_option('-f', '--force', action='store_true', default=False,
