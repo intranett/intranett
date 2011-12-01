@@ -22,6 +22,22 @@
   <javascript id="++resource++quickupload_static/helpers.js" authenticated="False"
       insert-after="++resource++plone.app.discussion.javascripts/comments.js"/>
 
+  <!-- XMPP -->
+  <javascript id="++resource++jsi18n.js"
+      insert-after="++resource++quickupload_static/swfobject.js" />
+  <javascript id="++resource++gritter/jquery.gritter.min.js"
+      authenticated="False"
+      insert-after="++resource++jsi18n.js" />
+  <javascript id="++resource++jarn.xmpp.core.js/strophe.js"
+      authenticated="False"
+      insert-after="++resource++gritter/jquery.gritter.min.js" />
+  <javascript id="++resource++jarn.xmpp.core.js/jarnxmpp.core.handlers.js"
+      authenticated="False" compression="safe"
+      insert-after="++resource++jarn.xmpp.core.js/strophe.js" />
+  <javascript id="++resource++jarn.xmpp.core.js/jarnxmpp.core.ui.js"
+      authenticated="False"
+      insert-after="++resource++jarn.xmpp.core.js/jarnxmpp.core.handlers.js" />
+
   <!-- Amberjack -->
   <javascript id="++resource++jquery-ui.min.js"
       expression="python: 'personal' in request['URL']" insert-after="main.js"/>

@@ -86,7 +86,7 @@ class UpgradeTests(object):
         return remaining
 
     def test_upgrades(self):
-        self.importFile(__file__, 'six.zexp')
+        self.importFile(__file__, 'fourtysix.zexp')
         portal = getattr(self.layer['app'], self.site_id)
 
         # TODO - we should do this in a layer
@@ -95,7 +95,7 @@ class UpgradeTests(object):
         self.portal = portal
 
         # Adjust for some things changed by the testing infrastructure
-        portal.setTitle('Plone site')
+        portal.setTitle('intranett.no')
 
         portal.portal_migration.upgrade(swallow_errors=False)
         setup = getToolByName(portal, "portal_setup")

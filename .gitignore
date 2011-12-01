@@ -10,6 +10,7 @@ etc/haproxy.cfg
 etc/logrotate.conf
 etc/nginx.conf
 etc/supervisord.conf
+etc/supervisord-test.conf
 etc/varnish.vcl
 etc/fastcgi.conf
 etc/fastcgi.conf.default
@@ -28,6 +29,7 @@ include
 lib
 nginx-sites/jarn.conf
 parts
+python
 htmlcov
 munin/etc/munin-node.conf
 munin/etc/plugin-conf.d
@@ -35,6 +37,7 @@ munin/etc/plugins
 munin/etc/supervisord.conf
 src/*/*.egg-info
 src/collective.*
+src/jarn.xmpp.*
 src/plone.*
 src/plutonian
 tmp

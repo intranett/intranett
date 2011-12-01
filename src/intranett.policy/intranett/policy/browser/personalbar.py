@@ -22,6 +22,7 @@ class PersonalBarViewlet(ViewletBase):
         sm = getSecurityManager()
         member = mtool.getAuthenticatedMember()
         userid = member.getId()
+        self.userid = userid
         self.user_name = get_fullname(context, userid)
         self.can_manage_users = sm.checkPermission('Manage users', self.context)
         self.profile_url = get_user_profile_url(context, userid)
