@@ -1,6 +1,11 @@
 """
 This script assumes to be called via python alltests.py while the current
 directory is the buildout root.
+
+The script will start the local ejabberd. As part of the test layer setup,
+the ejabberd database will be reset. Since dev.intranett.no and the Jenkins
+slave run on the same machine, this means the dev.intranett.no site will also
+get its ejabberd database reset frequently.
 """
 
 import os

@@ -7,6 +7,8 @@ from plone.app.testing import applyProfile
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 
+from intranett.policy.setuphandlers import setup_xmpp
+
 
 class IntranettFixture(PloneFixture):
 
@@ -62,6 +64,7 @@ class IntranettLayer(PloneSandboxLayer):
         portal.invokeFactory('Folder', 'test-folder')
         # don't require secure cookies in tests
         portal.acl_users.session.secure = False
+        setup_xmpp(portal)
         setRoles(portal, TEST_USER_ID, ['Member'])
 
 
