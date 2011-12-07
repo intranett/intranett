@@ -9,6 +9,7 @@ etc/ejabberd.cfg
 etc/haproxy.cfg
 etc/logrotate.conf
 etc/nginx.conf
+etc/pack.conf
 etc/supervisord.conf
 etc/supervisord-test.conf
 etc/varnish.vcl
@@ -40,6 +41,7 @@ src/collective.*
 src/jarn.xmpp.*
 src/plone.*
 src/plutonian
+src/RelStorage
 tmp
 var
 .*
