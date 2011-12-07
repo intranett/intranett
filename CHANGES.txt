@@ -4,6 +4,8 @@ Changelog
 1.4.1 - unreleased
 ------------------
 
+- Setup and configure RelStorage with a central Postgres database for
+  `jarn.intranett.no`.
 
 1.4.0 - 2011-12-01
 ------------------
