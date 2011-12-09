@@ -4,6 +4,8 @@ Changelog
 1.4.1 - unreleased
 ------------------
 
+- Update to Plone 4.1.4 and bugfix releases of Chameleon and RelStorage.
+
 - Setup and configure RelStorage with a central Postgres database for
   `jarn.intranett.no`.
 
