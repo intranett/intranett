@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.4.1 - unreleased
+1.4.1 - 2011-12-12
 ------------------
 
 - Fix some IE problems for activity streams.
