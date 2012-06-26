@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<tool-setup>
- <required tool_id="extropy_tracking_tool"
-    class="Products.Extropy.tools.ExtropyTrackingTool.ExtropyTrackingTool"/>
- <required tool_id="extropy_timetracker_tool"
-    class="Products.Extropy.tools.ExtropyTimeTrackerTool.ExtropyTimeTrackerTool"/>
-</tool-setup>

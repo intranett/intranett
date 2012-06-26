@@ -39,38 +39,6 @@ To overwrite an existing site and set the admin password, you can use::
 
   bin/instance create_site --force --rootpassword=admin --language=no
 
-Working on a ticket
--------------------
-
-If you work on a non-trivial story ticket, you should create a branch of this
-buildout. The Git master should always be in a releasable state to the
-production environment.
-
-As a convention we use the ticket number and a short word or two to describe
-each ticket.
-
-For example, if you want to work on ticket #82, called ``Special view for the
-frontpage``, here's the steps you should take::
-
-  git co -b 82-frontpage
-
-Edit the any config files you need to get new software (if any) and run::
-
-  bin/buildout
-
-You are now working on your own branch and can pull in additional dependencies
-if you want to. Push the branch to Github for other people to see it::
-
-  g push -u
-
-You only need to specify the `-u` the first time, to associate your local
-branch with the remote one.
-
-After the ticket is done, all tests are written, it's been tested TTW,
-upgrade notes or automatic steps are in place and quality assurance has been
-performed, you can request the release manager to merge your branch to master.
-
-
 Working with CSS
 ----------------
 

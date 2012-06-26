@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<object name="portal_skins">
- <object name="Invoice" meta_type="Filesystem Directory View"
-    directory="Products.Invoice:skins/Invoice"/>
- <skin-path name="*">
-  <layer insert-after="custom" name="Invoice"/>
- </skin-path>
-</object>

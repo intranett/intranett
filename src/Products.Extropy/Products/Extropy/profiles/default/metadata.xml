@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<metadata>
-  <version>0.7</version>
-  <dependencies>
-    <dependency>profile-Products.Invoice:default</dependency>
-    <dependency>profile-jarn.extranet:default</dependency>
-  </dependencies>
-</metadata>

@@ -1,3 +1,0 @@
-"""\
-ExtropyTracking tests package
-"""

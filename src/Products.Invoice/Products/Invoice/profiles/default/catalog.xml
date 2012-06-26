@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<object name="portal_catalog">
-
-  <index name="getInvoiceNumber" meta_type="FieldIndex">
-    <indexed_attr value="getInvoiceNumber"/>
-  </index>
-  <column value="getInvoiceNumber"/>
-
-</object>
