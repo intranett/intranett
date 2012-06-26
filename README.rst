@@ -12,6 +12,42 @@ installed. Via MacPorts install:
     rb19-haml
     erlang
 
+Install
+-------
+
+Follow the typical buildout steps::
+
+  python2.6 bootstrap.py -dc development.cfg
+  bin/buildout -c development.cfg
+
+Site creation
+-------------
+
+Start supervisor and stop instance::
+
+  bin/supervisord
+  bin/supervisorctl stop instance
+
+To create a Plone site in the database call::
+
+  bin/instance create_site
+
+To overwrite an existing site and set the admin password, you can use::
+
+  bin/instance create_site --force --rootpassword=admin --language=no
+
+Finally start the instance again::
+
+  bin/supervisorctl start instance
+
+Access the site via one of::
+
+  https://localhost:8080/
+  http://localhost:8081/Plone/
+
+Log in via `admin/admin`. In order to use some features like the streams, you
+need to create a user inside the Plone site via the `Manage users` link.
+
 Tests
 -----
 
@@ -27,17 +63,6 @@ In order to run coverage tests, which includes upgrade tests use::
 You can view the coverage results in the htmlcov directory via::
 
   open htmlcov/index.html
-
-Site creation
--------------
-
-To create a Plone site in the database call::
-
-  bin/instance create_site
-
-To overwrite an existing site and set the admin password, you can use::
-
-  bin/instance create_site --force --rootpassword=admin --language=no
 
 Working with CSS
 ----------------
