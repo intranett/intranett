@@ -57,7 +57,7 @@ def create_site(app, args):
         help='Force creation of a site when one already exists.')
     parser.add_option('-r', '--rootpassword', default=None,
         help='Create a admin user in the Zope root with the given password.')
-    parser.add_option('-l', '--language', default='no',
+    parser.add_option('-l', '--language', default='en',
         help='The language used in the new site. [default: "%default"]')
     (options, args) = parser.parse_args(args=args)
 

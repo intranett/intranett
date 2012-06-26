@@ -27,7 +27,7 @@ class AddIntranettSite(AddPloneSite):
                     (u'intranett.policy:default',
                      u'intranett.policy:content')),
                 setup_content=False,
-                default_language=form.get('language', 'no'),
+                default_language=form.get('language', 'en'),
                 )
             return self.request.response.redirect(site.absolute_url())
 
